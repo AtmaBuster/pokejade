@@ -60,6 +60,7 @@ LoadSGBLayoutCGB:
 	dw _CGB_TrainerOrMonFrontpicPals
 	dw _CGB_MysteryGift
 	dw _CGB_Unused1E
+	dw _CGB_VoltorbFlip
 
 _CGB_BattleGrayscale:
 	ld hl, PalPacket_BattleGrayscale + 1
@@ -363,6 +364,19 @@ _CGB_PokedexUnownMode:
 	call ApplyPals
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
+	ret
+
+_CGB_VoltorbFlip:
+	ld hl, VoltorbFlipPals
+	ld de, wBGPals1
+	ld bc, 3 palettes
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
+	ld hl, VoltorbFlipPals + 2 palettes
+	ld de, wOBPals1
+	ld bc, 1 palettes
+	ld a, BANK(wOBPals1)
+	call FarCopyWRAM
 	ret
 
 _CGB_SlotMachine:

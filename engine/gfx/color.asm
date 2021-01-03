@@ -1333,3 +1333,6 @@ INCLUDE "gfx/beta_poker/beta_poker.pal"
 
 SlotMachinePals:
 INCLUDE "gfx/slots/slots.pal"
+
+VoltorbFlipPals:
+INCLUDE "gfx/voltorb_flip/vflip.pal"

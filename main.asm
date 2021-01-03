@@ -517,6 +517,7 @@ INCLUDE "engine/events/mom_phone.asm"
 SECTION "mobile40", ROMX
 
 INCLUDE "mobile/mobile_40.asm"
+INCLUDE "engine/games/voltorb_flip.asm"
 
 
 SECTION "bank41", ROMX
