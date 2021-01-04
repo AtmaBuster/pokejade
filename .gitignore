@@ -50,6 +50,7 @@ used_space.png
 
 # swap files for vim and gedit
 .*.swp
+.*.swo
 *~
 
 # macos files

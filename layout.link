@@ -294,7 +294,7 @@ ROMX $77
 	"Tileset Data 7"
 	"bank77_2"
 ROMX $78
-	"Debug Room"
+	"Debug Menu"
 	"Tileset Data 8"
 ROMX $7b
 	"Battle Tower Text"
@@ -305,8 +305,6 @@ ROMX $7d
 ROMX $7e
 	"Crystal Events"
 ROMX $7f
-	org $7de0
-	"Stadium 2 Checksums"
 WRAM0
 	"Stack"
 	"Audio RAM"

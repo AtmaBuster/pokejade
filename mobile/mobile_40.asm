@@ -540,4 +540,3 @@ Function10383c:
 UnknownText_0x103876:
 Function10387b:
 UnknownText_0x103898:
-	ret

@@ -693,13 +693,10 @@ INCBIN "gfx/pokegear/pokegear.2bpp.lz"
 
 INCLUDE "engine/pokemon/european_mail.asm"
 
-
-SECTION "Debug Room", ROMX
-
+SECTION "Debug Menu", ROMX
 if DEF(_DEBUG)
-INCLUDE "engine/debug/debug_room.asm"
+INCLUDE "engine/debug/debug_menu.asm"
 endc
-
 
 SECTION "Battle Tower Text", ROMX
 
@@ -721,13 +718,3 @@ SECTION "Crystal Events", ROMX
 INCLUDE "engine/events/battle_tower/load_trainer.asm"
 INCLUDE "engine/events/odd_egg.asm"
 
-
-SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]
-
-; The end of the ROM is taken up by checksums of the content, apparently used
-; by Pokémon Stadium 2 due to the checksums' "N64PS3" header. (In Japan,
-; Pokémon Stadium Gold and Silver was the third Stadium release for N64.)
-; This SECTION reserves space for those checksums.
-; If it is removed, also remove the "tools/stadium" command in the Makefile.
-
-	ds $220

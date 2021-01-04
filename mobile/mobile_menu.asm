@@ -841,8 +841,3 @@ Function4a6d8:
 	jr nz, Function4a6d8
 	ret
 
-if DEF(_DEBUG)
-MainMenu_DebugRoom:
-	farcall _DebugRoom
-	ret
-endc
