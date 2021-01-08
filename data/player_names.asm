@@ -29,7 +29,11 @@ KrisNameMenuHeader:
 	db 5 ; items
 	db "NEW NAME@"
 FemalePlayerNameArray:
+if DEF(_FORLEAF)
+	db "LEAF@"
+else
 	db "KRIS@"
+endc
 	db "AMANDA@"
 	db "JUANA@"
 	db "JODI@"

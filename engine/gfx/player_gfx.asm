@@ -115,7 +115,11 @@ ChrisCardPic:
 INCBIN "gfx/trainer_card/chris_card.2bpp"
 
 KrisCardPic:
+if DEF(_FORLEAF)
+INCBIN "gfx/trainer_card/leaf_card.2bpp"
+else
 INCBIN "gfx/trainer_card/kris_card.2bpp"
+endc
 
 TrainerCardGFX:
 INCBIN "gfx/trainer_card/trainer_card.2bpp"
@@ -204,7 +208,11 @@ ChrisPic:
 INCBIN "gfx/player/chris.2bpp"
 
 KrisPic:
+if DEF(_FORLEAF)
+INCBIN "gfx/player/leaf.2bpp"
+else
 INCBIN "gfx/player/kris.2bpp"
+endc
 
 GetKrisBackpic:
 ; Kris's backpic is uncompressed.
@@ -215,4 +223,8 @@ GetKrisBackpic:
 	ret
 
 KrisBackpic:
+if DEF(_FORLEAF)
+INCBIN "gfx/player/leaf_back.2bpp"
+else
 INCBIN "gfx/player/kris_back.2bpp"
+endc

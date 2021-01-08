@@ -1,4 +1,4 @@
-roms := pokecrystal.gbc pokecrystal11.gbc pokecrystal_au.gbc pokecrystal_debug.gbc pokecrystal11_debug.gbc
+roms := pokecrystal.gbc pokecrystal11.gbc pokecrystal_au.gbc pokecrystal_debug.gbc pokecrystal11_debug.gbc pokecrystal_leaf.gbc
 
 rom_obj := \
 audio.o \
@@ -22,6 +22,7 @@ pokecrystal11_obj       := $(rom_obj:.o=11.o)
 pokecrystal_au_obj      := $(rom_obj:.o=_au.o)
 pokecrystal_debug_obj   := $(rom_obj:.o=_debug.o)
 pokecrystal11_debug_obj := $(rom_obj:.o=11_debug.o)
+pokecrystal_leaf_obj    := $(rom_obj:.o=_leaf.o)
 
 
 ### Build tools
@@ -53,6 +54,7 @@ crystal11:       pokecrystal11.gbc
 crystal_au:      pokecrystal_au.gbc
 crystal_debug:   pokecrystal_debug.gbc
 crystal11_debug: pokecrystal11_debug.gbc
+crystal_leaf:    pokecrystal_leaf.gbc
 
 clean: tidy
 	find gfx \( -name "*.[12]bpp" -o -name "*.lz" -o -name "*.gbcpal" -o -name "*.sgb.tilemap" \) -delete
@@ -80,6 +82,7 @@ $(pokecrystal11_obj):       RGBASMFLAGS += -D _CRYSTAL11
 $(pokecrystal_au_obj):      RGBASMFLAGS += -D _CRYSTAL11 -D _CRYSTAL_AU
 $(pokecrystal_debug_obj):   RGBASMFLAGS += -D _DEBUG
 $(pokecrystal11_debug_obj): RGBASMFLAGS += -D _CRYSTAL11 -D _DEBUG
+$(pokecrystal_leaf_obj):    RGBASMFLAGS += -D _FORLEAF
 
 rgbdscheck.o: rgbdscheck.asm
 	$(RGBASM) -o $@ $<
@@ -104,6 +107,7 @@ $(foreach obj, $(pokecrystal11_obj), $(eval $(call DEP,$(obj),$(obj:11.o=.asm)))
 $(foreach obj, $(pokecrystal_au_obj), $(eval $(call DEP,$(obj),$(obj:_au.o=.asm))))
 $(foreach obj, $(pokecrystal_debug_obj), $(eval $(call DEP,$(obj),$(obj:_debug.o=.asm))))
 $(foreach obj, $(pokecrystal11_debug_obj), $(eval $(call DEP,$(obj),$(obj:11_debug.o=.asm))))
+$(foreach obj, $(pokecrystal_leaf_obj), $(eval $(call DEP,$(obj),$(obj:_leaf.o=.asm))))
 
 endif
 
@@ -113,12 +117,14 @@ pokecrystal11_opt       = -Cjv -t PM_CRYSTAL -i BYTE -n 1 -k 01 -l 0x33 -m 0x10 
 pokecrystal_au_opt      = -Cjv -t PM_CRYSTAL -i BYTU -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 pokecrystal_debug_opt   = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 pokecrystal11_debug_opt = -Cjv -t PM_CRYSTAL -i BYTE -n 1 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokecrystal_leaf_opt    = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 
 pokecrystal_base         = us
 pokecrystal11_base       = us
 pokecrystal_au_base      = us
 pokecrystal_debug_base   = dbg
 pokecrystal11_debug_base = dbg
+pokecrystal_leaf_base    = us
 
 %.gbc: $$(%_obj) layout.link
 	$(RGBLINK) -n $*.sym -m $*.map -l layout.link -o $@ $(filter %.o,$^)
@@ -210,9 +216,12 @@ gfx/player/chris.2bpp: rgbgfx += -h
 gfx/player/chris_back.2bpp: rgbgfx += -h
 gfx/player/kris.2bpp: rgbgfx += -h
 gfx/player/kris_back.2bpp: rgbgfx += -h
+gfx/player/leaf.2bpp: rgbgfx += -h
+gfx/player/leaf_back.2bpp: rgbgfx += -h
 
 gfx/trainer_card/chris_card.2bpp: rgbgfx += -h
 gfx/trainer_card/kris_card.2bpp: rgbgfx += -h
+gfx/trainer_card/leaf_card.2bpp: rgbgfx += -h
 gfx/trainer_card/leaders.2bpp: tools/gfx += --trim-whitespace
 
 gfx/overworld/chris_fish.2bpp: tools/gfx += --trim-whitespace
