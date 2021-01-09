@@ -372,9 +372,9 @@ _CGB_VoltorbFlip:
 	ld bc, 3 palettes
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
-	ld hl, VoltorbFlipPals + 2 palettes
+	ld hl, VoltorbFlipPals
 	ld de, wOBPals1
-	ld bc, 1 palettes
+	ld bc, 3 palettes
 	ld a, BANK(wOBPals1)
 	call FarCopyWRAM
 	ret

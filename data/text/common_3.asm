@@ -715,6 +715,25 @@ _SlotsDarnText::
 	text "Darn!"
 	done
 
+_VFlipPlayText::
+	text "Play Voltorb"
+	line "Flip?"
+	done
+
+_VFlipLevelUpText::
+	text "Advanced to"
+	line "level @"
+	text_decimal wVFlipLevel, 1, 1
+	text "!"
+	done
+
+_VFlipLevelDownText::
+	text "Dropped to"
+	line "level @"
+	text_decimal wVFlipLevel, 1, 1
+	text "…"
+	done
+
 _MobileStadiumEntryText::
 	text "Data for use in"
 	line "the MOBILE STADIUM"

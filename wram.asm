@@ -850,6 +850,7 @@ wVFlipComboCounter:: db
 wVFlipLevel:: db
 wVFlipRowStats:: ds 5 * 2
 wVFlipColStats:: ds 5 * 2
+wVFlipOldLevel:: db
 wVoltorbFlipEnd::
 
 NEXTU

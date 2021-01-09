@@ -20,6 +20,15 @@
 	const VFLIP_QUIT
 VFLIP_END_LOOP_F EQU 7
 
+VFLIP_NUMTILE_1 EQU $0c
+VFLIP_NUMTILE_2 EQU $0d
+VFLIP_NUMTILE_3 EQU $0e
+
+VFLIP_RIGHT_NOTE EQU 2
+VFLIP_LEFT_NOTE  EQU 3
+VFLIP_UP_NOTE    EQU 4
+VFLIP_DOWN_NOTE  EQU 5
+
 _VoltorbFlip::
 	ld hl, wOptions
 	set NO_TEXT_SCROLL, [hl]
@@ -220,13 +229,6 @@ VFlipAction_AskPlay:
 	call VoltorbFlip_CopyTileAttrMapUpper
 	call VoltorbFlip_CopyTileAttrMapLower
 	call WaitBGMap2
-	;ld a, 2
-	;ldh [hBGMapMode], a
-	;ld c, 4
-	;call DelayFrames
-	;ld a, 1
-	;ldh [hBGMapMode], a
-	;call DelayFrame
 	ret
 
 .exit_game
@@ -235,6 +237,7 @@ VFlipAction_AskPlay:
 	ret
 
 VFlip_AskPlay:
+	call VFlip_HideCursor
 	ld hl, .VFlipPlayText
 	call PrintText
 	call LoadMenuTextbox
@@ -254,8 +257,7 @@ VFlip_AskPlay:
 	ret
 
 .VFlipPlayText
-	; placeholder, slot text
-	text_far _SlotsPlayAgainText
+	text_far _VFlipPlayText
 	text_end
 
 VFlipAction_ChooseCard:
@@ -264,8 +266,8 @@ VFlipAction_ChooseCard:
 	and A_BUTTON
 	jr nz, .card_chosen
 	ldh a, [hJoyLast]
-	and B_BUTTON
-	;jr nz, .ask_quit
+	and START
+	jr nz, .ask_quit
 	call VFlip_HandleJoypad
 	call VFlip_DrawCursor
 	call VFlip_DrawPayout
@@ -276,12 +278,16 @@ VFlipAction_ChooseCard:
 	ld [wJumptableIndex], a
 	ret
 
+.ask_quit
+	ret
+
 VFlip_HandleJoypad:
+	; check if b is held
+	; if yes, then switch to toggling notes
+	ldh a, [hJoyDown]
+	and B_BUTTON
+	jr nz, VFlip_JoypadNoteMode
 	; get cursor pos as x and y
-	;ld a, [wVFlipCursorPos]
-	;ld c, 5
-	;call SimpleDivide
-	;ld c, a
 	call VFlip_CursorToBC
 
 	; try move cursor
@@ -332,22 +338,91 @@ VFlip_HandleJoypad:
 	ld b, 0
 	; fallthrough
 .finish
-	;ld a, b
-	;add a
-	;add a
-	;add b
-	;add c
-	;ld [wVFlipCursorPos], a
 	call VFlip_BCToCursor
+	ret
+
+VFlip_JoypadNoteMode:
+	ldh a, [hJoyLast]
+	and D_PAD
+	ret z
+	ld a, [wVFlipCursorPos]
+	ld c, a
+	ld b, 0
+	ld hl, wVFlipBoard
+	add hl, bc
+	ld a, [hl]
+	and %10000000
+	ret nz
+	ldh a, [hJoyLast]
+	bit D_RIGHT_F, a
+	jr nz, .right
+	bit D_LEFT_F, a
+	jr nz, .left
+	bit D_UP_F, a
+	jr nz, .up
+; fallthrough
+.down
+	ld a, 1 << VFLIP_DOWN_NOTE
+	xor [hl]
+	ld [hl], a
+	bit VFLIP_DOWN_NOTE, [hl]
+	push af
+	hlcoord 1, 2
+	jr .finish
+
+.right
+	ld a, 1 << VFLIP_RIGHT_NOTE
+	xor [hl]
+	ld [hl], a
+	bit VFLIP_RIGHT_NOTE, [hl]
+	push af
+	hlcoord 2, 1
+	jr .finish
+
+.left
+	ld a, 1 << VFLIP_LEFT_NOTE
+	xor [hl]
+	ld [hl], a
+	bit VFLIP_LEFT_NOTE, [hl]
+	push af
+	hlcoord 0, 1
+	jr .finish
+
+.up
+	ld a, 1 << VFLIP_UP_NOTE
+	xor [hl]
+	ld [hl], a
+	bit VFLIP_UP_NOTE, [hl]
+	push af
+	hlcoord 1, 0
+; fallthrough
+.finish
+	call VFlip_CursorToBC
+	ld a, b
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	ld bc, SCREEN_WIDTH * 3
+	call AddNTimes
+	pop af
+	jr z, .was_set
+	inc [hl]
+	ret
+
+.was_set
+	dec [hl]
 	ret
 
 VFlipAction_FlipCard:
 	call VFlip_TryFlipCard
-	jr nz, .already_flipped
+	jr nc, .already_flipped
 
-	;ld de, 0
-	;call PlaySFX
-	;call WaitSFX
+	ld de, SFX_EGG_CRACK
+	call PlaySFX
+	call WaitSFX
+
+	call VFlip_CardFlipAnimation
 
 	ld hl, wVFlipCardsTurned
 	inc [hl]
@@ -415,7 +490,7 @@ VFlip_CheckIfBoardComplete:
 	ldi a, [hl]
 	bit 7, a
 	jr nz, .cont
-	and $7f
+	and %00000011
 	cp 2
 	jr z, .not_complete
 	cp 3
@@ -438,11 +513,13 @@ VFlip_TryFlipCard:
 	ld b, 0
 	ld hl, wVFlipBoard
 	add hl, bc
+	and a
 	bit 7, [hl]
 	ret nz ; dont flip if already done
-	ld a, [hl]
+	ld b, [hl]
 	set 7, [hl]
 	push af
+	push bc
 	hlcoord 1, 1
 	call VFlip_CursorToBC
 	ld e, b
@@ -453,13 +530,52 @@ VFlip_TryFlipCard:
 	ld bc, SCREEN_WIDTH * 3
 	ld a, e
 	call AddNTimes
+	pop bc
+	call .clear_notes
 	pop af
+	ld a, b
+	and %00000011
 	push af
-	add $1f
+	add VFLIP_NUMTILE_1 - 1
 	ld [hl], a
+	xor a
+	ldh [hBGMapMode], a
 	pop af
 	scf
 	ret
+
+.clear_notes
+	bit VFLIP_RIGHT_NOTE, b
+	call nz, .right_note
+	bit VFLIP_LEFT_NOTE, b
+	call nz, .left_note
+	bit VFLIP_UP_NOTE, b
+	call nz, .up_note
+	bit VFLIP_DOWN_NOTE, b
+	call nz, .down_note
+	ret
+
+.right_note
+	ld de, 1
+	jr .finish_note
+
+.left_note
+	ld de, -1
+	jr .finish_note
+
+.up_note
+	ld de, -SCREEN_WIDTH
+	jr .finish_note
+
+.down_note
+	ld de, SCREEN_WIDTH
+.finish_note
+	push hl
+	add hl, de
+	dec [hl]
+	pop hl
+	ret
+	
 
 VFlip_GenerateBoard:
 	; get card counts
@@ -744,10 +860,6 @@ VFlip_DrawBoardStats:
 
 VFlip_DrawCursor:
 	; get cursor coordinates
-	;ld a, [wVFlipCursorPos]
-	;ld c, 5
-	;call SimpleDivide
-	;ld c, a
 	call VFlip_CursorToBC
 	add a
 	add c
@@ -766,22 +878,22 @@ VFlip_DrawCursor:
 	ld c, l
 	; b has sprite x, c has sprite y
 	ld hl, .OAM_data
-	call .copy_OAM
+	call VFlip_CopyOAM
 	ret
 
 .OAM_data
 	db 6
-	dbsprite 0, 0, 0, 0, $02, 0
-	dbsprite 1, 0, 0, 0, $04, 0
-	dbsprite 2, 0, 0, 0, $02, 0 | X_FLIP
-	dbsprite 0, 2, 0, 0, $06, 0
-	dbsprite 1, 2, 0, 0, $08, 0
-	dbsprite 2, 2, 0, 0, $06, 0 | X_FLIP
+	dbsprite 0, 0, 0, 0, $02, 2
+	dbsprite 1, 0, 0, 0, $04, 2
+	dbsprite 2, 0, 0, 0, $02, 2 | X_FLIP
+	dbsprite 0, 2, 0, 0, $06, 2
+	dbsprite 1, 2, 0, 0, $08, 2
+	dbsprite 2, 2, 0, 0, $06, 2 | X_FLIP
 
-.copy_OAM:
+VFlip_CopyOAM:
 	ld de, wVirtualOAMSprite00
 	ldi a, [hl]
-.copy_loop
+.loop
 	push af
 	ldi a, [hl]
 	add c
@@ -799,36 +911,48 @@ VFlip_DrawCursor:
 	inc de
 	pop af
 	dec a
-	jr nz, .copy_loop
+	jr nz, .loop
+	ret
+
+VFlip_HideCursor:
+	ld hl, wVirtualOAMSprite00YCoord
+	ld a, SCREEN_HEIGHT_PX + 2 * TILE_WIDTH
+	ld bc, SPRITEOAMSTRUCT_LENGTH
+	ld d, 6 ; number of cursor oam's
+.loop
+	ld [hl], a
+	add hl, bc
+	dec d
+	jr nz, .loop
 	ret
 
 VFlipAction_FinishWin:
+	call VFlip_HideCursor
 	call VFlip_DrawPayout
 	ld de, SFX_3RD_PLACE
 	call PlaySFX
 	call WaitSFX
 
 	ld a, [wVFlipLevel]
+	ld [wVFlipOldLevel], a
+
+	ld a, [wVFlipLevel]
 	cp 8
 	jr nc, .done_level_change
-	ld b, a
 	ld a, [wVFlipCardsTurned]
 	cp 8
-	jr nc, .level8_combo
-	jr .try_increment_level
-
-.level8_combo
+	jr c, .try_increment_level
 	ld a, [wVFlipComboCounter]
-	cp 5
-	jr nc, .set_level_8
 	inc a
 	ld [wVFlipComboCounter], a
+	cp 5
+	jr nc, .set_level_8
 	ld a, [wVFlipCardsTurned]
-
 .try_increment_level
-	cp b
-	jr c, .done_level_change
+	ld b, a
 	ld a, [wVFlipLevel]
+	cp b
+	jr nc, .done_level_change
 	cp 7
 	jr nc, .done_level_change
 	inc a
@@ -838,32 +962,94 @@ VFlipAction_FinishWin:
 .set_level_8
 	ld a, 8
 	ld [wVFlipLevel], a
-
 .done_level_change
 	call VFlipAction_Next
 	ret
 
 VFlipAction_FinishLose:
+	call VFlip_HideCursor
 	call VFlip_DrawPayout
 	ld de, SFX_QUIT_SLOTS
 	call PlaySFX
 	call WaitSFX
 
+	xor a
+	ld [wVFlipComboCounter], a
+	ld a, [wVFlipCardsTurned]
+	dec a
+	ld b, a
+
+	ld a, [wVFlipLevel]
+	ld [wVFlipOldLevel], a
+
+	cp b
+	jr c, .done
+	ld a, b
+	and a
+	jr nz, .no_inc
+	inc a
+.no_inc
+	ld [wVFlipLevel], a
+.done
 	call VFlipAction_Next
 	ret
 
 VFlipAction_FinishAll:
-	;call FlipAllCards
-
-	ld c, 10
-	call DelayFrames
-
 	xor a
 	ld [wPayout], a
 	ld [wPayout + 1], a
+	call VFlip_DrawPayout
+	call VFlip_FlipAllCards
 
+	call JoyWaitAorB
+
+	ld a, [wVFlipOldLevel]
+	ld b, a
+	ld a, [wVFlipLevel]
+	cp b
+	jr z, .no_level_change
+	jr nc, .level_up
+	ld hl, .level_down_msg
+	ld de, SFX_WRONG
+	jr .new_level_msg
+
+.level_up
+	ld hl, .level_up_msg
+	ld de, SFX_SLOT_MACHINE_START
+.new_level_msg
+	call PlaySFX
+	call MenuTextbox
+	call WaitBGMap2
+	call WaitButton
+	call ExitMenu
+	call WaitSFX
+.no_level_change
 	ld a, VFLIP_ASK_PLAY
 	ld [wJumptableIndex], a
+	ret
+
+.level_down_msg
+	text_far _VFlipLevelDownText
+	text_end
+
+.level_up_msg
+	text_far _VFlipLevelUpText
+	text_end
+
+VFlip_FlipAllCards:
+	xor a
+	ld [wVFlipCursorPos], a
+	ld c, 25
+.loop
+	push bc
+	call VFlip_TryFlipCard
+	call c, VFlip_CardFlipAnimation
+	pop bc
+	ld hl, wVFlipCursorPos
+	inc [hl]
+	dec c
+	jr nz, .loop
+	call VFlip_HideCursor
 	ret
 
 VFlipAction_GivePayout:
@@ -921,6 +1107,137 @@ VFlipAction_GivePayout:
 .not_full
 	and a
 	ret
+
+VFlip_CardFlipAnimation:
+	push af
+	; update tilemap and attrmap for flipped card
+	call VFlip_CursorToBC
+	hlcoord 0, 0
+	ld a, b
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	ld bc, SCREEN_WIDTH * 3
+	call AddNTimes
+	push hl
+	call .inc_box
+	pop hl
+	ld bc, wAttrmap - wTilemap
+	add hl, bc
+	ld a, 1
+	lb bc, 3, 3
+	push hl
+	call FillBoxWithByte
+	pop hl
+	call .check_for_voltorb
+	; get cursor coordinates
+	call VFlip_CursorToBC
+	add a
+	add c
+	inc a
+	ld h, a ; cursor x
+	ld a, b
+	add a
+	add b
+	inc a
+	inc a
+	ld l, a ; cursor y
+	add hl
+	add hl
+	add hl
+	ld b, h
+	ld c, l
+	; b has sprite x, c has sprite y
+	ld hl, .sprite_frames
+	ld d, 4
+.loop
+	push de
+	ld a, d
+	srl a
+	call nc, .update_bgmapmode
+	call VFlip_CopyOAM
+	call DelayFrame
+	call DelayFrame
+	pop de
+	dec d
+	jr nz, .loop
+
+	pop af
+	ret
+
+.update_bgmapmode
+	ldh [hBGMapMode], a
+	ret
+
+.check_for_voltorb
+	push hl
+	ld a, [wVFlipCursorPos]
+	ld c, a
+	ld b, 0
+	ld hl, wVFlipBoard
+	add hl, bc
+	ld a, [hl]
+	and %00000011
+	jr nz, .voltorb_check_done
+	pop hl
+	push hl
+	ld bc, SCREEN_WIDTH + 1
+	add hl, bc
+	ld [hl], 2
+.voltorb_check_done
+	pop hl
+	ret
+
+.inc_box
+	inc hl
+	inc [hl]
+	inc [hl]
+	ld bc, SCREEN_WIDTH - 1
+	add hl, bc
+	inc [hl]
+	inc [hl]
+	inc hl
+	inc hl
+	inc [hl]
+	inc [hl]
+	add hl, bc
+	inc [hl]
+	inc [hl]
+	ret
+
+.sprite_frames
+	db 6
+	dbsprite 0, 0, 0, 0, $0a, 0
+	dbsprite 1, 0, 0, 0, $0c, 0
+	dbsprite 2, 0, 0, 0, $0a, 0 | X_FLIP
+	dbsprite 0, 2, 0, 0, $20, 0
+	dbsprite 1, 2, 0, 0, $22, 0
+	dbsprite 2, 2, 0, 0, $20, 0 | X_FLIP
+
+	db 6
+	dbsprite 0, 0, 0, 0, $0e, 0
+	dbsprite 1, 0, 0, 0, $10, 0
+	dbsprite 2, 0, 0, 0, $0e, 0
+	dbsprite 0, 2, 0, 0, $24, 0
+	dbsprite 1, 2, 0, 0, $26, 0
+	dbsprite 2, 2, 0, 0, $24, 0
+
+	db 6
+	dbsprite 0, 0, 0, 0, $0e, 1
+	dbsprite 1, 0, 0, 0, $12, 1
+	dbsprite 2, 0, 0, 0, $0e, 1
+	dbsprite 0, 2, 0, 0, $24, 1
+	dbsprite 1, 2, 0, 0, $28, 1
+	dbsprite 2, 2, 0, 0, $24, 1
+
+	db 6
+	dbsprite 0, 0, 0, 0, $0a, 1
+	dbsprite 1, 0, 0, 0, $14, 1
+	dbsprite 2, 0, 0, 0, $0a, 1 | X_FLIP
+	dbsprite 0, 2, 0, 0, $20, 1
+	dbsprite 1, 2, 0, 0, $2a, 1
+	dbsprite 2, 2, 0, 0, $20, 1 | X_FLIP
 
 VoltorbFlipSpriteGFX:
 	INCBIN "gfx/voltorb_flip/sprite_tiles.2bpp.lz"
