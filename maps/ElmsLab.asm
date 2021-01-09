@@ -160,8 +160,13 @@ CyndaquilPokeBallScript:
 	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	refreshscreen
+if DEF(_FORLEAF)
+	pokepic CHARMANDER
+	cry CHARMANDER
+else
 	pokepic CYNDAQUIL
 	cry CYNDAQUIL
+endc
 	waitbutton
 	closepokepic
 	opentext
@@ -173,12 +178,20 @@ CyndaquilPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
+if DEF(_FORLEAF)
+	getmonname STRING_BUFFER_3, CHARMANDER
+else
 	getmonname STRING_BUFFER_3, CYNDAQUIL
+endc
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
+if DEF(_FORLEAF)
+	givepoke CHARMANDER, 5, BERRY
+else
 	givepoke CYNDAQUIL, 5, BERRY
+endc
 	closetext
 	readvar VAR_FACING
 	ifequal RIGHT, ElmDirectionsScript
@@ -855,11 +868,19 @@ LabWhereGoingText:
 	line "are you going?"
 	done
 
+if DEF(_FORLEAF)
+TakeCyndaquilText:
+	text "ELM: You'll take"
+	line "CHARMANDER, the"
+	cont "fire #MON?"
+	done
+else
 TakeCyndaquilText:
 	text "ELM: You'll take"
 	line "CYNDAQUIL, the"
 	cont "fire #MON?"
 	done
+endc
 
 TakeTotodileText:
 	text "ELM: Do you want"
