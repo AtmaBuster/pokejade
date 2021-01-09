@@ -69,7 +69,7 @@ DebugMenu::
 .Strings:
 	db "Sound Test@"
 	db "Subgame@"
-	db "NULL@"
+	db "Warp@"
 	db "NULL@"
 	db "NULL@"
 	db "NULL@"
@@ -84,7 +84,7 @@ DebugMenu::
 .Jumptable
 	dw Debug_SoundTest
 	dw Debug_SubgameMenu
-	dw NULL
+	dw Debug_Warp
 	dw NULL
 	dw NULL
 	dw NULL
@@ -294,3 +294,120 @@ Debug_SubgameMenu:
 	db "Slots@"
 	db "Card@"
 	db "Voltorb@"
+
+Debug_Warp:
+	lb bc, SCREEN_HEIGHT - 2, SCREEN_WIDTH - 2
+	hlcoord 0, 0
+	call Textbox
+	ld hl, .MenuHeader
+	call LoadMenuHeader
+	call ScrollingMenu
+	and B_BUTTON
+	ret nz
+	ld a, [wMenuSelection]
+	cp -1
+	ret z
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, .SpawnTable
+	add hl, bc
+	ld a, [hl]
+	ld [wDefaultSpawnpoint], a
+	farcall FlyFunction.DoFly
+	ld a, HMENURETURN_SCRIPT
+	ldh [hMenuReturn], a
+	ret
+
+.SpawnTable
+	db SPAWN_NEW_BARK
+	db SPAWN_CHERRYGROVE
+	db SPAWN_VIOLET
+	db SPAWN_UNION_CAVE
+	db SPAWN_AZALEA
+	db SPAWN_GOLDENROD
+	db SPAWN_ECRUTEAK
+	db SPAWN_OLIVINE
+	db SPAWN_CIANWOOD
+	db SPAWN_MAHOGANY
+	db SPAWN_LAKE_OF_RAGE
+	db SPAWN_BLACKTHORN
+	db SPAWN_MT_SILVER
+	db SPAWN_FAST_SHIP
+	db SPAWN_PALLET
+	db SPAWN_VIRIDIAN
+	db SPAWN_PEWTER
+	db SPAWN_CERULEAN
+	db SPAWN_VERMILION
+	db SPAWN_ROCK_TUNNEL
+	db SPAWN_LAVENDER
+	db SPAWN_CELADON
+	db SPAWN_SAFFRON
+	db SPAWN_FUCHSIA
+	db SPAWN_CINNABAR
+	db SPAWN_INDIGO
+
+.MenuHeader:
+	db MENU_BACKUP_TILES
+	menu_coords 1, 1, SCREEN_WIDTH - 2, SCREEN_HEIGHT - 2
+	dw .MenuData
+	db 1
+
+.MenuData:
+	db 0
+	db 8, 0
+	db SCROLLINGMENU_ITEMS_NORMAL
+	dba .Items
+	dba .DrawItem
+	dba NULL
+
+.Items:
+	db 26
+x = 1
+rept 26
+	db x
+x = x + 1
+endr
+	db -1
+
+.DrawItem:
+	push de
+	ld a, [wMenuSelection]
+	dec a
+	ld hl, .LocNames
+	ld bc, 13
+	call AddNTimes
+	ld d, h
+	ld e, l
+	pop hl
+	call PlaceString
+	ret
+
+.LocNames:
+	db "New Bark@@@@@"
+	db "Cherrygrove@@"
+	db "Violet@@@@@@@"
+	db "Union Cave@@@"
+	db "Azalea@@@@@@@"
+	db "Goldenrod@@@@"
+	db "Ecruteak@@@@@"
+	db "Olivine@@@@@@"
+	db "Cianwood@@@@@"
+	db "Mahogany@@@@@"
+	db "Lake of Rage@"
+	db "Blackthorn@@@"
+	db "Mt. Silver@@@"
+	db "S.S. Aqua@@@@"
+	db "Pallet@@@@@@@"
+	db "Viridian@@@@@"
+	db "Pewter@@@@@@@"
+	db "Cerulean@@@@@"
+	db "Vermilion@@@@"
+	db "Rock Tunnel@@"
+	db "Lavender@@@@@"
+	db "Celadon@@@@@@"
+	db "Saffron@@@@@@"
+	db "Fuchsia@@@@@@"
+	db "Cinnabar@@@@@"
+	db "Indigo Plat.@"
+
