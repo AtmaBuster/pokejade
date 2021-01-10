@@ -199,7 +199,7 @@ SlotMachine:
 	ret
 
 VoltorbFlip:
-	call CheckCoinsAndCoinCase
+	call CheckCoinCase
 	ret c
 	ld a, BANK(_VoltorbFlip)
 	ld hl, _VoltorbFlip
@@ -264,6 +264,28 @@ CheckCoinsAndCoinCase:
 .NoCoinsText:
 	text_far _NoCoinsText
 	text_end
+
+.NoCoinCaseText:
+	text_far _NoCoinCaseText
+	text_end
+
+CheckCoinCase:
+	; no coins needed for voltorb flip
+	ld a, COIN_CASE
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+	jr nc, .no_coin_case
+	and a
+	ret
+
+.no_coin_case
+	ld hl, .NoCoinCaseText
+
+.print
+	call PrintText
+	scf
+	ret
 
 .NoCoinCaseText:
 	text_far _NoCoinCaseText

@@ -3435,6 +3435,7 @@ DoEnemyDamage:
 	ld [wHPBuffer2 + 1], a
 	sbc b
 	ld [wEnemyMonHP], a
+	jr nc, .no_underflow
 
 	ld a, [wHPBuffer2 + 1]
 	ld [hli], a
