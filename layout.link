@@ -37,13 +37,13 @@ ROMX $01
 	"Tileset Data 11"
 ROMX $02
 	"bank2"
-	"Tileset Data 9"
-	"Battle Weather Images"
 ROMX $03
+	"Battle Weather Images"
 	"bank3"
 	"VWF"
 	"mobile5C"
 ROMX $04
+	"Tileset Data 9"
 	"bank4"
 ROMX $05
 	"bank5"
@@ -184,7 +184,6 @@ ROMX $3b
 ROMX $3c
 	"Songs 3"
 	"Sound Effects"
-	"Cries"
 ROMX $3d
 	"Songs 4"
 ROMX $3e
@@ -212,7 +211,6 @@ ROMX $46
 ROMX $47
 	"Battle Tower"
 ROMX $48
-	"Pic Pointers"
 	"Pics 1"
 ROMX $49
 	"Unown Pic Pointers"

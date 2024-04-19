@@ -1,3 +1,7 @@
+SECTION "Pokedex Entries 000", ROMX
+
+PlaceholderPokedexEntry:: INCLUDE "data/pokemon/dex_entries/placeholder.asm"
+
 SECTION "Pokedex Entries 001-064", ROMX
 
 BulbasaurPokedexEntry::  INCLUDE "data/pokemon/dex_entries/bulbasaur.asm"

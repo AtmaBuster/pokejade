@@ -1138,3 +1138,38 @@ INCLUDE "gfx/diploma/plain.pal" ; todo: replace this polished port
 PokegearOBPals:
 INCLUDE "gfx/icons/icons.pal" ; todo: replace this polished port
 
+IF DEF(_DEBUG)
+DebugMenuPokePicColors::
+	ld a, [wCurPartySpecies]
+	call GetMonPalettePointer
+	ldh a, [hDebugMenuDataBuffer + 2]
+	and a
+	jr z, .norm_pal
+REPT 4
+	inc hl
+ENDR
+.norm_pal
+	ld de, wDebugColorPickerPal
+	call LoadPalette_White_Col1_Col2_Black
+; fallthrough
+DebugMenuPokePicApplyPal::
+	ld hl, wDebugColorPickerPal
+	ld de, wBGPals1 palette 1
+	ld bc, 1 palettes
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
+	call ApplyPals
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
+
+DebugMenuTrainerPicColors::
+	ld a, [wMenuCursorY]
+	call GetTrainerPalettePointer
+	ld de, wBGPals1 palette 1
+	call LoadPalette_White_Col1_Col2_Black
+	call ApplyPals
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret
+ENDC

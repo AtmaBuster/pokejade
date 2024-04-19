@@ -272,7 +272,13 @@ wGlobalAnimXOffset:: db
 
 wSpriteAnimDataEnd::
 
+UNION
+IF DEF(_DEBUG)
+wDebugColorPickerPal:: ds 1 palettes
+ENDC
+NEXTU
 	ds 11
+ENDU
 
 ; mobile data
 wc3cc:: ds 1

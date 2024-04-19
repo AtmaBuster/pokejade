@@ -839,11 +839,26 @@ CheckMenuOW:
 	bit START_F, a
 	jr z, .NoMenu
 
+IF DEF(_DEBUG)
+	ldh a, [hJoyDown]
+	bit B_BUTTON_F, a
+	jr nz, .debug_menu
+ENDC
+
 	ld a, BANK(StartMenuScript)
 	ld hl, StartMenuScript
 	call CallScript
 	scf
 	ret
+
+IF DEF(_DEBUG)
+.debug_menu
+	ld a, BANK(DebugMenuScript)
+	ld hl, DebugMenuScript
+	call CallScript
+	scf
+	ret
+ENDC
 
 .NoMenu:
 	xor a
@@ -864,6 +879,14 @@ StartMenuScript:
 SelectMenuScript:
 	callasm SelectMenu
 	sjump SelectMenuCallback
+
+IF DEF(_DEBUG)
+DebugMenuScript:
+	callasm DebugMenu
+	sjump DebugMenuCallback
+
+DebugMenuCallback:
+ENDC
 
 StartMenuCallback:
 SelectMenuCallback:

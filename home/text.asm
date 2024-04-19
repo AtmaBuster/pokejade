@@ -1022,3 +1022,13 @@ TextCommand_DAY::
 .Fri:    db "FRI@"
 .Satur:  db "SATUR@"
 .Day:    db "DAY@"
+
+IF DEF(_DEBUG)
+DebugWinText::
+	text "Win."
+	done
+
+DebugLossText::
+	text "Loss."
+	done
+ENDC

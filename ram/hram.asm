@@ -186,6 +186,7 @@ hFunctionTargetHi:: db
 
 hDelayFrameLY:: db
 
+UNION
 hRequested2bpp::        db
 hRequested1bpp::        db
 hRequestedVTileDest::   dw
@@ -195,5 +196,12 @@ hRequestOpaque1bpp::    db
 hTilesetGFXBank:: db
 
 	ds 4
+
+NEXTU
+IF DEF(_DEBUG)
+hDebugMenuCursorPos:: db
+hDebugMenuDataBuffer:: ds 8
+ENDC
+ENDU
 
 ENDSECTION

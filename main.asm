@@ -218,17 +218,17 @@ INCLUDE "engine/battle/sliding_intro.asm"
 INCLUDE "engine/battle/check_battle_scene.asm"
 INCLUDE "engine/movie/gbc_only.asm"
 INCLUDE "engine/events/poke_seer.asm"
-
-
-SECTION "bank14", ROMX
-
-INCLUDE "engine/pokemon/party_menu.asm"
 INCLUDE "engine/events/poisonstep.asm"
 INCLUDE "engine/events/sweet_scent.asm"
 INCLUDE "engine/events/squirtbottle.asm"
 INCLUDE "engine/events/card_key.asm"
 INCLUDE "engine/events/basement_key.asm"
 INCLUDE "engine/events/sacred_ash.asm"
+
+
+SECTION "bank14", ROMX
+
+INCLUDE "engine/pokemon/party_menu.asm"
 INCLUDE "engine/pokemon/tempmon.asm"
 INCLUDE "engine/pokemon/types.asm"
 INCLUDE "engine/pokemon/mon_stats.asm"
@@ -236,7 +236,15 @@ INCLUDE "engine/link/init_list.asm"
 INCLUDE "engine/pokemon/experience.asm"
 INCLUDE "engine/pokemon/switchpartymons.asm"
 INCLUDE "engine/gfx/load_pics.asm"
+
+
+SECTION "Base Stats", ROMX
+
 INCLUDE "data/pokemon/base_stats.asm"
+
+
+SECTION "Mon Names", ROMX
+
 INCLUDE "data/pokemon/names.asm"
 
 
@@ -439,6 +447,7 @@ SECTION "Pic Animations 3", ROMX
 INCLUDE "gfx/pokemon/johto_frames.asm"
 INCLUDE "gfx/pokemon/unown_frame_pointers.asm"
 INCLUDE "gfx/pokemon/unown_frames.asm"
+INCLUDE "gfx/pokemon/later_frames.asm"
 
 
 SECTION "bank38", ROMX
@@ -459,19 +468,24 @@ INCLUDE "engine/movie/intro.asm"
 SECTION "bank3E", ROMX
 
 INCLUDE "engine/gfx/load_font.asm"
-INCLUDE "engine/link/time_capsule.asm"
 INCLUDE "engine/events/name_rater.asm"
 INCLUDE "engine/events/play_slow_cry.asm"
 INCLUDE "engine/pokedex/new_pokedex_entry.asm"
-INCLUDE "engine/link/time_capsule_2.asm"
 INCLUDE "engine/pokedex/unown_dex.asm"
-INCLUDE "engine/events/magikarp.asm"
-INCLUDE "engine/battle/hidden_power.asm"
-INCLUDE "engine/battle/misc.asm"
+
+
+SECTION "Footprints", ROMX
+
+INCLUDE "gfx/footprints.asm"
 
 
 SECTION "bank3F", ROMX
 
+INCLUDE "engine/link/time_capsule.asm"
+INCLUDE "engine/link/time_capsule_2.asm"
+INCLUDE "engine/events/magikarp.asm"
+INCLUDE "engine/battle/hidden_power.asm"
+INCLUDE "engine/battle/misc.asm"
 INCLUDE "engine/tilesets/tileset_anims.asm"
 INCLUDE "engine/events/npc_trade.asm"
 INCLUDE "engine/events/mom_phone.asm"
@@ -681,6 +695,13 @@ INCLUDE "engine/gfx/dynamic_pals.asm"
 SECTION "Fade System", ROMX
 
 INCLUDE "engine/gfx/fade.asm"
+
+
+SECTION "Debug", ROMX
+
+IF DEF(_DEBUG)
+INCLUDE "engine/debug/debug_menu.asm"
+ENDC
 
 
 SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]
