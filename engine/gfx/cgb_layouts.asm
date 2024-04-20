@@ -1142,7 +1142,7 @@ IF DEF(_DEBUG)
 DebugMenuPokePicColors::
 	ld a, [wCurPartySpecies]
 	call GetMonPalettePointer
-	ldh a, [hDebugMenuDataBuffer + 2]
+	ld a, [wDebugMenuDataBuffer + 2]
 	and a
 	jr z, .norm_pal
 REPT 4

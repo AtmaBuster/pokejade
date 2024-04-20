@@ -272,13 +272,7 @@ wGlobalAnimXOffset:: db
 
 wSpriteAnimDataEnd::
 
-UNION
-IF DEF(_DEBUG)
-wDebugColorPickerPal:: ds 1 palettes
-ENDC
-NEXTU
 	ds 11
-ENDU
 
 ; mobile data
 wc3cc:: ds 1
@@ -1600,6 +1594,15 @@ SECTION "16-bit WRAM home data", WRAM0
 ; align to $20
 
 wConversionTableBitmap:: ds $20
+
+
+SECTION "Debug WRAM", WRAM0
+
+IF DEF(_DEBUG)
+wDebugMenuCursorPos:: db
+wDebugColorPickerPal:: ds 1 palettes
+wDebugMenuDataBuffer:: ds 8
+ENDC
 
 
 SECTION "WRAM 1", WRAMX

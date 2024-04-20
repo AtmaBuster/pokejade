@@ -4,12 +4,12 @@ DebugColorPicker::
 	jp nz, DebugMenu_TrainerPics
 DebugMenu_PokePics:
 	ld a, LOW(BULBASAUR)
-	ldh [hDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 1], a
 	xor a
 	ld [wMenuCursorY], a
-	ldh [hDebugMenuCursorPos], a
-	ldh [hDebugMenuDataBuffer], a
-	ldh [hDebugMenuDataBuffer + 2], a
+	ld [wDebugMenuCursorPos], a
+	ld [wDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer + 2], a
 	hlcoord 0, 0
 	lb bc, 16, 18
 	call Textbox
@@ -66,9 +66,9 @@ DebugMenu_PokePics:
 	jr .input
 
 .toggle_edit_mode
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	xor 1
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_edit_display
 	jr .input
 
@@ -93,12 +93,12 @@ DebugMenu_PokePics:
 	jp .update_pal_cursor
 
 .left
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	jp nz, .left_pal
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	ld h, a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	dec hl
 	ld a, h
@@ -108,12 +108,12 @@ DebugMenu_PokePics:
 	jr .cont
 
 .right
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	jp nz, .right_pal
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	ld h, a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	inc hl
 	ld a, h
@@ -125,14 +125,14 @@ DebugMenu_PokePics:
 	ld hl, 1
 .cont
 	ld a, h
-	ldh [hDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer], a
 	ld a, l
-	ldh [hDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 1], a
 	call .change_pic
 	jp .input
 
 .swap_pals
-	ld hl, hDebugMenuDataBuffer + 2
+	ld hl, wDebugMenuDataBuffer + 2
 	ld a, 1
 	xor [hl]
 	ld [hl], a
@@ -143,9 +143,9 @@ DebugMenu_PokePics:
 .change_pic
 	call DisableLCD
 	call .print_all_colors
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	ld h, a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	call GetPokemonIDFromIndex
 	ld [wCurPartySpecies], a
@@ -159,7 +159,7 @@ DebugMenu_PokePics:
 	ld bc, 3
 	ld a, " "
 	call ByteFill
-	ld de, hDebugMenuDataBuffer
+	ld de, wDebugMenuDataBuffer
 	lb bc, 2, 3
 	hlcoord 9, 1
 	call PrintNum
@@ -167,9 +167,9 @@ DebugMenu_PokePics:
 	ld bc, 10
 	ld a, " "
 	call ByteFill
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	ld h, a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	call GetPokemonIDFromIndex
 	ld [wNamedObjectIndex], a
@@ -199,12 +199,12 @@ DebugMenu_PokePics:
 
 .update_pal_edit
 	call .get_pal_color
-	ldh [hDebugMenuDataBuffer + 4], a
+	ld [wDebugMenuDataBuffer + 4], a
 	ld bc, SCREEN_WIDTH
 	hlcoord 14, 5
 	ld a, [wMenuCursorY]
 	call AddNTimes
-	ld de, hDebugMenuDataBuffer + 4
+	ld de, wDebugMenuDataBuffer + 4
 	lb bc, $81, 2
 	call PrintNum
 	farcall DebugMenuPokePicApplyPal
@@ -288,10 +288,10 @@ DebugMenu_PokePics:
 	push hl
 	call .get_pal_color
 	pop hl
-	ldh [hDebugMenuDataBuffer + 4], a
+	ld [wDebugMenuDataBuffer + 4], a
 	lb bc, $81, 2
 	push hl
-	ld de, hDebugMenuDataBuffer + 4
+	ld de, wDebugMenuDataBuffer + 4
 	call PrintNum
 	ld hl, wMenuCursorY
 	inc [hl]
@@ -385,7 +385,7 @@ DebugMenu_PokePics:
 	ret
 
 .update_edit_display
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	jr z, .clear_edit
 	hlcoord 17, 5

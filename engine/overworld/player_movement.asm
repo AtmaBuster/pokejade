@@ -30,11 +30,10 @@ DoPlayerMovement::
 	ret
 
 .TranslateIntoMovement:
-	if DEF(_DEBUG)
+if DEF(_DEBUG)
 	ld a, [wCurInput]
-	or ~(A_BUTTON | B_BUTTON)
-	inc a
-	jr nz, .regular_move
+	and B_BUTTON
+	jr z, .regular_move
 	call .GetAction
 	ld a, [wWalkingTileCollision]
 	cp -1

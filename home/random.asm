@@ -78,3 +78,100 @@ RandomRange::
 
 	pop bc
 	ret
+
+MACRO rand32_mul
+	ld c, \3
+	ldh a, [hRand32 + \1]
+	call .Mul
+IF (\1 != 0) | (\2 != 0)
+	ldh a, [hRand32_Result + \2]
+	add l
+ELSE
+	ld a, l
+ENDC
+	ldh [hRand32_Result + \2], a
+IF \2 != 3
+	ldh a, [hRand32_Result + \2 + 1]
+	adc h
+	ldh [hRand32_Result + \2 + 1], a
+ENDC
+IF \2 < 2
+	ldh a, [hRand32_Result + \2 + 2]
+	adc 0
+	ldh [hRand32_Result + \2 + 2], a
+ENDC
+IF \2 == 0
+	ldh a, [hRand32_Result + \2 + 3]
+	adc 0
+	ldh [hRand32_Result + \2 + 3], a
+ENDC
+ENDM
+Random2:
+	push bc
+	push de
+	push hl
+
+	xor a
+	ldh [hRand32_Result], a
+	ldh [hRand32_Result + 1], a
+	ldh [hRand32_Result + 2], a
+	ldh [hRand32_Result + 3], a
+	rand32_mul 0, 0, $6D
+	rand32_mul 1, 1, $6D
+	rand32_mul 2, 2, $6D
+	rand32_mul 3, 3, $6D
+	rand32_mul 0, 1, $4E
+	rand32_mul 1, 2, $4E
+	rand32_mul 2, 3, $4E
+	rand32_mul 0, 2, $C6
+	rand32_mul 1, 3, $C6
+	rand32_mul 0, 3, $41
+
+	ldh a, [hRand32_Result]
+	add LOW(24691)
+	ldh [hRand32_Result], a
+	ldh a, [hRand32_Result + 1]
+	adc HIGH(24691)
+	ldh [hRand32_Result + 1], a
+	ldh a, [hRand32_Result + 2]
+	adc 0
+	ldh [hRand32_Result + 2], a
+	ldh a, [hRand32_Result + 3]
+	adc 0
+	ldh [hRand32_Result + 3], a
+
+	ldh a, [hRand32_Result]
+	ldh [hRand32], a
+	ldh a, [hRand32_Result + 1]
+	ldh [hRand32 + 1], a
+	ldh a, [hRand32_Result + 2]
+	ldh [hRand32 + 2], a
+	ldh a, [hRand32_Result + 3]
+	ldh [hRand32 + 3], a
+
+	pop hl
+	pop de
+	pop bc
+	ret
+
+.Mul
+	and a
+	jr nz, .do_mul
+	ld hl, 0
+	ret
+
+.do_mul
+	ld b, 0
+	ld hl, 0
+	ld e, 8
+	ld d, a
+.mul_loop
+	rr a
+	jr nc, .no_add
+	add hl, bc
+.no_add
+	dec e
+	ret z
+	sla c
+	rl b
+	jr .mul_loop

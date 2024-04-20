@@ -118,6 +118,8 @@ VBlank0::
 	sbc b
 	ldh [hRandomSub], a
 
+	call Random2
+
 	xor a
 	ld [wVBlankOccurred], a
 

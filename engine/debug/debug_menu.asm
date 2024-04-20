@@ -76,6 +76,7 @@ DebugMenu::
 .Strings:
 	db "Party@"
 	db "Set Flags@"
+	db "ATMA@"
 	db "Sound Test@"
 	db "Subgame@"
 	db "Warp@"
@@ -92,13 +93,14 @@ DebugMenu::
 	db "Trainer@"
 
 .MenuItems
-	db 16
-	db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+	db 17
+	db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
 	db -1
 
 .Jumptable
 	dw Debug_GiveParty
 	dw Debug_SetFlags
+	dw Debug_ATMA
 	dw Debug_SoundTest
 	dw Debug_SubgameMenu
 	dw Debug_Warp
@@ -256,19 +258,19 @@ Debug_SoundTest:
 	ld de, MUSIC_NONE
 	call PlayMusic
 	xor a
-	ldh [hDebugMenuDataBuffer], a
-	ldh [hDebugMenuDataBuffer + 1], a
-	ldh [hDebugMenuDataBuffer + 2], a
-	ldh [hDebugMenuDataBuffer + 3], a
+	ld [wDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 2], a
+	ld [wDebugMenuDataBuffer + 3], a
 	hlcoord 0, 0
 	lb bc, 6, SCREEN_WIDTH - 2
 	call Textbox
 	call WaitBGMap2
 	ld a, 1
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 	xor a
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 .loop
 	call JoyTextDelay
@@ -286,10 +288,10 @@ Debug_SoundTest:
 	jr .loop
 
 .change
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	inc a
 	and 1
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 	jr .loop
 
@@ -320,7 +322,7 @@ Debug_SoundTest:
 	hlcoord 1, 5
 	ld a, " "
 	ld [hl], a
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	jr z, .update_music
 	hlcoord 1, 5
@@ -334,7 +336,7 @@ Debug_SoundTest:
 	ldi [hl], a
 	ld [hl], a
 	hlcoord 3, 5
-	ld de, hDebugMenuDataBuffer + 2
+	ld de, wDebugMenuDataBuffer + 2
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
 	ret
@@ -351,7 +353,7 @@ Debug_SoundTest:
 	ldi [hl], a
 	ld [hl], a
 	hlcoord 3, 2
-	ld de, hDebugMenuDataBuffer
+	ld de, wDebugMenuDataBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
 	hlcoord 1, 3
@@ -360,7 +362,7 @@ Debug_SoundTest:
 	call ByteFill
 	ld hl, Debug_MusicNames
 	ld bc, 18
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	cp a, NUM_MUSIC_SONGS
 	jp nc, .loop
 	call AddNTimes
@@ -371,7 +373,7 @@ Debug_SoundTest:
 	ret
 
 .play
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	jr z, .play_music
 	call .get_value
@@ -391,8 +393,8 @@ Debug_SoundTest:
 	ret
 
 .get_value
-	ldh a, [hDebugMenuCursorPos]
-	ld hl, hDebugMenuDataBuffer
+	ld a, [wDebugMenuCursorPos]
+	ld hl, wDebugMenuDataBuffer
 	add a
 	add l
 	ld l, a
@@ -407,8 +409,8 @@ Debug_SoundTest:
 	ret
 
 .put_value
-	ldh a, [hDebugMenuCursorPos]
-	ld hl, hDebugMenuDataBuffer
+	ld a, [wDebugMenuCursorPos]
+	ld hl, wDebugMenuDataBuffer
 	add a
 	add l
 	ld l, a
@@ -604,8 +606,8 @@ Debug_TeachMove:
 	and a
 	ret z
 	xor a
-	ldh [hDebugMenuDataBuffer], a
-	ldh [hDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer + 1], a
 	hlcoord 0, 0
 	lb bc, 6, SCREEN_WIDTH - 2
 	call Textbox
@@ -673,18 +675,18 @@ Debug_TeachMove:
 	jr .loop
 
 .teach
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	and a
 	jr nz, .ok_teach
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	and a
 	ret z
 .ok_teach
 	xor a
 	ld [wCurPartyMon], a
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	ld h, a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	call GetMoveIDFromIndex
 	ld [wTempTMHM], a
@@ -698,47 +700,47 @@ Debug_TeachMove:
 	ret
 
 .left
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	and a
 	jr nz, .go_left
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	and a
 	jr nz, .go_left2
 	ld a, HIGH(NUM_ATTACKS)
-	ldh [hDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer], a
 	ld a, LOW(NUM_ATTACKS)
-	ldh [hDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 1], a
 	ret
 
 .go_left2
 	dec a
-	ldh [hDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer], a
 	xor a
 .go_left
 	dec a
-	ldh [hDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 1], a
 	ret
 
 .right
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	cp LOW(NUM_ATTACKS)
 	jr nz, .go_right
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	cp HIGH(NUM_ATTACKS)
 	jr nz, .go_right
 	xor a
-	ldh [hDebugMenuDataBuffer], a
-	ldh [hDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer + 1], a
 	ret
 
 .go_right
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	inc a
-	ldh [hDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 1], a
 	ret nz
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	inc a
-	ldh [hDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer], a
 	ret
 
 .update_display
@@ -750,14 +752,14 @@ Debug_TeachMove:
 	ldi [hl], a
 	ld [hl], a
 	hlcoord 3, 2
-	ld de, hDebugMenuDataBuffer
+	ld de, wDebugMenuDataBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
 	hlcoord 1, 3
 	ld a, " "
 	ld bc, 18
 	call ByteFill
-	ld hl, hDebugMenuDataBuffer
+	ld hl, wDebugMenuDataBuffer
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -777,24 +779,24 @@ Debug_TeachMove:
 
 Debug_GivePoke:
 	xor a
-	ldh [hDebugMenuDataBuffer], a
-	ldh [hDebugMenuDataBuffer + 1], a
-	ldh [hDebugMenuDataBuffer + 2], a
-	ldh [hDebugMenuDataBuffer + 3], a
-	ldh [hDebugMenuDataBuffer + 4], a
-	ldh [hDebugMenuDataBuffer + 5], a
+	ld [wDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 2], a
+	ld [wDebugMenuDataBuffer + 3], a
+	ld [wDebugMenuDataBuffer + 4], a
+	ld [wDebugMenuDataBuffer + 5], a
 	hlcoord 0, 0
 	lb bc, 8, SCREEN_WIDTH - 2
 	call Textbox
 	call WaitBGMap2
 	ld a, 2
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 	ld a, 1
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 	xor a
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 
 .loop
@@ -829,7 +831,7 @@ Debug_GivePoke:
 	jr .loop
 
 .up
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	jr nz, .do_up
 	ld a, 3
@@ -838,14 +840,14 @@ Debug_GivePoke:
 	jr .curchange
 
 .down
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	cp 2
 	jr nz, .do_down
 	ld a, -1
 .do_down
 	inc a
 .curchange
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 	jr .loop
 
@@ -870,42 +872,39 @@ Debug_GivePoke:
 	jr .loop
 
 .getdat
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	add a
-	add LOW(hDebugMenuDataBuffer)
-	ld c, a
-	ldh a, [c]
-	ld h, a
-	inc c
-	ldh a, [c]
+	add LOW(wDebugMenuDataBuffer)
 	ld l, a
-	dec c
+	ld h, HIGH(wDebugMenuDataBuffer)
+	ld a, [hli]
+	ld c, [hl]
+	ld b, a
+	dec hl
 	ret
 
 .putdat
-	ld a, h
-	ldh [c], a
-	inc c
-	ld a, l
-	ldh [c], a
+	ld a, c
+	ld [hli], a
+	ld [hl], b
 	ret
 
 .givepoke
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	ld h, a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	cphl16 0
 	jp z, .loop
 	cphl16 NUM_POKEMON + 1
 	jp nc, .loop
-	ldh a, [hDebugMenuDataBuffer + 5]
+	ld a, [wDebugMenuDataBuffer + 5]
 	and a
 	jp z, .loop
 	cp 101
 	jp nc, .loop
 	ld [wCurPartyLevel], a
-;	ldh a, [hDebugMenuDataBuffer + 3]
+;	ldh a, [wDebugMenuDataBuffer + 3]
 	xor a
 	ld [wCurItem], a
 	call GetPokemonIDFromIndex
@@ -922,7 +921,7 @@ Debug_GivePoke:
 	ld [hl], a
 	hlcoord 1, 8
 	ld [hl], a
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	jr z, .put_mon
 	dec a
@@ -939,7 +938,7 @@ Debug_GivePoke:
 	ld a, "v"
 	ld [hli], a
 	inc hl
-	ld de, hDebugMenuDataBuffer + 5
+	ld de, wDebugMenuDataBuffer + 5
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
 	ret
@@ -949,12 +948,12 @@ Debug_GivePoke:
 	ld a, "▶"
 	ld [hl], a
 	hlcoord 3, 2
-	ld de, hDebugMenuDataBuffer
+	ld de, wDebugMenuDataBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	ld h, a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	cphl16 0
 	ret z
@@ -980,14 +979,14 @@ Debug_GivePoke:
 	ld [hl], a
 	ret ; TODO
 	hlcoord 3, 5
-	ld de, hDebugMenuDataBuffer + 3
+	ld de, wDebugMenuDataBuffer + 3
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
 	hlcoord 1, 6
 	ld bc, 18
 	ld a, " "
 	call ByteFill
-	ldh a, [hDebugMenuDataBuffer + 3]
+	ld a, [wDebugMenuDataBuffer + 3]
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld de, wStringBuffer1
@@ -1012,21 +1011,21 @@ Debug_MaxMoney:
 
 Debug_WarpAny:
 	ld a, 1
-	ldh [hDebugMenuDataBuffer], a
-	ldh [hDebugMenuDataBuffer + 1], a
-	ldh [hDebugMenuDataBuffer + 2], a
+	ld [wDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 2], a
 	hlcoord 0, 0
 	lb bc, 3, SCREEN_WIDTH - 2
 	call Textbox
 	call WaitBGMap2
 	ld a, 2
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 	ld a, 1
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 	xor a
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 
 .loop
@@ -1061,7 +1060,7 @@ Debug_WarpAny:
 	jr .loop
 
 .up
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	jr nz, .do_up
 	ld a, 3
@@ -1070,14 +1069,14 @@ Debug_WarpAny:
 	jr .curchange
 
 .down
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	cp 2
 	jr nz, .do_down
 	ld a, -1
 .do_down
 	inc a
 .curchange
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 	jr .loop
 
@@ -1102,8 +1101,8 @@ Debug_WarpAny:
 	jr .loop
 
 .getdat
-	ldh a, [hDebugMenuCursorPos]
-	add LOW(hDebugMenuDataBuffer)
+	ld a, [wDebugMenuCursorPos]
+	add LOW(wDebugMenuDataBuffer)
 	ld c, a
 	ldh a, [c]
 	ret
@@ -1113,7 +1112,7 @@ Debug_WarpAny:
 	ret
 
 .warp
-	ld hl, hDebugMenuDataBuffer
+	ld hl, wDebugMenuDataBuffer
 	ld de, wNextWarp
 	ld bc, 3
 	call CopyBytes
@@ -1132,11 +1131,11 @@ Debug_WarpAny:
 	ld [hl], a
 	hlcoord 1, 3
 	ld [hl], a
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	ld c, a
 	ld b, 0
-	ld hl, hDebugMenuDataBuffer
+	ld hl, wDebugMenuDataBuffer
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -1235,7 +1234,7 @@ Debug_PlayCry:
 	ld de, MUSIC_NONE
 	call PlayMusic
 	xor a
-	ld hl, hDebugMenuDataBuffer
+	ld hl, wDebugMenuDataBuffer
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -1244,8 +1243,8 @@ Debug_PlayCry:
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld [hDebugMenuCursorPos], a
-	ld a, LOW(hDebugMenuDataBuffer)
+	ld [wDebugMenuCursorPos], a
+	ld a, LOW(wDebugMenuDataBuffer)
 	ld [hl], a
 	hlcoord 0, 0
 	lb bc, 7, SCREEN_WIDTH - 2
@@ -1271,7 +1270,7 @@ Debug_PlayCry:
 	ret
 
 .left
-	ldh a, [hDebugMenuDataBuffer + 8]
+	ld a, [wDebugMenuDataBuffer + 8]
 	ld c, a
 	ldh a, [c]
 	ld h, a
@@ -1288,7 +1287,7 @@ Debug_PlayCry:
 	jr .loop
 
 .right
-	ldh a, [hDebugMenuDataBuffer + 8]
+	ld a, [wDebugMenuDataBuffer + 8]
 	ld c, a
 	ldh a, [c]
 	ld h, a
@@ -1305,28 +1304,28 @@ Debug_PlayCry:
 	jr .loop
 
 .up
-	ldh a, [hDebugMenuDataBuffer + 8]
-	cp LOW(hDebugMenuDataBuffer)
+	ld a, [wDebugMenuDataBuffer + 8]
+	cp LOW(wDebugMenuDataBuffer)
 	jr z, .underflow
 	dec a
 	dec a
 	jr .set_cursor
 .underflow
-	ld a, LOW(hDebugMenuDataBuffer + 6)
+	ld a, LOW(wDebugMenuDataBuffer + 6)
 	jr .set_cursor
 
 .down
-	ldh a, [hDebugMenuDataBuffer + 8]
-	cp LOW(hDebugMenuDataBuffer + 6)
+	ld a, [wDebugMenuDataBuffer + 8]
+	cp LOW(wDebugMenuDataBuffer + 6)
 	jr z, .overrflow
 	inc a
 	inc a
 	jr .set_cursor
 .overrflow
-	ld a, LOW(hDebugMenuDataBuffer)
+	ld a, LOW(wDebugMenuDataBuffer)
 
 .set_cursor
-	ldh [hDebugMenuDataBuffer + 8], a
+	ld [wDebugMenuDataBuffer + 8], a
 	call .update_numbers
 	jr .loop
 
@@ -1334,7 +1333,7 @@ Debug_PlayCry:
 	ld a, [hJoyDown]
 	and SELECT
 	jr nz, .copyvanilla
-	ld hl, hDebugMenuDataBuffer + 2
+	ld hl, wDebugMenuDataBuffer + 2
 	ld d, [hl]
 	inc hl
 	ld e, [hl]
@@ -1351,7 +1350,7 @@ Debug_PlayCry:
 	jp .loop
 
 .copyvanilla
-	ld hl, hDebugMenuDataBuffer
+	ld hl, wDebugMenuDataBuffer
 	ld d, [hl]
 	inc hl
 	ld e, [hl]
@@ -1366,10 +1365,10 @@ Debug_PlayCry:
 	add hl, de
 	add hl, de
 	add hl, de
-	ld de, hDebugMenuDataBuffer + 2
+	ld de, wDebugMenuDataBuffer + 2
 	ld bc, 6
 	call FarCopyBytes
-	ld c, LOW(hDebugMenuDataBuffer + 2)
+	ld c, LOW(wDebugMenuDataBuffer + 2)
 REPT 3
 	ldh a, [c]
 	inc c
@@ -1401,8 +1400,8 @@ ENDR
 	ld [hl], a
 	add hl, bc
 	ld [hl], a
-	ldh a, [hDebugMenuDataBuffer + 8]
-	sub LOW(hDebugMenuDataBuffer)
+	ld a, [wDebugMenuDataBuffer + 8]
+	sub LOW(wDebugMenuDataBuffer)
 	hlcoord 1, 1
 	ld bc, SCREEN_WIDTH
 	call AddNTimes
@@ -1418,43 +1417,43 @@ ENDR
 	ld de, .length
 	call PlaceString
 	hlcoord 8, 3
-	ld de, hDebugMenuDataBuffer + 2
+	ld de, wDebugMenuDataBuffer + 2
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
 	hlcoord 8, 5
-	ld de, hDebugMenuDataBuffer + 4
+	ld de, wDebugMenuDataBuffer + 4
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
 	hlcoord 8, 7
-	ld de, hDebugMenuDataBuffer + 6
+	ld de, wDebugMenuDataBuffer + 6
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
 	hlcoord 15, 3
-	ld de, hDebugMenuDataBuffer + 2
+	ld de, wDebugMenuDataBuffer + 2
 	ld b, 2
 	call PrintHexNum
 	hlcoord 15, 5
-	ld de, hDebugMenuDataBuffer + 4
+	ld de, wDebugMenuDataBuffer + 4
 	ld b, 2
 	call PrintHexNum
 	hlcoord 15, 7
-	ld de, hDebugMenuDataBuffer + 6
+	ld de, wDebugMenuDataBuffer + 6
 	ld b, 2
 	call PrintHexNum
 	hlcoord 2, 1
-	ld de, hDebugMenuDataBuffer
+	ld de, wDebugMenuDataBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	cp HIGH(NUM_POKEMON)
 	jr c, .show_name
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	cp LOW(NUM_POKEMON) + 1
 	ret nc
 .show_name
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	ld h, a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	call GetPokemonIDFromIndex
 	ld [wNamedObjectIndex], a
@@ -1538,9 +1537,9 @@ PrintHexNum:
 
 Debug_Trainer:
 	xor a
-	ldh [hDebugMenuDataBuffer], a
-	ldh [hDebugMenuDataBuffer + 1], a
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuCursorPos], a
 	hlcoord 0, 0
 	lb bc, 6, SCREEN_WIDTH - 2
 	call Textbox
@@ -1562,10 +1561,10 @@ Debug_Trainer:
 	jr .loop
 
 .change
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	inc a
 	and 1
-	ldh [hDebugMenuCursorPos], a
+	ld [wDebugMenuCursorPos], a
 	call .update_display
 	jr .loop
 
@@ -1576,7 +1575,7 @@ Debug_Trainer:
 	dec a
 	jr nz, .left_loop
 	call .put_value
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	call z, .reset_trainer_num
 	call .update_display
@@ -1589,7 +1588,7 @@ Debug_Trainer:
 	dec a
 	jr nz, .right_loop
 	call .put_value
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	call z, .reset_trainer_num
 	call .update_display
@@ -1597,7 +1596,7 @@ Debug_Trainer:
 
 .reset_trainer_num
 	ld a, 1
-	ldh [hDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 1], a
 	ret
 
 .update_display
@@ -1607,7 +1606,7 @@ Debug_Trainer:
 	hlcoord 1, 5
 	ld a, " "
 	ld [hl], a
-	ldh a, [hDebugMenuCursorPos]
+	ld a, [wDebugMenuCursorPos]
 	and a
 	hlcoord 1, 2
 	jr z, .got_cursor_pos
@@ -1627,7 +1626,7 @@ Debug_Trainer:
 	call PlaceString
 .skip_trainer_name
 	hlcoord 3, 6
-	ld de, hDebugMenuDataBuffer + 1
+	ld de, wDebugMenuDataBuffer + 1
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
 	ret
@@ -1639,7 +1638,7 @@ Debug_Trainer:
 	call ByteFill
 	ld a, TRAINER_NAME
 	ld [wNamedObjectType], a
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	and a
 	jr z, .skip_class_name
 	cp NUM_TRAINER_CLASSES
@@ -1652,19 +1651,19 @@ Debug_Trainer:
 	call PlaceString
 .skip_class_name
 	hlcoord 3, 3
-	ld de, hDebugMenuDataBuffer
+	ld de, wDebugMenuDataBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
 	ret
 
 .fight
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	and a
 	jp z, .loop
 	cp NUM_TRAINER_CLASSES
 	jp nc, .loop
 	ld [wOtherTrainerClass], a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	and a
 	jp z, .loop
 	ld [wOtherTrainerID], a
@@ -1694,8 +1693,8 @@ Debug_Trainer:
 	ret
 
 .get_value
-	ldh a, [hDebugMenuCursorPos]
-	ld hl, hDebugMenuDataBuffer
+	ld a, [wDebugMenuCursorPos]
+	ld hl, wDebugMenuDataBuffer
 	add l
 	ld l, a
 	ld d, [hl]
@@ -1707,8 +1706,8 @@ Debug_Trainer:
 	ret
 
 .put_value
-	ldh a, [hDebugMenuCursorPos]
-	ld hl, hDebugMenuDataBuffer
+	ld a, [wDebugMenuCursorPos]
+	ld hl, wDebugMenuDataBuffer
 	add l
 	ld l, a
 	ld [hl], d
@@ -1719,7 +1718,7 @@ Debug_Trainer:
 	ret
 
 .get_trainer_name
-	ldh a, [hDebugMenuDataBuffer]
+	ld a, [wDebugMenuDataBuffer]
 	and a
 	jr z, .cancel_trainer_name
 	cp NUM_TRAINER_CLASSES
@@ -1740,7 +1739,7 @@ Debug_Trainer:
 	call GetFarWord
 	pop af
 	ld b, a
-	ldh a, [hDebugMenuDataBuffer + 1]
+	ld a, [wDebugMenuDataBuffer + 1]
 	and a
 	jr z, .cancel_trainer_name
 	dec a
@@ -1784,3 +1783,13 @@ Debug_SanitizeString:
 	ld a, "@"
 	ld [hl], a
 	ret
+
+Debug_ATMA:
+.loop
+	call JoyTextDelay
+	ldh a, [hJoyLast]
+	cp B_BUTTON
+	ret z
+	cp A_BUTTON
+	call z, Random2
+	jr .loop

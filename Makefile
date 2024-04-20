@@ -50,7 +50,7 @@ RGBLINK ?= $(RGBDS)rgblink
 .PRECIOUS:
 .SECONDARY:
 
-all: crystal crystal_debug crystal_vc
+all: crystal crystal_debug
 crystal:       pokecrystal.gbc
 crystal_debug: pokecrystal_debug.gbc
 crystal_vc:    pokecrystal.patch
@@ -139,6 +139,7 @@ pokecrystal_vc_opt      = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 
 	$(RGBFIX) $($*_opt) $@
 	tools/stadium $@
 	tools/bankends -q $(basename $@).map
+	python3 tools/freespace2.py $*.map > $*.free
 
 
 ### LZ compression rules

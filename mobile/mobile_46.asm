@@ -113,7 +113,7 @@ BattleTowerRoomMenu_InitRAM:
 	ldh [rIE], a
 	ld a, $1
 	ldh [hMobileReceive], a
-	ldh [hMobile], a
+;	ldh [hMobile], a
 	ei
 	farcall Function106464
 	farcall Function115d99
@@ -124,7 +124,7 @@ BattleTowerRoomMenu_Cleanup:
 	di
 	xor a
 	ldh [hMobileReceive], a
-	ldh [hMobile], a
+;	ldh [hMobile], a
 	ldh [hVBlank], a
 	xor a
 	ldh [rIF], a

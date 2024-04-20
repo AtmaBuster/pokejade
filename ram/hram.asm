@@ -16,11 +16,8 @@ hMetatileCountWidth:: db
 hMetatileCountHeight:: db
 
 hHours:: db
-	ds 1
 hMinutes:: db
-	ds 1
 hSeconds:: db
-	ds 1
 
 hVBlankCounter:: db
 
@@ -33,7 +30,6 @@ hVBlank:: db
 hMapEntryMethod:: db
 
 hMenuReturn:: db
-hUnusedByte:: db
 
 hJoypadReleased:: db
 hJoypadPressed::  db
@@ -168,7 +164,6 @@ hCGB::          db
 hSGB::          db
 
 hDMATransfer:: db
-hMobile:: db
 hSystemBooted:: db
 
 hClockResetTrigger:: db
@@ -186,7 +181,6 @@ hFunctionTargetHi:: db
 
 hDelayFrameLY:: db
 
-UNION
 hRequested2bpp::        db
 hRequested1bpp::        db
 hRequestedVTileDest::   dw
@@ -195,13 +189,9 @@ hRequestOpaque1bpp::    db
 
 hTilesetGFXBank:: db
 
-	ds 4
+hRand32:: ds 4
+hRand32_Result:: ds 4
 
-NEXTU
-IF DEF(_DEBUG)
-hDebugMenuCursorPos:: db
-hDebugMenuDataBuffer:: ds 8
-ENDC
-ENDU
 
+	ds 1 ; MAKE SURE THIS IS HERE TO RESERVE $FFFF
 ENDSECTION
