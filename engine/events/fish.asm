@@ -24,12 +24,17 @@ endr
 .Fish:
 ; Fish for monsters with rod b from encounter data in FishGroup at hl.
 ; Return monster d at level e.
+; If lead party mon has >= 150 friendship, this always works
+	ld a, [wPartyMon1Happiness]
+	cp 150
+	jr nc, .fish_ok
 
 	call Random
 	cp [hl]
 	ld de, 0
 	ret nc
 
+.fish_ok
 	; Get encounter data by rod:
 	; 0: Old
 	; 1: Good
