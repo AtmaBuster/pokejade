@@ -165,7 +165,7 @@ endr
 
 	; Initialize stat experience.
 	xor a
-	ld b, MON_DVS - MON_EVS
+	ld b, 6 ; num stats
 .loop
 	ld [de], a
 	inc de
@@ -179,8 +179,24 @@ endr
 	jr z, .registerpokedex
 
 	push hl
-	farcall GetTrainerDVs
+	farcall GetTrainerMonInfo
+	ld a, b
+	ld [de], a
+	inc de
+	ld a, c
+	ld [de], a
+	inc de
+	ld a, h
+	ld [de], a
+	inc de
 	pop hl
+
+	push hl
+	farcall GetTrainerDVs
+	ld a, h
+	pop hl
+	push bc
+	ld c, a
 	jr .initializeDVs
 
 .registerpokedex
@@ -198,11 +214,29 @@ endr
 	and a
 	jr nz, .copywildmonDVs
 
+	call GenerateMonPersonality
+	ld a, b
+	ld [de], a
+	inc de
+	ld a, c
+	ld [de], a
+	inc de
+
+	; TO-DO
+	inc de ; caught ball
+
 	call Random
 	ld b, a
 	call Random
 	ld c, a
+	push bc
+	call Random
+	ld c, a
 .initializeDVs
+	ld a, c
+	ld [de], a
+	inc de
+	pop bc
 	ld a, b
 	ld [de], a
 	inc de
@@ -267,12 +301,15 @@ endr
 	jr .initstats
 
 .copywildmonDVs
-	ld a, [wEnemyMonDVs]
-	ld [de], a
-	inc de
-	ld a, [wEnemyMonDVs + 1]
-	ld [de], a
-	inc de
+	push hl
+	push de
+	ld h, d
+	ld l, e
+	ld de, wEnemyMonDVs
+	ld bc, MON_HAPPINESS - MON_PERSONALITY
+	rst CopyBytes
+	pop de
+	pop hl
 
 	push hl
 	ld hl, wEnemyMonPP
@@ -1417,3 +1454,9 @@ InitNickname:
 	ld a, $4 ; ExitAllMenus is in bank 0; maybe it used to be in bank 4
 	ld hl, ExitAllMenus
 	jmp FarCall_hl
+
+GenerateMonPersonality:
+	; TO-DO
+	ld b, %00_1_10100 ; first ability, shiny, calm
+	ld c, %000000_0_0 ; base type set, no ev break, female
+	ret

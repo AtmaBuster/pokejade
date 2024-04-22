@@ -480,10 +480,18 @@ PokeBallEffect:
 	bit SUBSTATUS_TRANSFORMED, a
 	jr nz, .load_data
 
-	ld hl, wEnemyBackupDVs
+	ld hl, wEnemyBackupPersonality
+	ld a, [wEnemyMonPersonality]
+	ld [hli], a
+	ld a, [wEnemyMonPersonality + 1]
+	ld [hli], a
+	inc hl
+	;ld hl, wEnemyBackupDVs
 	ld a, [wEnemyMonDVs]
 	ld [hli], a
 	ld a, [wEnemyMonDVs + 1]
+	ld [hli], a
+	ld a, [wEnemyMonDVs + 2]
 	ld [hl], a
 
 .load_data

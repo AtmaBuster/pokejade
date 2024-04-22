@@ -6,6 +6,17 @@ DEF SHINY_SPD_DV EQU 10
 DEF SHINY_SPC_DV EQU 10
 
 CheckShininess:
+	ld a, [bc]
+	and MON_SHINY
+	jr z, .not_shiny
+	scf
+	ret
+
+.not_shiny
+	and a
+	ret
+
+_CheckShininess:
 ; Check if a mon is shiny by DVs at bc.
 ; Return carry if shiny.
 
@@ -514,7 +525,7 @@ SetFirstOBJPalette::
 
 GetBattlemonBackpicPalettePointer:
 	push de
-	farcall GetPartyMonDVs
+	farcall GetPartyMonPersonality
 	ld c, l
 	ld b, h
 	ld a, [wTempBattleMonSpecies]
@@ -524,7 +535,7 @@ GetBattlemonBackpicPalettePointer:
 
 GetEnemyFrontpicPalettePointer:
 	push de
-	farcall GetEnemyMonDVs
+	farcall GetEnemyMonPersonality
 	ld c, l
 	ld b, h
 	ld a, [wTempEnemyMonSpecies]

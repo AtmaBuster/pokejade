@@ -725,7 +725,7 @@ WriteIconPaletteData:
 	push hl
 	push de
 	push bc
-	ld bc, wBufferMonDVs
+	ld bc, wBufferMonPersonality
 	farcall CheckShininess
 	ld a, [wBufferMonAltSpecies]
 	ld c, a
@@ -1095,7 +1095,7 @@ _GetCursorMon:
 	call FillBoxWithByte
 
 	; Colors
-	ld bc, wBufferMonDVs
+	ld bc, wBufferMonPersonality
 	ld a, [wBufferMonAltSpecies]
 	farcall GetMonNormalOrShinyPalettePointer
 	ld de, wBillsPC_PokepicPal
@@ -1181,7 +1181,7 @@ _GetCursorMon:
 	; Shiny
 	push hl
 	push bc
-	ld bc, wBufferMonDVs
+	ld bc, wBufferMonPersonality
 	farcall CheckShininess
 	pop bc
 	pop hl

@@ -17,8 +17,10 @@ MACRO box_struct
 \1SpdEV::          db
 \1SpclAtkEV::      db
 \1SpclDefEV::      db
-\1Padding::        ds 4
-\1DVs::            dw
+\1Personality::    db
+\1ExtraFlags::     db
+\1CaughtBall::     db
+\1DVs::            ds 3
 \1PP::             ds NUM_MOVES
 \1Happiness::      db
 \1PokerusStatus::  db
@@ -45,8 +47,10 @@ MACRO savemon_struct
 \1SpdEV::          db
 \1SpclAtkEV::      db
 \1SpclDefEV::      db
-\1Padding::        ds 4
-\1DVs::            dw
+\1Personality::    db
+\1ExtraFlags::     db
+\1CaughtBall::     db
+\1DVs::            ds 3
 \1MovesHigh::
 \1PPUps::          ds NUM_MOVES
 \1Happiness::      db
@@ -130,7 +134,10 @@ MACRO battle_struct
 \1Species::   db
 \1Item::      db
 \1Moves::     ds NUM_MOVES
-\1DVs::       dw
+\1Personality:: db
+\1ExtraFlags:: db
+\1CaughtBall:: db
+\1DVs::       ds 3
 \1PP::        ds NUM_MOVES
 \1Happiness:: db
 \1Level::     db

@@ -68,7 +68,6 @@ AlphabeticalPokedexOrder:
 	dw CROCONAW
 	dw CUBONE
 	dw CYNDAQUIL
-	dw DDUNSPARCE
 	dw DELCATTY
 	dw DEOXYS
 	dw DEWPIDER
@@ -81,6 +80,7 @@ AlphabeticalPokedexOrder:
 	dw DRAGONITE
 	dw DRATINI
 	dw DREDNAW
+	dw DUDUNSPARC
 	dw DUNSPARCE
 	dw DURANT
 	dw DUSCLOPS
@@ -98,6 +98,7 @@ AlphabeticalPokedexOrder:
 	dw EXEGGCUTE
 	dw EXEGGUTOR
 	dw FALINKS
+	dw FARIGIRAF
 	dw FEEBAS
 	dw FERALIGATR
 	dw FLAREON
@@ -205,7 +206,6 @@ AlphabeticalPokedexOrder:
 	dw MISDREAVUS
 	dw MISMAGIUS
 	dw MOLTRES
-	dw MON_0EE
 	dw MON_0F3
 	dw MON_0F4
 	dw MON_0F5

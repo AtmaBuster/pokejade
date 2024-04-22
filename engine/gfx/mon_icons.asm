@@ -58,7 +58,7 @@ LoadPartyMenuMonIconColors:
 	add hl, de
 	ld a, [hl]
 	ld [wCurPartySpecies], a
-	ld a, MON_DVS
+	ld a, MON_PERSONALITY
 	call GetPartyParamLocation
 	call GetMenuMonIconPalette
 	ld hl, wShadowOAMSprite00Attributes
@@ -411,7 +411,7 @@ FlyFunction_GetMonIcon:
 ; fallthrough
 SetOWFlyMonColor:
 	; Edit the OBJ 0 palette so that the cursor Pokémon has the right colors.
-	ld a, MON_DVS
+	ld a, MON_PERSONALITY
 	call GetPartyParamLocation
 	call GetMenuMonIconPalette
 	add a

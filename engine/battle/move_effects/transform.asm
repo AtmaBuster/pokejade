@@ -46,20 +46,22 @@ BattleCommand_Transform:
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .mimic_enemy_backup
-	ld a, [de]
-	ld [wEnemyBackupDVs], a
-	inc de
-	ld a, [de]
-	ld [wEnemyBackupDVs + 1], a
-	dec de
+	push hl
+	push de
+	ld de, wEnemyBackupDVs
+	ld bc, 6
+	rst CopyBytes
+	pop de
+	pop hl
 .mimic_enemy_backup
-; copy DVs
+; copy personality & DVs
+	ld c, 6
+.personality_dv_loop
 	ld a, [hli]
 	ld [de], a
 	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
+	dec c
+	jr nz, .personality_dv_loop
 ; move pointer to stats
 	ld bc, wBattleMonStats - wBattleMonPP
 	add hl, bc

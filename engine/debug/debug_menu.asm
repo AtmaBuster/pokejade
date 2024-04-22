@@ -977,7 +977,7 @@ Debug_GivePoke:
 	hlcoord 1, 5
 	ld a, "▶"
 	ld [hl], a
-	ret ; TODO
+	ret ; TO-DO
 	hlcoord 3, 5
 	ld de, wDebugMenuDataBuffer + 3
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3

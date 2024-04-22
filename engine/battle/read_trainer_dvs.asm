@@ -19,3 +19,6 @@ GetTrainerDVs:
 	ret
 
 INCLUDE "data/trainers/dvs.asm"
+
+GetTrainerMonInfo: ; TO-DO
+	ret

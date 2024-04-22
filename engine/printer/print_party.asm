@@ -327,7 +327,7 @@ PlaceGenderAndShininess:
 .got_gender
 	hlcoord 17, 2
 	ld [hl], a
-	ld bc, wTempMonDVs
+	ld bc, wTempMonPersonality
 	farcall CheckShininess
 	ret nc
 	hlcoord 18, 2

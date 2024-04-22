@@ -136,18 +136,18 @@ GetGender:
 ; Figure out what type of monster struct we're looking at.
 
 ; 0: PartyMon
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Personality
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wMonType]
 	and a
 	jr z, .PartyMon
 
-	ld hl, wBufferMonDVs
+	ld hl, wBufferMonPersonality
 	cp BUFFERMON
 	jr z, .DVs
 
 ; 1: OTPartyMon
-	ld hl, wOTPartyMon1DVs
+	ld hl, wOTPartyMon1Personality
 	dec a
 	jr z, .PartyMon
 
@@ -156,12 +156,12 @@ GetGender:
 	jr z, .sBoxMon
 
 ; 3: Unknown
-	ld hl, wTempMonDVs
+	ld hl, wTempMonPersonality
 	dec a
 	jr z, .DVs
 
 ; else: WildMon
-	ld hl, wEnemyMonDVs
+	ld hl, wEnemyMonPersonality
 	jr .DVs
 
 ; Get our place in the party/box.
@@ -176,21 +176,9 @@ GetGender:
 	rst AddNTimes
 
 .DVs:
-; Attack DV
-	ld a, [hli]
-	and $f0
-	ld b, a
-; Speed DV
-	ld a, [hl]
-	and $f0
-	swap a
-
-; Put our DVs together.
-	or b
-	ld b, a
-
-; We need the gender ratio to do anything with this.
-	push bc
+; Start with the gender ratio
+; If it's "unknown" we can get out right away
+	push hl
 	ld a, [wCurPartySpecies]
 	call GetPokemonIndexFromID
 	ld b, h
@@ -200,10 +188,9 @@ GetGender:
 	call LoadIndirectPointer
 	ld bc, BASE_GENDER
 	add hl, bc
-	pop bc
-	jr z, .Genderless
-
+	jr z, .Fail
 	call GetFarByte
+	pop hl
 
 ; The higher the ratio, the more likely the monster is to be female.
 
@@ -216,9 +203,11 @@ GetGender:
 	cp GENDER_F100
 	jr z, .Female
 
-; Values below the ratio are male, and vice versa.
-	cp b
-	jr c, .Male
+; If not fixed, check personality
+	inc hl
+	ld a, [hl]
+	and MON_GENDER
+	jr z, .Male
 
 .Female:
 	xor a
@@ -229,6 +218,8 @@ GetGender:
 	and a
 	ret
 
+.Fail
+	pop hl
 .Genderless:
 	scf
 	ret

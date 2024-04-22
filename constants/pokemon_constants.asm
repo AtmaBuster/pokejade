@@ -230,7 +230,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const TINKATON   ; 0d0 //
 	const ORTHWORM   ; 0d1 //
 	const ANNIHILAPE ; 0d2 //
-	const DDUNSPARCE ; 0d3 //
+	const DUDUNSPARC ; 0d3 //
 	const SCIZOR     ; 0d4
 	const SHUCKLE    ; 0d5
 	const GIMMIGHOUL ; 0d6 //
@@ -257,7 +257,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const BOMASHIKA  ; 0eb //
 	const _SPACEBOAT ; 0ec //
 	const _KOKOPELLI ; 0ed //
-	const MON_0EE    ; 0ee //
+	const FARIGIRAF  ; 0ee //
 	const ELEKID     ; 0ef
 	const MAGBY      ; 0f0
 	const MILTANK    ; 0f1

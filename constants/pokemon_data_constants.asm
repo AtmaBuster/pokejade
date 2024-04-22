@@ -86,8 +86,10 @@ DEF MON_DEF_EV             rb
 DEF MON_SPD_EV             rb
 DEF MON_SAT_EV             rb
 DEF MON_SDF_EV             rb
-                           rb_skip 4
-DEF MON_DVS                rw
+DEF MON_PERSONALITY        rb
+DEF MON_EXTRA_FLAGS        rb
+DEF MON_CAUGHT_BALL        rb
+DEF MON_DVS                rb 3
 DEF MON_PP                 rb NUM_MOVES
 DEF MON_HAPPINESS          rb
 DEF MON_POKERUS            rb
@@ -112,6 +114,12 @@ DEF MON_SPD                rw
 DEF MON_SAT                rw
 DEF MON_SDF                rw
 DEF PARTYMON_STRUCT_LENGTH EQU _RS
+
+DEF MON_NATURE_MASK EQU %00_0_11111
+DEF MON_SHINY       EQU %00_1_00000
+DEF MON_ABILITY     EQU %11_0_00000
+DEF MON_LIMITBREAK  EQU %000000_1_0
+DEF MON_GENDER      EQU %000000_0_1
 
 ; savemon_struct members (see macros/wram.asm)
 rsreset

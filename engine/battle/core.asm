@@ -3763,10 +3763,10 @@ InitBattleMon:
 	ld de, wBattleMonSpecies
 	ld bc, MON_ID
 	rst CopyBytes
-	ld bc, MON_DVS - MON_ID
+	ld bc, MON_PERSONALITY - MON_ID
 	add hl, bc
-	ld de, wBattleMonDVs
-	ld bc, MON_POKERUS - MON_DVS
+	ld de, wBattleMonPersonality
+	ld bc, MON_POKERUS - MON_PERSONALITY
 	rst CopyBytes
 	inc hl
 	inc hl
@@ -3797,36 +3797,36 @@ InitBattleMon:
 	jmp BadgeStatBoosts
 
 BattleCheckPlayerShininess:
-	call GetPartyMonDVs
+	call GetPartyMonPersonality
 	jr BattleCheckShininess
 
 BattleCheckEnemyShininess:
-	call GetEnemyMonDVs
+	call GetEnemyMonPersonality
 
 BattleCheckShininess:
 	ld b, h
 	ld c, l
 	farjp CheckShininess
 
-GetPartyMonDVs:
-	ld hl, wBattleMonDVs
+GetPartyMonPersonality:
+	ld hl, wBattleMonPersonality
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
 	ret z
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Personality
 	ld a, [wCurBattleMon]
 	jmp GetPartyLocation
 
-GetEnemyMonDVs:
-	ld hl, wEnemyMonDVs
+GetEnemyMonPersonality:
+	ld hl, wEnemyMonPersonality
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
 	ret z
-	ld hl, wEnemyBackupDVs
+	ld hl, wEnemyBackupPersonality
 	ld a, [wBattleMode]
 	dec a
 	ret z
-	ld hl, wOTPartyMon1DVs
+	ld hl, wOTPartyMon1Personality
 	ld a, [wCurOTMon]
 	jmp GetPartyLocation
 
@@ -4621,12 +4621,12 @@ DrawEnemyHUD:
 	ld l, c
 	dec hl
 
-	ld hl, wEnemyMonDVs
-	ld de, wTempMonDVs
+	ld hl, wEnemyMonPersonality
+	ld de, wTempMonPersonality
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
 	jr z, .ok
-	ld hl, wEnemyBackupDVs
+	ld hl, wEnemyBackupPersonality
 .ok
 	ld a, [hli]
 	ld [de], a
@@ -5948,8 +5948,8 @@ LoadEnemyMon:
 	jr z, .InitDVs
 
 ; Unknown
-	ld hl, wEnemyBackupDVs
-	ld de, wEnemyMonDVs
+	ld hl, wEnemyBackupPersonality ; TO-DO
+	ld de, wEnemyMonPersonality
 	ld a, [hli]
 	ld [de], a
 	inc de

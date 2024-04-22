@@ -478,14 +478,14 @@ wLinkBattleRNCount::
 	db
 
 wEnemyItemState:: db
-	ds 2
 wCurEnemyMoveNum:: db
 
 wEnemyHPAtTimeOfPlayerSwitch:: dw
 wPayDayMoney:: ds 3
 
-	ds 1
-wEnemyBackupDVs:: dw ; used when enemy is transformed
+wEnemyBackupPersonality:: db ; used when enemy is transformed
+wEnemyBackupExtraFlags:: db
+wEnemyBackupDVs:: ds 3
 wAlreadyDisobeyed:: db
 
 wDisabledMove:: db
