@@ -1638,13 +1638,43 @@ Pokedex_PrintNumberIfOldMode:
 	push de
 	ld bc, -SCREEN_WIDTH
 	add hl, bc
+	push hl
+	ld h, d
+	ld l, e
+	call GetDexNumberNational
+	pop hl
+	ld a, e
+	and d
+	inc a
+	jr z, .unknown_number
 	ld a, e
 	ld [wPokedexDisplayNumber + 1], a
 	ld a, d
 	ld de, wPokedexDisplayNumber
 	ld [de], a
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
+	cp HIGH(1000)
+	jr c, .ok
+	jr z, .next_check
+	jr .gt1k
+
+.next_check
+	ld a, [wPokedexDisplayNumber + 1]
+	cp LOW(1000)
+	jr c, .ok
+.gt1k
+	inc c
+.ok
 	call PrintNum
+	pop de
+	pop hl
+	ret
+
+.unknown_number
+	ld a, "?"
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
 	pop de
 	pop hl
 	ret
@@ -1737,18 +1767,6 @@ Pokedex_CheckSeen:
 Pokedex_OrderMonsByMode:
 	ld hl, wEndPokedexSeen - 1
 	ld c, wEndPokedexSeen - wPokedexSeen
-.last_seen_loop
-	ld a, [hld]
-	and a
-	jr nz, .found_last_seen
-	dec c
-	jr nz, .last_seen_loop
-.found_last_seen
-	ld [wDexLastSeenValue], a
-	dec c
-	and a ;flags will be preserved until the jump, since all following operations are loads (and a push)
-	ld a, c
-	ld [wDexLastSeenIndex], a
 
 	ldh a, [rSVBK]
 	push af
@@ -1756,7 +1774,6 @@ Pokedex_OrderMonsByMode:
 	ldh [rSVBK], a
 	ld hl, wPokedexOrder
 	ld a, -1
-	jr z, .nothing_seen
 	ld bc, (NUM_POKEMON + 1) * 2
 	rst ByteFill
 	ld a, [wCurDexMode]
@@ -1768,54 +1785,40 @@ Pokedex_OrderMonsByMode:
 	ldh [rSVBK], a
 	ret
 
-.nothing_seen
-	ld [hli], a
-	ld [hl], a
-	xor a
-	ld hl, wDexListingEnd
-	ld [hli], a
-	ld [hl], a
-	jr .restore_bank_and_exit
-
 .Jumptable:
 	dw .NewMode
 	dw .OldMode
 	dw Pokedex_ABCMode
 
 .OldMode:
-	ld a, [wDexLastSeenValue] ;known to be non-zero
-	ld c, 9 ;bits are numbered 1-8 (instead of 0-7) because the first dex entry is #001, not #000
-.highest_bit_index_loop
-	dec c
-	add a
-	jr nc, .highest_bit_index_loop
-	ld a, [wDexLastSeenIndex]
-	ld l, a
-	ld h, 0
-	ld b, h
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, bc
-	ld d, h
-	ld e, l
-	ld hl, wPokedexOrder
-	ld c, b ;b = 0
-.old_mode_loop
-	inc bc
-	ld a, c
-	ld [hli], a
+	ld hl, NationalPokedexOrder
+	ld de, wPokedexOrder
+	ld bc, NUM_POKEMON * 2
+	rst CopyBytes
+	ld a, BANK(wPokedexSeen)
+	ldh [rSVBK], a
+	ld bc, (NationalPokedexOrder.End - NationalPokedexOrder) / 2
+	ld hl, NationalPokedexOrder.End - 1
+.old_mode_last_seen_loop
+	ld a, [hld]
+	ld d, a
+	ld a, [hld]
+	ld e, a
+	push hl
+	push bc
+	call CheckSeenMonIndex
+	pop bc
+	pop hl
+	jr nz, .old_mode_found_last_seen_index
+	dec bc
 	ld a, b
-	ld [hli], a
-	cp d
-	jr c, .old_mode_loop
-	ld a, c
-	cp e
-	jr c, .old_mode_loop
+	or c
+	jr nz, .old_mode_last_seen_loop
+.old_mode_found_last_seen_index
 	ld hl, wDexListingEnd
-	ld a, e
+	ld a, c
 	ld [hli], a
-	ld [hl], d
+	ld [hl], b
 	ret
 
 .NewMode:
@@ -1904,6 +1907,8 @@ Pokedex_ABCMode:
 INCLUDE "data/pokemon/dex_order_alpha.asm"
 
 INCLUDE "data/pokemon/dex_order_new.asm"
+
+INCLUDE "data/pokemon/dex_order_national.asm"
 
 Pokedex_DisplayModeDescription:
 	xor a
@@ -2632,6 +2637,10 @@ Pokedex_LoadSelectedMonTiles:
 	call Pokedex_CheckSeen
 	jr z, .QuestionMark
 	ld a, [wFirstUnownSeen]
+	and a
+	jr nz, .got_unown
+	inc a
+.got_unown
 	ld [wUnownLetter], a
 	ld a, [wTempSpecies]
 	ld [wCurPartySpecies], a
@@ -2824,3 +2833,45 @@ Pokedex_ResetBGMapMode:
 	xor a
 	ldh [hBGMapMode], a
 	ret
+
+GetValidDexNumber:
+; gets a valid dex number for mon hl
+; if a=0, try Nazoh dex first
+; else, try Holon dex first
+	and a
+	jr z, .nazoh_first
+	call GetDexNumberHolon
+	ld a, d
+	or e
+	ret nz
+	call GetDexNumberNazoh
+	ld a, d
+	or e
+	ret nz
+	jr .national
+
+.nazoh_first
+	call GetDexNumberNazoh
+	ld a, d
+	or e
+	ret nz
+	call GetDexNumberHolon
+	ld a, d
+	or e
+	ret nz
+
+.national
+	jmp GetDexNumberNational
+
+_GetDexNumberFromList:
+	dec hl
+	add hl, hl
+	add hl, de
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	ret
+
+INCLUDE "data/pokemon/dex_list_nazoh.asm"
+INCLUDE "data/pokemon/dex_list_holon.asm"
+INCLUDE "data/pokemon/dex_list_national.asm"

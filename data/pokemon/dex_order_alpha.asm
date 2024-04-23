@@ -401,7 +401,7 @@ AlphabeticalPokedexOrder:
 	dw ZAPDOS
 	dw ZIGZAGOON
 	dw ZUBAT
-	dw _KOKOPELLI
+	dw KOKOPELLI
 	dw _SPACEBOAT
 	dw -1
 	dw -1

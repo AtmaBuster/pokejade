@@ -236,7 +236,7 @@ BitmasksPointers:
 	dw StantlerBitmasks
 	dw SmeargleBitmasks
 	dw TyrogueBitmasks
-	dw HitmontopBitmasks
+	dw KokopelliBitmasks
 	dw SmoochumBitmasks
 	dw ElekidBitmasks
 	dw MagbyBitmasks

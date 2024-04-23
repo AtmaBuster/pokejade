@@ -241,7 +241,7 @@ IconPointers:
 	dw StantlerIcon
 	dw SmeargleIcon
 	dw TyrogueIcon
-	dw HitmontopIcon
+	dw KokopelliIcon
 	dw SmoochumIcon
 	dw ElekidIcon
 	dw MagbyIcon

@@ -417,7 +417,7 @@ BrunoGroup:
 	next_list_item ; BRUNO (1)
 	db "BRUNO@", TRAINERTYPE_MOVES
 	db 42
-	dw HITMONTOP
+	dw BULBASAUR
 	dw PURSUIT, QUICK_ATTACK, DIG, DETECT
 	db 42
 	dw HITMONLEE

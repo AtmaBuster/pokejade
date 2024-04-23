@@ -236,7 +236,7 @@ FramesPointers:
 	dba StantlerFrames
 	dba SmeargleFrames
 	dba TyrogueFrames
-	dba HitmontopFrames
+	dba KokopelliFrames
 	dba SmoochumFrames
 	dba ElekidFrames
 	dba MagbyFrames

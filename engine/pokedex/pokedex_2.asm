@@ -98,15 +98,43 @@ DisplayDexEntry:
 	push hl
 	ld a, [wTempSpecies]
 	call GetPokemonIndexFromID
-	ld b, l
-	ld c, h
+	call GetDexNumberNational
+	ld a, d
+	and e
+	inc a
+	jr z, .unknown_number
+	ld b, e
+	ld c, d
 	ld hl, sp + 0
 	ld d, h
 	ld e, l
 	pop hl
 	push bc
+	ld a, c
+	cp HIGH(1000)
+	ld a, b
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
+	jr c, .under_1k
+	jr z, .next_1k_check
+	jr .gt_1k
+
+.next_1k_check
+	cp LOW(1000)
+	jr c, .under_1k
+.gt_1k
+	inc c
+.under_1k
 	call PrintNum
+	jr .done_num
+
+.unknown_number
+	pop hl
+	push bc
+	ld a, "?"
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+.done_num
 	pop bc
 ; Check to see if we caught it.  Get out of here if we haven't.
 	ld a, [wTempSpecies]

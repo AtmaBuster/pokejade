@@ -79,9 +79,9 @@ ROMX $0f
 	"Battle Core"
 ROMX $10
 	"bank10"
+ROMX $11
 	"Evolutions and Attacks Pointers"
 	"Evolutions and Attacks 1"
-ROMX $11
 	"bank11"
 	"Newbox"
 	"Bill's PC Graphics"

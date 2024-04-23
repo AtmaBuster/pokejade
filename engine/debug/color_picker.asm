@@ -62,7 +62,7 @@ DebugMenu_PokePics:
 	bit D_UP_F, a
 	jr nz, .up
 	bit SELECT_F, a
-	jr nz, .swap_pals
+	jp nz, .swap_pals
 	jr .input
 
 .toggle_edit_mode
@@ -101,6 +101,10 @@ DebugMenu_PokePics:
 	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	dec hl
+	cphl16 UNOWN
+	jr nz, .left_not_unown
+	dec hl
+.left_not_unown
 	ld a, h
 	or l
 	jr nz, .cont
@@ -116,6 +120,10 @@ DebugMenu_PokePics:
 	ld a, [wDebugMenuDataBuffer + 1]
 	ld l, a
 	inc hl
+	cphl16 UNOWN
+	jr nz, .right_not_unown
+	inc hl
+.right_not_unown
 	ld a, h
 	cp HIGH(NUM_POKEMON)
 	jr c, .cont

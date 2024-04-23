@@ -240,7 +240,7 @@ PokemonNames::
 	db "STANTLER@@"
 	db "BOMASHIKA@"
 	db "VIKING1@@@"
-	db "KOKOPELLI1"
+	db "KOKOPELLI@"
 	db "FARGIRAF@@"
 	db "ELEKID@@@@"
 	db "MAGBY@@@@@"

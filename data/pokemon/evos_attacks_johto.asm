@@ -86,7 +86,7 @@ EvosAttacksPointers2::
 	dw StantlerEvosAttacks
 	dw SmeargleEvosAttacks
 	dw TyrogueEvosAttacks
-	dw HitmontopEvosAttacks
+	dw KokopelliEvosAttacks
 	dw SmoochumEvosAttacks
 	dw ElekidEvosAttacks
 	dw MagbyEvosAttacks
@@ -1186,24 +1186,13 @@ SmeargleEvosAttacks:
 	db 0 ; no more level-up moves
 
 TyrogueEvosAttacks:
-	dbbbw EVOLVE_STAT, 20, ATK_LT_DEF, HITMONCHAN
-	dbbbw EVOLVE_STAT, 20, ATK_GT_DEF, HITMONLEE
-	dbbbw EVOLVE_STAT, 20, ATK_EQ_DEF, HITMONTOP
 	db 0 ; no more evolutions
 	dbw 1, TACKLE
 	db 0 ; no more level-up moves
 
-HitmontopEvosAttacks:
+KokopelliEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, ROLLING_KICK
-	dbw 7, FOCUS_ENERGY
-	dbw 13, PURSUIT
-	dbw 19, QUICK_ATTACK
-	dbw 25, RAPID_SPIN
-	dbw 31, COUNTER
-	dbw 37, AGILITY
-	dbw 43, DETECT
-	dbw 49, TRIPLE_KICK
+	dbw 1, POUND
 	db 0 ; no more level-up moves
 
 SmoochumEvosAttacks:

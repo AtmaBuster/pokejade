@@ -357,9 +357,12 @@ StatsScreen_InitUpperHalf:
 	ld a, [wBaseSpecies]
 	ld [wCurSpecies], a
 	call GetPokemonIndexFromID
-	ld a, h
-	ld h, l
-	ld l, a
+	call GetDexNumberNational
+	ld h, e
+	ld l, d
+	;ld a, h
+	;ld h, l
+	;ld l, a
 	push hl
 	ld hl, sp + 0
 	ld d, h

@@ -256,7 +256,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const STANTLER   ; 0ea
 	const BOMASHIKA  ; 0eb //
 	const _SPACEBOAT ; 0ec //
-	const _KOKOPELLI ; 0ed //
+	const KOKOPELLI  ; 0ed //
 	const FARIGIRAF  ; 0ee //
 	const ELEKID     ; 0ef
 	const MAGBY      ; 0f0

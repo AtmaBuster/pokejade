@@ -237,7 +237,7 @@ PokedexDataPointerTable:
 	dba StantlerPokedexEntry
 	dba SmearglePokedexEntry
 	dba TyroguePokedexEntry
-	dba HitmontopPokedexEntry
+	dba KokopelliPokedexEntry
 	dba SmoochumPokedexEntry
 	dba ElekidPokedexEntry
 	dba MagbyPokedexEntry

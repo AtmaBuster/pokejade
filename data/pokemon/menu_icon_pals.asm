@@ -246,7 +246,7 @@ MonMenuIconPals:
 	icon_pals BROWN,  GREEN  ; STANTLER
 	icon_pals BROWN,  GREEN  ; SMEARGLE
 	icon_pals BROWN,  BLUE   ; TYROGUE
-	icon_pals BROWN,  PURPLE ; HITMONTOP
+	icon_pals BROWN,  PURPLE ; KOKOPELLI
 	icon_pals PURPLE, PINK   ; SMOOCHUM
 	icon_pals BROWN,  PINK   ; ELEKID
 	icon_pals RED,    PINK   ; MAGBY

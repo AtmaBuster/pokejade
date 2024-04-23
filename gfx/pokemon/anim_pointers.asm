@@ -236,7 +236,7 @@ AnimationPointers:
 	dw StantlerAnimation
 	dw SmeargleAnimation
 	dw TyrogueAnimation
-	dw HitmontopAnimation
+	dw KokopelliAnimation
 	dw SmoochumAnimation
 	dw ElekidAnimation
 	dw MagbyAnimation
