@@ -26,8 +26,10 @@ DEF BASE_ITEM_2             rw
 DEF BASE_GENDER             rb
 DEF BASE_EGG_STEPS          rb
 DEF BASE_PIC_SIZE           rb
-DEF BASE_FRONTPIC           rw
-DEF BASE_BACKPIC            rw
+DEF BASE_ABILITY_1          rb
+DEF BASE_ABILITY_2          rb
+DEF BASE_ABILITY_3          rb
+DEF BASE_ABILITY_4          rb
 DEF BASE_GROWTH_RATE        rb
 DEF BASE_EGG_GROUPS         rb
 DEF BASE_TMHM               rb (NUM_TM_HM_TUTOR + 7) / 8
@@ -115,11 +117,11 @@ DEF MON_SAT                rw
 DEF MON_SDF                rw
 DEF PARTYMON_STRUCT_LENGTH EQU _RS
 
-DEF MON_NATURE_MASK EQU %00_0_11111
-DEF MON_SHINY       EQU %00_1_00000
-DEF MON_ABILITY     EQU %11_0_00000
-DEF MON_LIMITBREAK  EQU %000000_1_0
-DEF MON_GENDER      EQU %000000_0_1
+DEF MON_NATURE_MASK EQU %0_0_0_11111
+DEF MON_SHINY       EQU %0_0_1_00000
+DEF MON_GENDER      EQU %0_1_0_00000
+DEF MON_SHINY_F  EQU 5
+DEF MON_GENDER_F EQU 6
 
 ; savemon_struct members (see macros/wram.asm)
 rsreset

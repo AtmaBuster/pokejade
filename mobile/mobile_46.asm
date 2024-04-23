@@ -951,7 +951,7 @@ BattleTowerRoomMenu2_UpdateYesNoMenu:
 	farcall HDMATransferTilemapAndAttrmap_Overworld
 	ld a, [wMobileInactivityTimerFrames]
 	and a
-	ld a, [wcd47]
+;	ld a, [wcd47]
 	jr nz, .exit_carry
 	ld a, [wcd33]
 .exit_carry

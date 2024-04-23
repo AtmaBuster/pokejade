@@ -1,8 +1,9 @@
-	const_def 1
-	const PINK_PAGE  ; 1
-	const GREEN_PAGE ; 2
-	const BLUE_PAGE  ; 3
-DEF NUM_STAT_PAGES EQU const_value - 1
+	const_def
+	const PINK_PAGE   ; 1
+	const GREEN_PAGE  ; 2
+	const BLUE_PAGE   ; 3
+	const ORANGE_PAGE ; 4
+DEF NUM_STAT_PAGES EQU const_value
 
 DEF STAT_PAGE_MASK EQU %00000011
 
@@ -45,11 +46,7 @@ StatsScreenInit:
 StatsScreenMain:
 	xor a
 	ld [wJumptableIndex], a
-; ???
-	ld [wStatsScreenFlags], a
-	and ~STAT_PAGE_MASK
-	or PINK_PAGE ; first_page
-	ld [wStatsScreenFlags], a
+	ld [wStatsScreenFlags], a ; PINK_PAGE
 .loop
 	ld a, [wJumptableIndex]
 	and ~(1 << 7)
@@ -307,20 +304,22 @@ StatsScreen_JoypadAction:
 
 .a_button
 	ld a, c
-	cp BLUE_PAGE ; last page
+	cp ORANGE_PAGE ; last page
 	jr z, .b_button
 .d_right
 	inc c
-	ld a, BLUE_PAGE ; last page
+	ld a, ORANGE_PAGE ; last page
 	cp c
 	jr nc, .set_page
 	ld c, PINK_PAGE ; first page
 	jr .set_page
 
 .d_left
+	ld a, c
 	dec c
+	and a ; cp PINK_PAGE
 	jr nz, .set_page
-	ld c, BLUE_PAGE ; last page
+	ld c, ORANGE_PAGE ; last page
 	jr .set_page
 
 .prev_storage
@@ -365,7 +364,7 @@ StatsScreen_InitUpperHalf:
 	ld hl, sp + 0
 	ld d, h
 	ld e, l
-	hlcoord 8, 0
+	hlcoord 15, 0
 	ld a, "№"
 	ld [hli], a
 	ld a, "."
@@ -373,14 +372,14 @@ StatsScreen_InitUpperHalf:
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
 	add sp, 2
-	hlcoord 14, 0
+	hlcoord 8, 0
 	call PrintLevel
 	ld hl, .NicknamePointers
 	call GetNicknamePointer
 	call CopyNickname
 	hlcoord 8, 2
 	rst PlaceString
-	hlcoord 18, 0
+	hlcoord 12, 0
 	call .PlaceGenderChar
 	hlcoord 9, 4
 	ld a, "/"
@@ -389,6 +388,7 @@ StatsScreen_InitUpperHalf:
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	rst PlaceString
+	call .PlaceBallIcon
 	call StatsScreen_PlaceHorizontalDivider
 	call StatsScreen_PlacePageSwitchArrows
 	jr StatsScreen_PlaceShinyIcon
@@ -418,6 +418,19 @@ StatsScreen_InitUpperHalf:
 	jr nz, .got_gender
 	ld a, "♀"
 .got_gender
+	ld [hl], a
+	ret
+
+.PlaceBallIcon:
+	hlcoord 7, 5
+	ld a, $42
+	ld [hli], a
+	inc a
+	ld [hl], a
+	inc a
+	hlcoord 7, 6
+	ld [hli], a
+	inc a
 	ld [hl], a
 	ret
 
@@ -452,7 +465,7 @@ StatsScreen_PlaceHorizontalDivider:
 	ret
 
 StatsScreen_PlacePageSwitchArrows:
-	hlcoord 12, 6
+	hlcoord 10, 6
 	ld [hl], "◀"
 	hlcoord 19, 6
 	ld [hl], "▶"
@@ -462,7 +475,7 @@ StatsScreen_PlaceShinyIcon:
 	ld bc, wTempMonPersonality
 	farcall CheckShininess
 	ret nc
-	hlcoord 19, 0
+	hlcoord 13, 0
 	ld [hl], "⁂"
 	ret
 
@@ -478,6 +491,10 @@ StatsScreen_LoadGFX:
 	ld hl, wStatsScreenFlags
 	bit 4, [hl]
 	jmp z, SetDefaultBGPAndOBP
+; load ball gfx
+	ld a, [wTempMonCaughtBall]
+	maskbits NUM_BALL_ITEM_POCKET
+	call LoadBallIcon
 	jmp StatsScreen_PlaceFrontpic
 
 .ClearBox:
@@ -502,7 +519,6 @@ StatsScreen_LoadGFX:
 .PageTilemap:
 	ld a, [wStatsScreenFlags]
 	maskbits NUM_STAT_PAGES
-	dec a
 	ld hl, .Jumptable
 	jmp JumpTable
 
@@ -512,6 +528,7 @@ StatsScreen_LoadGFX:
 	dw LoadPinkPage
 	dw LoadGreenPage
 	dw LoadBluePage
+	dw LoadOrangePage
 	assert_table_length NUM_STAT_PAGES
 
 LoadPinkPage:
@@ -754,6 +771,95 @@ IDNoString:
 
 OTString:
 	db "OT/@"
+
+LoadOrangePage:
+	hlcoord 0, 9
+	call .PlaceNatureString
+	call .PlaceOriginInfo
+	hlcoord 2, 13
+	call .PlaceAbilityName
+	hlcoord 1, 15
+	call .PlaceAbilityDescription
+	ret
+
+.PlaceNatureString
+	ld a, [wTempMonPersonality]
+	and MON_NATURE_MASK
+	push hl
+	ld hl, NatureNames
+	call GetNthString
+	ld d, h
+	ld e, l
+	pop hl
+	rst PlaceString
+	ret
+
+.PlaceOriginInfo
+	hlcoord 9, 9
+	ld a, [wTempMonCaughtLevel]
+	and CAUGHT_LEVEL_MASK
+	jr z, .fateful_encounter
+	cp 1
+	jr z, .hatched
+	ld d, a
+	ld a, [wTempMonLevel]
+	push af
+	ld a, d
+	ld [wTempMonLevel], a
+	ld de, .CaughtAtString
+	call PlaceString
+	hlcoord 16, 11
+	call PrintLevel
+	pop af
+	ld [wTempMonLevel], a
+	jr .place_location
+
+.hatched
+	ld de, .HatchedAtString
+	call PlaceString
+.place_location
+	ld a, [wTempMonCaughtLocation]
+	and CAUGHT_LOCATION_MASK ; TO-DO : reformat this
+	ld e, a
+	farcall GetLandmarkName
+	ld de, wStringBuffer1
+	hlcoord 0, 11
+	jmp PlaceString
+
+.fateful_encounter
+	ld de, .FatefulEncounterString1
+	call PlaceString
+	ld de, .FatefulEncounterString2
+	hlcoord 0, 11
+	jmp PlaceString
+
+.CaughtAtString:
+	db "Caught at@"
+.HatchedAtString:
+	db "Hatched at@"
+.FatefulEncounterString1:
+	db "Met in a@"
+.FatefulEncounterString2:
+	db "fateful encounter@"
+
+.PlaceAbilityName:
+	push hl
+	call GetBaseData
+	ld a, [wTempMonAbility]
+	call GetAbilityName
+	pop hl
+	ld de, wStringBuffer1
+	jmp PlaceString
+
+.PlaceAbilityDescription:
+	push hl
+	ld a, [wTempMonAbility]
+	call GetAbilityDescriptionPointer
+	ld a, BANK(AbilityDescriptions)
+	ld d, h
+	ld e, l
+	pop hl
+	jmp FarPlaceString
 
 StatsScreen_PlaceFrontpic:
 	ld hl, wTempMonDVs
@@ -1025,28 +1131,31 @@ StatsScreen_AnimateEgg:
 	ret
 
 StatsScreen_LoadPageIndicators:
+	hlcoord 11, 5
+	call .load_square2
 	hlcoord 13, 5
-	ld a, $36 ; first of 4 small square tiles
-	call .load_square
+	call .load_square2
 	hlcoord 15, 5
-	ld a, $36 ; " " " "
-	call .load_square
+	call .load_square2
 	hlcoord 17, 5
-	ld a, $36 ; " " " "
-	call .load_square
-	ld a, c
-	cp GREEN_PAGE
-	ld a, $3a ; first of 4 large square tiles
-	hlcoord 13, 5 ; PINK_PAGE (< GREEN_PAGE)
-	jr c, .load_square
-	hlcoord 15, 5 ; GREEN_PAGE (= GREEN_PAGE)
+	call .load_square2
+
+	hlcoord 11, 5
+	inc a
+	inc c
+.find_page_loop
+	dec c
 	jr z, .load_square
-	hlcoord 17, 5 ; BLUE_PAGE (> GREEN_PAGE)
+	inc hl
+	inc hl
+	jr .find_page_loop
+
 .load_square
 	push bc
 	ld [hli], a
 	inc a
 	ld [hld], a
+.join
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	inc a
@@ -1055,6 +1164,14 @@ StatsScreen_LoadPageIndicators:
 	ld [hl], a
 	pop bc
 	ret
+
+.load_square2
+	push bc
+	ld a, " "
+	ld [hli], a
+	ld [hld], a
+	ld a, $37
+	jr .join
 
 CopyNickname:
 	ld de, wStringBuffer1
@@ -1096,3 +1213,5 @@ CheckFaintedFrzSlp:
 .fainted_frz_slp
 	scf
 	ret
+
+INCLUDE "data/pokemon/nature_names.asm"

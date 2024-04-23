@@ -211,6 +211,7 @@ INCLUDE "engine/events/lucky_number.asm"
 INCLUDE "engine/pokemon/caught_data.asm"
 INCLUDE "engine/pokemon/search_party.asm"
 INCLUDE "engine/pokemon/stats_screen.asm"
+INCLUDE "engine/pokemon/ball_icons.asm"
 INCLUDE "engine/events/catch_tutorial.asm"
 INCLUDE "engine/movie/evolution_animation.asm"
 INCLUDE "engine/movie/init_hof_credits.asm"
@@ -246,6 +247,12 @@ INCLUDE "data/pokemon/base_stats.asm"
 SECTION "Mon Names", ROMX
 
 INCLUDE "data/pokemon/names.asm"
+
+
+SECTION "Ability Strings", ROMX
+
+INCLUDE "data/abilities/names.asm"
+INCLUDE "data/abilities/descriptions.asm"
 
 
 SECTION "Crystal Phone Text", ROMX
@@ -500,6 +507,7 @@ INCLUDE "engine/link/mystery_gift.asm"
 INCLUDE "engine/battle/used_move_text.asm"
 INCLUDE "mobile/mobile_41.asm"
 INCLUDE "engine/gfx/load_overworld_font.asm"
+INCLUDE "gfx/stats/ball_icons.asm"
 
 
 SECTION "Move Animation Framesets", ROMX

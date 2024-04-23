@@ -854,7 +854,7 @@ Debug_GivePoke:
 .left
 	call .getdat
 .leftloop
-	dec hl
+	dec de
 	dec b
 	jr nz, .leftloop
 	call .putdat
@@ -864,7 +864,7 @@ Debug_GivePoke:
 .right
 	call .getdat
 .rightloop
-	inc hl
+	inc de
 	dec b
 	jr nz, .rightloop
 	call .putdat
@@ -878,15 +878,15 @@ Debug_GivePoke:
 	ld l, a
 	ld h, HIGH(wDebugMenuDataBuffer)
 	ld a, [hli]
-	ld c, [hl]
-	ld b, a
+	ld e, [hl]
+	ld d, a
 	dec hl
 	ret
 
 .putdat
-	ld a, c
-	ld [hli], a
-	ld [hl], b
+	ld [hl], d
+	inc hl
+	ld [hl], e
 	ret
 
 .givepoke

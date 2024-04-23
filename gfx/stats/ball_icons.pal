@@ -1,0 +1,12 @@
+; Master Ball
+	RGB 00, 00, 00
+	RGB 00, 00, 00
+; Ultra Ball
+	RGB 00, 00, 00
+	RGB 00, 00, 00
+; Great Ball
+	RGB 00, 00, 00
+	RGB 00, 00, 00
+; Poké Ball
+	RGB 31, 00, 00
+	RGB 31, 31, 31

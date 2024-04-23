@@ -230,7 +230,6 @@ LoadStatsScreenPals:
 	ret z
 	ld hl, StatsScreenPals
 	ld b, 0
-	dec c
 	add hl, bc
 	add hl, bc
 	ldh a, [rSVBK]
@@ -1151,3 +1150,15 @@ INCLUDE "gfx/beta_poker/beta_poker.pal"
 
 SlotMachinePals:
 INCLUDE "gfx/slots/slots.pal"
+
+GetBallIconPalPointer:
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	ld bc, BallIconPals
+	add hl, bc
+	ret
+
+BallIconPals:
+INCLUDE "gfx/stats/ball_icons.pal"

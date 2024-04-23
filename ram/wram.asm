@@ -152,7 +152,8 @@ wPlayerNextMovement:: db
 wPlayerMovement:: db
 
 wLinkOtherPlayerGender:: db
-	ds 1
+wGenerateMonBall:: db
+wGenerateMonHiddenAbility:: db
 
 wMovementObject::
 	db
@@ -160,7 +161,7 @@ wMovementDataBank:: db
 wMovementDataAddress:: dw
 wIndexedMovement2Pointer:: dw
 
-	ds 2
+	ds 1
 
 wContinueReadingMovement:: db
 
@@ -484,7 +485,7 @@ wEnemyHPAtTimeOfPlayerSwitch:: dw
 wPayDayMoney:: ds 3
 
 wEnemyBackupPersonality:: db ; used when enemy is transformed
-wEnemyBackupExtraFlags:: db
+wEnemyBackupAbility:: db
 wEnemyBackupDVs:: ds 3
 wAlreadyDisobeyed:: db
 
@@ -1596,7 +1597,7 @@ SECTION "16-bit WRAM home data", WRAM0
 wConversionTableBitmap:: ds $20
 
 
-SECTION "Debug WRAM", WRAM0
+SECTION "Debug WRAM", WRAMX
 
 IF DEF(_DEBUG)
 wDebugMenuCursorPos:: db
@@ -2095,6 +2096,11 @@ wCurMessageScrollPosition:: db
 wCurMessageIndex:: db
 wMailboxCount:: db
 wMailboxItems:: ds MAILBOX_CAPACITY
+
+NEXTU
+wPersonalityValueStore:: ds 4
+wPersonalityByteStore:: db
+
 ENDU
 
 wListPointer:: dw
@@ -2449,8 +2455,7 @@ wBaseItem2:: dw
 wBaseGender:: db
 wBaseEggSteps:: db
 wBasePicSize:: db
-wBaseUnusedFrontpic:: dw
-wBaseUnusedBackpic:: dw
+wBaseAbility:: ds 4
 wBaseGrowthRate:: db
 wBaseEggGroups:: db
 wBaseTMHM:: flag_array NUM_TM_HM_TUTOR
@@ -2614,15 +2619,7 @@ wPlayerGender::
 ;	0 male
 ;	1 female
 	db
-wd473:: ds 1
-wd474:: ds 1
-wd475:: ds 1
-wd476:: ds 1
-wd477:: ds 1
-wd478:: ds 1
 wCrystalDataEnd::
-
-wd479:: ds 2
 
 wGameData::
 wPlayerData::

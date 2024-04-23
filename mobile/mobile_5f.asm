@@ -2204,7 +2204,7 @@ Function17f4f6:
 	ld l, a
 	ld a, [wcd6b]
 	ld h, a
-	ld a, [wcd47]
+;	ld a, [wcd47]
 	ld c, a
 	ld a, [wBGMapPalBuffer]
 	ld b, a

@@ -222,8 +222,12 @@ endr
 	ld [de], a
 	inc de
 
-	; TO-DO
-	inc de ; caught ball
+	ld a, [wGenerateMonBall]
+	add POKE_BALL - FIRST_BALL_ITEM
+	ld [de], a
+	xor a
+	ld [wGenerateMonBall], a
+	inc de
 
 	call Random
 	ld b, a
@@ -1456,7 +1460,142 @@ InitNickname:
 	jmp FarCall_hl
 
 GenerateMonPersonality:
-	; TO-DO
-	ld b, %00_1_10100 ; first ability, shiny, calm
-	ld c, %000000_0_0 ; base type set, no ev break, female
+	push de
+	push hl
+	call Random2
+	ldh a, [hRand32 + 2]
+	ld [wPersonalityValueStore], a
+	ld e, a
+	ldh a, [hRand32 + 3]
+	ld [wPersonalityValueStore + 1], a
+	ld d, a
+	call Random2
+	ldh a, [hRand32 + 2]
+	ld [wPersonalityValueStore + 2], a
+	ld c, a
+	ldh a, [hRand32 + 3]
+	ld [wPersonalityValueStore + 3], a
+	ld b, a
+
+	xor a
+	ld [wPersonalityByteStore], a
+
+; check for shiny
+	ld a, b
+	xor d
+	ld b, a
+	ld a, c
+	xor e
+	ld c, a
+	ld a, [wPlayerID + 1]
+	xor c
+	ld c, a
+	ld a, [wSecretID + 1]
+	xor c
+	ld c, a
+	ld a, [wPlayerID]
+	xor b
+	ld b, a
+	ld a, [wSecretID]
+	xor b
+	jr nz, .not_shiny
+	ld a, c
+	cp 8
+	jr nc, .not_shiny
+	ld hl, wPersonalityByteStore
+	set MON_SHINY_F, [hl]
+.not_shiny
+; get nature
+	ld a, [wPersonalityValueStore + 3]
+	ld l, a
+	ld h, 0
+	call PID_Mod25
+
+	ld h, a
+	ld a, [wPersonalityValueStore + 2]
+	ld l, a
+	call PID_Mod400
+	call PID_Mod25
+
+	ld h, a
+	ld a, [wPersonalityValueStore + 1]
+	ld l, a
+	call PID_Mod400
+	call PID_Mod25
+
+	ld h, a
+	ld a, [wPersonalityValueStore]
+	ld l, a
+	call PID_Mod400
+	call PID_Mod25
+
+	ld hl, wPersonalityByteStore
+	or [hl]
+	ld [hl], a
+
+; get gender
+	call GetBaseData
+	ld a, [wBaseGender]
+	cp GENDER_UNKNOWN
+	jr z, .male ; doesn't matter
+	cp GENDER_F0
+	jr z, .male
+	cp GENDER_F100
+	jr z, .female
+
+	ld b, a
+	ld a, [wPersonalityValueStore]
+	cp b
+	jr c, .female
+
+.male
+	xor a
+	jr .got_gender
+
+.female
+	ld a, MON_GENDER
+.got_gender
+	ld hl, wPersonalityByteStore
+	or [hl]
+	ld [wPersonalityByteStore], a
+
+	ld hl, wBaseAbility
+	ld a, [wGenerateMonHiddenAbility]
+	and a
+	jr z, .no_hidden_ability
+	inc hl
+	inc hl
+.no_hidden_ability
+	ld a, [wPersonalityValueStore + 2]
+	and 1
+	jr z, .first_ability
+	inc hl
+.first_ability
+	ld c, [hl]
+	ld a, [wPersonalityByteStore]
+	ld b, a
+	pop hl
+	pop de
+	ret
+
+PID_Mod400:
+; divides hl by 400, returns remainder in hl
+	ld bc, -400
+.loop
+	add hl, bc
+	bit 7, h
+	jr z, .loop
+	ld bc, 400
+	add hl, bc
+	ret
+
+PID_Mod25:
+; divides hl by 25, returns remainder in a
+	ld bc, -25
+.loop
+	add hl, bc
+	bit 7, h
+	jr z, .loop
+	ld a, l
+	add 25
 	ret

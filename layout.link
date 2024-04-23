@@ -350,6 +350,7 @@ WRAMX 1
 	"Enemy Party"
 	"Party"
 	"Used Storage"
+	"Debug WRAM"
 WRAMX 2
 	"Pic Animations"
 	align 8

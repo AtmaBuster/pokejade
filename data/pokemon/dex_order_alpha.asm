@@ -94,6 +94,7 @@ AlphabeticalPokedexOrder:
 	dw ELECTIVIRE
 	dw ELECTRODE
 	dw ELEKID
+	dw ENTEI
 	dw ESPEON
 	dw EXEGGCUTE
 	dw EXEGGUTOR
@@ -206,9 +207,6 @@ AlphabeticalPokedexOrder:
 	dw MISDREAVUS
 	dw MISMAGIUS
 	dw MOLTRES
-	dw MON_0F3
-	dw MON_0F4
-	dw MON_0F5
 	dw MON_161
 	dw MON_162
 	dw MON_163
@@ -304,6 +302,7 @@ AlphabeticalPokedexOrder:
 	dw QUAGSIRE
 	dw QUILAVA
 	dw RAICHU
+	dw RAIKOU
 	dw RAITORA
 	dw RALTS
 	dw RAYQUAZA
@@ -348,6 +347,7 @@ AlphabeticalPokedexOrder:
 	dw STARMIE
 	dw STARYU
 	dw STOUTLAND
+	dw SUICUNE
 	dw SWABLU
 	dw SWALOT
 	dw SWAMPERT

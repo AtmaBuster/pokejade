@@ -1,22 +1,3 @@
-InitCrystalData:
-	ld a, $1
-	ld [wd474], a
-	xor a
-	ld [wd473], a
-	ld [wPlayerGender], a
-	ld [wd475], a
-	ld [wd476], a
-	ld [wd477], a
-	ld [wd478], a
-	ld [wd002], a
-	ld [wd003], a
-	ld a, [wd479]
-	res 0, a ; ???
-	ld [wd479], a
-	res 1, a ; ???
-	ld [wd479], a
-	ret
-
 InitGender:
 	call InitGenderScreen
 	call LoadGenderScreenPal
@@ -62,7 +43,8 @@ InitGenderScreen:
 	ld c, 8
 	call DelayFrames
 	call ClearBGPalettes
-	call InitCrystalData
+	xor a
+	ld [wPlayerGender], a
 	call LoadFontsExtra
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH

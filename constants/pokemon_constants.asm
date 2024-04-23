@@ -262,9 +262,9 @@ DEF JOHTO_POKEMON EQU const_value
 	const MAGBY      ; 0f0
 	const MILTANK    ; 0f1
 	const BLISSEY    ; 0f2
-	const MON_0F3    ; 0f3 //
-	const MON_0F4    ; 0f4 //
-	const MON_0F5    ; 0f5 //
+	const RAIKOU     ; 0f3
+	const ENTEI      ; 0f4
+	const SUICUNE    ; 0f5
 	const LARVITAR   ; 0f6
 	const PUPITAR    ; 0f7
 	const TYRANITAR  ; 0f8
@@ -587,6 +587,3 @@ DEF SMEARGLE EQU   $0eb
 DEF TYROGUE EQU    $0ec
 DEF HITMONTOP EQU  $0ed
 DEF SMOOCHUM EQU   $0ee
-DEF RAIKOU EQU     $0f3
-DEF ENTEI EQU      $0f4
-DEF SUICUNE EQU    $0f5

@@ -18,7 +18,7 @@ MACRO box_struct
 \1SpclAtkEV::      db
 \1SpclDefEV::      db
 \1Personality::    db
-\1ExtraFlags::     db
+\1Ability::        db
 \1CaughtBall::     db
 \1DVs::            ds 3
 \1PP::             ds NUM_MOVES
@@ -48,7 +48,7 @@ MACRO savemon_struct
 \1SpclAtkEV::      db
 \1SpclDefEV::      db
 \1Personality::    db
-\1ExtraFlags::     db
+\1Ability::        db
 \1CaughtBall::     db
 \1DVs::            ds 3
 \1MovesHigh::
@@ -135,7 +135,7 @@ MACRO battle_struct
 \1Item::      db
 \1Moves::     ds NUM_MOVES
 \1Personality:: db
-\1ExtraFlags:: db
+\1Ability::   db
 \1CaughtBall:: db
 \1DVs::       ds 3
 \1PP::        ds NUM_MOVES

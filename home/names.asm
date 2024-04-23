@@ -3,6 +3,7 @@ NamesPointers::
 	dbw 0, wPartyMonOTs     ; PARTY_OT_NAME
 	dbw 0, wOTPartyMonOTs   ; ENEMY_OT_NAME
 	dba TrainerClassNames   ; TRAINER_NAME
+	dba AbilityNames        ; ABILITY_NAME
 
 GetName::
 ; Return name wCurSpecies from name list wNamedObjectType in wStringBuffer1.
@@ -324,4 +325,21 @@ GetMoveName::
 	rst Bankswitch
 	pop bc
 	pop hl
+	ret
+
+GetAbilityName:
+	inc a
+	ld [wCurSpecies], a
+	ld a, ABILITY_NAME
+	ld [wNamedObjectType], a
+	jmp GetName
+
+GetAbilityDescriptionPointer:
+	ld bc, AbilityDescriptions
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, bc
+	ld a, BANK(AbilityDescriptions)
+	call GetFarWord
 	ret

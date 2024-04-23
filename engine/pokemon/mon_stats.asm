@@ -204,7 +204,6 @@ GetGender:
 	jr z, .Female
 
 ; If not fixed, check personality
-	inc hl
 	ld a, [hl]
 	and MON_GENDER
 	jr z, .Male

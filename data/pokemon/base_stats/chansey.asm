@@ -1,6 +1,6 @@
 	db 0 ; species ID placeholder
 
-	db 250,  05,  05,  50,  35, 105
+	db 250,   5,   5,  50,  35, 105
 	evs  2,   0,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
 
@@ -11,7 +11,7 @@
 	db GENDER_F100 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/chansey/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_FAST ; growth rate
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups
 
