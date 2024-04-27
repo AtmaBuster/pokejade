@@ -8,10 +8,10 @@ DEF AUTO_INPUT EQU $ff
 
 ; wCurDexMode::
 	const_def
-	const DEXMODE_NEW
-	const DEXMODE_OLD
+	const DEXMODE_NAZOH
+	const DEXMODE_HOLON
+	const DEXMODE_NATIONAL
 	const DEXMODE_ABC
-	const DEXMODE_UNOWN
 
 ; wMonType::
 	const_def
@@ -353,3 +353,9 @@ DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
 	const SCAN_OBJECTS_FIRST_F ; 1
 	const USE_DAYTIME_PAL_F    ; 2
 	const DISABLE_DYN_PAL_F    ; 3
+
+; wUnlockedDexFlags
+	const_def
+	const NAZOH_DEX_UNLOCK_F    ; 0
+	const HOLON_DEX_UNLOCK_F    ; 1
+	const NATIONAL_DEX_UNLOCK_F ; 2

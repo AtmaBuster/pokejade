@@ -75,6 +75,14 @@ DoDexSearchSlowpokeFrame:
 	dbsprite 11, 13, 0, 0, $22, 0
 	db -1
 
+DisplayDexEntry_GetNumber:
+	ld a, [wCurDexMode]
+	and a
+	jp z, GetDexNumberNazoh
+	dec a
+	jp z, GetDexNumberHolon
+	jp GetDexNumberNational
+
 DisplayDexEntry:
 	call GetPokemonName
 	hlcoord 9, 3
@@ -98,7 +106,8 @@ DisplayDexEntry:
 	push hl
 	ld a, [wTempSpecies]
 	call GetPokemonIndexFromID
-	call GetDexNumberNational
+	ld a, [wCurDexMode]
+	call DisplayDexEntry_GetNumber
 	ld a, d
 	and e
 	inc a

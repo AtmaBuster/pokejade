@@ -1,4 +1,5 @@
 DexListNational:
+	table_width 2, DexListNational
 	dw   1
 	dw   2
 	dw   3
@@ -400,3 +401,10 @@ DexListNational:
 	dw   0
 	dw   0
 	dw   0
+	dw   0
+	dw   0
+	dw   0
+	dw   0
+	dw   0
+	dw   0
+	assert_table_length NUM_POKEMON

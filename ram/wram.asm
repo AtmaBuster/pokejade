@@ -692,8 +692,12 @@ wPrevDexEntry:: dw
 wPrevDexEntryBackup:: dw
 wPrevDexEntryJumptableIndex:: db
 
+wPokedexModes:: ds 5
+wDexOrderCursorData:: ds 10
+wDexOrderJumptable:: ds 8
+
 wPokedexNameBuffer:: ds MON_NAME_LENGTH
-	ds 231
+	ds 208
 
 NEXTU
 ; pokegear
@@ -3034,9 +3038,13 @@ wEndPokedexCaught::
 wPokedexSeen:: flag_array NUM_POKEMON
 wEndPokedexSeen::
 
+UNION
 wUnownDex:: ds NUM_UNOWN
 wUnlockedUnowns:: db
 wFirstUnownSeen:: db
+NEXTU
+wUnlockedDexFlags:: db
+ENDU
 
 wDayCareMan::
 ; bit 7: active

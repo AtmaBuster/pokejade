@@ -199,4 +199,8 @@ EngineFlags:
 	engine_flag wSwarmFlags, SWARMFLAGS_DUNSPARCE_SWARM_F
 	engine_flag wSwarmFlags, SWARMFLAGS_YANMA_SWARM_F
 
+	engine_flag wUnlockedDexFlags, NAZOH_DEX_UNLOCK_F
+	engine_flag wUnlockedDexFlags, HOLON_DEX_UNLOCK_F
+	engine_flag wUnlockedDexFlags, NATIONAL_DEX_UNLOCK_F
+
 	assert_table_length NUM_ENGINE_FLAGS

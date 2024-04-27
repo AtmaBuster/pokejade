@@ -6,5 +6,5 @@
 	next "trades them for"
 
 	page "trinkets. It uses"
-	next "its flute-like"
-	next "beak to sing.@"
+	next "its flutelike beak"
+	next "to share stories.@"

@@ -301,12 +301,7 @@ Pokedex_InitMainScreen:
 	ld a, POKEDEX_SCX
 	ldh [hSCX], a
 
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
-	ld a, $4a
-	jr z, .okay
 	ld a, $47
-.okay
 	ldh [hWX], a
 	xor a
 	ldh [hWY], a
@@ -581,34 +576,110 @@ Pokedex_InitOptionScreen:
 	call Pokedex_DrawOptionScreenBG
 	call Pokedex_InitArrowCursor
 	; point cursor to the current dex mode (modes == menu item indexes)
+	call Pokedex_GetModeList
 	ld a, [wCurDexMode]
+	ld b, a
+	ld c, 0
+	ld hl, wPokedexModes
+.mode_list_loop
+	ld a, [hli]
+	cp -1
+	jr z, .failsafe
+	cp b
+	jr z, .gotit
+	inc c
+	jr .mode_list_loop
+
+.failsafe
+	ld c, 0
+.gotit
+	ld a, c
 	ld [wDexArrowCursorPosIndex], a
 	call Pokedex_DisplayModeDescription
+	call Pokedex_GetDexOrderCursorData
 	call WaitBGMap
 	ld a, SCGB_POKEDEX_SEARCH_OPTION
 	call Pokedex_GetSGBLayout
 	jmp Pokedex_IncrementDexPointer
 
+Pokedex_GetDexOrderCursorData:
+	ld hl, wPokedexModes
+	ld c, 0
+.ct_loop
+	ld a, [hli]
+	inc a
+	jr z, .done_ct
+	inc c
+	jr .ct_loop
+
+.done_ct
+	ld hl, wDexOrderCursorData
+	ld a, D_UP | D_DOWN
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	decoord 2, 4
+.pos_loop
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	dec c
+	jr z, .done_pos
+	push hl
+	ld hl, SCREEN_WIDTH * 2
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	jr .pos_loop
+
+.done_pos
+	ld hl, wDexOrderJumptable
+	ld de, wPokedexModes
+	call .AddMode
+	call .AddMode
+	call .AddMode
+	call .AddMode
+	ret
+
+.AddMode
+	ld a, [de]
+	cp -1
+	ret z
+	inc de
+	push hl
+	add a
+	ld l, a
+	ld h, 0
+	ld bc, .JumptablePointers
+	add hl, bc
+	ld a, [hli]
+	ld b, [hl]
+	pop hl
+	ld [hli], a
+	ld [hl], b
+	inc hl
+	ret
+
+.JumptablePointers:
+	dw Pokedex_OptionActions.MenuAction_NazohDex
+	dw Pokedex_OptionActions.MenuAction_HolonDex
+	dw Pokedex_OptionActions.MenuAction_NationalDex
+	dw Pokedex_OptionActions.MenuAction_ABCDex
+
 Pokedex_UpdateOptionScreen:
-	ld a, [wUnlockedUnownMode]
-	and a
-	jr nz, .okay
-	ld de, .NoUnownModeArrowCursorData
-	jr .okay2
-.okay
-	ld de, .ArrowCursorData
-.okay2
+	ld de, wDexOrderCursorData
 	call Pokedex_MoveArrowCursor
 	call c, Pokedex_DisplayModeDescription
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and SELECT | B_BUTTON
 	jr nz, .return_to_main_screen
-	ld a, [hl]
-	and A_BUTTON
+	bit A_BUTTON_F, [hl]
 	ret z
 	ld a, [wDexArrowCursorPosIndex]
-	ld hl, .MenuActionJumptable
+	ld hl, wDexOrderJumptable
 	call Pokedex_LoadPointer
 	jp hl
 
@@ -618,34 +689,20 @@ Pokedex_UpdateOptionScreen:
 	ld [wJumptableIndex], a
 	ret
 
-.NoUnownModeArrowCursorData:
-	db D_UP | D_DOWN, 3
-	dwcoord 2,  4 ; NEW
-	dwcoord 2,  6 ; OLD
-	dwcoord 2,  8 ; ABC
-
-.ArrowCursorData:
-	db D_UP | D_DOWN, 4
-	dwcoord 2,  4 ; NEW
-	dwcoord 2,  6 ; OLD
-	dwcoord 2,  8 ; ABC
-	dwcoord 2, 10 ; UNOWN
-
-.MenuActionJumptable:
-	dw .MenuAction_NewMode
-	dw .MenuAction_OldMode
-	dw .MenuAction_ABCMode
-	dw .MenuAction_UnownMode
-
-.MenuAction_NewMode:
-	ld b, DEXMODE_NEW
+Pokedex_OptionActions:
+.MenuAction_NazohDex:
+	ld b, DEXMODE_NAZOH
 	jr .ChangeMode
 
-.MenuAction_OldMode:
-	ld b, DEXMODE_OLD
+.MenuAction_HolonDex:
+	ld b, DEXMODE_HOLON
 	jr .ChangeMode
 
-.MenuAction_ABCMode:
+.MenuAction_NationalDex:
+	ld b, DEXMODE_NATIONAL
+	jr .ChangeMode
+
+.MenuAction_ABCDex:
 	ld b, DEXMODE_ABC
 
 .ChangeMode:
@@ -662,12 +719,6 @@ Pokedex_UpdateOptionScreen:
 .skip_changing_mode
 	call Pokedex_BlackOutBG
 	ld a, DEXSTATE_MAIN_SCR
-	ld [wJumptableIndex], a
-	ret
-
-.MenuAction_UnownMode:
-	call Pokedex_BlackOutBG
-	ld a, DEXSTATE_UNOWN_MODE
 	ld [wJumptableIndex], a
 	ret
 
@@ -1179,9 +1230,7 @@ Pokedex_DrawMainScreenBG:
 	hlcoord 1, 11
 	ld de, String_SEEN
 	call Pokedex_PlaceString
-	ld hl, wPokedexSeen
-	ld bc, wEndPokedexSeen - wPokedexSeen
-	call CountSetBits16
+	call CountPokedexOrderSeen
 	ld a, c
 	ld de, wPokedexDisplayNumber + 1
 	ld [de], a
@@ -1194,9 +1243,7 @@ Pokedex_DrawMainScreenBG:
 	hlcoord 1, 14
 	ld de, String_OWN
 	call Pokedex_PlaceString
-	ld hl, wPokedexCaught
-	ld bc, wEndPokedexCaught - wPokedexCaught
-	call CountSetBits16
+	call CountPokedexOrderCaught
 	ld a, c
 	ld de, wPokedexDisplayNumber + 1
 	ld [de], a
@@ -1236,6 +1283,91 @@ String_SELECT_OPTION:
 	; fallthrough
 String_START_SEARCH:
 	db $3c, $3b, $41, $42, $43, $4b, $4c, $4d, $4e, $3c, -1 ; START > SEARCH
+
+CountPokedexOrderSeen:
+	ld a, [wCurDexMode]
+	cp DEXMODE_NATIONAL
+	jr nc, .global_count
+	ld hl, wPokedexSeen
+	push hl
+	jr CountPokedexOrder_Join
+
+.global_count
+	ld hl, wPokedexSeen
+	ld bc, wEndPokedexSeen - wPokedexSeen
+	jp CountSetBits16
+
+CountPokedexOrderCaught:
+	ld a, [wCurDexMode]
+	cp DEXMODE_NATIONAL
+	jr nc, .global_count
+	ld hl, wPokedexCaught
+	push hl
+	jr CountPokedexOrder_Join
+
+.global_count
+	ld hl, wPokedexCaught
+	ld bc, wEndPokedexCaught - wPokedexCaught
+	jp CountSetBits16
+
+CountPokedexOrder_Join:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokedexOrder)
+	ldh [rSVBK], a
+
+	ld hl, 0
+	ld a, [wDexListingEnd]
+	ld c, a
+	ld a, [wDexListingEnd + 1]
+	ld b, a
+
+	ld a, b
+	or c
+	jr z, .done
+.loop
+	push hl
+	ld hl, wPokedexOrder - 1
+	add hl, bc
+	add hl, bc
+	ld a, [hld]
+	ld d, a
+	ld e, [hl]
+	pop hl
+
+	or e
+	jr z, .skip
+
+	push hl
+	ld hl, sp+4
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push bc
+	ld a, BANK(wPokedexCaught)
+	ldh [rSVBK], a
+	call CheckPokedexStatusMonIndex
+	ld a, BANK(wPokedexOrder)
+	ldh [rSVBK], a
+	pop bc
+	pop hl
+
+	jr z, .skip
+	inc hl
+.skip
+	dec bc
+	ld a, b
+	or c
+	jr nz, .loop
+
+.done
+	pop af
+	ldh [rSVBK], a
+
+	ld b, h
+	ld c, l
+	pop hl
+	ret
 
 Pokedex_DrawDexEntryScreenBG:
 	call Pokedex_FillBackgroundColor2
@@ -1286,27 +1418,60 @@ Pokedex_DrawOptionScreenBG:
 	hlcoord 0, 1
 	ld de, .Title
 	call Pokedex_PlaceString
+
+	call Pokedex_GetModeList
 	hlcoord 3, 4
-	ld de, .Modes
+	ld c, 4
+	ld de, wPokedexModes
+.loop
+	ld a, [de]
+	inc de
+	cp -1
+	jr z, .done
+	push de
+	call .PlaceListing
+	ld de, SCREEN_WIDTH * 2
+	add hl, de
+	pop de
+	dec c
+	jr nz, .loop
+
+.done
+	ret
+
+.PlaceListing:
+	push hl
+	add a
+	ld l, a
+	ld h, 0
+	ld de, .Listings
+	add hl, de
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	pop hl
+	push bc
 	rst PlaceString
-	ld a, [wUnlockedUnownMode]
-	and a
-	ret z
-	hlcoord 3, 10
-	ld de, .UnownMode
-	jmp PlaceString
+	pop bc
+	ret
 
 .Title:
 	db $3b, " OPTION ", $3c, -1
 
-.Modes:
-	db   "NEW #DEX MODE"
-	next "OLD #DEX MODE"
-	next "A to Z MODE"
-	db   "@"
+.Listings:
+	dw .NazohDex
+	dw .HolonDex
+	dw .NationalDex
+	dw .ABCDex
 
-.UnownMode:
-	db "UNOWN MODE@"
+.NazohDex:
+	db "NAZOH #DEX@"
+.HolonDex:
+	db "HOLON #DEX@"
+.NationalDex:
+	db "NATIONAL #DEX@"
+.ABCDex:
+	db "ALPHABETICAL@"
 
 Pokedex_DrawSearchScreenBG:
 	call Pokedex_FillBackgroundColor2
@@ -1605,7 +1770,7 @@ Pokedex_PrintListing:
 	ret z
 	ld a, BANK(wPokedexSeen)
 	ldh [rSVBK], a
-	call Pokedex_PrintNumberIfOldMode
+	call Pokedex_PrintNumber
 	call Pokedex_PlaceDefaultStringIfNotSeen
 	ret c
 	call Pokedex_PlaceCaughtSymbolIfCaught
@@ -1630,10 +1795,10 @@ Pokedex_PrintListing:
 	pop hl
 	jmp PlaceString
 
-Pokedex_PrintNumberIfOldMode:
+Pokedex_PrintNumber:
 	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
-	ret nz
+	cp DEXMODE_ABC
+	ret z
 	push hl
 	push de
 	ld bc, -SCREEN_WIDTH
@@ -1641,7 +1806,7 @@ Pokedex_PrintNumberIfOldMode:
 	push hl
 	ld h, d
 	ld l, e
-	call GetDexNumberNational
+	call .get_number
 	pop hl
 	ld a, e
 	and d
@@ -1678,6 +1843,14 @@ Pokedex_PrintNumberIfOldMode:
 	pop de
 	pop hl
 	ret
+
+.get_number
+	ld a, [wCurDexMode]
+	and a
+	jp z, GetDexNumberNazoh
+	dec a
+	jp z, GetDexNumberHolon
+	jp GetDexNumberNational
 
 Pokedex_PlaceCaughtSymbolIfCaught:
 	push hl
@@ -1781,56 +1954,65 @@ Pokedex_OrderMonsByMode:
 	call Pokedex_LoadPointer
 	call _hl_
 .restore_bank_and_exit
+	ld a, BANK(wPokedexOrder)
+	ldh [rSVBK], a
+	ld a, [wDexListingEnd]
+	ld c, a
+	ld a, [wDexListingEnd + 1]
+	ld b, a
+	ld hl, wPokedexOrder
+	add hl, bc
+	add hl, bc
+	ld c, 14
+	ld a, -1
+.cleanup_loop
+	ld [hli], a
+	dec c
+	jr nz, .cleanup_loop
 	pop af
 	ldh [rSVBK], a
 	ret
 
 .Jumptable:
-	dw .NewMode
-	dw .OldMode
+	dw .NazohOrder
+	dw .HolonOrder
+	dw .NationalOrder
 	dw Pokedex_ABCMode
 
-.OldMode:
+.NationalOrder:
 	ld hl, NationalPokedexOrder
 	ld de, wPokedexOrder
-	ld bc, NUM_POKEMON * 2
+	ld bc, NationalPokedexOrder.End - NationalPokedexOrder
 	rst CopyBytes
 	ld a, BANK(wPokedexSeen)
 	ldh [rSVBK], a
 	ld bc, (NationalPokedexOrder.End - NationalPokedexOrder) / 2
 	ld hl, NationalPokedexOrder.End - 1
-.old_mode_last_seen_loop
-	ld a, [hld]
-	ld d, a
-	ld a, [hld]
-	ld e, a
-	push hl
-	push bc
-	call CheckSeenMonIndex
-	pop bc
-	pop hl
-	jr nz, .old_mode_found_last_seen_index
-	dec bc
-	ld a, b
-	or c
-	jr nz, .old_mode_last_seen_loop
-.old_mode_found_last_seen_index
-	ld hl, wDexListingEnd
-	ld a, c
-	ld [hli], a
-	ld [hl], b
-	ret
+	jr .get_last_seen
 
-.NewMode:
-	ld hl, NewPokedexOrder
+.NazohOrder:
+	ld hl, NazohPokedexOrder
 	ld de, wPokedexOrder
-	ld bc, NUM_POKEMON * 2
+	ld bc, NazohPokedexOrder.End - NazohPokedexOrder
 	rst CopyBytes
 	ld a, BANK(wPokedexSeen)
 	ldh [rSVBK], a
-	ld bc, NUM_POKEMON
-	ld hl, NewPokedexOrder + (2 * NUM_POKEMON) - 1
-.new_mode_last_seen_loop
+	ld bc, (NazohPokedexOrder.End - NazohPokedexOrder) / 2
+	ld hl, NazohPokedexOrder.End - 1
+	jr .get_last_seen
+
+.HolonOrder:
+	ld hl, HolonPokedexOrder
+	ld de, wPokedexOrder
+	ld bc, HolonPokedexOrder.End - HolonPokedexOrder
+	rst CopyBytes
+	ld a, BANK(wPokedexSeen)
+	ldh [rSVBK], a
+	ld bc, (HolonPokedexOrder.End - HolonPokedexOrder) / 2
+	ld hl, HolonPokedexOrder.End - 1
+
+.get_last_seen
+.last_seen_loop
 	ld a, [hld]
 	ld d, a
 	ld a, [hld]
@@ -1844,7 +2026,7 @@ Pokedex_OrderMonsByMode:
 	dec bc
 	ld a, b
 	or c
-	jr nz, .new_mode_last_seen_loop
+	jr nz, .last_seen_loop
 .found_last_seen_index
 	ld hl, wDexListingEnd
 	ld a, c
@@ -1905,10 +2087,41 @@ Pokedex_ABCMode:
 	ret
 
 INCLUDE "data/pokemon/dex_order_alpha.asm"
-
-INCLUDE "data/pokemon/dex_order_new.asm"
-
+INCLUDE "data/pokemon/dex_order_nazoh.asm"
+INCLUDE "data/pokemon/dex_order_holon.asm"
 INCLUDE "data/pokemon/dex_order_national.asm"
+
+Pokedex_GetModeList:
+	ld a, [wUnlockedDexFlags]
+	ld b, a
+	ld hl, wPokedexModes + 4
+	ld a, -1
+REPT 4
+	ld [hld], a
+ENDR
+	ld [hl], a
+	inc a
+.loop
+	rr b
+	jr nc, .skip_current
+	ld [hli], a
+.skip_current
+	inc a
+	cp 3
+	jr nz, .loop
+	ld [hl], a
+	ret
+
+Pokedex_GetModeMenuSelection:
+	call Pokedex_GetModeList
+
+	ld a, [wDexArrowCursorPosIndex]
+	ld l, a
+	ld h, 0
+	ld de, wPokedexModes
+	add hl, de
+	ld a, [hl]
+	ret
 
 Pokedex_DisplayModeDescription:
 	xor a
@@ -1916,7 +2129,7 @@ Pokedex_DisplayModeDescription:
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Pokedex_PlaceBorder
-	ld a, [wDexArrowCursorPosIndex]
+	call Pokedex_GetModeMenuSelection
 	ld hl, .Modes
 	call Pokedex_LoadPointer
 	ld e, l
@@ -1928,26 +2141,26 @@ Pokedex_DisplayModeDescription:
 	ret
 
 .Modes:
-	dw .NewMode
-	dw .OldMode
-	dw .ABCMode
-	dw .UnownMode
+	dw .NazohDex
+	dw .HolonDex
+	dw .NationalDex
+	dw .ABCDex
 
-.NewMode:
-	db   "<PK><MN> are listed by"
-	next "evolution type.@"
+.NazohDex:
+	db   "<PK><MN> are listed in"
+	next "NAZOH order.@"
 
-.OldMode:
-	db   "<PK><MN> are listed by"
-	next "official type.@"
+.HolonDex:
+	db   "<PK><MN> are listed in"
+	next "HOLON order.@"
 
-.ABCMode:
+.NationalDex:
+	db   "<PK><MN> are listed in"
+	next "NATION order.@"
+
+.ABCDex:
 	db   "<PK><MN> are listed"
 	next "alphabetically.@"
-
-.UnownMode:
-	db   "UNOWN are listed"
-	next "in catching order.@"
 
 Pokedex_DisplayChangingModesMessage:
 	xor a
@@ -2212,19 +2425,20 @@ Pokedex_DisplayTypeNotFoundMessage:
 	next "was not found.@"
 
 Pokedex_UpdateCursorOAM:
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
-	jr z, Pokedex_PutOldModeCursorOAM
-	call Pokedex_PutNewModeABCModeCursorOAM
+	call .PutCursorOAM
 	jmp Pokedex_PutScrollbarOAM
 
-Pokedex_PutOldModeCursorOAM:
+.PutCursorOAM:
+	ld hl, .CursorOAM_ABC
+	ld a, [wCurDexMode]
+	cp DEXMODE_ABC
+	jr z, .ok
 	ld hl, .CursorOAM
 	ld a, [wDexListingCursor]
 	or a
-	jr nz, .okay
-	ld hl, .CursorAtTopOAM
-.okay
+	jr nz, .ok
+	ld hl, .CursorOAM_Top
+.ok
 	jmp Pokedex_LoadCursorOAM
 
 .CursorOAM:
@@ -2232,62 +2446,48 @@ Pokedex_PutOldModeCursorOAM:
 	dbsprite  9,  2, -1,  0, $31, 7
 	dbsprite 10,  2, -1,  0, $32, 7
 	dbsprite 11,  2, -1,  0, $32, 7
-	dbsprite 12,  2, -1,  0, $32, 7
-	dbsprite 13,  2, -1,  0, $33, 7
-	dbsprite 16,  2, -2,  0, $33, 7 | X_FLIP
-	dbsprite 17,  2, -2,  0, $32, 7 | X_FLIP
-	dbsprite 18,  2, -2,  0, $32, 7 | X_FLIP
-	dbsprite 19,  2, -2,  0, $32, 7 | X_FLIP
-	dbsprite 20,  2, -2,  0, $31, 7 | X_FLIP
-	dbsprite 20,  3, -2,  0, $30, 7 | X_FLIP
+	dbsprite 12,  2, -1,  0, $33, 7
+	dbsprite 16,  2,  0,  0, $33, 7 | X_FLIP
+	dbsprite 17,  2,  0,  0, $32, 7 | X_FLIP
+	dbsprite 18,  2,  0,  0, $32, 7 | X_FLIP
+	dbsprite 19,  2,  0,  0, $31, 7 | X_FLIP
+	dbsprite 19,  3,  0,  0, $30, 7 | X_FLIP
 	dbsprite  9,  4, -1,  0, $30, 7 | Y_FLIP
 	dbsprite  9,  5, -1,  0, $31, 7 | Y_FLIP
 	dbsprite 10,  5, -1,  0, $32, 7 | Y_FLIP
 	dbsprite 11,  5, -1,  0, $32, 7 | Y_FLIP
-	dbsprite 12,  5, -1,  0, $32, 7 | Y_FLIP
-	dbsprite 13,  5, -1,  0, $33, 7 | Y_FLIP
-	dbsprite 16,  5, -2,  0, $33, 7 | X_FLIP | Y_FLIP
-	dbsprite 17,  5, -2,  0, $32, 7 | X_FLIP | Y_FLIP
-	dbsprite 18,  5, -2,  0, $32, 7 | X_FLIP | Y_FLIP
-	dbsprite 19,  5, -2,  0, $32, 7 | X_FLIP | Y_FLIP
-	dbsprite 20,  5, -2,  0, $31, 7 | X_FLIP | Y_FLIP
-	dbsprite 20,  4, -2,  0, $30, 7 | X_FLIP | Y_FLIP
+	dbsprite 12,  5, -1,  0, $33, 7 | Y_FLIP
+	dbsprite 16,  5,  0,  0, $33, 7 | X_FLIP | Y_FLIP
+	dbsprite 17,  5,  0,  0, $32, 7 | X_FLIP | Y_FLIP
+	dbsprite 18,  5,  0,  0, $32, 7 | X_FLIP | Y_FLIP
+	dbsprite 19,  5,  0,  0, $31, 7 | X_FLIP | Y_FLIP
+	dbsprite 19,  4,  0,  0, $30, 7 | X_FLIP | Y_FLIP
 	db -1
 
-.CursorAtTopOAM:
-; OAM data for when the cursor is at the top of the list. The tiles at the top
-; are cut off so they don't show up outside the list area.
+.CursorOAM_Top:
 	dbsprite  9,  3, -1,  0, $30, 7
 	dbsprite  9,  2, -1,  0, $34, 7
 	dbsprite 10,  2, -1,  0, $35, 7
 	dbsprite 11,  2, -1,  0, $35, 7
-	dbsprite 12,  2, -1,  0, $35, 7
-	dbsprite 13,  2, -1,  0, $36, 7
-	dbsprite 16,  2, -2,  0, $36, 7 | X_FLIP
-	dbsprite 17,  2, -2,  0, $35, 7 | X_FLIP
-	dbsprite 18,  2, -2,  0, $35, 7 | X_FLIP
-	dbsprite 19,  2, -2,  0, $35, 7 | X_FLIP
-	dbsprite 20,  2, -2,  0, $34, 7 | X_FLIP
-	dbsprite 20,  3, -2,  0, $30, 7 | X_FLIP
+	dbsprite 12,  2, -1,  0, $36, 7
+	dbsprite 16,  2,  0,  0, $36, 7 | X_FLIP
+	dbsprite 17,  2,  0,  0, $35, 7 | X_FLIP
+	dbsprite 18,  2,  0,  0, $35, 7 | X_FLIP
+	dbsprite 19,  2,  0,  0, $34, 7 | X_FLIP
+	dbsprite 19,  3,  0,  0, $30, 7 | X_FLIP
 	dbsprite  9,  4, -1,  0, $30, 7 | Y_FLIP
 	dbsprite  9,  5, -1,  0, $31, 7 | Y_FLIP
 	dbsprite 10,  5, -1,  0, $32, 7 | Y_FLIP
 	dbsprite 11,  5, -1,  0, $32, 7 | Y_FLIP
-	dbsprite 12,  5, -1,  0, $32, 7 | Y_FLIP
-	dbsprite 13,  5, -1,  0, $33, 7 | Y_FLIP
-	dbsprite 16,  5, -2,  0, $33, 7 | X_FLIP | Y_FLIP
-	dbsprite 17,  5, -2,  0, $32, 7 | X_FLIP | Y_FLIP
-	dbsprite 18,  5, -2,  0, $32, 7 | X_FLIP | Y_FLIP
-	dbsprite 19,  5, -2,  0, $32, 7 | X_FLIP | Y_FLIP
-	dbsprite 20,  5, -2,  0, $31, 7 | X_FLIP | Y_FLIP
-	dbsprite 20,  4, -2,  0, $30, 7 | X_FLIP | Y_FLIP
+	dbsprite 12,  5, -1,  0, $33, 7 | Y_FLIP
+	dbsprite 16,  5,  0,  0, $33, 7 | X_FLIP | Y_FLIP
+	dbsprite 17,  5,  0,  0, $32, 7 | X_FLIP | Y_FLIP
+	dbsprite 18,  5,  0,  0, $32, 7 | X_FLIP | Y_FLIP
+	dbsprite 19,  5,  0,  0, $31, 7 | X_FLIP | Y_FLIP
+	dbsprite 19,  4,  0,  0, $30, 7 | X_FLIP | Y_FLIP
 	db -1
 
-Pokedex_PutNewModeABCModeCursorOAM:
-	ld hl, .CursorOAM
-	jmp Pokedex_LoadCursorOAM
-
-.CursorOAM:
+.CursorOAM_ABC:
 	dbsprite  9,  3, -1,  3, $30, 7
 	dbsprite  9,  2, -1,  3, $31, 7
 	dbsprite 10,  2, -1,  3, $32, 7
@@ -2311,9 +2511,6 @@ Pokedex_PutNewModeABCModeCursorOAM:
 	db -1
 
 Pokedex_UpdateSearchResultsCursorOAM:
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
-	jmp z, Pokedex_PutOldModeCursorOAM
 	ld hl, .CursorOAM
 	jr Pokedex_LoadCursorOAM
 

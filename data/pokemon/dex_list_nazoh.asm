@@ -1,4 +1,7 @@
 DexListNazoh:
+	table_width 2, DexListNazoh
+	dw   0
+	dw   0
 	dw   0
 	dw   0
 	dw   0
@@ -400,3 +403,8 @@ DexListNazoh:
 	dw   0
 	dw   0
 	dw   0
+	dw   0
+	dw   0
+	dw   0
+	dw   0
+	assert_table_length NUM_POKEMON

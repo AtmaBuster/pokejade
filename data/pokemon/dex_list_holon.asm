@@ -1,4 +1,5 @@
 DexListHolon:
+	table_width 2, DexListHolon
 	dw   0
 	dw   0
 	dw   0
@@ -400,3 +401,10 @@ DexListHolon:
 	dw   0
 	dw   0
 	dw   0
+	dw   0
+	dw   0
+	dw   0
+	dw   0
+	dw   0
+	dw   0
+	assert_table_length NUM_POKEMON
