@@ -90,7 +90,7 @@ DEF MON_SPD_EV             rb
 DEF MON_SAT_EV             rb
 DEF MON_SDF_EV             rb
 DEF MON_PERSONALITY        rb
-DEF MON_EXTRA_FLAGS        rb
+DEF MON_ABILITY            rb
 DEF MON_CAUGHT_BALL        rb
 DEF MON_DVS                rb 3
 DEF MON_PP                 rb NUM_MOVES

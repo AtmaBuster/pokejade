@@ -1,5 +1,7 @@
 GivePokerusAndConvertBerries:
 	call ConvertBerriesToBerryJuice
+	call ApplyPickup
+	call ApplyHoneyGather
 	ld hl, wPartyMon1PokerusStatus
 	ld a, [wPartyCount]
 	ld b, a
@@ -171,3 +173,137 @@ ConvertBerriesToBerryJuice:
 	pop hl
 	pop af
 	jr .done
+
+ApplyPickup:
+	ld hl, wPartyMon1Ability
+	ld a, [wPartyCount]
+	ld c, a
+.party_loop
+	ld a, [hl]
+	cp PICKUP
+	call z, .TryPickup
+	ld de, PARTYMON_STRUCT_LENGTH
+	add hl, de
+	dec c
+	jr nz, .party_loop
+	ret
+
+.TryPickup:
+	push bc
+	push hl
+
+	ld bc, MON_ITEM - MON_ABILITY
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .done
+
+	call Random2
+	ldh a, [hRand32 + 2]
+	;cp 10 percent
+	cp 90 percent
+	jr nc, .done
+
+; find item slot
+	push hl
+	ld hl, PickupTable_SlotPercents
+	ldh a, [hRand32 + 3]
+	ld d, a
+	ld e, 0
+.item_slot_loop
+	ld a, [hli]
+	cp d
+	jr nc, .got_slot
+	inc e
+	jr .item_slot_loop
+.got_slot
+	pop hl
+	push hl
+	ld bc, MON_LEVEL - MON_ITEM
+	add hl, bc
+	ld a, [hl]
+	dec a
+	ld c, 10
+	call SimpleDivide
+	ld d, b
+
+	ld a, e
+	cp 9
+	ld hl, PickupTable_Common
+	jr c, .got_table
+	sub 9
+	ld hl, PickupTable_Rare
+.got_table
+	add d
+	add a
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	call GetItemIDFromIndex
+
+	pop hl
+	ld [hl], a
+
+.done
+	pop hl
+	pop bc
+	ret
+
+INCLUDE "data/pokemon/pickup_table.asm"
+
+ApplyHoneyGather:
+	ld hl, wPartyMon1Ability
+	ld a, [wPartyCount]
+	ld c, a
+.party_loop
+	ld a, [hl]
+	cp HONEY_GATHER
+	call z, .TryHoney
+	ld de, PARTYMON_STRUCT_LENGTH
+	add hl, de
+	dec c
+	jr nz, .party_loop
+	ret
+
+.TryHoney:
+	push bc
+	push hl
+
+	ld bc, MON_ITEM - MON_ABILITY
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .done
+
+	ld a, 100
+	call RandomRange
+	inc a
+	ld e, a
+	push hl
+	ld bc, MON_LEVEL - MON_ITEM
+	add hl, bc
+	ld a, [hl]
+	pop hl
+
+	srl a
+	and a
+	jr nz, .got_pcnt
+	inc a
+.got_pcnt
+	cp e
+	jr c, .done
+
+	push hl
+	ld hl, MASTER_BALL ; TO-DO
+	call GetItemIDFromIndex
+	pop hl
+	ld [hl], a
+
+.done
+	pop hl
+	pop bc
+	ret
