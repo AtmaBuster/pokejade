@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/venusaur/front.dimensions"
 	db OVERGROW, OVERGROW, CHLOROPHYLL, CHLOROPHYLL ; abilities
 	db GROWTH_MEDIUM_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_PLANT ; egg groups
 
 	; tm/hm learnset

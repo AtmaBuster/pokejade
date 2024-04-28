@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/celebi/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_MEDIUM_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_NONE, EGG_NONE ; egg groups
 
 	; tm/hm learnset

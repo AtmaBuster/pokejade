@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/charmander/front.dimensions"
 	db BLAZE, BLAZE, SOLAR_POWER, SOLAR_POWER ; abilities
 	db GROWTH_MEDIUM_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_DRAGON ; egg groups
 
 	; tm/hm learnset

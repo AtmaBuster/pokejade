@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/victreebel/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_MEDIUM_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_PLANT, EGG_PLANT ; egg groups
 
 	; tm/hm learnset

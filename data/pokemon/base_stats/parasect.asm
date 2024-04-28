@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/parasect/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_MEDIUM_FAST ; growth rate
+	db 70 ; base happiness
 	dn EGG_BUG, EGG_PLANT ; egg groups
 
 	; tm/hm learnset

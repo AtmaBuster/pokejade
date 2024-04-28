@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/gligar/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_MEDIUM_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_BUG, EGG_BUG ; egg groups
 
 	; tm/hm learnset

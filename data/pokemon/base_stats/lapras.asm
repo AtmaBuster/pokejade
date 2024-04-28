@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/lapras/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_WATER_1 ; egg groups
 
 	; tm/hm learnset

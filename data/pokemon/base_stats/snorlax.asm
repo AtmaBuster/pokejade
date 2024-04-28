@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/snorlax/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_MONSTER ; egg groups
 
 	; tm/hm learnset

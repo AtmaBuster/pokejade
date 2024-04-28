@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/remoraid/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_MEDIUM_FAST ; growth rate
+	db 70 ; base happiness
 	dn EGG_WATER_1, EGG_WATER_2 ; egg groups
 
 	; tm/hm learnset

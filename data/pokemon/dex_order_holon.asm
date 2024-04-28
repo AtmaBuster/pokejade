@@ -1,4 +1,13 @@
 HolonPokedexOrder:
+	dw CHIKORITA
+	dw BAYLEEF
+	dw MEGANIUM
+	dw CYNDAQUIL
+	dw QUILAVA
+	dw TYPHLOSION
+	dw TOTODILE
+	dw CROCONAW
+	dw FERALIGATR
 	dw 0
 	dw 0
 	dw 0
@@ -179,24 +188,15 @@ HolonPokedexOrder:
 	dw 0
 	dw 0
 	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
+	dw REGIROCK
+	dw REGICE
+	dw REGISTEEL
+	dw KYOGRE
+	dw GROUDON
+	dw RAYQUAZA
+	dw LATIAS
+	dw LATIOS
+	dw DEOXYS
+	dw MEWTWO
+	dw MEW
 .End

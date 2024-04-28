@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/ariados/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_FAST ; growth rate
+	db 70 ; base happiness
 	dn EGG_BUG, EGG_BUG ; egg groups
 
 	; tm/hm learnset

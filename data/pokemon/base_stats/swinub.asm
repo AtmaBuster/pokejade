@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/swinub/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_GROUND, EGG_GROUND ; egg groups
 
 	; tm/hm learnset

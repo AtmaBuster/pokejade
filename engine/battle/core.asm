@@ -5950,11 +5950,13 @@ LoadEnemyMon:
 ; Unknown
 	ld hl, wEnemyBackupPersonality ; TO-DO
 	ld de, wEnemyMonPersonality
+	ld c, 6
+.restore_dvs_loop
 	ld a, [hli]
 	ld [de], a
 	inc de
-	ld a, [hl]
-	ld [de], a
+	dec c
+	jr nz, .restore_dvs_loop
 	jmp .Happiness
 
 .InitDVs:
@@ -6141,7 +6143,7 @@ LoadEnemyMon:
 
 .Happiness:
 ; Set happiness
-	ld a, BASE_HAPPINESS
+	ld a, [wBaseHappiness]
 	ld [wEnemyMonHappiness], a
 ; Set level
 	ld a, [wCurPartyLevel]

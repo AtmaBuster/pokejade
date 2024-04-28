@@ -260,8 +260,8 @@ rept NUM_MOVES
 	inc de
 endr
 
-	; Initialize happiness.
-	ld a, BASE_HAPPINESS
+	; Initialize happiness
+	ld a, [wBaseHappiness]
 	ld [de], a
 	inc de
 
@@ -307,12 +307,14 @@ endr
 .copywildmonDVs
 	push hl
 	push de
-	ld h, d
-	ld l, e
-	ld de, wEnemyMonDVs
+	ld hl, wEnemyMonPersonality
 	ld bc, MON_HAPPINESS - MON_PERSONALITY
 	rst CopyBytes
 	pop de
+	ld hl, MON_PP - MON_PERSONALITY
+	add hl, de
+	ld d, h
+	ld e, l
 	pop hl
 
 	push hl
@@ -327,7 +329,7 @@ endr
 	pop hl
 
 	; Initialize happiness.
-	ld a, BASE_HAPPINESS
+	ld a, [wBaseHappiness]
 	ld [de], a
 	inc de
 
@@ -498,7 +500,8 @@ AddTempmonToParty:
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld [hl], BASE_HAPPINESS
+	ld a, [wBaseHappiness]
+	ld [hl], a
 .egg
 
 	ld a, [wCurPartySpecies]
@@ -786,7 +789,7 @@ SendMonIntoBox:
 	dec b
 	jr nz, .loop3
 
-	ld a, BASE_HAPPINESS
+	ld a, [wBaseHappiness]
 	ld [de], a
 	inc de
 	xor a

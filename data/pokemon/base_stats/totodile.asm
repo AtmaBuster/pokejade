@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/totodile/front.dimensions"
 	db TORRENT, TORRENT, SHEER_FORCE, SHEER_FORCE ; abilities
 	db GROWTH_MEDIUM_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_WATER_1 ; egg groups
 
 	; tm/hm learnset

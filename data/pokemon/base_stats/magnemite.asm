@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/magnemite/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_MEDIUM_FAST ; growth rate
+	db 70 ; base happiness
 	dn EGG_MINERAL, EGG_MINERAL ; egg groups
 
 	; tm/hm learnset

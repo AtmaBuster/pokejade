@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/mew/front.dimensions"
 	db SYNCHRONIZE, SYNCHRONIZE, SYNCHRONIZE, SYNCHRONIZE ; abilities
 	db GROWTH_MEDIUM_SLOW ; growth rate
+	db 70 ; base happiness
 	dn EGG_NONE, EGG_NONE ; egg groups
 
 	; tm/hm learnset

@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/misdreavus/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_FAST ; growth rate
+	db 70 ; base happiness
 	dn EGG_INDETERMINATE, EGG_INDETERMINATE ; egg groups
 
 	; tm/hm learnset

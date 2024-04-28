@@ -2461,6 +2461,7 @@ wBaseEggSteps:: db
 wBasePicSize:: db
 wBaseAbility:: ds 4
 wBaseGrowthRate:: db
+wBaseHappiness:: db
 wBaseEggGroups:: db
 wBaseTMHM:: flag_array NUM_TM_HM_TUTOR
 wCurBaseDataEnd::

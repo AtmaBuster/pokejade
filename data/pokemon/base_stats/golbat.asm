@@ -13,6 +13,7 @@
 	INCBIN "gfx/pokemon/golbat/front.dimensions"
 	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
 	db GROWTH_MEDIUM_FAST ; growth rate
+	db 250 ; base happiness
 	dn EGG_FLYING, EGG_FLYING ; egg groups
 
 	; tm/hm learnset
