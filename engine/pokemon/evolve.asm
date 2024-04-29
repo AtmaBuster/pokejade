@@ -61,6 +61,65 @@ EvolveAfterBattle_MasterLoop:
 	and a
 	jr z, EvolveAfterBattle_MasterLoop
 
+	push af
+	call IsMonHoldingEverstone
+	jmp z, .everstone_cancel
+	pop af
+
+	cp EVOLVE_TRADE
+	jr z, .skip_link_disable
+
+	ld c, a
+	ld a, [wLinkMode]
+	and a
+	ld a, c
+	jmp nz, .link_mode_cancel
+
+.skip_link_disable
+	ld b, 0
+	dec c
+	ld d, h
+	ld e, l
+
+	ld hl, .Jumptable
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld bc, .confirm_evo
+	push bc
+	push hl
+	ld h, d
+	ld l, e
+	ret
+
+.Jumptable:
+	dw EvoTest_Level
+	dw EvoTest_Item
+	dw EvoTest_Trade
+	dw EvoTest_Happiness
+	dw EvoTest_LevelRand1
+	dw EvoTest_LevelRand2
+	dw EvoTest_LevelFemale
+	dw EvoTest_LevelItem
+	dw EvoTest_LevelMove ; TO-DO
+	dw EvoTest_LevelItemNite ; TO-DO
+	dw EvoTest_LevelWithDark ; TO-DO
+	dw EvoTest_LevelAbility ; TO-DO
+	dw EvoTest_LevelLandmark ; TO-DO
+	dw EvoTest_ItemNite ; TO-DO
+	dw EvoTest_ItemBloodMoon ; TO-DO
+	dw EvoTest_ItemMale ; TO-DO
+	dw EvoTest_ItemFemale ; TO-DO
+	dw EvoTest_Sylveon ; TO-DO
+	dw EvoTest_Coins
+
+.confirm_evo
+	jmp nc, .skip_species_next
+
+IF 0
 	ld b, a
 
 	cp EVOLVE_TRADE
@@ -202,6 +261,7 @@ EvolveAfterBattle_MasterLoop:
 	jmp c, .skip_half_species_parameter
 	call IsMonHoldingEverstone
 	jmp z, .skip_half_species_parameter
+ENDC
 
 .proceed
 	ld a, [wTempMonLevel]
@@ -340,7 +400,7 @@ EvolveAfterBattle_MasterLoop:
 	ld h, d
 	jmp EvolveAfterBattle_MasterLoop
 
-.dont_evolve_check
+IF 0
 	ld a, b
 	cp EVOLVE_STAT
 	jr nz, .skip_evolution_species_parameter
@@ -350,6 +410,23 @@ EvolveAfterBattle_MasterLoop:
 .skip_half_species_parameter
 	inc hl
 .skip_evolution_species
+	inc hl
+	inc hl
+	jmp .loop
+ENDC
+
+.everstone_cancel
+	pop af
+.link_mode_cancel
+	ld a, c
+	call GetEvoTypeSkipCount
+	ld c, a
+	ld b, 0
+	dec c
+	add hl, bc
+	jmp .loop
+
+.skip_species_next
 	inc hl
 	inc hl
 	jmp .loop
@@ -647,18 +724,11 @@ SkipEvolutions::
 	inc hl
 	and a
 	ret z
-	cp EVOLVE_STAT
-	jr z, .inc_hl
-	cp EVOLVE_TRADE
-	jr z, .inc_hl
-	cp EVOLVE_ITEM
-	jr nz, .no_extra_skip
-.inc_hl
-	inc hl
-.no_extra_skip
-	inc hl
-	inc hl
-	inc hl
+	call GetEvoTypeSkipCount
+	ld c, a
+	ld b, 0
+	dec c
+	add hl, bc
 	jr SkipEvolutions
 
 DetermineEvolutionItemResults::
@@ -673,10 +743,8 @@ DetermineEvolutionItemResults::
 	call GetNextEvoAttackByte
 	and a
 	ret z
-	cp EVOLVE_STAT
-	jr z, .skip_species_two_parameters
 	cp EVOLVE_ITEM
-	jr nz, .skip_species_parameter
+	jr nz, .skip_parameters
 	call GetNextEvoAttackByte
 	ld b, a
 	call GetNextEvoAttackByte
@@ -695,19 +763,269 @@ DetermineEvolutionItemResults::
 	ld e, l
 	ret
 
-.skip_species_two_parameters
-	inc hl
-.skip_species_parameter
-	inc hl
-.skip_half_species_parameter
-	inc hl
 .skip_species
 	inc hl
 	inc hl
+	jr .loop
+
+.skip_parameters
+	push bc
+	call GetEvoTypeSkipCount
+	ld c, a
+	ld b, 0
+	dec c
+	add hl, bc
+	pop bc
 	jr .loop
 
 GetNextEvoAttackByte:
 	ldh a, [hTemp]
 	call GetFarByte
 	inc hl
+	ret
+
+GetEvoTypeSkipCount:
+	push hl
+	push bc
+	ld c, a
+	ld b, 0
+	ld hl, .skip_amounts
+	add hl, bc
+	pop bc
+	ld a, [hl]
+	pop hl
+	ret
+
+.skip_amounts
+	db 4 ; EVOLVE_LEVEL
+	db 5 ; EVOLVE_ITEM
+	db 5 ; EVOLVE_TRADE
+	db 4 ; EVOLVE_HAPPINESS
+	db 4 ; EVOLVE_LEVEL_RAND1
+	db 4 ; EVOLVE_LEVEL_RAND2
+	db 4 ; EVOLVE_LEVEL_FEMALE
+	db 5 ; EVOLVE_LEVEL_ITEM
+	db 5 ; EVOLVE_LEVEL_MOVE
+	db 5 ; EVOLVE_LEVEL_ITEM_NIGHT
+	db 4 ; EVOLVE_LEVEL_WITH_DARK
+	db 5 ; EVOLVE_LEVEL_ABILITY
+	db 4 ; EVOLVE_LANDMARK
+	db 5 ; EVOLVE_ITEM_NITE
+	db 5 ; EVOLVE_ITEM_BLOODMOON
+	db 5 ; EVOLVE_ITEM_MALE
+	db 5 ; EVOLVE_ITEM_FEMALE
+	db 5 ; EVOLVE_SYLVEON
+	db 3 ; EVOLVE_COINS
+
+EvoTest_Level:
+	call GetNextEvoAttackByte
+	ld b, a
+	ld a, [wTempMonLevel]
+	cp b
+	ccf
+	ret
+
+EvoTest_Item:
+	call GetNextEvoAttackByte
+	ld b, a
+	call GetNextEvoAttackByte
+	push hl
+	ld h, a
+	ld l, b
+	call GetItemIDFromIndex
+	ld b, a
+	pop hl
+	ld a, [wCurItem]
+	cp b
+	jr nz, .fail
+	scf
+	ret
+
+.fail
+	and a
+	ret
+
+EvoTest_Trade:
+	ld a, [wFakeLinkTradeEvo]
+	and a
+	jr z, .check_link_mode
+	xor a
+	ld [wFakeLinkTradeEvo], a
+	jr .continue
+
+.check_link_mode
+	ld a, [wLinkMode]
+	and a
+	jr z, .skip_item_fail
+
+.continue
+	call GetNextEvoAttackByte
+	ld b, a
+	call GetNextEvoAttackByte
+	push hl
+	ld h, a
+	ld l, b
+	call GetItemIDFromIndex
+	ld b, a
+	pop hl
+	inc a
+	jr z, .success
+
+	ld a, [wTempMonItem]
+	cp b
+	jr nz, .fail
+
+	xor a
+	ld [wTempMonItem], a
+.success
+	scf
+	ret
+
+.skip_item_fail
+	inc hl
+	inc hl
+.fail
+	and a
+	ret
+
+EvoTest_Happiness:
+	ld a, [wTempMonHappiness]
+	cp HAPPINESS_TO_EVOLVE
+	jr c, .skip_time_fail
+	call GetNextEvoAttackByte
+	cp TR_ANYTIME
+	jr z, .success
+	cp TR_MORNDAY
+	jr z, .day
+
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	jr c, .fail
+	jr .success
+
+.day
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	jr nc, .fail
+.success
+	scf
+	ret
+
+.skip_time_fail
+	inc hl
+.fail
+	and a
+	ret
+
+EvoTest_LevelRand1:
+	call EvoTest_Level
+	ret nc
+	push hl
+	call EvoTest_Rand_Check
+	pop hl
+	jr z, .fail
+	scf
+	ret
+
+.fail
+	and a
+	ret
+
+EvoTest_LevelRand2:
+	call EvoTest_Level
+	ret nc
+	push hl
+	call EvoTest_Rand_Check
+	pop hl
+	jr nz, .fail
+	scf
+	ret
+
+.fail
+	and a
+	ret
+
+EvoTest_Rand_Check:
+	ld a, [wTempMonDVs]
+	ld b, a
+	ld a, [wTempMonDVs + 1]
+	xor b
+	ld b, a
+	ld a, [wTempMonDVs + 2]
+	xor b
+	ld b, a
+	ld c, 8
+	xor a
+	ld d, a
+.loop
+	rr b
+	rl d
+	xor d
+	ld d, 0
+	dec c
+	jr nz, .loop
+	and a
+	ret
+
+EvoTest_LevelFemale:
+	call EvoTest_Level
+	ret nc
+	ld a, [wTempMonPersonality]
+	and MON_GENDER
+	ret z
+	scf
+	ret
+
+EvoTest_LevelItem:
+EvoTest_LevelMove:
+EvoTest_LevelItemNite:
+EvoTest_LevelWithDark:
+EvoTest_LevelAbility:
+EvoTest_LevelLandmark:
+EvoTest_ItemNite:
+EvoTest_ItemBloodMoon:
+EvoTest_ItemMale:
+EvoTest_ItemFemale:
+EvoTest_Sylveon:
+	ret
+
+EvoTest_Coins:
+	call GetNextEvoAttackByte
+	ld c, a
+	call GetNextEvoAttackByte
+	ld b, a
+
+	ld a, [wGimmighoulCoins]
+	ld e, a
+	ld a, [wGimmighoulCoins + 1]
+	ld d, a
+
+	cp b
+	jr c, .fail
+	jr nz, .success
+	ld a, e
+	cp c
+	jr c, .fail
+
+.success
+	push hl
+	ld a, b
+	cpl
+	ld h, a
+	ld a, c
+	cpl
+	ld l, a
+	inc hl
+	add hl, de
+	ld a, l
+	ld [wGimmighoulCoins], a
+	ld a, h
+	ld [wGimmighoulCoins + 1], a
+	pop hl
+
+	scf
+	ret
+
+.fail
+	and a
 	ret

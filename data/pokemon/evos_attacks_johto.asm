@@ -155,7 +155,7 @@ FeraligatrEvosAttacks:
 	db 0 ; no more level-up moves
 
 PanchamEvosAttacks:
-	;dbbw LEVEL_WITH_DARK_MON, 32, PANGORO
+	dbbw EVOLVE_LEVEL_WITH_DARK, 32, PANGORO
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -221,7 +221,7 @@ PichuEvosAttacks:
 	db 0 ; no more level-up moves
 
 CharjabugEvosAttacks:
-	;dbbw EVOLVE_LANDMARK, NEW_BARK_TOWN, VIKAVOLT
+	dbbw EVOLVE_LANDMARK, LANDMARK_NEW_BARK_TOWN, VIKAVOLT
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -232,9 +232,9 @@ VikavoltEvosAttacks:
 	db 0 ; no more level-up moves
 
 RockruffEvosAttacks:
-	;dbbbw EVOLVE_LEVEL_ABILITY, 25, KEEN_EYE, LYCANROC
-	;dbbbw EVOLVE_LEVEL_ABILITY, 25, VITAL_SPIRIT, LYCANROC_NITE
-	;dbbbw EVOLVE_LEVEL_ABILITY, 25, OWN_TEMPO, LYCANROC_DUSK
+	dbbbw EVOLVE_LEVEL_ABILITY, 25, KEEN_EYE, LYCANROC
+	dbbbw EVOLVE_LEVEL_ABILITY, 25, VITAL_SPIRIT, LYCANROC_NITE
+	dbbbw EVOLVE_LEVEL_ABILITY, 25, OWN_TEMPO, LYCANROC_DUSK
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -384,7 +384,7 @@ KleavorEvosAttacks:
 	db 0 ; no more level-up moves
 
 GirafarigEvosAttacks:
-	;dbww EVOLVE_LEVEL_MOVE, TWIN_BEAM, FARGIRAF
+	dbww EVOLVE_LEVEL_MOVE, TWIN_BEAM, FARIGIRAF
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -401,7 +401,7 @@ TinkatinkEvosAttacks:
 	db 0 ; no more level-up moves
 
 DunsparceEvosAttacks:
-	;dbww EVOLVE_LEVEL_MOVE, HYPER_DRILL, DUDUNSPARC
+	dbww EVOLVE_LEVEL_MOVE, HYPER_DRILL, DUDUNSPARC
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -443,7 +443,7 @@ ShuckleEvosAttacks:
 	db 0 ; no more level-up moves
 
 GimmighoulEvosAttacks:
-	;dbww EVOLVE_COINS, 999, GHOLDENGO
+	dbww EVOLVE_COINS, 999, GHOLDENGO
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -554,7 +554,7 @@ Porygon2EvosAttacks:
 	db 0 ; no more level-up moves
 
 StantlerEvosAttacks:
-	;dbww EVOLVE_USE_MOVE, BARRIER_BASH, WYRDEER
+	dbww EVOLVE_LEVEL_MOVE, BARRIER_BASH, WYRDEER
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves

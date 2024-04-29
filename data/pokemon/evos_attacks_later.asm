@@ -233,8 +233,8 @@ LinooneEvosAttacks:
 	db 0 ; no more level-up moves
 
 WurmpleEvosAttacks:
-	;dbbw EVOLVE_LEVEL_RAND1, 7, SILCOON
-	;dbbw EVOLVE_LEVEL_RAND2, 7, CASCOON
+	dbbw EVOLVE_LEVEL_RAND1, 7, SILCOON
+	dbbw EVOLVE_LEVEL_RAND2, 7, CASCOON
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -534,7 +534,7 @@ ArmaldoEvosAttacks:
 	db 0 ; no more level-up moves
 
 FeebasEvosAttacks:
-	;dbbw EVOLVE_BEAUTY, 0, MILOTIC
+	;dbbw EVOLVE_BEAUTY, MILOTIC
 	;dbww EVOLVE_TRADE, PRISM_SCALE, MILOTIC
 	db 0 ; no more evolutions
 	dbw 1, POUND

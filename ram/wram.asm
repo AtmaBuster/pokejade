@@ -2895,7 +2895,8 @@ wBikeFlags::
 ; bit 1: always on bike
 ; bit 2: downhill
 	db
-	ds 1 ; cleared along with wBikeFlags by ResetBikeFlags
+
+wFakeLinkTradeEvo:: db
 
 wCurMapSceneScriptPointer:: dw
 
@@ -2956,7 +2957,7 @@ wKenjiBreakTimer:: ds 2 ; Kenji
 wYanmaMapGroup:: db
 wYanmaMapNumber:: db
 wPlayerMonSelection:: ds 3
-	ds 2
+wGimmighoulCoins:: ds 2
 
 wStepCount:: db
 wPoisonStepCount:: db

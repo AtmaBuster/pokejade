@@ -262,7 +262,7 @@ KricketuneEvosAttacks:
 	db 0 ; no more level-up moves
 
 CombeeEvosAttacks:
-	;dbbw EVOLVE_LEVEL_FEMALE, 21, VESPIQUEN
+	dbbw EVOLVE_LEVEL_FEMALE, 21, VESPIQUEN
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -469,7 +469,7 @@ MankeyEvosAttacks:
 	db 0 ; no more level-up moves
 
 PrimeapeEvosAttacks:
-	;dbww EVOLVE_USE_MOVE, RAGE_FIST, ANNIHILAPE
+	dbww EVOLVE_LEVEL_MOVE, RAGE_FIST, ANNIHILAPE
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -606,7 +606,7 @@ MagnemiteEvosAttacks:
 	db 0 ; no more level-up moves
 
 MagnetonEvosAttacks:
-	;dbbw EVOLVE_LANDMARK, NEW_BARK_TOWN, MAGNEZONE
+	dbbw EVOLVE_LANDMARK, LANDMARK_NEW_BARK_TOWN, MAGNEZONE
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -744,7 +744,7 @@ LitwickEvosAttacks:
 	db 0 ; no more level-up moves
 
 LampentEvosAttacks:
-	;dbww EVOLVE_ITEM, DUSK_STONE, CHANDELURE ; TO-DO
+	;dbww EVOLVE_ITEM, DUSK_STONE, CHANDELURE
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -783,8 +783,8 @@ ChanseyEvosAttacks:
 	db 0 ; no more level-up moves
 
 TangelaEvosAttacks:
-	;dbww EVOLVE_LEVEL_MOVE, ANCIENTPOWER, TANGROWTH
-	;dbww EVOLVE_LEVEL_MOVE, POWER_WHIP, GELANIA
+	dbww EVOLVE_LEVEL_MOVE, ANCIENTPOWER, TANGROWTH
+	dbww EVOLVE_LEVEL_MOVE, POWER_WHIP, GELANIA
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -894,9 +894,9 @@ EeveeEvosAttacks:
 	dbww EVOLVE_ITEM, FIRE_STONE, FLAREON
 	dbww EVOLVE_HAPPINESS, TR_MORNDAY, ESPEON
 	dbww EVOLVE_HAPPINESS, TR_EVENITE, UMBREON
-	;dbbw EVOLVE_LANDMARK, NEW_BARK_TOWN, LEAFEON
-	;dbbw EVOLVE_LANDMARK, NEW_BARK_TOWN, GLACEON
-	;dbbw EVOLVE_SYLVEON, 0, SYLVEON
+	dbbw EVOLVE_LANDMARK, LANDMARK_NEW_BARK_TOWN, LEAFEON
+	dbbw EVOLVE_LANDMARK, LANDMARK_NEW_BARK_TOWN, GLACEON
+	dbw EVOLVE_SYLVEON, SYLVEON
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
