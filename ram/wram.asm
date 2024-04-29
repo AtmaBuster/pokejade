@@ -2947,7 +2947,8 @@ wUnusedTwoDayTimer:: db
 wUnusedTwoDayTimerStartDate:: db
 
 wMobileOrCable_LastSelection:: db
-	ds 9
+	ds 8
+wBloodMoonStatusActive:: db
 wBuenasPassword:: db
 wBlueCardBalance:: db
 wDailyRematchFlags:: ds 4

@@ -461,8 +461,8 @@ TeddiursaEvosAttacks:
 	db 0 ; no more level-up moves
 
 UrsaringEvosAttacks:
-	;dbww EVOLVE_ITEM_NITE, PEAT_BLOCK, URSALUNA
 	;dbww EVOLVE_ITEM_BLOODMOON, PEAT_BLOCK, URSALUNA_BLOOD
+	;dbww EVOLVE_ITEM_NITE, PEAT_BLOCK, URSALUNA
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves

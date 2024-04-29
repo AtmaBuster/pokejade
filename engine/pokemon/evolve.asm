@@ -104,16 +104,16 @@ EvolveAfterBattle_MasterLoop:
 	dw EvoTest_LevelRand2
 	dw EvoTest_LevelFemale
 	dw EvoTest_LevelItem
-	dw EvoTest_LevelMove ; TO-DO
-	dw EvoTest_LevelItemNite ; TO-DO
-	dw EvoTest_LevelWithDark ; TO-DO
-	dw EvoTest_LevelAbility ; TO-DO
-	dw EvoTest_LevelLandmark ; TO-DO
-	dw EvoTest_ItemNite ; TO-DO
-	dw EvoTest_ItemBloodMoon ; TO-DO
-	dw EvoTest_ItemMale ; TO-DO
-	dw EvoTest_ItemFemale ; TO-DO
-	dw EvoTest_Sylveon ; TO-DO
+	dw EvoTest_LevelMove
+	dw EvoTest_LevelItemNite
+	dw EvoTest_LevelWithDark
+	dw EvoTest_LevelAbility
+	dw EvoTest_LevelLandmark
+	dw EvoTest_ItemNite
+	dw EvoTest_ItemBloodMoon
+	dw EvoTest_ItemMale
+	dw EvoTest_ItemFemale
+	dw EvoTest_Sylveon
 	dw EvoTest_Coins
 
 .confirm_evo
@@ -726,9 +726,11 @@ SkipEvolutions::
 	ret z
 	call GetEvoTypeSkipCount
 	ld c, a
+	ld a, b
 	ld b, 0
 	dec c
 	add hl, bc
+	ld b, a
 	jr SkipEvolutions
 
 DetermineEvolutionItemResults::
@@ -789,6 +791,7 @@ GetEvoTypeSkipCount:
 	push bc
 	ld c, a
 	ld b, 0
+	dec c
 	ld hl, .skip_amounts
 	add hl, bc
 	pop bc
@@ -814,7 +817,7 @@ GetEvoTypeSkipCount:
 	db 5 ; EVOLVE_ITEM_BLOODMOON
 	db 5 ; EVOLVE_ITEM_MALE
 	db 5 ; EVOLVE_ITEM_FEMALE
-	db 5 ; EVOLVE_SYLVEON
+	db 3 ; EVOLVE_SYLVEON
 	db 3 ; EVOLVE_COINS
 
 EvoTest_Level:
@@ -977,16 +980,178 @@ EvoTest_LevelFemale:
 	ret
 
 EvoTest_LevelItem:
+	call GetNextEvoAttackByte
+	ld b, a
+	call GetNextEvoAttackByte
+	push hl
+	ld h, a
+	ld l, b
+	call GetItemIDFromIndex
+	ld b, a
+	pop hl
+	ld a, [wTempMonItem]
+	cp b
+	jr nz, .fail
+	scf
+	ret
+
+.fail
+	and a
+	ret
+
 EvoTest_LevelMove:
+	call GetNextEvoAttackByte
+	ld b, a
+	call GetNextEvoAttackByte
+	push hl
+	ld h, a
+	ld l, b
+	call GetMoveIDFromIndex
+	ld b, a
+	pop hl
+
+	ld c, 4
+	push hl
+	ld hl, wTempMonMoves
+.loop
+	ld a, [hli]
+	and a
+	jr z, .fail
+	cp b
+	jr z, .success
+	dec c
+	jr nz, .loop
+.fail
+	pop hl
+	and a
+	ret
+
+.success
+	pop hl
+	scf
+	ret
+
 EvoTest_LevelItemNite:
+	call EvoTest_LevelItem
+	ret nc
+
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	ccf
+	ret
+
 EvoTest_LevelWithDark:
+	call EvoTest_Level
+	ret nc
+
+	call .ScanPartyDarkType
+	ret
+
+.ScanPartyDarkType: ; TO-DO
+	scf
+	ret
+
 EvoTest_LevelAbility:
+	call EvoTest_Level
+	inc hl
+	ret nc
+	dec hl
+	call GetNextEvoAttackByte
+	ld b, a
+	ld a, [wTempMonAbility]
+	cp b
+	jr z, .fail
+	scf
+	ret
+
+.fail
+	and a
+	ret
+
 EvoTest_LevelLandmark:
+	call GetNextEvoAttackByte
+	ld b, a
+	ld a, [wCurLandmark]
+	cp b
+	jr nz, .fail
+	scf
+	ret
+
+.fail
+	and a
+	ret
+
 EvoTest_ItemNite:
+	call EvoTest_Item
+	ret nc
+
+	ld a, [wTimeOfDay]
+	cp NITE_F
+	ccf
+	ret
+
 EvoTest_ItemBloodMoon:
+	call EvoTest_ItemNite
+	ret nc
+
+	ld a, [wBloodMoonStatusActive]
+	and a
+	ret z
+	scf
+	ret
+
 EvoTest_ItemMale:
+	call EvoTest_Item
+	ret nc
+	ld a, [wTempMonPersonality]
+	and MON_GENDER
+	ret nz
+	scf
+	ret
+
 EvoTest_ItemFemale:
+	call EvoTest_Item
+	ret nc
+	ld a, [wTempMonPersonality]
+	and MON_GENDER
+	ret z
+	scf
+	ret
+
 EvoTest_Sylveon:
+	ld a, [wTempMonHappiness]
+	cp HAPPINESS_TO_EVOLVE
+	jr c, .fail
+
+	push hl
+	ld hl, wTempMonMoves
+	ld c, 4
+.move_loop
+	ld a, [hli]
+	and a
+	jr z, .move_fail
+	call .get_move_type
+	cp NORMAL ; FAIRY, TO-DO
+	jr z, .success
+	dec c
+	jr nz, .move_loop
+.move_fail
+	pop hl
+.fail
+	and a
+	ret
+
+.success
+	pop hl
+	scf
+	ret
+
+.get_move_type
+	push hl
+	ld l, a
+	ld a, MOVE_TYPE
+	call GetMoveAttribute
+	pop hl
 	ret
 
 EvoTest_Coins:
