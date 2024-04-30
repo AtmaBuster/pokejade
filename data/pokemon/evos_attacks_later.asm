@@ -313,8 +313,8 @@ RaltsEvosAttacks:
 	db 0 ; no more level-up moves
 
 KirliaEvosAttacks:
+	dbww EVOLVE_ITEM_MALE, DAWN_STONE, GALLADE
 	dbbw EVOLVE_LEVEL, 30, GARDEVOIR
-	;dbww EVOLVE_ITEM_MALE, DAWN_STONE, GALLADE
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -408,7 +408,7 @@ BudewEvosAttacks:
 	db 0 ; no more level-up moves
 
 RoseliaEvosAttacks:
-	;dbww EVOLVE_ITEM, SHINY_STONE, ROSERADE
+	dbww EVOLVE_ITEM, SHINY_STONE, ROSERADE
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -535,7 +535,7 @@ ArmaldoEvosAttacks:
 
 FeebasEvosAttacks:
 	;dbbw EVOLVE_BEAUTY, MILOTIC
-	;dbww EVOLVE_TRADE, PRISM_SCALE, MILOTIC
+	dbww EVOLVE_TRADE, PRISM_SCALE, MILOTIC
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -562,7 +562,7 @@ DuskullEvosAttacks:
 	db 0 ; no more level-up moves
 
 DusclopsEvosAttacks:
-	;dbww EVOLVE_TRADE, REAPER_CLOTH, DUSKNOIR
+	dbww EVOLVE_TRADE, REAPER_CLOTH, DUSKNOIR
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -589,8 +589,8 @@ AbsolEvosAttacks:
 	db 0 ; no more level-up moves
 
 SnoruntEvosAttacks:
+	dbww EVOLVE_ITEM_FEMALE, DAWN_STONE, FROSLASS
 	dbbw EVOLVE_LEVEL, 42, GLALIE
-	;dbww EVOLVE_ITEM_FEMALE, DAWN_STONE, FROSLASS
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -623,8 +623,8 @@ WalreinEvosAttacks:
 	db 0 ; no more level-up moves
 
 ClamperlEvosAttacks:
-	;dbww EVOLVE_TRADE, DEEPSEATOOTH, HUNTAIL
-	;dbww EVOLVE_TRADE, DEEPSEASCALE, GOREBYSS
+	dbww EVOLVE_TRADE, DEEPSEATOOTH, HUNTAIL
+	dbww EVOLVE_TRADE, DEEPSEASCALE, GOREBYSS
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves

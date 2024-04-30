@@ -357,6 +357,12 @@ PlacePartyMonEvoStoneCompatibility:
 	ld hl, wPartyMon1Species
 	rst AddNTimes
 	ld a, [hl]
+	push af
+	ld bc, MON_PERSONALITY - MON_SPECIES
+	add hl, bc
+	ld a, [hl]
+	ld [wTempMonPersonality], a
+	pop af
 	call GetPokemonIndexFromID
 	ld b, h
 	ld c, l

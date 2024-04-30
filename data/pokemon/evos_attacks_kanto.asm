@@ -355,7 +355,7 @@ HonchkrowEvosAttacks:
 	db 0 ; no more level-up moves
 
 HappinyEvosAttacks:
-	;dbww EVOLVE_LEVEL_ITEM, OVAL_STONE, CHANSEY
+	dbww EVOLVE_LEVEL_ITEM, OVAL_STONE, CHANSEY
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -744,7 +744,7 @@ LitwickEvosAttacks:
 	db 0 ; no more level-up moves
 
 LampentEvosAttacks:
-	;dbww EVOLVE_ITEM, DUSK_STONE, CHANDELURE
+	dbww EVOLVE_ITEM, DUSK_STONE, CHANDELURE
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -834,7 +834,7 @@ LarvestaEvosAttacks:
 
 ScytherEvosAttacks:
 	dbww EVOLVE_TRADE, METAL_COAT, SCIZOR
-	;dbww EVOLVE_TRADE, BLACK_AUGITE, KLEAVOR
+	dbww EVOLVE_TRADE, BLACK_AUGITE, KLEAVOR
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -845,13 +845,13 @@ VolcaronaEvosAttacks:
 	db 0 ; no more level-up moves
 
 ElectabuzzEvosAttacks:
-	;dbww EVOLVE_TRADE, ELECTIRIZER, ELECTIVIRE
+	dbww EVOLVE_TRADE, ELECTIRIZER, ELECTIVIRE
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
 
 MagmarEvosAttacks:
-	;dbww EVOLVE_TRADE, MAGMARIZER, MAGMORTAR
+	dbww EVOLVE_TRADE, MAGMARIZER, MAGMORTAR
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves

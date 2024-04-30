@@ -357,7 +357,7 @@ UmbreonEvosAttacks:
 	db 0 ; no more level-up moves
 
 MurkrowEvosAttacks:
-	;dbww EVOLVE_ITEM, DUSK_STONE, HONCHKROW
+	dbww EVOLVE_ITEM, DUSK_STONE, HONCHKROW
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -368,7 +368,7 @@ WyrdeerEvosAttacks:
 	db 0 ; no more level-up moves
 
 MisdreavusEvosAttacks:
-	;dbww EVOLVE_ITEM, DUSK_STONE, HONCHKROW
+	dbww EVOLVE_ITEM, DUSK_STONE, MISMAGIUS
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -449,7 +449,7 @@ GimmighoulEvosAttacks:
 	db 0 ; no more level-up moves
 
 SneaselEvosAttacks:
-	;dbww EVOLVE_LEVEL_ITEM_NIGHT, RAZOR_CLAW, WEAVILE
+	dbww EVOLVE_LEVEL_ITEM_NITE, RAZOR_CLAW, WEAVILE
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -461,8 +461,8 @@ TeddiursaEvosAttacks:
 	db 0 ; no more level-up moves
 
 UrsaringEvosAttacks:
-	;dbww EVOLVE_ITEM_BLOODMOON, PEAT_BLOCK, URSALUNA_BLOOD
-	;dbww EVOLVE_ITEM_NITE, PEAT_BLOCK, URSALUNA
+	dbww EVOLVE_ITEM_BLOODMOON, PEAT_BLOCK, URSALUNA_BLOOD
+	dbww EVOLVE_ITEM_NITE, PEAT_BLOCK, URSALUNA
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -548,7 +548,7 @@ RaitoraEvosAttacks:
 	db 0 ; no more level-up moves
 
 Porygon2EvosAttacks:
-	;dbww EVOLVE_TRADE, DUBIOUS_DISC, PORYGON_Z
+	dbww EVOLVE_TRADE, DUBIOUS_DISC, PORYGON_Z
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves

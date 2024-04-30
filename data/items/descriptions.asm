@@ -168,6 +168,20 @@ ItemDescriptions1:
 	dw QuestionMarkDesc ; 009D
 	dw QuestionMarkDesc ; 009E
 	dw QuestionMarkDesc ; 009F
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
+	dw QuestionMarkDesc
 .IndirectEnd:
 
 ItemDescriptionsKeyItems:

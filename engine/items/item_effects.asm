@@ -188,6 +188,20 @@ ItemEffects1:
 	dw NoEffect            ; ITEM_DC
 	dw NoEffect            ; ITEM_C3
 	dw NoEffect            ; ITEM_FA
+	dw NoEffect
+	dw EvoStoneEffect      ; DUSK_STONE
+	dw NoEffect
+	dw NoEffect
+	dw NoEffect
+	dw NoEffect
+	dw EvoStoneEffect      ; PEAT_BLOCK
+	dw NoEffect
+	dw EvoStoneEffect      ; DAWN_STONE
+	dw EvoStoneEffect      ; SHINY_STONE
+	dw NoEffect
+	dw NoEffect
+	dw NoEffect
+	dw NoEffect
 .IndirectEnd:
 
 ItemEffectsKeyItems:
@@ -949,6 +963,8 @@ MoonBallMultiplier:
 	ld [wCurItem], a
 	ld d, h
 	ld e, l
+	ld a, [wEnemyMonPersonality]
+	ld [wTempMonPersonality], a
 	farcall DetermineEvolutionItemResults
 	ld a, c
 	ld [wCurItem], a

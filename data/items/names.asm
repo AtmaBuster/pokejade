@@ -159,6 +159,20 @@ ItemNames::
 	li "TERU-SAMA"    ; 009C
 	li "TERU-SAMA"    ; 009D
 	li "TERU-SAMA"    ; 009E
+	li "OVAL STONE"   ; 009F
+	li "DUSK STONE"
+	li "BLACK AUGITE"
+	li "ELECTRIZER"
+	li "MAGMARIZER"
+	li "RAZOR CLAW"
+	li "PEAT BLOCK"
+	li "DUBIOUS DISC"
+	li "DAWN STONE"
+	li "SHINY STONE"
+	li "PRISM SCALE"
+	li "REAPER CLOTH"
+	li "DEEPSEATOOTH"
+	li "DEEPSEASCALE"
 	assert_list_length NUM_ITEM_POCKET
 
 KeyItemNames::

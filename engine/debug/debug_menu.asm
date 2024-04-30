@@ -87,7 +87,7 @@ DebugMenu::
 	db "Max ¥@"
 	db "Warp Any@"
 	db "PC@"
-	db "XXX@";"Fill Bag@"
+	db "Fill Bag@"
 	db "Fill TM/HM@"
 	db "Play Cry@"
 	db "Trainer@"
@@ -1252,11 +1252,25 @@ Debug_FillBag:
 	dw SUN_STONE
 	dw THUNDERSTONE
 	dw WATER_STONE
+	dw DUSK_STONE
+	dw DAWN_STONE
+	dw SHINY_STONE
+	dw PEAT_BLOCK
 
 	dw DRAGON_SCALE
 	dw KINGS_ROCK
 	dw METAL_COAT
 	dw UP_GRADE
+	dw OVAL_STONE
+	dw BLACK_AUGITE
+	dw ELECTIRIZER
+	dw MAGMARIZER
+	dw RAZOR_CLAW
+	dw DUBIOUS_DISC
+	dw PRISM_SCALE
+	dw REAPER_CLOTH
+	dw DEEPSEATOOTH
+	dw DEEPSEASCALE
 
 	dw AMULET_COIN
 	dw BERRY

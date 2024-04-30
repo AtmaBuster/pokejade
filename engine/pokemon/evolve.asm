@@ -745,32 +745,46 @@ DetermineEvolutionItemResults::
 	call GetNextEvoAttackByte
 	and a
 	ret z
-	cp EVOLVE_ITEM
-	jr nz, .skip_parameters
-	call GetNextEvoAttackByte
-	ld b, a
-	call GetNextEvoAttackByte
+	ld c, a
 	push hl
-	ld h, a
-	ld l, b
-	call GetItemIDFromIndex
-	ld b, a
-	pop hl
-	ld a, [wCurItem]
-	cp b
-	jr nz, .skip_species
-	ldh a, [hTemp]
-	call GetFarWord
-	ld d, h
-	ld e, l
-	ret
+	ld hl, .method_table
+.get_method_loop
+	ld a, [hli]
+	and a
+	jr z, .skip_parameters
+	cp c
+	jr z, .got_method
+	inc hl
+	inc hl
+	jr .get_method_loop
 
+.got_method
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	pop hl
+	ld bc, .after_test
+	push bc
+	push de
+	ret
+.after_test
+	ld de, 0
+	jr c, .success
 .skip_species
 	inc hl
 	inc hl
 	jr .loop
 
+.success
+	call GetNextEvoAttackByte
+	ld e, a
+	call GetNextEvoAttackByte
+	ld d, a
+	ret
+
 .skip_parameters
+	ld a, c
+	pop hl
 	push bc
 	call GetEvoTypeSkipCount
 	ld c, a
@@ -779,6 +793,14 @@ DetermineEvolutionItemResults::
 	add hl, bc
 	pop bc
 	jr .loop
+
+.method_table
+	dbw EVOLVE_ITEM, EvoTest_Item
+	dbw EVOLVE_ITEM_NITE, EvoTest_ItemNite
+	dbw EVOLVE_ITEM_BLOODMOON, EvoTest_ItemBloodMoon
+	dbw EVOLVE_ITEM_MALE, EvoTest_ItemMale
+	dbw EVOLVE_ITEM_FEMALE, EvoTest_ItemFemale
+	db 0
 
 GetNextEvoAttackByte:
 	ldh a, [hTemp]
@@ -823,6 +845,9 @@ GetEvoTypeSkipCount:
 EvoTest_Level:
 	call GetNextEvoAttackByte
 	ld b, a
+	ld a, [wCurItem]
+	and a
+	ret nz
 	ld a, [wTempMonLevel]
 	cp b
 	ccf

@@ -33,8 +33,6 @@ ROM0
 	"Home"
 ROMX $01
 	"bank1"
-	"Tileset Data 10"
-	"Tileset Data 11"
 ROMX $02
 	"bank2"
 ROMX $03
@@ -56,11 +54,13 @@ ROMX $07
 	"Roofs"
 	"Tileset Data 2"
 	"Extra Songs 1"
+	"Tileset Data 10"
 ROMX $08
 	"Clock Reset"
 	"Tileset Data 3"
 	"Egg Move Pointers"
 	"Egg Moves 1"
+	"Tileset Data 11"
 ROMX $09
 	"bank9"
 ROMX $0a

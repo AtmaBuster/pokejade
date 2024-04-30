@@ -165,6 +165,20 @@
 	const ITEM_DC      ; 009D
 	const ITEM_C3      ; 009E
 	const ITEM_FA      ; 009F
+	const OVAL_STONE   ; 00A0
+	const DUSK_STONE   ; 00A1
+	const BLACK_AUGITE ; 00A2
+	const ELECTIRIZER  ; 00A3
+	const MAGMARIZER   ; 00A4
+	const RAZOR_CLAW   ; 00A5
+	const PEAT_BLOCK   ; 00A6
+	const DUBIOUS_DISC ; 00A7
+	const DAWN_STONE   ; 00A8
+	const SHINY_STONE  ; 00A9
+	const PRISM_SCALE  ; 00AA
+	const REAPER_CLOTH ; 00AB
+	const DEEPSEATOOTH ; 00AC
+	const DEEPSEASCALE ; 00AD
 DEF NUM_ITEM_POCKET EQU const_value - 1
 
 	const_align 8 ; Key items assume the value of HIGH(FIRST_KEY_ITEM) when storing in bag.
