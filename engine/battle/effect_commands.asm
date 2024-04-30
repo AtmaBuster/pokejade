@@ -2565,8 +2565,6 @@ DittoMetalPowder:
 
 	ld h, b
 	ld l, c
-	srl b
-	rr c
 	add hl, bc
 	ld b, h
 	ld c, l
@@ -2654,19 +2652,23 @@ PlayerAttackDamage:
 
 .lightball
 ; Note: Returns player special attack at hl in hl.
-	call LightBallBoost
+	call LightBall_DeepSeaTooth_Boost
+	push hl
+	call ClamperlDeepSeaScale
+	pop hl
 	jr .done
 
 .thickclub
 ; Note: Returns player attack at hl in hl.
 	call ThickClubBoost
+	push hl
+	call DittoMetalPowder
+	pop hl
 
 .done
 	call TruncateHL_BC
-
 	ld a, [wBattleMonLevel]
 	ld e, a
-	call DittoMetalPowder
 
 	ld a, 1
 	and a
@@ -2783,6 +2785,81 @@ ThickClubBoost:
 	pop bc
 	ret
 
+ClamperlDeepSeaScale:
+	ld a, MON_SPECIES
+	call BattlePartyAttr
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [hl]
+	jr nz, .got_species
+	ld a, [wTempEnemyMonSpecies]
+
+.got_species
+	push hl
+	call GetPokemonIndexFromID
+	ld a, l
+	sub LOW(CLAMPERL)
+	ld a, h
+	pop hl
+	ret nz
+	dec a
+	ret nz
+
+	push bc
+	call GetOpponentItem
+	ld a, [hl]
+	push hl
+	call GetItemIndexFromID
+	cphl16 DEEPSEASCALE
+	pop hl
+	pop bc
+	ret nz
+
+	ld h, b
+	ld l, c
+	add hl, bc
+	ld b, h
+	ld c, l
+
+	ld a, HIGH(MAX_STAT_VALUE)
+	cp b
+	jr c, .cap
+	ret nz
+	ld a, LOW(MAX_STAT_VALUE)
+	cp c
+	ret nc
+
+.cap
+	ld bc, MAX_STAT_VALUE
+	ret
+
+LightBall_DeepSeaTooth_Boost:
+	push hl
+	call LightBallBoost
+	jr z, .ok
+	pop hl
+	call DeepSeaToothBoost
+	ret
+
+.ok
+	inc sp
+	inc sp
+	ret
+
+DeepSeaToothBoost:
+	push bc
+	push de
+	ld bc, CLAMPERL
+	push hl
+	ld hl, DEEPSEATOOTH
+	call GetItemIDFromIndex
+	ld d, a
+	pop hl
+	call SpeciesItemBoost
+	pop de
+	pop bc
+	ret
+
 LightBallBoost:
 ; Return in hl the stat value at hl.
 
@@ -2851,10 +2928,12 @@ DoubleStatIfSpeciesHoldingItem:
 	jr c, .cap
 	ld a, LOW(MAX_STAT_VALUE)
 	cp l
-	ret nc
+	jr nc, .done
 
 .cap
 	ld hl, MAX_STAT_VALUE
+.done
+	xor a
 	ret
 
 EnemyAttackDamage:
@@ -2918,18 +2997,22 @@ EnemyAttackDamage:
 	ld hl, wEnemySpAtk
 
 .lightball
-	call LightBallBoost
+	call LightBall_DeepSeaTooth_Boost
+	push hl
+	call ClamperlDeepSeaScale
+	pop hl
 	jr .done
 
 .thickclub
 	call ThickClubBoost
+	push hl
+	call DittoMetalPowder
+	pop hl
 
 .done
 	call TruncateHL_BC
-
 	ld a, [wEnemyMonLevel]
 	ld e, a
-	call DittoMetalPowder
 
 	ld a, 1
 	and a

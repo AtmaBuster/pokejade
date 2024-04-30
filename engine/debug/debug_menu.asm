@@ -904,11 +904,13 @@ Debug_GivePoke:
 	cp 101
 	jp nc, .loop
 	ld [wCurPartyLevel], a
-;	ldh a, [wDebugMenuDataBuffer + 3]
-	xor a
-	ld [wCurItem], a
 	call GetPokemonIDFromIndex
 	ld [wCurPartySpecies], a
+	ld a, [wDebugMenuDataBuffer + 3]
+	ld l, a
+	ld h, 0
+	call GetItemIDFromIndex
+	ld [wCurItem], a
 	ld b, 0
 	farcall GivePoke
 	ret
@@ -977,7 +979,6 @@ Debug_GivePoke:
 	hlcoord 1, 5
 	ld a, "▶"
 	ld [hl], a
-	ret ; TO-DO
 	hlcoord 3, 5
 	ld de, wDebugMenuDataBuffer + 3
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
@@ -987,6 +988,13 @@ Debug_GivePoke:
 	ld a, " "
 	call ByteFill
 	ld a, [wDebugMenuDataBuffer + 3]
+	and a
+	ret z
+	cp NUM_ITEM_POCKET + 1
+	ret nc
+	ld l, a
+	ld h, 0
+	call GetItemIDFromIndex
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld de, wStringBuffer1
