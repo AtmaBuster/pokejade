@@ -2738,8 +2738,7 @@ wBadges::
 wJohtoBadges:: flag_array NUM_JOHTO_BADGES
 wKantoBadges:: flag_array NUM_KANTO_BADGES
 
-wTMsHMs:: ds NUM_TMS + NUM_HMS
-
+UNION
 wNumItems:: db
 wItems:: ds MAX_ITEMS * 3 + 1
 
@@ -2751,6 +2750,9 @@ wBalls:: ds MAX_BALLS * 2 + 1
 
 wNumPCItems:: db
 wPCItems:: ds MAX_PC_ITEMS * 3 + 1
+NEXTU
+	ds $180
+ENDU
 
 wPokegearFlags::
 ; bit 0: map
@@ -3340,5 +3342,13 @@ SECTION "Stack RAM", WRAMX
 
 wWindowStack:: ds $1000 - 1
 wWindowStackBottom:: ds 1
+
+ENDSECTION
+
+SECTION "TM HM", WRAMX
+
+wTMsHMs:: ds NUM_TMS + NUM_HMS
+wTMsHMsEnd::
+wTMsHMsTerminator:: db
 
 ENDSECTION

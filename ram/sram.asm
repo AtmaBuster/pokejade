@@ -79,6 +79,7 @@ sBackupGameData::
 sBackupPlayerData::  ds wPlayerDataEnd - wPlayerData
 sBackupCurMapData::  ds wCurMapDataEnd - wCurMapData
 sBackupPokemonData:: ds wPokemonDataEnd - wPokemonData
+sBackupTMHMData::    ds wTMsHMsEnd - wTMsHMs
 sBackupGameDataEnd::
 
 sBackupPokemonIndexTable:: ds wPokemonIndexTableEnd - wPokemonIndexTable
@@ -110,6 +111,7 @@ sGameData::
 sPlayerData::  ds wPlayerDataEnd - wPlayerData
 sCurMapData::  ds wCurMapDataEnd - wCurMapData
 sPokemonData:: ds wPokemonDataEnd - wPokemonData
+sTMHMData::    ds wTMsHMsEnd - wTMsHMs
 sGameDataEnd::
 
 sPokemonIndexTable:: ds wPokemonIndexTableEnd - wPokemonIndexTable

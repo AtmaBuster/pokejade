@@ -662,6 +662,16 @@ CheckKeyItems:
 	ret
 
 ReceiveTMHM:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	call .ReceiveTMHM
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.ReceiveTMHM:
 	dec c
 	ld b, 0
 	ld hl, wTMsHMs
@@ -679,6 +689,16 @@ ReceiveTMHM:
 	ret
 
 TossTMHM:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	call .TossTMHM
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.TossTMHM:
 	dec c
 	ld b, 0
 	ld hl, wTMsHMs
@@ -706,6 +726,16 @@ TossTMHM:
 	ret
 
 CheckTMHM:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	call .CheckTMHM
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.CheckTMHM:
 	dec c
 	ld b, $0
 	ld hl, wTMsHMs

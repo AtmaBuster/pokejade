@@ -1155,10 +1155,11 @@ Debug_PC:
 
 Debug_FillBag:
 	ld hl, wNumItems
-;	ld bc, wMedicineEnd - wNumItems
 	ld bc, wNumPCItems - wNumItems
 	xor a
-	call ByteFill
+	rst ByteFill
+	ld [wDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer + 1], a
 
 	ld a, -1
 	ld hl, wItems
@@ -1167,52 +1168,104 @@ Debug_FillBag:
 	ld [hl], a
 	ld hl, wBalls
 	ld [hl], a
-;	ld hl, wBerries
-;	ld [hl], a
-;	ld hl, wMedicine
-;	ld [hl], a
 
-	ld a, 1
-.loop
-	push af
-	ld [wCurItem], a
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	ld a, [wStringBuffer1]
-	cp "?"
-	jr z, .next
-	farcall CheckItemPocket
-	ld a, [wItemAttributeValue]
-	cp KEY_ITEM
-	jr z, .give_key_item
-	
-	ld a, 99
-	ld [wItemQuantityChange], a
-	ld hl, wNumItems
-	call ReceiveItem
+	call .FillKeyItems
+	call .FillBalls
+	call .FillItems
 
-	call nc, .full_break
-
-	jr .next
-
-.give_key_item
-	ld a, 1
-	ld [wItemQuantityChange], a
-	ld hl, wNumItems
-	call ReceiveItem
-
-	call nc, .full_break
-
-.next
-	pop af
+	ld a, [wDebugMenuDataBuffer]
+	and a
+	ret nz
+	ld a, [wNumItems]
+	sub MAX_ITEMS
+	cpl
 	inc a
-	cp -1
-	jr nz, .loop
+	ld [wDebugMenuDataBuffer + 1], a
+
 	ret
 
-.full_break
-; set breakpoint to check if full
+.FillKeyItems:
+	ld hl, FIRST_KEY_ITEM
+	lb bc, 1, NUM_KEY_ITEM_POCKET
+	jr .key_item_ball_loop
+
+.FillBalls:
+	ld hl, FIRST_BALL_ITEM
+	lb bc, MAX_ITEM_STACK, NUM_BALL_ITEM_POCKET
+
+.key_item_ball_loop
+	push hl
+	call GetItemIDFromIndex
+	ld [wCurItem], a
+	ld a, b
+	ld [wItemQuantityChange], a
+	ld hl, wNumItems
+	call ReceiveItem
+	pop hl
+	inc hl
+	dec c
+	jr nz, .key_item_ball_loop
 	ret
+
+.FillItems:
+	ld hl, .ItemList
+.item_loop
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	or e
+	ret z
+	push hl
+	ld h, d
+	ld l, e
+	call GetItemIDFromIndex
+	ld [wCurItem], a
+	ld a, MAX_ITEM_STACK
+	ld [wItemQuantityChange], a
+	ld hl, wNumItems
+	call ReceiveItem
+	pop hl
+	jr nc, .bag_full
+	jr .item_loop
+
+.bag_full
+	ld a, [wDebugMenuDataBuffer]
+	inc a
+	ld [wDebugMenuDataBuffer], a
+	jr .item_loop
+
+.ItemList
+	dw MAX_REPEL
+	dw RARE_CANDY
+	dw ESCAPE_ROPE
+	dw FULL_RESTORE
+
+	dw SACRED_ASH
+	dw MAX_REVIVE
+	dw PP_UP
+	dw MAX_ELIXER
+
+	dw FIRE_STONE
+	dw LEAF_STONE
+	dw MOON_STONE
+	dw SUN_STONE
+	dw THUNDERSTONE
+	dw WATER_STONE
+
+	dw DRAGON_SCALE
+	dw KINGS_ROCK
+	dw METAL_COAT
+	dw UP_GRADE
+
+	dw AMULET_COIN
+	dw BERRY
+	dw BERSERK_GENE
+	dw EVERSTONE
+	dw EXP_SHARE
+	dw LEFTOVERS
+	dw LUCKY_EGG
+	dw 0
 
 Debug_FillTMHM:
 	ld hl, wTMsHMs

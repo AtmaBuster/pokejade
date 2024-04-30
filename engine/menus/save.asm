@@ -149,6 +149,7 @@ SaveGameData:
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
+	call SaveTMHMData
 	call SavePokemonData
 	call SaveIndexTables
 	call SaveBackupIndexTables
@@ -188,6 +189,7 @@ WriteBackupSave:
 	call ValidateBackupSave
 	call SaveBackupOptions
 	call SaveBackupPlayerData
+	call SaveBackupTMHMData
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
 
@@ -371,6 +373,21 @@ SavePokemonData:
 	rst CopyBytes
 	jmp CloseSRAM
 
+SaveTMHMData:
+	ld a, BANK(sTMHMData)
+	call OpenSRAM
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	ld hl, wTMsHMs
+	ld de, sTMHMData
+	ld bc, wTMsHMsEnd - wTMsHMs
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
 SaveIndexTables:
 	; saving is already a long operation, so take the chance to GC the table
 	farcall ForceGarbageCollection
@@ -459,6 +476,21 @@ SaveBackupPokemonData:
 	rst CopyBytes
 	jmp CloseSRAM
 
+SaveBackupTMHMData:
+	ld a, BANK(sBackupTMHMData)
+	call OpenSRAM
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	ld hl, wTMsHMs
+	ld de, sBackupTMHMData
+	ld bc, wTMsHMsEnd - wTMsHMs
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
 SaveBackupIndexTables:
 	ld a, BANK(sBackupPokemonIndexTable)
 	call OpenSRAM
@@ -526,6 +558,7 @@ TryLoadSaveFile:
 	call VerifyChecksum
 	jr nz, .backup
 	call LoadPlayerData
+	call LoadTMHMData
 	call LoadPokemonData
 	call LoadIndexTables
 	call SaveBackupIndexTables
@@ -546,6 +579,7 @@ TryLoadSaveFile:
 	call VerifyBackupChecksum
 	jr nz, .corrupt
 	call LoadBackupPlayerData
+	call LoadBackupTMHMData
 	call LoadBackupPokemonData
 	call LoadBackupIndexTables
 	farcall RestorePartyMonMail
@@ -685,6 +719,21 @@ LoadPokemonData:
 	rst CopyBytes
 	jmp CloseSRAM
 
+LoadTMHMData:
+	ld a, BANK(sTMHMData)
+	call OpenSRAM
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	ld hl, sTMHMData
+	ld de, wTMsHMs
+	ld bc, wTMsHMsEnd - wTMsHMs
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
 LoadIndexTables:
 	ldh a, [rSVBK]
 	push af
@@ -764,6 +813,21 @@ LoadBackupPokemonData:
 	ld de, wPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
 	rst CopyBytes
+	jmp CloseSRAM
+
+LoadBackupTMHMData:
+	ld a, BANK(sBackupTMHMData)
+	call OpenSRAM
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	ld hl, sBackupTMHMData
+	ld de, wTMsHMs
+	ld bc, wTMsHMsEnd - wTMsHMs
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
 	jmp CloseSRAM
 
 LoadBackupIndexTables:

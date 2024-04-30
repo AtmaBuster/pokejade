@@ -14,7 +14,8 @@ TMHMPocket:
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [hl]
+	ld a, BANK(wTMsHMs)
+	call GetFarWRAMByte
 	ld [wItemQuantity], a
 	call .ConvertItemToTMHMNumber
 	scf
@@ -226,7 +227,7 @@ TMHM_JoypadLoop:
 	ldh [hBGMapMode], a
 	ld a, [w2DMenuFlags2]
 	bit 7, a
-	jr nz, TMHM_ScrollPocket
+	jp nz, TMHM_ScrollPocket
 	ld a, b
 	ld [wMenuJoypad], a
 	bit A_BUTTON_F, a
@@ -275,7 +276,9 @@ TMHM_CheckHoveringOverCancel:
 	ld a, c
 	cp NUM_TMS + NUM_HMS + 1
 	jr nc, .okay
-	ld a, [hli]
+	ld a, BANK(wTMsHMs)
+	call GetFarWRAMByte
+	inc hl
 	and a
 	jr z, .loop
 	dec b
@@ -318,7 +321,9 @@ TMHM_ScrollPocket:
 	ld a, c
 	cp NUM_TMS + NUM_HMS + 1
 	jmp nc, TMHM_JoypadLoop
-	ld a, [hli]
+	ld a, BANK(wTMsHMs)
+	call GetFarWRAMByte
+	inc hl
 	and a
 	jr z, .loop
 	dec b
@@ -344,7 +349,9 @@ TMHM_DisplayPocketItems:
 	ld a, c
 	cp NUM_TMS + NUM_HMS + 1
 	jr nc, .NotTMHM
-	ld a, [hli]
+	ld a, BANK(wTMsHMs)
+	call GetFarWRAMByte
+	inc hl
 	and a
 	jr z, .loop2
 	ld b, a
@@ -437,6 +444,7 @@ TMHM_CancelString:
 	db "CANCEL@"
 
 TMHM_GetCurrentPocketPosition:
+	call .set_terminator
 	ld hl, wTMsHMs
 	ld a, [wTMHMPocketScrollPosition]
 	ld b, a
@@ -444,13 +452,31 @@ TMHM_GetCurrentPocketPosition:
 	ld c, 0
 .loop
 	inc c
-	ld a, [hli]
+;	jr z, .overflow
+	ld a, BANK(wTMsHMs)
+	call GetFarWRAMByte
+	inc hl
 	and a
 	jr z, .loop
 	dec b
 	jr nz, .loop
 	dec hl
 	dec c
+	ret
+
+.overflow
+	ld c, -2
+	ret
+
+.set_terminator
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	ld a, -1
+	ld [wTMsHMsTerminator], a
+	pop af
+	ldh [rSVBK], a
 	ret
 
 Tutorial_TMHMPocket:
@@ -476,11 +502,29 @@ ConsumeTM:
 	ld b, 0
 	ld c, a
 	add hl, bc
-	ld a, [hl]
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	ld c, [hl]
+	pop af
+	ldh [rSVBK], a
+	ld a, c
+
 	and a
 	ret z
 	dec a
-	ld [hl], a
+
+	ld c, a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	ld [hl], c
+	pop af
+	ldh [rSVBK], a
+
 	ret nz
 	ld a, [wTMHMPocketScrollPosition]
 	and a
@@ -490,6 +534,16 @@ ConsumeTM:
 	ret
 
 CountTMsHMs:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	call .CountTMsHMs
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.CountTMsHMs:
 	lb bc, 0, NUM_TMS + NUM_HMS
 	ld hl, wTMsHMs
 .loop

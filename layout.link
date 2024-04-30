@@ -356,6 +356,7 @@ WRAMX 2
 	align 8
 	"16-bit WRAM tables"
 	"Battle Tower RAM"
+	"TM HM"
 WRAMX 3
 	org $d000
 	"Metatiles"

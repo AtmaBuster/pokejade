@@ -1188,6 +1188,9 @@ EvoTest_Coins:
 	ld [wGimmighoulCoins + 1], a
 	pop hl
 
+	ld a, 1
+	ld [wForceEvolution], a
+
 	scf
 	ret
 
