@@ -4555,6 +4555,25 @@ PrintPlayerHUD:
 	ld [wCurSpecies], a
 	call GetBaseData
 
+	ld a, [wCurSpecies]
+	call GetPokemonIndexFromID
+	cphl16 NIDORAN_F
+	ld de, .nidoranf
+	jr z, .nidoran_check
+	cphl16 NIDORAN_M
+	ld de, .nidoranm
+	jr nz, .do_gender
+.nidoran_check
+	ld a, [wCurBattleMon]
+	ld hl, wPartyMonNicknames
+	call SkipNames
+	call .namecmp
+	jr nz, .do_gender
+	ld a, 1
+	pop hl
+	jr .skip_gender
+
+.do_gender
 	pop hl
 	dec hl
 
@@ -4570,6 +4589,7 @@ PrintPlayerHUD:
 .got_gender_char
 	hlcoord 17, 8
 	ld [hl], a
+.skip_gender
 	hlcoord 14, 8
 	push af ; back up gender
 	push hl
@@ -4587,6 +4607,22 @@ PrintPlayerHUD:
 	ld a, [wBattleMonLevel]
 	ld [wTempMonLevel], a
 	jmp PrintLevel
+
+.namecmp
+	ld a, [de]
+	ld b, a
+	inc de
+	ld a, [hli]
+	cp b
+	ret nz
+	cp "@"
+	ret z
+	jr .namecmp
+
+.nidoranf
+	db "NIDORAN♀@"
+.nidoranm
+	db "NIDORAN♂@"
 
 UpdateEnemyHUD::
 	push hl
