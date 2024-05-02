@@ -9,37 +9,37 @@ AnimationPointers:
 	dw SquirtleAnimation
 	dw WartortleAnimation
 	dw BlastoiseAnimation
-	dw CaterpieAnimation
-	dw MetapodAnimation
-	dw ButterfreeAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw WeedleAnimation
 	dw KakunaAnimation
 	dw BeedrillAnimation
 	dw PidgeyAnimation
 	dw PidgeottoAnimation
 	dw PidgeotAnimation
-	dw RattataAnimation
-	dw RaticateAnimation
-	dw SpearowAnimation
-	dw FearowAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw EkansAnimation
 	dw ArbokAnimation
 	dw PikachuAnimation
 	dw RaichuAnimation
-	dw SandshrewAnimation
-	dw SandslashAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw NidoranFAnimation
 	dw NidorinaAnimation
 	dw NidoqueenAnimation
 	dw NidoranMAnimation
 	dw NidorinoAnimation
 	dw NidokingAnimation
-	dw ClefairyAnimation
-	dw ClefableAnimation
-	dw VulpixAnimation
-	dw NinetalesAnimation
-	dw JigglypuffAnimation
-	dw WigglytuffAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw ZubatAnimation
 	dw GolbatAnimation
 	dw OddishAnimation
@@ -47,56 +47,56 @@ AnimationPointers:
 	dw VileplumeAnimation
 	dw ParasAnimation
 	dw ParasectAnimation
-	dw VenonatAnimation
-	dw VenomothAnimation
-	dw DiglettAnimation
-	dw DugtrioAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw MeowthAnimation
 	dw PersianAnimation
 	dw PsyduckAnimation
 	dw GolduckAnimation
 	dw MankeyAnimation
 	dw PrimeapeAnimation
-	dw GrowlitheAnimation
-	dw ArcanineAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw PoliwagAnimation
 	dw PoliwhirlAnimation
 	dw PoliwrathAnimation
-	dw AbraAnimation
-	dw KadabraAnimation
-	dw AlakazamAnimation
-	dw MachopAnimation
-	dw MachokeAnimation
-	dw MachampAnimation
-	dw BellsproutAnimation
-	dw WeepinbellAnimation
-	dw VictreebelAnimation
-	dw TentacoolAnimation
-	dw TentacruelAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw GeodudeAnimation
 	dw GravelerAnimation
 	dw GolemAnimation
-	dw PonytaAnimation
-	dw RapidashAnimation
-	dw SlowpokeAnimation
-	dw SlowbroAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw MagnemiteAnimation
 	dw MagnetonAnimation
-	dw FarfetchDAnimation
+	dw PlaceholderAnimation
 	dw DoduoAnimation
 	dw DodrioAnimation
-	dw SeelAnimation
-	dw DewgongAnimation
-	dw GrimerAnimation
-	dw MukAnimation
-	dw ShellderAnimation
-	dw CloysterAnimation
-	dw GastlyAnimation
-	dw HaunterAnimation
-	dw GengarAnimation
-	dw OnixAnimation
-	dw DrowzeeAnimation
-	dw HypnoAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw KrabbyAnimation
 	dw KinglerAnimation
 	dw VoltorbAnimation
@@ -105,32 +105,32 @@ AnimationPointers:
 	dw ExeggutorAnimation
 	dw CuboneAnimation
 	dw MarowakAnimation
-	dw HitmonleeAnimation
-	dw HitmonchanAnimation
-	dw LickitungAnimation
-	dw KoffingAnimation
-	dw WeezingAnimation
-	dw RhyhornAnimation
-	dw RhydonAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw ChanseyAnimation
 	dw TangelaAnimation
-	dw KangaskhanAnimation
+	dw PlaceholderAnimation
 	dw HorseaAnimation
 	dw SeadraAnimation
-	dw GoldeenAnimation
-	dw SeakingAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw StaryuAnimation
 	dw StarmieAnimation
-	dw MrMimeAnimation
+	dw PlaceholderAnimation
 	dw ScytherAnimation
-	dw JynxAnimation
+	dw PlaceholderAnimation
 	dw ElectabuzzAnimation
 	dw MagmarAnimation
-	dw PinsirAnimation
+	dw PlaceholderAnimation
 	dw TaurosAnimation
 	dw MagikarpAnimation
 	dw GyaradosAnimation
-	dw LaprasAnimation
+	dw PlaceholderAnimation
 	dw DittoAnimation
 	dw EeveeAnimation
 	dw VaporeonAnimation
@@ -160,84 +160,84 @@ AnimationPointers:
 	dw TotodileAnimation
 	dw CroconawAnimation
 	dw FeraligatrAnimation
-	dw SentretAnimation
-	dw FurretAnimation
-	dw HoothootAnimation
-	dw NoctowlAnimation
-	dw LedybaAnimation
-	dw LedianAnimation
-	dw SpinarakAnimation
-	dw AriadosAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw CrobatAnimation
 	dw ChinchouAnimation
 	dw LanturnAnimation
 	dw PichuAnimation
-	dw CleffaAnimation
-	dw IgglybuffAnimation
-	dw TogepiAnimation
-	dw TogeticAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw NatuAnimation
 	dw XatuAnimation
-	dw MareepAnimation
-	dw FlaaffyAnimation
-	dw AmpharosAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw BellossomAnimation
 	dw MarillAnimation
 	dw AzumarillAnimation
-	dw SudowoodoAnimation
+	dw PlaceholderAnimation
 	dw PolitoedAnimation
-	dw HoppipAnimation
-	dw SkiploomAnimation
-	dw JumpluffAnimation
-	dw AipomAnimation
-	dw SunkernAnimation
-	dw SunfloraAnimation
-	dw YanmaAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw WooperAnimation
 	dw QuagsireAnimation
 	dw EspeonAnimation
 	dw UmbreonAnimation
 	dw MurkrowAnimation
-	dw SlowkingAnimation
+	dw PlaceholderAnimation
 	dw MisdreavusAnimation
 	dw UnownAnimation
-	dw WobbuffetAnimation
+	dw PlaceholderAnimation
 	dw GirafarigAnimation
-	dw PinecoAnimation
-	dw ForretressAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw DunsparceAnimation
-	dw GligarAnimation
-	dw SteelixAnimation
-	dw SnubbullAnimation
-	dw GranbullAnimation
-	dw QwilfishAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw ScizorAnimation
 	dw ShuckleAnimation
-	dw HeracrossAnimation
+	dw PlaceholderAnimation
 	dw SneaselAnimation
 	dw TeddiursaAnimation
 	dw UrsaringAnimation
-	dw SlugmaAnimation
-	dw MagcargoAnimation
-	dw SwinubAnimation
-	dw PiloswineAnimation
-	dw CorsolaAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw RemoraidAnimation
 	dw OctilleryAnimation
-	dw DelibirdAnimation
-	dw MantineAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw SkarmoryAnimation
 	dw HoundourAnimation
 	dw HoundoomAnimation
 	dw KingdraAnimation
-	dw PhanpyAnimation
-	dw DonphanAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw Porygon2Animation
 	dw StantlerAnimation
-	dw SmeargleAnimation
-	dw TyrogueAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
 	dw KokopelliAnimation
-	dw SmoochumAnimation
+	dw PlaceholderAnimation
 	dw ElekidAnimation
 	dw MagbyAnimation
 	dw MiltankAnimation

@@ -9,37 +9,37 @@ FramesPointers:
 	dba SquirtleFrames
 	dba WartortleFrames
 	dba BlastoiseFrames
-	dba CaterpieFrames
-	dba MetapodFrames
-	dba ButterfreeFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba WeedleFrames
 	dba KakunaFrames
 	dba BeedrillFrames
 	dba PidgeyFrames
 	dba PidgeottoFrames
 	dba PidgeotFrames
-	dba RattataFrames
-	dba RaticateFrames
-	dba SpearowFrames
-	dba FearowFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba EkansFrames
 	dba ArbokFrames
 	dba PikachuFrames
 	dba RaichuFrames
-	dba SandshrewFrames
-	dba SandslashFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba NidoranFFrames
 	dba NidorinaFrames
 	dba NidoqueenFrames
 	dba NidoranMFrames
 	dba NidorinoFrames
 	dba NidokingFrames
-	dba ClefairyFrames
-	dba ClefableFrames
-	dba VulpixFrames
-	dba NinetalesFrames
-	dba JigglypuffFrames
-	dba WigglytuffFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba ZubatFrames
 	dba GolbatFrames
 	dba OddishFrames
@@ -47,56 +47,56 @@ FramesPointers:
 	dba VileplumeFrames
 	dba ParasFrames
 	dba ParasectFrames
-	dba VenonatFrames
-	dba VenomothFrames
-	dba DiglettFrames
-	dba DugtrioFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba MeowthFrames
 	dba PersianFrames
 	dba PsyduckFrames
 	dba GolduckFrames
 	dba MankeyFrames
 	dba PrimeapeFrames
-	dba GrowlitheFrames
-	dba ArcanineFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba PoliwagFrames
 	dba PoliwhirlFrames
 	dba PoliwrathFrames
-	dba AbraFrames
-	dba KadabraFrames
-	dba AlakazamFrames
-	dba MachopFrames
-	dba MachokeFrames
-	dba MachampFrames
-	dba BellsproutFrames
-	dba WeepinbellFrames
-	dba VictreebelFrames
-	dba TentacoolFrames
-	dba TentacruelFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba GeodudeFrames
 	dba GravelerFrames
 	dba GolemFrames
-	dba PonytaFrames
-	dba RapidashFrames
-	dba SlowpokeFrames
-	dba SlowbroFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba MagnemiteFrames
 	dba MagnetonFrames
-	dba FarfetchDFrames
+	dba PlaceholderFrames
 	dba DoduoFrames
 	dba DodrioFrames
-	dba SeelFrames
-	dba DewgongFrames
-	dba GrimerFrames
-	dba MukFrames
-	dba ShellderFrames
-	dba CloysterFrames
-	dba GastlyFrames
-	dba HaunterFrames
-	dba GengarFrames
-	dba OnixFrames
-	dba DrowzeeFrames
-	dba HypnoFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba KrabbyFrames
 	dba KinglerFrames
 	dba VoltorbFrames
@@ -105,32 +105,32 @@ FramesPointers:
 	dba ExeggutorFrames
 	dba CuboneFrames
 	dba MarowakFrames
-	dba HitmonleeFrames
-	dba HitmonchanFrames
-	dba LickitungFrames
-	dba KoffingFrames
-	dba WeezingFrames
-	dba RhyhornFrames
-	dba RhydonFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba ChanseyFrames
 	dba TangelaFrames
-	dba KangaskhanFrames
+	dba PlaceholderFrames
 	dba HorseaFrames
 	dba SeadraFrames
-	dba GoldeenFrames
-	dba SeakingFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba StaryuFrames
 	dba StarmieFrames
-	dba MrMimeFrames
+	dba PlaceholderFrames
 	dba ScytherFrames
-	dba JynxFrames
+	dba PlaceholderFrames
 	dba ElectabuzzFrames
 	dba MagmarFrames
-	dba PinsirFrames
+	dba PlaceholderFrames
 	dba TaurosFrames
 	dba MagikarpFrames
 	dba GyaradosFrames
-	dba LaprasFrames
+	dba PlaceholderFrames
 	dba DittoFrames
 	dba EeveeFrames
 	dba VaporeonFrames
@@ -160,84 +160,84 @@ FramesPointers:
 	dba TotodileFrames
 	dba CroconawFrames
 	dba FeraligatrFrames
-	dba SentretFrames
-	dba FurretFrames
-	dba HoothootFrames
-	dba NoctowlFrames
-	dba LedybaFrames
-	dba LedianFrames
-	dba SpinarakFrames
-	dba AriadosFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba CrobatFrames
 	dba ChinchouFrames
 	dba LanturnFrames
 	dba PichuFrames
-	dba CleffaFrames
-	dba IgglybuffFrames
-	dba TogepiFrames
-	dba TogeticFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba NatuFrames
 	dba XatuFrames
-	dba MareepFrames
-	dba FlaaffyFrames
-	dba AmpharosFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba BellossomFrames
 	dba MarillFrames
 	dba AzumarillFrames
-	dba SudowoodoFrames
+	dba PlaceholderFrames
 	dba PolitoedFrames
-	dba HoppipFrames
-	dba SkiploomFrames
-	dba JumpluffFrames
-	dba AipomFrames
-	dba SunkernFrames
-	dba SunfloraFrames
-	dba YanmaFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba WooperFrames
 	dba QuagsireFrames
 	dba EspeonFrames
 	dba UmbreonFrames
 	dba MurkrowFrames
-	dba SlowkingFrames
+	dba PlaceholderFrames
 	dba MisdreavusFrames
 	dba UnownFrames
-	dba WobbuffetFrames
+	dba PlaceholderFrames
 	dba GirafarigFrames
-	dba PinecoFrames
-	dba ForretressFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba DunsparceFrames
-	dba GligarFrames
-	dba SteelixFrames
-	dba SnubbullFrames
-	dba GranbullFrames
-	dba QwilfishFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba ScizorFrames
 	dba ShuckleFrames
-	dba HeracrossFrames
+	dba PlaceholderFrames
 	dba SneaselFrames
 	dba TeddiursaFrames
 	dba UrsaringFrames
-	dba SlugmaFrames
-	dba MagcargoFrames
-	dba SwinubFrames
-	dba PiloswineFrames
-	dba CorsolaFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba RemoraidFrames
 	dba OctilleryFrames
-	dba DelibirdFrames
-	dba MantineFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba SkarmoryFrames
 	dba HoundourFrames
 	dba HoundoomFrames
 	dba KingdraFrames
-	dba PhanpyFrames
-	dba DonphanFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba Porygon2Frames
 	dba StantlerFrames
-	dba SmeargleFrames
-	dba TyrogueFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	dba KokopelliFrames
-	dba SmoochumFrames
+	dba PlaceholderFrames
 	dba ElekidFrames
 	dba MagbyFrames
 	dba MiltankFrames
