@@ -19,6 +19,7 @@ StatsScreenInit:
 	ld b, a
 	ld a, [wStatsScreenFlags]
 	ld c, a
+	call StatsScreenInitDexNumberMode
 
 	push bc
 	push hl
@@ -41,6 +42,38 @@ StatsScreenInit:
 	ld [wBoxAlignment], a
 	pop af
 	ldh [hMapAnims], a
+	ret
+
+StatsScreenInitDexNumberMode:
+	ld a, [wLastDexMode]
+	cp DEXMODE_ABC
+	jr z, .reset
+	and a
+	ld b, a
+	ld a, [wUnlockedDexFlags]
+	jr z, .nazoh_check
+	dec b
+	jr z, .holon_check
+; national check
+	bit NATIONAL_DEX_UNLOCK_F, a
+	ld a, DEXMODE_NATIONAL
+	jr nz, .finished
+	jr .reset
+
+.nazoh_check
+	bit NAZOH_DEX_UNLOCK_F, a
+	ld a, DEXMODE_NAZOH
+	jr nz, .finished
+	jr .reset
+
+.holon_check
+	bit NAZOH_DEX_UNLOCK_F, a
+	ld a, DEXMODE_HOLON
+	jr nz, .finished
+.reset
+	ld a, 3
+.finished
+	ld [wStatsScreenDexNumber], a
 	ret
 
 StatsScreenMain:
@@ -199,7 +232,7 @@ else
 endc
 
 .next
-	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
+	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON | SELECT
 	jr StatsScreen_JoypadAction
 
 StatsScreenWaitCry:
@@ -247,6 +280,8 @@ StatsScreen_JoypadAction:
 	maskbits NUM_STAT_PAGES
 	ld c, a
 	pop af
+	bit SELECT_F, a
+	jmp nz, .select
 	bit B_BUTTON_F, a
 	jmp nz, .b_button
 	bit D_LEFT_F, a
@@ -350,19 +385,59 @@ StatsScreen_JoypadAction:
 	ld h, 7
 	jmp StatsScreen_SetJumptableIndex
 
-StatsScreen_InitUpperHalf:
-	call .PlaceHPBar
-	xor a
-	ldh [hBGMapMode], a
-	ld a, [wBaseSpecies]
-	ld [wCurSpecies], a
+.select
+	call StatsScreen_SelectNextNumber
+	ld a, [wTempMonSpecies]
 	call GetPokemonIndexFromID
-	call GetDexNumberNational
+	call StatsScreen_UpdateNumber
+	ld hl, wStatsScreenFlags
+	set 5, [hl]
+	ret
+
+StatsScreen_SelectNextNumber:
+	ld a, [wStatsScreenDexNumber]
+	ld b, a
+	and %11
+	ld c, a
+	ld a, b
+	swap a
+	and %111
+	ld b, a
+	xor a
+	inc b
+.loop
+	dec b
+	jr z, .done_loop
+	add 4
+	jr .loop
+
+.done_loop
+	add c
+	ld c, a
+	ld b, 0
+	ld hl, .table
+	add hl, bc
+	ld b, [hl]
+	ld a, [wStatsScreenDexNumber]
+	and %11110000
+	or b
+	ld [wStatsScreenDexNumber], a
+	ret
+
+.table
+	db 3, 3, 3, 3
+	db 0, 0, 0, 0
+	db 1, 1, 1, 1
+	db 1, 0, 0, 0
+	db 2, 2, 2, 2
+	db 2, 2, 0, 0
+	db 1, 2, 1, 1
+	db 1, 2, 0, 0
+
+StatsScreen_UpdateNumber:
+	call StatsScreen_GetDexNumber
 	ld h, e
 	ld l, d
-	;ld a, h
-	;ld h, l
-	;ld l, a
 	push hl
 	ld hl, sp + 0
 	ld d, h
@@ -370,11 +445,74 @@ StatsScreen_InitUpperHalf:
 	hlcoord 15, 0
 	ld a, "№"
 	ld [hli], a
-	ld a, "."
+	ld a, [wStatsScreenDexNumber]
+	and %11
+	ld b, "X"
+	jr z, .got_sym
+	dec a
+	ld b, "<DELTA>"
+	jr z, .got_sym
+	dec a
+	ld b, "."
+	jr z, .got_sym
+	jr .unknown_number
+
+.got_sym
+	ld a, b
 	ld [hli], a
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
+	ld a, [de]
+	cp HIGH(1000)
+	jr c, .lt_1k
+	jr z, .next
+	jr .gt_1k
+
+.next
+	inc de
+	ld a, [de]
+	dec de
+	cp LOW(1000)
+	jr c, .lt_1k
+.gt_1k
+	inc c
+	dec hl
+.lt_1k
 	call PrintNum
 	add sp, 2
+	ret
+
+.unknown_number
+	ld a, b
+	ld [hli], a
+	ld a, "?"
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	add sp, 2
+	ret
+
+StatsScreen_InitUpperHalf:
+	call .PlaceHPBar
+	xor a
+	ldh [hBGMapMode], a
+	ld a, [wBaseSpecies]
+	ld [wCurSpecies], a
+	call GetPokemonIndexFromID
+	push hl
+	call StatsScreen_CheckDexNumbers
+	jr nc, .no_swappale_number
+	hlcoord 17, 1
+	ld a, $32
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hl], a
+.no_swappale_number
+	call .CheckForceNumberSwap
+	call c, StatsScreen_SelectNextNumber
+	pop hl
+	call StatsScreen_UpdateNumber
 	hlcoord 8, 0
 	call PrintLevel
 	ld hl, .NicknamePointers
@@ -394,7 +532,7 @@ StatsScreen_InitUpperHalf:
 	call .PlaceBallIcon
 	call StatsScreen_PlaceHorizontalDivider
 	call StatsScreen_PlacePageSwitchArrows
-	jr StatsScreen_PlaceShinyIcon
+	jp StatsScreen_PlaceShinyIcon
 
 .PlaceHPBar:
 	ld hl, wTempMonHP
@@ -444,6 +582,108 @@ StatsScreen_InitUpperHalf:
 	dw wBufferMonNickname ; unused
 	dw wBufferMonNickname ; unused
 	dw wBufferMonNickname
+
+.CheckForceNumberSwap:
+	ld a, [wStatsScreenDexNumber]
+	ld b, a
+	and %11
+	jr z, .nazoh
+	dec a
+	jr z, .holon
+	dec a
+	jr z, .national
+.force
+	scf
+	ret
+
+.nazoh
+	bit 4, b
+	jr z, .force
+	ret
+
+.holon
+	bit 5, b
+	jr z, .force
+	ret
+
+.national
+	bit 6, b
+	jr z, .force
+	ret
+
+StatsScreen_GetDexNumber:
+	ld a, [wStatsScreenDexNumber]
+	and %11
+	jr z, .nazoh
+	dec a
+	jr z, .holon
+	dec a
+	jr z, .national
+	ld de, -1
+	ret
+
+.national
+	call GetDexNumberNational
+	ret
+
+.holon
+	call GetDexNumberHolon
+	ret
+
+.nazoh
+	call GetDexNumberNazoh
+	ret
+
+StatsScreen_CheckDexNumbers:
+	ld b, 7
+
+	ld a, [wUnlockedDexFlags]
+	ld c, a
+	bit NAZOH_DEX_UNLOCK_F, c
+	jr nz, .got_nazoh
+	res 0, b
+.got_nazoh
+	bit HOLON_DEX_UNLOCK_F, c
+	jr nz, .got_holon
+	res 1, b
+.got_holon
+	bit NATIONAL_DEX_UNLOCK_F, c
+	jr nz, .got_nat
+	res 2, b
+.got_nat
+
+	call CheckDexNumberNazoh
+	jr nz, .got_nazoh_num
+	res 0, b
+.got_nazoh_num
+	call CheckDexNumberHolon
+	jr nz, .got_holon_num
+	res 1, b
+.got_holon_num
+	call CheckDexNumberNational
+	jr nz, .got_nat_num
+	res 2, b
+.got_nat_num
+
+	ld a, [wStatsScreenDexNumber]
+	swap b
+	and %11
+	or b
+	ld [wStatsScreenDexNumber], a
+
+	ld a, b
+	cp $10
+	jr z, .single
+	cp $20
+	jr z, .single
+	cp $40
+	jr z, .single
+	scf
+	ret
+
+.single
+	and a
+	ret
 
 StatsScreen_PlaceVerticalDivider: ; unreferenced
 ; The Japanese stats screen has a vertical divider.

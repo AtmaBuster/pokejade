@@ -1374,6 +1374,7 @@ wDebugTilesetCurColor:: db
 NEXTU
 ; stats screen
 wStatsScreenFlags:: db
+wStatsScreenDexNumber:: db
 
 NEXTU
 ; battle tower
