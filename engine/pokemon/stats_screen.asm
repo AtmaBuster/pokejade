@@ -822,7 +822,6 @@ LoadOrangePage:
 	call PlaceString
 .place_location
 	ld a, [wTempMonCaughtLocation]
-	and CAUGHT_LOCATION_MASK ; TO-DO : reformat this
 	ld e, a
 	farcall GetLandmarkName
 	ld de, wStringBuffer1

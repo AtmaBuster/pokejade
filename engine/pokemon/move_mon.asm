@@ -1440,17 +1440,17 @@ GenerateMonPersonality:
 	push de
 	push hl
 	call Random2
-	ldh a, [hRand32 + 2]
+	ldh a, [hRand16]
 	ld [wPersonalityValueStore], a
 	ld e, a
-	ldh a, [hRand32 + 3]
+	ldh a, [hRand16+1]
 	ld [wPersonalityValueStore + 1], a
 	ld d, a
 	call Random2
-	ldh a, [hRand32 + 2]
+	ldh a, [hRand16]
 	ld [wPersonalityValueStore + 2], a
 	ld c, a
-	ldh a, [hRand32 + 3]
+	ldh a, [hRand16+1]
 	ld [wPersonalityValueStore + 3], a
 	ld b, a
 

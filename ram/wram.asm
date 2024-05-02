@@ -3098,9 +3098,9 @@ wRoamMons_CurMapGroup:: db
 wRoamMons_LastMapNumber:: db
 wRoamMons_LastMapGroup:: db
 
-wBestMagikarpLengthFeet:: db
-wBestMagikarpLengthInches:: db
-wMagikarpRecordHoldersName:: ds NAME_LENGTH
+wBestMagikarpLengthFeet::
+wBestMagikarpLengthInches::
+wMagikarpRecordHoldersName:: db
 
 wPokemonDataEnd::
 wGameDataEnd::

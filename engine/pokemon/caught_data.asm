@@ -160,15 +160,13 @@ SetCaughtData:
 	ld hl, wPartyMon1CaughtLevel
 	call GetPartyLocation
 SetBoxmonOrEggmonCaughtData:
-	ld a, [wTimeOfDay]
-	inc a
-	rrca
-	rrca
-	and CAUGHT_TIME_MASK
-	ld b, a
 	ld a, [wCurPartyLevel]
+	ld b, a
+	ld a, [wPlayerGender]
+	rrca
 	or b
 	ld [hli], a
+
 	ld a, [wMapGroup]
 	ld b, a
 	ld a, [wMapNumber]
@@ -186,10 +184,6 @@ SetBoxmonOrEggmonCaughtData:
 
 .NotPokecenter2F:
 	call GetWorldMapLocation
-	ld b, a
-	ld a, [wPlayerGender]
-	rrca ; shift bit 0 (PLAYERGENDER_FEMALE_F) to bit 7 (CAUGHT_GENDER_MASK)
-	or b
 	ld [hl], a
 	ret
 

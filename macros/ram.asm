@@ -25,9 +25,8 @@ MACRO box_struct
 \1Happiness::      db
 \1PokerusStatus::  db
 \1CaughtData::
-\1CaughtTime::
-\1CaughtLevel::    db
 \1CaughtGender::
+\1CaughtLevel::    db
 \1CaughtLocation:: db
 \1Level::          db
 \1BoxEnd::
@@ -273,8 +272,10 @@ MACRO roam_struct
 \1Level::     db
 \1MapGroup::  db
 \1MapNumber:: db
-\1HP::        db
-\1DVs::       dw
+\1HP::        dw
+\1DVs::       ds 3
+\1Personality:: db
+\1Ability::   db
 ENDM
 
 MACRO bugcontestwinner

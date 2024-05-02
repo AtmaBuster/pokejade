@@ -199,7 +199,7 @@ ApplyPickup:
 	jr nz, .done
 
 	call Random2
-	ldh a, [hRand32 + 2]
+	ldh a, [hRand16]
 	;cp 10 percent
 	cp 90 percent
 	jr nc, .done
@@ -207,7 +207,7 @@ ApplyPickup:
 ; find item slot
 	push hl
 	ld hl, PickupTable_SlotPercents
-	ldh a, [hRand32 + 3]
+	ldh a, [hRand16+1]
 	ld d, a
 	ld e, 0
 .item_slot_loop

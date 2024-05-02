@@ -189,7 +189,12 @@ hRequestOpaque1bpp::    db
 
 hTilesetGFXBank:: db
 
+UNION
 hRand32:: ds 4
+NEXTU
+	ds 2
+hRand16:: ds 2
+ENDU
 hRand32_Result:: ds 4
 
 

@@ -177,7 +177,7 @@ Debug_GiveParty:
 	ld hl, wPartyMon1CaughtLevel
 	ld a, $9E
 	ld [hli], a
-	ld a, $81
+	ld a, $01
 	ld [hl], a
 
 	ld hl, wPartyMon1ID
@@ -1912,11 +1912,41 @@ Debug_SanitizeString:
 	ret
 
 Debug_ATMA:
-.loop
-	call JoyTextDelay
-	ldh a, [hJoyLast]
-	cp B_BUTTON
-	ret z
-	cp A_BUTTON
-	call z, Random2
-	jr .loop
+	ld hl, wRoamMon1
+	ld de, LATIAS
+	call .init
+	ld hl, wRoamMon2
+	ld de, LATIOS
+	call .init
+	ld hl, wRoamMon3
+	ld de, CELEBI
+	call .init
+
+	ld a, [wMapGroup]
+	ld [wRoamMon1MapGroup], a
+	ld [wRoamMon2MapGroup], a
+	ld [wRoamMon3MapGroup], a
+	ld a, [wMapNumber]
+	ld [wRoamMon1MapNumber], a
+	ld [wRoamMon2MapNumber], a
+	ld [wRoamMon3MapNumber], a
+
+	ret
+
+.init
+	ld a, [hl]
+	and a
+	ret nz
+	push hl
+	ld h, d
+	ld l, e
+	call GetPokemonIDFromIndex
+	pop hl
+	ld [hli], a
+	ld a, 40
+	ld [hl], a
+	ld de, wRoamMon1HP - wRoamMon1
+	add hl, de
+	xor a
+	ld [hl], a
+	ret

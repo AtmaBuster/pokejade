@@ -552,6 +552,12 @@ PokeBallEffect:
 	cp BATTLETYPE_TUTORIAL
 	jmp z, .FinishTutorial
 
+	ld a, [wCurItem]
+	call GetItemIndexFromID
+	ld a, l
+	ld hl, wEnemyMonCaughtBall
+	ld [hl], a
+
 	farcall StubbedTrainerRankings_WildMonsCaught
 
 	ld hl, Text_GotchaMonWasCaught

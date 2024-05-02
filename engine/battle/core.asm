@@ -5957,7 +5957,7 @@ LoadEnemyMon:
 	inc de
 	dec c
 	jr nz, .restore_dvs_loop
-	jmp .Happiness
+	jr .Happiness
 
 .InitDVs:
 ; Trainer DVs
@@ -5982,165 +5982,92 @@ LoadEnemyMon:
 
 ; Grab HP
 	call GetRoamMonHP
-	ld a, [hl]
+	ld a, [hli]
 ; Check if the HP has been initialized
-	and a
+	or [hl]
 ; We'll do something with the result in a minute
 	push af
 
 ; Grab DVs
 	call GetRoamMonDVs
-	inc hl
-	ld a, [hld]
-	ld c, a
-	ld b, [hl]
-
-; Get back the result of our check
 	pop af
-; If the RoamMon struct has already been initialized, we're done
-	jr nz, .UpdateDVs
+	jr nz, .DoRoamMonPIDDV
 
 ; If it hasn't, we need to initialize the DVs
 ; (HP is initialized at the end of the battle)
-	call GetRoamMonDVs
-	inc hl
-	call BattleRandom
-	ld [hld], a
-	ld c, a
-	call BattleRandom
+	push hl
+	call GenerateMonPersonality
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	call Random2
+	ldh a, [hRand16]
+	ld [hli], a
+	ldh a, [hRand16+1]
+	ld [hli], a
+	call Random2
+	ldh a, [hRand16]
 	ld [hl], a
-	ld b, a
+	pop hl
 ; We're done with DVs
-	jr .UpdateDVs
+	jr .DoRoamMonPIDDV
 
 .NotRoaming:
 ; Register a contains wBattleType
 
 ; Forced shiny battle type
 ; Used by Red Gyarados at Lake of Rage
+	push af
+	call .GenerateDVs
+	pop af
+	push bc
 	cp BATTLETYPE_FORCESHINY
-	jr nz, .GenerateDVs
+	jr nz, .GeneratePID
 
-	lb bc, ATKDEFDV_SHINY, SPDSPCDV_SHINY ; $ea / $aa
+	lb bc, MON_SHINY, INTIMIDATE
+	jr .UpdateDVs
+
+.DoRoamMonPIDDV:
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld d, a
+	push bc
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
 	jr .UpdateDVs
 
 .GenerateDVs:
 ; Generate new random DVs
-	call BattleRandom
+	call Random2
+	ldh a, [hRand16]
 	ld b, a
-	call BattleRandom
+	ldh a, [hRand16+1]
 	ld c, a
+	call Random2
+	ldh a, [hRand16]
+	ld d, a
+	ret
 
+.GeneratePID:
+	farcall GenerateMonPersonality
 .UpdateDVs:
-; Input DVs in register bc
-	ld hl, wEnemyMonDVs
+	ld hl, wEnemyMonPersonality
 	ld a, b
 	ld [hli], a
-	ld [hl], c
-
-; We've still got more to do if we're dealing with a wild monster
-	ld a, [wBattleMode]
-	dec a
-	jr nz, .Happiness
-
-; Species-specfic:
-
-; Unown
-	ld a, [wTempEnemyMonSpecies]
-	call GetPokemonIndexFromID ; will be preserved for the Magikarp check
-	ld a, l
-	sub LOW(UNOWN)
-	if HIGH(UNOWN) == 0
-		or h
-	else
-		jr nz, .Magikarp
-		ld a, h
-		if HIGH(UNOWN) == 1
-			dec a
-		else
-			cp HIGH(UNOWN)
-		endc
-	endc
-	jr nz, .Magikarp
-
-; Get letter based on DVs
-	ld hl, wEnemyMonDVs
-	predef GetUnownLetter
-; Can't use any letters that haven't been unlocked
-; If combined with forced shiny battletype, causes an infinite loop
-	call CheckUnownLetter
-	jr c, .GenerateDVs ; try again
-	jr .Happiness ; skip the Magikarp check
-
-.Magikarp:
-; These filters are untranslated.
-; They expect at wMagikarpLength a 2-byte value in mm,
-; but the value is in feet and inches (one byte each).
-
-; The first filter is supposed to make very large Magikarp even rarer,
-; by targeting those 1600 mm (= 5'3") or larger.
-; After the conversion to feet, it is unable to target any,
-; since the largest possible Magikarp is 5'3", and $0503 = 1283 mm.
-	ld a, l
-	sub LOW(MAGIKARP)
-	if HIGH(MAGIKARP) == 0
-		or h
-	else
-		jr nz, .Happiness
-		if HIGH(MAGIKARP) == 1
-			dec h
-		else
-			ld a, h
-			cp HIGH(MAGIKARP)
-		endc
-	endc
-	jr nz, .Happiness
-
-; Get Magikarp's length
-	ld de, wEnemyMonDVs
-	ld bc, wPlayerID
-	farcall CalcMagikarpLength
-
-; No reason to keep going if length > 1536 mm (i.e. if HIGH(length) > 6 feet)
-	ld a, [wMagikarpLength]
-	cp 5
-	jr nz, .CheckMagikarpArea
-
-; 5% chance of skipping both size checks
-	call Random
-	cp 5 percent
-	jr c, .CheckMagikarpArea
-; Try again if length >= 1616 mm (i.e. if LOW(length) >= 4 inches)
-	ld a, [wMagikarpLength + 1]
-	cp 4
-	jr nc, .GenerateDVs
-
-; 20% chance of skipping this check
-	call Random
-	cp 20 percent - 1
-	jr c, .CheckMagikarpArea
-; Try again if length >= 1600 mm (i.e. if LOW(length) >= 3 inches)
-	ld a, [wMagikarpLength + 1]
-	cp 3
-	jr nc, .GenerateDVs
-
-.CheckMagikarpArea:
-	ld a, [wMapGroup]
-	cp GROUP_LAKE_OF_RAGE
-	jr nz, .Happiness
-	ld a, [wMapNumber]
-	cp MAP_LAKE_OF_RAGE
-	jr nz, .Happiness
-; 40% chance of not flooring
-	call Random
-	cp 39 percent + 1
-	jr c, .Happiness
-; Try again if length < 1024 mm (i.e. if HIGH(length) < 3 feet)
-	ld a, [wMagikarpLength]
-	cp 3
-	jp c, .GenerateDVs ; try again
-
-; Finally done with DVs
+	ld a, c
+	ld [hli], a
+	inc hl ; skip caught ball
+	pop bc
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	ld [hl], d
 
 .Happiness:
 ; Set happiness
@@ -6167,7 +6094,7 @@ LoadEnemyMon:
 
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
-	jr nz, .Moves
+	jp nz, .Moves
 
 .TreeMon:
 ; If we're headbutting trees, some monsters enter battle asleep
@@ -6200,6 +6127,8 @@ LoadEnemyMon:
 	and a
 	jr z, .InitRoamHP
 ; Update from the struct if it has
+	ld a, [hli]
+	ld [wEnemyMonHP], a
 	ld a, [hl]
 	ld [wEnemyMonHP + 1], a
 	jr .Moves
@@ -6207,6 +6136,8 @@ LoadEnemyMon:
 .InitRoamHP:
 ; HP only uses the lo byte in the RoamMon struct since
 ; Raikou and Entei will have < 256 hp at level 40
+	ld a, [wEnemyMonHP]
+	ld [hli], a
 	ld a, [wEnemyMonHP + 1]
 	ld [hl], a
 	jr .Moves

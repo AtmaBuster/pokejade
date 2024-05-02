@@ -165,7 +165,7 @@ GetCaughtLevel:
 
 GetCaughtTime:
 	ld a, [wSeerCaughtData]
-	and CAUGHT_TIME_MASK
+;	and CAUGHT_TIME_MASK
 	rlca
 	rlca
 	dec a
@@ -195,7 +195,7 @@ UnknownCaughtData:
 
 GetCaughtLocation:
 	ld a, [wSeerCaughtGender]
-	and CAUGHT_LOCATION_MASK
+;	and CAUGHT_LOCATION_MASK
 	jr z, .Unknown
 	cp LANDMARK_EVENT
 	jr z, .event
@@ -365,7 +365,7 @@ GetCaughtGender:
 	add hl, bc
 
 	ld a, [hl]
-	and CAUGHT_LOCATION_MASK
+;	and CAUGHT_LOCATION_MASK
 	jr z, .genderless
 	cp LANDMARK_EVENT
 	jr z, .genderless
