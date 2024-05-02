@@ -457,7 +457,7 @@ StatsScreen_UpdateNumber:
 	ld [hli], a
 	ld a, [wStatsScreenDexNumber]
 	and %11
-	ld b, "X"
+	ld b, "<NA>"
 	jr z, .got_sym
 	dec a
 	ld b, "<DELTA>"

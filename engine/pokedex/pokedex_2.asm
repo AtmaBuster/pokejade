@@ -108,7 +108,14 @@ DisplayDexEntry:
 	jr nz, .not_holon
 	ld a, "<DELTA>"
 	ld [hli], a
+	jr .putnum
+
 .not_holon
+	cp DEXMODE_NAZOH
+	jr nz, .putnum
+	ld a, "<NA>"
+	ld [hli], a
+.putnum
 	push hl
 	ld a, [wTempSpecies]
 	call GetPokemonIndexFromID

@@ -1805,10 +1805,17 @@ Pokedex_PrintNumber:
 	add hl, bc
 	ld a, [wCurDexMode]
 	cp DEXMODE_HOLON
-	jr nz, .no_delta
+	jr nz, .not_holon
 	ld a, "<DELTA>"
 	ld [hli], a
-.no_delta
+	jr .putnum
+
+.not_holon
+	cp DEXMODE_NAZOH
+	jr nz, .putnum
+	ld a, "<NA>"
+	ld [hli], a
+.putnum
 	push hl
 	ld h, d
 	ld l, e
