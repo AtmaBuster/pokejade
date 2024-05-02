@@ -469,7 +469,6 @@ wPlayerSubstituteHP:: db
 wEnemySubstituteHP::  db
 
 wUnusedPlayerLockedMove:: db
-	ds 1
 
 wCurPlayerMove:: db
 wCurEnemyMove::  db
@@ -486,6 +485,7 @@ wPayDayMoney:: ds 3
 
 wEnemyBackupPersonality:: db ; used when enemy is transformed
 wEnemyBackupAbility:: db
+wEnemyBackupCaughtBall:: db
 wEnemyBackupDVs:: ds 3
 wAlreadyDisobeyed:: db
 

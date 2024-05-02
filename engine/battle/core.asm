@@ -5980,7 +5980,7 @@ LoadEnemyMon:
 	jr z, .InitDVs
 
 ; Unknown
-	ld hl, wEnemyBackupPersonality ; TO-DO
+	ld hl, wEnemyBackupPersonality
 	ld de, wEnemyMonPersonality
 	ld c, 6
 .restore_dvs_loop
@@ -6057,6 +6057,7 @@ LoadEnemyMon:
 	cp BATTLETYPE_FORCESHINY
 	jr nz, .GeneratePID
 
+	ld e, 1 << MON_DELTA_SHIFT
 	lb bc, MON_SHINY, INTIMIDATE
 	jr .UpdateDVs
 
@@ -6071,6 +6072,7 @@ LoadEnemyMon:
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
+	ld e, 0 ; TO-DO
 	jr .UpdateDVs
 
 .GenerateDVs:
@@ -6087,13 +6089,15 @@ LoadEnemyMon:
 
 .GeneratePID:
 	farcall GenerateMonPersonality
+	ld e, 0 ; TO-DO
 .UpdateDVs:
 	ld hl, wEnemyMonPersonality
 	ld a, b
 	ld [hli], a
 	ld a, c
 	ld [hli], a
-	inc hl ; skip caught ball
+	ld a, e
+	ld [hli], a
 	pop bc
 	ld a, b
 	ld [hli], a

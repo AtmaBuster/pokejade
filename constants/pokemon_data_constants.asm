@@ -124,6 +124,7 @@ DEF MON_SHINY       EQU %0_0_1_00000
 DEF MON_GENDER      EQU %0_1_0_00000
 DEF MON_SHINY_F  EQU 5
 DEF MON_GENDER_F EQU 6
+DEF MON_DELTA_SHIFT EQU 5
 
 ; savemon_struct members (see macros/wram.asm)
 rsreset

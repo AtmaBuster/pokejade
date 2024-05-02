@@ -536,28 +536,34 @@ Debug_Warp:
 
 .SpawnTable
 	db SPAWN_HOME
-;	db SPAWN_DEBUG
-;	db SPAWN_TWINLEAF
-;	db SPAWN_SANDGEM
-;	db SPAWN_JUBILIFE
-;	db SPAWN_OREBURGH
-;	db SPAWN_FLOAROMA
-;	db SPAWN_ETERNA
-;	db SPAWN_HEARTHOME
-;	db SPAWN_SOLACEON
-;	db SPAWN_VEILSTONE
-;	db SPAWN_PASTORIA
-;	db SPAWN_CELESTIC
-;	db SPAWN_CANALAVE
-;	db SPAWN_SNOWPOINT
-;	db SPAWN_SUNYSHORE
-;	db SPAWN_LEAGUE_S
-;	db SPAWN_LEAGUE_N
-;	db SPAWN_FIGHT_AREA
-;	db SPAWN_SURVIVAL_AREA
-;	db SPAWN_RESORT_AREA
-;	db SPAWN_PAL_PARK
-DEF NUM_DEBUG_SPAWNS EQU 1
+	db SPAWN_DEBUG
+	db SPAWN_PALLET
+	db SPAWN_VIRIDIAN
+	db SPAWN_PEWTER
+	db SPAWN_CERULEAN
+	db SPAWN_ROCK_TUNNEL
+	db SPAWN_VERMILION
+	db SPAWN_LAVENDER
+	db SPAWN_SAFFRON
+	db SPAWN_CELADON
+	db SPAWN_FUCHSIA
+	db SPAWN_CINNABAR
+	db SPAWN_INDIGO
+	db SPAWN_NEW_BARK
+	db SPAWN_CHERRYGROVE
+	db SPAWN_VIOLET
+	db SPAWN_UNION_CAVE
+	db SPAWN_AZALEA
+	db SPAWN_CIANWOOD
+	db SPAWN_GOLDENROD
+	db SPAWN_OLIVINE
+	db SPAWN_ECRUTEAK
+	db SPAWN_MAHOGANY
+	db SPAWN_LAKE_OF_RAGE
+	db SPAWN_BLACKTHORN
+	db SPAWN_MT_SILVER
+	db SPAWN_FAST_SHIP
+DEF NUM_DEBUG_SPAWNS EQU 28
 
 .MenuHeader:
 	db MENU_BACKUP_TILES
@@ -597,27 +603,33 @@ endr
 
 .LocNames:
 	db "HOME@@@@@@@@@"
-;	db "DEBUG@@@@@@@@"
-	db "TWINLEAF@@@@@"
-	db "SANDGEM@@@@@@"
-;	db "JUBILIFE@@@@@"
-;	db "OREBURGH@@@@@"
-;	db "FLOAROMA@@@@@"
-;	db "ETERNA@@@@@@@"
-;	db "8@@@@@@@@@@@@"
-;	db "9@@@@@@@@@@@@"
-;	db "10@@@@@@@@@@@"
-;	db "11@@@@@@@@@@@"
-;	db "12@@@@@@@@@@@"
-;	db "13@@@@@@@@@@@"
-;	db "14@@@@@@@@@@@"
-;	db "15@@@@@@@@@@@"
-;	db "16@@@@@@@@@@@"
-;	db "17@@@@@@@@@@@"
-;	db "18@@@@@@@@@@@"
-;	db "19@@@@@@@@@@@"
-;	db "20@@@@@@@@@@@"
-;	db "21@@@@@@@@@@@"
+	db "DEBUG@@@@@@@@"
+	db "PALLET@@@@@@@"
+	db "VIRIDIAN@@@@@"
+	db "PEWTEW@@@@@@@"
+	db "CERULEAN@@@@@"
+	db "ROCK TUNNEL@@"
+	db "VERMILION@@@@"
+	db "LAVENDER@@@@@"
+	db "SAFFRON@@@@@@"
+	db "CELADON@@@@@@"
+	db "FUCHSIA@@@@@@"
+	db "CINNABAR@@@@@"
+	db "INDIGO PLAT.@"
+	db "NEW BARK@@@@@"
+	db "CHERRYGROVE@@"
+	db "VIOLET@@@@@@@"
+	db "UNION CAVE@@@"
+	db "AZALEA@@@@@@@"
+	db "CIANWOOD@@@@@"
+	db "GOLDENROD@@@@"
+	db "OLIVINE@@@@@@"
+	db "ECRUTEAK@@@@@"
+	db "MAHOGANY@@@@@"
+	db "LAKE OF RAGE@"
+	db "BLACKTHORN@@@"
+	db "MT. SILVER@@@"
+	db "FAST SHIP@@@@"
 
 Debug_ColorPicker:
 	ldh a, [hMapAnims]

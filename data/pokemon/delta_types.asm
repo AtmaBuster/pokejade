@@ -129,7 +129,7 @@ DeltaTypePointers:
 	dw NoDeltaTypes
 	dw NoDeltaTypes
 	dw NoDeltaTypes
-	dw NoDeltaTypes
+	dw GyaradosDeltaTypes
 	dw NoDeltaTypes
 	dw NoDeltaTypes
 	dw NoDeltaTypes
@@ -410,6 +410,10 @@ DeltaTypePointers:
 	assert_table_length NUM_POKEMON
 
 NoDeltaTypes:
+	db -1
+
+GyaradosDeltaTypes:
+	db FIRE, DRAGON
 	db -1
 
 DragoniteDeltaTypes:

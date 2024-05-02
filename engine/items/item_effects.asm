@@ -499,8 +499,8 @@ PokeBallEffect:
 	ld [hli], a
 	ld a, [wEnemyMonPersonality + 1]
 	ld [hli], a
-	inc hl
-	;ld hl, wEnemyBackupDVs
+	ld a, [wEnemyMonCaughtBall]
+	ld [hli], a
 	ld a, [wEnemyMonDVs]
 	ld [hli], a
 	ld a, [wEnemyMonDVs + 1]
