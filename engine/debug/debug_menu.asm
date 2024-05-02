@@ -126,7 +126,7 @@ Debug_GiveParty:
 .loop
 	ldi a, [hl]
 	and a
-	ret z
+	jr z, .done
 	ld [wCurPartyLevel], a
 	xor a
 	ld [wCurItem], a
@@ -157,6 +157,62 @@ Debug_GiveParty:
 	call .set_move
 	jr .loop
 
+.done
+	ld a, [wPartyMon1Level]
+	ld [wCurPartyLevel], a
+	ld hl, wPartyMon1Personality
+	ld a, MON_SHINY | $10 ; mild
+	ld [hli], a
+	ld a, PRANKSTER
+	ld [hli], a
+	ld a, POKE_BALL - FIRST_BALL_ITEM
+	ld [hli], a
+	ld a, $EA
+	ld [hli], a
+	ld a, $59
+	ld [hli], a
+	ld a, $A2
+	ld [hl], a
+
+	ld hl, wPartyMon1CaughtLevel
+	ld a, $9E
+	ld [hli], a
+	ld a, $81
+	ld [hl], a
+
+	ld hl, wPartyMon1ID
+	ld a, $E3
+	ld [hli], a
+	ld a, $20
+	ld [hl], a
+
+	ld hl, wPartyMon1OT
+	ld a, "K"
+	ld [hli], a
+	ld a, "R"
+	ld [hli], a
+	ld a, "I"
+	ld [hli], a
+	ld a, "S"
+	ld [hli], a
+	ld a, "@"
+	ld [hl], a
+
+	ld de, wPartyMon1MaxHP
+	ld hl, wPartyMon1EVs - 1
+	ld b, TRUE
+	predef CalcMonStats
+	ld hl, wPartyMon1MaxHP + 1
+	ld a, [hld]
+	ld b, a
+	ld a, [hld]
+	ld c, a
+	ld a, b
+	ld [hld], a
+	ld a, c
+	ld [hl], a
+	ret
+
 .set_move
 	ld e, [hl]
 	inc hl
@@ -179,15 +235,11 @@ Debug_GiveParty:
 
 .party_info
 	db 90
+	dw KOKOPELLI, POUND, 0, 0, 0
+	db 50
 	dw EXEGGUTOR, FLY, CUT, SURF, STRENGTH
-	db 20
+	db 50
 	dw MEW, POUND, 0, 0, 0
-	db 56
-	dw JOLTEON, DOUBLE_KICK, AGILITY, PIN_MISSILE, THUNDERBOLT
-	db 56
-	dw DUGTRIO, DIG, SAND_ATTACK, SLASH, EARTHQUAKE
-	db 57
-	dw ARTICUNO, FLY, ICE_BEAM, BLIZZARD, AGILITY
 	db 0
 
 Debug_SetFlags:

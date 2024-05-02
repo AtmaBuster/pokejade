@@ -1132,58 +1132,27 @@ CalcMonStatC:
 	cp STAT_SPD
 	jr z, .Speed
 	cp STAT_SATK
-	jr z, .Special
+	jr z, .SpecialAtk
 	cp STAT_SDEF
-	jr z, .Special
-; DV_HP = (DV_ATK & 1) << 3 | (DV_DEF & 1) << 2 | (DV_SPD & 1) << 1 | (DV_SPC & 1)
-	push bc
-	ld a, [hl]
-	swap a
-	and 1
-	add a
-	add a
-	add a
-	ld b, a
-	ld a, [hli]
-	and 1
-	add a
-	add a
-	add b
-	ld b, a
-	ld a, [hl]
-	swap a
-	and 1
-	add a
-	add b
-	ld b, a
-	ld a, [hl]
-	and 1
-	add b
-	pop bc
-	jr .GotDV
-
+	jr z, .SpecialDef
+; HP
+	inc hl
+.Speed:
+	inc hl
 .Attack:
 	ld a, [hl]
 	swap a
 	and $f
 	jr .GotDV
 
+.SpecialDef:
+	inc hl
+.SpecialAtk:
+	inc hl
 .Defense:
 	ld a, [hl]
 	and $f
 	jr .GotDV
-
-.Speed:
-	inc hl
-	ld a, [hl]
-	swap a
-	and $f
-	jr .GotDV
-
-.Special:
-	inc hl
-	ld a, [hl]
-	and $f
 
 .GotDV:
 	ld d, 0
