@@ -5964,11 +5964,12 @@ LoadEnemyMon:
 
 ; All trainers have preset DVs, determined by class
 ; See GetTrainerDVs for more on that
-	farcall GetTrainerDVs
+	;farcall GetTrainerDVs
 ; These are the DVs we'll use if we're actually in a trainer battle
 	ld a, [wBattleMode]
-	dec a
-	jr nz, .UpdateDVs
+	cp TRAINER_BATTLE
+	jp z, .OpponentParty
+	;jr nz, .UpdateDVs
 
 ; Wild DVs
 ; Here's where the fun starts
@@ -6137,7 +6138,7 @@ LoadEnemyMon:
 ; Try again if length < 1024 mm (i.e. if HIGH(length) < 3 feet)
 	ld a, [wMagikarpLength]
 	cp 3
-	jr c, .GenerateDVs ; try again
+	jp c, .GenerateDVs ; try again
 
 ; Finally done with DVs
 
@@ -6156,9 +6157,9 @@ LoadEnemyMon:
 
 ; If we're in a trainer battle,
 ; get the rest of the parameters from the party struct
-	ld a, [wBattleMode]
-	cp TRAINER_BATTLE
-	jr z, .OpponentParty
+	;ld a, [wBattleMode]
+	;cp TRAINER_BATTLE
+	;jr z, .OpponentParty
 
 ; If we're in a wild battle, check wild-specific stuff
 	and a
@@ -6211,6 +6212,32 @@ LoadEnemyMon:
 	jr .Moves
 
 .OpponentParty:
+; copy cur trainer mon personality and DVs
+	ld a, [wCurPartyMon]
+	ld hl, wOTPartyMon1Personality
+	call GetPartyLocation
+	ld de, wEnemyMonPersonality
+	ld bc, 6
+	rst CopyBytes
+
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	ld [wEnemyMonHappiness], a
+
+	ld a, [wCurPartyMon]
+	ld hl, wOTPartyMon1Level
+	call GetPartyLocation
+	ld a, [hl]
+	ld [wEnemyMonLevel], a
+	ld bc, wOTPartyMon1EVs - wOTPartyMon1Level - 1
+	add hl, bc
+	ld b, TRUE
+	ld de, wEnemyMonMaxHP
+	predef CalcMonStats
+
 ; Get HP from the party struct
 	ld hl, (wOTPartyMon1HP + 1)
 	ld a, [wCurPartyMon]
@@ -6309,15 +6336,29 @@ LoadEnemyMon:
 	ld a, [wTempEnemyMonSpecies]
 	ld [wNamedObjectIndex], a
 
-	call GetPokemonName
-
 ; Did we catch it?
 	ld a, [wBattleMode]
 	and a
 	ret z
 
 ; Update enemy nickname
+	ld a, [wBattleMode]
+	dec a
+	jr z, .no_nickname
+	ld a, [wOtherTrainerType]
+	bit TRAINERTYPE_NICKNAME_F, a
+	jr z, .no_nickname
+	ld a, [wCurPartyMon]
+	ld hl, wOTPartyMonNicknames
+	ld bc, MON_NAME_LENGTH
+	rst AddNTimes
+	ld a, [hl]
+	cp "@"
+	jr nz, .got_nickname
+.no_nickname
+	call GetPokemonName
 	ld hl, wStringBuffer1
+.got_nickname
 	ld de, wEnemyMonNickname
 	ld bc, MON_NAME_LENGTH
 	rst CopyBytes

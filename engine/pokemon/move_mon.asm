@@ -178,18 +178,23 @@ endr
 	and $f
 	jr z, .registerpokedex
 
-	push hl
-	farcall GetTrainerMonInfo
-	ld a, b
-	ld [de], a
+	;push hl
+	;farcall GetTrainerMonInfo
+	;ld a, b
+	;ld [de], a
+	;inc de
+	;ld a, c
+	;ld [de], a
+	;inc de
+	;ld a, h
+	;ld [de], a
+	;inc de
+	;pop hl
+
+	; skip personality
+REPT 3
 	inc de
-	ld a, c
-	ld [de], a
-	inc de
-	ld a, h
-	ld [de], a
-	inc de
-	pop hl
+ENDR
 
 	push hl
 	farcall GetTrainerDVs

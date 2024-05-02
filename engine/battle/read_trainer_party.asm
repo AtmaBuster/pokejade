@@ -106,6 +106,36 @@ ReadTrainerPartyPieces:
 	pop hl
 	inc hl ;because hl was pushed before the last call to GetNextTrainerDataByte
 
+	call .GetPersonalityData
+
+	ld a, [wOtherTrainerType]
+	and TRAINERTYPE_NICKNAME
+	jr z, .no_nickname
+
+	push de
+	ld de, wStringBuffer2
+.copy_nickname
+	call GetNextTrainerDataByte
+	ld [de], a ; N.B. fiddle with this if nickname needs "9"
+	inc de
+	cp "@"
+	jr nz, .copy_nickname
+
+	push hl
+	ld a, [wOTPartyCount]
+	dec a
+	ld hl, wOTPartyMonNicknames
+	ld bc, MON_NAME_LENGTH
+	rst AddNTimes
+	ld d, h
+	ld e, l
+	ld hl, wStringBuffer2
+	ld bc, MON_NAME_LENGTH
+	rst CopyBytes
+	pop hl
+	pop de
+
+.no_nickname
 	ld a, [wOtherTrainerType]
 	and TRAINERTYPE_ITEM
 	jr z, .no_item
@@ -132,8 +162,8 @@ ReadTrainerPartyPieces:
 .no_item
 
 	ld a, [wOtherTrainerType]
-	rra ; TRAINERTYPE_MOVES_F == 0
-	jr nc, .no_moves
+	and TRAINERTYPE_MOVES
+	jr z, .no_moves
 	push hl
 	ld a, [wOTPartyCount]
 	dec a
@@ -197,7 +227,100 @@ ReadTrainerPartyPieces:
 	pop hl
 .no_moves
 
+	ld a, [wOtherTrainerType]
+	and TRAINERTYPE_EVDV
+	jr z, .no_evdv
+
+	push hl
+	ld a, [wOTPartyCount]
+	dec a
+	ld hl, wOTPartyMon1EVs
+	call GetPartyLocation
+	ld d, h
+	ld e, l
+	pop hl
+
+	ld c, 6 ; 6 evs
+.ev_loop
+	call GetNextTrainerDataByte
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .ev_loop
+
+	push hl
+	ld hl, 3
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+
+	ld c, 3 ; 3 dv bytes
+.dv_loop
+	call GetNextTrainerDataByte
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .dv_loop
+
+	push hl
+	ld hl, 4
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+
+	call GetNextTrainerDataByte
+	ld [de], a
+
+	; recalculate stats
+	push hl
+	ld hl, 9
+	add hl, de
+	ld d, h
+	ld e, l
+
+	ld hl, -25
+	add hl, de
+
+	ld b, TRUE
+	push de
+	predef CalcMonStats
+	pop hl
+
+	inc hl
+	ld c, [hl]
+	dec hl
+	ld b, [hl]
+	dec hl
+	ld [hl], c
+	dec hl
+	ld [hl], b
+
+	pop hl
+
+.no_evdv
 	jmp .loop
+
+.GetPersonalityData:
+	push hl
+	ld a, [wOTPartyCount]
+	dec a
+	ld hl, wOTPartyMon1Personality
+	call GetPartyLocation
+	ld d, h
+	ld e, l
+	pop hl
+	call GetNextTrainerDataByte
+	ld [de], a
+	inc de
+	call GetNextTrainerDataByte
+	ld [de], a
+	inc de
+	call GetNextTrainerDataByte
+	ld [de], a
+	inc de
+	ret
 
 ComputeTrainerReward:
 	ld hl, hProduct
