@@ -1,12 +1,36 @@
 ; Master Ball
-	RGB 00, 00, 00
-	RGB 00, 00, 00
+	RGB 26, 13, 20
+	RGB 14, 09, 19
 ; Ultra Ball
-	RGB 00, 00, 00
-	RGB 00, 00, 00
+	RGB 31, 31, 00
+	RGB 31, 31, 31
 ; Great Ball
-	RGB 00, 00, 00
-	RGB 00, 00, 00
+	RGB 00, 00, 31
+	RGB 31, 31, 31
 ; Poké Ball
+	RGB 31, 00, 00
+	RGB 31, 31, 31
+; Heavy Ball
+	RGB 31, 00, 00
+	RGB 31, 31, 31
+; Level Ball
+	RGB 31, 00, 00
+	RGB 31, 31, 31
+; Lure Ball
+	RGB 31, 00, 00
+	RGB 31, 31, 31
+; Fast Ball
+	RGB 31, 00, 00
+	RGB 31, 31, 31
+; Friend Ball
+	RGB 31, 00, 00
+	RGB 31, 31, 31
+; Moon Ball
+	RGB 31, 00, 00
+	RGB 31, 31, 31
+; Love Ball
+	RGB 31, 00, 00
+	RGB 31, 31, 31
+; Park Ball
 	RGB 31, 00, 00
 	RGB 31, 31, 31

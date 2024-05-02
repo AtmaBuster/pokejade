@@ -16,6 +16,14 @@ LoadBallIcon:
 	jmp Get2bppViaHDMA
 
 BallIconPointers:
+	dba MasterBallMenuIcon
+	dba PokeBallMenuIcon
+	dba PokeBallMenuIcon
+	dba PokeBallMenuIcon
+	dba PokeBallMenuIcon
+	dba PokeBallMenuIcon
+	dba PokeBallMenuIcon
+	dba PokeBallMenuIcon
 	dba PokeBallMenuIcon
 	dba PokeBallMenuIcon
 	dba PokeBallMenuIcon
