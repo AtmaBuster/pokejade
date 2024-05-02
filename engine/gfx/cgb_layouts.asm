@@ -256,7 +256,7 @@ _CGB_StatsScreenHPPals:
 	ld a, BANK(wBGPals1)
 	call FarCopyWRAM
 	ld a, [wTempMonCaughtBall]
-	maskbits NUM_BALL_ITEM_POCKET
+	and MON_BALL_MASK
 	call GetBallIconPalPointer
 	call LoadPalette_White_Col1_Col2_Black ; ball palette
 	call WipeAttrmap

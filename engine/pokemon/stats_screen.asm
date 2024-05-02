@@ -248,6 +248,8 @@ StatsScreen_CopyToTempMon:
 	jr nz, .not_tempmon
 	ld a, [wBufferMonSpecies]
 	ld [wCurSpecies], a
+	ld a, [wBufferMonCaughtBall]
+	ld [wCurDeltaIndex], a
 	call GetBaseData
 	ld hl, wBufferMon
 	ld de, wTempMon
@@ -257,6 +259,8 @@ StatsScreen_CopyToTempMon:
 
 .not_tempmon
 	farcall CopyMonToTempMon
+	ld a, [wTempMonCaughtBall]
+	ld [wCurDeltaIndex], a
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .done
@@ -746,7 +750,7 @@ StatsScreen_LoadGFX:
 	jmp z, SetDefaultBGPAndOBP
 ; load ball gfx
 	ld a, [wTempMonCaughtBall]
-	maskbits NUM_BALL_ITEM_POCKET
+	and MON_BALL_MASK
 	call LoadBallIcon
 	jmp StatsScreen_PlaceFrontpic
 
@@ -793,6 +797,13 @@ LoadPinkPage:
 	ld de, .Status_Type
 	hlcoord 0, 12
 	rst PlaceString
+	ld a, [wTempMonCaughtBall]
+	and MON_DELTA_MASK
+	jr z, .no_delta
+	hlcoord 5, 14
+	ld a, "<DELTA>"
+	ld [hl], a
+.no_delta
 	ld a, [wTempMonPokerusStatus]
 	ld b, a
 	and $f
@@ -1096,7 +1107,6 @@ LoadOrangePage:
 
 .PlaceAbilityName:
 	push hl
-	call GetBaseData
 	ld a, [wTempMonAbility]
 	call GetAbilityName
 	pop hl

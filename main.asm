@@ -726,3 +726,8 @@ INCLUDE "engine/16/table_functions.asm"
 
 ; own section
 INCLUDE "data/trainers/parties.asm"
+
+
+SECTION "Delta Types", ROMX
+
+INCLUDE "engine/pokemon/delta_types.asm"

@@ -261,6 +261,11 @@ GetBaseData::
 	ld [hl], b
 
 .end
+	ld a, [wCurDeltaIndex]
+	and MON_DELTA_MASK
+	jr z, .regular_type
+	farcall GetDeltaTypes
+.regular_type
 ; Replace Pokedex # with species
 	ld a, [wCurSpecies]
 	ld [wBaseSpecies], a

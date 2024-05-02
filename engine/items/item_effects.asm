@@ -556,6 +556,7 @@ PokeBallEffect:
 	call GetItemIndexFromID
 	ld a, l
 	ld hl, wEnemyMonCaughtBall
+	or [hl]
 	ld [hl], a
 
 	farcall StubbedTrainerRankings_WildMonsCaught
