@@ -123,6 +123,7 @@
 	charmap "└",         $be
 	charmap "┘",         $bf
 
+	charmap "<DELTA>",   $cd
 	charmap "′",         $ce
 	charmap "″",         $cf
 

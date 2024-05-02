@@ -1803,6 +1803,12 @@ Pokedex_PrintNumber:
 	push de
 	ld bc, -SCREEN_WIDTH
 	add hl, bc
+	ld a, [wCurDexMode]
+	cp DEXMODE_HOLON
+	jr nz, .no_delta
+	ld a, "<DELTA>"
+	ld [hli], a
+.no_delta
 	push hl
 	ld h, d
 	ld l, e

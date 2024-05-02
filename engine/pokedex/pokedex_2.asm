@@ -103,6 +103,12 @@ DisplayDexEntry:
 	ld [hli], a
 	ld a, $5d ; .
 	ld [hli], a
+	ld a, [wCurDexMode]
+	cp DEXMODE_HOLON
+	jr nz, .not_holon
+	ld a, "<DELTA>"
+	ld [hli], a
+.not_holon
 	push hl
 	ld a, [wTempSpecies]
 	call GetPokemonIndexFromID
