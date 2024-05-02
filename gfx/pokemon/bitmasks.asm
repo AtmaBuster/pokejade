@@ -234,9 +234,9 @@ Porygon2Bitmasks:   INCLUDE "gfx/pokemon/porygon2/bitmask.asm"
 StantlerBitmasks:   INCLUDE "gfx/pokemon/stantler/bitmask.asm"
 ; -----------
 ; -----------
+KokopelliBitmasks:  INCLUDE "gfx/pokemon/kokopelli/bitmask.asm"
 ; -----------
-SmoochumBitmasks:   INCLUDE "gfx/pokemon/smoochum/bitmask.asm"
-; -----------
+ElekidBitmasks:     INCLUDE "gfx/pokemon/elekid/bitmask.asm"
 MagbyBitmasks:      INCLUDE "gfx/pokemon/magby/bitmask.asm"
 MiltankBitmasks:    INCLUDE "gfx/pokemon/miltank/bitmask.asm"
 BlisseyBitmasks:    INCLUDE "gfx/pokemon/blissey/bitmask.asm"

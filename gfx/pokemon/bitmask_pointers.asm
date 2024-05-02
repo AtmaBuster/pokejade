@@ -236,9 +236,9 @@ BitmasksPointers:
 	dw StantlerBitmasks
 	dw PlaceholderBitmasks
 	dw PlaceholderBitmasks
+	dw KokopelliBitmasks
 	dw PlaceholderBitmasks
-	dw SmoochumBitmasks
-	dw PlaceholderBitmasks
+	dw ElekidBitmasks
 	dw MagbyBitmasks
 	dw MiltankBitmasks
 	dw BlisseyBitmasks
