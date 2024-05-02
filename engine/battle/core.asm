@@ -4539,14 +4539,10 @@ PrintPlayerHUD:
 	push bc
 
 	ld a, [wCurBattleMon]
-	ld hl, wPartyMon1DVs
+	ld hl, wPartyMon1Personality
 	call GetPartyLocation
-	ld de, wTempMonDVs
-	ld a, [hli]
-	ld [de], a
-	inc de
 	ld a, [hl]
-	ld [de], a
+	ld [wTempMonPersonality], a
 	ld hl, wBattleMonLevel
 	ld de, wTempMonLevel
 	ld bc, wTempMonStructEnd - wTempMonLevel
