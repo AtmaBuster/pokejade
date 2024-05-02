@@ -386,7 +386,17 @@ StatsScreen_JoypadAction:
 	jmp StatsScreen_SetJumptableIndex
 
 .select
+	ld a, [wStatsScreenDexNumber]
+	ld b, a
+	push bc
 	call StatsScreen_SelectNextNumber
+	pop bc
+	ld a, [wStatsScreenDexNumber]
+	cp b
+	jr z, .skip_sfx
+	ld de, SFX_SWITCH_POCKETS
+	call PlaySFX
+.skip_sfx
 	ld a, [wTempMonSpecies]
 	call GetPokemonIndexFromID
 	call StatsScreen_UpdateNumber

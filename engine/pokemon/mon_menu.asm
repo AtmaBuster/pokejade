@@ -654,6 +654,8 @@ _OpenPartyStats:
 	ld a, $77
 	ld [wLastVolume], a
 	call MaxVolume
+	xor a
+	ld [wLastVolume], a
 	call ExitMenu
 	xor a
 	ret
