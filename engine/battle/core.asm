@@ -4563,6 +4563,15 @@ PrintPlayerHUD:
 	ld [wCurSpecies], a
 	call GetBaseData
 
+	ld a, [wBattleMonCaughtBall]
+	and MON_DELTA_MASK
+	jr z, .no_delta
+
+	hlcoord 18, 8
+	ld a, "<DELTA>"
+	ld [hl], a
+
+.no_delta
 	ld a, [wCurSpecies]
 	call GetPokemonIndexFromID
 	cphl16 NIDORAN_F
@@ -4673,6 +4682,16 @@ DrawEnemyHUD:
 	inc de
 	ld a, [hl]
 	ld [de], a
+
+	ld a, [wEnemyMonCaughtBall]
+	and MON_DELTA_MASK
+	jr z, .no_delta
+
+	hlcoord 10, 1
+	ld a, "<DELTA>"
+	ld [hl], a
+
+.no_delta
 
 	ld a, TEMPMON
 	ld [wMonType], a
