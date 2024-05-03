@@ -2074,3 +2074,10 @@ DefenseCurl:
 	statupmessage
 	statupfailtext
 	endmove
+
+Libra:
+	checkobedience
+	usedmovetext
+	doturn
+	libra
+	endmove

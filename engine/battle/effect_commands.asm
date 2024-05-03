@@ -6142,16 +6142,12 @@ DoubleDamage:
 	ret
 
 INCLUDE "engine/battle/move_effects/mimic.asm"
-
 INCLUDE "engine/battle/move_effects/leech_seed.asm"
-
 INCLUDE "engine/battle/move_effects/splash.asm"
-
 INCLUDE "engine/battle/move_effects/disable.asm"
-
 INCLUDE "engine/battle/move_effects/pay_day.asm"
-
 INCLUDE "engine/battle/move_effects/conversion.asm"
+INCLUDE "engine/battle/move_effects/libra.asm"
 
 BattleCommand_ResetStats:
 	ld a, BASE_STAT_LEVEL

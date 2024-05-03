@@ -260,9 +260,6 @@ DEF GEN1_MOVES EQU const_value - 1
 	const BEAT_UP      ; 0fb
 DEF GEN2_MOVES EQU const_value - 1
 	const FAKE_OUT     ; 0fc
-DEF MOVES_GP3 EQU const_value - 1
-
-DEF NUM_ATTACKS EQU const_value - 1
 	const UPROAR       ; 0fd
 	const STOCKPILE    ; 0fe
 	const SPIT_UP      ; 0ff
@@ -383,6 +380,7 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const TOXIC_SPIKES ; 172
 	const AQUA_RING    ; 173
 	const MAGNET_RISE  ; 174
+DEF MOVES_GP3 EQU const_value - 1
 	const FLARE_BLITZ  ; 175
 	const FORCE_PALM   ; 176
 	const ROCK_POLISH  ; 177
@@ -479,6 +477,9 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const BLOOD_MOON   ; 1d2
 	const NO_RETREAT   ; 1d3
 	const BARRIER_BASH ; 1d4
+	const LIBRA        ; 1d5
+DEF MOVES_GP4 EQU const_value - 1
+DEF NUM_ATTACKS EQU const_value - 1
 
 	if NUM_ATTACKS > $3fff
 		fail "Too many moves defined!"

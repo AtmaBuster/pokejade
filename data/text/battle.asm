@@ -1073,3 +1073,25 @@ BattleText_LinkErrorBattleCanceled:
 	para "The battle has"
 	line "been canceled…"
 	prompt
+
+LibraText:
+	text "<USER>"
+	line "scanned its foe!"
+	prompt
+
+LibraTypeSingleText:
+	text "<TARGET>"
+	line "is @"
+	text_ram wStringBuffer1
+	text " TYPE!"
+	prompt
+
+LibraTypeDualText:
+	text "<TARGET>"
+	line "is @"
+	text_ram wStringBuffer1
+	text " and"
+	cont "@"
+	text_ram wStringBuffer2
+	text " TYPE!"
+	prompt
