@@ -259,10 +259,10 @@ DEF GEN1_MOVES EQU const_value - 1
 	const WHIRLPOOL    ; 0fa
 	const BEAT_UP      ; 0fb
 DEF GEN2_MOVES EQU const_value - 1
-
+	const FAKE_OUT     ; 0fc
+DEF MOVES_GP3 EQU const_value - 1
 
 DEF NUM_ATTACKS EQU const_value - 1
-	const FAKE_OUT     ; 0fc
 	const UPROAR       ; 0fd
 	const STOCKPILE    ; 0fe
 	const SPIT_UP      ; 0ff
