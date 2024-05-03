@@ -845,7 +845,7 @@ GetEvoTypeSkipCount:
 EvoTest_Level:
 	call GetNextEvoAttackByte
 	ld b, a
-	ld a, [wCurItem]
+	ld a, [wForceEvolution]
 	and a
 	ret nz
 	ld a, [wTempMonLevel]
