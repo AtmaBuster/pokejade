@@ -61,3 +61,6 @@ used_space.png
 
 notes
 *.free
+
+basedata.json
+basestat.py
