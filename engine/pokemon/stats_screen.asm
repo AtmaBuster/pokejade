@@ -834,6 +834,8 @@ LoadPinkPage:
 	rst PlaceString
 .done_status
 	hlcoord 1, 15
+	ld a, [wTempMonCaughtBall]
+	ld [wCurDeltaIndex], a
 	predef PrintMonTypes
 	hlcoord 9, 8
 	ld de, SCREEN_WIDTH

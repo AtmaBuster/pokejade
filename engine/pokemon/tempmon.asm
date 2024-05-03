@@ -97,10 +97,12 @@ GetMonSpecies:
 	; WILDMON
 
 .partymon
+	ld bc, wPartyMon1CaughtBall
 	ld hl, wPartySpecies
 	jr .done
 
 .otpartymon
+	ld bc, wOTPartyMon1CaughtBall
 	ld hl, wOTPartySpecies
 	jr .done
 
@@ -114,6 +116,15 @@ GetMonSpecies:
 	jr .done2
 
 .done
+	push hl
+	ld h, b
+	ld l, c
+	ld a, e
+	call GetPartyLocation
+	ld a, [hl]
+	ld [wCurDeltaIndex], a
+	pop hl
+
 	ld d, 0
 	add hl, de
 	ld a, [hl]

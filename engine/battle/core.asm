@@ -3774,6 +3774,10 @@ InitBattleMon:
 	ld de, wBattleMonLevel
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
 	rst CopyBytes
+	ld bc, MON_CAUGHT_BALL - PARTYMON_STRUCT_LENGTH
+	add hl, bc
+	ld a, [hl]
+	ld [wCurDeltaIndex], a
 	ld a, [wBattleMonSpecies]
 	ld [wTempBattleMonSpecies], a
 	ld [wCurPartySpecies], a
@@ -3858,6 +3862,10 @@ InitEnemyMon:
 	ld de, wEnemyMonLevel
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
 	rst CopyBytes
+	ld bc, MON_CAUGHT_BALL - PARTYMON_STRUCT_LENGTH
+	add hl, bc
+	ld a, [hl]
+	ld [wCurDeltaIndex], a
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	call GetBaseData

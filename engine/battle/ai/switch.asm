@@ -317,7 +317,7 @@ FindAliveEnemyMons:
 	and a
 	ret
 
-FindEnemyMonsImmuneToLastCounterMove:
+FindEnemyMonsImmuneToLastCounterMove: ; TO-DO : check for OTParty Delta Species
 	ld hl, wOTPartyMon1
 	ld a, [wOTPartyCount]
 	ld b, a
@@ -508,6 +508,7 @@ FindEnemyMonsWithASuperEffectiveMove:
 	ret
 
 FindEnemyMonsThatResistPlayer:
+	push de
 	push bc
 	ld hl, wOTPartySpecies
 	lb bc, 1 << (PARTY_LENGTH - 1), 0
@@ -517,8 +518,18 @@ FindEnemyMonsThatResistPlayer:
 	cp $ff
 	jr z, .done
 
-	push hl
 	ld [wCurSpecies], a
+	push hl
+	ld de, $10000 - (wOTPartySpecies + 1) ; this should work without the $10000, but rgbasm is dumb sometimes
+	add hl, de
+	ld a, l
+	ld hl, wOTPartyMon1CaughtBall
+	push bc
+	call GetPartyLocation
+	pop bc
+	ld a, [hl]
+	ld [wCurDeltaIndex], a
+	pop hl
 	call GetBaseData
 	ld a, [wLastPlayerCounterMove]
 	and a
@@ -557,6 +568,7 @@ FindEnemyMonsThatResistPlayer:
 	pop bc
 	and c
 	ld c, a
+	pop de
 	ret
 
 FindEnemyMonsWithAtLeastQuarterMaxHP:
