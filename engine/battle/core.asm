@@ -5915,6 +5915,18 @@ LoadEnemyMon:
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 
+; Check for Trainer Battle, if so, copy delta species data
+	ld a, [wBattleMode]
+	cp TRAINER_BATTLE
+	jr nz, .skip_delta_check
+
+	ld a, [wCurPartyMon]
+	ld hl, wOTPartyMon1CaughtBall
+	call GetPartyLocation
+	ld a, [hl]
+	ld [wCurDeltaIndex], a
+
+.skip_delta_check
 ; Grab the BaseData for this species
 	call GetBaseData
 

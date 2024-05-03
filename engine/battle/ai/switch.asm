@@ -529,7 +529,6 @@ FindEnemyMonsThatResistPlayer:
 	pop bc
 	ld a, [hl]
 	ld [wCurDeltaIndex], a
-	pop hl
 	call GetBaseData
 	ld a, [wLastPlayerCounterMove]
 	and a

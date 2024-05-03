@@ -16,16 +16,18 @@
 MACRO trainer_mon
 	db \2
 	dw \1
-IF _NARG < 6
+IF _NARG < 7
 	db \4 << MON_GENDER_F
 ELSE
-	db (\4 << MON_GENDER_F) | (\6 << MON_SHINY_F)
+	db (\4 << MON_GENDER_F) | (\7 << MON_SHINY_F)
 ENDC
 	db \3
 IF _NARG < 5
 	db POKE_BALL - FIRST_BALL_ITEM
-ELSE
+ELIF _NARG < 6
 	db \5 - FIRST_BALL_ITEM
+ELSE
+	db (\5 - FIRST_BALL_ITEM) | \6
 ENDC
 ENDM
 
@@ -68,12 +70,10 @@ FalknerGroup:
 
 WhitneyGroup:
 	next_list_item ; WHITNEY (1)
-	db "WHITNEY@", TRAINERTYPE_MOVES | TRAINERTYPE_ITEM | TRAINERTYPE_NICKNAME | TRAINERTYPE_EVDV
-	trainer_mon  MILTANK, 20, THICK_FAT, FEMALE
-	    mon_nick "MILKER"
+	db "WHITNEY@", TRAINERTYPE_MOVES | TRAINERTYPE_ITEM
+	trainer_mon  BULBASAUR, 10, THICK_FAT, FEMALE, POKE_BALL, DELTA_VENUSAUR_PSYCHIC_TYPE_STEEL, TRUE
 	    mon_item MOOMOO_MILK
-	    mon_move ROLLOUT, ATTRACT, STOMP, MILK_DRINK
-	    mon_stat 252, 0, 252, 0, 0, 6, 15, 15, 15, 15, 15, 15, 255
+	    mon_move SPLASH, NO_MOVE, NO_MOVE, NO_MOVE
 	db -1 ; end
 
 	end_list_items
