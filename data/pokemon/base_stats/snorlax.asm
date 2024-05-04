@@ -11,7 +11,8 @@
 	db GENDER_F12_5 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/snorlax/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db IMMUNITY, THICK_FAT, GLUTTONY ; abilities
+	db 0 ; unused
 	db GROWTH_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_MONSTER ; egg groups

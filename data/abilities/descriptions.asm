@@ -6,31 +6,31 @@ AbilityDescriptions:
 	dw SolarPowerDesc
 	dw TorrentDesc
 	dw RainDishDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
-	dw NoAbilityDesc
+	dw SimpleDesc
+	dw UnawareDesc
+	dw MoodyDesc
+	dw ShedSkinDesc
+	dw RunAwayDesc
+	dw ShieldDustDesc
+	dw SwarmDesc
+	dw SniperDesc
+	dw KeenEyeDesc
+	dw TangledFeetDesc
+	dw BigPecksDesc
+	dw TechnicianDesc
+	dw HoneyGatherDesc
+	dw HustleDesc
+	dw PressureDesc
+	dw UnnerveDesc
+	dw PickupDesc
+	dw VoltAbsorbDesc
+	dw IntimidateDesc
+	dw StaticDesc
+	dw LightningRodDesc
+	dw SwiftSwimDesc
+	dw WaterVeilDesc
+	dw PoisonPointDesc
+	dw RivalryDesc
 	dw SheerForceDesc
 	dw NoAbilityDesc
 	dw NoAbilityDesc
@@ -157,6 +157,33 @@ AbilityDescriptions:
 	dw NoAbilityDesc
 	dw NoAbilityDesc
 	dw NoAbilityDesc
+
+SimpleDesc:
+UnawareDesc:
+MoodyDesc:
+ShedSkinDesc:
+RunAwayDesc:
+ShieldDustDesc:
+SwarmDesc:
+SniperDesc:
+KeenEyeDesc:
+TangledFeetDesc:
+BigPecksDesc:
+TechnicianDesc:
+HoneyGatherDesc:
+HustleDesc:
+PressureDesc:
+UnnerveDesc:
+PickupDesc:
+VoltAbsorbDesc:
+IntimidateDesc:
+StaticDesc:
+LightningRodDesc:
+SwiftSwimDesc:
+WaterVeilDesc:
+PoisonPointDesc:
+RivalryDesc:
+	db   "???@"
 
 NoAbilityDesc:
 	db   "This #MON has no"

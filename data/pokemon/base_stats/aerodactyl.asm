@@ -11,7 +11,8 @@
 	db GENDER_F12_5 ; gender ratio
 	db 35 ; step cycles to hatch
 	INCBIN "gfx/pokemon/aerodactyl/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db ROCK_HEAD, PRESSURE, TOUGH_CLAWS ; abilities
+	db 0 ; unused
 	db GROWTH_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_FLYING, EGG_FLYING ; egg groups

@@ -11,7 +11,8 @@
 	db GENDER_F25 ; gender ratio
 	db 25 ; step cycles to hatch
 	INCBIN "gfx/pokemon/magmar/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db FLAME_BODY, FLAME_BODY, VITAL_SPIRIT ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate
 	db 70 ; base happiness
 	dn EGG_HUMANSHAPE, EGG_HUMANSHAPE ; egg groups

@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 10 ; step cycles to hatch
 	INCBIN "gfx/pokemon/pichu/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db STATIC, STATIC, LIGHTNINGROD ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate
 	db 70 ; base happiness
 	dn EGG_NONE, EGG_NONE ; egg groups

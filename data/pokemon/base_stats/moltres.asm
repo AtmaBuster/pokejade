@@ -11,7 +11,8 @@
 	db GENDER_UNKNOWN ; gender ratio
 	db 80 ; step cycles to hatch
 	INCBIN "gfx/pokemon/moltres/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db PRESSURE, PRESSURE, FLAME_BODY ; abilities
+	db 0 ; unused
 	db GROWTH_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_NONE, EGG_NONE ; egg groups

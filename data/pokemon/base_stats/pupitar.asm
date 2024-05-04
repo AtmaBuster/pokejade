@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/pupitar/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db SHED_SKIN, SHED_SKIN, SHED_SKIN ; abilities
+	db 0 ; unused
 	db GROWTH_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_MONSTER ; egg groups

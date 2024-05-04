@@ -67,7 +67,7 @@
 	const SNOW_CLOAK   ; 41
 	const ICE_BODY     ; 42
 	const CUTE_CHARM   ; 43
-	const PIXILIATE    ; 44
+	const PIXILATE     ; 44
 	const ADAPTABILITY ; 45
 	const DOWNLOAD     ; 46
 	const SAND_RUSH    ; 47

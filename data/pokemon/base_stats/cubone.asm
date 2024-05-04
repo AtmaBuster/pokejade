@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/cubone/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db ROCK_HEAD, LIGHTNINGROD, BATTLE_ARMOR ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate
 	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_MONSTER ; egg groups

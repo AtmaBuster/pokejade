@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/placeholder/front.dimensions"
-	db SWARM, SWARM, TECHNICIAN, TECHNICIAN ; abilities
+	db SWARM, SWARM, TECHNICIAN ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_BUG, EGG_BUG ; egg groups

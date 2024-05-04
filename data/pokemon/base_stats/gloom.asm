@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/gloom/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db CHLOROPHYLL, CHLOROPHYLL, STENCH ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_PLANT, EGG_PLANT ; egg groups

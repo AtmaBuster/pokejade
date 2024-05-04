@@ -11,7 +11,8 @@
 	db GENDER_UNKNOWN ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/ditto/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db LIMBER, LIMBER, IMPOSTER ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate
 	db 70 ; base happiness
 	dn EGG_DITTO, EGG_DITTO ; egg groups

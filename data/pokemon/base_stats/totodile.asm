@@ -11,7 +11,8 @@
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/totodile/front.dimensions"
-	db TORRENT, TORRENT, SHEER_FORCE, SHEER_FORCE ; abilities
+	db TORRENT, TORRENT, SHEER_FORCE ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_WATER_1 ; egg groups

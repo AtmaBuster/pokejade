@@ -11,7 +11,8 @@
 	db GENDER_F0 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/nidoking/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db POISON_POINT, RIVALRY, SHEER_FORCE ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_GROUND ; egg groups

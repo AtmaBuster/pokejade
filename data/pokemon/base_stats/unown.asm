@@ -11,7 +11,8 @@
 	db GENDER_UNKNOWN ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/unown_a/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate
 	db 70 ; base happiness
 	dn EGG_NONE, EGG_NONE ; egg groups

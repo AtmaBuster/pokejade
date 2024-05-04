@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
 	INCBIN "gfx/pokemon/golbat/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db INNER_FOCUS, INNER_FOCUS, INFILTRATOR ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate
 	db 250 ; base happiness
 	dn EGG_FLYING, EGG_FLYING ; egg groups

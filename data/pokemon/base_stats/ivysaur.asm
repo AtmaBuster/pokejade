@@ -11,7 +11,8 @@
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/ivysaur/front.dimensions"
-	db OVERGROW, OVERGROW, CHLOROPHYLL, CHLOROPHYLL ; abilities
+	db OVERGROW, OVERGROW, CHLOROPHYLL ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_PLANT ; egg groups

@@ -11,7 +11,8 @@
 	db GENDER_F100 ; gender ratio
 	db 40 ; step cycles to hatch
 	INCBIN "gfx/pokemon/chansey/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db NATURAL_CURE, SERENE_GRACE, HEALER ; abilities
+	db 0 ; unused
 	db GROWTH_FAST ; growth rate
 	db 70 ; base happiness
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups

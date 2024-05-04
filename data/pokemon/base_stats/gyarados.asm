@@ -11,7 +11,8 @@
 	db GENDER_F50 ; gender ratio
 	db 5 ; step cycles to hatch
 	INCBIN "gfx/pokemon/gyarados/front.dimensions"
-	db NO_ABILITY, NO_ABILITY, NO_ABILITY, NO_ABILITY ; abilities
+	db INTIMIDATE, INTIMIDATE, MOXIE ; abilities
+	db 0 ; unused
 	db GROWTH_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_WATER_2, EGG_DRAGON ; egg groups

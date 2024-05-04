@@ -11,7 +11,8 @@
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/charizard/front.dimensions"
-	db BLAZE, BLAZE, SOLAR_POWER, SOLAR_POWER ; abilities
+	db BLAZE, BLAZE, SOLAR_POWER ; abilities
+	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	db 70 ; base happiness
 	dn EGG_MONSTER, EGG_DRAGON ; egg groups
