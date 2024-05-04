@@ -1981,6 +1981,7 @@ Debug_PokeEdit:
 	rst ByteFill
 	call WaitBGMap2
 	call Debug_PokeEdit_MainLoop
+	ret nc
 
 ; copy data back to mon struct
 	ld bc, wDebugE_Species
@@ -2102,7 +2103,9 @@ Debug_PokeEdit_MainLoop:
 	call JoyTextDelay
 	ldh a, [hJoyLast]
 	cp START
-	ret z
+	jr z, .exit
+	cp B_BUTTON
+	jr z, .exit_no_change
 	call Debug_PokeEdit_Joypad
 	push af
 	call c, .CursorJumptable
@@ -2110,6 +2113,14 @@ Debug_PokeEdit_MainLoop:
 	call c, WaitBGMap
 	call .DrawCursor
 	jr .MainLoop
+
+.exit
+	scf
+	ret
+
+.exit_no_change
+	and a
+	ret
 
 .DrawCursor:
 	lb bc, DEBUGE_MAX_CURSOR, 0
@@ -2623,7 +2634,7 @@ Debug_PokeEdit_Joypad:
 .left
 	ldh a, [hJoyDown]
 	ld bc, -100
-	bit B_BUTTON_F, a
+	bit A_BUTTON_F, a
 	jr nz, .leftright
 	ld bc, -10
 	bit SELECT_F, a
@@ -2634,7 +2645,7 @@ Debug_PokeEdit_Joypad:
 .right
 	ldh a, [hJoyDown]
 	ld bc, 100
-	bit B_BUTTON_F, a
+	bit A_BUTTON_F, a
 	jr nz, .leftright
 	ld bc, 10
 	bit SELECT_F, a
