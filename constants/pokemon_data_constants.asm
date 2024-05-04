@@ -42,6 +42,7 @@ DEF GENDER_F12_5   EQU  12 percent + 1
 DEF GENDER_F25     EQU  25 percent
 DEF GENDER_F50     EQU  50 percent
 DEF GENDER_F75     EQU  75 percent
+DEF GENDER_F87_5   EQU  87 percent + 1
 DEF GENDER_F100    EQU 100 percent - 1
 DEF GENDER_UNKNOWN EQU -1
 
