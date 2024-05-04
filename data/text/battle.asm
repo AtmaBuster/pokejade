@@ -1080,18 +1080,18 @@ LibraText:
 	prompt
 
 LibraTypeSingleText:
-	text "<TARGET>"
-	line "is @"
+	text "<TARGET>'s"
+	line "type is @"
 	text_ram wStringBuffer1
-	text " TYPE!"
+	text "!"
 	prompt
 
 LibraTypeDualText:
-	text "<TARGET>"
-	line "is @"
-	text_ram wStringBuffer1
-	text " and"
+	text "<TARGET>'s"
+	line "type is "
 	cont "@"
+	text_ram wStringBuffer1
+	text "/@"
 	text_ram wStringBuffer2
-	text " TYPE!"
+	text "!"
 	prompt
