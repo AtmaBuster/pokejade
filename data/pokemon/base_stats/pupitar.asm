@@ -14,7 +14,7 @@
 	db SHED_SKIN, SHED_SKIN, SHED_SKIN ; abilities
 	db 0 ; unused
 	db GROWTH_SLOW ; growth rate
-	db 70 ; base happiness
+	db 35 ; base happiness
 	dn EGG_MONSTER, EGG_MONSTER ; egg groups
 
 	; tm/hm learnset

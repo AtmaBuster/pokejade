@@ -14,7 +14,7 @@
 	db NATURAL_CURE, SERENE_GRACE, HEALER ; abilities
 	db 0 ; unused
 	db GROWTH_FAST ; growth rate
-	db 70 ; base happiness
+	db 140 ; base happiness
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups
 
 	; tm/hm learnset

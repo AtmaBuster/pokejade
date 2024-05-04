@@ -91,10 +91,11 @@ DebugMenu::
 	db "Fill TM/HM@"
 	db "Play Cry@"
 	db "Trainer@"
+	db "# Edit@"
 
 .MenuItems
-	db 17
-	db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+	db 18
+	db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
 	db -1
 
 .Jumptable
@@ -115,6 +116,7 @@ DebugMenu::
 	dw Debug_FillTMHM
 	dw Debug_PlayCry
 	dw Debug_Trainer
+	dw Debug_PokeEdit
 
 Debug_GiveParty:
 ; clear party
@@ -1921,6 +1923,657 @@ Debug_SanitizeString:
 	dec hl
 	ld a, "@"
 	ld [hl], a
+	ret
+
+Debug_PokeEdit:
+; Edits the first mon in the party
+	ld a, [wPartyCount]
+	and a
+	ret z
+; Copy data to debug data buffer
+	ld a, [wPartyMon1Species]
+	ld de, wDebugE_Species
+	ld hl, GetPokemonIndexFromID
+	call .CopyToBuffer
+
+	ld a, [wPartyMon1Item]
+	ld de, wDebugE_Item
+	ld hl, GetItemIndexFromID
+	call .CopyToBuffer
+
+	ld bc, wPartyMon1Moves
+	ld de, wDebugE_Moves
+	ld a, 4
+.mv_to_buf_loop
+	push af
+	ld a, [bc]
+	inc bc
+	ld hl, GetMoveIndexFromID
+	call .CopyToBuffer
+	inc de
+	pop af
+	dec a
+	jr nz, .mv_to_buf_loop
+
+	ld a, [wPartyMon1ID]
+	ld [wDebugE_TID], a
+	ld a, [wPartyMon1ID + 1]
+	ld [wDebugE_TID + 1], a
+
+	ld hl, wPartyMon1EVs
+	ld de, wDebugE_EVs
+	ld bc, 12
+	rst CopyBytes
+
+	ld a, [wPartyMon1Happiness]
+	ld [wDebugE_Happiness], a
+
+	ld a, [wPartyMon1Level]
+	ld [wDebugE_Level], a
+
+	ld hl, wTilemap
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld a, " "
+	rst ByteFill
+	ld hl, wAttrmap
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld a, 7
+	rst ByteFill
+	call WaitBGMap2
+	call Debug_PokeEdit_MainLoop
+
+; copy data back to mon struct
+	ld bc, wDebugE_Species
+	ld de, wPartyMon1Species
+	ld hl, GetPokemonIDFromIndex
+	call .CopyFromBuffer
+	ld [wPartySpecies], a
+
+	ld bc, wDebugE_Item
+	ld de, wPartyMon1Item
+	ld hl, GetItemIDFromIndex
+	call .CopyFromBuffer
+
+	ld bc, wDebugE_Moves
+	ld de, wPartyMon1Moves
+	ld a, 4
+.mv_from_buf_loop
+	push af
+	ld hl, GetMoveIDFromIndex
+	call .CopyFromBuffer
+	inc de
+	inc bc
+	pop af
+	dec a
+	jr nz, .mv_from_buf_loop
+
+	ld a, [wDebugE_TID]
+	ld [wPartyMon1ID], a
+	ld a, [wDebugE_TID + 1]
+	ld [wPartyMon1ID + 1], a
+
+	ld hl, wDebugE_EVs
+	ld de, wPartyMon1EVs
+	ld bc, 12
+	rst CopyBytes
+
+	ld a, [wDebugE_Happiness]
+	ld [wPartyMon1Happiness], a
+
+	ld a, [wDebugE_Level]
+	ld [wPartyMon1Level], a
+
+; fix PP
+	;;;
+
+; fix EXP
+	ld a, [wPartyMon1Species]
+	ld [wCurSpecies], a
+	call GetBaseData
+	ld a, [wPartyMon1Level]
+	ld d, a
+	farcall CalcExpAtLevel
+	ldh a, [hProduct + 1]
+	ld [wPartyMon1Exp], a
+	ldh a, [hProduct + 2]
+	ld [wPartyMon1Exp + 1], a
+	ldh a, [hProduct + 3]
+	ld [wPartyMon1Exp + 2], a
+	ret
+
+.CopyToBuffer
+; copies ID from a to de, using hl as a function
+	call _hl_
+	ld a, l
+	ld [de], a
+	inc de
+	ld a, h
+	ld [de], a
+	ret
+
+.CopyFromBuffer
+; copies index from bc to de, using hl as a function
+	push hl
+	push hl
+	ld hl, .CopyFromBuffer_ret
+	add sp, 4
+	push hl
+	add sp, -2
+	ld a, [bc]
+	ld l, a
+	inc bc
+	ld a, [bc]
+	ld h, a
+	ret
+.CopyFromBuffer_ret
+	ld [de], a
+	ret
+
+DEF DEBUGE_MAX_CURSOR EQU 15
+
+Debug_PokeEdit_MainLoop:
+; init display
+	ld a, DEBUGE_MAX_CURSOR
+.init_display_loop
+	dec a
+	ld [wDebugMenuCursorPos], a
+	push af
+	call .CursorJumptable
+	pop af
+	jr nz, .init_display_loop
+.MainLoop:
+	call JoyTextDelay
+	ldh a, [hJoyLast]
+	cp START
+	ret z
+	call Debug_PokeEdit_Joypad
+	push af
+	call c, .CursorJumptable
+	pop af
+	call c, WaitBGMap
+	call .DrawCursor
+	jr .MainLoop
+
+.DrawCursor:
+	lb bc, DEBUGE_MAX_CURSOR, 0
+	ld de, .CursorPositions
+.draw_cursor_loop
+	ld a, [de]
+	inc de
+	ld l, a
+	ld a, [de]
+	inc de
+	ld h, a
+	ld a, [wDebugMenuCursorPos]
+	cp c
+	ld a, " "
+	jr nz, .got_cursor_tile
+	ld a, "▶"
+.got_cursor_tile
+	ld [hl], a
+	inc c
+	dec b
+	jr nz, .draw_cursor_loop
+	ret
+
+.CursorPositions:
+	table_width 2, .CursorPositions
+	dwcoord 1, 0
+	dwcoord 1, 1
+	dwcoord 2, 2
+	dwcoord 2, 3
+	dwcoord 2, 4
+	dwcoord 2, 5
+	dwcoord 1, 6
+	dwcoord 9, 6
+	dwcoord 14, 6
+	dwcoord 2, 7
+	dwcoord 7, 7
+	dwcoord 12, 7
+	dwcoord 2, 8
+	dwcoord 7, 8
+	dwcoord 12, 8
+	assert_table_length DEBUGE_MAX_CURSOR
+
+.CursorJumptable:
+	ld a, [wDebugMenuCursorPos]
+	ld c, a
+	ld b, 0
+	ld hl, .CursorJumptable_Ptr
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp hl
+
+.CursorJumptable_Ptr:
+	table_width 2, .CursorJumptable_Ptr
+	dw .Species
+	dw .Item
+	dw .Move1
+	dw .Move2
+	dw .Move3
+	dw .Move4
+	dw .TID
+	dw .Happiness
+	dw .Level
+	dw .Species
+	dw .Species
+	dw .Species
+	dw .Species
+	dw .Species
+	dw .Species
+	assert_table_length DEBUGE_MAX_CURSOR
+
+.Species
+	ld hl, wDebugE_Species
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	push hl
+	ld hl, sp+0
+	ld d, h
+	ld e, l
+	hlcoord 2, 0
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 4
+	call PrintNum
+	hlcoord 8, 0
+	ld a, " "
+	ld bc, 10
+	rst ByteFill
+	pop hl
+	ld a, h
+	ld h, l
+	ld l, a
+	or h
+	ret z
+	cphl16 NUM_POKEMON + 1
+	ret nc
+	call GetPokemonIDFromIndex
+	ld [wNamedObjectIndex], a
+	call GetPokemonName
+	hlcoord 8, 0
+	ld de, wStringBuffer1
+	rst PlaceString
+	ret
+
+.Item
+	ld hl, wDebugE_Item
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	push hl
+	ld hl, sp+0
+	ld d, h
+	ld e, l
+	hlcoord 2, 1
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 4
+	call PrintNum
+	hlcoord 7, 1
+	ld a, " "
+	ld bc, 12
+	rst ByteFill
+	pop hl
+	ld a, h
+	ld h, l
+	ld l, a
+	or h
+	jr z, .no_item
+	cphl16 NUM_ITEMS + 1
+	ret nc
+	call GetItemIDFromIndex
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	hlcoord 7, 1
+	ld de, wStringBuffer1
+	rst PlaceString
+	ret
+
+.no_item
+	ld de, .no_item_str
+	hlcoord 7, 1
+	rst PlaceString
+	ret
+
+.no_item_str
+	db "NO ITEM@"
+
+.Move1
+	hlcoord 3, 2
+	push hl
+	ld hl, wDebugE_Moves
+	jr .move_n
+
+.Move2
+	hlcoord 3, 3
+	push hl
+	ld hl, wDebugE_Moves + 2
+	jr .move_n
+.Move3
+	hlcoord 3, 4
+	push hl
+	ld hl, wDebugE_Moves + 4
+	jr .move_n
+.Move4
+	hlcoord 3, 5
+	push hl
+	ld hl, wDebugE_Moves + 6
+.move_n
+	ld a, [hli]
+	ld c, [hl]
+	ld b, a
+	pop hl
+	push bc
+	push hl
+	ld hl, sp+2
+	ld d, h
+	ld e, l
+	pop hl
+	push hl
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
+	call PrintNum
+	pop hl
+	ld bc, 4
+	add hl, bc
+	push hl
+	ld a, " "
+	ld bc, 12
+	rst ByteFill
+	pop hl
+	pop de
+	push hl
+	ld a, d
+	ld h, e
+	ld l, a
+	or h
+	jr z, .skip_move
+	cphl16 NUM_ATTACKS + 1
+	jr nc, .skip_move
+	call GetMoveIDFromIndex
+	ld [wNamedObjectIndex], a
+	call GetMoveName
+	pop hl
+	ld de, wStringBuffer1
+	rst PlaceString
+	ret
+
+.skip_move
+	pop hl
+	ret
+
+.TID
+	ld a, [wDebugE_TID]
+	ld e, a
+	ld a, [wDebugE_TID + 1]
+	ld d, a
+	push de
+	ld hl, sp+0
+	ld d, h
+	ld e, l
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
+	hlcoord 2, 6
+	call PrintNum
+	add sp, 2
+	ret
+
+.Happiness
+	ld a, [wDebugE_Happiness]
+	ld e, a
+	push de
+	ld hl, sp+0
+	ld d, h
+	ld e, l
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
+	hlcoord 10, 6
+	call PrintNum
+	add sp, 2
+	ret
+
+.Level
+	ld a, [wDebugE_Level]
+	ld e, a
+	push de
+	ld hl, sp+0
+	ld d, h
+	ld e, l
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
+	hlcoord 15, 6
+	call PrintNum
+	add sp, 2
+	ret
+
+Debug_PokeEdit_Joypad:
+	bit D_UP_F, a
+	jr nz, .up
+	bit D_DOWN_F, a
+	jr nz, .down
+	bit D_LEFT_F, a
+	jr nz, .left
+	bit D_RIGHT_F, a
+	jr nz, .right
+	and a
+	ret
+
+.left
+	ldh a, [hJoyDown]
+	ld bc, -100
+	bit B_BUTTON_F, a
+	jr nz, .leftright
+	ld bc, -10
+	bit SELECT_F, a
+	jr nz, .leftright
+	ld bc, -1
+	jr .leftright
+
+.right
+	ldh a, [hJoyDown]
+	ld bc, 100
+	bit B_BUTTON_F, a
+	jr nz, .leftright
+	ld bc, 10
+	bit SELECT_F, a
+	jr nz, .leftright
+	ld bc, 1
+.leftright
+	call .CursorJumptable
+	scf
+	ret
+
+.down
+	ld a, [wDebugMenuCursorPos]
+	inc a
+	cp DEBUGE_MAX_CURSOR
+	jr nz, .got_new_pos
+	xor a
+	jr .got_new_pos
+
+.up
+	ld a, [wDebugMenuCursorPos]
+	and a
+	jr z, .up_loop
+	dec a
+	jr .got_new_pos
+.up_loop
+	ld a, DEBUGE_MAX_CURSOR - 1
+.got_new_pos
+	ld [wDebugMenuCursorPos], a
+	scf
+	ret
+
+.CursorJumptable:
+	push bc
+	ld a, [wDebugMenuCursorPos]
+	ld c, a
+	ld b, 0
+	ld hl, .CursorJumptable_Ptr
+	add hl, bc
+	add hl, bc
+	pop bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp hl
+
+.CursorJumptable_Ptr:
+	table_width 2, .CursorJumptable_Ptr
+	dw .Species
+	dw .Item
+	dw .Move1
+	dw .Move2
+	dw .Move3
+	dw .Move4
+	dw .TID
+	dw .Happiness
+	dw .Level
+	dw .Species
+	dw .Species
+	dw .Species
+	dw .Species
+	dw .Species
+	dw .Species
+	assert_table_length DEBUGE_MAX_CURSOR
+
+.Species
+	ld de, wDebugE_Species
+	jr .simple_edit
+
+.Move1
+	ld de, wDebugE_Moves
+	jr .simple_edit
+
+.Move2
+	ld de, wDebugE_Moves + 2
+	jr .simple_edit
+
+.Move3
+	ld de, wDebugE_Moves + 4
+	jr .simple_edit
+
+.Move4
+	ld de, wDebugE_Moves + 6
+	jr .simple_edit
+
+.TID
+	ld de, wDebugE_TID
+
+.simple_edit
+	ld a, [de]
+	ld l, a
+	inc de
+	ld a, [de]
+	ld h, a
+	add hl, bc
+.put_hl_to_de
+	ld a, h
+	ld [de], a
+	dec de
+	ld a, l
+	ld [de], a
+	ret
+
+.Happiness
+	ld a, [wDebugE_Happiness]
+	add c
+	ld [wDebugE_Happiness], a
+	ret
+
+.Level
+	ld a, [wDebugE_Level]
+	add c
+	dec a
+	cp 100
+	jr c, .done_level
+	ld c, a
+	ld a, b
+	and a
+	ld a, -100
+	jr z, .got_level_fix
+	ld a, 100
+.got_level_fix
+	add c
+.done_level
+	inc a
+	ld [wDebugE_Level], a
+	ret
+
+.Item
+	ld de, wDebugE_Item
+	call .simple_edit
+	inc de
+.item_loop
+	call Debug_PokeEdit_GetItemSection
+	jr c, .put_hl_to_de
+	push de
+	ld d, b
+	ld c, a
+	ld b, 0
+	push hl
+	ld hl, .item_section_offsets
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld b, [hl]
+	ld c, a
+	pop hl
+	ld a, d
+	and a
+	jr z, .got_item_add
+	ld a, b
+	cpl
+	ld b, a
+	ld a, c
+	cpl
+	ld c, a
+	inc bc
+.got_item_add
+	add hl, bc
+	pop de
+	jr .item_loop
+
+.item_section_offsets
+	dw FIRST_KEY_ITEM - NUM_ITEM_POCKET - 1
+	dw FIRST_BALL_ITEM - NUM_KEY_ITEM_POCKET - FIRST_KEY_ITEM
+	dw -NUM_BALL_ITEM_POCKET - FIRST_BALL_ITEM
+
+Debug_PokeEdit_GetItemSection:
+	cphl16 NUM_ITEM_POCKET + 1
+	jr c, .item_pocket
+	cphl16 FIRST_KEY_ITEM
+	jr c, .item_pocket_error
+	cphl16 NUM_KEY_ITEM_POCKET + FIRST_KEY_ITEM
+	jr c, .key_item_pocket
+	cphl16 FIRST_BALL_ITEM
+	jr c, .key_item_pocket_error
+	cphl16 NUM_BALL_ITEM_POCKET + FIRST_BALL_ITEM
+	jr c, .ball_pocket
+; ball_pocket_error
+	ld a, 2
+	and a
+	ret
+
+.ball_pocket
+	ld a, 2
+	scf
+	ret
+
+.key_item_pocket_error
+	ld a, 1
+	and a
+	ret
+
+.key_item_pocket
+	ld a, 1
+	scf
+	ret
+
+.item_pocket_error
+	xor a
+	ret
+
+.item_pocket
+	xor a
+	scf
 	ret
 
 Debug_ATMA:

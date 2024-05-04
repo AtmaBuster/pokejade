@@ -14,7 +14,7 @@
 	db INNER_FOCUS, INNER_FOCUS, MULTISCALE ; abilities
 	db 0 ; unused
 	db GROWTH_SLOW ; growth rate
-	db 70 ; base happiness
+	db 35 ; base happiness
 	dn EGG_WATER_1, EGG_DRAGON ; egg groups
 
 	; tm/hm learnset

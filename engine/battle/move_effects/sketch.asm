@@ -1,4 +1,5 @@
 BattleCommand_Sketch:
+IF 0
 	call ClearLastMove
 ; Don't sketch during a link battle
 	ld a, [wLinkMode]
@@ -118,3 +119,6 @@ BattleCommand_Sketch:
 .fail
 	call AnimateFailedMove
 	jmp PrintDidntAffect
+ELSE
+	ret
+ENDC

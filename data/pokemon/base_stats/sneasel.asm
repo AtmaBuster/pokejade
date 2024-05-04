@@ -14,7 +14,7 @@
 	db INNER_FOCUS, KEEN_EYE, PICKPOCKET ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate
-	db 70 ; base happiness
+	db 35 ; base happiness
 	dn EGG_GROUND, EGG_GROUND ; egg groups
 
 	; tm/hm learnset

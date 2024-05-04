@@ -14,7 +14,7 @@
 	db SYNCHRONIZE, SYNCHRONIZE, INNER_FOCUS ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate
-	db 70 ; base happiness
+	db 35 ; base happiness
 	dn EGG_GROUND, EGG_GROUND ; egg groups
 
 	; tm/hm learnset

@@ -1607,7 +1607,21 @@ SECTION "Debug WRAM", WRAMX
 IF DEF(_DEBUG)
 wDebugMenuCursorPos:: db
 wDebugColorPickerPal:: ds 1 palettes
-wDebugMenuDataBuffer:: ds 8
+UNION
+wDebugMenuDataBuffer:: ds 29
+NEXTU
+wDebugE_Species:: dw
+wDebugE_Item:: dw
+wDebugE_Moves:: ds 4 * 2
+wDebugE_TID:: dw
+wDebugE_EVs:: ds 6
+wDebugE_Personality:: db
+wDebugE_Ability:: db
+wDebugE_CaughtBall:: db
+wDebugE_DVs:: ds 3
+wDebugE_Happiness:: db
+wDebugE_Level:: db
+ENDU
 ENDC
 
 

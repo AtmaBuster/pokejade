@@ -14,7 +14,7 @@
 	db EARLY_BIRD, FLASH_FIRE, UNNERVE ; abilities
 	db 0 ; unused
 	db GROWTH_SLOW ; growth rate
-	db 70 ; base happiness
+	db 35 ; base happiness
 	dn EGG_GROUND, EGG_GROUND ; egg groups
 
 	; tm/hm learnset
