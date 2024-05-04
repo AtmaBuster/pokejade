@@ -157,3 +157,4 @@
 	const CLEAR_BODY   ; 9B
 	const DROUGHT      ; 9C
 	const AIR_LOCK     ; 9D
+DEF NUM_ABILITIES EQU const_value

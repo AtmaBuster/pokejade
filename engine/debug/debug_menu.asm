@@ -2039,6 +2039,23 @@ Debug_PokeEdit:
 	ld [wPartyMon1Exp + 1], a
 	ldh a, [hProduct + 3]
 	ld [wPartyMon1Exp + 2], a
+
+; recalc stats
+	ld a, [wPartyMon1Level]
+	ld [wCurPartyLevel], a
+	ld de, wPartyMon1MaxHP
+	ld hl, wPartyMon1EVs - 1
+	ld b, TRUE
+	predef CalcMonStats
+	ld hl, wPartyMon1MaxHP + 1
+	ld a, [hld]
+	ld b, a
+	ld a, [hld]
+	ld c, a
+	ld a, b
+	ld [hld], a
+	ld a, c
+	ld [hld], a
 	ret
 
 .CopyToBuffer
@@ -2069,7 +2086,7 @@ Debug_PokeEdit:
 	ld [de], a
 	ret
 
-DEF DEBUGE_MAX_CURSOR EQU 15
+DEF DEBUGE_MAX_CURSOR EQU 26
 
 Debug_PokeEdit_MainLoop:
 ; init display
@@ -2133,6 +2150,17 @@ Debug_PokeEdit_MainLoop:
 	dwcoord 2, 8
 	dwcoord 7, 8
 	dwcoord 12, 8
+	dwcoord 1, 9
+	dwcoord 4, 9
+	dwcoord 7, 9
+	dwcoord 10, 9
+	dwcoord 13, 9
+	dwcoord 16, 9
+	dwcoord 2, 10
+	dwcoord 3, 11
+	dwcoord 0, 12
+	dwcoord 1, 13
+	dwcoord 1, 14
 	assert_table_length DEBUGE_MAX_CURSOR
 
 .CursorJumptable:
@@ -2158,15 +2186,28 @@ Debug_PokeEdit_MainLoop:
 	dw .TID
 	dw .Happiness
 	dw .Level
-	dw .Species
-	dw .Species
-	dw .Species
-	dw .Species
-	dw .Species
-	dw .Species
+	dw .EV1
+	dw .EV2
+	dw .EV3
+	dw .EV4
+	dw .EV5
+	dw .EV6
+	dw .DV1
+	dw .DV2
+	dw .DV3
+	dw .DV4
+	dw .DV5
+	dw .DV6
+	dw .Ability
+	dw .Ball
+	dw .Delta
+	dw .Shiny
+	dw .Gender
 	assert_table_length DEBUGE_MAX_CURSOR
 
 .Species
+	call .Gender
+	call .Delta
 	ld hl, wDebugE_Species
 	ld a, [hli]
 	ld l, [hl]
@@ -2343,6 +2384,230 @@ Debug_PokeEdit_MainLoop:
 	add sp, 2
 	ret
 
+.EV1
+	hlcoord 3, 7
+	ld a, [wDebugE_EVs]
+	jr .EV_n
+.EV2
+	hlcoord 8, 7
+	ld a, [wDebugE_EVs+1]
+	jr .EV_n
+.EV3
+	hlcoord 13, 7
+	ld a, [wDebugE_EVs+2]
+	jr .EV_n
+.EV4
+	hlcoord 3, 8
+	ld a, [wDebugE_EVs+3]
+	jr .EV_n
+.EV5
+	hlcoord 8, 8
+	ld a, [wDebugE_EVs+4]
+	jr .EV_n
+.EV6
+	hlcoord 13, 8
+	ld a, [wDebugE_EVs+5]
+.EV_n
+	ld e, a
+	push de
+	push hl
+	ld hl, sp+2
+	ld d, h
+	ld e, l
+	pop hl
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
+	call PrintNum
+	add sp, 2
+	ret
+
+.DV1
+	hlcoord 2, 9
+	ld a, [wDebugE_DVs + 2]
+	swap a
+	jr .DV_n
+.DV2
+	hlcoord 5, 9
+	ld a, [wDebugE_DVs]
+	swap a
+	jr .DV_n
+.DV3
+	hlcoord 8, 9
+	ld a, [wDebugE_DVs]
+	jr .DV_n
+.DV4
+	hlcoord 11, 9
+	ld a, [wDebugE_DVs + 1]
+	swap a
+	jr .DV_n
+.DV5
+	hlcoord 14, 9
+	ld a, [wDebugE_DVs + 1]
+	jr .DV_n
+.DV6
+	hlcoord 17, 9
+	ld a, [wDebugE_DVs + 2]
+.DV_n
+	and $F
+	ld e, a
+	push de
+	push hl
+	ld hl, sp+2
+	ld d, h
+	ld e, l
+	pop hl
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	call PrintNum
+	add sp, 2
+	ret
+
+.Ability
+	ld a, [wDebugE_Ability]
+	ld e, a
+	push de
+	ld hl, sp+0
+	ld d, h
+	ld e, l
+	hlcoord 3, 10
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
+	call PrintNum
+	hlcoord 8, 10
+	ld bc, 12
+	ld a, " "
+	rst ByteFill
+	pop de
+	ld a, e
+	cp NUM_ABILITIES
+	ret nc
+	call GetAbilityName
+	hlcoord 8, 10
+	ld de, wStringBuffer1
+	rst PlaceString
+	ret
+
+.Ball
+	ld a, [wDebugE_CaughtBall]
+	and MON_BALL_MASK
+	ld e, a
+	push de
+	ld hl, sp+0
+	ld d, h
+	ld e, l
+	hlcoord 4, 11
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	call PrintNum
+	hlcoord 8, 11
+	ld bc, 12
+	ld a, " "
+	rst ByteFill
+	pop de
+	ld a, e
+	cp NUM_BALL_ITEM_POCKET
+	ret nc
+	ld l, a
+	ld h, HIGH(FIRST_BALL_ITEM)
+	call GetItemIDFromIndex
+	ld [wNamedObjectIndex], a
+	call GetItemName
+	ld de, wStringBuffer1
+	hlcoord 8, 11
+	rst PlaceString
+	ret
+
+.Delta
+	ld a, [wDebugE_Species]
+	ld l, a
+	ld a, [wDebugE_Species + 1]
+	ld h, a
+	call GetPokemonIDFromIndex
+	ld [wCurSpecies], a
+	ld a, [wDebugE_CaughtBall]
+	ld [wCurDeltaIndex], a
+	call GetBaseData
+	ld a, [wDebugE_CaughtBall]
+	swap a
+	rrca
+	and %111
+	hlcoord 1, 12
+	add "0"
+	ld [hli], a
+	inc hl
+	inc a
+	ld bc, 17
+	ld a, " "
+	rst ByteFill
+	ld a, [wBaseType1]
+	ld [wNamedObjectIndex], a
+	farcall GetTypeName
+	hlcoord 3, 12
+	ld de, wStringBuffer1
+	rst PlaceString
+	ld a, [wBaseType1]
+	ld b, a
+	ld a, [wBaseType2]
+	cp b
+	ret z
+	ld [wNamedObjectIndex], a
+	farcall GetTypeName
+	hlcoord 11, 12
+	ld a, "/"
+	ld [hli], a
+	ld de, wStringBuffer1
+	rst PlaceString
+	ret
+
+.Shiny
+	hlcoord 2, 13
+	ld de, .shiny_str
+	rst PlaceString
+	ld a, [wDebugE_Personality]
+	and MON_SHINY
+	ld a, "Y"
+	jr nz, .got_shiny_char
+	ld a, "n"
+.got_shiny_char
+	hlcoord 8, 13
+	ld [hl], a
+	ret
+
+.shiny_str
+	db "SHINY:@"
+
+.Gender
+	hlcoord 2, 14
+	ld de, .gender_str
+	rst PlaceString
+	ld a, [wDebugE_Species]
+	ld l, a
+	ld a, [wDebugE_Species + 1]
+	ld h, a
+	call GetPokemonIDFromIndex
+	ld [wCurSpecies], a
+	ld a, [wDebugE_CaughtBall]
+	ld [wCurDeltaIndex], a
+	call GetBaseData
+	ld a, [wBaseGender]
+	cp GENDER_F0
+	ld b, "♂"
+	jr z, .got_gender_symbol
+	cp GENDER_F100
+	ld b, "♀"
+	jr z, .got_gender_symbol
+	cp GENDER_UNKNOWN
+	ld b, "-"
+	jr z, .got_gender_symbol
+	ld a, [wDebugE_Personality]
+	and MON_GENDER
+	ld b, "♀"
+	jr nz, .got_gender_symbol
+	ld b, "♂"
+.got_gender_symbol
+	hlcoord 9, 14
+	ld [hl], b
+	ret
+
+.gender_str
+	db "GENDER:@"
+
 Debug_PokeEdit_Joypad:
 	bit D_UP_F, a
 	jr nz, .up
@@ -2426,13 +2691,53 @@ Debug_PokeEdit_Joypad:
 	dw .TID
 	dw .Happiness
 	dw .Level
-	dw .Species
-	dw .Species
-	dw .Species
-	dw .Species
-	dw .Species
-	dw .Species
+	dw .EV1
+	dw .EV2
+	dw .EV3
+	dw .EV4
+	dw .EV5
+	dw .EV6
+	dw .DV1
+	dw .DV2
+	dw .DV3
+	dw .DV4
+	dw .DV5
+	dw .DV6
+	dw .Ability
+	dw .Ball
+	dw .Delta
+	dw .Shiny
+	dw .Gender
 	assert_table_length DEBUGE_MAX_CURSOR
+
+.Delta
+	ld a, [wDebugE_CaughtBall]
+	ld b, a
+	swap a
+	rrca
+	add c
+	and %111
+	rrca
+	rrca
+	rrca
+	ld c, a
+	ld a, b
+	and %00011111
+	or c
+	ld [wDebugE_CaughtBall], a
+	ret
+
+.Shiny
+	ld a, [wDebugE_Personality]
+	xor MON_SHINY
+	ld [wDebugE_Personality], a
+	ret
+
+.Gender
+	ld a, [wDebugE_Personality]
+	xor MON_GENDER
+	ld [wDebugE_Personality], a
+	ret
 
 .Species
 	ld de, wDebugE_Species
@@ -2497,13 +2802,102 @@ Debug_PokeEdit_Joypad:
 	ld [wDebugE_Level], a
 	ret
 
+.EV1
+	ld a, [wDebugE_EVs]
+	add c
+	ld [wDebugE_EVs], a
+	ret
+.EV2
+	ld a, [wDebugE_EVs+1]
+	add c
+	ld [wDebugE_EVs+1], a
+	ret
+.EV3
+	ld a, [wDebugE_EVs+2]
+	add c
+	ld [wDebugE_EVs+2], a
+	ret
+.EV4
+	ld a, [wDebugE_EVs+3]
+	add c
+	ld [wDebugE_EVs+3], a
+	ret
+.EV5
+	ld a, [wDebugE_EVs+4]
+	add c
+	ld [wDebugE_EVs+4], a
+	ret
+.EV6
+	ld a, [wDebugE_EVs+5]
+	add c
+	ld [wDebugE_EVs+5], a
+	ret
+
+.DV1
+	ld hl, wDebugE_DVs + 2
+	ld b, $F0
+	jr .DV_n
+.DV2
+	ld hl, wDebugE_DVs
+	ld b, $F0
+	jr .DV_n
+.DV3
+	ld hl, wDebugE_DVs
+	ld b, $0F
+	jr .DV_n
+.DV4
+	ld hl, wDebugE_DVs + 1
+	ld b, $F0
+	jr .DV_n
+.DV5
+	ld hl, wDebugE_DVs + 1
+	ld b, $0F
+	jr .DV_n
+.DV6
+	ld hl, wDebugE_DVs + 2
+	ld b, $0F
+.DV_n
+	ld a, c
+	swap a
+	or c
+	ld c, a
+	ld a, [hl]
+	and b
+	add c
+	and b
+	ld c, a
+	ld a, b
+	cpl
+	and [hl]
+	or c
+	ld [hl], a
+	ret
+
+.Ability
+	ld a, [wDebugE_Ability]
+	add c
+	ld [wDebugE_Ability], a
+	ret
+
+.Ball
+	ld a, [wDebugE_CaughtBall]
+	ld b, a
+	add c
+	and MON_BALL_MASK
+	ld c, a
+	ld a, b
+	and ~MON_BALL_MASK
+	or c
+	ld [wDebugE_CaughtBall], a
+	ret
+
 .Item
 	ld de, wDebugE_Item
 	call .simple_edit
 	inc de
 .item_loop
 	call Debug_PokeEdit_GetItemSection
-	jr c, .put_hl_to_de
+	jp c, .put_hl_to_de
 	push de
 	ld d, b
 	ld c, a
