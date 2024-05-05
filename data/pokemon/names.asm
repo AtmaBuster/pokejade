@@ -196,7 +196,7 @@ PokemonNames::
 	db "CHEWTLE@@@"
 	db "DREDNAW@@@"
 	db "FALINKS@@@"
-	db "EISCUE@@@@"
+	db "MON 193@@@"
 	db "WOOPER@@@@"
 	db "QUAGSIRE@@"
 	db "ESPEON@@@@"

@@ -43,8 +43,35 @@ CalcExpAtLevel:
 	ld [hl], a
 	ret
 
+.erratic
+	ld hl, ErraticExperienceTable
+	jr .lookup_table
+
+.fluctuating
+	ld hl, FluctiationExperienceTable
+.lookup_table
+	ld c, d
+	ld b, 0
+	dec c
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	xor a
+	ldh [hProduct + 0], a
+	ld a, [hli]
+	ldh [hProduct + 1], a
+	ld a, [hli]
+	ldh [hProduct + 2], a
+	ld a, [hl]
+	ldh [hProduct + 3], a
+	ret
+
 .UseExpFormula
 	ld a, [wBaseGrowthRate]
+	cp GROWTH_ERRATIC
+	jr z, .erratic
+	cp GROWTH_FLUCTUATING
+	jr z, .fluctuating
 	add a
 	add a
 	ld c, a

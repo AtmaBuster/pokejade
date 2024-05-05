@@ -88,7 +88,6 @@ AlphabeticalPokedexOrder:
 	dw DUSKULL
 	dw DUSTOX
 	dw EEVEE
-	dw EISCUE
 	dw EKANS
 	dw ELECTABUZZ
 	dw ELECTIVIRE
@@ -207,6 +206,7 @@ AlphabeticalPokedexOrder:
 	dw MISDREAVUS
 	dw MISMAGIUS
 	dw MOLTRES
+	dw MON_0C1
 	dw MON_161
 	dw MON_162
 	dw MON_163

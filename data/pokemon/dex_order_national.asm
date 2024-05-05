@@ -325,7 +325,6 @@ NationalPokedexOrder:
 	dw CHEWTLE
 	dw DREDNAW
 	dw FALINKS
-	dw EISCUE
 	dw WYRDEER
 	dw KLEAVOR
 	dw URSALUNA

@@ -212,7 +212,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const CHEWTLE    ; 0be //
 	const DREDNAW    ; 0bf //
 	const FALINKS    ; 0c0 //
-	const EISCUE     ; 0c1 //
+	const MON_0C1    ; 0c1 //
 	const WOOPER     ; 0c2
 	const QUAGSIRE   ; 0c3
 	const ESPEON     ; 0c4
