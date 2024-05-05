@@ -6070,11 +6070,8 @@ LoadEnemyMon:
 ; If it hasn't, we need to initialize the DVs
 ; (HP is initialized at the end of the battle)
 	push hl
-	call GenerateMonPersonality
-	ld a, b
-	ld [hli], a
-	ld a, c
-	ld [hli], a
+	farcall GenerateMonPersonality
+	push bc
 	call Random2
 	ldh a, [hRand16]
 	ld [hli], a
@@ -6082,6 +6079,11 @@ LoadEnemyMon:
 	ld [hli], a
 	call Random2
 	ldh a, [hRand16]
+	ld [hli], a
+	pop bc
+	ld a, b
+	ld [hli], a
+	ld a, c
 	ld [hl], a
 	pop hl
 ; We're done with DVs
