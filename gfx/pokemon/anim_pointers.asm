@@ -26,8 +26,8 @@ AnimationPointers:
 	dw ArbokAnimation
 	dw PikachuAnimation
 	dw RaichuAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
+	dw BuizelAnimation
+	dw FloatzelAnimation
 	dw NidoranFAnimation
 	dw NidorinaAnimation
 	dw NidoqueenAnimation
@@ -35,7 +35,7 @@ AnimationPointers:
 	dw NidorinoAnimation
 	dw NidokingAnimation
 	dw PlaceholderAnimation
-	dw PlaceholderAnimation
+	dw HonchkrowAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
@@ -48,8 +48,8 @@ AnimationPointers:
 	dw ParasAnimation
 	dw ParasectAnimation
 	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
+	dw CroagunkAnimation
+	dw ToxicroakAnimation
 	dw PlaceholderAnimation
 	dw MeowthAnimation
 	dw PersianAnimation
@@ -57,7 +57,7 @@ AnimationPointers:
 	dw GolduckAnimation
 	dw MankeyAnimation
 	dw PrimeapeAnimation
-	dw PlaceholderAnimation
+	dw WeavileAnimation
 	dw PlaceholderAnimation
 	dw PoliwagAnimation
 	dw PoliwhirlAnimation
@@ -65,12 +65,12 @@ AnimationPointers:
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
+	dw ElectivireAnimation
+	dw MagmortarAnimation
+	dw LeafeonAnimation
+	dw GlaceonAnimation
+	dw SylveonAnimation
+	dw PorygonZAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
 	dw GeodudeAnimation
@@ -86,6 +86,8 @@ AnimationPointers:
 	dw DoduoAnimation
 	dw DodrioAnimation
 	dw PlaceholderAnimation
+	dw CottoneeAnimation
+	dw WhimsicottAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
@@ -93,10 +95,8 @@ AnimationPointers:
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
+	dw JoltikAnimation
+	dw GalvantulaAnimation
 	dw KrabbyAnimation
 	dw KinglerAnimation
 	dw VoltorbAnimation
@@ -105,9 +105,9 @@ AnimationPointers:
 	dw ExeggutorAnimation
 	dw CuboneAnimation
 	dw MarowakAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
+	dw LitwickAnimation
+	dw LampentAnimation
+	dw ChandelureAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
@@ -121,9 +121,9 @@ AnimationPointers:
 	dw PlaceholderAnimation
 	dw StaryuAnimation
 	dw StarmieAnimation
-	dw PlaceholderAnimation
+	dw LarvestaAnimation
 	dw ScytherAnimation
-	dw PlaceholderAnimation
+	dw VolcaronaAnimation
 	dw ElectabuzzAnimation
 	dw MagmarAnimation
 	dw PlaceholderAnimation
@@ -180,7 +180,7 @@ AnimationPointers:
 	dw XatuAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
-	dw PlaceholderAnimation
+	dw MimikyuAnimation
 	dw BellossomAnimation
 	dw MarillAnimation
 	dw AzumarillAnimation
@@ -198,7 +198,7 @@ AnimationPointers:
 	dw EspeonAnimation
 	dw UmbreonAnimation
 	dw MurkrowAnimation
-	dw PlaceholderAnimation
+	dw WyrdeerAnimation
 	dw MisdreavusAnimation
 	dw UnownAnimation
 	dw PlaceholderAnimation
@@ -208,7 +208,7 @@ AnimationPointers:
 	dw DunsparceAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
-	dw PlaceholderAnimation
+	dw OrthwormAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
 	dw ScizorAnimation
@@ -237,7 +237,7 @@ AnimationPointers:
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
 	dw KokopelliAnimation
-	dw PlaceholderAnimation
+	dw FarigirafAnimation
 	dw ElekidAnimation
 	dw MagbyAnimation
 	dw MiltankAnimation
@@ -251,86 +251,86 @@ AnimationPointers:
 	dw LugiaAnimation
 	dw HoOhAnimation
 	dw CelebiAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
-	dw PlaceholderAnimation
+	dw TreeckoAnimation
+	dw GrovyleAnimation
+	dw SceptileAnimation
+	dw TorchicAnimation
+	dw CombuskenAnimation
+	dw BlazikenAnimation
+	dw MudkipAnimation
+	dw MarshtompAnimation
+	dw SwampertAnimation
+	dw PoochyenaAnimation
+	dw MightyenaAnimation
+	dw ZigzagoonAnimation
+	dw LinooneAnimation
+	dw WurmpleAnimation
+	dw SilcoonAnimation
+	dw BeautiflyAnimation
+	dw CascoonAnimation
+	dw DustoxAnimation
+	dw LotadAnimation
+	dw LombreAnimation
+	dw LudicoloAnimation
+	dw SeedotAnimation
+	dw NuzleafAnimation
+	dw ShiftryAnimation
+	dw WingullAnimation
+	dw PelipperAnimation
+	dw RaltsAnimation
+	dw KirliaAnimation
+	dw GardevoirAnimation
+	dw GalladeAnimation
+	dw ShroomishAnimation
+	dw BreloomAnimation
+	dw SlakothAnimation
+	dw VigorothAnimation
+	dw SlakingAnimation
+	dw AzurillAnimation
+	dw SkittyAnimation
+	dw DelcattyAnimation
+	dw SableyeAnimation
+	dw MawileAnimation
+	dw AronAnimation
+	dw LaironAnimation
+	dw AggronAnimation
+	dw PlaceholderAnimation
+	dw RoseliaAnimation
+	dw PlaceholderAnimation
+	dw GulpinAnimation
+	dw SwalotAnimation
+	dw WailmerAnimation
+	dw WailordAnimation
+	dw NumelAnimation
+	dw CameruptAnimation
+	dw TrapinchAnimation
+	dw VibravaAnimation
+	dw FlygonAnimation
+	dw CacneaAnimation
+	dw CacturneAnimation
+	dw SwabluAnimation
+	dw AltariaAnimation
+	dw ZangooseAnimation
+	dw SeviperAnimation
+	dw BarboachAnimation
+	dw WhiscashAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw PlaceholderAnimation
+	dw SnoruntAnimation
+	dw GlalieAnimation
+	dw FroslassAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation
 	dw PlaceholderAnimation

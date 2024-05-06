@@ -27,7 +27,7 @@ NatuFrames:       INCLUDE "gfx/pokemon/natu/frames.asm"
 XatuFrames:       INCLUDE "gfx/pokemon/xatu/frames.asm"
 ; -----------
 ; -----------
-; -----------
+MimikyuFrames: INCLUDE "gfx/pokemon/mimikyu/frames.asm"
 BellossomFrames:  INCLUDE "gfx/pokemon/bellossom/frames.asm"
 MarillFrames:     INCLUDE "gfx/pokemon/marill/frames.asm"
 AzumarillFrames:  INCLUDE "gfx/pokemon/azumarill/frames.asm"
@@ -45,7 +45,7 @@ QuagsireFrames:   INCLUDE "gfx/pokemon/quagsire/frames.asm"
 EspeonFrames:     INCLUDE "gfx/pokemon/espeon/frames.asm"
 UmbreonFrames:    INCLUDE "gfx/pokemon/umbreon/frames.asm"
 MurkrowFrames:    INCLUDE "gfx/pokemon/murkrow/frames.asm"
-; -----------
+WyrdeerFrames: INCLUDE "gfx/pokemon/wyrdeer/frames.asm"
 MisdreavusFrames: INCLUDE "gfx/pokemon/misdreavus/frames.asm"
 UnownFrames:      INCLUDE "gfx/pokemon/unown/frames.asm"
 ; -----------
@@ -55,7 +55,7 @@ GirafarigFrames:  INCLUDE "gfx/pokemon/girafarig/frames.asm"
 DunsparceFrames:  INCLUDE "gfx/pokemon/dunsparce/frames.asm"
 ; -----------
 ; -----------
-; -----------
+OrthwormFrames: INCLUDE "gfx/pokemon/orthworm/frames.asm"
 ; -----------
 ; -----------
 ScizorFrames:     INCLUDE "gfx/pokemon/scizor/frames.asm"
@@ -84,7 +84,7 @@ StantlerFrames:   INCLUDE "gfx/pokemon/stantler/frames.asm"
 ; -----------
 ; -----------
 KokopelliFrames:  INCLUDE "gfx/pokemon/kokopelli/frames.asm"
-; -----------
+FarigirafFrames: INCLUDE "gfx/pokemon/farigiraf/frames.asm"
 ElekidFrames:     INCLUDE "gfx/pokemon/elekid/frames.asm"
 MagbyFrames:      INCLUDE "gfx/pokemon/magby/frames.asm"
 MiltankFrames:    INCLUDE "gfx/pokemon/miltank/frames.asm"

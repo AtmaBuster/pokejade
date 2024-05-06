@@ -26,8 +26,8 @@ FramesPointers:
 	dba ArbokFrames
 	dba PikachuFrames
 	dba RaichuFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
+	dba BuizelFrames
+	dba FloatzelFrames
 	dba NidoranFFrames
 	dba NidorinaFrames
 	dba NidoqueenFrames
@@ -35,7 +35,7 @@ FramesPointers:
 	dba NidorinoFrames
 	dba NidokingFrames
 	dba PlaceholderFrames
-	dba PlaceholderFrames
+	dba HonchkrowFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
@@ -48,8 +48,8 @@ FramesPointers:
 	dba ParasFrames
 	dba ParasectFrames
 	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
+	dba CroagunkFrames
+	dba ToxicroakFrames
 	dba PlaceholderFrames
 	dba MeowthFrames
 	dba PersianFrames
@@ -57,7 +57,7 @@ FramesPointers:
 	dba GolduckFrames
 	dba MankeyFrames
 	dba PrimeapeFrames
-	dba PlaceholderFrames
+	dba WeavileFrames
 	dba PlaceholderFrames
 	dba PoliwagFrames
 	dba PoliwhirlFrames
@@ -65,12 +65,12 @@ FramesPointers:
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
+	dba ElectivireFrames
+	dba MagmortarFrames
+	dba LeafeonFrames
+	dba GlaceonFrames
+	dba SylveonFrames
+	dba PorygonZFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba GeodudeFrames
@@ -86,6 +86,8 @@ FramesPointers:
 	dba DoduoFrames
 	dba DodrioFrames
 	dba PlaceholderFrames
+	dba CottoneeFrames
+	dba WhimsicottFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
@@ -93,10 +95,8 @@ FramesPointers:
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
+	dba JoltikFrames
+	dba GalvantulaFrames
 	dba KrabbyFrames
 	dba KinglerFrames
 	dba VoltorbFrames
@@ -105,9 +105,9 @@ FramesPointers:
 	dba ExeggutorFrames
 	dba CuboneFrames
 	dba MarowakFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
+	dba LitwickFrames
+	dba LampentFrames
+	dba ChandelureFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
@@ -121,9 +121,9 @@ FramesPointers:
 	dba PlaceholderFrames
 	dba StaryuFrames
 	dba StarmieFrames
-	dba PlaceholderFrames
+	dba LarvestaFrames
 	dba ScytherFrames
-	dba PlaceholderFrames
+	dba VolcaronaFrames
 	dba ElectabuzzFrames
 	dba MagmarFrames
 	dba PlaceholderFrames
@@ -180,7 +180,7 @@ FramesPointers:
 	dba XatuFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
-	dba PlaceholderFrames
+	dba MimikyuFrames
 	dba BellossomFrames
 	dba MarillFrames
 	dba AzumarillFrames
@@ -198,7 +198,7 @@ FramesPointers:
 	dba EspeonFrames
 	dba UmbreonFrames
 	dba MurkrowFrames
-	dba PlaceholderFrames
+	dba WyrdeerFrames
 	dba MisdreavusFrames
 	dba UnownFrames
 	dba PlaceholderFrames
@@ -208,7 +208,7 @@ FramesPointers:
 	dba DunsparceFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
-	dba PlaceholderFrames
+	dba OrthwormFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba ScizorFrames
@@ -237,7 +237,7 @@ FramesPointers:
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba KokopelliFrames
-	dba PlaceholderFrames
+	dba FarigirafFrames
 	dba ElekidFrames
 	dba MagbyFrames
 	dba MiltankFrames
@@ -251,86 +251,86 @@ FramesPointers:
 	dba LugiaFrames
 	dba HoOhFrames
 	dba CelebiFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
-	dba PlaceholderFrames
+	dba TreeckoFrames
+	dba GrovyleFrames
+	dba SceptileFrames
+	dba TorchicFrames
+	dba CombuskenFrames
+	dba BlazikenFrames
+	dba MudkipFrames
+	dba MarshtompFrames
+	dba SwampertFrames
+	dba PoochyenaFrames
+	dba MightyenaFrames
+	dba ZigzagoonFrames
+	dba LinooneFrames
+	dba WurmpleFrames
+	dba SilcoonFrames
+	dba BeautiflyFrames
+	dba CascoonFrames
+	dba DustoxFrames
+	dba LotadFrames
+	dba LombreFrames
+	dba LudicoloFrames
+	dba SeedotFrames
+	dba NuzleafFrames
+	dba ShiftryFrames
+	dba WingullFrames
+	dba PelipperFrames
+	dba RaltsFrames
+	dba KirliaFrames
+	dba GardevoirFrames
+	dba GalladeFrames
+	dba ShroomishFrames
+	dba BreloomFrames
+	dba SlakothFrames
+	dba VigorothFrames
+	dba SlakingFrames
+	dba AzurillFrames
+	dba SkittyFrames
+	dba DelcattyFrames
+	dba SableyeFrames
+	dba MawileFrames
+	dba AronFrames
+	dba LaironFrames
+	dba AggronFrames
+	dba PlaceholderFrames
+	dba RoseliaFrames
+	dba PlaceholderFrames
+	dba GulpinFrames
+	dba SwalotFrames
+	dba WailmerFrames
+	dba WailordFrames
+	dba NumelFrames
+	dba CameruptFrames
+	dba TrapinchFrames
+	dba VibravaFrames
+	dba FlygonFrames
+	dba CacneaFrames
+	dba CacturneFrames
+	dba SwabluFrames
+	dba AltariaFrames
+	dba ZangooseFrames
+	dba SeviperFrames
+	dba BarboachFrames
+	dba WhiscashFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba SnoruntFrames
+	dba GlalieFrames
+	dba FroslassFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
