@@ -227,6 +227,7 @@ ItemEffectsKeyItems:
 	dw NoEffect           ; PASS
 	dw SquirtbottleEffect ; SQUIRTBOTTLE
 	dw NoEffect           ; RAINBOW_WING
+	dw NoEffect           ; SHINY_CHARM
 .IndirectEnd:
 
 ItemEffectsBalls:
@@ -2157,24 +2158,30 @@ EscapeRopeEffect:
 	ret
 
 SuperRepelEffect:
-	ld b, 200
+	lb bc, 200, EFF_SUPER_REPEL
 	jr UseRepel
 
 MaxRepelEffect:
-	ld b, 250
+	lb bc, 250, EFF_MAX_REPEL
 	jr UseRepel
 
 RepelEffect:
-	ld b, 100
+	lb bc, 100, EFF_REPEL
 
 UseRepel:
-	ld a, [wRepelEffect]
+	ld a, [wRepelType]
 	and a
+	jr z, .set_repel
+	cp EFF_LURE
+	jr nc, .set_repel
 	ld hl, RepelUsedEarlierIsStillInEffectText
 	jmp nz, PrintText
 
+.set_repel
 	ld a, b
 	ld [wRepelEffect], a
+	ld a, c
+	ld [wRepelType], a
 	jmp UseItemText
 
 RepelUsedEarlierIsStillInEffectText:

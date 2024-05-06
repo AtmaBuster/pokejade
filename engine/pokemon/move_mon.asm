@@ -1439,6 +1439,36 @@ InitNickname:
 GenerateMonPersonality:
 	push de
 	push hl
+
+; get shiny rolls
+	ld bc, 1
+	push bc
+	ld a, SUPER_LUCK
+	call CheckFieldAbility
+	pop bc
+	jr nc, .no_super_luck
+	inc bc
+.no_super_luck
+	ld hl, SHINY_CHARM
+	call GetItemIDFromIndex
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+	jr nc, .no_shiny_charm
+	inc bc
+	inc bc
+.no_shiny_charm
+	ld a, [wRepelType]
+	cp EFF_LURE
+	jr c, .no_lure
+	inc bc
+	cp EFF_SUPER_LURE
+	jr c, .no_lure
+	inc bc
+.no_lure
+
+.shiny_roll_loop
+	push bc
 	call Random2
 	ldh a, [hRand16]
 	ld [wPersonalityValueStore], a
@@ -1481,7 +1511,16 @@ GenerateMonPersonality:
 	jr nc, .not_shiny
 	ld hl, wPersonalityByteStore
 	set MON_SHINY_F, [hl]
+	pop bc
+	jr .shiny_ok
+
 .not_shiny
+	pop bc
+	dec bc
+	ld a, b
+	or c
+	jr nz, .shiny_roll_loop
+.shiny_ok
 ; get nature
 	ld a, [wPersonalityValueStore + 3]
 	ld l, a

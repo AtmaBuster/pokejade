@@ -400,7 +400,7 @@ ChooseWildEncounter:
 
 INCLUDE "data/wild/probabilities.asm"
 
-CheckRepelEffect::
+CheckRepelEffect:: ; TO-DO: Lures
 ; If there is no active Repel, there's no need to be here.
 	ld a, [wRepelEffect]
 	and a

@@ -359,3 +359,13 @@ DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
 	const NAZOH_DEX_UNLOCK_F    ; 0
 	const HOLON_DEX_UNLOCK_F    ; 1
 	const NATIONAL_DEX_UNLOCK_F ; 2
+
+; wRepelType
+	const_def
+	const EFF_NO_REPEL
+	const EFF_REPEL
+	const EFF_SUPER_REPEL
+	const EFF_MAX_REPEL
+	const EFF_LURE
+	const EFF_SUPER_LURE
+	const EFF_MAX_LURE

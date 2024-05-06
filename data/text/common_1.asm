@@ -974,8 +974,19 @@ _BugCatchingContestIsOverText::
 	done
 
 _RepelWoreOffText::
-	text "REPEL's effect"
-	line "wore off."
+	text "The @"
+	text_ram wStringBuffer3
+	text "'s"
+	line "effect wore off."
+	done
+
+_UseAnotherRepelText::
+	text "The @"
+	text_ram wStringBuffer3
+	text "'s"
+	line "effect wore off."
+
+	para "Use another?"
 	done
 
 _PlayerFoundItemText::

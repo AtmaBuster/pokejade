@@ -976,11 +976,38 @@ DoRepelStep:
 	ld [wRepelEffect], a
 	ret nz
 
+	ld a, [wRepelType]
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, .RepelItems
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetItemIDFromIndex
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+
 	ld a, BANK(RepelWoreOffScript)
 	ld hl, RepelWoreOffScript
+	jr nc, .got_script
+	ld a, BANK(UseAnotherRepelScript)
+	ld hl, UseAnotherRepelScript
+.got_script
 	call CallScript
 	scf
 	ret
+
+.RepelItems
+	dw REPEL
+	dw SUPER_REPEL
+	dw MAX_REPEL
+	dw MASTER_BALL ; LURE
+	dw MASTER_BALL ; SUPER_LURE
+	dw MASTER_BALL ; MAX_LURE
 
 DoPlayerEvent:
 	ld a, [wScriptRunning]

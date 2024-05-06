@@ -207,6 +207,7 @@ ItemDescriptionsKeyItems:
 	dw PassDesc         ; 0113
 	dw SquirtBottleDesc ; 0114
 	dw RainbowWingDesc  ; 0115
+	dw ShinyCharmDesc   ; 0116
 .IndirectEnd:
 
 ItemDescriptionsBalls:
@@ -884,3 +885,7 @@ MusicMailDesc:
 MirageMailDesc:
 	db   "MEW-print MAIL."
 	next "(HOLD)@"
+
+ShinyCharmDesc:
+	db   "Attracts shiny"
+	next "#MON.@"

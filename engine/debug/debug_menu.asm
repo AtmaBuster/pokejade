@@ -1243,6 +1243,10 @@ Debug_FillBag:
 	ld hl, wBalls
 	ld [hl], a
 
+	ldh a, [hJoyDown]
+	and SELECT
+	ret nz ; SELECT to empty
+
 	call .FillKeyItems
 	call .FillBalls
 	call .FillItems

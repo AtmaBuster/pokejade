@@ -191,7 +191,7 @@ SetMobileErrorCode:
 	ld [wMobileErrorCodeBuffer + 1], a
 	ld [wMobileErrorCodeBuffer + 2], a
 	ld a, MOBILEAPI_05
-	call MobileAPI
+	;call MobileAPI
 	ld a, [wc3f0]
 	ld [wc319], a
 	ld a, [wcd34]
@@ -1355,7 +1355,7 @@ Function11a5b9:
 	lb bc, $6, $14
 	hlcoord 0, 0
 	lb bc, $4, $12
-	call Function3eea
+	;call Function3eea
 	farcall HDMATransferTilemapAndAttrmap_Overworld
 	call UpdateSprites
 	ld c, $0
@@ -1378,7 +1378,7 @@ Function11a5f5:
 	lb bc, $5, $6
 	hlcoord 14, 6
 	lb bc, $3, $4
-	call Function3eea
+	;call Function3eea
 	hlcoord 16, 7
 	ld de, String_11a2cf
 	rst PlaceString
