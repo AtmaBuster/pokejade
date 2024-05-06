@@ -1542,15 +1542,19 @@ GenerateMonPersonality:
 	jr z, .no_hidden_ability
 	inc hl
 	inc hl
+	jr .got_abililty
+
 .no_hidden_ability
 	ld a, [wPersonalityValueStore + 2]
 	and 1
-	jr z, .first_ability
+	jr z, .got_abililty
 	inc hl
-.first_ability
+.got_abililty
 	ld c, [hl]
 	ld a, [wPersonalityByteStore]
 	ld b, a
+	xor a
+	ld [wGenerateMonHiddenAbility], a
 	pop hl
 	pop de
 	ret

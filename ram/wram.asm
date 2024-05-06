@@ -154,14 +154,13 @@ wPlayerMovement:: db
 wLinkOtherPlayerGender:: db
 wGenerateMonBall:: db
 wGenerateMonHiddenAbility:: db
+wWildMonDeltaType:: db
 
 wMovementObject::
 	db
 wMovementDataBank:: db
 wMovementDataAddress:: dw
 wIndexedMovement2Pointer:: dw
-
-	ds 1
 
 wContinueReadingMovement:: db
 

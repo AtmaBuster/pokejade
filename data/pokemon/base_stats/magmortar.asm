@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F25 ; gender ratio
 	db 25 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/magmortar/front.dimensions"
 	db FLAME_BODY, FLAME_BODY, VITAL_SPIRIT ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate

@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
 	db 35 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/sylveon/front.dimensions"
 	db CUTE_CHARM, CUTE_CHARM, PIXILATE ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate

@@ -5940,15 +5940,23 @@ LoadEnemyMon:
 ; Check for Trainer Battle, if so, copy delta species data
 	ld a, [wBattleMode]
 	cp TRAINER_BATTLE
-	jr nz, .skip_delta_check
+	jr nz, .skip_trainer_delta_check
 
 	ld a, [wCurPartyMon]
 	ld hl, wOTPartyMon1CaughtBall
 	call GetPartyLocation
 	ld a, [hl]
-	ld [wCurDeltaIndex], a
+	jr .got_delta
 
-.skip_delta_check
+.skip_trainer_delta_check
+	ld a, [wBattleType]
+	cp BATTLETYPE_FORCESHINY
+	ld a, DELTA_GYARADOS_FIRE_DRAGON
+	jr z, .got_delta
+	ld a, [wWildMonDeltaType]
+
+.got_delta
+	ld [wCurDeltaIndex], a
 ; Grab the BaseData for this species
 	call GetBaseData
 
@@ -6031,7 +6039,7 @@ LoadEnemyMon:
 	inc de
 	dec c
 	jr nz, .restore_dvs_loop
-	jr .Happiness
+	jp .Happiness
 
 .InitDVs:
 ; Trainer DVs
@@ -6101,8 +6109,13 @@ LoadEnemyMon:
 	cp BATTLETYPE_FORCESHINY
 	jr nz, .GeneratePID
 
-	ld e, 1 << MON_DELTA_SHIFT
-	lb bc, MON_SHINY, INTIMIDATE
+	farcall GenerateMonPersonality
+	ld a, b
+	or MON_SHINY
+	ld b, a
+	ld e, DELTA_GYARADOS_FIRE_DRAGON
+	xor a
+	ld [wWildMonDeltaType], a
 	jr .UpdateDVs
 
 .DoRoamMonPIDDV:
@@ -6133,7 +6146,10 @@ LoadEnemyMon:
 
 .GeneratePID:
 	farcall GenerateMonPersonality
-	ld e, 0 ; TO-DO
+	ld a, [wWildMonDeltaType]
+	ld e, a
+	xor a
+	ld [wWildMonDeltaType], a
 .UpdateDVs:
 	ld hl, wEnemyMonPersonality
 	ld a, b
@@ -6202,23 +6218,22 @@ LoadEnemyMon:
 
 ; Grab HP
 	call GetRoamMonHP
-	ld a, [hl]
+	ld a, [hli]
+	or [hl]
 ; Check if it's been initialized again
 	and a
 	jr z, .InitRoamHP
 ; Update from the struct if it has
-	ld a, [hli]
-	ld [wEnemyMonHP], a
-	ld a, [hl]
+	ld a, [hld]
 	ld [wEnemyMonHP + 1], a
+	ld a, [hl]
+	ld [wEnemyMonHP], a
 	jr .Moves
 
 .InitRoamHP:
-; HP only uses the lo byte in the RoamMon struct since
-; Raikou and Entei will have < 256 hp at level 40
-	ld a, [wEnemyMonHP]
-	ld [hli], a
 	ld a, [wEnemyMonHP + 1]
+	ld [hld], a
+	ld a, [wEnemyMonHP]
 	ld [hl], a
 	jr .Moves
 
@@ -8469,13 +8484,17 @@ BattleEnd_HandleRoamMons:
 	and $f
 	jr z, .caught_or_defeated_roam_mon ; WIN
 	call GetRoamMonHP
+	ld a, [wEnemyMonHP]
+	ld [hli], a
 	ld a, [wEnemyMonHP + 1]
 	ld [hl], a
 	jr .update_roam_mons
 
 .caught_or_defeated_roam_mon
 	call GetRoamMonHP
-	ld [hl], 0
+	xor a
+	ld [hli], a
+	ld [hl], a
 	call GetRoamMonMapGroup
 	ld [hl], GROUP_N_A
 	call GetRoamMonMapNumber

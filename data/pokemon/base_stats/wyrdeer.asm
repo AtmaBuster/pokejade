@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/wyrdeer/front.dimensions"
 	db INTIMIDATE, FRISK, SAP_SIPPER ; abilities
 	db 0 ; unused
 	db GROWTH_SLOW ; growth rate

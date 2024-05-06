@@ -65,10 +65,10 @@ PokemonPicPointers::
 	dba PikachuBackpic
 	dba RaichuFrontpic
 	dba RaichuBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba BuizelFrontpic
+	dba BuizelBackpic
+	dba FloatzelFrontpic
+	dba FloatzelBackpic
 	dba NidoranFFrontpic
 	dba NidoranFBackpic
 	dba NidorinaFrontpic
@@ -83,8 +83,8 @@ PokemonPicPointers::
 	dba NidokingBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba HonchkrowFrontpic
+	dba HonchkrowBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
@@ -109,10 +109,10 @@ PokemonPicPointers::
 	dba ParasectBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba CroagunkFrontpic
+	dba CroagunkBackpic
+	dba ToxicroakFrontpic
+	dba ToxicroakBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
 	dba MeowthFrontpic
@@ -127,8 +127,8 @@ PokemonPicPointers::
 	dba MankeyBackpic
 	dba PrimeapeFrontpic
 	dba PrimeapeBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba WeavileFrontpic
+	dba WeavileBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
 	dba PoliwagFrontpic
@@ -143,18 +143,18 @@ PokemonPicPointers::
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba ElectivireFrontpic
+	dba ElectivireBackpic
+	dba MagmortarFrontpic
+	dba MagmortarBackpic
+	dba LeafeonFrontpic
+	dba LeafeonBackpic
+	dba GlaceonFrontpic
+	dba GlaceonBackpic
+	dba SylveonFrontpic
+	dba SylveonBackpic
+	dba PorygonZFrontpic
+	dba PorygonZBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
@@ -185,6 +185,10 @@ PokemonPicPointers::
 	dba DodrioBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
+	dba CottoneeFrontpic
+	dba CottoneeBackpic
+	dba WhimsicottFrontpic
+	dba WhimsicottBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
@@ -199,14 +203,10 @@ PokemonPicPointers::
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba JoltikFrontpic
+	dba JoltikBackpic
+	dba GalvantulaFrontpic
+	dba GalvantulaBackpic
 	dba KrabbyFrontpic
 	dba KrabbyBackpic
 	dba KinglerFrontpic
@@ -223,12 +223,12 @@ PokemonPicPointers::
 	dba CuboneBackpic
 	dba MarowakFrontpic
 	dba MarowakBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba LitwickFrontpic
+	dba LitwickBackpic
+	dba LampentFrontpic
+	dba LampentBackpic
+	dba ChandelureFrontpic
+	dba ChandelureBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
@@ -255,12 +255,12 @@ PokemonPicPointers::
 	dba StaryuBackpic
 	dba StarmieFrontpic
 	dba StarmieBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba LarvestaFrontpic
+	dba LarvestaBackpic
 	dba ScytherFrontpic
 	dba ScytherBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba VolcaronaFrontpic
+	dba VolcaronaBackpic
 	dba ElectabuzzFrontpic
 	dba ElectabuzzBackpic
 	dba MagmarFrontpic
@@ -373,8 +373,8 @@ PokemonPicPointers::
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba MimikyuFrontpic
+	dba MimikyuBackpic
 	dba BellossomFrontpic
 	dba BellossomBackpic
 	dba MarillFrontpic
@@ -409,8 +409,8 @@ PokemonPicPointers::
 	dba UmbreonBackpic
 	dba MurkrowFrontpic
 	dba MurkrowBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba WyrdeerFrontpic
+	dba WyrdeerBackpic
 	dba MisdreavusFrontpic
 	dba MisdreavusBackpic
 
@@ -432,8 +432,8 @@ PokemonPicPointers::
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba OrthwormFrontpic
+	dba OrthwormBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
@@ -490,8 +490,8 @@ PokemonPicPointers::
 	dba PlaceholderBackpic
 	dba KokopelliFrontpic
 	dba KokopelliBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba FarigirafFrontpic
+	dba FarigirafBackpic
 	dba ElekidFrontpic
 	dba ElekidBackpic
 	dba MagbyFrontpic
@@ -518,6 +518,132 @@ PokemonPicPointers::
 	dba HoOhBackpic
 	dba CelebiFrontpic
 	dba CelebiBackpic
+	dba TreeckoFrontpic
+	dba TreeckoBackpic
+	dba GrovyleFrontpic
+	dba GrovyleBackpic
+	dba SceptileFrontpic
+	dba SceptileBackpic
+	dba TorchicFrontpic
+	dba TorchicBackpic
+	dba CombuskenFrontpic
+	dba CombuskenBackpic
+	dba BlazikenFrontpic
+	dba BlazikenBackpic
+	dba MudkipFrontpic
+	dba MudkipBackpic
+	dba MarshtompFrontpic
+	dba MarshtompBackpic
+	dba SwampertFrontpic
+	dba SwampertBackpic
+	dba PoochyenaFrontpic
+	dba PoochyenaBackpic
+	dba MightyenaFrontpic
+	dba MightyenaBackpic
+	dba ZigzagoonFrontpic
+	dba ZigzagoonBackpic
+	dba LinooneFrontpic
+	dba LinooneBackpic
+	dba WurmpleFrontpic
+	dba WurmpleBackpic
+	dba SilcoonFrontpic
+	dba SilcoonBackpic
+	dba BeautiflyFrontpic
+	dba BeautiflyBackpic
+	dba CascoonFrontpic
+	dba CascoonBackpic
+	dba DustoxFrontpic
+	dba DustoxBackpic
+	dba LotadFrontpic
+	dba LotadBackpic
+	dba LombreFrontpic
+	dba LombreBackpic
+	dba LudicoloFrontpic
+	dba LudicoloBackpic
+	dba SeedotFrontpic
+	dba SeedotBackpic
+	dba NuzleafFrontpic
+	dba NuzleafBackpic
+	dba ShiftryFrontpic
+	dba ShiftryBackpic
+	dba WingullFrontpic
+	dba WingullBackpic
+	dba PelipperFrontpic
+	dba PelipperBackpic
+	dba RaltsFrontpic
+	dba RaltsBackpic
+	dba KirliaFrontpic
+	dba KirliaBackpic
+	dba GardevoirFrontpic
+	dba GardevoirBackpic
+	dba GalladeFrontpic
+	dba GalladeBackpic
+	dba ShroomishFrontpic
+	dba ShroomishBackpic
+	dba BreloomFrontpic
+	dba BreloomBackpic
+	dba SlakothFrontpic
+	dba SlakothBackpic
+	dba VigorothFrontpic
+	dba VigorothBackpic
+	dba SlakingFrontpic
+	dba SlakingBackpic
+	dba AzurillFrontpic
+	dba AzurillBackpic
+	dba SkittyFrontpic
+	dba SkittyBackpic
+	dba DelcattyFrontpic
+	dba DelcattyBackpic
+	dba SableyeFrontpic
+	dba SableyeBackpic
+	dba MawileFrontpic
+	dba MawileBackpic
+	dba AronFrontpic
+	dba AronBackpic
+	dba LaironFrontpic
+	dba LaironBackpic
+	dba AggronFrontpic
+	dba AggronBackpic
+	dba PlaceholderFrontpic
+	dba PlaceholderBackpic
+	dba RoseliaFrontpic
+	dba RoseliaBackpic
+	dba PlaceholderFrontpic
+	dba PlaceholderBackpic
+	dba GulpinFrontpic
+	dba GulpinBackpic
+	dba SwalotFrontpic
+	dba SwalotBackpic
+	dba WailmerFrontpic
+	dba WailmerBackpic
+	dba WailordFrontpic
+	dba WailordBackpic
+	dba NumelFrontpic
+	dba NumelBackpic
+	dba CameruptFrontpic
+	dba CameruptBackpic
+	dba TrapinchFrontpic
+	dba TrapinchBackpic
+	dba VibravaFrontpic
+	dba VibravaBackpic
+	dba FlygonFrontpic
+	dba FlygonBackpic
+	dba CacneaFrontpic
+	dba CacneaBackpic
+	dba CacturneFrontpic
+	dba CacturneBackpic
+	dba SwabluFrontpic
+	dba SwabluBackpic
+	dba AltariaFrontpic
+	dba AltariaBackpic
+	dba ZangooseFrontpic
+	dba ZangooseBackpic
+	dba SeviperFrontpic
+	dba SeviperBackpic
+	dba BarboachFrontpic
+	dba BarboachBackpic
+	dba WhiscashFrontpic
+	dba WhiscashBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
@@ -546,138 +672,12 @@ PokemonPicPointers::
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
-	dba PlaceholderFrontpic
-	dba PlaceholderBackpic
+	dba SnoruntFrontpic
+	dba SnoruntBackpic
+	dba GlalieFrontpic
+	dba GlalieBackpic
+	dba FroslassFrontpic
+	dba FroslassBackpic
 	dba PlaceholderFrontpic
 	dba PlaceholderBackpic
 	dba PlaceholderFrontpic

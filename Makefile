@@ -162,8 +162,8 @@ gfx/pokemon/%/frames.asm: gfx/pokemon/%/front.animated.tilemap gfx/pokemon/%/fro
 
 ### Misc file-specific graphics rules
 
-gfx/pokemon/%/back.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/front.2bpp: rgbgfx += -c embedded
+gfx/pokemon/%/back.2bpp: rgbgfx += -Z
+gfx/pokemon/%/front.2bpp: rgbgfx += 
 
 gfx/trainers/%.2bpp: rgbgfx += -Z -c embedded
 
@@ -279,7 +279,7 @@ gfx/mobile/stadium2_n64.2bpp: tools/gfx += --trim-whitespace
 	$Qtools/sub_2bpp.sh $< 128 128 > $@
 
 %.gbcpal: %.png
-	$(RGBGFX) -c embedded -p $@ $<
+	$(RGBGFX) -p $@ $<
 
 %.dimensions: %.png
 	tools/png_dimensions $< $@

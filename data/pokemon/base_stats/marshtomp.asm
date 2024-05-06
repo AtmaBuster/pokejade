@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
 	db 20 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/marshtomp/front.dimensions"
 	db TORRENT, TORRENT, DAMP ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate

@@ -56,7 +56,8 @@ FindNest:
 	ld hl, JohtoWaterWildMons
 	call .FindWater
 	call .RoamMon1
-	jmp .RoamMon2
+	call .RoamMon2
+	jmp .RoamMon3
 
 .kanto
 	decoord 0, 0
@@ -191,6 +192,22 @@ FindNest:
 	ld a, [wRoamMon2MapGroup]
 	ld b, a
 	ld a, [wRoamMon2MapNumber]
+	ld c, a
+	call .AppendNest
+	ret nc
+	ld [de], a
+	inc de
+	ret
+
+.RoamMon3:
+	ld a, [wRoamMon3Species]
+	ld b, a
+	ld a, [wNamedObjectIndex]
+	cp b
+	ret nz
+	ld a, [wRoamMon3MapGroup]
+	ld b, a
+	ld a, [wRoamMon3MapNumber]
 	ld c, a
 	call .AppendNest
 	ret nc
@@ -578,12 +595,12 @@ CheckEncounterRoamMon:
 	jr nc, .DontEncounterRoamMon
 	and %00000011 ; Of that, a 3/4 chance.  Running total: 75/256, or around 29.3%.
 	jr z, .DontEncounterRoamMon
-	dec a ; 1/3 chance that it's Entei, 1/3 chance that it's Raikou
+	dec a
 ; Compare its current location with yours
 	ld hl, wRoamMon1MapGroup
 	ld c, a
 	ld b, 0
-	ld a, 7 ; length of the roam_struct
+	ld a, 11 ; length of the roam_struct
 	rst AddNTimes
 	ld a, d
 	cp [hl]

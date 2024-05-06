@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/buizel/front.dimensions"
 	db SWIFT_SWIM, SWIFT_SWIM, WATER_VEIL ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate

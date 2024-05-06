@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 35 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/orthworm/front.dimensions"
 	db EARTH_EATER, EARTH_EATER, SAND_VEIL ; abilities
 	db 0 ; unused
 	db GROWTH_SLOW ; growth rate

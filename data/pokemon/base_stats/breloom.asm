@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 15 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/breloom/front.dimensions"
 	db EFFECT_SPORE, POISON_HEAL, TECHNICIAN ; abilities
 	db 0 ; unused
 	db GROWTH_FLUCTUATING ; growth rate

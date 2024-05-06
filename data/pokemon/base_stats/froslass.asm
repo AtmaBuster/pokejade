@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F100 ; gender ratio
 	db 20 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/froslass/front.dimensions"
 	db SNOW_CLOAK, SNOW_CLOAK, CURSED_BODY ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate

@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/chandelure/front.dimensions"
 	db FLASH_FIRE, FLAME_BODY, SHADOW_TAG ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate

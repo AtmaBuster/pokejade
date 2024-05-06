@@ -2982,6 +2982,16 @@ Debug_PokeEdit_GetItemSection:
 	ret
 
 Debug_ATMA:
+	ldh a, [hJoyDown]
+	and SELECT
+	jr z, .no_select
+	ld hl, wRoamMon1
+	ld bc, 11 * 3
+	xor a
+	rst ByteFill
+	ret
+
+.no_select
 	ld hl, wRoamMon1
 	ld de, LATIAS
 	call .init

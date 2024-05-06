@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/swalot/front.dimensions"
 	db LIQUID_OOZE, STICKY_HOLD, GLUTTONY ; abilities
 	db 0 ; unused
 	db GROWTH_FLUCTUATING ; growth rate

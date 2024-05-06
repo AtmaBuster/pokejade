@@ -10,7 +10,7 @@
 	dw NO_ITEM, NO_ITEM ; items
 	db GENDER_F25 ; gender ratio
 	db 25 ; step cycles to hatch
-	INCBIN "gfx/pokemon/placeholder/front.dimensions"
+	INCBIN "gfx/pokemon/electivire/front.dimensions"
 	db MOTOR_DRIVE, MOTOR_DRIVE, VITAL_SPIRIT ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate
