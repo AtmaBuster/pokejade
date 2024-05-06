@@ -1,6 +1,8 @@
 SECTION "Mon Icons 1", ROMX
 
 NullIcon::
+PlaceholderIcon:: INCBIN "gfx/icons/placeholder.2bpp"
+
 BulbasaurIcon::  INCBIN "gfx/icons/bulbasaur.2bpp"
 IvysaurIcon::    INCBIN "gfx/icons/ivysaur.2bpp"
 VenusaurIcon::   INCBIN "gfx/icons/venusaur.2bpp"
@@ -128,11 +130,11 @@ JynxIcon::       INCBIN "gfx/icons/jynx.2bpp"
 ElectabuzzIcon:: INCBIN "gfx/icons/electabuzz.2bpp"
 MagmarIcon::     INCBIN "gfx/icons/magmar.2bpp"
 PinsirIcon::     INCBIN "gfx/icons/pinsir.2bpp"
-TaurosIcon::     INCBIN "gfx/icons/tauros.2bpp"
 
 
 SECTION "Mon Icons 2", ROMX
 
+TaurosIcon::     INCBIN "gfx/icons/tauros.2bpp"
 MagikarpIcon::   INCBIN "gfx/icons/magikarp.2bpp"
 GyaradosIcon::   INCBIN "gfx/icons/gyarados.2bpp"
 LaprasIcon::     INCBIN "gfx/icons/lapras.2bpp"

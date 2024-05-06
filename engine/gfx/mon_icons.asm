@@ -4,13 +4,19 @@ LoadOverworldMonIcon:
 	; fallthrough
 _LoadOverworldMonIcon:
 	call GetPokemonIndexFromID
-	add hl, hl
+	ld d, h
+	ld e, l
+	add hl, de
+	add hl, de
 	ld de, IconPointers
 	add hl, de
 	ld a, [hli]
+	ld b, a
+	ld c, 8
+	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	jmp GetIconBank
+	ret
 
 SetMenuMonIconColor:
 	push hl
@@ -464,37 +470,26 @@ endr
 	ld a, [wCurIcon]
 	cp EGG
 	push hl
-	ld hl, IconPointers - (3 * 2)
+	ld hl, IconPointers - (3 * 3)
 	jr z, .is_egg
 	call GetPokemonIndexFromID
-	add hl, hl
+	ld d, h
+	ld e, l
+	add hl, de
+	add hl, de
 	ld de, IconPointers
 	add hl, de
 .is_egg
+	ld a, [hli]
+	ld b, a
+	ld c, 8
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
 	pop hl
 
-	call GetIconBank
 	call GetGFXUnlessMobile
 
-	pop hl
-	ret
-
-GetIconBank:
-	push hl
-	ld a, [wCurIcon]
-	call GetPokemonIndexFromID
-	ld a, h
-	cp HIGH(MAGIKARP) ; first species in "Mon Icons 2"
-	lb bc, BANK("Mon Icons 1"), 8
-	jr c, .return
-	ld a, l
-	cp LOW(MAGIKARP)
-	jr c, .return
-	ld b, BANK("Mon Icons 2")
-.return
 	pop hl
 	ret
 
