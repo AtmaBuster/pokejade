@@ -1442,6 +1442,7 @@ GenerateMonPersonality:
 
 ; get shiny rolls
 	ld bc, 1
+; check lead mon for Super Luck
 	push bc
 	ld a, SUPER_LUCK
 	call CheckFieldAbility
@@ -1449,6 +1450,7 @@ GenerateMonPersonality:
 	jr nc, .no_super_luck
 	inc bc
 .no_super_luck
+; check Shiny Charm
 	ld hl, SHINY_CHARM
 	call GetItemIDFromIndex
 	ld [wCurItem], a
@@ -1458,14 +1460,21 @@ GenerateMonPersonality:
 	inc bc
 	inc bc
 .no_shiny_charm
+; check for active Lure
 	ld a, [wRepelType]
 	cp EFF_LURE
 	jr c, .no_lure
 	inc bc
-	cp EFF_SUPER_LURE
-	jr c, .no_lure
-	inc bc
 .no_lure
+; check if any shiny mon is in storage
+	ld a, [wShinyEncounterStorage]
+	and a
+	jr z, .no_shiny_in_storage
+	ld hl, 32
+	add hl, bc
+	ld b, h
+	ld c, l
+.no_shiny_in_storage
 
 .shiny_roll_loop
 	push bc
@@ -1509,9 +1518,27 @@ GenerateMonPersonality:
 	ld a, c
 	cp 8
 	jr nc, .not_shiny
+	pop bc
+; if shiny encounters are disabled, skip this, and remember another shiny mon to give to the player
+	ld a, [wShinyEncountersEnabled]
+	and a
+	jr nz, .set_shiny
+	ld a, [wShinyEncounterStorage]
+	cp 255
+	jr z, .shiny_ok ; counter is maxxed out (unlikely!)
+	inc a
+	ld [wShinyEncounterStorage], a
+	jr .shiny_ok
+
+.set_shiny
+	ld a, [wShinyEncounterStorage]
+	and a
+	jr z, .storage_empty
+	dec a
+	ld [wShinyEncounterStorage], a
+.storage_empty
 	ld hl, wPersonalityByteStore
 	set MON_SHINY_F, [hl]
-	pop bc
 	jr .shiny_ok
 
 .not_shiny

@@ -2986,11 +2986,13 @@ wParkBallsRemaining::
 wSafariBallsRemaining:: db
 wSafariTimeRemaining:: dw
 
-wPhoneList:: ds CONTACT_LIST_SIZE
+wPhoneList:: ds CONTACT_LIST_SIZE - 2
 
 wLuckyNumberShowFlag:: db
 wLuckyIDNumber:: dw
 
+wShinyEncountersEnabled:: db
+wShinyEncounterStorage:: db
 wRepelEffect:: db ; If a Repel is in use, it contains the nr of steps it's still active
 wRepelType:: db
 wBikeStep:: dw
