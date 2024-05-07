@@ -470,8 +470,6 @@ Route27_MapEvents:
 
 	def_warp_events
 	warp_event 33,  7, ROUTE_27_SANDSTORM_HOUSE, 1
-	warp_event 26,  5, TOHJO_FALLS, 1
-	warp_event 36,  5, TOHJO_FALLS, 2
 
 	def_coord_events
 	coord_event 18, 10, SCENE_ROUTE27_FIRST_STEP_INTO_KANTO, FirstStepIntoKantoLeftScene

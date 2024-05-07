@@ -60,6 +60,7 @@ CGBLayoutJumptable:
 	dw _CGB_MysteryGift
 	dw _CGB_Unused1E
 	dw _CGB_Plain
+	dw _CGB_VoltorbFlip
 	assert_table_length NUM_SCGB_LAYOUTS
 
 _CGB_BattleGrayscale:
@@ -444,6 +445,18 @@ _CGB_PokedexUnownMode:
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
+
+_CGB_VoltorbFlip:
+	ld hl, VoltorbFlipPals
+	ld de, wBGPals1
+	ld bc, 3 palettes
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
+	ld hl, VoltorbFlipPals
+	ld de, wOBPals1
+	ld bc, 3 palettes
+	ld a, BANK(wOBPals1)
+	jmp FarCopyWRAM
 
 _CGB_SlotMachine:
 	ld hl, SlotMachinePals

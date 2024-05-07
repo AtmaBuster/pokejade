@@ -239,7 +239,6 @@ VictoryRoad_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event  9, 67, VICTORY_ROAD_GATE, 5
 	warp_event  1, 49, VICTORY_ROAD, 3
 	warp_event  1, 35, VICTORY_ROAD, 2
 	warp_event 13, 31, VICTORY_ROAD, 5
@@ -248,7 +247,6 @@ VictoryRoad_MapEvents:
 	warp_event 17, 19, VICTORY_ROAD, 6
 	warp_event  0, 11, VICTORY_ROAD, 9
 	warp_event  0, 27, VICTORY_ROAD, 8
-	warp_event 13,  5, ROUTE_23, 3
 
 	def_coord_events
 	coord_event 12,  8, SCENE_VICTORYROAD_RIVAL_BATTLE, VictoryRoadRivalLeft

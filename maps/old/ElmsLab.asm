@@ -570,8 +570,8 @@ CopScript:
 
 ElmsLabWindow:
 	opentext
-	checkflag ENGINE_FLYPOINT_VIOLET
-	iftrue .Normal
+;	checkflag ENGINE_FLYPOINT_VIOLET
+;	iftrue .Normal
 	checkevent EVENT_ELM_CALLED_ABOUT_STOLEN_POKEMON
 	iftrue .BreakIn
 	sjump .Normal

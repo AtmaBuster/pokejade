@@ -577,6 +577,25 @@ _SlotsDarnText::
 	text "Darn!"
 	done
 
+_VFlipPlayText::
+	text "Play VOLTORB"
+	line "FLIP?"
+	done
+
+_VFlipLevelUpText::
+	text "Advanced to"
+	line "level @"
+	text_decimal wVFlipLevel, 1, 1
+	text "!"
+	done
+
+_VFlipLevelDownText::
+	text "Dropped to"
+	line "level @"
+	text_decimal wVFlipLevel, 1, 1
+	text "…"
+	done
+
 _PhoneWrongNumberText::
 	text "Huh? Sorry, wrong"
 	line "number!"

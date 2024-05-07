@@ -23,7 +23,6 @@ LoadSGBLayout:
 
 SGBLayoutJumptable:
 ; entries correspond to SCGB_* constants (see constants/scgb_constants.asm)
-	table_width 2, SGBLayoutJumptable
 	dw .SGB_BattleGrayscale
 	dw .SGB_BattleColors
 	dw .SGB_PokegearPals
@@ -57,7 +56,6 @@ SGBLayoutJumptable:
 	dw .SGB_MysteryGift
 	dw .SGB_Unused1E
 	dw .SGB_Unused1E ; SCGB_PLAIN (not used)
-	assert_table_length NUM_SCGB_LAYOUTS
 
 .SGB_BattleGrayscale:
 	ld hl, PalPacket_BattleGrayscale

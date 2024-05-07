@@ -476,6 +476,27 @@ Debug_SoundTest:
 INCLUDE "engine/debug/music_names.asm"
 
 Debug_SubgameMenu:
+	ld hl, COIN_CASE
+	call GetItemIDFromIndex
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+	jr c, .have_coin_case
+	ld a, 1
+	ld [wItemQuantityChange], a
+	ld hl, wNumItems
+	call ReceiveItem
+.have_coin_case
+	ld a, [wCoins]
+	ld b, a
+	ld a, [wCoins + 1]
+	or b
+	jr nz, .have_coins
+	xor a
+	ld [wCoins], a
+	inc a
+	ld [wCoins + 1], a
+.have_coins
 	ld hl, .MenuHeader
 	call LoadMenuHeader
 	call VerticalMenu
@@ -498,6 +519,7 @@ Debug_SubgameMenu:
 	dba SlotMachine
 	dba CardFlip
 	dba UnownPuzzle
+	dba VoltorbFlip
 
 .MenuHeader:
 	db MENU_BACKUP_TILES
@@ -507,10 +529,11 @@ Debug_SubgameMenu:
 
 .MenuData:
 	db STATICMENU_CURSOR
-	db 3 ; # items
+	db 4 ; # items
 	db "Slots@"
 	db "Card@"
 	db "Unown@"
+	db "Voltorb@"
 
 Debug_Warp:
 	lb bc, SCREEN_HEIGHT - 2, SCREEN_WIDTH - 2
@@ -539,33 +562,8 @@ Debug_Warp:
 .SpawnTable
 	db SPAWN_HOME
 	db SPAWN_DEBUG
-	db SPAWN_PALLET
-	db SPAWN_VIRIDIAN
-	db SPAWN_PEWTER
-	db SPAWN_CERULEAN
-	db SPAWN_ROCK_TUNNEL
-	db SPAWN_VERMILION
-	db SPAWN_LAVENDER
-	db SPAWN_SAFFRON
-	db SPAWN_CELADON
-	db SPAWN_FUCHSIA
-	db SPAWN_CINNABAR
-	db SPAWN_INDIGO
 	db SPAWN_NEW_BARK
-	db SPAWN_CHERRYGROVE
-	db SPAWN_VIOLET
-	db SPAWN_UNION_CAVE
-	db SPAWN_AZALEA
-	db SPAWN_CIANWOOD
-	db SPAWN_GOLDENROD
-	db SPAWN_OLIVINE
-	db SPAWN_ECRUTEAK
-	db SPAWN_MAHOGANY
-	db SPAWN_LAKE_OF_RAGE
-	db SPAWN_BLACKTHORN
-	db SPAWN_MT_SILVER
-	db SPAWN_FAST_SHIP
-DEF NUM_DEBUG_SPAWNS EQU 28
+DEF NUM_DEBUG_SPAWNS EQU 3
 
 .MenuHeader:
 	db MENU_BACKUP_TILES
@@ -606,32 +604,7 @@ endr
 .LocNames:
 	db "HOME@@@@@@@@@"
 	db "DEBUG@@@@@@@@"
-	db "PALLET@@@@@@@"
-	db "VIRIDIAN@@@@@"
-	db "PEWTEW@@@@@@@"
-	db "CERULEAN@@@@@"
-	db "ROCK TUNNEL@@"
-	db "VERMILION@@@@"
-	db "LAVENDER@@@@@"
-	db "SAFFRON@@@@@@"
-	db "CELADON@@@@@@"
-	db "FUCHSIA@@@@@@"
-	db "CINNABAR@@@@@"
-	db "INDIGO PLAT.@"
 	db "NEW BARK@@@@@"
-	db "CHERRYGROVE@@"
-	db "VIOLET@@@@@@@"
-	db "UNION CAVE@@@"
-	db "AZALEA@@@@@@@"
-	db "CIANWOOD@@@@@"
-	db "GOLDENROD@@@@"
-	db "OLIVINE@@@@@@"
-	db "ECRUTEAK@@@@@"
-	db "MAHOGANY@@@@@"
-	db "LAKE OF RAGE@"
-	db "BLACKTHORN@@@"
-	db "MT. SILVER@@@"
-	db "FAST SHIP@@@@"
 
 Debug_ColorPicker:
 	ldh a, [hMapAnims]

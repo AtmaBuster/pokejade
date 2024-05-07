@@ -109,23 +109,23 @@ InitMapNameSign::
 	ret
 
 .CheckExcludedMap:
-	ld a, [wMapGroup]
-	assert GROUP_ROUTE_35_NATIONAL_PARK_GATE == GROUP_ROUTE_36_NATIONAL_PARK_GATE
-	cp GROUP_ROUTE_35_NATIONAL_PARK_GATE
-	jr nz, .not_national_park_gate
-	ld a, [wMapNumber]
-	cp MAP_ROUTE_35_NATIONAL_PARK_GATE
-	ret z
-	cp MAP_ROUTE_36_NATIONAL_PARK_GATE
-	ret
-.not_national_park_gate
-	assert GROUP_OLIVINE_PORT == GROUP_VERMILION_PORT
-	cp GROUP_OLIVINE_PORT
-	ret nz
-	ld a, [wMapNumber]
-	cp MAP_OLIVINE_PORT
-	ret z
-	cp MAP_VERMILION_PORT
+;	ld a, [wMapGroup]
+;	assert GROUP_ROUTE_35_NATIONAL_PARK_GATE == GROUP_ROUTE_36_NATIONAL_PARK_GATE
+;	cp GROUP_ROUTE_35_NATIONAL_PARK_GATE
+;	jr nz, .not_national_park_gate
+;	ld a, [wMapNumber]
+;	cp MAP_ROUTE_35_NATIONAL_PARK_GATE
+;	ret z
+;	cp MAP_ROUTE_36_NATIONAL_PARK_GATE
+;	ret
+;.not_national_park_gate
+;	assert GROUP_OLIVINE_PORT == GROUP_VERMILION_PORT
+;	cp GROUP_OLIVINE_PORT
+;	ret nz
+;	ld a, [wMapNumber]
+;	cp MAP_OLIVINE_PORT
+;	ret z
+;	cp MAP_VERMILION_PORT
 	ret
 
 PlaceMapNameSign::
