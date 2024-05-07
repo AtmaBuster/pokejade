@@ -221,7 +221,7 @@ PichuEvosAttacks:
 	db 0 ; no more level-up moves
 
 CharjabugEvosAttacks:
-	dbbw EVOLVE_LANDMARK, LANDMARK_NEW_BARK_TOWN, VIKAVOLT
+	dbbw EVOLVE_LANDMARK, LANDMARK_OBSIDIAN_TOWN, VIKAVOLT ; TO-DO
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves

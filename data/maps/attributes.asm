@@ -97,11 +97,10 @@ MACRO connection
 ENDM
 
 
-	map_attributes NewBarkTown, NEW_BARK_TOWN, $05, WEST
-	connection west, Route29, ROUTE_29, 0
+	map_attributes ObsidianTown, OBSIDIAN_TOWN, $05, 0
 
 	map_attributes Route29, ROUTE_29, $05, EAST
-	connection east, NewBarkTown, NEW_BARK_TOWN, 0
+	connection east, ObsidianTown, OBSIDIAN_TOWN, 0
 
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0
 	map_attributes TradeCenter, TRADE_CENTER, $00, 0

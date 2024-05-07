@@ -3,7 +3,7 @@ SECTION "Map Blocks 1", ROMX
 Pokecenter2F_Blocks:    INCBIN "maps/Pokecenter2F.ablk"
 PlayersHouse1F_Blocks:  INCBIN "maps/PlayersHouse1F.ablk"
 Colosseum_Blocks:       INCBIN "maps/Colosseum.ablk"
-NewBarkTown_Blocks:     INCBIN "maps/NewBarkTown.ablk"
+ObsidianTown_Blocks:    INCBIN "maps/ObsidianTown.ablk"
 PlayersHouse2F_Blocks:  INCBIN "maps/PlayersHouse2F.ablk"
 VictoryRoad_Blocks:     INCBIN "maps/VictoryRoad.ablk"
 Route29_Blocks:         INCBIN "maps/Route29.ablk"

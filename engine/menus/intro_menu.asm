@@ -61,7 +61,7 @@ NewGame:
 	call OakSpeech
 	call InitializeWorld
 
-	ld a, LANDMARK_NEW_BARK_TOWN
+	ld a, LANDMARK_OBSIDIAN_TOWN
 	ld [wPrevLandmark], a
 
 	ld a, SPAWN_HOME
@@ -325,13 +325,13 @@ Continue:
 	jr FinishContinueFunction
 
 .SpawnAfterE4:
-	ld a, SPAWN_NEW_BARK
+	ld a, SPAWN_OBSIDIAN
 	ld [wDefaultSpawnpoint], a
 	call PostCreditsSpawn
 	jr FinishContinueFunction
 
 SpawnAfterRed:
-	ld a, SPAWN_NEW_BARK
+	ld a, SPAWN_OBSIDIAN
 	ld [wDefaultSpawnpoint], a
 
 PostCreditsSpawn:

@@ -606,7 +606,7 @@ MagnemiteEvosAttacks:
 	db 0 ; no more level-up moves
 
 MagnetonEvosAttacks:
-	dbbw EVOLVE_LANDMARK, LANDMARK_NEW_BARK_TOWN, MAGNEZONE
+	dbbw EVOLVE_LANDMARK, LANDMARK_OBSIDIAN_TOWN, MAGNEZONE ; TO-DO
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves
@@ -895,8 +895,8 @@ EeveeEvosAttacks:
 	dbw EVOLVE_SYLVEON, SYLVEON
 	dbbw EVOLVE_HAPPINESS, TR_MORNDAY, ESPEON
 	dbbw EVOLVE_HAPPINESS, TR_EVENITE, UMBREON
-	dbbw EVOLVE_LANDMARK, LANDMARK_NEW_BARK_TOWN, LEAFEON
-	dbbw EVOLVE_LANDMARK, LANDMARK_NEW_BARK_TOWN, GLACEON
+	dbbw EVOLVE_LANDMARK, LANDMARK_OBSIDIAN_TOWN, LEAFEON ; TO-DO
+	dbbw EVOLVE_LANDMARK, LANDMARK_OBSIDIAN_TOWN, GLACEON ; TO-DO
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves

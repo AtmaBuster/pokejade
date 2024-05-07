@@ -120,23 +120,10 @@ MainMenu_GetWhichMenu:
 	cp -1 ; locked?
 	call CloseSRAM
 	jr nz, .mystery_gift
-	; This check makes no difference.
-	ld a, [wStatusFlags]
-	bit STATUSFLAGS_MAIN_MENU_MOBILE_CHOICES_F, a
-	ld a, MAINMENU_CONTINUE
-	jr z, .ok
-.ok
-.ok2
 	ld a, MAINMENU_CONTINUE
 	ret
 
 .mystery_gift
-	; This check makes no difference.
-	ld a, [wStatusFlags]
-	bit STATUSFLAGS_MAIN_MENU_MOBILE_CHOICES_F, a
-	jr z, .ok3
-.ok3
-.ok4
 	ld a, MAINMENU_MYSTERY
 	ret
 

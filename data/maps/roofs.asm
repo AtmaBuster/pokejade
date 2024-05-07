@@ -1,6 +1,6 @@
 ; MapGroupRoofs values; Roofs indexes
 	const_def
-	const ROOF_NEW_BARK  ; 0
+	const ROOF_OBSIDIAN  ; 0
 	const ROOF_VIOLET    ; 1
 	const ROOF_AZALEA    ; 2
 	const ROOF_OLIVINE   ; 3
@@ -14,7 +14,7 @@ MapGroupRoofs:
 	db -1             ;  0
 	db -1             ;  1
 	db -1             ;  2
-	db ROOF_NEW_BARK  ;  3 (New Bark)
+	db ROOF_OBSIDIAN  ;  3 (New Bark)
 	assert_table_length NUM_MAP_GROUPS + 1
 
 Roofs:

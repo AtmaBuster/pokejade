@@ -35,6 +35,21 @@ InitMapNameSign::
 	res 1, [hl]
 	jr nz, .dont_do_map_sign
 
+	ld a, [wCurLandmark]
+	cp LANDMARK_OBSIDIAN_TOWN
+	jr nz, .not_first_time_outside
+
+	call GetMapEnvironment
+	cp TOWN
+	jr nz, .not_first_time_outside
+	ld a, [wStatusFlags]
+	bit STATUSFLAGS_FIRST_TIME_OUTSIDE_F, a
+	jr nz, .not_first_time_outside
+	set STATUSFLAGS_FIRST_TIME_OUTSIDE_F, a
+	ld [wStatusFlags], a
+	jr .show_sign
+
+.not_first_time_outside
 	call .CheckMovingWithinLandmark
 	jr z, .dont_do_map_sign
 	ld a, [wCurLandmark]
@@ -43,6 +58,7 @@ InitMapNameSign::
 	call .CheckSpecialMap
 	jr z, .dont_do_map_sign
 
+.show_sign
 ; Landmark sign timer: descends $74-$00
 ; $73-$68: Sliding out (old sign)
 ; $67-$65: Loading new graphics

@@ -937,9 +937,15 @@ ObjectEventText::
 	text_far _ObjectEventText
 	text_end
 
+BGEvent::
+	jumptext BGEventText
+
 BGEventText::
 	text_far _BGEventText
 	text_end
+
+CoordinatesEvent::
+	jumptext CoordinatesEventText
 
 CoordinatesEventText::
 	text_far _CoordinatesEventText

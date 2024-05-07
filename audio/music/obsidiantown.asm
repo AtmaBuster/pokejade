@@ -1,12 +1,12 @@
-Music_NewBarkTown:
+Music_ObsidianTown:
 	channel_count 3
-	channel 1, Music_NewBarkTown_Ch1
-	channel 2, Music_NewBarkTown_Ch2
-	channel 3, Music_NewBarkTown_Ch3
+	channel 1, Music_ObsidianTown_Ch1
+	channel 2, Music_ObsidianTown_Ch2
+	channel 3, Music_ObsidianTown_Ch3
 
 	db $3 ; unused, leftover from a channel 4
 
-Music_NewBarkTown_Ch1:
+Music_ObsidianTown_Ch1:
 	tempo 187
 	volume 7, 7
 	stereo_panning FALSE, TRUE
@@ -158,7 +158,7 @@ Music_NewBarkTown_Ch1:
 	note E_, 2
 	sound_ret
 
-Music_NewBarkTown_Ch2:
+Music_ObsidianTown_Ch2:
 	stereo_panning TRUE, TRUE
 	vibrato 18, 2, 3
 	note_type 6, 10, 7
@@ -252,7 +252,7 @@ Music_NewBarkTown_Ch2:
 	note E_, 16
 	sound_ret
 
-Music_NewBarkTown_Ch3:
+Music_ObsidianTown_Ch3:
 	stereo_panning TRUE, FALSE
 	note_type 12, 1, 0
 	octave 5

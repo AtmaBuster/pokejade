@@ -562,7 +562,7 @@ Debug_Warp:
 .SpawnTable
 	db SPAWN_HOME
 	db SPAWN_DEBUG
-	db SPAWN_NEW_BARK
+	db SPAWN_OBSIDIAN
 DEF NUM_DEBUG_SPAWNS EQU 3
 
 .MenuHeader:
@@ -604,7 +604,7 @@ endr
 .LocNames:
 	db "HOME@@@@@@@@@"
 	db "DEBUG@@@@@@@@"
-	db "NEW BARK@@@@@"
+	db "OBSIDIAN@@@@@"
 
 Debug_ColorPicker:
 	ldh a, [hMapAnims]

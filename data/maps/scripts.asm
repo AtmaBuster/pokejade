@@ -7,7 +7,7 @@ INCLUDE "maps/Pokecenter2F.asm"
 INCLUDE "maps/TradeCenter.asm"
 INCLUDE "maps/Colosseum.asm"
 INCLUDE "maps/TimeCapsule.asm"
-INCLUDE "maps/NewBarkTown.asm"
+INCLUDE "maps/ObsidianTown.asm"
 INCLUDE "maps/Route29.asm"
 
 
