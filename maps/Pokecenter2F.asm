@@ -57,10 +57,8 @@ Script_BattleRoomClosed:
 	end
 
 LinkReceptionistScript_Trade:
-if !DEF(_DEBUG)
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iffalse Script_TradeCenterClosed
-endc
+;	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM ; TO-DO : event to enable trades
+;	iffalse Script_TradeCenterClosed
 	opentext
 	writetext Text_TradeReceptionistIntro
 	yesorno
@@ -121,10 +119,8 @@ endc
 	end
 
 LinkReceptionistScript_Battle:
-if !DEF(_DEBUG)
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iffalse Script_BattleRoomClosed
-endc
+;	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM ; TO-DO : event to enable battles
+;	iffalse Script_TradeCenterClosed
 	opentext
 	writetext Text_BattleReceptionistIntro
 	yesorno
@@ -193,12 +189,8 @@ Script_TimeCapsuleClosed:
 	end
 
 LinkReceptionistScript_TimeCapsule:
-IF !DEF(_DEBUG)
-	checkevent EVENT_MET_BILL
-	iftrue Script_TimeCapsuleClosed
-	checkflag ENGINE_TIME_CAPSULE
-	iftrue Script_TimeCapsuleClosed
-ENDC
+	sjump ObjectEvent
+	;;;
 	special SetBitsForTimeCapsuleRequest
 	faceplayer
 	opentext
