@@ -493,9 +493,9 @@ Debug_SubgameMenu:
 	or b
 	jr nz, .have_coins
 	xor a
-	ld [wCoins], a
-	inc a
 	ld [wCoins + 1], a
+	inc a
+	ld [wCoins], a
 .have_coins
 	ld hl, .MenuHeader
 	call LoadMenuHeader
@@ -623,6 +623,9 @@ Debug_FillDex:
 	ld de, ENGINE_POKEDEX
 	ld b, SET_FLAG
 	farcall EngineFlagAction
+; unlock all dex modes
+	ld a, %111
+	ld [wUnlockedDexFlags], a
 ; set flags
 	ld hl, 0
 .loop

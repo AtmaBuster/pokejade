@@ -241,8 +241,22 @@ VFlip_AskPlay:
 	ld hl, .VFlipPlayText
 	call PrintText
 	call LoadMenuTextbox
+	hlcoord 9, 15
+	lb bc, 1, 9
+	call Textbox
+	hlcoord 10, 16
+	ld de, .CoinStr
+	rst PlaceString
+	hlcoord 15, 16
+	ld de, wCoins
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 4
+	call PrintNum
+
+	hlcoord 14, 7
+	lb bc, 3, 4
+	call Textbox
 	call WaitBGMap2
-	lb bc, 14, 12
+	lb bc, 14, 7 ; TO-DO : palette issues
 	call PlaceYesNoBox
 	ld a, [wMenuCursorY]
 	dec a
@@ -259,6 +273,9 @@ VFlip_AskPlay:
 .VFlipPlayText
 	text_far _VFlipPlayText
 	text_end
+
+.CoinStr:
+	db "COIN@"
 
 VFlipAction_ChooseCard:
 	call JoyTextDelay
