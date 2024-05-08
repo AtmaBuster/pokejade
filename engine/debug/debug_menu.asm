@@ -2962,51 +2962,5 @@ Debug_PokeEdit_GetItemSection:
 	ret
 
 Debug_ATMA:
-	ldh a, [hJoyDown]
-	and SELECT
-	jr z, .no_select
-	ld hl, wRoamMon1
-	ld bc, 11 * 3
-	xor a
-	rst ByteFill
-	ret
-
-.no_select
-	ld hl, wRoamMon1
-	ld de, LATIAS
-	call .init
-	ld hl, wRoamMon2
-	ld de, LATIOS
-	call .init
-	ld hl, wRoamMon3
-	ld de, CELEBI
-	call .init
-
-	ld a, [wMapGroup]
-	ld [wRoamMon1MapGroup], a
-	ld [wRoamMon2MapGroup], a
-	ld [wRoamMon3MapGroup], a
-	ld a, [wMapNumber]
-	ld [wRoamMon1MapNumber], a
-	ld [wRoamMon2MapNumber], a
-	ld [wRoamMon3MapNumber], a
-
-	ret
-
-.init
-	ld a, [hl]
-	and a
-	ret nz
-	push hl
-	ld h, d
-	ld l, e
-	call GetPokemonIDFromIndex
-	pop hl
-	ld [hli], a
-	ld a, 40
-	ld [hl], a
-	ld de, wRoamMon1HP - wRoamMon1
-	add hl, de
-	xor a
-	ld [hl], a
+	farcall Script_halloffame
 	ret

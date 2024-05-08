@@ -737,3 +737,8 @@ INCLUDE "engine/pokemon/delta_types.asm"
 SECTION "Voltorb Flip", ROMX
 
 INCLUDE "engine/games/voltorb_flip.asm"
+
+
+SECTION "Player Stats", ROMX
+
+INCLUDE "engine/events/player_stats.asm"

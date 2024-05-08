@@ -44,7 +44,7 @@ BattleBGMap:
 	jmp SetDefaultBGPAndOBP
 
 HalveMoney:
-	farcall StubbedTrainerRankings_WhiteOuts
+	farcall PlayerStats_WhiteOuts
 
 ; Halve the player's money.
 	ld hl, wMoney

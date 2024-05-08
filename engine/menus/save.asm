@@ -149,6 +149,7 @@ SaveGameData:
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
+	call SavePlayerStats
 	call SaveTMHMData
 	call SavePokemonData
 	call SaveIndexTables
@@ -189,6 +190,7 @@ WriteBackupSave:
 	call ValidateBackupSave
 	call SaveBackupOptions
 	call SaveBackupPlayerData
+	call SaveBackupPlayerStats
 	call SaveBackupTMHMData
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
@@ -364,6 +366,21 @@ SavePlayerData:
 	rst CopyBytes
 	jmp CloseSRAM
 
+SavePlayerStats:
+	ld a, BANK(sPlayerStatistics)
+	call OpenSRAM
+	ld hl, wPlayerStatistics
+	ld de, sPlayerStatistics
+	ld bc, wPlayerStatisticsEnd - wPlayerStatistics
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPlayerStatistics)
+	ldh [rSVBK], a
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
 SavePokemonData:
 	ld a, BANK(sPokemonData)
 	call OpenSRAM
@@ -467,6 +484,21 @@ SaveBackupPlayerData:
 	rst CopyBytes
 	jmp CloseSRAM
 
+SaveBackupPlayerStats:
+	ld a, BANK(sBackupPlayerStatistics)
+	call OpenSRAM
+	ld hl, wPlayerStatistics
+	ld de, sBackupPlayerStatistics
+	ld bc, wPlayerStatisticsEnd - wPlayerStatistics
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPlayerStatistics)
+	ldh [rSVBK], a
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
 SaveBackupPokemonData:
 	ld a, BANK(sBackupPokemonData)
 	call OpenSRAM
@@ -558,6 +590,7 @@ TryLoadSaveFile:
 	call VerifyChecksum
 	jr nz, .backup
 	call LoadPlayerData
+	call LoadPlayerStats
 	call LoadTMHMData
 	call LoadPokemonData
 	call LoadIndexTables
@@ -579,6 +612,7 @@ TryLoadSaveFile:
 	call VerifyBackupChecksum
 	jr nz, .corrupt
 	call LoadBackupPlayerData
+	call LoadBackupPlayerStats
 	call LoadBackupTMHMData
 	call LoadBackupPokemonData
 	call LoadBackupIndexTables
@@ -710,6 +744,21 @@ LoadPlayerData:
 .not_4
 	jmp CloseSRAM
 
+LoadPlayerStats:
+	ld a, BANK(sPlayerStatistics)
+	call OpenSRAM
+	ld hl, sPlayerStatistics
+	ld de, wPlayerStatistics
+	ld bc, wPlayerStatisticsEnd - wPlayerStatistics
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPlayerStatistics)
+	ldh [rSVBK], a
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
 LoadPokemonData:
 	ld a, BANK(sPokemonData)
 	call OpenSRAM
@@ -804,6 +853,21 @@ LoadBackupPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	rst CopyBytes
+	jmp CloseSRAM
+
+LoadBackupPlayerStats:
+	ld a, BANK(sBackupPlayerStatistics)
+	call OpenSRAM
+	ld hl, sBackupPlayerStatistics
+	ld de, wPlayerStatistics
+	ld bc, wPlayerStatisticsEnd - wPlayerStatistics
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPlayerStatistics)
+	ldh [rSVBK], a
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
 	jmp CloseSRAM
 
 LoadBackupPokemonData:

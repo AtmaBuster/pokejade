@@ -217,6 +217,7 @@ sNewBoxMons2:: pokedb sNewBoxMons2, MONDB_ENTRIES
 
 SECTION "SRAM Trainer Rankings", SRAM
 
+UNION
 sTrainerRankings::
 sTrainerRankingGameTimeHOF:: ds 4
 sTrainerRankingStepCountHOF:: ds 4
@@ -262,6 +263,13 @@ sTrainerRankingsEnd::
 
 sTrainerRankingsBackup:: ds sTrainerRankingsEnd - sTrainerRankings
 
+NEXTU
+
+sPlayerStatistics:: ds wPlayerStatisticsEnd - wPlayerStatistics
+
+sBackupPlayerStatistics:: ds wPlayerStatisticsEnd - wPlayerStatistics
+
+ENDU
 
 SECTION "SRAM Bank 5", SRAM
 

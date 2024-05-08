@@ -92,6 +92,20 @@ _ResetWRAM:
 	ld bc, wItemIndexTableEnd - wItemIndexTable
 	rst ByteFill
 
+	ld a, BANK(wTMsHMs)
+	ldh [rSVBK], a
+	ld hl, wTMsHMs
+	ld bc, wTMsHMsEnd - wTMsHMs
+	xor a
+	rst ByteFill
+
+	ld a, BANK(wPlayerStatistics)
+	ldh [rSVBK], a
+	ld hl, wPlayerStatistics
+	ld bc, wPlayerStatisticsEnd - wPlayerStatistics
+	xor a
+	rst ByteFill
+
 	ld a, 1
 	ldh [rSVBK], a
 

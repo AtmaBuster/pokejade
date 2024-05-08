@@ -560,7 +560,7 @@ PokeBallEffect:
 	or [hl]
 	ld [hl], a
 
-	farcall StubbedTrainerRankings_WildMonsCaught
+	farcall PlayerStats_MonsCaught
 
 	ld hl, Text_GotchaMonWasCaught
 	call PrintText

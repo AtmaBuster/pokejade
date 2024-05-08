@@ -680,7 +680,7 @@ MonMenu_Fly:
 	jr z, .Fail
 	and a
 	jr z, .Error
-	farcall StubbedTrainerRankings_Fly
+	farcall PlayerStats_FlyUsed
 	ld b, $4
 	ld a, $2
 	ret

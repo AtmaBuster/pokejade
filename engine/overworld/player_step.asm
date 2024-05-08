@@ -68,7 +68,7 @@ HandlePlayerStep:
 	dw DoNothing ; .fail1
 
 .mobile
-	farjp StubbedTrainerRankings_StepCount
+	farjp PlayerStats_StepCount
 
 UpdatePlayerCoords:
 	ld a, [wPlayerStepDirection]

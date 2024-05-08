@@ -65,7 +65,7 @@ RunBattleTowerTrainer:
 
 	xor a
 	ld [wLinkMode], a
-	farcall StubbedTrainerRankings_Healings
+	farcall PlayerStats_Healing
 	call HealParty
 	call ReadBTTrainerParty
 	call Clears5_a89a

@@ -144,7 +144,7 @@ SpecialsPointers::
 	add_special SampleKenjiBreakCountdown
 	add_special BeastsCheck
 	add_special MonCheck
-	add_special StubbedTrainerRankings_Healings
+	add_special PlayerStats_Healing
 	add_special RefreshSprites
 	add_special AskRememberPassword
 	add_special LoadMapPalettes

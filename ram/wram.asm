@@ -3383,3 +3383,38 @@ wTMsHMsEnd::
 wTMsHMsTerminator:: db
 
 ENDSECTION
+
+SECTION "Player Stats RAM", WRAMX
+
+wPlayerStatistics::
+wPlayerStat_Healing:: dw
+wPlayerStat_PrizeMoney:: ds 4
+wPlayerStat_Battles:: dw
+wPlayerStat_TrainerBattles:: dw
+wPlayerStat_WildBattles:: dw
+wPlayerStat_LinkBattles:: dw
+wPlayerStat_ColosseumDraws:: dw
+wPlayerStat_ColosseumWins:: dw
+wPlayerStat_ColosseumLosses:: dw
+wPlayerStat_FishingBattles:: dw
+wPlayerStat_Selfdestruct:: dw
+wPlayerStat_Splash:: dw
+wPlayerStat_BerriesPicked:: dw
+wPlayerStat_SurfUsed:: dw
+wPlayerStat_WaterfallUsed:: dw
+wPlayerStat_TreeBattles:: dw
+wPlayerStat_WhiteOuts:: dw
+wPlayerStat_MonsCaught:: dw
+wPlayerStat_Trades:: dw
+wPlayerStat_TMsHMsUsed:: dw
+wPlayerStat_MysteryGift:: dw
+wPlayerStat_StepCount:: ds 4
+wPlayerStat_HallOfFame:: db
+wPlayerStat_FirstHallOfFameTime:: ds 4
+wPlayerStat_MostRecentHallOfFameTime:: ds 4
+wPlayerStat_EggsHatched:: dw
+wPlayerStat_MonsEvolved:: dw
+wPlayerStat_FlyUsed:: dw
+wPlayerStatisticsEnd::
+
+ENDSECTION

@@ -104,7 +104,7 @@ endc
 	jr z, .skip_append_save
 	call .SaveMysteryGiftTrainerName
 	call RestoreGSBallFlag
-	call StubbedTrainerRankings_MysteryGift
+	call PlayerStats_MysteryGift
 	call BackupGSBallFlag
 .skip_append_save
 	ld a, [wMysteryGiftPartnerSentDeco]
