@@ -1115,4 +1115,10 @@ MACRO clearmapmusicoverride
 	db clearmapmusicoverride_command
 ENDM
 
+	const setscriptparam_command ; $b2
+MACRO setscriptparam
+	db setscriptparam_command
+	db \1 ; param
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

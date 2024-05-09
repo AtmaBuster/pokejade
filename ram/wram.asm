@@ -2811,8 +2811,8 @@ wColosseumSceneID::                               db
 wTimeCapsuleSceneID::                             db
 wObsidianTownSceneID::                            db
 wParksLabSceneID::                                db
+wObsidianMeadowSceneID::                          db
 
-wPowerPlantSceneID::                              db
 wCeruleanGymSceneID::                             db
 wRoute25SceneID::                                 db
 wTrainerHouseB1FSceneID::                         db

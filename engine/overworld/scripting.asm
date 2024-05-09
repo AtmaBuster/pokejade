@@ -238,6 +238,7 @@ ScriptCommandTable:
 	dw Script_applymovementparam         ; af
 	dw Script_setmapmusicoverride        ; b0
 	dw Script_clearmapmusicoverride      ; b1
+	dw Script_setscriptparam             ; b2
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2467,4 +2468,9 @@ Script_setmapmusicoverride:
 Script_clearmapmusicoverride:
 	xor a
 	ld [wMapMusicOverride], a
+	ret
+
+Script_setscriptparam:
+	rst GetScriptByte
+	ld [wScriptParameter], a
 	ret

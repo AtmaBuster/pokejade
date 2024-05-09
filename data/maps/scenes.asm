@@ -11,4 +11,5 @@ MapScenes::
 	scene_var TIME_CAPSULE,                                wTimeCapsuleSceneID
 	scene_var OBSIDIAN_TOWN,                               wObsidianTownSceneID
 	scene_var PARKS_LAB,                                   wParksLabSceneID
+	scene_var OBSIDIAN_MEADOW,                             wObsidianMeadowSceneID
 	db -1 ; end
