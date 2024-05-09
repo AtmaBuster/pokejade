@@ -380,10 +380,14 @@ SpecialMapMusic::
 	jr z, .surf
 	cp PLAYER_SURF_PIKA
 	jr z, .surf
-
-	ld a, [wStatusFlags2]
-	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, a
-	jr nz, .contest
+	ld a, [wMapMusicOverride]
+	and a
+	jr z, .no
+	ld a, [wMapMusic]
+	ld e, a
+	ld d, 0
+	scf
+	ret
 
 .no
 	and a
@@ -391,21 +395,6 @@ SpecialMapMusic::
 
 .surf
 	ld de, MUSIC_SURF
-	scf
-	ret
-
-.contest
-;	ld a, [wMapGroup]
-;	cp GROUP_ROUTE_35_NATIONAL_PARK_GATE
-;	jr nz, .no
-;	ld a, [wMapNumber]
-;	cp MAP_ROUTE_35_NATIONAL_PARK_GATE
-;	jr z, .ranking
-;	cp MAP_ROUTE_36_NATIONAL_PARK_GATE
-;	jr nz, .no
-;
-;.ranking
-;	ld de, MUSIC_BUG_CATCHING_CONTEST_RANKING
 	scf
 	ret
 

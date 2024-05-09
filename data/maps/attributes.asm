@@ -97,7 +97,11 @@ MACRO connection
 ENDM
 
 
-	map_attributes ObsidianTown, OBSIDIAN_TOWN, $05, 0
+	map_attributes ObsidianTown, OBSIDIAN_TOWN, $05, EAST
+	connection east, ObsidianMeadow, OBSIDIAN_MEADOW, 3
+
+	map_attributes ObsidianMeadow, OBSIDIAN_MEADOW, $05, WEST
+	connection west, ObsidianTown, OBSIDIAN_TOWN, -3
 
 	map_attributes Route29, ROUTE_29, $05, EAST
 	connection east, ObsidianTown, OBSIDIAN_TOWN, 0
@@ -109,3 +113,4 @@ ENDM
 	map_attributes VictoryRoad, VICTORY_ROAD, $1d, 0
 	map_attributes PlayersHouse1F, PLAYERS_HOUSE_1F, $00, 0
 	map_attributes PlayersHouse2F, PLAYERS_HOUSE_2F, $00, 0
+	map_attributes ParksLab, PARKS_LAB, $00, 0

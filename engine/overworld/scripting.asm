@@ -236,6 +236,8 @@ ScriptCommandTable:
 	dw Script_checkmaplockeditems        ; ad
 	dw Script_givepokemove               ; ae
 	dw Script_applymovementparam         ; af
+	dw Script_setmapmusicoverride        ; b0
+	dw Script_clearmapmusicoverride      ; b1
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2455,4 +2457,14 @@ Script_givepokemove:
 	; Set move
 	ld a, d
 	ld [hl], a
+	ret
+
+Script_setmapmusicoverride:
+	ld a, 1
+	ld [wMapMusicOverride], a
+	ret
+
+Script_clearmapmusicoverride:
+	xor a
+	ld [wMapMusicOverride], a
 	ret

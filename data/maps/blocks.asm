@@ -7,6 +7,8 @@ ObsidianTown_Blocks:    INCBIN "maps/ObsidianTown.ablk"
 PlayersHouse2F_Blocks:  INCBIN "maps/PlayersHouse2F.ablk"
 VictoryRoad_Blocks:     INCBIN "maps/VictoryRoad.ablk"
 Route29_Blocks:         INCBIN "maps/Route29.ablk"
+ParksLab_Blocks:        INCBIN "maps/ParksLab.ablk"
+ObsidianMeadow_Blocks:  INCBIN "maps/ObsidianMeadow.ablk"
 
 
 SECTION "Map Blocks 2", ROMX

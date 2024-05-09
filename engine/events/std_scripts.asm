@@ -401,14 +401,27 @@ BugContestResults_CopyContestantsToResults:
 	end
 
 InitializeEventsScript:
-	setevent EVENT_PLAYERS_HOUSE_2F_CONSOLE
-	setevent EVENT_PLAYERS_HOUSE_2F_DOLL_1
-	setevent EVENT_PLAYERS_HOUSE_2F_DOLL_2
-	setevent EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
-	setevent EVENT_DECO_BED_1
-	setevent EVENT_DECO_POSTER_1
+	callasm .SetEvents
 	setevent EVENT_INITIALIZED_EVENTS
 	endcallback
+
+.SetEvents:
+	ld hl, DefaultFlags
+.loop
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	and e
+	inc a
+	ret z
+	ld b, SET_FLAG
+	push hl
+	call EventFlagAction
+	pop hl
+	jr .loop
+
+INCLUDE "data/events/default_flags.asm"
 
 AskNumber1MScript:
 	special RandomPhoneMon

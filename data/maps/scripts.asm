@@ -9,6 +9,8 @@ INCLUDE "maps/Colosseum.asm"
 INCLUDE "maps/TimeCapsule.asm"
 INCLUDE "maps/ObsidianTown.asm"
 INCLUDE "maps/Route29.asm"
+INCLUDE "maps/ParksLab.asm"
+INCLUDE "maps/ObsidianMeadow.asm"
 
 
 SECTION "Map Scripts 2", ROMX

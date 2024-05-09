@@ -2810,6 +2810,7 @@ wTradeCenterSceneID::                             db
 wColosseumSceneID::                               db
 wTimeCapsuleSceneID::                             db
 wObsidianTownSceneID::                            db
+wParksLabSceneID::                                db
 
 wPowerPlantSceneID::                              db
 wCeruleanGymSceneID::                             db
@@ -2827,7 +2828,6 @@ wKarensRoomSceneID::                              db
 wLancesRoomSceneID::                              db
 wHallOfFameSceneID::                              db
 wRoute27SceneID::                                 db
-wElmsLabSceneID::                                 db
 wPlayersHouse1FSceneID::                          db
 wRoute29SceneID::                                 db
 wCherrygroveCitySceneID::                         db
@@ -2977,7 +2977,8 @@ wUnusedTwoDayTimer:: db
 wUnusedTwoDayTimerStartDate:: db
 
 wMobileOrCable_LastSelection:: db
-	ds 8
+	ds 7
+wMapMusicOverride:: db
 wBloodMoonStatusActive:: db
 wBuenasPassword:: db
 wBlueCardBalance:: db
