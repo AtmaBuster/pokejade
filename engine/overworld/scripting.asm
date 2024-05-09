@@ -235,6 +235,7 @@ ScriptCommandTable:
 	dw Script_loaditemindex              ; ac
 	dw Script_checkmaplockeditems        ; ad
 	dw Script_givepokemove               ; ae
+	dw Script_applymovementparam         ; af
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -767,6 +768,41 @@ Script_setlasttalked:
 	call GetScriptObject
 	ldh [hLastTalked], a
 	ret
+
+Script_applymovementparam:
+	rst GetScriptByte
+	call GetScriptObject
+	ld c, a
+
+	push bc
+	ld a, c
+	farcall FreezeAllOtherObjects
+	pop bc
+
+	push bc
+	call UnfreezeFollowerObject
+	pop bc
+
+	rst GetScriptByte
+	ld l, a
+	rst GetScriptByte
+	ld h, a
+	ld a, [wScriptParameter]
+	push bc
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	pop bc
+	ld a, [wScriptBank]
+	ld b, a
+	call GetFarWord
+	call GetMovementData
+	ret c
+
+	ld a, SCRIPT_WAIT_MOVEMENT
+	ld [wScriptMode], a
+	jmp StopScript
 
 Script_applymovement:
 	rst GetScriptByte

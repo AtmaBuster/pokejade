@@ -1156,7 +1156,7 @@ EvoTest_Sylveon:
 	and a
 	jr z, .move_fail
 	call .get_move_type
-	cp NORMAL ; FAIRY, TO-DO
+	cp FAIRY
 	jr z, .success
 	dec c
 	jr nz, .move_loop

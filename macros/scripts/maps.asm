@@ -72,10 +72,10 @@ MACRO coord_event
 ;\1: x: left to right, starts at 0
 ;\2: y: top to bottom, starts at 0
 ;\3: scene id: a SCENE_* constant; controlled by setscene/setmapscene
-;\4: script pointer
-	db \3, \2, \1
-	db 0 ; filler
-	dw \4
+;\4: script param
+;\5: script pointer
+	db \3, \2, \1, \4
+	dw \5
 	dw 0 ; filler
 	DEF {_NUM_COORD_EVENTS} += 1
 ENDM

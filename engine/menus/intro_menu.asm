@@ -52,6 +52,16 @@ Option:
 	farjp _Option
 
 NewGame:
+IF DEF(_DEBUG)
+	ldh a, [hJoyDown]
+	and SELECT
+	jr z, .normal
+
+	ld a, $C1
+	ld [wOptions], a
+
+.normal
+ENDC
 	xor a
 	ld [wDebugFlags], a
 	call ResetWRAM

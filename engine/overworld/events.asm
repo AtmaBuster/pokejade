@@ -366,7 +366,9 @@ CheckTileEvent:
 	ret
 
 .coord_event
-	ld hl, wCurCoordEventScriptAddr
+	ld hl, wCurCoordEventScriptParam
+	ld a, [hli]
+	ld [wScriptParameter], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

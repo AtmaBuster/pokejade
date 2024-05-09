@@ -31,7 +31,7 @@
 	const EVENT_GOT_OLD_ROD
 	const EVENT_GOT_GOOD_ROD
 	const EVENT_GOT_SUPER_ROD
-; Johto story events
+; Story events
 	const EVENT_INITIALIZED_EVENTS
 ; Unused: next 572 events
 
@@ -90,13 +90,15 @@
 ; When these events are cleared, the sprite becomes visible; when set, the sprite is hidden.
 ; The map script command macros `disappear` and `appear` set/clear these flags and immediately apply the effect on visibility.
 ; The map script command macros `setevent` and `clearevent` set/clear these flags, and their effects will be seen when the map is reloaded.
-; Johto itemballs
 	const EVENT_PLAYERS_HOUSE_2F_CONSOLE
 	const EVENT_PLAYERS_HOUSE_2F_DOLL_1
 	const EVENT_PLAYERS_HOUSE_2F_DOLL_2
 	const EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
 	const EVENT_MYSTERY_GIFT_DELIVERY_GUY
-; Unused: next 443 events
+	const EVENT_OBSIDIAN_TOWN_PROF
+; Item balls
+	const EVENT_OBSIDIAN_TOWN_RARE_CANDY
+; Unused: next 441 events
 
 	const_next 2048
 DEF NUM_EVENTS EQU const_value ; 800

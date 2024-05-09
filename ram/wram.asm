@@ -135,7 +135,7 @@ wPalFlags:: db
 wPrinterConnectionOpen:: db
 wPrinterOpcode:: db
 
-	ds 1
+wScriptParameter:: db
 
 wDisableTextAcceleration:: db
 wPrevLandmark:: db
@@ -1974,7 +1974,7 @@ wCurCoordEvent::
 wCurCoordEventSceneID:: db
 wCurCoordEventMapY:: db
 wCurCoordEventMapX:: db
-	ds 1
+wCurCoordEventScriptParam:: db
 wCurCoordEventScriptAddr:: dw
 
 NEXTU

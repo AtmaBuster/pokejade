@@ -930,6 +930,9 @@ _GetScriptByte::
 	pop hl
 	ret
 
+EmptyScript:
+	end
+
 ObjectEvent::
 	jumptextfaceplayer ObjectEventText
 
