@@ -154,3 +154,6 @@ SpecialsPointers::
 
 	add_special FadeInPalettes_EnableDynNoApply
 	add_special VoltorbFlip
+	add_special InitStarterMonData
+	add_special CheckStarterForceShiny
+	add_special GetStarterName

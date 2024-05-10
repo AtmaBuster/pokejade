@@ -236,9 +236,8 @@ ScriptCommandTable:
 	dw Script_checkmaplockeditems        ; ad
 	dw Script_givepokemove               ; ae
 	dw Script_applymovementparam         ; af
-	dw Script_setmapmusicoverride        ; b0
-	dw Script_clearmapmusicoverride      ; b1
-	dw Script_setscriptparam             ; b2
+	dw Script_setscriptparam             ; b0
+	dw Script_sjumpparam                 ; b1
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -777,15 +776,6 @@ Script_applymovementparam:
 	call GetScriptObject
 	ld c, a
 
-	push bc
-	ld a, c
-	farcall FreezeAllOtherObjects
-	pop bc
-
-	push bc
-	call UnfreezeFollowerObject
-	pop bc
-
 	rst GetScriptByte
 	ld l, a
 	rst GetScriptByte
@@ -798,8 +788,24 @@ Script_applymovementparam:
 	add hl, bc
 	pop bc
 	ld a, [wScriptBank]
-	ld b, a
 	call GetFarWord
+	ld a, h
+	or l
+	ret z
+
+	push hl
+	push bc
+	ld a, c
+	farcall FreezeAllOtherObjects
+	pop bc
+
+	push bc
+	call UnfreezeFollowerObject
+	pop bc
+	pop hl
+
+	ld a, [wScriptBank]
+	ld b, a
 	call GetMovementData
 	ret c
 
@@ -2460,17 +2466,22 @@ Script_givepokemove:
 	ld [hl], a
 	ret
 
-Script_setmapmusicoverride:
-	ld a, 1
-	ld [wMapMusicOverride], a
-	ret
-
-Script_clearmapmusicoverride:
-	xor a
-	ld [wMapMusicOverride], a
-	ret
-
 Script_setscriptparam:
 	rst GetScriptByte
 	ld [wScriptParameter], a
 	ret
+
+Script_sjumpparam:
+	rst GetScriptByte
+	ld l, a
+	rst GetScriptByte
+	ld h, a
+	ld a, [wScriptParameter]
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ld a, [wScriptBank]
+	ld b, a
+	call GetFarWord
+	jmp ScriptJump

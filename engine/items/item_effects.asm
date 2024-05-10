@@ -228,6 +228,7 @@ ItemEffectsKeyItems:
 	dw SquirtbottleEffect ; SQUIRTBOTTLE
 	dw NoEffect           ; RAINBOW_WING
 	dw NoEffect           ; SHINY_CHARM
+	dw NoEffect           ; LETTER
 .IndirectEnd:
 
 ItemEffectsBalls:

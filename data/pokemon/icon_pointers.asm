@@ -256,13 +256,13 @@ IconPointers:
 	dba LugiaIcon
 	dba HoOhIcon
 	dba CelebiIcon
+	dba ChikoritaIcon
 	dba PlaceholderIcon
 	dba PlaceholderIcon
+	dba CyndaquilIcon
 	dba PlaceholderIcon
 	dba PlaceholderIcon
-	dba PlaceholderIcon
-	dba PlaceholderIcon
-	dba PlaceholderIcon
+	dba TotodileIcon
 	dba PlaceholderIcon
 	dba PlaceholderIcon
 	dba PlaceholderIcon

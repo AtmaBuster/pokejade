@@ -36,4 +36,7 @@ SpriteMons:
 	dw GYARADOS
 	dw LUGIA
 	dw HO_OH
+	dw TREECKO
+	dw TORCHIC
+	dw MUDKIP
 	assert_table_length NUM_POKEMON_SPRITES

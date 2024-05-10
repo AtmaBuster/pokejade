@@ -1105,20 +1105,16 @@ MACRO applymovementparam
 	dw \2 ; data table
 ENDM
 
-	const setmapmusicoverride_command ; $b0
-MACRO setmapmusicoverride
-	db setmapmusicoverride_command
-ENDM
-
-	const clearmapmusicoverride_command ; $b1
-MACRO clearmapmusicoverride
-	db clearmapmusicoverride_command
-ENDM
-
-	const setscriptparam_command ; $b2
+	const setscriptparam_command ; $b0
 MACRO setscriptparam
 	db setscriptparam_command
 	db \1 ; param
+ENDM
+
+	const sjumpparam_command ; $b1
+MACRO sjumpparam
+	db sjumpparam_command
+	dw \1 ; table pointer
 ENDM
 
 DEF NUM_EVENT_COMMANDS EQU const_value

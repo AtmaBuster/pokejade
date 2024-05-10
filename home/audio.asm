@@ -380,12 +380,14 @@ SpecialMapMusic::
 	jr z, .surf
 	cp PLAYER_SURF_PIKA
 	jr z, .surf
-	ld a, [wMapMusicOverride]
-	and a
+
+	ld a, [wObsidianMeadowSceneID]
+	cp 2
 	jr z, .no
-	ld a, [wMapMusic]
-	ld e, a
-	ld d, 0
+	ld a, [wObsidianTownSceneID]
+	cp 1
+	jr nz, .no
+	ld de, MUSIC_OFFICER_ENCOUNTER ; TO-DO
 	scf
 	ret
 

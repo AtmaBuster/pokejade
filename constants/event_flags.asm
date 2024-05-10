@@ -33,7 +33,11 @@
 	const EVENT_GOT_SUPER_ROD
 ; Story events
 	const EVENT_INITIALIZED_EVENTS
-; Unused: next 572 events
+	const EVENT_GOT_TREECKO
+	const EVENT_GOT_TORCHIC
+	const EVENT_GOT_MUDKIP
+	const EVENT_GOT_STARTER
+; Unused: next 568 events
 
 	const_next 600
 ; Decorations
@@ -98,9 +102,10 @@
 	const EVENT_OBSIDIAN_TOWN_PROF
 	const EVENT_PARKS_LAB_PROF
 	const EVENT_OBSIDIAN_MEADOW_PROF
+	const EVENT_OBSIDIAN_MEADOW_STARTERS
 ; Item balls
 	const EVENT_OBSIDIAN_TOWN_RARE_CANDY
-; Unused: next 441 events
+; Unused: next 438 events
 
 	const_next 2048
 DEF NUM_EVENTS EQU const_value ; 800

@@ -149,6 +149,7 @@ SECTION "Extra Songs 2", ROMX
 
 INCLUDE "audio/music/postcredits.asm"
 INCLUDE "audio/music/trainerbattle.asm"
+INCLUDE "audio/music/nazohwildbattle.asm"
 
 
 SECTION "Sound Effects", ROMX

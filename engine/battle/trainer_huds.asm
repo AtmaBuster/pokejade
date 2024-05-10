@@ -18,7 +18,22 @@ ShowPlayerMonsRemaining:
 	call DrawPlayerPartyIconHUDBorder
 	ld hl, wPartyMon1HP
 	ld de, wPartyCount
+	ld a, [de]
+	and a
+	jr z, .no_mons ; tutorial
 	call StageBallTilesData
+	jr .got_balls
+
+.no_mons
+	ld hl, wBattleHUDTiles
+	ld a, $7f ; blank
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+.got_balls
 	; ldpixel wPlaceBallsX, 12, 12
 	ld a, 12 * TILE_WIDTH
 	ld hl, wPlaceBallsX

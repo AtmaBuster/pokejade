@@ -78,7 +78,7 @@ ObsidianTownCO_CantLeave:
 	step LEFT
 	step_end
 
-ObsidianTownCO_ApproachLab: ; TO-DO
+ObsidianTownCO_ApproachLab:
 	appear OBSIDIANTOWN_PROF
 	playsound SFX_ENTER_DOOR
 	applymovement OBSIDIANTOWN_PROF, .Move_WalkDown
@@ -86,6 +86,7 @@ ObsidianTownCO_ApproachLab: ; TO-DO
 	turnobject OBSIDIANTOWN_PROF, LEFT
 	showemote EMOTE_SHOCK, OBSIDIANTOWN_PROF, 15
 	playmusic MUSIC_OFFICER_ENCOUNTER ; TO-DO
+	callasm .SetMapMusic
 	applymovementparam OBSIDIANTOWN_PROF, .Move_ApproachPlayer
 	opentext
 	writetext .Text_ComeWithMe
@@ -95,12 +96,43 @@ ObsidianTownCO_ApproachLab: ; TO-DO
 	disappear OBSIDIANTOWN_PROF
 	playsound SFX_ENTER_DOOR
 	waitsfx
-	setmapmusicoverride
+	pause 15
+	appear OBSIDIANTOWN_PROF
+	playsound SFX_ENTER_DOOR
+	applymovement OBSIDIANTOWN_PROF, .Move_WalkDown
+	waitsfx
+	turnobject OBSIDIANTOWN_PROF, LEFT
+	opentext
+	writetext .Text_Hurry
+	waitbutton
+	closetext
+	applymovement OBSIDIANTOWN_PROF, .Move_WalkUp
+	disappear OBSIDIANTOWN_PROF
+	playsound SFX_ENTER_DOOR
+	waitsfx
 	setscene SCENE_OBSIDIAN_TOWN_FORCE_LAB
 	end
 
-.Text_ComeWithMe: ; TO-DO
-	text "TO-DO"
+.Text_ComeWithMe:
+	text "PROF. PARK:"
+	line "<PLAYER>! I need"
+	cont "your help!"
+
+	para "The #MON that"
+	line "I keep in my lab…"
+
+	para "They've escaped!"
+	line "Into the meadow!"
+
+	para "You need to help"
+	line "me capture them!"
+	done
+
+.Text_Hurry:
+	text "What are you"
+	line "waiting for?"
+
+	para "Hurry!"
 	done
 
 .Move_WalkDown:
@@ -127,6 +159,7 @@ ObsidianTownCO_ApproachLab: ; TO-DO
 .Return1:
 	big_step RIGHT
 	big_step RIGHT
+.Move_WalkUp:
 	big_step UP
 	step_end
 .Return2:
@@ -143,6 +176,17 @@ ObsidianTownCO_ApproachLab: ; TO-DO
 	big_step UP
 	step_end
 
+.SetMapMusic:
+	ld a, [wScriptPos]
+	ld l, a
+	ld a, [wScriptPos + 1]
+	ld h, a
+	ld bc, -6
+	add hl, bc
+	ld a, [hl]
+	ld [wMapMusic], a
+	ret
+
 ObsidianTownCO_ForceLab:
 	applymovementparam OBSIDIANTOWN_FISHER, .Move_ApproachPlayer
 	opentext
@@ -153,8 +197,12 @@ ObsidianTownCO_ForceLab:
 	applymovement PLAYER, .Move_Right
 	end
 
-.Text: ; TO-DO
-	text "TO-DO"
+.Text:
+	text "Where are you"
+	line "going, <PLAYER>?"
+
+	para "The PROF. needs"
+	line "your help!"
 	done
 
 .Move_ApproachPlayer:

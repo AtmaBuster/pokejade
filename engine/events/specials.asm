@@ -398,3 +398,50 @@ TrainerHouse:
 	ld a, [sMysteryGiftTrainerHouseFlag]
 	ld [wScriptVar], a
 	jmp CloseSRAM
+
+GetStarterName:
+	ld de, EVENT_GOT_TREECKO
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld hl, TREECKO
+	jr nz, .got_mon
+	ld de, EVENT_GOT_TORCHIC
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld hl, TORCHIC
+	jr nz, .got_mon
+	ld de, EVENT_GOT_MUDKIP
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld hl, MUDKIP
+	jr nz, .got_mon
+	ld hl, wStringBuffer1
+	ld bc, MON_NAME_LENGTH - 1
+	ld a, "?"
+	rst ByteFill
+	ld [hl], "@"
+	ret
+
+.got_mon
+	call GetPokemonIDFromIndex
+	ld [wNamedObjectIndex], a
+	call GetPokemonName
+	ret
+;Script_getmonname:
+;	call LoadScriptPokemonID
+;	ld [wNamedObjectIndex], a
+;	call GetPokemonName
+;	ld de, wStringBuffer1
+;
+;GetStringBuffer:
+;	rst GetScriptByte
+;	cp NUM_STRING_BUFFERS
+;	jr c, .ok
+;	xor a
+;.ok
+;
+;CopyConvertedText:
+;	ld hl, wStringBuffer3
+;	ld bc, STRING_BUFFER_LENGTH
+;	rst AddNTimes
+;	jmp CopyName2

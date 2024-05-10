@@ -208,6 +208,7 @@ ItemDescriptionsKeyItems:
 	dw SquirtBottleDesc ; 0114
 	dw RainbowWingDesc  ; 0115
 	dw ShinyCharmDesc   ; 0116
+	dw LetterDesc       ; 0117
 .IndirectEnd:
 
 ItemDescriptionsBalls:
@@ -889,3 +890,7 @@ MirageMailDesc:
 ShinyCharmDesc:
 	db   "Attracts shiny"
 	next "#MON.@"
+
+LetterDesc:
+	db   "A letter from"
+	next "PROF. PARK@"

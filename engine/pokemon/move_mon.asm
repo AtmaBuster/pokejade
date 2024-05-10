@@ -1451,6 +1451,8 @@ GenerateMonPersonality:
 	inc bc
 .no_super_luck
 ; check Shiny Charm
+	ld a, [wCurItem]
+	push af
 	ld hl, SHINY_CHARM
 	call GetItemIDFromIndex
 	ld [wCurItem], a
@@ -1460,6 +1462,8 @@ GenerateMonPersonality:
 	inc bc
 	inc bc
 .no_shiny_charm
+	pop af
+	ld [wCurItem], a
 ; check for active Lure
 	ld a, [wRepelType]
 	cp EFF_LURE
@@ -1496,6 +1500,9 @@ GenerateMonPersonality:
 	xor a
 	ld [wPersonalityByteStore], a
 
+	ld a, [wForceShinyPID]
+	and a
+	jp nz, .force_pid
 ; check for shiny
 	ld a, b
 	xor d
@@ -1600,6 +1607,16 @@ GenerateMonPersonality:
 .got_gender
 	ld hl, wPersonalityByteStore
 	or [hl]
+	jr .cont
+
+.force_pid
+	pop bc
+	ld l, a
+	xor a
+	ld [wForceShinyPID], a
+	ld a, l
+	dec a
+.cont
 	ld [wPersonalityByteStore], a
 
 	ld hl, wBaseAbility
@@ -1645,4 +1662,59 @@ PID_Mod25:
 	jr z, .loop
 	ld a, l
 	add 25
+	ret
+
+InitStarterMonData:
+	ld a, 1
+	ld [wShinyEncountersEnabled], a
+	call GenerateMonPersonality
+	ld a, b
+	ld [wStarterTreeckoPersonality], a
+	bit MON_SHINY_F, b
+	jr z, .not_shiny_treecko
+	ld a, PAL_NPC_TEAL
+	ld [wMap2ObjectPalette], a
+.not_shiny_treecko
+	call GenerateMonPersonality
+	ld a, b
+	ld [wStarterTorchicPersonality], a
+	bit MON_SHINY_F, b
+	jr z, .not_shiny_torchic
+	ld a, PAL_NPC_YELLOW
+	ld [wMap3ObjectPalette], a
+.not_shiny_torchic
+	call GenerateMonPersonality
+	ld a, b
+	ld [wStarterMudkipPersonality], a
+	bit MON_SHINY_F, b
+	jr z, .not_shiny_mudkip
+	ld a, PAL_NPC_PINK
+	ld [wMap4ObjectPalette], a
+.not_shiny_mudkip
+	xor a
+	ld [wShinyEncountersEnabled], a
+	ret
+
+CheckStarterForceShiny:
+	ld de, EVENT_GOT_TREECKO
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, [wStarterTreeckoPersonality]
+	jr nz, .got_byte
+	ld de, EVENT_GOT_TORCHIC
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, [wStarterTorchicPersonality]
+	jr nz, .got_byte
+	ld de, EVENT_GOT_MUDKIP
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, [wStarterMudkipPersonality]
+	jr nz, .got_byte
+	xor a
+.got_byte
+	bit MON_SHINY_F, a
+	ret z
+	inc a
+	ld [wForceShinyPID], a
 	ret

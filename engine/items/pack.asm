@@ -1043,7 +1043,7 @@ TutorialPack:
 	db STATICMENU_ENABLE_SELECT | STATICMENU_ENABLE_LEFT_RIGHT | STATICMENU_ENABLE_START | STATICMENU_WRAP | STATICMENU_CURSOR ; flags
 	db 5, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY ; item format
-	dbw 0, wDudeNumItems
+	dbw 0, wNumItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
 	dba UpdateItemDescription
@@ -1063,7 +1063,7 @@ TutorialPack:
 	db STATICMENU_ENABLE_SELECT | STATICMENU_ENABLE_LEFT_RIGHT | STATICMENU_ENABLE_START | STATICMENU_WRAP | STATICMENU_CURSOR ; flags
 	db 5, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_NORMAL ; item format
-	dbw 0, wDudeNumKeyItems
+	dbw 0, wNumKeyItems
 	dba PlaceMenuKeyItemName
 	dba PlaceMenuKeyItemQuantity
 	dba UpdateKeyItemDescription
@@ -1091,7 +1091,7 @@ TutorialPack:
 	db STATICMENU_ENABLE_SELECT | STATICMENU_ENABLE_LEFT_RIGHT | STATICMENU_ENABLE_START | STATICMENU_WRAP | STATICMENU_CURSOR ; flags
 	db 5, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY ; item format
-	dbw 0, wDudeNumBalls
+	dbw 0, wNumBalls
 	dba PlaceMenuItemBallName
 	dba PlaceMenuItemBallQuantity
 	dba UpdateItemBallDescription
