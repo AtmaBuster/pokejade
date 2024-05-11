@@ -9,7 +9,11 @@ SpawnPoints:
 	table_width 4, SpawnPoints
 
 	spawn PLAYERS_HOUSE_2F,            3,  3
+IF DEF(_DEBUG)
+	spawn DEBUG_ROOM,                  5,  6
+ELSE
 	spawn PLAYERS_HOUSE_2F,            3,  3
+ENDC
 
 	spawn OBSIDIAN_TOWN,               3, 10
 

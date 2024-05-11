@@ -1007,9 +1007,9 @@ DoRepelStep:
 	dw REPEL
 	dw SUPER_REPEL
 	dw MAX_REPEL
-	dw MASTER_BALL ; LURE
-	dw MASTER_BALL ; SUPER_LURE
-	dw MASTER_BALL ; MAX_LURE
+	dw LURE
+	dw SUPER_LURE
+	dw MAX_LURE
 
 DoPlayerEvent:
 	ld a, [wScriptRunning]

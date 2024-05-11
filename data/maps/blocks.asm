@@ -21,6 +21,8 @@ _NorthSouthGate_Blocks: INCBIN "maps/NorthSouthGate.ablk"
 _EastWestGate_Blocks:   INCBIN "maps/EastWestGate.ablk"
 _Mart_Blocks:           INCBIN "maps/Mart.ablk"
 _Pokecenter1F_Blocks:   INCBIN "maps/Pokecenter1F.ablk"
-
+IF DEF(_DEBUG)
+DebugRoom_Blocks:       INCBIN "maps/DebugRoom.ablk"
+ENDC
 
 ENDSECTION

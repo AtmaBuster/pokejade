@@ -179,6 +179,9 @@
 	const REAPER_CLOTH ; 00AB
 	const DEEPSEATOOTH ; 00AC
 	const DEEPSEASCALE ; 00AD
+	const LURE         ; 00AE
+	const SUPER_LURE   ; 00AF
+	const MAX_LURE     ; 00B0
 DEF NUM_ITEM_POCKET EQU const_value - 1
 
 	const_align 8 ; Key items assume the value of HIGH(FIRST_KEY_ITEM) when storing in bag.
@@ -189,24 +192,25 @@ DEF FIRST_KEY_ITEM EQU const_value
 	const OLD_ROD      ; 0103
 	const GOOD_ROD     ; 0104
 	const SUPER_ROD    ; 0105
-	const RED_SCALE    ; 0106
-	const SECRETPOTION ; 0107
-	const S_S_TICKET   ; 0108
-	const MYSTERY_EGG  ; 0109
-	const CLEAR_BELL   ; 010A
-	const SILVER_WING  ; 010B
-	const GS_BALL      ; 010C
-	const BLUE_CARD    ; 010D
-	const CARD_KEY     ; 010E
-	const MACHINE_PART ; 010F
-	const EGG_TICKET   ; 0110
-	const LOST_ITEM    ; 0111
-	const BASEMENT_KEY ; 0112
-	const PASS         ; 0113
+	const RED_SCALE    ; 0106 -
+	const SECRETPOTION ; 0107 -
+	const S_S_TICKET   ; 0108 -
+	const MYSTERY_EGG  ; 0109 -
+	const CLEAR_BELL   ; 010A -
+	const SILVER_WING  ; 010B -
+	const GS_BALL      ; 010C -
+	const BLUE_CARD    ; 010D -
+	const CARD_KEY     ; 010E -
+	const MACHINE_PART ; 010F -
+	const EGG_TICKET   ; 0110 -
+	const LOST_ITEM    ; 0111 -
+	const BASEMENT_KEY ; 0112 -
+	const PASS         ; 0113 -
 	const SQUIRTBOTTLE ; 0114
 	const RAINBOW_WING ; 0115
 	const SHINY_CHARM  ; 0116
 	const LETTER       ; 0117
+	const PARKS_NOTE   ; 0118
 DEF NUM_KEY_ITEM_POCKET EQU const_value - FIRST_KEY_ITEM
 assert NUM_KEY_ITEM_POCKET <= $ff
 

@@ -1290,7 +1290,12 @@ Debug_FillBag:
 	jr .item_loop
 
 .ItemList
+	dw REPEL
+	dw SUPER_REPEL
 	dw MAX_REPEL
+	dw LURE
+	dw SUPER_LURE
+	dw MAX_LURE
 	dw RARE_CANDY
 	dw ESCAPE_ROPE
 	dw FULL_RESTORE

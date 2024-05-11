@@ -38,4 +38,9 @@ SECTION "Map Scripts 23", ROMX
 SECTION "Map Scripts 24", ROMX
 SECTION "Map Scripts 25", ROMX
 
+IF DEF(_DEBUG)
+INCLUDE "maps/DebugRoom.asm"
+ENDC
+
+
 ENDSECTION

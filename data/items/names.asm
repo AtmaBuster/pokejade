@@ -173,6 +173,9 @@ ItemNames::
 	li "REAPER CLOTH"
 	li "DEEPSEATOOTH"
 	li "DEEPSEASCALE"
+	li "LURE"
+	li "SUPER LURE"
+	li "MAX LURE"
 	assert_list_length NUM_ITEM_POCKET
 
 KeyItemNames::
@@ -201,6 +204,7 @@ KeyItemNames::
 	li "RAINBOW WING" ; 0115
 	li "SHINY CHARM"  ; 0116
 	li "LETTER"       ; 0117
+	li "PARK'S NOTE"  ; 0118
 	assert_list_length NUM_KEY_ITEM_POCKET
 
 BallNames::

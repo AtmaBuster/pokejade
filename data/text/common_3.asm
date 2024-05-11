@@ -934,6 +934,12 @@ _ItemCantUseOnMonText::
 	line "on this #MON."
 	prompt
 
+_LureUsedEarlierIsStillInEffectText::
+	text "The LURE used"
+	line "earlier is still"
+	cont "in effect."
+	prompt
+
 _RepelUsedEarlierIsStillInEffectText::
 	text "The REPEL used"
 	line "earlier is still"

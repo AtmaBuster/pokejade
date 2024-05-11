@@ -168,20 +168,23 @@ ItemDescriptions1:
 	dw QuestionMarkDesc ; 009D
 	dw QuestionMarkDesc ; 009E
 	dw QuestionMarkDesc ; 009F
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
-	dw QuestionMarkDesc
+	dw OvalStoneDesc    ; 00A0
+	dw DuskStoneDesc    ; 00A1
+	dw BlackAugiteDesc  ; 00A2
+	dw ElectirizerDesc  ; 00A3
+	dw MagmarizerDesc   ; 00A4
+	dw RazorClawDesc    ; 00A5
+	dw PeatBlockDesc    ; 00A6
+	dw DubiousDiscDesc  ; 00A7
+	dw DawnStoneDesc    ; 00A8
+	dw ShinyStoneDesc   ; 00A9
+	dw PrismScaleDesc   ; 00AA
+	dw ReaperClothDesc  ; 00AB
+	dw DeepSeaToothDesc ; 00AC
+	dw DeepSeaScaleDesc ; 00AD
+	dw LureDesc         ; 00AE
+	dw SuperLureDesc    ; 00AF
+	dw MaxLureDesc      ; 00B0
 .IndirectEnd:
 
 ItemDescriptionsKeyItems:
@@ -209,6 +212,7 @@ ItemDescriptionsKeyItems:
 	dw RainbowWingDesc  ; 0115
 	dw ShinyCharmDesc   ; 0116
 	dw LetterDesc       ; 0117
+	dw ParksNoteDesc    ; 0118
 .IndirectEnd:
 
 ItemDescriptionsBalls:
@@ -251,6 +255,15 @@ BicycleDesc:
 	next "for fast movement.@"
 
 MoonStoneDesc:
+FireStoneDesc:
+ThunderStoneDesc:
+WaterStoneDesc:
+LeafStoneDesc:
+SunStoneDesc:
+OvalStoneDesc:
+DuskStoneDesc:
+DawnStoneDesc:
+ShinyStoneDesc:
 	db   "Evolves certain"
 	next "kinds of #MON.@"
 
@@ -306,18 +319,6 @@ MaxElixerDesc:
 	db   "Fully restores the"
 	next "PP of one #MON.@"
 
-FireStoneDesc:
-	db   "Evolves certain"
-	next "kinds of #MON.@"
-
-ThunderStoneDesc:
-	db   "Evolves certain"
-	next "kinds of #MON.@"
-
-WaterStoneDesc:
-	db   "Evolves certain"
-	next "kinds of #MON.@"
-
 HPUpDesc:
 	db   "Raises the HP of"
 	next "one #MON.@"
@@ -349,10 +350,6 @@ RareCandyDesc:
 XAccuracyDesc:
 	db   "Raises accuracy."
 	next "(1 BTL)@"
-
-LeafStoneDesc:
-	db   "Evolves certain"
-	next "kinds of #MON.@"
 
 MetalPowderDesc:
 	db   "Raises DEFENSE of"
@@ -737,6 +734,7 @@ BerryJuiceDesc:
 	next "HP by 20.@"
 
 ScopeLensDesc:
+RazorClawDesc:
 	db   "Raises critical"
 	next "hit ratio. (HOLD)@"
 
@@ -811,10 +809,6 @@ NormalBoxDesc:
 GorgeousBoxDesc:
 	db   "Open it and see"
 	next "what's inside.@"
-
-SunStoneDesc:
-	db   "Evolves certain"
-	next "kinds of #MON.@"
 
 PolkadotBowDesc:
 	db   "Powers up normal-"
@@ -894,3 +888,55 @@ ShinyCharmDesc:
 LetterDesc:
 	db   "A letter from"
 	next "PROF. PARK@"
+
+ParksNoteDesc:
+	db   "A note signed by"
+	next "PROF. PARK@"
+
+BlackAugiteDesc:
+	db   "A sharp glassy"
+	next "stone.@"
+
+ElectirizerDesc:
+	db   "A box charged"
+	next "with electricity.@"
+
+MagmarizerDesc:
+	db   "A box full of"
+	next "magmatic power.@"
+
+PeatBlockDesc:
+	db   "A block of muddy"
+	next "material.@"
+
+DubiousDiscDesc:
+	db   "A device full of"
+	next "dubious data.@"
+
+PrismScaleDesc:
+	db   "A rainbow-colored"
+	next "scale.@"
+
+ReaperClothDesc:
+	db   "Cloth imbued with"
+	next "spiritual energy.@"
+
+DeepSeaToothDesc:
+	db   "Boosts SP.ATK of"
+	next "CLAMPERL. (HOLD)@"
+
+DeepSeaScaleDesc:
+	db   "Boosts SP.DEF of"
+	next "CLAMPERL. (HOLD)@"
+
+LureDesc:
+	db   "Lures rare #-"
+	next "MON for 100 steps.@"
+
+SuperLureDesc:
+	db   "Lures rare #-"
+	next "MON for 200 steps.@"
+
+MaxLureDesc:
+	db   "Lures rare #-"
+	next "MON for 250 steps.@"

@@ -202,6 +202,9 @@ ItemEffects1:
 	dw NoEffect
 	dw NoEffect
 	dw NoEffect
+	dw LureEffect
+	dw SuperLureEffect
+	dw MaxLureEffect
 .IndirectEnd:
 
 ItemEffectsKeyItems:
@@ -229,6 +232,7 @@ ItemEffectsKeyItems:
 	dw NoEffect           ; RAINBOW_WING
 	dw NoEffect           ; SHINY_CHARM
 	dw NoEffect           ; LETTER
+	dw NoEffect           ; PARKS_NOTE
 .IndirectEnd:
 
 ItemEffectsBalls:
@@ -2158,6 +2162,30 @@ EscapeRopeEffect:
 	jmp z, UseDisposableItem
 	ret
 
+SuperLureEffect:
+	lb bc, 200, EFF_SUPER_LURE
+	jr UseLure
+
+MaxLureEffect:
+	lb bc, 250, EFF_MAX_LURE
+	jr UseLure
+
+LureEffect:
+	lb bc, 100, EFF_LURE
+UseLure:
+	ld a, [wRepelType]
+	cp EFF_LURE
+	jr c, .set_lure
+	ld hl, LureUsedEarlierIsStillInEffectText
+	jmp PrintText
+
+.set_lure
+	ld a, b
+	ld [wRepelEffect], a
+	ld a, c
+	ld [wRepelType], a
+	jmp UseItemText
+
 SuperRepelEffect:
 	lb bc, 200, EFF_SUPER_REPEL
 	jr UseRepel
@@ -2176,7 +2204,7 @@ UseRepel:
 	cp EFF_LURE
 	jr nc, .set_repel
 	ld hl, RepelUsedEarlierIsStillInEffectText
-	jmp nz, PrintText
+	jmp PrintText
 
 .set_repel
 	ld a, b
@@ -2184,6 +2212,10 @@ UseRepel:
 	ld a, c
 	ld [wRepelType], a
 	jmp UseItemText
+
+LureUsedEarlierIsStillInEffectText:
+	text_far _LureUsedEarlierIsStillInEffectText
+	text_end
 
 RepelUsedEarlierIsStillInEffectText:
 	text_far _RepelUsedEarlierIsStillInEffectText

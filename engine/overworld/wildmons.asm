@@ -253,6 +253,15 @@ GetMapEncounterRate:
 	ld b, 0
 	add hl, bc
 	ld b, [hl]
+	ld a, [wRepelType]
+	cp EFF_LURE
+	ret c
+	ld a, b
+	add 5 percent
+	jr nc, .done
+	ld a, -1
+.done
+	ld b, a
 	ret
 
 ApplyMusicEffectOnEncounterRate::
@@ -300,18 +309,17 @@ ChooseWildEncounter:
 	call CheckEncounterRoamMon
 	jr c, .startwildbattle
 
+	call GetProbTable
 	inc hl
 	inc hl
 	inc hl
 	call CheckOnWater
-	ld de, WaterMonProbTable
 	jr z, .watermon
 	inc hl
 	inc hl
 	call GetTimeOfDayNotEve
 	ld bc, NUM_GRASSMON * 3
 	rst AddNTimes
-	ld de, GrassMonProbTable
 
 .watermon
 ; hl contains the pointer to the wild mon data, let's save that to the stack
@@ -398,6 +406,23 @@ ChooseWildEncounter:
 	and a
 	ret
 
+GetProbTable:
+	ld a, [wRepelType]
+	cp EFF_LURE
+	jr c, .no_lure
+	ld de, GrassMonLureProbTable
+	call CheckOnWater
+	ret nz
+	ld de, WaterMonLureProbTable
+	ret
+
+.no_lure
+	ld de, GrassMonProbTable
+	call CheckOnWater
+	ret nz
+	ld de, WaterMonProbTable
+	ret
+
 INCLUDE "data/wild/probabilities.asm"
 
 CheckRepelEffect:: ; TO-DO: Lures
@@ -405,6 +430,9 @@ CheckRepelEffect:: ; TO-DO: Lures
 	ld a, [wRepelEffect]
 	and a
 	jr z, .encounter
+	ld a, [wRepelType]
+	cp EFF_LURE
+	jr nc, .encounter
 ; Get the first Pokemon in your party that isn't fainted.
 	ld hl, wPartyMon1HP
 	ld bc, PARTYMON_STRUCT_LENGTH - 1

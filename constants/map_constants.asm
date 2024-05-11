@@ -40,6 +40,9 @@ ENDM
 	map_const TRADE_CENTER,                                 5,  4 ;  2
 	map_const COLOSSEUM,                                    5,  4 ;  3
 	map_const TIME_CAPSULE,                                 5,  4 ;  4
+IF DEF(_DEBUG)
+	map_const DEBUG_ROOM,                                  10, 10 ;  5
+ENDC
 	endgroup
 
 	newgroup DUNGEONS                                             ;  2
