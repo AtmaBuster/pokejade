@@ -121,7 +121,7 @@
 	tilecoll WALL, HEADBUTT_TREE, WALL, WALL ; 78
 	tilecoll WATER, WATER, WATER, WATER ; 79
 	tilecoll WATER, WATER, WATER, WATER ; 7a
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 7b
+	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 7b
 	tilecoll WATER, WATER, WATER, WATER ; 7c
 	tilecoll WATER, WATER, WATER, WATER ; 7d
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 7e

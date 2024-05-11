@@ -19,7 +19,7 @@
 	const EVENT_GOT_TM_X6
 	const EVENT_GOT_TM_X7
 	const EVENT_GOT_TM_X8
-; HMs (EVENT_GOT_HM07_WATERFALL is with the Johto itemballs)
+; HMs
 	const EVENT_GOT_HM01_CUT
 	const EVENT_GOT_HM02_FLY
 	const EVENT_GOT_HM03_SURF
@@ -87,7 +87,12 @@
 	const EVENT_DECO_BIG_SNORLAX_DOLL
 	const EVENT_DECO_BIG_ONIX_DOLL
 	const EVENT_DECO_BIG_LAPRAS_DOLL
-; Unused: next 954 events
+; Unused: next 4 events
+
+	const_next 650
+; Hidden items
+	const EVENT_ROUTEN01_HIDDEN_REPEL
+; Unused: next 949 events
 
 	const_next 1600
 ; Sprite visibility flags
@@ -108,7 +113,9 @@
 	const EVENT_OBSIDIAN_MEADOW_RIVAL
 ; Item balls
 	const EVENT_OBSIDIAN_TOWN_RARE_CANDY
-; Unused: next 436 events
+	const EVENT_OBSIDIAN_MEADOW_ITEMBALL
+	const EVENT_ROUTEN01_POTION
+; Unused: next 434 events
 
 	const_next 2048
 DEF NUM_EVENTS EQU const_value ; 800
