@@ -207,7 +207,7 @@ DEF SPAWN_RED   EQU 2
 ; wStatusFlags2::
 	const_def
 	const STATUSFLAGS2_ROCKETS_IN_RADIO_TOWER_F ; 0
-	const STATUSFLAGS2_SAFARI_GAME_F            ; 1
+	const STATUSFLAGS2_BADGE_CASE_F             ; 1
 	const STATUSFLAGS2_BUG_CONTEST_TIMER_F      ; 2
 	const STATUSFLAGS2_UNUSED_3_F               ; 3
 	const STATUSFLAGS2_BIKE_SHOP_CALL_F         ; 4

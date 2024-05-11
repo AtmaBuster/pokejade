@@ -127,10 +127,24 @@ TrainerCard_Page1_LoadGFX:
 TrainerCard_Page1_Joypad:
 	call TrainerCard_Page1_PrintGameTime
 	ld hl, hJoyLast
+	ld a, [wStatusFlags2]
+	bit STATUSFLAGS2_BADGE_CASE_F, a
+	jr nz, .has_badge_case
+	ld a, [hl]
+	and A_BUTTON
+	jr nz, .Quit
+	ret
+
+.has_badge_case
 	ld a, [hl]
 	and D_RIGHT | A_BUTTON
 	ret z
 	ld a, TRAINERCARDSTATE_PAGE2_LOADGFX
+	ld [wJumptableIndex], a
+	ret
+
+.Quit
+	ld a, TRAINERCARDSTATE_QUIT
 	ld [wJumptableIndex], a
 	ret
 
@@ -154,7 +168,7 @@ TrainerCard_Page2_LoadGFX:
 	call Request2bpp
 	ld hl, TrainerCard_JohtoBadgesOAM
 	call TrainerCard_Page2_3_InitObjectsAndStrings
-	jr TrainerCard_IncrementJumptable
+	jp TrainerCard_IncrementJumptable
 
 TrainerCard_Page2_Joypad:
 	ld hl, TrainerCard_JohtoBadgesOAM
@@ -293,9 +307,13 @@ TrainerCard_Page1_PrintDexCaught_GameTime:
 	hlcoord 2, 10
 	ld de, .Dex_PlayTime
 	rst PlaceString
+	ld a, [wStatusFlags2]
+	bit STATUSFLAGS2_BADGE_CASE_F, a
+	jr z, .no_badges
 	hlcoord 10, 15
 	ld de, .Badges
 	rst PlaceString
+.no_badges
 	ld hl, wPokedexCaught
 	ld bc, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits16
