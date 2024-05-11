@@ -103,6 +103,20 @@ PlayersHouse1FOB_Mom:
 
 .HaveStarter:
 	writetext .Text_CuteMon
+	yesorno
+	iffalse .SkipRest
+	closetext
+	special FadeOutToBlack
+	special ReloadSpritesNoPalettes
+	special PlayerStats_Healing
+	playmusic MUSIC_HEAL
+	special HealParty
+	pause 60
+	special FadeInFromBlack
+	special RestartMapMusic
+	opentext
+.SkipRest:
+	writetext .Text_GoGetEm
 	waitbutton
 	closetext
 	end
@@ -119,8 +133,16 @@ PlayersHouse1FOB_Mom:
 	text "MOM: Oh, what a"
 	line "cute #MON!"
 
-	para "Did PROF.PARK"
-	line "give that to you?"
+	para "Did PROF.PARK give"
+	line "that to you?"
+
+	para "While you're here,"
+	line "would you like to"
+	cont "rest?"
+	done
+
+.Text_GoGetEm:
+	text "Go get 'em, honey!"
 	done
 
 PlayersHouse1F_MapEvents:
