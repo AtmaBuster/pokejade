@@ -24,6 +24,10 @@ UpdateTrainerStars:
 	ret
 
 CountTrainerStars:
+	push hl
+	push de
+	push bc
+	call UpdateTrainerStars
 	ld a, [wTrainerStars]
 	ld c, 0
 	ld b, 5
@@ -35,4 +39,4 @@ CountTrainerStars:
 	dec b
 	jr nz, .loop
 	ld a, c
-	ret
+	jmp PopBCDEHL

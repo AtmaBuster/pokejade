@@ -427,21 +427,3 @@ GetStarterName:
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ret
-;Script_getmonname:
-;	call LoadScriptPokemonID
-;	ld [wNamedObjectIndex], a
-;	call GetPokemonName
-;	ld de, wStringBuffer1
-;
-;GetStringBuffer:
-;	rst GetScriptByte
-;	cp NUM_STRING_BUFFERS
-;	jr c, .ok
-;	xor a
-;.ok
-;
-;CopyConvertedText:
-;	ld hl, wStringBuffer3
-;	ld bc, STRING_BUFFER_LENGTH
-;	rst AddNTimes
-;	jmp CopyName2

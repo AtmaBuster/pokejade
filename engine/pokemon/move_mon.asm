@@ -1441,7 +1441,11 @@ GenerateMonPersonality:
 	push hl
 
 ; get shiny rolls
-	ld bc, 1
+; count trainer stars, add 1
+	farcall CountTrainerStars
+	inc a
+	ld c, a
+	ld b, 0
 ; check lead mon for Super Luck
 	push bc
 	ld a, SUPER_LUCK
@@ -1474,7 +1478,8 @@ GenerateMonPersonality:
 	ld a, [wShinyEncounterStorage]
 	and a
 	jr z, .no_shiny_in_storage
-	ld hl, 32
+	ld hl, 82 ; gives about 1% minimum rate
+	;ld hl, 420 ; gives about 5% minimum rate <- noticable load times
 	add hl, bc
 	ld b, h
 	ld c, l
@@ -1673,7 +1678,7 @@ InitStarterMonData:
 	bit MON_SHINY_F, b
 	jr z, .not_shiny_treecko
 	ld a, PAL_NPC_TEAL
-	ld [wMap2ObjectPalette], a
+	ld [wMap3ObjectPalette], a
 .not_shiny_treecko
 	call GenerateMonPersonality
 	ld a, b
@@ -1681,7 +1686,7 @@ InitStarterMonData:
 	bit MON_SHINY_F, b
 	jr z, .not_shiny_torchic
 	ld a, PAL_NPC_YELLOW
-	ld [wMap3ObjectPalette], a
+	ld [wMap4ObjectPalette], a
 .not_shiny_torchic
 	call GenerateMonPersonality
 	ld a, b
@@ -1689,7 +1694,7 @@ InitStarterMonData:
 	bit MON_SHINY_F, b
 	jr z, .not_shiny_mudkip
 	ld a, PAL_NPC_PINK
-	ld [wMap4ObjectPalette], a
+	ld [wMap5ObjectPalette], a
 .not_shiny_mudkip
 	xor a
 	ld [wShinyEncountersEnabled], a
