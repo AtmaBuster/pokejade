@@ -425,7 +425,7 @@ GetProbTable:
 
 INCLUDE "data/wild/probabilities.asm"
 
-CheckRepelEffect:: ; TO-DO: Lures
+CheckRepelEffect::
 ; If there is no active Repel, there's no need to be here.
 	ld a, [wRepelEffect]
 	and a

@@ -38,17 +38,15 @@ ObsidianTownCO_CantLeave:
 	applymovementparam OBSIDIANTOWN_TEACHER, .Move_Return
 	end
 
-.Text1: ; TO-DO
-	text "bruh what are"
-	line "you DOIN"
+.Text1:
+	text "<PLAYER>, wait!"
+	line "Come back here!"
 	done
 
-.Text2: ; TO-DO
-	text "get the FUCK"
-	line "back in here."
-
-	para "shit's mad scary"
-	line "out there"
+.Text2:
+	text "You can't go out"
+	line "without a #MON"
+	cont "to protect you."
 	done
 
 .Move_ApproachPlayer:
@@ -384,21 +382,37 @@ ObsidianTownBG_Lab:
 	done
 
 ObsidianTownOB_Teacher:
-	jumptextfaceplayer .Text
-.Text: ; TO-DO
-	text "TO-DO"
+	faceplayer
+	opentext
+	writetext .Text
+	waitbutton
+	closetext
+	turnobject OBSIDIANTOWN_TEACHER, DOWN
+	end
+.Text:
+	text "I love watching"
+	line "the stream flow."
+
+	para "Sometimes I wish I"
+	line "could just lie"
+	cont "down on the water"
+	cont "and let it take me"
+	cont "wherever it thinks"
+	cont "I need to go."
 	done
 
 ObsidianTownOB_Fisher:
 	jumptextfaceplayer .Text
-.Text: ; TO-DO
+.Text:
 	text "Technology is"
 	line "incredible!"
 
-	para "You can now"
-	line "skibidi rizz"
-	cont "gyatt ohio"
-	cont "sigma fortnite!"
+	para "You can now take"
+	line "the code from your"
+	cont "favorite games and"
+	cont "change it to make"
+	cont "your very own"
+	cont "masterpiece!"
 	done
 
 ObsidianTownOB_RareCandy:
