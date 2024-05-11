@@ -97,14 +97,15 @@ MACRO connection
 ENDM
 
 
-	map_attributes ObsidianTown, OBSIDIAN_TOWN, $05, EAST
+	map_attributes ObsidianTown, OBSIDIAN_TOWN, $05, NORTH | EAST
+	connection north, RouteN01, ROUTE_N01, 0
 	connection east, ObsidianMeadow, OBSIDIAN_MEADOW, 3
 
 	map_attributes ObsidianMeadow, OBSIDIAN_MEADOW, $05, WEST
 	connection west, ObsidianTown, OBSIDIAN_TOWN, -3
 
-	map_attributes Route29, ROUTE_29, $05, EAST
-	connection east, ObsidianTown, OBSIDIAN_TOWN, 0
+	map_attributes RouteN01, ROUTE_N01, $05, SOUTH
+	connection south, ObsidianTown, OBSIDIAN_TOWN, 0
 
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0
 	map_attributes TradeCenter, TRADE_CENTER, $00, 0

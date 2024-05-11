@@ -52,7 +52,7 @@ ENDC
 	newgroup OBSIDIAN                                             ;  3
 	map_const OBSIDIAN_TOWN,                               10, 10 ;  1
 	map_const OBSIDIAN_MEADOW,                             10, 10 ;  2
-	map_const ROUTE_29,                                    30,  9 ;  3
+	map_const ROUTE_N01,                                   10, 15 ;  3
 	map_const PLAYERS_HOUSE_1F,                             5,  4 ;  4
 	map_const PLAYERS_HOUSE_2F,                             4,  3 ;  5
 	map_const PARKS_LAB,                                    5,  6 ;  6

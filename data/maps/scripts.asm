@@ -8,7 +8,7 @@ INCLUDE "maps/TradeCenter.asm"
 INCLUDE "maps/Colosseum.asm"
 INCLUDE "maps/TimeCapsule.asm"
 INCLUDE "maps/ObsidianTown.asm"
-INCLUDE "maps/Route29.asm"
+INCLUDE "maps/RouteN01.asm"
 INCLUDE "maps/ParksLab.asm"
 INCLUDE "maps/ObsidianMeadow.asm"
 

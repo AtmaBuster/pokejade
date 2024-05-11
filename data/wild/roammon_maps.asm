@@ -15,6 +15,6 @@ ENDM
 RoamMaps:
 	list_start RoamMaps
 	; start map, ...other maps
-	roam_map ROUTE_29, ROUTE_29
+	roam_map ROUTE_N01, ROUTE_N01
 	assert_list_length NUM_ROAMMON_MAPS
 	db -1 ; end

@@ -10,8 +10,9 @@ Landmarks:
 	landmark  -8, -16, SpecialMapName
 	landmark 140, 100, ObsidianTownName
 	landmark 128, 100, ObsidianMeadowName
+	landmark 100,  80, RouteN01Name
+
 	landmark 100, 100, CherrygroveCityName
-	landmark 100,  80, Route30Name
 	landmark  96,  60, Route31Name
 	landmark  84,  60, VioletCityName
 	landmark  85,  58, SproutTowerName
@@ -108,6 +109,7 @@ Landmarks:
 
 ObsidianTownName:    db "OBSIDIAN<BSP>TOWN@"
 ObsidianMeadowName:  db "OBSIDIAN<BSP>MEADOW@"
+RouteN01Name:        db "ROUTE N01@"
 
 CherrygroveCityName: db "CHERRYGROVE<BSP>CITY@"
 VioletCityName:      db "VIOLET CITY@"
