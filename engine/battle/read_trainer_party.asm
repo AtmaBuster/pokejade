@@ -312,6 +312,21 @@ ReadTrainerPartyPieces:
 	ld e, l
 	pop hl
 	call GetNextTrainerDataByte
+	cp $fd
+	jr c, .ok
+; get starter personality data
+	sub $fd
+	push hl
+	ld hl, wStarterTreeckoPersonality
+	add l
+	ld l, a
+	ld a, 0
+	adc h
+	ld h, a
+	ld a, [hl]
+	pop hl
+	and MON_SHINY
+.ok
 	ld [de], a
 	inc de
 	call GetNextTrainerDataByte

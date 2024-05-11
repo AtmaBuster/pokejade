@@ -2,7 +2,7 @@
 ; - db "NAME@", TRAINERTYPE_* constant
 ; - 1 to 6 Pokémon:
 ;    FOR EACH
-;        trainer_mon species, level, ability, gender, [caughtball], [shiny]
+;        trainer_mon species, level, ability, gender, [caughtball], [deltaindex], [shiny]
 ;        IF TRAINERTYPE_NICKNAME
 ;                mon_nick nickname
 ;        IF TRAINERTYPE_ITEM
@@ -29,6 +29,14 @@ ELIF _NARG < 6
 ELSE
 	db (\5 - FIRST_BALL_ITEM) | \6
 ENDC
+ENDM
+
+MACRO starter_mon
+	db \2
+	dw \1
+	db \4 + $fd
+	db \3
+	db POKE_BALL - FIRST_BALL_ITEM
 ENDM
 
 MACRO mon_item
@@ -161,17 +169,17 @@ ClairGroup:
 Rival1Group:
 	next_list_item ; RIVAL1 (1)
 	db "?@", TRAINERTYPE_NORMAL
-	trainer_mon  TORCHIC, 5, BLAZE, MALE
+	starter_mon  TORCHIC, 5, BLAZE, 1
 	db -1 ; end
 
 	next_list_item ; RIVAL1 (2)
 	db "?@", TRAINERTYPE_NORMAL
-	trainer_mon  MUDKIP, 5, TORRENT, MALE
+	starter_mon  MUDKIP, 5, TORRENT, 2
 	db -1 ; end
 
 	next_list_item ; RIVAL1 (3)
 	db "?@", TRAINERTYPE_NORMAL
-	trainer_mon  TREECKO, 5, OVERGROW, MALE
+	starter_mon  TREECKO, 5, OVERGROW, 0
 	db -1 ; end
 
 	end_list_items
