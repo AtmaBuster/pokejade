@@ -72,7 +72,7 @@ ParksLabSC_AfterStarter:
 	writetext .Text_MyOwnMon
 	waitbutton
 	closetext
-	turnobject PLAYER, DOWN
+	applymovement PARKSLAB_RIVAL, .Move_ToBooks
 	setscene SCENE_PARKS_LAB_DONE
 	setmapscene OBSIDIAN_TOWN, SCENE_OBSIDIAN_TOWN_RIVAL_BATTLE
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
@@ -187,6 +187,16 @@ ParksLabSC_AfterStarter:
 .Move_Return:
 	step UP
 	turn_head DOWN
+	step_end
+
+.Move_ToBooks:
+	step DOWN
+	step DOWN
+	step DOWN
+	step LEFT
+	step LEFT
+	step LEFT
+	turn_head UP
 	step_end
 
 .HideMapNameSign:

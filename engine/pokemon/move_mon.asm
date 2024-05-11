@@ -1673,7 +1673,6 @@ InitStarterMonData:
 	ld a, 1
 	ld [wShinyEncountersEnabled], a
 	call GenerateMonPersonality
-	set MON_SHINY_F, b
 	ld a, b
 	ld [wStarterTreeckoPersonality], a
 	bit MON_SHINY_F, b
