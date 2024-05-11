@@ -43,9 +43,9 @@ PlayBattleMusic:
 	ld a, [wBattleType]
 	cp BATTLETYPE_SUICUNE
 	ld de, MUSIC_SUICUNE_BATTLE
-	jmp z, .done
+	jr z, .done
 	cp BATTLETYPE_ROAMING
-	jmp z, .done
+	jr z, .done
 
 	; Are we fighting a trainer?
 	ld a, [wOtherTrainerClass]
@@ -69,48 +69,26 @@ PlayBattleMusic:
 	jr .done
 
 .trainermusic
-	ld de, MUSIC_CHAMPION_BATTLE
-	cp CHAMPION
-	jr z, .done
-	cp RED
-	jr z, .done
+	ld hl, TrainerClassMusic
+	ld b, a
+.trainer_loop
+	ld a, [hli]
+	and a
+	jr z, .normal_trainer
+	cp b
+	jr z, .got_trainer_class
+	inc hl
+	inc hl
+	jr .trainer_loop
 
-	ld de, MUSIC_ROCKET_BATTLE
-	cp GRUNTM
-	jr z, .done
-	cp GRUNTF
-	jr z, .done
-	cp EXECUTIVEM
-	jr z, .done
-	cp EXECUTIVEF
-	jr z, .done
-	cp SCIENTIST
-	jr z, .done
-
-	ld de, MUSIC_KANTO_GYM_LEADER_BATTLE
-	farcall IsKantoGymLeader
-	jr c, .done
-
-	; IsGymLeader also counts CHAMPION, RED, and the Kanto gym leaders
-	; but they have been taken care of before this
-	ld de, MUSIC_JOHTO_GYM_LEADER_BATTLE
-	farcall IsGymLeader
-	jr c, .done
-
-	ld de, MUSIC_RIVAL_BATTLE
-	ld a, [wOtherTrainerClass]
-	cp RIVAL1
-	jr z, .done
-	cp RIVAL2
-	jr nz, .othertrainer
-
-	ld a, [wOtherTrainerID]
-	cp RIVAL2_2_CHIKORITA ; Rival in Indigo Plateau
-	jr c, .done
-	ld de, MUSIC_CHAMPION_BATTLE
+.got_trainer_class
+	ld a, [hli]
+	ld e, a
+	ld a, [hl]
+	ld d, a
 	jr .done
 
-.othertrainer
+.normal_trainer
 	ld a, [wLinkMode]
 	and a
 	jr nz, .johtotrainer
@@ -131,6 +109,8 @@ PlayBattleMusic:
 	call PlayMusic
 
 	jmp PopBCDEHL
+
+INCLUDE "data/trainers/music.asm"
 
 ClearBattleRAM:
 	xor a

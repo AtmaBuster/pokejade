@@ -2,12 +2,14 @@
 	const OBSIDIANTOWN_TEACHER
 	const OBSIDIANTOWN_FISHER
 	const OBSIDIANTOWN_PROF
+	const OBSIDIANTOWN_RIVAL
 	const OBSIDIANTOWN_POKE_BALL
 
 ObsidianTown_MapScripts:
 	def_scene_scripts
 	scene_script EmptyScript, SCENE_OBSIDIAN_TOWN_CANT_LEAVE
 	scene_script EmptyScript, SCENE_OBSIDIAN_TOWN_FORCE_LAB
+	scene_script EmptyScript, SCENE_OBSIDIAN_TOWN_RIVAL_BATTLE
 	scene_script EmptyScript, SCENE_OBSIDIAN_TOWN_NONE
 
 	def_callbacks
@@ -114,7 +116,7 @@ ObsidianTownCO_ApproachLab:
 	end
 
 .Text_ComeWithMe:
-	text "PROF. PARK:"
+	text "PROF.PARK:"
 	line "<PLAYER>! I need"
 	cont "your help!"
 
@@ -242,6 +244,117 @@ ObsidianTownCO_ForceLab:
 	step RIGHT
 	step_end
 
+ObsidianTownCO_RivalBattle:
+	opentext
+	writetext .Text_Wait
+	waitbutton
+	closetext
+	turnobject PLAYER, DOWN
+	playmusic MUSIC_RIVAL_ENCOUNTER
+	sjumpparam .MoveIfParam1
+.MoveIfParam1:
+	dw .Param0
+	dw .Param1
+.Param1:
+	moveobject OBSIDIANTOWN_RIVAL, 10, 11
+.Param0:
+	appear OBSIDIANTOWN_RIVAL
+	applymovement OBSIDIANTOWN_RIVAL, .Move_ApproachPlayer
+	opentext
+	writetext .Text_Battle
+	waitbutton
+	closetext
+	winlosstext .Text_PlayerWin, .Text_PlayerLose
+	setlasttalked OBSIDIANTOWN_RIVAL
+	loadrival RIVAL1, RIVAL1_1
+	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
+	startbattle
+	dontrestartmapmusic
+	reloadmap
+	playmusic MUSIC_RIVAL_AFTER
+	opentext
+	writetext .Text_BackToLab
+	waitbutton
+	closetext
+	applymovement OBSIDIANTOWN_RIVAL, .Move_Leave
+	disappear OBSIDIANTOWN_RIVAL
+	setscene SCENE_OBSIDIAN_TOWN_NONE
+	special HealParty
+	playmapmusic
+	end
+
+.Text_Wait:
+	text "<RIVAL>: <PLAYER>!"
+	line "Wait up!"
+	done
+
+.Text_Battle:
+	text "<RIVAL>: <PLAYER>!"
+	line "We both have"
+	cont "#MON now. Do"
+	cont "you know what that"
+	cont "means?"
+
+	para "It means we're"
+	line "both #MON"
+	cont "trainers! And"
+	cont "#MON trainers"
+	cont "have to battle!"
+
+	para "I won't take “no”"
+	line "for an answer!"
+	done
+
+.Text_PlayerWin:
+	text "<RIVAL>: Man."
+	line "You're tough"
+	cont "<PLAYER>."
+	done
+
+.Text_PlayerLose:
+	text "<RIVAL>: That was"
+	line "a good battle,"
+	cont "<PLAYER>."
+	done
+
+.Text_BackToLab:
+	text "It's hard to tell"
+	line "early on who the"
+	cont "better trainer is."
+
+	para "We should battle"
+	line "again later to"
+	cont "figure out who's"
+	cont "the best!"
+
+	para "Anyway, I need to"
+	line "head back to the"
+	cont "lab. I've got more"
+	cont "work to do."
+
+	para "See you around!"
+	done
+
+.Move_ApproachPlayer:
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step UP
+	step UP
+	step_end
+
+.Move_Leave:
+	step DOWN
+	step DOWN
+	step LEFT
+	step LEFT
+	step LEFT
+	step LEFT
+	step LEFT
+	step_end
+
 ObsidianTownBG_NameSign:
 	jumptext .Text
 .Text:
@@ -308,6 +421,8 @@ ObsidianTown_MapEvents:
 	coord_event 12, 16, SCENE_OBSIDIAN_TOWN_FORCE_LAB, 0, ObsidianTownCO_ForceLab
 	coord_event 12, 17, SCENE_OBSIDIAN_TOWN_FORCE_LAB, 1, ObsidianTownCO_ForceLab
 	coord_event 12, 18, SCENE_OBSIDIAN_TOWN_FORCE_LAB, 2, ObsidianTownCO_ForceLab
+	coord_event 14,  8, SCENE_OBSIDIAN_TOWN_RIVAL_BATTLE, 0, ObsidianTownCO_RivalBattle
+	coord_event 15,  8, SCENE_OBSIDIAN_TOWN_RIVAL_BATTLE, 1, ObsidianTownCO_RivalBattle
 
 	def_bg_events
 	bg_event 15,  5, BGEVENT_READ, ObsidianTownBG_NameSign
@@ -319,4 +434,5 @@ ObsidianTown_MapEvents:
 	object_event 16,  7, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObsidianTownOB_Teacher, -1
 	object_event  9, 18, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObsidianTownOB_Fisher, -1
 	object_event 16, 15, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_OBSIDIAN_TOWN_PROF
+	object_event  9, 11, SPRITE_RIVAL, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_OBSIDIAN_TOWN_RIVAL
 	object_event  2,  5, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, ObsidianTownOB_RareCandy, EVENT_OBSIDIAN_TOWN_RARE_CANDY

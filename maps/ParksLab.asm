@@ -1,5 +1,6 @@
 	object_const_def
 	const PARKSLAB_PROF
+	const PARKSLAB_RIVAL
 
 ParksLab_MapScripts:
 	def_scene_scripts
@@ -8,8 +9,17 @@ ParksLab_MapScripts:
 	scene_script EmptyScript, SCENE_PARKS_LAB_DONE
 
 	def_callbacks
+	callback MAPCALLBACK_OBJECTS, ParksLabCB_MoveRival
+
+ParksLabCB_MoveRival:
+	checkscene
+	ifnotequal SCENE_PARKS_LAB_AFTER_STARTER, .Skip
+	moveobject PARKSLAB_RIVAL, 5, 5
+.Skip:
+	endcallback
 
 ParksLabSC_AfterStarter:
+	callasm .HideMapNameSign
 	opentext
 	writetext .Text_ThanksAskFavor
 .YesNoLoop:
@@ -46,22 +56,39 @@ ParksLabSC_AfterStarter:
 	setevent EVENT_GOT_STARTER
 	writetext .Text_Letter
 	waitbutton
+	closetext
+	applymovement PARKSLAB_PROF, .Move_ToPlayer
+	opentext
 	verbosegiveitem LETTER
+	closetext
+	applymovement PARKSLAB_PROF, .Move_Return
+	opentext
 	writetext .Text_GoodLuck
 	waitbutton
 	closetext
+	turnobject PLAYER, RIGHT
+	turnobject PARKSLAB_RIVAL, LEFT
+	opentext
+	writetext .Text_MyOwnMon
+	waitbutton
+	closetext
+	turnobject PLAYER, DOWN
 	setscene SCENE_PARKS_LAB_DONE
-	setmapscene OBSIDIAN_TOWN, SCENE_OBSIDIAN_TOWN_NONE
+	setmapscene OBSIDIAN_TOWN, SCENE_OBSIDIAN_TOWN_RIVAL_BATTLE
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
 	end
 
 .Text_ThanksAskFavor:
-	text "PROF. PARK: Thank"
+	text "PROF.PARK: Thank"
 	line "you for your help,"
-	cont "<PLAYER>. You sure"
-	cont "saved my bacon!"
+	cont "<PLAYER>. And you"
+	cont "too, <RIVAL>. You"
+	cont "both really saved"
+	cont "my bacon!"
 
-	para "I actually wanted"
-	line "to talk to you. I"
+	para "<PLAYER>, I"
+	line "actually wanted to"
+	cont "talk to you. I"
 	cont "want to ask you a"
 	cont "favor."
 
@@ -107,19 +134,103 @@ ParksLabSC_AfterStarter:
 	done
 
 .Text_Letter:
-	text "Oh! I'll need to"
-	line "hand the letter"
-	cont "over, too."
+	text "<RIVAL>, you"
+	line "should hold onto"
+	cont "the #MON you"
+	cont "caught, too."
+
+	para "Capturing a"
+	line "#MON creates a"
+	cont "strong bond"
+	cont "between it and the"
+	cont "trainer. I think"
+	cont "you'll learn a lot"
+	cont "by caring for a"
+	cont "#MON."
+
+	para "…"
+
+	para "…"
+
+	para "Oh, of course!"
+	line "I'll need to hand"
+	cont "the letter over,"
+	cont "too."
 	done
 
 .Text_GoodLuck:
 	text "If you run into"
-	line "any problems,"
-	cont "come see me."
+	line "any problems, come"
+	cont "see me."
 
 	para "Thanks again,"
-	line "<PLAYER>! You're"
-	cont "a life saver!"
+	line "<PLAYER>! You're a"
+	cont "real life saver!"
+	done
+
+.Text_MyOwnMon:
+	text "<RIVAL>: Wow, my"
+	line "very own #MON…"
+
+	para "I never would've"
+	line "gotten this"
+	cont "oppurtunity"
+	cont "without your help,"
+	cont "<PLAYER>. Thank"
+	cont "you!"
+	done
+
+.Move_ToPlayer:
+	step DOWN
+	step_end
+
+.Move_Return:
+	step UP
+	turn_head DOWN
+	step_end
+
+.HideMapNameSign:
+	xor a
+	ld [wLandmarkSignTimer], a
+	ret
+
+ParksLabOB_Rival:
+	faceplayer
+	opentext
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
+	iftrue .JustGotStarter
+	writetext .Text_CheckingBooks
+	waitbutton
+	closetext
+	turnobject PARKSLAB_RIVAL, UP
+	end
+
+.JustGotStarter:
+	writetext .Text_Thanks
+	waitbutton
+	closetext
+	end
+
+.Text_CheckingBooks:
+	text "<RIVAL>: Hi,"
+	line "<PLAYER>!"
+
+	para "I'm checking"
+	line "PROF.PARK's"
+	cont "bookshelves for"
+	cont "something useful"
+	cont "to my research."
+	done
+
+.Text_Thanks:
+	text "<RIVAL>: Thanks"
+	line "for the help,"
+	cont "<PLAYER>."
+
+	para "I don't know how"
+	line "we would have"
+	cont "managed without"
+	cont "you!"
 	done
 
 ParksLab_MapEvents:
@@ -128,8 +239,8 @@ ParksLab_MapEvents:
 	def_warp_events
 	warp_event  4, 11, OBSIDIAN_TOWN, 2
 	warp_event  5, 11, OBSIDIAN_TOWN, 2
-	warp_event  9,  6, OBSIDIAN_MEADOW, 1
-	warp_event  9,  7, OBSIDIAN_MEADOW, 2
+	warp_event  9,  8, OBSIDIAN_MEADOW, 1
+	warp_event  9,  9, OBSIDIAN_MEADOW, 2
 
 	def_coord_events
 
@@ -137,3 +248,4 @@ ParksLab_MapEvents:
 
 	def_object_events
 	object_event  4,  3, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_PARKS_LAB_PROF
+	object_event  2,  8, SPRITE_RIVAL, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ParksLabOB_Rival, EVENT_PARKS_LAB_RIVAL

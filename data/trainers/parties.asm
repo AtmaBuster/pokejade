@@ -161,164 +161,17 @@ ClairGroup:
 Rival1Group:
 	next_list_item ; RIVAL1 (1)
 	db "?@", TRAINERTYPE_NORMAL
-	trainer_mon  CHIKORITA, 5, NO_ABILITY, MALE
+	trainer_mon  TORCHIC, 5, BLAZE, MALE
 	db -1 ; end
 
 	next_list_item ; RIVAL1 (2)
 	db "?@", TRAINERTYPE_NORMAL
-	trainer_mon  CYNDAQUIL, 5, NO_ABILITY, MALE
+	trainer_mon  MUDKIP, 5, TORRENT, MALE
 	db -1 ; end
 
 	next_list_item ; RIVAL1 (3)
 	db "?@", TRAINERTYPE_NORMAL
-	trainer_mon  TOTODILE, 5, NO_ABILITY, MALE
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (4)
-	db "?@", TRAINERTYPE_NORMAL
-	trainer_mon  GASTLY, 12, NO_ABILITY, MALE
-	trainer_mon  ZUBAT, 14, NO_ABILITY, MALE
-	trainer_mon  BAYLEEF, 16, NO_ABILITY, MALE
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (5)
-	db "?@", TRAINERTYPE_NORMAL
-	trainer_mon  GASTLY, 12, NO_ABILITY, MALE
-	trainer_mon  ZUBAT, 14, NO_ABILITY, MALE
-	trainer_mon  QUILAVA, 16, NO_ABILITY, MALE
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (6)
-	db "?@", TRAINERTYPE_NORMAL
-	trainer_mon  GASTLY, 12, NO_ABILITY, MALE
-	trainer_mon  ZUBAT, 14, NO_ABILITY, MALE
-	trainer_mon  CROCONAW, 16, NO_ABILITY, MALE
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (7)
-	db "?@", TRAINERTYPE_MOVES
-	trainer_mon  HAUNTER, 20, NO_ABILITY, MALE
-	    mon_move LICK, SPITE, MEAN_LOOK, CURSE
-	trainer_mon  MAGNEMITE, 18, NO_ABILITY, MALE
-	    mon_move TACKLE, THUNDERSHOCK, SUPERSONIC, SONICBOOM
-	trainer_mon  ZUBAT, 20, NO_ABILITY, MALE
-	    mon_move LEECH_LIFE, SUPERSONIC, BITE, CONFUSE_RAY
-	trainer_mon  BAYLEEF, 22, NO_ABILITY, MALE
-	    mon_move GROWL, REFLECT, RAZOR_LEAF, POISONPOWDER
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (8)
-	db "?@", TRAINERTYPE_MOVES
-	trainer_mon  HAUNTER, 20, NO_ABILITY, MALE
-	    mon_move LICK, SPITE, MEAN_LOOK, CURSE
-	trainer_mon  MAGNEMITE, 18, NO_ABILITY, MALE
-	    mon_move TACKLE, THUNDERSHOCK, SUPERSONIC, SONICBOOM
-	trainer_mon  ZUBAT, 20, NO_ABILITY, MALE
-	    mon_move LEECH_LIFE, SUPERSONIC, BITE, CONFUSE_RAY
-	trainer_mon  QUILAVA, 22, NO_ABILITY, MALE
-	    mon_move LEER, SMOKESCREEN, EMBER, QUICK_ATTACK
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (9)
-	db "?@", TRAINERTYPE_MOVES
-	trainer_mon  HAUNTER, 20, NO_ABILITY, MALE
-	    mon_move LICK, SPITE, MEAN_LOOK, CURSE
-	trainer_mon  MAGNEMITE, 18, NO_ABILITY, MALE
-	    mon_move TACKLE, THUNDERSHOCK, SUPERSONIC, SONICBOOM
-	trainer_mon  ZUBAT, 20, NO_ABILITY, MALE
-	    mon_move LEECH_LIFE, SUPERSONIC, BITE, CONFUSE_RAY
-	trainer_mon  CROCONAW, 22, NO_ABILITY, MALE
-	    mon_move LEER, RAGE, WATER_GUN, BITE
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (10)
-	db "?@", TRAINERTYPE_MOVES
-	trainer_mon  GOLBAT, 30, NO_ABILITY, MALE
-	    mon_move LEECH_LIFE, BITE, CONFUSE_RAY, WING_ATTACK
-	trainer_mon  MAGNEMITE, 28, NO_ABILITY, MALE
-	    mon_move TACKLE, THUNDERSHOCK, SONICBOOM, THUNDER_WAVE
-	trainer_mon  HAUNTER, 30, NO_ABILITY, MALE
-	    mon_move LICK, MEAN_LOOK, CURSE, SHADOW_BALL
-	trainer_mon  SNEASEL, 32, NO_ABILITY, MALE
-	    mon_move LEER, QUICK_ATTACK, SCREECH, FAINT_ATTACK
-	trainer_mon  MEGANIUM, 32, NO_ABILITY, MALE
-	    mon_move REFLECT, RAZOR_LEAF, POISONPOWDER, BODY_SLAM
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (11)
-	db "?@", TRAINERTYPE_MOVES
-	trainer_mon  GOLBAT, 30, NO_ABILITY, MALE
-	    mon_move LEECH_LIFE, BITE, CONFUSE_RAY, WING_ATTACK
-	trainer_mon  MAGNEMITE, 28, NO_ABILITY, MALE
-	    mon_move TACKLE, THUNDERSHOCK, SONICBOOM, THUNDER_WAVE
-	trainer_mon  HAUNTER, 30, NO_ABILITY, MALE
-	    mon_move LICK, MEAN_LOOK, CURSE, SHADOW_BALL
-	trainer_mon  SNEASEL, 32, NO_ABILITY, MALE
-	    mon_move LEER, QUICK_ATTACK, SCREECH, FAINT_ATTACK
-	trainer_mon  QUILAVA, 32, NO_ABILITY, MALE
-	    mon_move SMOKESCREEN, EMBER, QUICK_ATTACK, FLAME_WHEEL
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (12)
-	db "?@", TRAINERTYPE_MOVES
-	trainer_mon  GOLBAT, 30, NO_ABILITY, MALE
-	    mon_move LEECH_LIFE, BITE, CONFUSE_RAY, WING_ATTACK
-	trainer_mon  MAGNEMITE, 28, NO_ABILITY, MALE
-	    mon_move TACKLE, THUNDERSHOCK, SONICBOOM, THUNDER_WAVE
-	trainer_mon  HAUNTER, 30, NO_ABILITY, MALE
-	    mon_move LICK, MEAN_LOOK, CURSE, SHADOW_BALL
-	trainer_mon  SNEASEL, 32, NO_ABILITY, MALE
-	    mon_move LEER, QUICK_ATTACK, SCREECH, FAINT_ATTACK
-	trainer_mon  FERALIGATR, 32, NO_ABILITY, MALE
-	    mon_move RAGE, WATER_GUN, BITE, SCARY_FACE
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (13)
-	db "?@", TRAINERTYPE_MOVES
-	trainer_mon  SNEASEL, 34, NO_ABILITY, MALE
-	    mon_move QUICK_ATTACK, SCREECH, FAINT_ATTACK, FURY_CUTTER
-	trainer_mon  GOLBAT, 36, NO_ABILITY, MALE
-	    mon_move LEECH_LIFE, BITE, CONFUSE_RAY, WING_ATTACK
-	trainer_mon  MAGNETON, 35, NO_ABILITY, MALE
-	    mon_move THUNDERSHOCK, SONICBOOM, THUNDER_WAVE, SWIFT
-	trainer_mon  HAUNTER, 35, NO_ABILITY, MALE
-	    mon_move MEAN_LOOK, CURSE, SHADOW_BALL, CONFUSE_RAY
-	trainer_mon  KADABRA, 35, NO_ABILITY, MALE
-	    mon_move DISABLE, PSYBEAM, RECOVER, FUTURE_SIGHT
-	trainer_mon  MEGANIUM, 38, NO_ABILITY, MALE
-	    mon_move REFLECT, RAZOR_LEAF, POISONPOWDER, BODY_SLAM
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (14)
-	db "?@", TRAINERTYPE_MOVES
-	trainer_mon  SNEASEL, 34, NO_ABILITY, MALE
-	    mon_move QUICK_ATTACK, SCREECH, FAINT_ATTACK, FURY_CUTTER
-	trainer_mon  GOLBAT, 36, NO_ABILITY, MALE
-	    mon_move LEECH_LIFE, BITE, CONFUSE_RAY, WING_ATTACK
-	trainer_mon  MAGNETON, 35, NO_ABILITY, MALE
-	    mon_move THUNDERSHOCK, SONICBOOM, THUNDER_WAVE, SWIFT
-	trainer_mon  HAUNTER, 35, NO_ABILITY, MALE
-	    mon_move MEAN_LOOK, CURSE, SHADOW_BALL, CONFUSE_RAY
-	trainer_mon  KADABRA, 35, NO_ABILITY, MALE
-	    mon_move DISABLE, PSYBEAM, RECOVER, FUTURE_SIGHT
-	trainer_mon  TYPHLOSION, 38, NO_ABILITY, MALE
-	    mon_move SMOKESCREEN, EMBER, QUICK_ATTACK, FLAME_WHEEL
-	db -1 ; end
-
-	next_list_item ; RIVAL1 (15)
-	db "?@", TRAINERTYPE_MOVES
-	trainer_mon  SNEASEL, 34, NO_ABILITY, MALE
-	    mon_move QUICK_ATTACK, SCREECH, FAINT_ATTACK, FURY_CUTTER
-	trainer_mon  GOLBAT, 36, NO_ABILITY, MALE
-	    mon_move LEECH_LIFE, BITE, CONFUSE_RAY, WING_ATTACK
-	trainer_mon  MAGNETON, 34, NO_ABILITY, MALE
-	    mon_move THUNDERSHOCK, SONICBOOM, THUNDER_WAVE, SWIFT
-	trainer_mon  HAUNTER, 35, NO_ABILITY, MALE
-	    mon_move MEAN_LOOK, CURSE, SHADOW_BALL, CONFUSE_RAY
-	trainer_mon  KADABRA, 35, NO_ABILITY, MALE
-	    mon_move DISABLE, PSYBEAM, RECOVER, FUTURE_SIGHT
-	trainer_mon  FERALIGATR, 38, NO_ABILITY, MALE
-	    mon_move RAGE, WATER_GUN, SCARY_FACE, SLASH
+	trainer_mon  TREECKO, 5, OVERGROW, MALE
 	db -1 ; end
 
 	end_list_items

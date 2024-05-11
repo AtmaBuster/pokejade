@@ -1117,4 +1117,11 @@ MACRO sjumpparam
 	dw \1 ; table pointer
 ENDM
 
+	const loadrival_command ; $b2
+MACRO loadrival
+	db loadrival_command
+	db \1 ; trainer_group
+	db \2 ; trainer_id
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

@@ -238,6 +238,7 @@ ScriptCommandTable:
 	dw Script_applymovementparam         ; af
 	dw Script_setscriptparam             ; b0
 	dw Script_sjumpparam                 ; b1
+	dw Script_loadrival                  ; b2
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -1135,6 +1136,30 @@ Script_loadwildmon:
 	ld [wTempWildMonSpecies], a
 	rst GetScriptByte
 	ld [wCurPartyLevel], a
+	ret
+
+Script_loadrival:
+	ld de, EVENT_GOT_TREECKO
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld b, 0
+	jr nz, .got_offset
+	ld de, EVENT_GOT_TORCHIC
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld b, 1
+	jr nz, .got_offset
+	ld de, EVENT_GOT_MUDKIP
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld b, 2
+	jr nz, .got_offset
+	ld b, 0
+.got_offset:
+	call Script_loadtrainer
+	ld a, [wOtherTrainerID]
+	add b
+	ld [wOtherTrainerID], a
 	ret
 
 Script_loadtrainer:

@@ -1,5 +1,6 @@
 	object_const_def
 	const OBSIDIANMEADOW_PROF
+	const OBSIDIANMEADOW_RIVAL
 	const OBSIDIANMEADOW_TREECKO
 	const OBSIDIANMEADOW_TORCHIC
 	const OBSIDIANMEADOW_MUDKIP
@@ -31,7 +32,7 @@ ObsidianMeadowCO_ApproachOak:
 	end
 
 .Text_ComeHere:
-	text "PROF. PARK: Hurry,"
+	text "PROF.PARK: Hurry,"
 	line "<PLAYER>, over"
 	cont "here!"
 	done
@@ -71,7 +72,7 @@ ObsidianMeadowCO_ComeBack:
 	end
 
 .Text_ComeBack:
-	text "PROF. PARK: Where"
+	text "PROF.PARK: Where"
 	line "are you going?"
 
 	para "Come back here,"
@@ -97,7 +98,7 @@ ObsidianMeadowOB_Prof:
 	end
 
 .Text_NoBall:
-	text "PROF. PARK: What"
+	text "PROF.PARK: What"
 	line "happened to the"
 	cont "# BALL I gave"
 	cont "you?"
@@ -140,13 +141,19 @@ ObsidianMeadowOB_Treecko:
 	readvar VAR_XCOORD
 	ifequal 4, .XEQ4
 	moveobject OBSIDIANMEADOW_PROF, 9, 13
+	moveobject OBSIDIANMEADOW_RIVAL, 9, 13
 	appear OBSIDIANMEADOW_PROF
+	appear OBSIDIANMEADOW_RIVAL
+	follow OBSIDIANMEADOW_PROF, OBSIDIANMEADOW_RIVAL
 	applymovement OBSIDIANMEADOW_PROF, .Move_GoToPlayer
 	sjump ObsidianMeadowScr_AfterStarter
 
 .XEQ4:
 	moveobject OBSIDIANMEADOW_PROF, 10, 14
+	moveobject OBSIDIANMEADOW_RIVAL, 10, 14
 	appear OBSIDIANMEADOW_PROF
+	appear OBSIDIANMEADOW_RIVAL
+	follow OBSIDIANMEADOW_PROF, OBSIDIANMEADOW_RIVAL
 	applymovement OBSIDIANMEADOW_PROF, .Move_GoToPlayer
 	sjump ObsidianMeadowScr_AfterStarter
 
@@ -191,14 +198,20 @@ ObsidianMeadowOB_Torchic:
 	readvar VAR_XCOORD
 	ifequal 13, .XEQ13
 	moveobject OBSIDIANMEADOW_PROF, 9, 14
+	moveobject OBSIDIANMEADOW_RIVAL, 9, 14
 	appear OBSIDIANMEADOW_PROF
+	appear OBSIDIANMEADOW_RIVAL
+	follow OBSIDIANMEADOW_PROF, OBSIDIANMEADOW_RIVAL
 	applymovement OBSIDIANMEADOW_PROF, .Move_GoToPlayer1
 	turnobject PLAYER, DOWN
 	sjump ObsidianMeadowScr_AfterStarter
 
 .XEQ13:
 	moveobject OBSIDIANMEADOW_PROF, 8, 14
+	moveobject OBSIDIANMEADOW_RIVAL, 8, 14
 	appear OBSIDIANMEADOW_PROF
+	appear OBSIDIANMEADOW_RIVAL
+	follow OBSIDIANMEADOW_PROF, OBSIDIANMEADOW_RIVAL
 	applymovement OBSIDIANMEADOW_PROF, .Move_GoToPlayer2
 	turnobject PLAYER, DOWN
 	sjump ObsidianMeadowScr_AfterStarter
@@ -257,8 +270,12 @@ ObsidianMeadowOB_Mudkip:
 	disappear OBSIDIANMEADOW_MUDKIP
 	turnobject PLAYER, LEFT
 	moveobject OBSIDIANMEADOW_PROF, 10, 13
+	moveobject OBSIDIANMEADOW_RIVAL, 10, 13
 	appear OBSIDIANMEADOW_PROF
+	appear OBSIDIANMEADOW_RIVAL
+	follow OBSIDIANMEADOW_PROF, OBSIDIANMEADOW_RIVAL
 	applymovement OBSIDIANMEADOW_PROF, .Move_GoToPlayer
+	turnobject OBSIDIANMEADOW_RIVAL, RIGHT
 	sjump ObsidianMeadowScr_AfterStarter
 
 .Text_AskMudkip:
@@ -288,7 +305,7 @@ ObsidianMeadowScr_TossedBall:
 	text "You don't have a"
 	line "# BALL!"
 
-	para "Ask PROF. PARK for"
+	para "Ask PROF.PARK for"
 	line "another one."
 	done
 
@@ -301,22 +318,39 @@ ObsidianMeadowScr_AfterStarter:
 	closetext
 	special FadeOutToWhite
 	disappear OBSIDIANMEADOW_PROF
+	disappear OBSIDIANMEADOW_RIVAL
 	clearevent EVENT_PARKS_LAB_PROF
+	clearevent EVENT_PARKS_LAB_RIVAL
 	setmapscene PARKS_LAB, SCENE_PARKS_LAB_AFTER_STARTER
 	warpfacing UP, PARKS_LAB, 4, 5
 	end
 
 .Text_BackToLab:
-	text "PROF. PARK: Good"
+	text "PROF.PARK: Good"
 	line "work, <PLAYER>!"
 
-	para "I managed to"
-	line "capture the other"
-	cont "two #MON."
+	para "<RIVAL> and I"
+	line "managed to capture"
+	cont "the other two"
+	cont "#MON."
 
 	para "Let's head back"
 	line "to my lab so we"
 	cont "can talk."
+	done
+
+ObsidianMeadowOB_Rival:
+	faceplayer
+	opentext
+	writetext .Text_Helping
+	waitbutton
+	closetext
+	end
+
+.Text_Helping:
+	text "<RIVAL>: We need"
+	line "to rescue the"
+	cont "#MON quickly!"
 	done
 
 ObsidianMeadow_MapEvents:
@@ -336,6 +370,8 @@ ObsidianMeadow_MapEvents:
 
 	def_object_events
 	object_event  5,  8, SPRITE_OAK, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObsidianMeadowOB_Prof, EVENT_OBSIDIAN_MEADOW_PROF
+	object_event  7,  6, SPRITE_RIVAL, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObsidianMeadowOB_Rival, EVENT_OBSIDIAN_MEADOW_RIVAL
 	object_event  3, 16, SPRITE_TREECKO, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObsidianMeadowOB_Treecko, EVENT_OBSIDIAN_MEADOW_STARTERS
 	object_event 14, 14, SPRITE_TORCHIC, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, ObsidianMeadowOB_Torchic, EVENT_OBSIDIAN_MEADOW_STARTERS
 	object_event 13,  8, SPRITE_MUDKIP, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObsidianMeadowOB_Mudkip, EVENT_OBSIDIAN_MEADOW_STARTERS
+	object_event -4, 1, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1

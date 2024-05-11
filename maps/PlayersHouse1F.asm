@@ -55,7 +55,7 @@ PlayersHouse1FSC_MeetMom:
 	done
 
 .Text_ProfCalled:
-	text "PROF. PARK came by"
+	text "PROF.PARK came by"
 	line "earlier. He said"
 	cont "he wanted to talk"
 	cont "with you about"
@@ -108,7 +108,7 @@ PlayersHouse1FOB_Mom:
 	end
 
 .Text_GoToLab:
-	text "MOM: PROF. PARK is"
+	text "MOM: PROF.PARK is"
 	line "waiting for you."
 
 	para "Head over to the"
@@ -119,7 +119,7 @@ PlayersHouse1FOB_Mom:
 	text "MOM: Oh, what a"
 	line "cute #MON!"
 
-	para "Did PROF. PARK"
+	para "Did PROF.PARK"
 	line "give that to you?"
 	done
 
