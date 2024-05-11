@@ -742,3 +742,4 @@ INCLUDE "engine/games/voltorb_flip.asm"
 SECTION "Player Stats", ROMX
 
 INCLUDE "engine/events/player_stats.asm"
+INCLUDE "engine/events/trainer_stars.asm"

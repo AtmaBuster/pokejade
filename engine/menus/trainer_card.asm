@@ -52,6 +52,12 @@ TrainerCard:
 	ld a, BANK(CardRightCornerGFX)
 	call FarCopyBytes
 
+	ld hl, CardStarGFX
+	ld de, vTiles0 tile $cb
+	ld bc, 1 tiles
+	ld a, BANK(CardStarGFX)
+	call FarCopyBytes
+
 	ld hl, CardStatusGFX
 	ld de, vTiles2 tile $29
 	ld bc, 86 tiles
@@ -253,6 +259,19 @@ TrainerCard_PrintTopHalfOfCard:
 	hlcoord 1, 3
 	ld de, .HorizontalDivider
 	call TrainerCardSetup_PlaceTilemapString
+	farcall UpdateTrainerStars
+	ld hl, wTrainerStars
+	ld b, 1
+	call CountSetBits
+	and a
+	jr z, .skip_stars
+	hlcoord 2, 5
+	ld a, $cb
+.stars_loop
+	ld [hli], a
+	dec c
+	jr nz, .stars_loop
+.skip_stars
 	hlcoord 14, 1
 	lb bc, 5, 7
 	xor a
@@ -673,3 +692,4 @@ BadgeGFX:   INCBIN "gfx/trainer_card/johto_badges.2bpp"
 BadgeGFX2:  INCBIN "gfx/trainer_card/kanto_badges.2bpp"
 
 CardRightCornerGFX: INCBIN "gfx/trainer_card/card_right_corner.2bpp"
+CardStarGFX: INCBIN "gfx/trainer_card/star.2bpp"

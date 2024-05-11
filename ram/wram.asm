@@ -2969,7 +2969,7 @@ wStarterTreeckoPersonality:: db
 wStarterTorchicPersonality:: db
 wStarterMudkipPersonality:: db
 wForceShinyPID:: db
-	ds 1
+wTrainerStars:: db
 wBloodMoonStatusActive:: db
 wBuenasPassword:: db
 wBlueCardBalance:: db

@@ -180,4 +180,10 @@ EngineFlags:
 	engine_flag wUnlockedDexFlags, HOLON_DEX_UNLOCK_F
 	engine_flag wUnlockedDexFlags, NATIONAL_DEX_UNLOCK_F
 
+	engine_flag wTrainerStars, TRAINER_STAR_HALLOFFAME_F
+	engine_flag wTrainerStars, TRAINER_STAR_POKEDEX_F
+	engine_flag wTrainerStars, TRAINER_STAR_3_F
+	engine_flag wTrainerStars, TRAINER_STAR_4_F
+	engine_flag wTrainerStars, TRAINER_STAR_5_F
+
 	assert_table_length NUM_ENGINE_FLAGS

@@ -369,3 +369,11 @@ DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
 	const EFF_LURE
 	const EFF_SUPER_LURE
 	const EFF_MAX_LURE
+
+; wTrainerStars
+	const_def
+	const TRAINER_STAR_HALLOFFAME_F
+	const TRAINER_STAR_POKEDEX_F
+	const TRAINER_STAR_3_F
+	const TRAINER_STAR_4_F
+	const TRAINER_STAR_5_F
