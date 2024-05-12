@@ -842,7 +842,7 @@ ValidateTempWildMonSpecies:
 	ret
 
 GetCallerRouteWildGrassMons:
-	farcall GetCallerLocation
+;	farcall GetCallerLocation
 	ld d, b
 	ld e, c
 	ld hl, JohtoGrassWildMons
@@ -946,7 +946,7 @@ RandomPhoneWildMon:
 
 RandomPhoneMon:
 ; Get a random monster owned by the trainer who's calling.
-	farcall GetCallerLocation
+;	farcall GetCallerLocation
 	ld hl, TrainerGroups
 	ld a, d
 	dec a

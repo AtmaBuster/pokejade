@@ -458,7 +458,6 @@ CheckTimeEvents:
 .do_daily
 	farcall CheckDailyResetTimer
 	farcall CheckPokerusTick
-	farcall CheckPhoneCall
 	ret c
 
 .nothing
@@ -908,10 +907,6 @@ CountStep:
 	ld a, [wLinkMode]
 	and a
 	jr nz, .done
-
-	; If there is a special phone call, don't count the step.
-	farcall CheckSpecialPhoneCall
-	jr c, .doscript
 
 	; If Repel wore off, don't count the step.
 	call DoRepelStep

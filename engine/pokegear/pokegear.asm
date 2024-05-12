@@ -863,7 +863,7 @@ PokegearPhone_MakePhoneCall:
 	call WaitSFX
 	ld a, [wPokegearPhoneSelectedPerson]
 	ld b, a
-	call MakePhoneCallFromPokegear
+;	call MakePhoneCallFromPokegear
 	ld c, 10
 	call DelayFrames
 	ld hl, wOptions
@@ -876,7 +876,7 @@ PokegearPhone_MakePhoneCall:
 	ret
 
 .no_service
-	call Phone_NoSignal
+;	call Phone_NoSignal
 	ld hl, .GearOutOfServiceText
 	call PrintText
 	ld a, POKEGEARSTATE_PHONEJOYPAD
@@ -896,7 +896,7 @@ PokegearPhone_FinishPhoneCall:
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	ret z
-	call HangUp
+;	call HangUp
 	ld a, POKEGEARSTATE_PHONEJOYPAD
 	ld [wJumptableIndex], a
 	ld hl, PokegearAskWhoCallText
@@ -1002,7 +1002,7 @@ PokegearPhone_UpdateDisplayList:
 	ld e, l
 	pop af
 	ld b, a
-	call GetCallerClassAndName
+;	call GetCallerClassAndName
 	pop hl
 	ld a, [wPokegearPhoneDisplayPosition] ; no-optimize Inefficient WRAM increment/decrement
 	inc a
@@ -1047,7 +1047,7 @@ PokegearPhoneContactSubmenu:
 	ld d, 0
 	add hl, de
 	ld c, [hl]
-	call CheckCanDeletePhoneNumber
+;	call CheckCanDeletePhoneNumber
 	ld a, c
 	and a
 	jr z, .cant_delete

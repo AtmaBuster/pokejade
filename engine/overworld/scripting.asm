@@ -587,35 +587,13 @@ Script_trade:
 	farjp NPCTrade
 
 Script_phonecall:
-	rst GetScriptByte
-	ld e, a
-	rst GetScriptByte
-	ld d, a
-	ld a, [wScriptBank]
-	ld b, a
-	farjp PhoneCall
+	ret ; stubbed
 
 Script_hangup:
-	farjp HangUp
+	ret ; stubbed
 
 Script_askforphonenumber:
-	call YesNoBox
-	jr c, .refused
-	rst GetScriptByte
-	ld c, a
-	farcall AddPhoneNumber
-	jr c, .phonefull
-	xor a ; PHONE_CONTACT_GOT
-	jr .done
-.phonefull
-	ld a, PHONE_CONTACTS_FULL
-	jr .done
-.refused
-	rst GetScriptByte
-	ld a, PHONE_CONTACT_REFUSED
-.done
-	ld [wScriptVar], a
-	ret
+	ret ; stubbed
 
 Script_describedecoration:
 	rst GetScriptByte
@@ -1208,9 +1186,7 @@ Script_reloadmapafterbattle:
 	ld a, [wBattleResult]
 	bit BATTLERESULT_BOX_FULL, a
 	jr z, .done
-	ld b, BANK(Script_SpecialBillCall)
-	ld de, Script_SpecialBillCall
-	call LoadMemScript
+	; TO-DO : handle this??
 .done
 ; fallthrough
 Script_reloadmap:
@@ -1889,39 +1865,13 @@ Script_checkpoke:
 	ret
 
 Script_addcellnum:
-	xor a
-	ld [wScriptVar], a
-	rst GetScriptByte
-	ld c, a
-	farcall AddPhoneNumber
-	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	ret ; stubbed
 
 Script_delcellnum:
-	xor a
-	ld [wScriptVar], a
-	rst GetScriptByte
-	ld c, a
-	farcall DelCellNum
-	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	ret ; stubbed
 
 Script_checkcellnum:
-; returns false if the cell number is not in your phone
-
-	xor a
-	ld [wScriptVar], a
-	rst GetScriptByte
-	ld c, a
-	farcall CheckCellNum
-	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	ret ; stubbed
 
 Script_specialphonecall:
 	rst GetScriptByte

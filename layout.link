@@ -103,7 +103,8 @@ ROMX $17
 ROMX $18
 	"Map Scripts 4"
 ROMX $19
-	"Crystal Phone Text"
+	"Standard Scripts"
+	"Standard Text"
 ROMX $1a
 	"Map Scripts 5"
 ROMX $1b
@@ -134,9 +135,7 @@ ROMX $26
 ROMX $27
 	"Map Scripts 12"
 ROMX $28
-	"Phone Scripts 1"
 ROMX $29
-	"Phone Text"
 ROMX $2a
 	"Map Blocks 1"
 ROMX $2b
@@ -148,7 +147,6 @@ ROMX $2d
 ROMX $2e
 	"bank2E"
 ROMX $2f
-	"Phone Scripts 2"
 ROMX $30
 	"Sprites 1"
 ROMX $31
@@ -252,7 +250,6 @@ ROMX $5b
 ROMX $5c
 	"Mon Icons 1"
 ROMX $5d
-	"Crystal Phone Text 2"
 ROMX $5e
 	"UpdateBattleHUDs"
 	"Songs 5"
@@ -285,10 +282,8 @@ ROMX $6a
 ROMX $6b
 	"Map Scripts 24"
 ROMX $6c
-	"Phone Text 2"
 	"Map Scripts 25"
 ROMX $6d
-	"Special Phone Text"
 ROMX $6e
 	"Pokedex Entries 065-128"
 ROMX $6f
