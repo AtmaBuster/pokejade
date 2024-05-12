@@ -8,9 +8,9 @@ Landmarks:
 ; entries correspond to constants/landmark_constants.asm
 	table_width 4, Landmarks
 	landmark  -8, -16, SpecialMapName
-	landmark 140, 100, ObsidianTownName
-	landmark 128, 100, ObsidianMeadowName
-	landmark 100,  80, RouteN01Name
+	landmark  52, 108, ObsidianTownName
+	landmark  60, 108, ObsidianMeadowName
+	landmark  52,  96, RouteN01Name
 
 	landmark 100, 100, CherrygroveCityName
 	landmark  96,  60, Route31Name

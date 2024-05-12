@@ -647,7 +647,9 @@ PokegearMap_InitPlayerIcon:
 	ld [hl], e
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
-	ld [hl], d
+	ld a, d
+	sub 8
+	ld [hl], a
 	ret
 
 PokegearMap_InitCursor:
@@ -692,7 +694,9 @@ PokegearMap_UpdateCursorPosition:
 	ld [hl], e
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
-	ld [hl], d
+	ld a, d
+	sub 8
+	ld [hl], a
 	ret
 
 TownMap_GetKantoLandmarkLimits:
