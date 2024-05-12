@@ -37,7 +37,11 @@
 	const EVENT_GOT_TORCHIC
 	const EVENT_GOT_MUDKIP
 	const EVENT_GOT_STARTER
-; Unused: next 568 events
+	const EVENT_GOT_TOWN_MAP
+	const EVENT_STOPPED_AT_SHALE_CHECKPOINT
+	const EVENT_SHOWN_5_STARS_TO_NURSE
+	const EVENT_GOT_POKEDEX
+; Unused: next 564 events
 
 	const_next 600
 ; Decorations

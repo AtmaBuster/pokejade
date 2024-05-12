@@ -24,47 +24,6 @@ NurseNiteText:
 	line "#MON CENTER."
 	done
 
-PokeComNurseMornText:
-	text "Good morning!"
-
-	para "This is the #-"
-	line "MON COMMUNICATION"
-
-	para "CENTER--or the"
-	line "#COM CENTER."
-	done
-
-PokeComNurseDayText:
-	text "Hello!"
-
-	para "This is the #-"
-	line "MON COMMUNICATION"
-
-	para "CENTER--or the"
-	line "#COM CENTER."
-	done
-
-PokeComNurseEveText:
-	text "Good evening."
-
-	para "This is the #-"
-	line "MON COMMUNICATION"
-
-	para "CENTER--or the"
-	line "#COM CENTER."
-	done
-
-PokeComNurseNiteText:
-	text "Good to see you"
-	line "working so late."
-
-	para "This is the #-"
-	line "MON COMMUNICATION"
-
-	para "CENTER--or the"
-	line "#COM CENTER."
-	done
-
 NurseAskHealText:
 	text "We can heal your"
 	line "#MON to perfect"
@@ -92,11 +51,6 @@ NurseGoodbyeText:
 	line "again."
 	done
 
-; not used
-	text "We hope to see you"
-	line "again."
-	done
-
 NursePokerusText:
 	text "Your #MON"
 	line "appear to be"
@@ -115,19 +69,54 @@ NursePokerusText:
 	line "CENTER."
 	done
 
-PokeComNursePokerusText:
-	text "Your #MON"
-	line "appear to be"
+NurseFirstTime5StarsText:
+	text "Hello!"
+	line "Welcome to our"
+	cont "#MON CENTER."
 
-	para "infected by tiny"
-	line "life forms."
+	para "We can heal your"
+	line "#MON to perfect"
+	cont "health."
 
-	para "Your #MON are"
-	line "healthy and seem"
-	cont "to be fine."
+	para "Shall we…"
 
-	para "But we can't tell"
-	line "you anything more."
+	para "Th-that card…"
+
+	para "Is… Is that a GOLD"
+	line "CARD?!"
+
+	para "Oh, the brilliant"
+	line "golden shine!"
+
+	para "The stars are"
+	line "sparkling!"
+
+	para "I've seen several"
+	line "talented trainers"
+	cont "with a SILVER CARD"
+	cont "before, but you,"
+	cont "<PLAYER>… You're"
+	cont "the first trainer"
+	cont "I've seen with a"
+	cont "GOLD CARD!"
+
+	para "<PLAYER>, please"
+	line "allow me the honor"
+	cont "of resting your"
+	cont "#MON!"
+	done
+
+NurseFastHealText:
+	text "Nice to see you,"
+	line "<PLAYER>!"
+
+	para "You want the"
+	line "usual?"
+	done
+
+NurseFastFinishText:
+	text "Thank you for"
+	line "waiting."
 	done
 
 DifficultBookshelfText:

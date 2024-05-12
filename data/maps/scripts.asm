@@ -11,6 +11,12 @@ INCLUDE "maps/ObsidianTown.asm"
 INCLUDE "maps/RouteN01.asm"
 INCLUDE "maps/ParksLab.asm"
 INCLUDE "maps/ObsidianMeadow.asm"
+INCLUDE "maps/RivalsHouse.asm"
+INCLUDE "maps/ShaleCity.asm"
+INCLUDE "maps/ShalePokecenter1F.asm"
+INCLUDE "maps/ShaleMart.asm"
+INCLUDE "maps/ShaleHouse1.asm"
+INCLUDE "maps/ShaleHouse2.asm"
 
 
 SECTION "Map Scripts 2", ROMX

@@ -89,6 +89,7 @@ DEF NUM_FISHGROUPS EQU const_value - 1
 	const SPAWN_HOME
 	const SPAWN_DEBUG
 	const SPAWN_OBSIDIAN
+	const SPAWN_SHALE
 DEF NUM_SPAWNS EQU const_value
 
 DEF SPAWN_N_A EQU -1
@@ -98,7 +99,7 @@ DEF SPAWN_N_A EQU -1
 ; johto
 DEF JOHTO_FLYPOINT EQU const_value
 	const FLY_OBSIDIAN
-	const FLY_CHERRYGROVE
+	const FLY_SHALE
 	const FLY_VIOLET
 	const FLY_AZALEA
 	const FLY_GOLDENROD

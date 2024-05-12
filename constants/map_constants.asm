@@ -56,6 +56,15 @@ ENDC
 	map_const PLAYERS_HOUSE_1F,                             5,  4 ;  4
 	map_const PLAYERS_HOUSE_2F,                             4,  3 ;  5
 	map_const PARKS_LAB,                                    5,  6 ;  6
+	map_const RIVALS_HOUSE,                                 5,  4 ;  7
+	endgroup
+
+	newgroup SHALE                                                ;  4
+	map_const SHALE_CITY,                                  20, 10 ;  1
+	map_const SHALE_POKECENTER_1F,                          5,  4 ;  2
+	map_const SHALE_MART,                                   6,  4 ;  3
+	map_const SHALE_HOUSE_1,                                4,  4 ;  4
+	map_const SHALE_HOUSE_2,                                4,  4 ;  5
 	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value

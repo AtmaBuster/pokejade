@@ -2800,8 +2800,8 @@ wObsidianTownSceneID::                            db
 wParksLabSceneID::                                db
 wObsidianMeadowSceneID::                          db
 wPlayersHouse1FSceneID::                          db
+wShaleCitySceneID::                               db
 
-wCeruleanGymSceneID::                             db
 wRoute25SceneID::                                 db
 wTrainerHouseB1FSceneID::                         db
 wVictoryRoadGateSceneID::                         db

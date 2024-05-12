@@ -14,7 +14,8 @@ MapGroupRoofs:
 	db -1             ;  0
 	db -1             ;  1
 	db -1             ;  2
-	db ROOF_OBSIDIAN  ;  3 (New Bark)
+	db ROOF_OBSIDIAN  ;  3 (Obsidian)
+	db ROOF_OBSIDIAN  ;  4 (Shale)
 	assert_table_length NUM_MAP_GROUPS + 1
 
 Roofs:

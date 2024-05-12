@@ -563,7 +563,8 @@ Debug_Warp:
 	db SPAWN_HOME
 	db SPAWN_DEBUG
 	db SPAWN_OBSIDIAN
-DEF NUM_DEBUG_SPAWNS EQU 3
+	db SPAWN_SHALE
+DEF NUM_DEBUG_SPAWNS EQU 4
 
 .MenuHeader:
 	db MENU_BACKUP_TILES
@@ -605,6 +606,7 @@ endr
 	db "HOME@@@@@@@@@"
 	db "DEBUG@@@@@@@@"
 	db "OBSIDIAN@@@@@"
+	db "SHALE@@@@@@@@"
 
 Debug_ColorPicker:
 	ldh a, [hMapAnims]

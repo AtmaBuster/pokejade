@@ -104,8 +104,12 @@ ENDM
 	map_attributes ObsidianMeadow, OBSIDIAN_MEADOW, $05, WEST
 	connection west, ObsidianTown, OBSIDIAN_TOWN, -3
 
-	map_attributes RouteN01, ROUTE_N01, $05, SOUTH
+	map_attributes RouteN01, ROUTE_N01, $05, NORTH | SOUTH
+	connection north, ShaleCity, SHALE_CITY, 0
 	connection south, ObsidianTown, OBSIDIAN_TOWN, 0
+
+	map_attributes ShaleCity, SHALE_CITY, $05, SOUTH
+	connection south, RouteN01, ROUTE_N01, 0
 
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0
 	map_attributes TradeCenter, TRADE_CENTER, $00, 0
@@ -118,3 +122,8 @@ ENDC
 	map_attributes PlayersHouse1F, PLAYERS_HOUSE_1F, $00, 0
 	map_attributes PlayersHouse2F, PLAYERS_HOUSE_2F, $00, 0
 	map_attributes ParksLab, PARKS_LAB, $00, 0
+	map_attributes RivalsHouse, RIVALS_HOUSE, $00, 0
+	map_attributes ShalePokecenter1F, SHALE_POKECENTER_1F, $00, 0
+	map_attributes ShaleMart, SHALE_MART, $00, 0
+	map_attributes ShaleHouse1, SHALE_HOUSE_1, $00, 0
+	map_attributes ShaleHouse2, SHALE_HOUSE_2, $00, 0

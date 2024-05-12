@@ -59,6 +59,8 @@ StdScripts::
 
 PokecenterNurseScript:
 	opentext
+	special CountTrainerStars
+	ifequal 5, PokecenterNurse_MaxStarsScript
 	checktime MORN
 	iftrue .morn
 	checktime DAY
@@ -128,6 +130,60 @@ PokecenterNurseScript:
 	end
 
 .pokerus
+	farwritetext NursePokerusText
+	waitbutton
+	closetext
+	setflag ENGINE_CAUGHT_POKERUS
+	end
+
+PokecenterNurse_MaxStarsScript:
+	checkevent EVENT_SHOWN_5_STARS_TO_NURSE
+	iftrue .FastScript
+	setevent EVENT_SHOWN_5_STARS_TO_NURSE
+	farwritetext NurseFirstTime5StarsText
+	yesorno
+	iffalse .No
+	sjump .Heal
+
+.FastScript:
+	farwritetext NurseFastHealText
+	yesorno
+	iffalse .No
+.Heal:
+	farwritetext NurseTakePokemonText
+	pause 20
+	special PlayerStats_Healing
+	turnobject LAST_TALKED, LEFT
+	pause 10
+	special HealParty
+	playmusic MUSIC_NONE
+	setval HEALMACHINE_POKECENTER
+	special HealMachineAnim
+	pause 30
+	special RestartMapMusic
+	turnobject LAST_TALKED, DOWN
+	pause 10
+
+	checkflag ENGINE_CAUGHT_POKERUS
+	iftrue .NoPokerus
+	special CheckPokerus
+	iftrue .Pokerus
+.NoPokerus
+	farwritetext NurseFastFinishText
+	pause 20
+.No:
+	farwritetext NurseGoodbyeText
+
+	turnobject LAST_TALKED, UP
+	pause 10
+	turnobject LAST_TALKED, DOWN
+	pause 10
+
+	waitbutton
+	closetext
+	end
+
+.Pokerus
 	farwritetext NursePokerusText
 	waitbutton
 	closetext

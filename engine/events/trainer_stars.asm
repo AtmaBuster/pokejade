@@ -39,4 +39,5 @@ CountTrainerStars:
 	dec b
 	jr nz, .loop
 	ld a, c
+	ld [wScriptVar], a
 	jmp PopBCDEHL

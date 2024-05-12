@@ -11,8 +11,8 @@ Landmarks:
 	landmark  52, 108, ObsidianTownName
 	landmark  60, 108, ObsidianMeadowName
 	landmark  52,  96, RouteN01Name
+	landmark  56,  84, ShaleCityName
 
-	landmark 100, 100, CherrygroveCityName
 	landmark  96,  60, Route31Name
 	landmark  84,  60, VioletCityName
 	landmark  85,  58, SproutTowerName
@@ -110,6 +110,7 @@ Landmarks:
 ObsidianTownName:    db "OBSIDIAN<BSP>TOWN@"
 ObsidianMeadowName:  db "OBSIDIAN<BSP>MEADOW@"
 RouteN01Name:        db "ROUTE N01@"
+ShaleCityName:       db "SHALE CITY@"
 
 CherrygroveCityName: db "CHERRYGROVE<BSP>CITY@"
 VioletCityName:      db "VIOLET CITY@"

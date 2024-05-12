@@ -8,12 +8,17 @@
 	RGB 21,21,21, 11,11,11 ; nite
 	RGB 20,19,19, 10,09,09 ; eve
 
-; group 2 (Mount Moon Square)
+; group 2 (Dungeon)
 	RGB 14,17,31, 07,11,15 ; morn/day
 	RGB 09,13,19, 07,07,16 ; nite
 	RGB 12,13,23, 06,08,11 ; eve
 
-; group 3 (New Bark)
+; group 3 (Obsidian)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 4 (Shale)
 	RGB 14,17,31, 07,11,15 ; morn/day
 	RGB 09,13,19, 07,07,16 ; nite
 	RGB 12,13,23, 06,08,11 ; eve

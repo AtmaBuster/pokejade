@@ -16,6 +16,7 @@ ELSE
 ENDC
 
 	spawn OBSIDIAN_TOWN,               3, 10
+	spawn SHALE_CITY,                  1, 12
 
 	spawn N_A,                        -1, -1
 

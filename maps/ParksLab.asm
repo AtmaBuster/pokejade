@@ -204,6 +204,132 @@ ParksLabSC_AfterStarter:
 	ld [wLandmarkSignTimer], a
 	ret
 
+ParksLabOB_Prof:
+	faceplayer
+	opentext
+	checkevent EVENT_GOT_POKEDEX
+	iftrue .RatePokedex
+	checkevent EVENT_STOPPED_AT_SHALE_CHECKPOINT
+	iftrue .GivePokedex
+	writetext .Text_DeliverLetter
+	waitbutton
+	closetext
+	end
+
+.GivePokedex:
+	writetext .Text_GiveDex
+	waitbutton
+	waitsfx
+	writetext .Text_GotDex
+	playsound SFX_ITEM
+	waitsfx
+	setflag ENGINE_POKEDEX
+	setevent EVENT_GOT_POKEDEX
+	writetext .Text_GiveBalls
+	waitbutton
+	verbosegiveitem POKE_BALL, 5
+	setval 1
+	writemem wShinyEncountersEnabled
+	writetext .Text_GiveNote
+	waitbutton
+	verbosegiveitem PARKS_NOTE
+	writetext .Text_GoodLuck
+	waitbutton
+	closetext
+	end
+
+.RatePokedex:
+	writetext .Text_RatePokedex
+	waitbutton
+	special ProfOaksPCBoot
+	writetext .Text_Goodbye
+	waitbutton
+	closetext
+	end
+
+.Text_DeliverLetter:
+	text "PROF.PARK: Hey,"
+	line "<PLAYER>! How's the"
+	cont "delivery going?"
+	done
+
+.Text_GiveDex:
+	text "PROF.PARK: Welcome"
+	line "back, <PLAYER>!"
+
+	para "Did you already"
+	line "deliver the"
+	cont "letter?"
+
+	para "… … …"
+
+	para "Oh, I see."
+	line "That guard can be"
+	cont "a bit paranoid"
+	cont "sometimes."
+
+	para "He's right,"
+	line "though. I did"
+	cont "forget to give you"
+	cont "this!"
+	done
+
+.Text_GotDex:
+	text "<PLAYER> received"
+	line "the #DEX!"
+	done
+
+.Text_GiveBalls:
+	text "And you can have"
+	line "these, too."
+	done
+
+.Text_GiveNote:
+	text "Use those #"
+	line "BALLS to fill up"
+	cont "your #DEX!"
+
+	para "Not only does it"
+	line "help with my"
+	cont "research, but you"
+	cont "can make all sorts"
+	cont "of new friends"
+	cont "that way."
+
+	para "…"
+
+	para "Oh, one more"
+	line "thing! Take this."
+	done
+
+.Text_GoodLuck:
+	text "Show that to the"
+	line "guard in case he"
+	cont "gives you any more"
+	cont "trouble."
+
+	para "Good luck on your"
+	line "journey, <PLAYER>."
+
+	para "I know you can do"
+	line "it!"
+	done
+
+.Text_RatePokedex:
+	text "PROF.PARK: Hi,"
+	line "<PLAYER>!"
+
+	para "Thanks for"
+	line "stopping by. How"
+	cont "about I rate your"
+	cont "#DEX?"
+	done
+
+.Text_Goodbye:
+	text "Come by again any"
+	line "time!"
+	done
+
 ParksLabOB_Rival:
 	faceplayer
 	opentext
@@ -257,5 +383,5 @@ ParksLab_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  4,  3, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_PARKS_LAB_PROF
+	object_event  4,  3, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ParksLabOB_Prof, EVENT_PARKS_LAB_PROF
 	object_event  2,  8, SPRITE_RIVAL, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ParksLabOB_Rival, EVENT_PARKS_LAB_RIVAL

@@ -13,9 +13,9 @@ ObsidianTown_MapScripts:
 	scene_script EmptyScript, SCENE_OBSIDIAN_TOWN_NONE
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, ObsidianTownFlypointCallback
+	callback MAPCALLBACK_NEWMAP, .FlypointCallback
 
-ObsidianTownFlypointCallback:
+.FlypointCallback:
 	setflag ENGINE_FLYPOINT_OBSIDIAN
 	endcallback
 
@@ -424,7 +424,7 @@ ObsidianTown_MapEvents:
 	def_warp_events
 	warp_event  3,  9, PLAYERS_HOUSE_1F, 1
 	warp_event 16, 15, PARKS_LAB, 1
-	warp_event  9,  9, OBSIDIAN_TOWN, 1
+	warp_event  9,  9, RIVALS_HOUSE, 2
 
 	def_coord_events
 	coord_event 16,  3, SCENE_OBSIDIAN_TOWN_CANT_LEAVE, 0, ObsidianTownCO_CantLeave
