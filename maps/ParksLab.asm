@@ -224,6 +224,7 @@ ParksLabOB_Prof:
 	playsound SFX_ITEM
 	waitsfx
 	setflag ENGINE_POKEDEX
+	setflag ENGINE_UNLOCKED_NAZOH_DEX
 	setevent EVENT_GOT_POKEDEX
 	writetext .Text_GiveBalls
 	waitbutton

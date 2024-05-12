@@ -8,19 +8,19 @@ NazohPokedexOrder:
 	dw MUDKIP
 	dw MARSHTOMP
 	dw SWAMPERT
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
-	dw 0
+	dw BIDOOF
+	dw BIBAREL
+	dw PIDGEY
+	dw PIDGEOTTO
+	dw PIDGEOT
+	dw POLIWAG
+	dw POLIWHIRL
+	dw POLIWRATH
+	dw POLITOED
+	dw GELANLA
+	dw TANGELA
+	dw TANGROWTH
+	dw GELANIA
 	dw 0
 	dw 0
 	dw 0
