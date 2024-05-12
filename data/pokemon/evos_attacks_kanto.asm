@@ -208,12 +208,36 @@ BlastoiseEvosAttacks:
 BidoofEvosAttacks:
 	dbbw EVOLVE_LEVEL, 15, BIBAREL
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, TACKLE
+	dbw 5, GROWL
+	dbw 9, DEFENSE_CURL
+	dbw 13, ROLLOUT
+	dbw 17, HEADBUTT
+	dbw 21, HYPER_FANG
+	dbw 25, YAWN
+	dbw 29, AMNESIA
+	dbw 33, TAKE_DOWN
+	dbw 37, SUPER_FANG
+	dbw 41, SUPERPOWER
+	dbw 45, CURSE
 	db 0 ; no more level-up moves
 
 BibarelEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, TACKLE
+	dbw 1, GROWL
+	dbw 5, GROWL
+	dbw 9, DEFENSE_CURL
+	dbw 13, ROLLOUT
+	dbw 15, WATER_GUN
+	dbw 18, HEADBUTT
+	dbw 23, HYPER_FANG
+	dbw 28, YAWN
+	dbw 33, AMNESIA
+	dbw 38, TAKE_DOWN
+	dbw 43, SUPER_FANG
+	dbw 48, SUPERPOWER
+	dbw 53, CURSE
 	db 0 ; no more level-up moves
 
 KricketotEvosAttacks:
@@ -242,18 +266,59 @@ BeedrillEvosAttacks:
 PidgeyEvosAttacks:
 	dbbw EVOLVE_LEVEL, 18, PIDGEOTTO
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, TACKLE
+	dbw 5, SAND_ATTACK
+	dbw 9, GUST
+	dbw 13, QUICK_ATTACK
+	dbw 17, WHIRLWIND
+	dbw 21, TWISTER
+	dbw 25, FEATHERDANCE
+	dbw 29, AGILITY
+	dbw 33, WING_ATTACK
+	dbw 37, ROOST
+	dbw 41, TAILWIND
+	dbw 45, MIRROR_MOVE
+	dbw 49, AIR_SLASH
 	db 0 ; no more level-up moves
 
 PidgeottoEvosAttacks:
 	dbbw EVOLVE_LEVEL, 36, PIDGEOT
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, TACKLE
+	dbw 1, SAND_ATTACK
+	dbw 1, GUST
+	dbw 5, SAND_ATTACK
+	dbw 9, GUST
+	dbw 13, QUICK_ATTACK
+	dbw 17, WHIRLWIND
+	dbw 22, TWISTER
+	dbw 27, FEATHERDANCE
+	dbw 32, AGILITY
+	dbw 37, WING_ATTACK
+	dbw 42, ROOST
+	dbw 47, TAILWIND
+	dbw 52, MIRROR_MOVE
+	dbw 57, AIR_SLASH
 	db 0 ; no more level-up moves
 
 PidgeotEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, TACKLE
+	dbw 1, SAND_ATTACK
+	dbw 1, GUST
+	dbw 1, QUICK_ATTACK
+	dbw 5, SAND_ATTACK
+	dbw 9, GUST
+	dbw 13, QUICK_ATTACK
+	dbw 17, WHIRLWIND
+	dbw 22, TWISTER
+	dbw 27, FEATHERDANCE
+	dbw 32, AGILITY
+	dbw 38, WING_ATTACK
+	dbw 44, ROOST
+	dbw 50, TAILWIND
+	dbw 56, MIRROR_MOVE
+	dbw 62, AIR_SLASH
 	db 0 ; no more level-up moves
 
 KricketuneEvosAttacks:
@@ -487,19 +552,50 @@ MagnezoneEvosAttacks:
 PoliwagEvosAttacks:
 	dbbw EVOLVE_LEVEL, 25, POLIWHIRL
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, BUBBLE
+	dbw 5, POUND
+	dbw 8, HYPNOSIS
+	dbw 11, WATER_GUN
+	dbw 15, DOUBLESLAP
+	dbw 18, RAIN_DANCE
+	dbw 21, BODY_SLAM
+	dbw 25, BUBBLEBEAM
+	dbw 28, MUD_SHOT
+	dbw 31, BELLY_DRUM
+	dbw 35, WAKE_UP_SLAP
+	dbw 38, HYDRO_PUMP
+	dbw 41, MUD_BOMB
 	db 0 ; no more level-up moves
 
 PoliwhirlEvosAttacks:
 	dbww EVOLVE_ITEM, WATER_STONE, POLIWRATH
 	dbww EVOLVE_TRADE, KINGS_ROCK, POLITOED
 	db 0 ; no more evolutions
+	dbw 1, BUBBLE
 	dbw 1, POUND
+	dbw 1, HYPNOSIS
+	dbw 5, POUND
+	dbw 8, HYPNOSIS
+	dbw 11, WATER_GUN
+	dbw 15, DOUBLESLAP
+	dbw 18, RAIN_DANCE
+	dbw 21, BODY_SLAM
+	dbw 27, BUBBLEBEAM
+	dbw 32, MUD_SHOT
+	dbw 37, BELLY_DRUM
+	dbw 43, WAKE_UP_SLAP
+	dbw 48, HYDRO_PUMP
+	dbw 53, MUD_BOMB
 	db 0 ; no more level-up moves
 
 PoliwrathEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, BUBBLEBEAM
+	dbw 1, DOUBLESLAP
+	dbw 1, HYPNOSIS
+	dbw 1, SUBMISSION
+	dbw 43, DYNAMICPUNCH
+	dbw 53, MIND_READER
 	db 0 ; no more level-up moves
 
 GelanlaEvosAttacks:

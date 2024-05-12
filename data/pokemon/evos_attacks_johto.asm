@@ -294,7 +294,13 @@ DhelmiseEvosAttacks:
 
 PolitoedEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, BUBBLEBEAM
+	dbw 1, DOUBLESLAP
+	dbw 1, HYPNOSIS
+	dbw 1, PERISH_SONG
+	dbw 27, SWAGGER
+	dbw 37, BOUNCE
+	dbw 48, HYPER_VOICE
 	db 0 ; no more level-up moves
 
 RookideeEvosAttacks:
