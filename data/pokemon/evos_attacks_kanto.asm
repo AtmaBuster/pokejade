@@ -599,19 +599,65 @@ PoliwrathEvosAttacks:
 	db 0 ; no more level-up moves
 
 GelanlaEvosAttacks:
-	dbbw EVOLVE_LEVEL, 1, TANGELA ; TO-DO
+	dbbw EVOLVE_LEVEL_MOVE, VINE_WHIP, TANGELA
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, CONSTRICT
+	dbw 5, SLEEP_POWDER
+	dbw 8, ABSORB
+	dbw 12, GROWTH
+	dbw 15, POISONPOWDER
+	dbw 19, VINE_WHIP
+	dbw 21, BIND
+	dbw 24, MEGA_DRAIN
+	dbw 26, STUN_SPORE
+	dbw 29, ANCIENTPOWER
+	dbw 31, KNOCK_OFF
+	dbw 34, NATURAL_GIFT
+	dbw 36, POWER_WHIP
+	dbw 39, TICKLE
+	dbw 41, WRING_OUT
 	db 0 ; no more level-up moves
 
 TangrowthEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, INGRAIN
+	dbw 1, CONSTRICT
+	dbw 5, SLEEP_POWDER
+	dbw 8, ABSORB
+	dbw 12, GROWTH
+	dbw 15, POISONPOWDER
+	dbw 19, VINE_WHIP
+	dbw 22, BIND
+	dbw 26, MEGA_DRAIN
+	dbw 29, STUN_SPORE
+	dbw 33, ANCIENTPOWER
+	dbw 36, KNOCK_OFF
+	dbw 40, NATURAL_GIFT
+	dbw 43, POWER_WHIP
+	dbw 47, TICKLE
+	dbw 50, WRING_OUT
+	dbw 54, BLOCK
 	db 0 ; no more level-up moves
 
 GelaniaEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, INGRAIN
+	dbw 1, CONSTRICT
+	dbw 5, SLEEP_POWDER
+	dbw 8, ABSORB
+	dbw 12, GROWTH
+	dbw 15, POISONPOWDER
+	dbw 19, VINE_WHIP
+	dbw 22, BIND
+	dbw 26, MEGA_DRAIN
+	dbw 29, STUN_SPORE
+	dbw 33, ANCIENTPOWER
+	dbw 36, KNOCK_OFF
+	dbw 40, NATURAL_GIFT
+	dbw 43, POWER_WHIP
+	dbw 47, TRAILBLAZE
+	dbw 50, WRING_OUT
+	dbw 54, WOOD_HAMMER
 	db 0 ; no more level-up moves
 
 ElectivireEvosAttacks:
@@ -882,7 +928,22 @@ TangelaEvosAttacks:
 	dbww EVOLVE_LEVEL_MOVE, ANCIENTPOWER, TANGROWTH
 	dbww EVOLVE_LEVEL_MOVE, POWER_WHIP, GELANIA
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, INGRAIN
+	dbw 1, CONSTRICT
+	dbw 5, SLEEP_POWDER
+	dbw 8, ABSORB
+	dbw 12, GROWTH
+	dbw 15, POISONPOWDER
+	dbw 19, VINE_WHIP
+	dbw 22, BIND
+	dbw 26, MEGA_DRAIN
+	dbw 29, STUN_SPORE
+	dbw 33, ANCIENTPOWER
+	dbw 36, KNOCK_OFF
+	dbw 40, NATURAL_GIFT
+	dbw 43, POWER_WHIP
+	dbw 47, TICKLE
+	dbw 50, WRING_OUT
 	db 0 ; no more level-up moves
 
 MandibuzzEvosAttacks:

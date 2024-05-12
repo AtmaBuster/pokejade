@@ -480,6 +480,7 @@ DEF MOVES_GP3 EQU const_value - 1
 	const LIBRA        ; 1d5
 DEF MOVES_GP4 EQU const_value - 1
 DEF NUM_ATTACKS EQU const_value - 1
+	const TRAILBLAZE   ; 1d6
 
 	if NUM_ATTACKS > $3fff
 		fail "Too many moves defined!"
