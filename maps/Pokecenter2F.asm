@@ -57,8 +57,8 @@ Script_BattleRoomClosed:
 	end
 
 LinkReceptionistScript_Trade:
-;	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM ; TO-DO : event to enable trades
-;	iffalse Script_TradeCenterClosed
+	checkevent EVENT_GOT_POKEDEX
+	iffalse Script_TradeCenterClosed
 	opentext
 	writetext Text_TradeReceptionistIntro
 	yesorno
@@ -119,8 +119,8 @@ LinkReceptionistScript_Trade:
 	end
 
 LinkReceptionistScript_Battle:
-;	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM ; TO-DO : event to enable battles
-;	iffalse Script_TradeCenterClosed
+	checkevent EVENT_GOT_POKEDEX
+	iffalse Script_TradeCenterClosed
 	opentext
 	writetext Text_BattleReceptionistIntro
 	yesorno

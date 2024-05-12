@@ -2182,6 +2182,8 @@ UseLure:
 	ld a, [wRepelType]
 	cp EFF_LURE
 	jr c, .set_lure
+	cp EFF_LURE_HIDDEN
+	jr z, .set_lure
 	ld hl, LureUsedEarlierIsStillInEffectText
 	jmp PrintText
 

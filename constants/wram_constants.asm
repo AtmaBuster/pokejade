@@ -369,6 +369,7 @@ DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
 	const EFF_LURE
 	const EFF_SUPER_LURE
 	const EFF_MAX_LURE
+	const EFF_LURE_HIDDEN
 
 ; wTrainerStars
 	const_def

@@ -239,6 +239,7 @@ ScriptCommandTable:
 	dw Script_setscriptparam             ; b0
 	dw Script_sjumpparam                 ; b1
 	dw Script_loadrival                  ; b2
+	dw Script_facingparam                ; b3
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2460,3 +2461,11 @@ Script_sjumpparam:
 	ld b, a
 	call GetFarWord
 	jmp ScriptJump
+
+Script_facingparam:
+	ld a, [wPlayerDirection]
+	and %1100
+	rrca
+	rrca
+	ld [wScriptParameter], a
+	ret

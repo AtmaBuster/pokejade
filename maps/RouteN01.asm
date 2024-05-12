@@ -51,6 +51,7 @@ RouteN01OB_Youngster:
 	playsound SFX_JUMP_OVER_LEDGE
 	applymovement ROUTEN01_YOUNGSTER, .Move_JumpOverLedge
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
+	moveobject ROUTEN01_YOUNGSTER, 8, 16
 	end
 
 .Jumped:

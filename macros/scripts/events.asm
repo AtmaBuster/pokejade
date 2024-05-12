@@ -1,3 +1,16 @@
+; helper macros
+MACRO textbox
+	opentext
+	writetext \1
+	waitbutton
+	closetext
+ENDM
+
+MACRO textcont
+	writetext \1
+	waitbutton
+ENDM
+
 ; ScriptCommandTable indexes (see engine/overworld/scripting.asm)
 	const_def
 
@@ -1122,6 +1135,11 @@ MACRO loadrival
 	db loadrival_command
 	db \1 ; trainer_group
 	db \2 ; trainer_id
+ENDM
+
+	const facingparam_command ; $b3
+MACRO facingparam
+	db facingparam_command
 ENDM
 
 DEF NUM_EVENT_COMMANDS EQU const_value

@@ -41,7 +41,9 @@
 	const EVENT_STOPPED_AT_SHALE_CHECKPOINT
 	const EVENT_SHOWN_5_STARS_TO_NURSE
 	const EVENT_GOT_POKEDEX
-; Unused: next 564 events
+	const EVENT_SHALE_CITY_HELP_KID
+	const EVENT_ASKED_SHALE_GUARD_FOR_HELP
+; Unused: next 562 events
 
 	const_next 600
 ; Decorations
@@ -96,7 +98,8 @@
 	const_next 650
 ; Hidden items
 	const EVENT_ROUTEN01_HIDDEN_REPEL
-; Unused: next 949 events
+	const EVENT_SHALE_CITY_HIDDEN_LURE
+; Unused: next 948 events
 
 	const_next 1600
 ; Sprite visibility flags
@@ -115,11 +118,13 @@
 	const EVENT_OBSIDIAN_MEADOW_PROF
 	const EVENT_OBSIDIAN_MEADOW_STARTERS
 	const EVENT_OBSIDIAN_MEADOW_RIVAL
+	const EVENT_SHALE_CITY_YOUNGSTER
 ; Item balls
 	const EVENT_OBSIDIAN_TOWN_RARE_CANDY
 	const EVENT_OBSIDIAN_MEADOW_ITEMBALL
 	const EVENT_ROUTEN01_POTION
-; Unused: next 434 events
+	const EVENT_SHALE_CITY_ANTIDOTE
+; Unused: next 431 events
 
 	const_next 2048
 DEF NUM_EVENTS EQU const_value ; 800

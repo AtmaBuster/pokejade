@@ -974,6 +974,8 @@ DoRepelStep:
 	ret nz
 
 	ld a, [wRepelType]
+	cp EFF_LURE_HIDDEN
+	jr z, .hidden_lure
 	dec a
 	ld c, a
 	ld b, 0
@@ -1005,6 +1007,11 @@ DoRepelStep:
 	dw LURE
 	dw SUPER_LURE
 	dw MAX_LURE
+
+.hidden_lure
+	xor a
+	ld [wRepelType], a
+	ret
 
 DoPlayerEvent:
 	ld a, [wScriptRunning]

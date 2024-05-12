@@ -1,5 +1,10 @@
 	object_const_def
 	const SHALECITY_OFFICER
+	const SHALECITY_OB2
+	const SHALECITY_OB3
+	const SHALECITY_YOUNGSTER
+	const SHALECITY_BUG_CATCHER
+	const SHALECITY_POKE_BALL
 
 ShaleCity_MapScripts:
 	def_scene_scripts
@@ -162,21 +167,44 @@ ShaleCityCO_CantLeave:
 	step LEFT
 	step_end
 
+ShaleCityCO_ApplyLure:
+	callasm .SetLure
+	end
+
+.SetLure:
+	ld a, [wRepelType]
+	and a
+	jr z, .set
+	cp EFF_LURE_HIDDEN
+	ret c
+.set
+	ld a, EFF_LURE_HIDDEN
+	ld [wRepelType], a
+	ld a, 150 ; 150 steps
+	ld [wRepelEffect], a
+	ret
+
 ShaleCityOB_Guard:
 	faceplayer
-	opentext
 	checkscene
 	ifequal SCENE_SHALE_CITY_CANT_LEAVE, .CantLeave
+	opentext
 	writetext .Text_Hello
 	waitbutton
+	checkevent EVENT_SHALE_CITY_HELP_KID
+	iffalse .SkipHelp
+	checkevent EVENT_ASKED_SHALE_GUARD_FOR_HELP
+	iftrue .SkipHelp
+	writetext .Text_HelpKid
+	waitbutton
+	setevent EVENT_ASKED_SHALE_GUARD_FOR_HELP
+.SkipHelp:
 	closetext
 	turnobject SHALECITY_OFFICER, DOWN
 	end
 
 .CantLeave:
-	writetext .Text_DontBotherMe
-	waitbutton
-	closetext
+	textbox .Text_DontBotherMe
 	turnobject SHALECITY_OFFICER, DOWN
 	end
 
@@ -186,6 +214,25 @@ ShaleCityOB_Guard:
 	cont "through!"
 	done
 
+.Text_HelpKid:
+	text "… … …"
+
+	para "I already told"
+	line "that kid he can't"
+	cont "pass. He'll get"
+	cont "hurt!"
+
+	para "Ah, alright. I"
+	line "suppose it"
+	cont "wouldn't hurt to"
+	cont "let him through."
+
+	para "But he has to"
+	line "promise not to go"
+	cont "past the gate"
+	cont "house!"
+	done
+
 .Text_DontBotherMe:
 	text "Excuse me."
 
@@ -193,6 +240,132 @@ ShaleCityOB_Guard:
 	line "bother me while"
 	cont "I'm working."
 	done
+
+ShaleCityBG_NameSign:
+	jumptext .Text
+.Text: ; TO-DO
+	text "SHALE CITY"
+	done
+
+ShaleCityBG_PokecenterSign:
+	jumpstd PokecenterSignScript
+
+ShaleCityBG_PokemartSign:
+	jumpstd MartSignScript
+
+ShaleCityBG_HILure:
+	hiddenitem LURE, EVENT_SHALE_CITY_HIDDEN_LURE
+
+ShaleCityOB_Youngster:
+	checkscene
+	ifnotequal SCENE_SHALE_CITY_NONE, .Stuck
+	checkevent EVENT_ASKED_SHALE_GUARD_FOR_HELP
+	iffalse .AskGuard
+	faceplayer
+	textbox .Text_Thanks
+	facingparam
+	applymovementparam SHALECITY_YOUNGSTER, .Move_Leave
+	disappear SHALECITY_YOUNGSTER
+	end
+
+.AskGuard:
+	setevent EVENT_SHALE_CITY_HELP_KID
+	jumptextfaceplayer .Text_Help
+
+.Stuck:
+	jumptextfaceplayer .Text_Stuck
+
+.Text_Thanks:
+	text "Thank you so much!"
+
+	para "I'm gonna head to"
+	line "ROUTE N02 right"
+	cont "now and find some"
+	cont "rare #MON!"
+	done
+
+.Text_Help:
+	text "The guard let you"
+	line "pass? No way!"
+
+	para "Do you think you"
+	line "could ask him to"
+	cont "let me go through,"
+	cont "too?"
+	done
+
+.Text_Stuck:
+	text "That mean guard"
+	line "won't let me"
+	cont "through."
+
+	para "I just wanted to"
+	line "search for some"
+	cont "#MON!"
+	done
+
+.Move_Leave:
+	dw .LeaveDown
+	dw .LeaveUp
+	dw .LeaveLeft
+	dw .LeaveRight
+.LeaveDown:
+	step RIGHT
+	step UP
+	step UP
+	step UP
+	step UP
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+.LeaveUp:
+	step RIGHT
+	step UP
+	step UP
+	step UP
+	step UP
+	step_end
+.LeaveLeft:
+	step UP
+	step RIGHT
+	step UP
+	step UP
+	step UP
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+.LeaveRight:
+	step RIGHT
+	step UP
+	step UP
+	step UP
+	step UP
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+
+ShaleCityOB_BugCatcher:
+	jumptextfaceplayer .Text
+.Text:
+	text "I'm spraying LURE"
+	line "in the flowers."
+
+	para "I'm trying to"
+	line "attract rare"
+	cont "#MON!"
+	done
+
+ShaleCityOB_Antidote:
+	itemball ANTIDOTE
 
 ShaleCity_MapEvents:
 	db 0, 0 ; filler
@@ -204,12 +377,19 @@ ShaleCity_MapEvents:
 	warp_event 27,  5, SHALE_HOUSE_2, 1
 
 	def_coord_events
-	coord_event 38,  8, SCENE_SHALE_CITY_CANT_LEAVE, 0, ShaleCityCO_CantLeave
+	coord_event 37,  8, SCENE_SHALE_CITY_CANT_LEAVE, 0, ShaleCityCO_CantLeave
+	coord_event 29, 16, -1, 0, ShaleCityCO_ApplyLure
 
 	def_bg_events
-	bg_event 14, 12, BGEVENT_READ, BGEvent
-	bg_event  2, 11, BGEVENT_READ, BGEvent
-	bg_event 16,  5, BGEVENT_READ, BGEvent
+	bg_event 14, 12, BGEVENT_READ, ShaleCityBG_NameSign
+	bg_event  2, 11, BGEVENT_READ, ShaleCityBG_PokecenterSign
+	bg_event 16,  5, BGEVENT_READ, ShaleCityBG_PokemartSign
+	bg_event 35,  3, BGEVENT_ITEM, ShaleCityBG_HILure
 
 	def_object_events
-	object_event 38,  7, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ShaleCityOB_Guard, -1
+	object_event 37,  7, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ShaleCityOB_Guard, -1
+	object_event 11,  4, SPRITE_CHRIS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+	object_event 11, 12, SPRITE_CHRIS, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+	object_event 25, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ShaleCityOB_Youngster, EVENT_SHALE_CITY_YOUNGSTER
+	object_event 31, 14, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ShaleCityOB_BugCatcher, -1
+	object_event 36, 13, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, ShaleCityOB_Antidote, EVENT_SHALE_CITY_ANTIDOTE
