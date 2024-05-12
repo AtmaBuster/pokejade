@@ -194,7 +194,7 @@ ItemDescriptionsKeyItems:
 	dw OldRodDesc       ; 0103
 	dw GoodRodDesc      ; 0104
 	dw SuperRodDesc     ; 0105
-	dw RedScaleDesc     ; 0106
+	dw TownMapDesc      ; 0106
 	dw SecretPotionDesc ; 0107
 	dw SSTicketDesc     ; 0108
 	dw MysteryEggDesc   ; 0109
@@ -463,9 +463,9 @@ ElixerDesc:
 	db   "Restores PP of all"
 	next "moves by 10.@"
 
-RedScaleDesc:
-	db   "A scale from the"
-	next "red GYARADOS.@"
+TownMapDesc:
+	db   "A map of the"
+	next "local area.@"
 
 SecretPotionDesc:
 	db   "Fully heals any"

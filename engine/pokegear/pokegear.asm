@@ -669,7 +669,7 @@ PokegearMap_InitCursor:
 
 PokegearMap_UpdateLandmarkName:
 	push af
-	hlcoord 8, 0
+	hlcoord 0, 16
 	lb bc, 2, 12
 	call ClearBox
 	pop af
@@ -678,7 +678,7 @@ PokegearMap_UpdateLandmarkName:
 	farcall GetLandmarkName
 	pop de
 	farcall TownMap_ConvertLineBreakCharacters
-	hlcoord 8, 0
+	hlcoord 0, 16
 	ld [hl], $34
 	ret
 
@@ -1806,24 +1806,25 @@ _TownMap:
 	ld e, KANTO_REGION
 .okay_tilemap
 	call PokegearMap
-	ld a, $07
-	ld bc, 6
-	hlcoord 1, 0
-	rst ByteFill
 	hlcoord 0, 0
-	ld [hl], $06
-	hlcoord 7, 0
-	ld [hl], $17
-	hlcoord 7, 1
-	ld [hl], $16
-	hlcoord 7, 2
-	ld [hl], $26
 	ld a, $07
-	ld bc, NAME_LENGTH
-	hlcoord 8, 2
+	ld bc, SCREEN_WIDTH
 	rst ByteFill
-	hlcoord 19, 2
-	ld [hl], $17
+	hlcoord 0, 15
+	ld bc, 12
+	rst ByteFill
+	ld a, $17
+	ld [hl], a
+	ld bc, SCREEN_WIDTH
+	add hl, bc
+	dec a
+	ld [hl], a
+	add hl, bc
+	ld a, $26
+	ld [hli], a
+	ld bc, 7
+	ld a, $07
+	rst ByteFill
 	ld a, [wTownMapCursorLandmark]
 	call PokegearMap_UpdateLandmarkName
 	jmp TownMapPals
@@ -1913,11 +1914,13 @@ PokegearMap:
 	and a
 	jr nz, .kanto
 	call LoadTownMapGFX
-	jmp FillJohtoMap
+	ld de, JohtoMap + SCREEN_WIDTH
+	jmp FillTownMap
 
 .kanto
 	call LoadTownMapGFX
-	jmp FillKantoMap
+	ld de, KantoMap + SCREEN_WIDTH
+	jmp FillTownMap
 
 _FlyMap:
 	call ClearBGPalettes
@@ -2207,6 +2210,10 @@ FlyMap:
 	pop af
 .MapHud:
 	call TownMapBubble
+	hlcoord 0, 17
+	ld a, $07
+	ld bc, SCREEN_WIDTH
+	rst ByteFill
 	call TownMapPals
 	hlbgcoord 0, 0 ; BG Map 0
 	call TownMapBGUpdate
@@ -2334,12 +2341,12 @@ Pokedex_GetArea:
 	ld a, " "
 	rst ByteFill
 	hlcoord 0, 1
-	ld a, $06
-	ld [hli], a
-	ld bc, SCREEN_WIDTH - 2
+	ld bc, SCREEN_WIDTH
 	ld a, $07
 	rst ByteFill
-	ld [hl], $17
+	hlcoord 0, 17
+	ld bc, SCREEN_WIDTH
+	rst ByteFill
 	call GetPokemonName
 	hlcoord 2, 0
 	rst PlaceString
@@ -2521,7 +2528,6 @@ FillTownMap:
 	ld a, [de]
 	cp -1
 	ret z
-	ld a, [de]
 	ld [hli], a
 	inc de
 	jr .loop

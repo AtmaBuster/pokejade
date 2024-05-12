@@ -186,7 +186,7 @@ KeyItemNames::
 	li "OLD ROD"      ; 0103
 	li "GOOD ROD"     ; 0104
 	li "SUPER ROD"    ; 0105
-	li "RED SCALE"    ; 0106
+	li "TOWN MAP"     ; 0106
 	li "SECRETPOTION" ; 0107
 	li "S.S.TICKET"   ; 0108
 	li "MYSTERY EGG"  ; 0109

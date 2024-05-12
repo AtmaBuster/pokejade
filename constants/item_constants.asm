@@ -7,7 +7,7 @@
 	const_def
 	const NO_ITEM      ; 0000
 	const BRIGHTPOWDER ; 0001
-	const TOWN_MAP     ; 0002
+	const ITEM_02      ; 0002
 	const MOON_STONE   ; 0003
 	const ANTIDOTE     ; 0004
 	const BURN_HEAL    ; 0005
@@ -192,7 +192,7 @@ DEF FIRST_KEY_ITEM EQU const_value
 	const OLD_ROD      ; 0103
 	const GOOD_ROD     ; 0104
 	const SUPER_ROD    ; 0105
-	const RED_SCALE    ; 0106 -
+	const TOWN_MAP     ; 0106
 	const SECRETPOTION ; 0107 -
 	const S_S_TICKET   ; 0108 -
 	const MYSTERY_EGG  ; 0109 -

@@ -30,7 +30,7 @@ ItemEffects:
 
 ItemEffects1:
 	dw NoEffect            ; BRIGHTPOWDER
-	dw TownMapEffect       ; TOWN_MAP
+	dw NoEffect            ; ITEM_02
 	dw EvoStoneEffect      ; MOON_STONE
 	dw StatusHealingEffect ; ANTIDOTE
 	dw StatusHealingEffect ; BURN_HEAL
@@ -214,7 +214,7 @@ ItemEffectsKeyItems:
 	dw OldRodEffect       ; OLD_ROD
 	dw GoodRodEffect      ; GOOD_ROD
 	dw SuperRodEffect     ; SUPER_ROD
-	dw NoEffect           ; RED_SCALE
+	dw TownMapEffect      ; TOWN_MAP
 	dw NoEffect           ; SECRETPOTION
 	dw NoEffect           ; S_S_TICKET
 	dw NoEffect           ; MYSTERY_EGG
