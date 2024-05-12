@@ -1186,7 +1186,13 @@ ReturnToBattle_UseBall:
 	farjp _ReturnToBattle_UseBall
 
 TownMapEffect:
-	farjp PokegearMap
+	farcall _TownMap
+	ld hl, TownMapCallbackScript
+	jmp QueueScript
+
+TownMapCallbackScript:
+	closetext
+	end
 
 BicycleEffect:
 	jmp BikeFunction

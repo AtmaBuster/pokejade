@@ -543,7 +543,7 @@ PokegearMap_KantoMap:
 	jr PokegearMap_ContinueMap
 
 PokegearMap_JohtoMap:
-	lb de, LANDMARK_SILVER_CAVE, LANDMARK_OBSIDIAN_TOWN
+	lb de, LANDMARK_UP_TO_DATE_NAZOH, LANDMARK_OBSIDIAN_TOWN
 PokegearMap_ContinueMap:
 	ld hl, hJoyLast
 	ld a, [hl]
@@ -1725,7 +1725,7 @@ _TownMap:
 	ld a, [wTownMapPlayerIconLandmark]
 	cp KANTO_LANDMARK
 	jr nc, .kanto
-	lb de, KANTO_LANDMARK - 1, 1
+	lb de, LANDMARK_UP_TO_DATE_NAZOH, LANDMARK_OBSIDIAN_TOWN
 	call .loop
 	jr .resume
 
