@@ -1,29 +1,71 @@
-_OakText6::
-	text "Now, what did you"
-	line "say your name was?"
+_ParkText6::
+	text "But enough about"
+	line "me."
+
+	para "Tell me about"
+	line "yourself."
 	prompt
 
-_OakText7::
-	text "<PLAYER>, are you"
-	line "ready?"
+_ParkTextBoyOrGirl:
+	text "Are you a boy? Or"
+	line "are you a girl?"
+	done
 
-if !DEF(_DEBUG)
-	para "Your very own"
+_ParkTextBoy:
+	text "So, you're a boy?"
+	done
+
+_ParkTextGirl:
+	text "So, you're a girl?"
+	done
+
+_ParkText7::
+	text "What's your name?"
+	done
+
+_ParkTextConfirmName::
+	text "Ok…"
+
+	para "So you're name is"
+	line "<PLAYER>?"
+	done
+
+_ParkText8::
+	text "This boy here is"
+	line "your friend."
+
+	para "He's also my lab"
+	line "assistant."
+	prompt
+
+_ParkText9::
+	text "What is his name?"
+	prompt
+
+_ParkTextConfirmRival::
+	text "Ok…"
+
+	para "So his name is"
+	line "<RIVAL>?"
+	done
+
+_ParkText10::
+	text "Are you ready,"
+	line "<PLAYER>?"
+
+	para "You very own"
 	line "#MON story is"
 	cont "about to unfold."
 
-	para "You'll face fun"
-	line "times and tough"
+	para "You'll have fun"
+	line "experiences and"
+	cont "face tough"
 	cont "challenges."
 
-	para "A world of dreams"
-	line "and adventures"
-
-	para "with #MON"
-	line "awaits! Let's go!"
-endc
-	para "I'll be seeing you"
-	line "later!"
+	para "A world of"
+	line "adventures with"
+	cont "#MON awaits!"
+	cont "Let's go!"
 	done
 
 _ClockTimeMayBeWrongText::

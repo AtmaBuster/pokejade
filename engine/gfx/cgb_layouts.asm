@@ -61,6 +61,7 @@ CGBLayoutJumptable:
 	dw _CGB_Unused1E
 	dw _CGB_Plain
 	dw _CGB_VoltorbFlip
+	dw _CGB_IntroBothPlayerPals
 	assert_table_length NUM_SCGB_LAYOUTS
 
 _CGB_BattleGrayscale:
@@ -1200,3 +1201,27 @@ DebugMenuTrainerPicColors::
 	ldh [hCGBPalUpdate], a
 	ret
 ENDC
+
+_CGB_IntroBothPlayerPals:
+	ld de, wBGPals1
+	ld a, CHRIS
+	ld [wTrainerClass], a
+	xor a
+	call GetFrontpicPalettePointer
+	call LoadPalette_White_Col1_Col2_Black
+	ld de, wBGPals1 palette 1
+	ld a, KRIS
+	ld [wTrainerClass], a
+	xor a
+	call GetFrontpicPalettePointer
+	call LoadPalette_White_Col1_Col2_Black
+
+	call WipeAttrmap
+
+	hlcoord 10, 4, wAttrmap
+	lb bc, 7, 7
+	ld a, 1
+	call FillBoxCGB
+
+	call ApplyAttrmap
+	jmp ApplyPals

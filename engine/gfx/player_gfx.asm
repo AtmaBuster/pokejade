@@ -57,6 +57,15 @@ ShowPlayerNamingChoices:
 	call CopyNameFromMenu
 	jmp CloseWindow
 
+ShowRivalNamingChoices:
+	ld hl, RivalNameMenuHeader
+	call LoadMenuHeader
+	call VerticalMenu
+	ld a, [wMenuCursorY]
+	dec a
+	call CopyNameFromMenu
+	jmp CloseWindow
+
 INCLUDE "data/player_names.asm"
 
 GetPlayerIcon:
@@ -135,6 +144,36 @@ HOF_LoadTrainerFrontpic:
 	call WaitBGMap
 	ld a, $1
 	ldh [hBGMapMode], a
+	ret
+
+DrawBothIntroFrontPics:
+; Draw male character pic at (2, 4) and female pic at (10, 4)
+; male
+	ld a, CHRIS
+	ld [wTrainerClass], a
+	ld de, ChrisPic
+	ld hl, vTiles2
+	ld b, BANK(ChrisPic)
+	ld c, 7 * 7
+	call Get2bpp
+	xor a
+	ldh [hGraphicStartTile], a
+	hlcoord 2, 4
+	lb bc, 7, 7
+	predef PlaceGraphic
+; female
+	ld a, KRIS
+	ld [wTrainerClass], a
+	ld de, KrisPic
+	ld hl, vTiles2 tile 7 * 7
+	ld b, BANK(ChrisPic)
+	ld c, 7 * 7
+	call Get2bpp
+	ld a, 7 * 7
+	ldh [hGraphicStartTile], a
+	hlcoord 10, 4
+	lb bc, 7, 7
+	predef PlaceGraphic
 	ret
 
 DrawIntroPlayerPic:

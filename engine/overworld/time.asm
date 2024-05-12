@@ -45,7 +45,8 @@ endc
 
 CheckReceiveCallTimer:
 	call CheckReceiveCallDelay ; check timer
-	ret nc
+;	ret nc
+	nop
 	ld hl, wTimeCyclesSinceLastCall
 	ld a, [hl]
 	cp 3

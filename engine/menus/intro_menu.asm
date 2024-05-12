@@ -59,16 +59,15 @@ IF DEF(_DEBUG)
 
 	ld a, $C1
 	ld [wOptions], a
-
-.normal
-ENDC
 	xor a
 	ld [wDebugFlags], a
 	call ResetWRAM
 	farcall ClearSavedObjPals
 	call NewGame_ClearTilemapEtc
-	call PlayerProfileSetup
-	call OakSpeech
+	ld hl, .defaultname
+	ld de, wPlayerName
+	ld bc, 5
+	rst CopyBytes
 	call InitializeWorld
 
 	ld a, LANDMARK_OBSIDIAN_TOWN
@@ -81,8 +80,28 @@ ENDC
 	ldh [hMapEntryMethod], a
 	jmp FinishContinueFunction
 
-PlayerProfileSetup:
-	farjp InitGender
+.defaultname
+	db "JADE@"
+
+.normal
+ENDC
+	xor a
+	ld [wDebugFlags], a
+	call ResetWRAM
+	farcall ClearSavedObjPals
+	call NewGame_ClearTilemapEtc
+	call ParkSpeech
+	call InitializeWorld
+
+	ld a, LANDMARK_OBSIDIAN_TOWN
+	ld [wPrevLandmark], a
+
+	ld a, SPAWN_HOME
+	ld [wDefaultSpawnpoint], a
+
+	ld a, MAPSETUP_WARP
+	ldh [hMapEntryMethod], a
+	jmp FinishContinueFunction
 
 ResetWRAM:
 	xor a
@@ -559,7 +578,7 @@ Continue_DisplayGameTime:
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	jmp PrintNum
 
-OakSpeech:
+ParkSpeech:
 	farcall InitClock
 	ld c, 31
 	call FadeToBlack
@@ -581,14 +600,14 @@ OakSpeech:
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
-	ld hl, OakText1
+	ld hl, ParkText1
 	call PrintText
-if !DEF(_DEBUG)
+
 	ld c, 15
 	call FadeToWhite
 	call ClearTilemap
 
-	ld hl, GASTLY
+	ld hl, POLIWHIRL
 	call GetPokemonIDFromIndex
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
@@ -606,9 +625,9 @@ if !DEF(_DEBUG)
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
-	ld hl, OakText2
+	ld hl, ParkText2
 	call PrintText
-	ld hl, OakText4
+	ld hl, ParkText4
 	call PrintText
 	ld c, 15
 	call FadeToWhite
@@ -624,9 +643,16 @@ if !DEF(_DEBUG)
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
-	ld hl, OakText5
+	ld hl, ParkText5
 	call PrintText
-;	call RotateThreePalettesRight ; TODO check this
+	ld c, 15
+	call FadeToWhite
+	call ClearTilemap
+
+	call IntroMenuChooseGender
+
+	ld c, 15
+	call FadeToWhite
 	call ClearTilemap
 
 	xor a
@@ -636,45 +662,123 @@ if !DEF(_DEBUG)
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
-endc
-	ld hl, OakText6
+
+.player_name_loop
+	ld hl, ParkText7
 	call PrintText
 	call NamePlayer
-	ld hl, OakText7
+
+	ld hl, ParkTextConfirmName
+	call PrintText
+	call YesNoBox
+	jr c, .player_name_loop
+
+	ld c, 15
+	call FadeToWhite
+	call ClearTilemap
+
+	xor a
+	ld [wCurPartySpecies], a
+	ld a, RIVAL1
+	ld [wTrainerClass], a
+	call Intro_PrepTrainerPic
+
+	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
+	call GetSGBLayout
+	call Intro_RotatePalettesLeftFrontpic
+
+	ld hl, ParkText8
+	call PrintText
+
+.rival_loop
+	ld hl, ParkText9
+	call PrintText
+	call IntroNameRival
+
+	ld hl, ParkTextConfirmRival
+	call PrintText
+	call YesNoBox
+	jr c, .rival_loop
+
+	ld c, 31
+	call FadeToWhite
+	call ClearTilemap
+
+	xor a
+	ld [wCurPartySpecies], a
+	farcall DrawIntroPlayerPic
+
+	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
+	call GetSGBLayout
+	call Intro_RotatePalettesLeftFrontpic
+
+	ld hl, ParkText10
 	jmp PrintText
 
-OakText1:
-	text_far _OakText1
+ParkText1:
+	text_far _ParkText1
 	text_end
 
-OakText2:
-	text_far _OakText2
+ParkText2:
+	text_far _ParkText2
 	text_asm
-	ld hl, WOOPER
+	ld hl, POLIWHIRL
 	call GetPokemonIDFromIndex
 	call PlayMonCry
 	call WaitSFX
-	ld hl, OakText3
+	ld hl, ParkText3
 	ret
 
-OakText3:
-	text_far _OakText3
+ParkText3:
+	text_far _ParkText3
 	text_end
 
-OakText4:
-	text_far _OakText4
+ParkText4:
+	text_far _ParkText4
 	text_end
 
-OakText5:
-	text_far _OakText5
+ParkText5:
+	text_far _ParkText5
 	text_end
 
-OakText6:
-	text_far _OakText6
+ParkText6:
+	text_far _ParkText6
 	text_end
 
-OakText7:
-	text_far _OakText7
+ParkText7:
+	text_far _ParkText7
+	text_end
+
+ParkText8:
+	text_far _ParkText8
+	text_end
+
+ParkText9:
+	text_far _ParkText9
+	text_end
+
+ParkText10:
+	text_far _ParkText10
+	text_end
+
+ParkTextBoyOrGirl:
+	text_far _ParkTextBoyOrGirl
+	text_end
+
+ParkTextBoy:
+	text_far _ParkTextBoy
+	text_end
+
+ParkTextGirl:
+	text_far _ParkTextGirl
+	text_end
+
+ParkTextConfirmName:
+	text_far _ParkTextConfirmName
+	text_end
+
+ParkTextConfirmRival:
+	text_far _ParkTextConfirmRival
 	text_end
 
 NamePlayer:
@@ -721,12 +825,59 @@ NamePlayer:
 .Kris:
 	db "KRIS@@@@@@@"
 
+IntroNameRival:
+	farcall MovePlayerPicRight
+	farcall ShowRivalNamingChoices
+	ld a, [wMenuCursorY]
+	dec a
+	jr z, .NewName
+	call StoreRivalName
+	farcall ApplyMonOrTrainerPals
+	farcall MovePlayerPicLeft
+	ret
+
+.NewName:
+	ld b, NAME_RIVAL
+	ld de, wRivalName
+	farcall NamingScreen
+
+	ld c, 15
+	call FadeToWhite
+	call ClearTilemap
+
+	call LoadFontsExtra
+	call WaitBGMap
+
+	xor a
+	ld [wCurPartySpecies], a
+	ld a, RIVAL1
+	ld [wTrainerClass], a
+	call Intro_PrepTrainerPic
+
+	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
+	call GetSGBLayout
+	call Intro_RotatePalettesLeftFrontpic
+
+	ld hl, wRivalName
+	ld de, .DefaultName
+	call InitName
+	ret
+
+.DefaultName:
+	db "???@@@@@@@@"
+
 StorePlayerName:
+	ld hl, wPlayerName
+	jr StoreName
+
+StoreRivalName:
+	ld hl, wRivalName
+StoreName:
+	push hl
 	ld a, "@"
 	ld bc, NAME_LENGTH
-	ld hl, wPlayerName
 	rst ByteFill
-	ld hl, wPlayerName
+	pop hl
 	ld de, wStringBuffer2
 	jmp CopyName2
 
@@ -878,6 +1029,73 @@ Intro_PlacePlayerSprite:
 	db 10 * TILE_WIDTH + 4,  9 * TILE_WIDTH, 2
 	db 10 * TILE_WIDTH + 4, 10 * TILE_WIDTH, 3
 
+IntroMenuChooseGender:
+	xor a
+	ld [wCurPartySpecies], a
+	farcall DrawBothIntroFrontPics
+
+	ld b, SCGB_INTRO_BOTH_PLAYER_PALS
+	call GetSGBLayout
+	call Intro_RotatePalettesLeftFrontpic
+
+	ld hl, ParkText6
+	call PrintText
+
+.gender_loop
+	ld hl, ParkTextBoyOrGirl
+	call PrintText
+; place cursor
+	ld a, "▼"
+	hlcoord 5, 2
+	ld [hl], a
+	ld a, " "
+	hlcoord 13, 2
+	ld [hl], a
+
+	xor a
+	ld [wMenuCursorX], a
+	call DelayFrame
+	call .get_input
+
+	ld a, [wMenuCursorX]
+	and a
+	ld [wPlayerGender], a
+	ld hl, ParkTextBoy
+	jr z, .ask_gender
+
+	ld hl, ParkTextGirl
+.ask_gender
+	call PrintText
+	call YesNoBox
+	jr c, .gender_loop
+	ret
+
+.get_input:
+	call JoyTextDelay
+	ldh a, [hJoypadPressed]
+	bit A_BUTTON_F, a
+	ret nz
+	and D_LEFT | D_RIGHT
+	call nz, .swap_cursor
+	call DelayFrame
+	jr .get_input
+
+.swap_cursor
+	ld a, " "
+	hlcoord 5, 2
+	ld [hl], a
+	hlcoord 13, 2
+	ld [hl], a
+	ld a, [wMenuCursorX]
+	xor 1
+	ld [wMenuCursorX], a
+	hlcoord 5, 2
+	jr z, .set_cursor
+	hlcoord 13, 2
+.set_cursor
+	ld a, "▼"
+	ld [hl], a
+	ret
 
 	const_def
 	const TITLESCREENOPTION_MAIN_MENU

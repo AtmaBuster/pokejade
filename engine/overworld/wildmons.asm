@@ -1,23 +1,13 @@
 LoadWildMonData:
 	call _GrassWildmonLookup
-	jr c, .copy
-	ld hl, wMornEncounterRate
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	jr .done_copy
+	ld a, 0
+	jr nc, .no_grass_mons
+	inc hl
+	inc hl
+	ld a, [hl]
+.no_grass_mons
+	ld [wMornEncounterRate], a
 
-.copy
-	inc hl
-	inc hl
-	ld de, wMornEncounterRate
-	ld bc, 3
-	rst CopyBytes
-	ld a, [wNiteEncounterRate]
-	ld [wEveEncounterRate], a
-.done_copy
 	call _WaterWildmonLookup
 	ld a, 0 ; no-optimize a = 0
 	jr nc, .no_copy
@@ -26,13 +16,6 @@ LoadWildMonData:
 	ld a, [hl]
 .no_copy
 	ld [wWaterEncounterRate], a
-	ret
-
-GetTimeOfDayNotEve:
-	ld a, [wTimeOfDay]
-	cp EVE_F
-	ret nz
-	ld a, NITE_F ; ld a, DAY_F to make evening use day encounters
 	ret
 
 FindNest:
@@ -247,7 +230,7 @@ GetMapEncounterRate:
 	call CheckOnWater
 	ld a, wWaterEncounterRate - wMornEncounterRate
 	jr z, .ok
-	ld a, [wTimeOfDay]
+	xor a
 .ok
 	ld c, a
 	ld b, 0
@@ -313,15 +296,7 @@ ChooseWildEncounter:
 	inc hl
 	inc hl
 	inc hl
-	call CheckOnWater
-	jr z, .watermon
-	inc hl
-	inc hl
-	call GetTimeOfDayNotEve
-	ld bc, NUM_GRASSMON * 3
-	rst AddNTimes
 
-.watermon
 ; hl contains the pointer to the wild mon data, let's save that to the stack
 	push hl
 .randomloop
@@ -547,6 +522,16 @@ LookUpGrassJohtoWildmons::
 	ld hl, JohtoGrassWildMons
 	ld bc, GRASS_WILDDATA_LENGTH
 LookUpWildmonsForMapDE:
+; if map is OBSIDIAN_MEADOW and scene isn't NONE, no encounters
+	ld a, d
+	cp GROUP_OBSIDIAN_MEADOW
+	jr nz, .loop
+	ld a, e
+	cp MAP_OBSIDIAN_MEADOW
+	jr nz, .loop
+	ld a, [wObsidianMeadowSceneID]
+	cp SCENE_OBSIDIAN_MEADOW_NONE
+	jr nz, .nope
 .loop
 	push hl
 	ld a, [hl]
@@ -870,7 +855,6 @@ GetCallerRouteWildGrassMons:
 .found
 	ld bc, 5 ; skip the map ID and encounter rates
 	add hl, bc
-	call GetTimeOfDayNotEve
 	ld bc, NUM_GRASSMON * 3
 	rst AddNTimes
 	scf

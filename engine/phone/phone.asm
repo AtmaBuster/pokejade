@@ -89,43 +89,8 @@ GetRemainingSpaceInPhoneList:
 INCLUDE "data/phone/permanent_numbers.asm"
 
 CheckPhoneCall::
-; Check if the phone is ringing in the overworld.
-
-	call CheckStandingOnEntrance
-	jr z, .no_call
-
-	call .timecheck
-	jr nc, .no_call
-
-	; 50% chance for a call
-	call Random
-	ld b, a
-	and %01111111
-	cp b
-	jr nz, .no_call
-
-	call GetMapPhoneService
-	and a
-	jr nz, .no_call
-
-	call GetAvailableCallers
-	call ChooseRandomCaller
-	jr nc, .no_call
-
-	ld e, a
-	call LoadCallerScript
-	ld a, BANK(Script_ReceivePhoneCall)
-	ld hl, Script_ReceivePhoneCall
-	call CallScript
-	scf
-	ret
-
-.no_call
 	xor a
 	ret
-
-.timecheck
-	farjp CheckReceiveCallTimer
 
 CheckPhoneContactTimeOfDay:
 	push hl

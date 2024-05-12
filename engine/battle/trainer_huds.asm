@@ -26,7 +26,7 @@ ShowPlayerMonsRemaining:
 
 .no_mons
 	ld hl, wBattleHUDTiles
-	ld a, $7f ; blank
+	ld a, $34 ; blank
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
