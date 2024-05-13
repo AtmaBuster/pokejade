@@ -137,9 +137,7 @@ DisplayDexEntry:
 	ld a, b
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	jr c, .under_1k
-	jr z, .next_1k_check
-	jr .gt_1k
-
+	jr nz, .gt_1k
 .next_1k_check
 	cp LOW(1000)
 	jr c, .under_1k

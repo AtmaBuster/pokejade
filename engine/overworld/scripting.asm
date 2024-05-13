@@ -588,11 +588,7 @@ Script_trade:
 	farjp NPCTrade
 
 Script_phonecall:
-	ret ; stubbed
-
 Script_hangup:
-	ret ; stubbed
-
 Script_askforphonenumber:
 	ret ; stubbed
 
@@ -1866,11 +1862,7 @@ Script_checkpoke:
 	ret
 
 Script_addcellnum:
-	ret ; stubbed
-
 Script_delcellnum:
-	ret ; stubbed
-
 Script_checkcellnum:
 	ret ; stubbed
 

@@ -289,12 +289,12 @@ ReadTrainerPartyPieces:
 	pop hl
 
 	inc hl
-	ld c, [hl]
-	dec hl
-	ld b, [hl]
-	dec hl
-	ld [hl], c
-	dec hl
+	ld a, [hld]
+	ld c, a
+	ld a, [hld]
+	ld b, a
+	ld a, c
+	ld [hld], a
 	ld [hl], b
 
 	pop hl
@@ -320,8 +320,8 @@ ReadTrainerPartyPieces:
 	ld hl, wStarterTreeckoPersonality
 	add l
 	ld l, a
-	ld a, 0
 	adc h
+	sub l
 	ld h, a
 	ld a, [hl]
 	pop hl

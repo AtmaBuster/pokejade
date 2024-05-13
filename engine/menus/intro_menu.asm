@@ -833,8 +833,7 @@ IntroNameRival:
 	jr z, .NewName
 	call StoreRivalName
 	farcall ApplyMonOrTrainerPals
-	farcall MovePlayerPicLeft
-	ret
+	farjp MovePlayerPicLeft
 
 .NewName:
 	ld b, NAME_RIVAL
@@ -860,8 +859,7 @@ IntroNameRival:
 
 	ld hl, wRivalName
 	ld de, .DefaultName
-	call InitName
-	ret
+	jmp InitName
 
 .DefaultName:
 	db "???@@@@@@@@"
@@ -1093,8 +1091,7 @@ IntroMenuChooseGender:
 	jr z, .set_cursor
 	hlcoord 13, 2
 .set_cursor
-	ld a, "▼"
-	ld [hl], a
+	ld [hl], "▼"
 	ret
 
 	const_def

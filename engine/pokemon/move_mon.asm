@@ -1152,7 +1152,6 @@ CalcMonStatC:
 .Defense:
 	ld a, [hl]
 	and $f
-	jr .GotDV
 
 .GotDV:
 	ld d, 0

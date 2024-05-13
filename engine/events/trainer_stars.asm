@@ -29,8 +29,7 @@ CountTrainerStars:
 	push bc
 	call UpdateTrainerStars
 	ld a, [wTrainerStars]
-	ld c, 0
-	ld b, 5
+	lb bc, 5, 0
 .loop
 	srl a
 	jr nc, .no_carry

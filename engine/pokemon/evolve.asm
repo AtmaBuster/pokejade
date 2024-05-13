@@ -1069,10 +1069,7 @@ EvoTest_LevelWithDark:
 	call EvoTest_Level
 	ret nc
 
-	call .ScanPartyDarkType
-	ret
-
-.ScanPartyDarkType: ; TO-DO
+; TO-DO : ScanPartyDarkType
 	scf
 	ret
 

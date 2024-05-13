@@ -2841,8 +2841,7 @@ LightBall_DeepSeaTooth_Boost:
 	call LightBallBoost
 	jr z, .ok
 	pop hl
-	call DeepSeaToothBoost
-	ret
+	jr DeepSeaToothBoost
 
 .ok
 	inc sp

@@ -425,5 +425,4 @@ GetStarterName:
 .got_mon
 	call GetPokemonIDFromIndex
 	ld [wNamedObjectIndex], a
-	call GetPokemonName
-	ret
+	jmp GetPokemonName

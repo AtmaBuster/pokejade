@@ -1817,8 +1817,7 @@ _TownMap:
 	hlcoord 0, 15
 	ld bc, 12
 	rst ByteFill
-	ld a, $17
-	ld [hl], a
+	ld [hl], $17
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	dec a

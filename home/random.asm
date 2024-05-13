@@ -157,16 +157,18 @@ Random2:
 .Mul
 	and a
 	jr nz, .do_mul
-	ld hl, 0
+	ld h, a
+	ld l, a
 	ret
 
 .do_mul
 	ld b, 0
-	ld hl, 0
+	ld h, b
+	ld l, b
 	ld e, 8
 	ld d, a
 .mul_loop
-	rr a
+	rra
 	jr nc, .no_add
 	add hl, bc
 .no_add

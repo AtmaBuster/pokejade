@@ -1,6 +1,6 @@
 LoadWildMonData:
 	call _GrassWildmonLookup
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr nc, .no_grass_mons
 	inc hl
 	inc hl

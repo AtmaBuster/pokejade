@@ -6,8 +6,8 @@ GetMoveCategoryName:
 	call GetFarByte
 
 	and ~TYPE_MASK
-	rlc a
-	rlc a
+	rlca
+	rlca
 	dec a
 
 	ld hl, CategoryNames

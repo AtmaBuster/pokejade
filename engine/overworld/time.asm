@@ -44,18 +44,7 @@ endc
 	db 20, 10, 5, 3
 
 CheckReceiveCallTimer:
-	call CheckReceiveCallDelay ; check timer
-;	ret nc
-	nop
-	ld hl, wTimeCyclesSinceLastCall
-	ld a, [hl]
-	cp 3
-	jr nc, .ok
-	inc [hl]
-
-.ok
-	call NextCallReceiveDelay ; restart timer
-	scf
+	and a
 	ret
 
 InitOneDayCountdown:

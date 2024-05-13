@@ -1088,7 +1088,7 @@ LibraTypeSingleText:
 
 LibraTypeDualText:
 	text "<TARGET>'s"
-	line "type is "
+	line "type is"
 	cont "@"
 	text_ram wStringBuffer1
 	text "/@"

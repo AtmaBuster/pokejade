@@ -12,8 +12,7 @@ GetDexNumberNational:
 
 GetDexNumberFromList:
 ; gets the dex number of mon hl from list de, returns in de
-	farcall _GetDexNumberFromList
-	ret
+	farjp _GetDexNumberFromList
 
 CheckDexNumberNazoh:
 	push hl

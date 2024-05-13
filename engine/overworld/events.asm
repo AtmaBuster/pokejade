@@ -883,8 +883,6 @@ SelectMenuScript:
 IF DEF(_DEBUG)
 DebugMenuScript:
 	callasm DebugMenu
-	sjump DebugMenuCallback
-
 DebugMenuCallback:
 ENDC
 

@@ -153,8 +153,7 @@ DrawBothIntroFrontPics:
 	ld [wTrainerClass], a
 	ld de, ChrisPic
 	ld hl, vTiles2
-	ld b, BANK(ChrisPic)
-	ld c, 7 * 7
+	lb bc, BANK(ChrisPic), 7 * 7
 	call Get2bpp
 	xor a
 	ldh [hGraphicStartTile], a
@@ -166,15 +165,13 @@ DrawBothIntroFrontPics:
 	ld [wTrainerClass], a
 	ld de, KrisPic
 	ld hl, vTiles2 tile 7 * 7
-	ld b, BANK(ChrisPic)
-	ld c, 7 * 7
+	lb bc, BANK(KrisPic), 7 * 7
 	call Get2bpp
 	ld a, 7 * 7
 	ldh [hGraphicStartTile], a
 	hlcoord 10, 4
 	lb bc, 7, 7
-	predef PlaceGraphic
-	ret
+	predef_jump PlaceGraphic
 
 DrawIntroPlayerPic:
 ; Draw the player pic at (6,4).

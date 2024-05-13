@@ -341,5 +341,4 @@ GetAbilityDescriptionPointer:
 	add hl, hl
 	add hl, bc
 	ld a, BANK(AbilityDescriptions)
-	call GetFarWord
-	ret
+	jmp GetFarWord

@@ -4568,8 +4568,7 @@ PrintPlayerHUD:
 	jr z, .no_delta
 
 	hlcoord 18, 8
-	ld a, "<DELTA>"
-	ld [hl], a
+	ld [hl], "<DELTA>"
 
 .no_delta
 	ld a, [wCurSpecies]
@@ -4688,8 +4687,7 @@ DrawEnemyHUD:
 	jr z, .no_delta
 
 	hlcoord 10, 1
-	ld a, "<DELTA>"
-	ld [hl], a
+	ld [hl], "<DELTA>"
 
 .no_delta
 
@@ -6221,7 +6219,6 @@ LoadEnemyMon:
 	ld a, [hli]
 	or [hl]
 ; Check if it's been initialized again
-	and a
 	jr z, .InitRoamHP
 ; Update from the struct if it has
 	ld a, [hld]

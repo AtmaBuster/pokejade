@@ -112,9 +112,7 @@ VoltorbFlip_CopyTileAttrMapUpper:
 	ld hl, VoltorbFlipAttrmap
 	decoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * 12
-	call CopyBytes
-
-	ret
+	jmp CopyBytes
 
 VoltorbFlip_CopyTileAttrMapLower:
 	ld hl, VoltorbFlipTilemap + SCREEN_WIDTH * 12
@@ -125,16 +123,13 @@ VoltorbFlip_CopyTileAttrMapLower:
 	ld hl, VoltorbFlipAttrmap + SCREEN_WIDTH * 12
 	decoord 0, 12, wAttrmap
 	ld bc, SCREEN_WIDTH * 6
-	call CopyBytes
-
-	ret
+	jmp CopyBytes
 
 VoltorbFlip_GetPals:
 	ld a, %11100100
 	call DmgToCgbBGPals
 	lb de, %11100100, %11100100
-	call DmgToCgbObjPals
-	ret
+	jmp DmgToCgbObjPals
 
 VFlip_CursorToBC:
 	ld a, [wVFlipCursorPos]
@@ -169,8 +164,7 @@ VFlip_DrawPayout:
 	hlcoord 16, 17
 	ld de, wPayout
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 4
-	call PrintNum
-	ret
+	jmp PrintNum
 
 VFlip_DrawLevel:
 	hlcoord 18, 15
@@ -219,8 +213,7 @@ VFlipAction_Init:
 	call VFlip_DrawLevel
 	call VFlip_DrawBoardStats
 
-	call VFlipAction_Next
-	ret
+	jr VFlipAction_Next
 
 VFlipAction_AskPlay:
 	call VFlip_AskPlay
@@ -228,8 +221,7 @@ VFlipAction_AskPlay:
 	call VFlipAction_Next
 	call VoltorbFlip_CopyTileAttrMapUpper
 	call VoltorbFlip_CopyTileAttrMapLower
-	call WaitBGMap2
-	ret
+	jmp WaitBGMap2
 
 .exit_game
 	ld a, VFLIP_QUIT
@@ -287,8 +279,7 @@ VFlipAction_ChooseCard:
 	jr nz, .ask_quit
 	call VFlip_HandleJoypad
 	call VFlip_DrawCursor
-	call VFlip_DrawPayout
-	ret
+	jmp VFlip_DrawPayout
 
 .card_chosen
 	ld a, VFLIP_FLIP_CARD
@@ -355,8 +346,7 @@ VFlip_HandleJoypad:
 	ld b, 0
 	; fallthrough
 .finish
-	call VFlip_BCToCursor
-	ret
+	jmp VFlip_BCToCursor
 
 VFlip_JoypadNoteMode:
 	ldh a, [hJoyLast]
@@ -478,9 +468,9 @@ VFlip_UpdatePayout:
 	cp 1
 	ret z ; payout non-zero, card is one, no change
 
-	ld a, [wPayout]
-	ld h, a
-	ld a, [wPayout + 1]
+	ld hl, wPayout
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
 	ld a, c
 	ld b, h
@@ -874,8 +864,7 @@ VFlip_DrawBoardStats:
 	hlcoord 12, 17
 	ld de, wVFlipColStats + 9
 	lb bc, 1, 2
-	call PrintNum
-	ret
+	jmp PrintNum
 
 VFlip_DrawCursor:
 	; get cursor coordinates
@@ -897,8 +886,7 @@ VFlip_DrawCursor:
 	ld c, l
 	; b has sprite x, c has sprite y
 	ld hl, .OAM_data
-	call VFlip_CopyOAM
-	ret
+	jmp VFlip_CopyOAM
 
 .OAM_data
 	db 6
@@ -961,9 +949,9 @@ VFlipAction_FinishWin:
 	ld a, [wVFlipCardsTurned]
 	cp 8
 	jr c, .try_increment_level
-	ld a, [wVFlipComboCounter]
-	inc a
-	ld [wVFlipComboCounter], a
+	ld hl, wVFlipComboCounter
+	inc [hl]
+	ld a, [hl]
 	cp 5
 	jr nc, .set_level_8
 	ld a, [wVFlipCardsTurned]
@@ -982,8 +970,7 @@ VFlipAction_FinishWin:
 	ld a, 8
 	ld [wVFlipLevel], a
 .done_level_change
-	call VFlipAction_Next
-	ret
+	jmp VFlipAction_Next
 
 VFlipAction_FinishLose:
 	call VFlip_HideCursor
@@ -1010,8 +997,7 @@ VFlipAction_FinishLose:
 .no_inc
 	ld [wVFlipLevel], a
 .done
-	call VFlipAction_Next
-	ret
+	jmp VFlipAction_Next
 
 VFlipAction_FinishAll:
 	xor a
@@ -1068,8 +1054,7 @@ VFlip_FlipAllCards:
 	inc [hl]
 	dec c
 	jr nz, .loop
-	call VFlip_HideCursor
-	ret
+	jmp VFlip_HideCursor
 
 VFlipAction_GivePayout:
 	call .try_payout
@@ -1081,8 +1066,7 @@ VFlipAction_GivePayout:
 	ret nz
 	ld de, SFX_GET_COIN_FROM_SLOTS
 	call PlaySFX
-	call VFlip_DrawPayout
-	ret
+	jmp VFlip_DrawPayout
 
 .try_payout
 	ld hl, wPayout
@@ -1092,19 +1076,19 @@ VFlipAction_GivePayout:
 	jr z, .done
 	ld e, [hl]
 	dec de
-	ld [hl], e
-	dec hl
+	ld a, e
+	ld [hld], a
 	ld [hl], d
 	ld hl, wCoins
-	ld d, [hl]
-	inc hl
+	ld a, d
+	ld [hli], a
 	ld e, [hl]
 	call .check_coin_case_full
 	jr c, .okay
 	inc de
 .okay
-	ld [hl], e
-	dec hl
+	ld a, e
+	ld [hld], a
 	ld [hl], d
 	ret
 

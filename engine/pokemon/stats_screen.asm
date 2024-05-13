@@ -468,9 +468,7 @@ StatsScreen_UpdateNumber:
 	jr z, .got_sym
 	dec a
 	ld b, "."
-	jr z, .got_sym
-	jr .unknown_number
-
+	jr nz, .unknown_number
 .got_sym
 	ld a, b
 	ld [hli], a
@@ -478,9 +476,7 @@ StatsScreen_UpdateNumber:
 	ld a, [de]
 	cp HIGH(1000)
 	jr c, .lt_1k
-	jr z, .next
-	jr .gt_1k
-
+	jr nz, .gt_1k
 .next
 	inc de
 	ld a, [de]
@@ -628,24 +624,12 @@ StatsScreen_InitUpperHalf:
 StatsScreen_GetDexNumber:
 	ld a, [wStatsScreenDexNumber]
 	and %11
-	jr z, .nazoh
+	jp z, GetDexNumberNazoh
 	dec a
-	jr z, .holon
+	jp z, GetDexNumberHolon
 	dec a
-	jr z, .national
+	jp z, GetDexNumberNational
 	ld de, -1
-	ret
-
-.national
-	call GetDexNumberNational
-	ret
-
-.holon
-	call GetDexNumberHolon
-	ret
-
-.nazoh
-	call GetDexNumberNazoh
 	ret
 
 StatsScreen_CheckDexNumbers:
@@ -801,8 +785,7 @@ LoadPinkPage:
 	and MON_DELTA_MASK
 	jr z, .no_delta
 	hlcoord 5, 14
-	ld a, "<DELTA>"
-	ld [hl], a
+	ld [hl], "<DELTA>"
 .no_delta
 	ld a, [wTempMonPokerusStatus]
 	ld b, a

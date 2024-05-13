@@ -640,9 +640,6 @@ Pokedex_GetDexOrderCursorData:
 	call .AddMode
 	call .AddMode
 	call .AddMode
-	call .AddMode
-	ret
-
 .AddMode
 	ld a, [de]
 	cp -1
@@ -658,8 +655,8 @@ Pokedex_GetDexOrderCursorData:
 	ld b, [hl]
 	pop hl
 	ld [hli], a
-	ld [hl], b
-	inc hl
+	ld a, b
+	ld [hli], a
 	ret
 
 .JumptablePointers:
@@ -1322,7 +1319,6 @@ CountPokedexOrder_Join:
 	ld a, [wDexListingEnd + 1]
 	ld b, a
 
-	ld a, b
 	or c
 	jr z, .done
 .loop
@@ -1427,7 +1423,7 @@ Pokedex_DrawOptionScreenBG:
 	ld a, [de]
 	inc de
 	cp -1
-	jr z, .done
+	ret z
 	push de
 	call .PlaceListing
 	ld de, SCREEN_WIDTH * 2
@@ -1435,8 +1431,6 @@ Pokedex_DrawOptionScreenBG:
 	pop de
 	dec c
 	jr nz, .loop
-
-.done
 	ret
 
 .PlaceListing:
@@ -1833,9 +1827,7 @@ Pokedex_PrintNumber:
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	cp HIGH(1000)
 	jr c, .ok
-	jr z, .next_check
-	jr .gt1k
-
+	jr nz, .gt1k
 .next_check
 	ld a, [wPokedexDisplayNumber + 1]
 	cp LOW(1000)
