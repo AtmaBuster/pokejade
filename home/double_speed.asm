@@ -8,15 +8,7 @@
 DoubleSpeed::
 	ld hl, rKEY1
 	bit 7, [hl]
-	jr z, SwitchSpeed
-	ret
-
-NormalSpeed::
-	ld hl, rKEY1
-	bit 7, [hl]
-	ret z
-
-SwitchSpeed::
+	ret nz
 	set 0, [hl]
 	xor a
 	ldh [rIF], a
