@@ -599,7 +599,7 @@ PoliwrathEvosAttacks:
 	db 0 ; no more level-up moves
 
 GelanlaEvosAttacks:
-	dbbw EVOLVE_LEVEL_MOVE, VINE_WHIP, TANGELA
+	dbww EVOLVE_LEVEL_MOVE, VINE_WHIP, TANGELA
 	db 0 ; no more evolutions
 	dbw 1, CONSTRICT
 	dbw 5, SLEEP_POWDER

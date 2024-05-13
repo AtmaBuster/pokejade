@@ -515,6 +515,11 @@ _UseSweetScentText::
 	line "SWEET SCENT!"
 	done
 
+_UseSweetHoneyText::
+	text "<PLAYER> used"
+	line "SWEET HONEY!"
+	done
+
 _SweetScentNothingText::
 	text "Looks like there's"
 	line "nothing here…"

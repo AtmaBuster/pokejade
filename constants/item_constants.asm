@@ -7,7 +7,7 @@
 	const_def
 	const NO_ITEM      ; 0000
 	const BRIGHTPOWDER ; 0001
-	const ITEM_02      ; 0002
+	const SWEET_HONEY  ; 0002
 	const MOON_STONE   ; 0003
 	const ANTIDOTE     ; 0004
 	const BURN_HEAL    ; 0005

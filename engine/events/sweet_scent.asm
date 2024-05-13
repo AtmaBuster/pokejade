@@ -1,3 +1,16 @@
+UseSweetHoney:
+	ld hl, .SweetHoney
+	call QueueScript
+	ld a, 1
+	ld [wItemEffectSucceeded], a
+	ret
+
+.SweetHoney:
+	refreshmap
+	special UpdateTimePals
+	writetext UseSweetHoneyText
+	sjump SweetScentHoneyScript
+
 SweetScentFromMenu:
 	ld hl, .SweetScent
 	call QueueScript
@@ -10,18 +23,14 @@ SweetScentFromMenu:
 	special UpdateTimePals
 	callasm GetPartyNickname
 	writetext UseSweetScentText
+SweetScentHoneyScript:
 	waitbutton
 	callasm SweetScentEncounter
 	iffalse SweetScentNothing
-	checkflag ENGINE_BUG_CONTEST_TIMER
-	iftrue .BugCatchingContest
 	randomwildmon
 	startbattle
 	reloadmapafterbattle
 	end
-
-.BugCatchingContest:
-	farsjump BugCatchingContestBattleScript
 
 SweetScentNothing:
 	writetext SweetScentNothingText
@@ -59,6 +68,10 @@ SweetScentEncounter:
 
 UseSweetScentText:
 	text_far _UseSweetScentText
+	text_end
+
+UseSweetHoneyText:
+	text_far _UseSweetHoneyText
 	text_end
 
 SweetScentNothingText:

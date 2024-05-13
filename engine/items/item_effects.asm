@@ -30,7 +30,7 @@ ItemEffects:
 
 ItemEffects1:
 	dw NoEffect            ; BRIGHTPOWDER
-	dw NoEffect            ; ITEM_02
+	dw SweetHoneyEffect    ; SWEET_HONEY
 	dw EvoStoneEffect      ; MOON_STONE
 	dw StatusHealingEffect ; ANTIDOTE
 	dw StatusHealingEffect ; BURN_HEAL
@@ -2157,6 +2157,10 @@ Softboiled_MilkDrinkFunction:
 .ItemCantUseOnMonText:
 	text_far _ItemCantUseOnMonText
 	text_end
+
+SweetHoneyEffect:
+	farcall UseSweetHoney
+	jmp UseDisposableItem
 
 EscapeRopeEffect:
 	xor a

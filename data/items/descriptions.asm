@@ -10,7 +10,7 @@ ItemDescriptions:
 ItemDescriptions1:
 ; entries correspond to item ids (see constants/item_constants.asm)
 	dw BrightpowderDesc ; 0001
-	dw QuestionMarkDesc ; 0002
+	dw SweetHoneyDesc   ; 0002
 	dw MoonStoneDesc    ; 0003
 	dw AntidoteDesc     ; 0004
 	dw BurnHealDesc     ; 0005
@@ -940,3 +940,7 @@ SuperLureDesc:
 MaxLureDesc:
 	db   "Lures rare #-"
 	next "MON for 250 steps.@"
+
+SweetHoneyDesc:
+	db   "A jar of honey."
+	next "Attracts #MON.@"

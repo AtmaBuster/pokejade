@@ -509,7 +509,7 @@ MovesGroup4:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_LIBRA,               0, NORMAL,        STATUS,   100,  0,   0      ;LIBRA
+	move EFFECT_LIBRA,               0, NORMAL,        STATUS,   100, 40,   0      ;LIBRA
 .IndirectEnd::
 
 POPS

@@ -219,7 +219,7 @@ TryWildEncounter::
 
 .EncounterRate:
 	call GetMapEncounterRate
-	call ApplyMusicEffectOnEncounterRate
+	call GetAbilityEffectsOnEncounterRate
 	call ApplyCleanseTagEffectOnEncounterRate
 	call Random
 	cp b
@@ -247,21 +247,36 @@ GetMapEncounterRate:
 	ld b, a
 	ret
 
-ApplyMusicEffectOnEncounterRate::
-; Pokemon March and Ruins of Alph signal double encounter rate.
-; Pokemon Lullaby halves encounter rate.
-	ld a, [wMapMusic]
-	cp MUSIC_POKEMON_MARCH
-	jr z, .double
-	cp MUSIC_RUINS_OF_ALPH_RADIO
-	jr z, .double
-	cp MUSIC_POKEMON_LULLABY
-	ret nz
+GetAbilityEffectsOnEncounterRate:
+	ld a, ILLUMINATE
+	call CheckFieldAbility
+	call c, .Double
+	ld a, ARENA_TRAP
+	call CheckFieldAbility
+	call c, .Double
+	ld a, NO_GUARD
+	call CheckFieldAbility
+	call c, .Double
+	ld a, QUICK_FEET
+	call CheckFieldAbility
+	call c, .Halve
+	ld a, STENCH
+	call CheckFieldAbility
+	call c, .Halve
+	ld a, WHITE_SMOKE
+	call CheckFieldAbility
+	call c, .Halve
+	ld a, INFILTRATOR
+	call CheckFieldAbility
+	ret nc
+.Halve:
 	srl b
 	ret
 
-.double
+.Double:
 	sla b
+	ret nc
+	ld b, $ff
 	ret
 
 ApplyCleanseTagEffectOnEncounterRate::
@@ -373,6 +388,8 @@ ChooseWildEncounter:
 	ld [wTempWildMonSpecies], a
 
 .startwildbattle
+	call CheckRepelLikeAbilities
+	jr nc, .nowildbattle
 	xor a
 	ret
 
@@ -431,6 +448,57 @@ endr
 	ret
 
 .encounter
+	scf
+	ret
+
+CheckRepelLikeAbilities:
+	ld a, KEEN_EYE
+	call CheckFirstFieldAbility
+	jr c, .keen_eye_intimidate
+	ld a, INTIMIDATE
+	call CheckFirstFieldAbility
+	jr c, .keen_eye_intimidate
+	ld a, HUSTLE
+	call CheckFirstFieldAbility
+	jr c, .levelplus2
+	ld a, VITAL_SPIRIT
+	call CheckFirstFieldAbility
+	jr c, .levelplus2
+	ld a, PRESSURE
+	call CheckFirstFieldAbility
+	jr c, .levelplus2
+	ret
+
+.keen_eye_intimidate
+	ld b, a
+	ld a, [wCurPartyLevel]
+	add 6
+	cp a
+	jr nc, .battle_ok
+	call Random
+	and %01000000
+	jr z, .battle_ok
+.cancel_battle
+	and a
+	ret
+
+.battle_ok
+	scf
+	ret
+
+.levelplus2
+	call Random
+	and %00000100
+	scf
+	ret z
+	ld hl, wCurPartyLevel
+	ld a, [hl]
+	add 2
+	cp MAX_LEVEL
+	jr c, .ok_level
+	ld a, MAX_LEVEL
+.ok_level
+	ld [hl], a
 	scf
 	ret
 

@@ -470,8 +470,8 @@ VFlip_UpdatePayout:
 
 	ld hl, wPayout
 	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld l, [hl]
+	ld h, a
 	ld a, c
 	ld b, h
 	ld c, l
@@ -886,7 +886,7 @@ VFlip_DrawCursor:
 	ld c, l
 	; b has sprite x, c has sprite y
 	ld hl, .OAM_data
-	jmp VFlip_CopyOAM
+	jr VFlip_CopyOAM
 
 .OAM_data
 	db 6

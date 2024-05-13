@@ -298,7 +298,7 @@ ApplyHoneyGather:
 	jr c, .done
 
 	push hl
-	ld hl, MASTER_BALL ; TO-DO
+	ld hl, SWEET_HONEY
 	call GetItemIDFromIndex
 	pop hl
 	ld [hl], a
