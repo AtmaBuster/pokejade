@@ -12,17 +12,6 @@ DelayFrame::
 	jr nz, .halt
 	ret
 
-ApplyTilemapInVBlank::
-; Tell VBlank to update BG Map
-	ld a, 1
-_ApplyAttrOrTilemapInVBlank:
-	ldh [hBGMapMode], a
-Delay2::
-	ld c, 2
-	jr DelayFrames
-
-Delay3::
-	ld c, 3
 DelayFrames::
 ; Wait c frames
 	call DelayFrame

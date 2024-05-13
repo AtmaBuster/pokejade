@@ -638,29 +638,6 @@ _VFlipLevelDownText::
 	text "…"
 	done
 
-_PhoneWrongNumberText::
-	text "Huh? Sorry, wrong"
-	line "number!"
-	done
-
-_PhoneClickText::
-	text "Click!"
-	done
-
-_PhoneEllipseText::
-	text "<……>"
-	done
-
-_PhoneOutOfAreaText::
-	text "That number is out"
-	line "of the area."
-	done
-
-_PhoneJustTalkToThemText::
-	text "Just go talk to"
-	line "that person!"
-	done
-
 _PasswordAskResetText::
 	text "Password OK."
 	line "Select CONTINUE &"

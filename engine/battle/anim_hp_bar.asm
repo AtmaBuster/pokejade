@@ -1,7 +1,13 @@
 AnimateHPBar:
-	call ApplyTilemapInVBlank
+	ld a, 1
+	ldh [hBGMapMode], a
+	ld c, 2
+	call DelayFrames
 	call _AnimateHPBar
-	jmp ApplyTilemapInVBlank
+	ld a, 1
+	ldh [hBGMapMode], a
+	ld c, 2
+	jmp DelayFrames
 
 _AnimateHPBar:
 ; Code in here treat the HP bar for update frequency as
