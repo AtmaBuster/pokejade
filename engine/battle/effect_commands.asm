@@ -2602,6 +2602,11 @@ PlayerAttackDamage:
 	ld d, a
 	ret z
 
+	ld a, [wBattleMonAbility]
+	ld e, a
+	ld bc, wBattleMonHP
+	call ApplyPinchAbilityEffect
+
 	ld a, [hl]
 	cp SPECIAL
 	jr nc, .special
@@ -2716,6 +2721,64 @@ TruncateHL_BC:
 	jr nz, .loop
 
 	ld b, l
+	ret
+
+ApplyPinchAbilityEffect:
+; if ability is Overgrow, Blaze, Torrent, or Swarm, test for applicable effect and apply to base power
+; Overflows for power >= 171, but this should never come up :3
+
+; first, check that (cur hp) * 3 <= (max hp)
+	push de
+	push hl
+	call .HPCheck
+	pop hl
+	pop de
+	ret c
+	ld a, e
+	cp OVERGROW
+	ld e, GRASS
+	jr z, .got_ability
+	cp BLAZE
+	ld e, FIRE
+	jr z, .got_ability
+	cp TORRENT
+	ld e, WATER
+	jr z, .got_ability
+	cp SWARM
+	ld e, BUG
+	ret nz
+.got_ability
+	ld a, [hl]
+	and TYPE_MASK
+	cp e
+	ret nz
+; hp low and type matches
+	ld a, d
+	srl d
+	add d
+	ld d, a
+	ret
+
+.HPCheck:
+	ld a, [bc]
+	ld h, a
+	inc bc
+	ld a, [bc]
+	ld l, a
+	inc bc
+	ld a, [bc]
+	cpl
+	ld d, a
+	inc bc
+	ld a, [bc]
+	cpl
+	ld e, a
+	inc de
+	ld b, h
+	ld c, l
+	add hl, hl
+	add hl, bc
+	add hl, de
 	ret
 
 CheckDamageStatsCritical:
@@ -2947,6 +3010,11 @@ EnemyAttackDamage:
 	ld d, a
 	and a
 	ret z
+
+	ld a, [wEnemyMonAbility]
+	ld e, a
+	ld bc, wEnemyMonHP
+	call ApplyPinchAbilityEffect
 
 	ld a, [hl]
 	cp SPECIAL
