@@ -141,17 +141,17 @@ ENDM
 	connection north, City05West, CITY_05_WEST, 0
 	connection west, City04, CITY_04, 0
 
-	map_attributes Town07, TOWN_07, $05, WEST | EAST
+	map_attributes CoquinaTown, COQUINA_TOWN, $05, WEST | EAST
 	connection west, RouteN07, ROUTE_N07, -10
 	connection east, RouteN06, ROUTE_N06, 0
 
 	map_attributes RouteN06, ROUTE_N06, $05, NORTH | WEST
 	connection north, Town06, TOWN_06, 40
-	connection west, Town07, TOWN_07, 0
+	connection west, CoquinaTown, COQUINA_TOWN, 0
 
 	map_attributes RouteN07, ROUTE_N07, $05, NORTH | EAST
 	connection north, RouteN08, ROUTE_N08, -10
-	connection east, Town07, TOWN_07, 10
+	connection east, CoquinaTown, COQUINA_TOWN, 10
 
 	map_attributes Town06, TOWN_06, $05, NORTH | SOUTH
 	connection north, RouteN05, ROUTE_N05, 0

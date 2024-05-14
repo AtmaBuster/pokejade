@@ -11,12 +11,12 @@
 	const LANDMARK_ROUTE_N03         ; 07
 	const LANDMARK_CITY_04           ; 08
 	const LANDMARK_ROUTE_N04         ; 09
-	const LANDMARK_CITY_WEST_05      ; 0a
-	const LANDMARK_CITY_EAST_05      ; 0b
+	const LANDMARK_CITY_05_WEST      ; 0a
+	const LANDMARK_CITY_05_EAST      ; 0b
 	const LANDMARK_ROUTE_N05         ; 0c
 	const LANDMARK_TOWN_06           ; 0d
 	const LANDMARK_ROUTE_N06         ; 0e
-	const LANDMARK_TOWN_07           ; 0f
+	const LANDMARK_COQUINA_TOWN      ; 0f
 	const LANDMARK_ROUTE_N07         ; 10
 	const LANDMARK_ROUTE_N08         ; 11
 	const LANDMARK_ROUTE_N09         ; 12

@@ -22,7 +22,7 @@ Landmarks:
 	landmark 148,  96, RouteN05Name
 	landmark 148, 116, Town06Name
 	landmark 132, 124, RouteN06Name
-	landmark 108, 124, Town07Name
+	landmark 108, 124, CoquinaTownName
 	landmark 100, 120, RouteN07Name
 	landmark  96, 108, RouteN08Name
 	landmark  84, 104, RouteN09Name
@@ -115,7 +115,7 @@ City04Name:          db "CITY 04@"
 City05WestName:      db "CITY 05<BSP>WEST@"
 City05EastName:      db "CITY 05<BSP>EAST@"
 Town06Name:          db "TOWN 06@"
-Town07Name:          db "TOWN 07@"
+CoquinaTownName:     db "COQUINA<BSP>TOWN@"
 Town08Name:          db "TOWN 08@"
 Town09Name:          db "TOWN 09@"
 City10Name:          db "CITY 10@"

@@ -1,11 +1,11 @@
 	object_const_def
 
-Town07_MapScripts:
+CoquinaTown_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-Town07_MapEvents:
+CoquinaTown_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events

@@ -80,8 +80,8 @@ ENDC
 	map_const ROUTE_N04,                                   10, 20 ;  2
 	endgroup
 
-	newgroup TOWN07                                               ;  7
-	map_const TOWN_07,                                     10, 10 ;  1
+	newgroup COQUINA                                              ;  7
+	map_const COQUINA_TOWN,                                10, 10 ;  1
 	map_const ROUTE_N06,                                   50, 10 ;  2
 	map_const ROUTE_N07,                                   10, 20 ;  3
 	endgroup
