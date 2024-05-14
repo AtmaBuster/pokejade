@@ -46,6 +46,11 @@ DEF GENDER_F87_5   EQU  87 percent + 1
 DEF GENDER_F100    EQU 100 percent - 1
 DEF GENDER_UNKNOWN EQU -1
 
+; ability slots
+DEF ABILITYSLOT_1 EQU 0
+DEF ABILITYSLOT_2 EQU 1
+DEF ABILITYSLOT_H EQU 2
+
 ; wBaseGrowthRate values
 ; GrowthRates indexes (see data/growth_rates.asm)
 	const_def

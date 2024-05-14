@@ -119,151 +119,6 @@ EvolveAfterBattle_MasterLoop:
 .confirm_evo
 	jmp nc, .skip_species_next
 
-IF 0
-	ld b, a
-
-	cp EVOLVE_TRADE
-	jr z, .trade
-
-	ld a, [wLinkMode]
-	and a
-	jmp nz, .dont_evolve_check
-
-	ld a, b
-	cp EVOLVE_ITEM
-	jmp z, .item
-
-	ld a, [wForceEvolution]
-	and a
-	jmp nz, .dont_evolve_check
-
-	ld a, b
-	cp EVOLVE_LEVEL
-	jmp z, .level
-
-	cp EVOLVE_HAPPINESS
-	jr z, .happiness
-
-; EVOLVE_STAT
-	call GetNextEvoAttackByte
-	ld c, a
-	ld a, [wTempMonLevel]
-	cp c
-	jmp c, .skip_evolution_species_parameter
-
-	call IsMonHoldingEverstone
-	jmp z, .skip_evolution_species_parameter
-
-	push hl
-	ld de, wTempMonAttack
-	ld hl, wTempMonDefense
-	ld c, 2
-	call CompareBytes
-	ld c, ATK_EQ_DEF
-	jr z, .got_tyrogue_evo
-	ld c, ATK_LT_DEF
-	jr c, .got_tyrogue_evo
-	ld c, ATK_GT_DEF
-.got_tyrogue_evo
-	pop hl
-
-	call GetNextEvoAttackByte
-	cp c
-	jmp nz, .skip_evolution_species
-	jmp .proceed
-
-.happiness
-	ld a, [wTempMonHappiness]
-	cp HAPPINESS_TO_EVOLVE
-	jmp c, .skip_evolution_species_parameter
-
-	call IsMonHoldingEverstone
-	jmp z, .skip_evolution_species_parameter
-
-	call GetNextEvoAttackByte
-	cp TR_ANYTIME
-	jmp z, .proceed
-	cp TR_MORNDAY
-	jr z, .happiness_daylight
-
-; TR_EVENITE
-	ld a, [wTimeOfDay]
-	cp NITE_F
-	jmp c, .skip_half_species_parameter ; MORN_F or DAY_F < NITE_F
-	jr .proceed
-
-.happiness_daylight
-	ld a, [wTimeOfDay]
-	cp NITE_F
-	jmp nc, .skip_half_species_parameter ; NITE_F or EVE_F >= NITE_F
-	jr .proceed
-
-.trade
-	ld a, [wLinkMode]
-	and a
-	jmp z, .skip_evolution_species_parameter
-
-	call IsMonHoldingEverstone
-	jmp z, .skip_evolution_species_parameter
-
-	call GetNextEvoAttackByte
-	ld b, a
-	call GetNextEvoAttackByte
-	push hl
-	ld h, a
-	ld l, b
-	call GetItemIDFromIndex
-	ld b, a
-	pop hl
-	inc a
-	jr z, .proceed
-	dec a
-
-	ld a, [wLinkMode]
-	cp LINK_TIMECAPSULE
-	jmp z, .skip_half_species_parameter
-
-	ld a, [wTempMonItem]
-	cp b
-	jmp nz, .skip_half_species_parameter
-
-	xor a
-	ld [wTempMonItem], a
-	jr .proceed
-
-.item
-	call GetNextEvoAttackByte
-	ld b, a
-	call GetNextEvoAttackByte
-	push hl
-	ld h, a
-	ld l, b
-	call GetItemIDFromIndex
-	ld b, a
-	pop hl
-	ld a, [wCurItem]
-	cp b
-	jmp nz, .skip_evolution_species
-
-	ld a, [wForceEvolution]
-	and a
-	jmp z, .skip_evolution_species
-	ld a, [wLinkMode]
-	and a
-	jmp nz, .skip_evolution_species
-	jr .proceed
-
-.level
-	call GetNextEvoAttackByte
-	ld b, a
-	ld a, [wTempMonLevel]
-	cp b
-	jmp c, .skip_half_species_parameter
-	call IsMonHoldingEverstone
-	jmp z, .skip_half_species_parameter
-ENDC
-
-.proceed
 	ld a, [wTempMonLevel]
 	ld [wCurPartyLevel], a
 	ld a, $1
@@ -300,6 +155,26 @@ ENDC
 	pop af
 	jmp c, CancelEvolution
 
+; figure out which ability slot prev mon had
+	ld hl, wTempMonPersonality
+	ld a, [hli]
+	bit MON_HABILITY_F, a
+	ld a, ABILITYSLOT_H
+	jr nz, .got_ability_slot
+
+	ld a, [hl]
+	push af
+	call GetBaseData
+	ld a, [wBaseAbility]
+	ld b, a
+	pop af
+	cp b
+	ld a, ABILITYSLOT_1
+	jr z, .got_ability_slot
+	ld a, ABILITYSLOT_2
+.got_ability_slot
+	push af
+
 	ld hl, CongratulationsYourPokemonText
 	call PrintText
 
@@ -326,6 +201,17 @@ ENDC
 	call ClearTilemap
 	call UpdateSpeciesNameIfNotNicknamed
 	call GetBaseData
+
+	pop hl
+	pop af
+	push hl
+; update mon ability
+	ld hl, wBaseAbility
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	ld [wTempMonAbility], a
 
 	ld hl, wTempMonExp + 2
 	ld de, wTempMonMaxHP
