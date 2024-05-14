@@ -16,6 +16,17 @@ MapGroupRoofs:
 	db -1             ;  2
 	db ROOF_OBSIDIAN  ;  3 (Obsidian)
 	db ROOF_OBSIDIAN  ;  4 (Shale)
+	db ROOF_OBSIDIAN  ;  5 (City03)
+	db ROOF_OBSIDIAN  ;  6 (City04)
+	db ROOF_OBSIDIAN  ;  7 (Town07)
+	db ROOF_OBSIDIAN  ;  8 (Town06)
+	db ROOF_OBSIDIAN  ;  9 (City05)
+	db ROOF_OBSIDIAN  ; 10 (Town09)
+	db ROOF_OBSIDIAN  ; 11 (City10)
+	db ROOF_OBSIDIAN  ; 12 (City11)
+	db ROOF_OBSIDIAN  ; 13 (City12)
+	db ROOF_OBSIDIAN  ; 14 (Town12)
+	db ROOF_OBSIDIAN  ; 15 (City13)
 	assert_table_length NUM_MAP_GROUPS + 1
 
 Roofs:

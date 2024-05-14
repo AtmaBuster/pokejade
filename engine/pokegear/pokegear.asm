@@ -1413,7 +1413,7 @@ RadioChannels:
 
 .RuinsOfAlphRadio:
 	ld a, [wPokegearMapPlayerIconLandmark]
-	cp LANDMARK_RUINS_OF_ALPH
+;	cp LANDMARK_RUINS_OF_ALPH
 	jr nz, .NoSignal
 	jmp LoadStation_UnownRadio
 

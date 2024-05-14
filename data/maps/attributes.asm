@@ -108,8 +108,114 @@ ENDM
 	connection north, ShaleCity, SHALE_CITY, 0
 	connection south, ObsidianTown, OBSIDIAN_TOWN, 0
 
-	map_attributes ShaleCity, SHALE_CITY, $05, SOUTH
+	map_attributes ShaleCity, SHALE_CITY, $05, SOUTH | EAST
 	connection south, RouteN01, ROUTE_N01, 0
+	connection east, RouteN02, ROUTE_N02, 0
+
+	map_attributes RouteN02, ROUTE_N02, $05, WEST | EAST
+	connection west, ShaleCity, SHALE_CITY, 0
+	connection east, City03, CITY_03, 0
+
+	map_attributes City03, CITY_03, $05, SOUTH | WEST | EAST
+	connection south, RouteN09, ROUTE_N09, 0
+	connection west, RouteN02, ROUTE_N02, 0
+	connection east, RouteN03, ROUTE_N03, 0
+
+	map_attributes RouteN03, ROUTE_N03, $05, WEST | EAST
+	connection west, City03, CITY_03, 0
+	connection east, City04, CITY_04, 0
+
+	map_attributes RouteN08, ROUTE_N08, $05, SOUTH | WEST
+	connection south, RouteN07, ROUTE_N07, 10
+	connection west, RouteN09, ROUTE_N09, -10
+
+	map_attributes RouteN09, ROUTE_N09, $05, NORTH | EAST
+	connection north, City03, CITY_03, 0
+	connection east, RouteN08, ROUTE_N08, 10
+
+	map_attributes City04, CITY_04, $05, WEST | EAST
+	connection west, RouteN03, ROUTE_N03, 0
+	connection east, RouteN04, ROUTE_N04, 0
+
+	map_attributes RouteN04, ROUTE_N04, $05, NORTH | WEST
+	connection north, City05West, CITY_05_WEST, 0
+	connection west, City04, CITY_04, 0
+
+	map_attributes Town07, TOWN_07, $05, WEST | EAST
+	connection west, RouteN07, ROUTE_N07, -10
+	connection east, RouteN06, ROUTE_N06, 0
+
+	map_attributes RouteN06, ROUTE_N06, $05, NORTH | WEST
+	connection north, Town06, TOWN_06, 40
+	connection west, Town07, TOWN_07, 0
+
+	map_attributes RouteN07, ROUTE_N07, $05, NORTH | EAST
+	connection north, RouteN08, ROUTE_N08, -10
+	connection east, Town07, TOWN_07, 10
+
+	map_attributes Town06, TOWN_06, $05, NORTH | SOUTH
+	connection north, RouteN05, ROUTE_N05, 0
+	connection south, RouteN06, ROUTE_N06, -40
+
+	map_attributes RouteN05, ROUTE_N05, $05, NORTH | SOUTH
+	connection north, City05East, CITY_05_EAST, -10
+	connection south, Town06, TOWN_06, 0
+
+	map_attributes City05West, CITY_05_WEST, $05, NORTH | SOUTH | EAST
+	connection north, RouteN11, ROUTE_N11, -20
+	connection south, RouteN04, ROUTE_N04, 0
+	connection east, City05East, CITY_05_EAST, 0
+
+	map_attributes City05East, CITY_05_EAST, $05, NORTH | SOUTH | WEST
+	connection north, RouteN10, ROUTE_N10, 10
+	connection south, RouteN05, ROUTE_N05, 10
+	connection west, City05West, CITY_05_WEST, 0
+
+	map_attributes Town08, TOWN_08, $05, SOUTH
+	connection south, RouteN10, ROUTE_N10, 0
+
+	map_attributes RouteN10, ROUTE_N10, $05, NORTH | SOUTH
+	connection north, Town08, TOWN_08, 0
+	connection south, City05East, CITY_05_EAST, -10
+
+	map_attributes Town09, TOWN_09, $05, WEST | EAST
+	connection west, RouteN12, ROUTE_N12, -30
+	connection east, RouteN11, ROUTE_N11, 0
+
+	map_attributes RouteN11, ROUTE_N11, $05, SOUTH | WEST
+	connection south, City05West, CITY_05_WEST, 20
+	connection west, Town09, TOWN_09, 0
+
+	map_attributes RouteN12, ROUTE_N12, $05, NORTH | WEST | EAST
+	connection north, City13, CITY_13, 0
+	connection west, RouteN13, ROUTE_N13, 10
+	connection east, Town09, TOWN_09, 30
+
+	map_attributes City10, CITY_10, $05, WEST | EAST
+	connection west, RouteN14, ROUTE_N14, 10
+	connection east, RouteN13, ROUTE_N13, 10
+
+	map_attributes RouteN13, ROUTE_N13, $05, WEST | EAST
+	connection west, City10, CITY_10, -10
+	connection east, RouteN12, ROUTE_N12, -10
+
+	map_attributes City11, CITY_11, $05, EAST
+	connection east, RouteN14, ROUTE_N14, 0
+
+	map_attributes RouteN14, ROUTE_N14, $05, SOUTH | WEST | EAST
+	connection south, RouteN15, ROUTE_N15, 10
+	connection west, City11, CITY_11, 0
+	connection east, City10, CITY_10, -10
+
+	map_attributes Town12, TOWN_12, $05, NORTH
+	connection north, RouteN15, ROUTE_N15, 0
+
+	map_attributes RouteN15, ROUTE_N15, $05, NORTH | SOUTH
+	connection north, RouteN14, ROUTE_N14, -10
+	connection south, Town12, TOWN_12, 0
+
+	map_attributes City13, CITY_13, $05, SOUTH
+	connection south, RouteN12, ROUTE_N12, 0
 
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0
 	map_attributes TradeCenter, TRADE_CENTER, $00, 0

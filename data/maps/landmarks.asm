@@ -12,33 +12,33 @@ Landmarks:
 	landmark  60, 108, ObsidianMeadowName
 	landmark  52,  96, RouteN01Name
 	landmark  56,  84, ShaleCityName
+	landmark  72,  84, RouteN02Name
+	landmark  84,  88, City03Name
+	landmark  96,  84, RouteN03Name
+	landmark 112,  88, City04Name
+	landmark 124,  88, RouteN04Name
+	landmark 128,  72, City05WestName
+	landmark 144,  72, City05EastName
+	landmark 148,  96, RouteN05Name
+	landmark 148, 116, Town06Name
+	landmark 132, 124, RouteN06Name
+	landmark 108, 124, Town07Name
+	landmark 100, 120, RouteN07Name
+	landmark  96, 108, RouteN08Name
+	landmark  84, 104, RouteN09Name
+	landmark 148,  48, RouteN10Name
+	landmark 148,  28, Town08Name
+	landmark 116,  60, RouteN11Name
+	landmark 100,  60, Town09Name
+	landmark  92,  52, RouteN12Name
+	landmark  76,  44, RouteN13Name
+	landmark  60,  40, City10Name
+	landmark  40,  44, RouteN14Name
+	landmark  16,  48, City11Name
+	landmark  36,  72, RouteN15Name
+	landmark  36,  92, Town12Name
+	landmark  92,  28, City13Name
 
-	landmark  96,  60, Route31Name
-	landmark  84,  60, VioletCityName
-	landmark  85,  58, SproutTowerName
-	landmark  84,  92, Route32Name
-	landmark  76,  76, RuinsOfAlphName
-	landmark  84, 124, UnionCaveName
-	landmark  82, 124, Route33Name
-	landmark  68, 124, AzaleaTownName
-	landmark  70, 122, SlowpokeWellName
-	landmark  52, 120, IlexForestName
-	landmark  52, 112, Route34Name
-	landmark  52,  92, GoldenrodCityName
-	landmark  50,  92, RadioTowerName
-	landmark  52,  76, Route35Name
-	landmark  52,  60, NationalParkName
-	landmark  64,  60, Route36Name
-	landmark  68,  52, Route37Name
-	landmark  68,  44, EcruteakCityName
-	landmark  70,  42, TinTowerName
-	landmark  66,  42, BurnedTowerName
-	landmark  52,  44, Route38Name
-	landmark  36,  48, Route39Name
-	landmark  36,  60, OlivineCityName
-	landmark  38,  62, LighthouseName
-	landmark  28,  56, BattleTowerName
-	landmark  28,  64, Route40Name
 	landmark  28,  92, WhirlIslandsName
 	landmark  28, 100, Route41Name
 	landmark  20, 100, CianwoodCityName
@@ -109,28 +109,41 @@ Landmarks:
 
 ObsidianTownName:    db "OBSIDIAN<BSP>TOWN@"
 ObsidianMeadowName:  db "OBSIDIAN<BSP>MEADOW@"
-RouteN01Name:        db "ROUTE N01@"
 ShaleCityName:       db "SHALE CITY@"
+City03Name:          db "CITY 03@"
+City04Name:          db "CITY 04@"
+City05WestName:      db "CITY 05<BSP>WEST@"
+City05EastName:      db "CITY 05<BSP>EAST@"
+Town06Name:          db "TOWN 06@"
+Town07Name:          db "TOWN 07@"
+Town08Name:          db "TOWN 08@"
+Town09Name:          db "TOWN 09@"
+City10Name:          db "CITY 10@"
+City11Name:          db "CITY 11@"
+Town12Name:          db "TOWN 12@"
+City13Name:          db "CITY 13@"
+RouteN01Name:        db "ROUTE N01@"
+RouteN02Name:        db "ROUTE N02@"
+RouteN03Name:        db "ROUTE N03@"
+RouteN04Name:        db "ROUTE N04@"
+RouteN05Name:        db "ROUTE N05@"
+RouteN06Name:        db "ROUTE N06@"
+RouteN07Name:        db "ROUTE N07@"
+RouteN08Name:        db "ROUTE N08@"
+RouteN09Name:        db "ROUTE N09@"
+RouteN10Name:        db "ROUTE N10@"
+RouteN11Name:        db "ROUTE N11@"
+RouteN12Name:        db "ROUTE N12@"
+RouteN13Name:        db "ROUTE N13@"
+RouteN14Name:        db "ROUTE N14@"
+RouteN15Name:        db "ROUTE N15@"
 
-VioletCityName:      db "VIOLET CITY@"
-AzaleaTownName:      db "AZALEA TOWN@"
-GoldenrodCityName:   db "GOLDENROD<BSP>CITY@"
-EcruteakCityName:    db "ECRUTEAK<BSP>CITY@"
-OlivineCityName:     db "OLIVINE<BSP>CITY@"
 CianwoodCityName:    db "CIANWOOD<BSP>CITY@"
 MahoganyTownName:    db "MAHOGANY<BSP>TOWN@"
 BlackthornCityName:  db "BLACKTHORN<BSP>CITY@"
 LakeOfRageName:      db "LAKE OF<BSP>RAGE@"
 SilverCaveName:      db "SILVER CAVE@"
-SproutTowerName:     db "SPROUT<BSP>TOWER@"
-RuinsOfAlphName:     db "RUINS<BSP>OF ALPH@"
-UnionCaveName:       db "UNION CAVE@"
-SlowpokeWellName:    db "SLOWPOKE<BSP>WELL@"
-RadioTowerName:      db "RADIO TOWER@"
 PowerPlantName:      db "POWER PLANT@"
-NationalParkName:    db "NATIONAL<BSP>PARK@"
-TinTowerName:        db "TIN TOWER@"
-LighthouseName:      db "LIGHTHOUSE@"
 WhirlIslandsName:    db "WHIRL<BSP>ISLANDS@"
 MtMortarName:        db "MT.MORTAR@"
 DragonsDenName:      db "DRAGON'S<BSP>DEN@"
@@ -179,16 +192,6 @@ Route25Name:         db "ROUTE 25@"
 Route26Name:         db "ROUTE 26@"
 Route27Name:         db "ROUTE 27@"
 Route28Name:         db "ROUTE 28@"
-Route31Name:         db "ROUTE 31@"
-Route32Name:         db "ROUTE 32@"
-Route33Name:         db "ROUTE 33@"
-Route34Name:         db "ROUTE 34@"
-Route35Name:         db "ROUTE 35@"
-Route36Name:         db "ROUTE 36@"
-Route37Name:         db "ROUTE 37@"
-Route38Name:         db "ROUTE 38@"
-Route39Name:         db "ROUTE 39@"
-Route40Name:         db "ROUTE 40@"
 Route41Name:         db "ROUTE 41@"
 Route42Name:         db "ROUTE 42@"
 Route43Name:         db "ROUTE 43@"
@@ -196,11 +199,8 @@ Route44Name:         db "ROUTE 44@"
 Route45Name:         db "ROUTE 45@"
 Route46Name:         db "ROUTE 46@"
 DarkCaveName:        db "DARK CAVE@"
-IlexForestName:      db "ILEX<BSP>FOREST@"
-BurnedTowerName:     db "BURNED<BSP>TOWER@"
 FastShipName:        db "FAST SHIP@"
 DiglettsCaveName:    db "DIGLETT'S<BSP>CAVE@"
 TohjoFallsName:      db "TOHJO FALLS@"
 UndergroundName:     db "UNDERGROUND@"
-BattleTowerName:     db "BATTLE<BSP>TOWER@"
 SpecialMapName:      db "SPECIAL@"

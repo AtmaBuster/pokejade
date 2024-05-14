@@ -61,10 +61,69 @@ ENDC
 
 	newgroup SHALE                                                ;  4
 	map_const SHALE_CITY,                                  20, 10 ;  1
-	map_const SHALE_POKECENTER_1F,                          5,  4 ;  2
-	map_const SHALE_MART,                                   6,  4 ;  3
-	map_const SHALE_HOUSE_1,                                4,  4 ;  4
-	map_const SHALE_HOUSE_2,                                4,  4 ;  5
+	map_const ROUTE_N02,                                   20, 10 ;  2
+	map_const SHALE_POKECENTER_1F,                          5,  4 ;  3
+	map_const SHALE_MART,                                   6,  4 ;  4
+	map_const SHALE_HOUSE_1,                                4,  4 ;  5
+	map_const SHALE_HOUSE_2,                                4,  4 ;  6
+	endgroup
+
+	newgroup CITY03                                               ;  5
+	map_const CITY_03,                                     10, 20 ;  1
+	map_const ROUTE_N03,                                   20, 10 ;  2
+	map_const ROUTE_N08,                                   20, 10 ;  3
+	map_const ROUTE_N09,                                   10, 20 ;  4
+	endgroup
+
+	newgroup CITY04                                               ;  6
+	map_const CITY_04,                                     20, 20 ;  1
+	map_const ROUTE_N04,                                   10, 20 ;  2
+	endgroup
+
+	newgroup TOWN07                                               ;  7
+	map_const TOWN_07,                                     10, 10 ;  1
+	map_const ROUTE_N06,                                   50, 10 ;  2
+	map_const ROUTE_N07,                                   10, 20 ;  3
+	endgroup
+
+	newgroup TOWN06                                               ;  8
+	map_const TOWN_06,                                     10, 10 ;  1
+	map_const ROUTE_N05,                                   10, 40 ;  2
+	endgroup
+
+	newgroup CITY05                                               ;  9
+	map_const CITY_05_WEST,                                20, 20 ;  1
+	map_const CITY_05_EAST,                                20, 20 ;  2
+	endgroup
+
+	newgroup TOWN08                                               ; 10
+	map_const TOWN_08,                                     10, 10 ;  1
+	map_const ROUTE_N10,                                   10, 40 ;  2
+	endgroup
+
+	newgroup TOWN09                                               ; 11
+	map_const TOWN_09,                                     10, 10 ;  1
+	map_const ROUTE_N11,                                   30, 10 ;  2
+	map_const ROUTE_N12,                                   10, 40 ;  3
+	endgroup
+
+	newgroup CITY10                                               ; 12
+	map_const CITY_10,                                     10, 20 ;  1
+	map_const ROUTE_N13,                                   30, 10 ;  2
+	endgroup
+
+	newgroup CITY11                                               ; 13
+	map_const CITY_11,                                     20, 20 ;  1
+	map_const ROUTE_N14,                                   40, 10 ;  2
+	endgroup
+
+	newgroup TOWN12                                               ; 14
+	map_const TOWN_12,                                     10, 10 ;  1
+	map_const ROUTE_N15,                                   10, 50 ;  2
+	endgroup
+
+	newgroup CITY13                                               ; 15
+	map_const CITY_13,                                     10, 10 ;  1
 	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value

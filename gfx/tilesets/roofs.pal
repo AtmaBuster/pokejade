@@ -22,3 +22,58 @@
 	RGB 14,17,31, 07,11,15 ; morn/day
 	RGB 09,13,19, 07,07,16 ; nite
 	RGB 12,13,23, 06,08,11 ; eve
+
+; group 5 (City03)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 6 (City04)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 7 (Town07)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 8 (Town06)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 9 (City05)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 10 (Town08)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 11 (Town09)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 12 (City10)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 13 (City11)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 14 (Town12)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve
+
+; group 15 (City13)
+	RGB 14,17,31, 07,11,15 ; morn/day
+	RGB 09,13,19, 07,07,16 ; nite
+	RGB 12,13,23, 06,08,11 ; eve

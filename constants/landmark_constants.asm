@@ -6,33 +6,33 @@
 	const LANDMARK_OBSIDIAN_MEADOW   ; 02
 	const LANDMARK_ROUTE_N01         ; 03
 	const LANDMARK_SHALE_CITY        ; 04
+	const LANDMARK_ROUTE_N02         ; 05
+	const LANDMARK_CITY_03           ; 06
+	const LANDMARK_ROUTE_N03         ; 07
+	const LANDMARK_CITY_04           ; 08
+	const LANDMARK_ROUTE_N04         ; 09
+	const LANDMARK_CITY_WEST_05      ; 0a
+	const LANDMARK_CITY_EAST_05      ; 0b
+	const LANDMARK_ROUTE_N05         ; 0c
+	const LANDMARK_TOWN_06           ; 0d
+	const LANDMARK_ROUTE_N06         ; 0e
+	const LANDMARK_TOWN_07           ; 0f
+	const LANDMARK_ROUTE_N07         ; 10
+	const LANDMARK_ROUTE_N08         ; 11
+	const LANDMARK_ROUTE_N09         ; 12
+	const LANDMARK_ROUTE_N10         ; 13
+	const LANDMARK_TOWN_08           ; 14
+	const LANDMARK_ROUTE_N11         ; 15
+	const LANDMARK_TOWN_09           ; 16
+	const LANDMARK_ROUTE_N12         ; 17
+	const LANDMARK_ROUTE_N13         ; 18
+	const LANDMARK_CITY_10           ; 19
+	const LANDMARK_ROUTE_N14         ; 1a
+	const LANDMARK_CITY_11           ; 1b
+	const LANDMARK_ROUTE_N15         ; 1c
+	const LANDMARK_TOWN_12           ; 1d
+	const LANDMARK_CITY_13           ; 1e
 DEF LANDMARK_UP_TO_DATE_NAZOH EQU const_value - 1
-	const LANDMARK_ROUTE_31          ; 05
-	const LANDMARK_VIOLET_CITY       ; 06
-	const LANDMARK_SPROUT_TOWER      ; 07
-	const LANDMARK_ROUTE_32          ; 08
-	const LANDMARK_RUINS_OF_ALPH     ; 09
-	const LANDMARK_UNION_CAVE        ; 0a
-	const LANDMARK_ROUTE_33          ; 0b
-	const LANDMARK_AZALEA_TOWN       ; 0c
-	const LANDMARK_SLOWPOKE_WELL     ; 0d
-	const LANDMARK_ILEX_FOREST       ; 0e
-	const LANDMARK_ROUTE_34          ; 0f
-	const LANDMARK_GOLDENROD_CITY    ; 10
-	const LANDMARK_RADIO_TOWER       ; 11
-	const LANDMARK_ROUTE_35          ; 12
-	const LANDMARK_NATIONAL_PARK     ; 13
-	const LANDMARK_ROUTE_36          ; 14
-	const LANDMARK_ROUTE_37          ; 15
-	const LANDMARK_ECRUTEAK_CITY     ; 16
-	const LANDMARK_TIN_TOWER         ; 17
-	const LANDMARK_BURNED_TOWER      ; 18
-	const LANDMARK_ROUTE_38          ; 19
-	const LANDMARK_ROUTE_39          ; 1a
-	const LANDMARK_OLIVINE_CITY      ; 1b
-	const LANDMARK_LIGHTHOUSE        ; 1c
-	const LANDMARK_BATTLE_TOWER      ; 1d
-	const LANDMARK_ROUTE_40          ; 1e
 	const LANDMARK_WHIRL_ISLANDS     ; 1f
 	const LANDMARK_ROUTE_41          ; 20
 	const LANDMARK_CIANWOOD_CITY     ; 21
