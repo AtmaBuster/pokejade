@@ -467,6 +467,7 @@ CheckRepelLikeAbilities:
 	ld a, PRESSURE
 	call CheckFirstFieldAbility
 	jr c, .levelplus2
+	scf
 	ret
 
 .keen_eye_intimidate

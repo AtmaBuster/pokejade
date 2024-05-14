@@ -662,6 +662,8 @@ CheckKeyItems:
 	ret
 
 ReceiveTMHM:
+	ld a, [wItemQuantityChange]
+	ld b, a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTMsHMs)
@@ -672,11 +674,11 @@ ReceiveTMHM:
 	ret
 
 .ReceiveTMHM:
+	ld a, b
 	dec c
 	ld b, 0
 	ld hl, wTMsHMs
 	add hl, bc
-	ld a, [wItemQuantityChange]
 	add [hl]
 	cp MAX_ITEM_STACK + 1
 	jr nc, .toomany
@@ -689,6 +691,8 @@ ReceiveTMHM:
 	ret
 
 TossTMHM:
+	ld a, [wItemQuantityChange]
+	ld b, a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTMsHMs)
@@ -699,11 +703,11 @@ TossTMHM:
 	ret
 
 .TossTMHM:
+	ld a, b
 	dec c
 	ld b, 0
 	ld hl, wTMsHMs
 	add hl, bc
-	ld a, [wItemQuantityChange]
 	ld b, a
 	ld a, [hl]
 	sub b
