@@ -11,7 +11,7 @@ LoadBallIcon:
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	ld hl, vTiles2 tile $42
+	ld hl, vTiles2 tile $79
 	ld c, 4
 	jmp Get2bppViaHDMA
 

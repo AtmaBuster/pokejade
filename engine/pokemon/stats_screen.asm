@@ -574,7 +574,7 @@ StatsScreen_InitUpperHalf:
 
 .PlaceBallIcon:
 	hlcoord 7, 5
-	ld a, $42
+	ld a, $79
 	ld [hli], a
 	inc a
 	ld [hl], a
