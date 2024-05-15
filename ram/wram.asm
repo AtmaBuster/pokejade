@@ -462,7 +462,8 @@ wEnemyEvaLevel::  db
 
 wEnemyTurnsTaken::  db
 wPlayerTurnsTaken:: db
-	ds 1
+
+wAlreadyExecuted:: db
 
 wPlayerSubstituteHP:: db
 wEnemySubstituteHP::  db
@@ -543,7 +544,7 @@ wWeatherCount::
 ; # turns remaining
 	db
 
-wLoweredStat:: db
+wChangedStat:: db
 wEffectFailed:: db
 wFailedMessage:: db
 wEnemyGoesFirst:: db

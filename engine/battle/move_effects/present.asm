@@ -1,7 +1,7 @@
-BattleCommand_Present:
+BattleCommand_present:
 	push bc
 	push de
-	call BattleCommand_Stab
+	call BattleCommand_stab
 	pop de
 	pop bc
 
@@ -40,7 +40,7 @@ BattleCommand_Present:
 	ld a, $3 ; heal animation
 	ld [wBattleAnimParam], a
 	call AnimateCurrentMove
-	call BattleCommand_SwitchTurn
+	call BattleCommand_switchturn
 	ld hl, AICheckPlayerMaxHP
 	ldh a, [hBattleTurn]
 	and a
@@ -53,18 +53,18 @@ BattleCommand_Present:
 
 	ld hl, GetQuarterMaxHP
 	call CallBattleCore
-	call BattleCommand_SwitchTurn
+	call BattleCommand_switchturn
 	ld hl, RestoreHP
 	call CallBattleCore
-	call BattleCommand_SwitchTurn
+	call BattleCommand_switchturn
 	ld hl, RegainedHealthText
 	call StdBattleTextbox
-	call BattleCommand_SwitchTurn
+	call BattleCommand_switchturn
 	call UpdateOpponentInParty
 	jr .do_animation
 
 .already_fully_healed
-	call BattleCommand_SwitchTurn
+	call BattleCommand_switchturn
 	call _CheckBattleScene
 	jr nc, .do_animation
 	call AnimateFailedMove

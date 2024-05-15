@@ -1,4 +1,4 @@
-BattleCommand_Libra:
+BattleCommand_libra:
 	call AnimateCurrentMove
 	ld hl, LibraText
 	call StdBattleTextbox

@@ -1,4 +1,4 @@
-BattleCommand_Conversion2:
+BattleCommand_conversion2:
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .failed
@@ -22,7 +22,7 @@ BattleCommand_Conversion2:
 	cp CURSE_TYPE
 	jr z, .failed
 	call AnimateCurrentMove
-	call BattleCommand_SwitchTurn
+	call BattleCommand_switchturn
 
 .loop
 	call BattleRandom
@@ -52,7 +52,7 @@ BattleCommand_Conversion2:
 	ld a, [wTypeMatchup]
 	cp EFFECTIVE
 	jr nc, .loop
-	call BattleCommand_SwitchTurn
+	call BattleCommand_switchturn
 
 	ld a, [hl]
 	ld [wNamedObjectIndex], a

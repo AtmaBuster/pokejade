@@ -1,4 +1,4 @@
-BattleCommand_Counter:
+BattleCommand_counter:
 	ld a, 1
 	ld [wAttackMissed], a
 	ld a, BATTLE_VARS_LAST_COUNTER_MOVE_OPP
@@ -12,7 +12,7 @@ BattleCommand_Counter:
 	cp EFFECT_COUNTER
 	ret z
 
-	call BattleCommand_ResetTypeMatchup
+	call BattleCommand_resettypematchup
 	ld a, [wTypeMatchup]
 	and a
 	ret z

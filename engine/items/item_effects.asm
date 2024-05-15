@@ -2297,8 +2297,8 @@ XItemEffect:
 	farcall RaiseStat
 	call WaitSFX
 
-	farcall BattleCommand_StatUpMessage
-	farcall BattleCommand_StatUpFailText
+	farcall BattleCommand_statupmessage
+	farcall BattleCommand_statupfailtext
 
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a

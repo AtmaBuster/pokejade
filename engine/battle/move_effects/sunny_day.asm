@@ -1,4 +1,4 @@
-BattleCommand_StartSun:
+BattleCommand_startsun:
 	ld a, WEATHER_SUN
 	ld [wBattleWeather], a
 	ld a, 5

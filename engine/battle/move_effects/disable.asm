@@ -1,4 +1,4 @@
-BattleCommand_Disable:
+BattleCommand_disable:
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .failed

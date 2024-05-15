@@ -1,4 +1,4 @@
-BattleCommand_FrustrationPower:
+BattleCommand_frustrationpower:
 	push bc
 	ld hl, wBattleMonHappiness
 	ldh a, [hBattleTurn]

@@ -1,4 +1,4 @@
-BattleCommand_GetMagnitude:
+BattleCommand_getmagnitude:
 	push bc
 	call BattleRandom
 	ld b, a
@@ -17,7 +17,7 @@ BattleCommand_GetMagnitude:
 	inc hl
 	ld a, [hl]
 	ld [wTextDecimalByte], a
-	call BattleCommand_MoveDelay
+	call BattleCommand_movedelay
 	ld hl, MagnitudeText
 	call StdBattleTextbox
 	pop de

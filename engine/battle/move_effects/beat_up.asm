@@ -1,4 +1,4 @@
-BattleCommand_BeatUp:
+BattleCommand_beatup:
 	call ResetDamage
 	ldh a, [hBattleTurn]
 	and a
@@ -193,7 +193,7 @@ BattleCommand_BeatUp:
 	ld b, buildopponentrage_command
 	jmp SkipToBattleCommand
 
-BattleCommand_BeatUpFailText:
+BattleCommand_beatupfailtext:
 	ld a, [wBeatUpHitAtLeastOnce]
 	and a
 	ret nz

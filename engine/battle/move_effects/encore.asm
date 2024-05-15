@@ -1,4 +1,4 @@
-BattleCommand_Encore:
+BattleCommand_encore:
 	ld hl, wEnemyMonMoves
 	ld de, wEnemyEncoreCount
 	ldh a, [hBattleTurn]

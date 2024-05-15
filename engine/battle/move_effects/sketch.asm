@@ -1,4 +1,4 @@
-BattleCommand_Sketch:
+BattleCommand_sketch:
 IF 0
 	call ClearLastMove
 ; Don't sketch during a link battle

@@ -1,4 +1,4 @@
-BattleCommand_Attract:
+BattleCommand_attract:
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .failed

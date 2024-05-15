@@ -1,13 +1,15 @@
-BattleCommand_BellyDrum:
+BattleCommand_bellydrum:
 	farcall GetHalfMaxHP
 	farcall CheckUserHasEnoughHP
 	jr nc, .failed
 
 	push bc
-	call BattleCommand_AttackUp2
-	pop bc
-	ld a, [wAttackMissed]
+	ld b, $f0 | ATTACK
+	ld a, STAT_SKIPTEXT
+	call _ForceRaiseStat
+	ld a, [wFailedMessage]
 	and a
+	pop bc
 	jr nz, .failed
 
 	push bc
@@ -15,15 +17,7 @@ BattleCommand_BellyDrum:
 	pop bc
 	farcall SubtractHPFromUser
 	call UpdateUserInParty
-	ld a, MAX_STAT_LEVEL - BASE_STAT_LEVEL - 1
-
-.max_attack_loop
-	push af
-	call BattleCommand_AttackUp2
-	pop af
-	dec a
-	jr nz, .max_attack_loop
-
+; TO-DO : contrary
 	ld hl, BellyDrumText
 	jmp StdBattleTextbox
 

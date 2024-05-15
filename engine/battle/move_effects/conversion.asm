@@ -1,4 +1,4 @@
-BattleCommand_Conversion:
+BattleCommand_conversion:
 	ld hl, wBattleMonMoves
 	ld de, wBattleMonType1
 	ldh a, [hBattleTurn]

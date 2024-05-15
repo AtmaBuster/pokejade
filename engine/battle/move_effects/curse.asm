@@ -1,4 +1,4 @@
-BattleCommand_Curse:
+BattleCommand_curse:
 	ld de, wBattleMonType1
 	ld bc, wPlayerStatLevels
 	ldh a, [hBattleTurn]
@@ -19,37 +19,15 @@ BattleCommand_Curse:
 	cp GHOST
 	jr z, .ghost
 
-; If no stats can be increased, don't.
-
-; Attack
-	ld a, [bc]
-	cp MAX_STAT_LEVEL
-	jr c, .raise
-
-; Defense
-	inc bc
-	ld a, [bc]
-	cp MAX_STAT_LEVEL
-	jr nc, .cantraise
-
-.raise
-
 ; Raise Attack and Defense, and lower Speed.
-
-	ld a, $1
+	ld a, 1
 	ld [wBattleAnimParam], a
-	call AnimateCurrentMove
-	ld a, SPEED
-	call LowerStat
-	call BattleCommand_SwitchTurn
-	call BattleCommand_StatDownMessage
-	call ResetMiss
-	call BattleCommand_SwitchTurn
-	call BattleCommand_AttackUp
-	call BattleCommand_StatUpMessage
-	call ResetMiss
-	call BattleCommand_DefenseUp
-	jmp BattleCommand_StatUpMessage
+	ld b, SPEED
+	call ForceLowerStat
+	ld b, ATTACK
+	call ForceRaiseStat
+	ld b, DEFENSE
+	jmp ForceRaiseStat
 
 .ghost
 
@@ -79,13 +57,3 @@ BattleCommand_Curse:
 .failed
 	call AnimateFailedMove
 	jmp PrintButItFailed
-
-.cantraise
-
-; Can't raise either stat.
-
-	ld b, ABILITY + 1
-	call GetStatName
-	call AnimateFailedMove
-	ld hl, WontRiseAnymoreText
-	jmp StdBattleTextbox

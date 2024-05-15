@@ -1,4 +1,4 @@
-BattleCommand_Foresight:
+BattleCommand_foresight:
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .failed

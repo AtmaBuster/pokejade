@@ -1,4 +1,4 @@
-BattleCommand_CheckFutureSight:
+BattleCommand_checkfuturesight:
 	ld hl, wPlayerFutureSightCount
 	ld de, wPlayerFutureSightDamage
 	ldh a, [hBattleTurn]
@@ -23,7 +23,7 @@ BattleCommand_CheckFutureSight:
 	ld b, futuresight_command
 	jmp SkipToBattleCommand
 
-BattleCommand_FutureSight:
+BattleCommand_futuresight:
 	call CheckUserIsCharging
 	jr nz, .AlreadyChargingFutureSight
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -46,11 +46,11 @@ BattleCommand_FutureSight:
 	and a
 	jr nz, .failed
 	ld [hl], 4
-	call BattleCommand_LowerSub
-	call BattleCommand_MoveDelay
+	call BattleCommand_lowersub
+	call BattleCommand_movedelay
 	ld hl, ForesawAttackText
 	call StdBattleTextbox
-	call BattleCommand_RaiseSub
+	call BattleCommand_raisesub
 	ld de, wPlayerFutureSightDamage
 	ldh a, [hBattleTurn]
 	and a

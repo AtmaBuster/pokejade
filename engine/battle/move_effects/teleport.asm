@@ -1,4 +1,4 @@
-BattleCommand_Teleport:
+BattleCommand_teleport:
 	ld a, [wBattleType]
 	cp BATTLETYPE_FORCESHINY
 	jr z, .failed
@@ -84,7 +84,7 @@ BattleCommand_Teleport:
 	ld [wForcedSwitch], a
 	ld [wBattleAnimParam], a
 	call SetBattleDraw
-	call BattleCommand_LowerSub
+	call BattleCommand_lowersub
 	call LoadMoveAnim
 	ld c, 20
 	call DelayFrames

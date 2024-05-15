@@ -1,4 +1,4 @@
-BattleCommand_Snore:
+BattleCommand_snore:
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVar
 	and SLP_MASK

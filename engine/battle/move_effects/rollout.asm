@@ -1,6 +1,6 @@
 DEF MAX_ROLLOUT_COUNT EQU 5
 
-BattleCommand_CheckCurl:
+BattleCommand_checkcurl:
 	ld de, wPlayerRolloutCount
 	ldh a, [hBattleTurn]
 	and a
@@ -20,7 +20,7 @@ BattleCommand_CheckCurl:
 	ld [de], a
 	ret
 
-BattleCommand_RolloutPower:
+BattleCommand_rolloutpower:
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVar
 	and SLP_MASK

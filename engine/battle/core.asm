@@ -389,14 +389,14 @@ HandleBerserkGene:
 	ld [hl], a
 	ld [wAttackMissed], a
 	ld [wEffectFailed], a
-	farcall BattleCommand_AttackUp2
+;	farcall BattleCommand_attackup2 ; TO-DO
 	pop af
 	pop hl
 	ld [hl], a
 	call GetItemName
 	ld hl, BattleText_UsersStringBuffer1Activated
 	call StdBattleTextbox
-	farcall BattleCommand_StatUpMessage
+	farcall BattleCommand_statupmessage
 	pop af
 	bit SUBSTATUS_CONFUSED, a
 	ret nz
@@ -404,7 +404,7 @@ HandleBerserkGene:
 	ld [wNumHits], a
 	ld de, ANIM_CONFUSED
 	call Call_PlayBattleAnim_OnlyIfVisible
-	call SwitchTurnCore
+	call SwitchTurn
 	ld hl, BecameConfusedText
 	jmp StdBattleTextbox
 
@@ -986,6 +986,10 @@ HasEnemyFainted:
 	ld hl, wEnemyMonHP
 	jr CheckIfHPIsZero
 
+HasOpponentFainted:
+	ldh a, [hBattleTurn]
+	and a
+	jr z, HasEnemyFainted
 HasPlayerFainted:
 	ld hl, wBattleMonHP
 
@@ -1058,7 +1062,7 @@ ResidualDamage:
 	bit SUBSTATUS_LEECH_SEED, [hl]
 	jr z, .not_seeded
 
-	call SwitchTurnCore
+	call SwitchTurn
 	xor a
 	ld [wNumHits], a
 	ld de, ANIM_SAP
@@ -1066,7 +1070,7 @@ ResidualDamage:
 	call GetBattleVar
 	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
 	call z, Call_PlayBattleAnim_OnlyIfVisible
-	call SwitchTurnCore
+	call SwitchTurn
 
 	call GetEighthMaxHP
 	call SubtractHPFromUser
@@ -1249,11 +1253,11 @@ HandleWrap:
 	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
 	jr nz, .skip_anim
 
-	call SwitchTurnCore
+	call SwitchTurn
 	xor a
 	ld [wNumHits], a
 	predef PlayBattleAnim
-	call SwitchTurnCore
+	call SwitchTurn
 
 .skip_anim
 	call GetSixteenthMaxHP
@@ -1266,12 +1270,6 @@ HandleWrap:
 
 .print_text
 	jmp StdBattleTextbox
-
-SwitchTurnCore:
-	ldh a, [hBattleTurn]
-	xor 1
-	ldh [hBattleTurn], a
-	ret
 
 HandleLeftovers:
 	ldh a, [hSerialConnectionStatus]
@@ -1319,7 +1317,7 @@ HandleLeftovers:
 
 .restore
 	call GetSixteenthMaxHP
-	call SwitchTurnCore
+	call SwitchTurn
 	call RestoreHP
 	ld hl, BattleText_TargetRecoveredWithItem
 	jmp StdBattleTextbox
@@ -1465,9 +1463,9 @@ HandleMysteryberry:
 
 .skip_consumption
 	call GetItemName
-	call SwitchTurnCore
+	call SwitchTurn
 	call ItemRecoveryAnim
-	call SwitchTurnCore
+	call SwitchTurn
 	ld hl, BattleText_UserRecoveredPPUsing
 	jmp StdBattleTextbox
 
@@ -1752,12 +1750,12 @@ HandleWeather:
 	cp STEEL
 	ret z
 
-	call SwitchTurnCore
+	call SwitchTurn
 	xor a
 	ld [wNumHits], a
 	ld de, ANIM_IN_SANDSTORM
 	call Call_PlayBattleAnim
-	call SwitchTurnCore
+	call SwitchTurn
 	call GetEighthMaxHP
 	call SubtractHPFromUser
 
@@ -1965,9 +1963,9 @@ RestoreHP:
 	ld [wHPBuffer3], a
 .overflow
 
-	call SwitchTurnCore
+	call SwitchTurn
 	call UpdateHPBarBattleHuds
-	jmp SwitchTurnCore
+	jmp SwitchTurn
 
 UpdateHPBarBattleHuds:
 	call UpdateHPBar
@@ -4262,7 +4260,7 @@ ItemRecoveryAnim:
 	push de
 	push bc
 	call EmptyBattleTextbox
-	call SwitchTurnCore
+	call SwitchTurn
 	xor a
 	ld [wNumHits], a
 	if HIGH(RECOVER)
@@ -4272,7 +4270,7 @@ ItemRecoveryAnim:
 	ld a, LOW(RECOVER)
 	ld [wFXAnimID], a
 	predef PlayBattleAnim
-	call SwitchTurnCore
+	call SwitchTurn
 	jmp PopBCDEHL
 
 UseHeldStatusHealingItem:
@@ -4319,10 +4317,10 @@ UseHeldStatusHealingItem:
 	ld hl, CalcPlayerStats
 
 .got_pointer
-	call SwitchTurnCore
+	call SwitchTurn
 	ld a, BANK(CalcPlayerStats) ; aka BANK(CalcEnemyStats)
 	call FarCall_hl
-	call SwitchTurnCore
+	call SwitchTurn
 	call ItemRecoveryAnim
 	call UseOpponentItem
 	ld a, $1
@@ -4418,7 +4416,7 @@ HandleStatBoostingHeldItems:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, BANK(BattleCommand_AttackUp)
+;	ld a, BANK(BattleCommand_attackup)
 	call FarCall_hl
 	pop bc
 	pop de
@@ -4431,7 +4429,7 @@ HandleStatBoostingHeldItems:
 	call GetItemName
 	ld hl, BattleText_UsersStringBuffer1Activated
 	call StdBattleTextbox
-	farjp BattleCommand_StatUpMessage
+	farjp BattleCommand_statupmessage
 
 .finish
 	pop bc
@@ -6598,6 +6596,9 @@ ApplyBrnEffectOnAttack:
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .enemy
+	ld a, [wBattleMonAbility]
+	cp GUTS
+	ret z
 	ld a, [wBattleMonStatus]
 	and 1 << BRN
 	ret z
@@ -6617,6 +6618,9 @@ ApplyBrnEffectOnAttack:
 	ret
 
 .enemy
+	ld a, [wEnemyMonAbility]
+	cp GUTS
+	ret z
 	ld a, [wEnemyMonStatus]
 	and 1 << BRN
 	ret z

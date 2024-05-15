@@ -1095,3 +1095,49 @@ LibraTypeDualText:
 	text_ram wStringBuffer2
 	text "!"
 	prompt
+
+StatRoseText:
+	text "<USER>'s"
+	line "@"
+	text_ram wStringBuffer2
+	text " rose!"
+	prompt
+
+StatRoseSharplyText:
+	text "<USER>'s"
+	line "@"
+	text_ram wStringBuffer2
+	text " rose"
+	cont "sharply!"
+	prompt
+
+StatRoseDrasticallyText:
+	text "<USER>'s"
+	line "@"
+	text_ram wStringBuffer2
+	text " rose"
+	cont "drastically!"
+	prompt
+
+StatFellText:
+	text "<USER>'s"
+	line "@"
+	text_ram wStringBuffer2
+	text " fell!"
+	prompt
+
+StatFellHarshlyText:
+	text "<USER>'s"
+	line "@"
+	text_ram wStringBuffer2
+	text " fell"
+	cont "harshly!"
+	prompt
+
+StatFellSeverelyText:
+	text "<USER>'s"
+	line "@"
+	text_ram wStringBuffer2
+	text " fell"
+	cont "severely!"
+	prompt

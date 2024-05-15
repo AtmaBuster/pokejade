@@ -75,6 +75,7 @@ ROMX $0e
 	"Enemy Trainers"
 ROMX $0f
 	"Battle Core"
+	"Effect Command Pointers"
 ROMX $10
 	"bank10"
 ROMX $11

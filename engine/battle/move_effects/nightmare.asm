@@ -1,4 +1,4 @@
-BattleCommand_Nightmare:
+BattleCommand_nightmare:
 ; Can't hit an absent opponent.
 
 	call CheckHiddenOpponent

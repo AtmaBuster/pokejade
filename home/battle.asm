@@ -267,3 +267,11 @@ PushLYOverrides::
 	ld a, (wLYOverridesEnd - wLYOverrides) / LEN_2BPP_TILE
 	ld [wRequested2bppSize], a
 	ret
+
+SwitchTurn:
+	push af
+	ldh a, [hBattleTurn]
+	xor 1
+	ldh [hBattleTurn], a
+	pop af
+	ret

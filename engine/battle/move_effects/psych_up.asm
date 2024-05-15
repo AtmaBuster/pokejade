@@ -1,4 +1,4 @@
-BattleCommand_PsychUp:
+BattleCommand_psychup:
 	ld hl, wEnemyStatLevels
 	ld de, wPlayerStatLevels
 	ldh a, [hBattleTurn]

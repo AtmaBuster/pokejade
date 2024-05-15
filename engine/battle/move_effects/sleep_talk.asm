@@ -1,4 +1,4 @@
-BattleCommand_SleepTalk:
+BattleCommand_sleeptalk:
 	call ClearLastMove
 	ld a, [wAttackMissed]
 	and a
@@ -52,7 +52,7 @@ BattleCommand_SleepTalk:
 	jr nz, .charging
 	ld a, [wBattleAnimParam]
 	push af
-	call BattleCommand_LowerSub
+	call BattleCommand_lowersub
 	pop af
 	ld [wBattleAnimParam], a
 .charging

@@ -1,11 +1,11 @@
-BattleCommand_Metronome:
+BattleCommand_metronome:
 	call ClearLastMove
 	call CheckUserIsCharging
 	jr nz, .charging
 
 	ld a, [wBattleAnimParam]
 	push af
-	call BattleCommand_LowerSub
+	call BattleCommand_lowersub
 	pop af
 	ld [wBattleAnimParam], a
 

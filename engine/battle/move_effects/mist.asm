@@ -1,4 +1,4 @@
-BattleCommand_Mist:
+BattleCommand_mist:
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_MIST, [hl]

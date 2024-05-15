@@ -1,4 +1,4 @@
-BattleCommand_Spite:
+BattleCommand_spite:
 	ld a, [wAttackMissed]
 	and a
 	jmp nz, .failed

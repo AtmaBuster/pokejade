@@ -1,4 +1,4 @@
-BattleCommand_BatonPass:
+BattleCommand_batonpass:
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .Enemy

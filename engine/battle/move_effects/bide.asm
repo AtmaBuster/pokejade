@@ -1,4 +1,4 @@
-BattleCommand_StoreEnergy:
+BattleCommand_storeenergy:
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
 	bit SUBSTATUS_BIDE, a
@@ -69,7 +69,7 @@ BattleCommand_StoreEnergy:
 	call StdBattleTextbox
 	jmp EndMoveEffect
 
-BattleCommand_UnleashEnergy:
+BattleCommand_unleashenergy:
 	ld de, wPlayerDamageTaken
 	ld bc, wPlayerRolloutCount
 	ldh a, [hBattleTurn]

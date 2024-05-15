@@ -1,4 +1,4 @@
-BattleCommand_Spikes:
+BattleCommand_spikes:
 	ld hl, wEnemyScreens
 	ldh a, [hBattleTurn]
 	and a

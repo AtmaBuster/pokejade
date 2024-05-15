@@ -1,4 +1,4 @@
-BattleCommand_MirrorMove:
+BattleCommand_mirrormove:
 	call ClearLastMove
 
 	ld a, BATTLE_VARS_MOVE
@@ -39,10 +39,10 @@ BattleCommand_MirrorMove:
 
 	ld a, [wBattleAnimParam]
 	push af
-	call BattleCommand_LowerSub
+	call BattleCommand_lowersub
 	pop af
 	ld [wBattleAnimParam], a
 
 .done
-	call BattleCommand_MoveDelay
+	call BattleCommand_movedelay
 	jmp ResetTurn

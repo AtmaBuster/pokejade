@@ -1,4 +1,4 @@
-BattleCommand_Thief:
+BattleCommand_thief:
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .enemy
