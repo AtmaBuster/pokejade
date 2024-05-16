@@ -16,7 +16,12 @@ DayCareWomanScript:
 	iffalse .Done
 	closetext
 	applymovement ROUTEN02DAYCARE_GRANNY, .Move_GetMon
+	disappear ROUTEN02DAYCARE_GRANNY
+	playsound SFX_ENTER_DOOR
+	waitsfx
 	pause 15
+	moveobject ROUTEN02DAYCARE_GRANNY, 6, 0
+	appear ROUTEN02DAYCARE_GRANNY
 	applymovement ROUTEN02DAYCARE_GRANNY, .Move_Return
 	opentext
 	sjump .Loop
@@ -27,9 +32,15 @@ DayCareWomanScript:
 	end
 
 .Egg:
+	writetext .Text_Egg
 	waitbutton
 	closetext
 	end
+
+.Text_Egg:
+	text "My husband was"
+	line "looking for you."
+	done
 
 .Move_GetMon:
 	step UP
@@ -54,4 +65,4 @@ RouteN02DayCare_MapEvents:
 	def_bg_events
 
 	def_object_events
-	object_event  6,  2, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, DayCareWomanScript, -1
+	object_event  6,  2, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, DayCareWomanScript, EVENT_ROUTEN02_DAYCARE_GRANNY

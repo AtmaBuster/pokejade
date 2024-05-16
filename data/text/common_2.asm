@@ -709,54 +709,27 @@ _BreedAskNicknameText::
 	text "?"
 	done
 
-_LeftWithDayCareLadyText::
-	text "It's @"
-	text_ram wBreedMon2Nickname
-	text_start
-	line "that was left with"
-	cont "the DAY-CARE LADY."
-	done
-
-_LeftWithDayCareManText::
-	text "It's @"
-	text_ram wBreedMon1Nickname
-	text_start
-	line "that was left with"
-	cont "the DAY-CARE MAN."
-	done
-
-_BreedBrimmingWithEnergyText::
-	text "It's brimming with"
-	line "energy."
-	prompt
-
 _BreedNoInterestText::
-	text "It has no interest"
-	line "in @"
-	text_ram wStringBuffer1
-	text "."
-	prompt
+	text "The two prefer to"
+	line "play with other"
+	cont "#MON."
+	done
 
 _BreedAppearsToCareForText::
-	text "It appears to care"
-	line "for @"
-	text_ram wStringBuffer1
-	text "."
-	prompt
+	text "The two seem to"
+	line "get along well."
+	done
 
 _BreedFriendlyText::
-	text "It's friendly with"
-	line "@"
-	text_ram wStringBuffer1
-	text "."
-	prompt
+	text "The two seem to"
+	line "get along."
+	done
 
 _BreedShowsInterestText::
-	text "It shows interest"
-	line "in @"
-	text_ram wStringBuffer1
-	text "."
-	prompt
+	text "The two don't seem"
+	line "to like each other"
+	cont "very much."
+	done
 
 _EmptyMailboxText::
 	text "There's no MAIL"

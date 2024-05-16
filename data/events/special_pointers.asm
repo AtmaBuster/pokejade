@@ -44,6 +44,7 @@ SpecialsPointers::
 	add_special PlayersHousePC
 	add_special DayCareWoman
 	add_special DayCareManOutside
+	add_special DayCareManCompatibilty
 	add_special MoveDeletion
 	add_special BankOfMom
 	add_special MagnetTrain
@@ -80,8 +81,6 @@ SpecialsPointers::
 	add_special FindPartyMonThatSpecies
 	add_special FindPartyMonThatSpeciesYourTrainerID
 	add_special UnusedCheckUnusedTwoDayTimer ; unused
-	add_special DayCareMon1
-	add_special DayCareMon2
 	add_special SelectRandomBugContestContestants
 	add_special ActivateFishingSwarm
 	add_special ToggleMaptileDecorations

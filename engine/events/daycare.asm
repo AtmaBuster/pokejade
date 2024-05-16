@@ -351,14 +351,6 @@ SeeMonMenuHeader:
 .cancel_string
 	db "CANCEL@"
 
-DayCareLadyIntroText:
-	call PrintDayCareText
-	jmp YesNoBox
-
-DayCareManIntroText:
-	call PrintDayCareText
-	jmp YesNoBox
-
 DayCareDepositPokemon:
 	ld a, [wPartyCount]
 	cp 2

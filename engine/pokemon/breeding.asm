@@ -843,41 +843,30 @@ Hatch_ShellFragmentLoop:
 	jr nz, .loop
 	ret
 
-DayCareMon1:
-	ld hl, LeftWithDayCareManText
-	call PrintText
-	ld a, [wBreedMon1Species]
-	call PlayMonCry
+DayCareManCompatibilty:
 	ld a, [wDayCare]
-	bit DAYCARE_HAS_MON2_F, a
-	jr z, DayCareMonCursor
+	and %11 ; either daycare mon
+	jr z, .NoMons
+	ld hl, .DoingGreatText
+	call PrintText
+	ld a, [wDayCare]
+	and %11
+	cp %11
+	ret nz
 	call PromptButton
-	ld hl, wBreedMon2Nickname
 	call DayCareMonCompatibilityText
+	jp PrintText
+
+.NoMons:
+	ld hl, .RaiseMonText
 	jmp PrintText
 
-DayCareMon2:
-	ld hl, LeftWithDayCareLadyText
-	call PrintText
-	ld a, [wBreedMon2Species]
-	call PlayMonCry
-	ld a, [wDayCare]
-	bit DAYCARE_HAS_MON1_F, a
-	jr z, DayCareMonCursor
-	call PromptButton
-	ld hl, wBreedMon1Nickname
-	call DayCareMonCompatibilityText
-	jmp PrintText
-
-DayCareMonCursor:
-	jmp WaitPressAorB_BlinkCursor
-
-LeftWithDayCareLadyText:
-	text_far _LeftWithDayCareLadyText
+.DoingGreatText:
+	text_far _DayCareOutsideDoingGreatText
 	text_end
 
-LeftWithDayCareManText:
-	text_far _LeftWithDayCareManText
+.RaiseMonText:
+	text_far _DayCareOutsideRaiseMonText
 	text_end
 
 DayCareMonCompatibilityText:
@@ -888,24 +877,21 @@ DayCareMonCompatibilityText:
 	call CheckBreedmonCompatibility
 	pop bc
 	ld a, [wBreedingCompatibility]
-	ld hl, .BreedBrimmingWithEnergyText
-	cp -1
-	ret z
+
 	ld hl, .BreedNoInterestText
 	and a
 	ret z
+
 	ld hl, .BreedAppearsToCareForText
 	cp 230
 	ret nc
+
 	cp 70
 	ld hl, .BreedFriendlyText
 	ret nc
+
 	ld hl, .BreedShowsInterestText
 	ret
-
-.BreedBrimmingWithEnergyText:
-	text_far _BreedBrimmingWithEnergyText
-	text_end
 
 .BreedNoInterestText:
 	text_far _BreedNoInterestText

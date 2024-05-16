@@ -20,6 +20,24 @@ RouteN02_MapScripts:
 	scene_script EmptyScript, SCENE_ROUTEN02_NONE
 
 	def_callbacks
+	callback MAPCALLBACK_OBJECTS, RouteN02CB_EggCheck
+
+RouteN02CB_EggCheck:
+	checkflag ENGINE_DAY_CARE_HAS_EGG
+	iffalse .Mons
+	moveobject ROUTEN02_DAYCARE_MAN, 27, 7
+.Mons:
+	clearevent EVENT_DAY_CARE_MON_1
+	clearevent EVENT_DAY_CARE_MON_2
+	checkflag ENGINE_DAY_CARE_HAS_MON1
+	iftrue .SkipMon1
+	setevent EVENT_DAY_CARE_MON_1
+.SkipMon1:
+	checkflag ENGINE_DAY_CARE_HAS_MON2
+	iftrue .SkipMon2
+	setevent EVENT_DAY_CARE_MON_2
+.SkipMon2:
+	endcallback
 
 RouteN02CO_ExplainDaycare:
 	turnobject ROUTEN02_DAYCARE_MAN, LEFT
@@ -117,13 +135,21 @@ RouteN02OB_DayCareMan:
 	checkscene
 	ifequal SCENE_ROUTEN02_BEFORE_DAYCARE, .Explain
 	opentext
-	writetext .Text
+	checkflag ENGINE_DAY_CARE_HAS_EGG
+	iftrue .GiveEgg
+	special DayCareManCompatibilty
 	waitbutton
 	closetext
 	end
-.Text:
-	text "Hi"
-	done
+
+.GiveEgg:
+	special DayCareManOutside
+	waitbutton
+	closetext
+	ifequal TRUE, .Done
+	clearflag ENGINE_DAY_CARE_HAS_EGG
+.Done:
+	end
 
 .Explain:
 	scall RouteN02_ExplainDayCare
