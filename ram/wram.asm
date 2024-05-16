@@ -2806,8 +2806,8 @@ wParksLabSceneID::                                db
 wObsidianMeadowSceneID::                          db
 wPlayersHouse1FSceneID::                          db
 wShaleCitySceneID::                               db
+wRouteN02SceneID::                                db
 
-wRoute25SceneID::                                 db
 wTrainerHouseB1FSceneID::                         db
 wVictoryRoadGateSceneID::                         db
 wSaffronMagnetTrainStationSceneID::               db

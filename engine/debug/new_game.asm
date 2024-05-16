@@ -38,6 +38,16 @@ Debug_NewGame:
 	ld hl, wUnlockedDexFlags
 	set NAZOH_DEX_UNLOCK_F, [hl]
 
+	ld hl, wStringBuffer2
+	xor a
+	ld [hli], a
+	ld a, 10
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hl], a
+	call InitTime
+
 	ret
 
 .defaultname

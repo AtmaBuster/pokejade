@@ -34,10 +34,10 @@ City10_Blocks:          INCBIN "maps/City10.ablk"
 RouteN13_Blocks:        INCBIN "maps/RouteN13.ablk"
 City11_Blocks:          INCBIN "maps/City11.ablk"
 RouteN14_Blocks:        INCBIN "maps/RouteN14.ablk"
-
 Town12_Blocks:          INCBIN "maps/Town12.ablk"
 RouteN15_Blocks:        INCBIN "maps/RouteN14.ablk"
 City13_Blocks:          INCBIN "maps/City13.ablk"
+RouteN02DayCare_Blocks: INCBIN "maps/RouteN02DayCare.ablk"
 
 
 SECTION "Map Blocks 2", ROMX

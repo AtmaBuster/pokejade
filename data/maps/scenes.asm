@@ -14,4 +14,5 @@ MapScenes::
 	scene_var OBSIDIAN_MEADOW,  wObsidianMeadowSceneID
 	scene_var PLAYERS_HOUSE_1F, wPlayersHouse1FSceneID
 	scene_var SHALE_CITY,       wShaleCitySceneID
+	scene_var ROUTE_N02,        wRouteN02SceneID
 	db -1 ; end

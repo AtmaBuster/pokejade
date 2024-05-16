@@ -40,10 +40,10 @@ INCLUDE "maps/City10.asm"
 INCLUDE "maps/RouteN13.asm"
 INCLUDE "maps/City11.asm"
 INCLUDE "maps/RouteN14.asm"
-
 INCLUDE "maps/Town12.asm"
 INCLUDE "maps/RouteN15.asm"
 INCLUDE "maps/City13.asm"
+INCLUDE "maps/RouteN02DayCare.asm"
 
 
 SECTION "Map Scripts 2", ROMX

@@ -66,6 +66,7 @@ ENDC
 	map_const SHALE_MART,                                   6,  4 ;  4
 	map_const SHALE_HOUSE_1,                                4,  4 ;  5
 	map_const SHALE_HOUSE_2,                                4,  4 ;  6
+	map_const ROUTE_N02_DAYCARE,                            4,  3 ;  7
 	endgroup
 
 	newgroup CITY03                                               ;  5

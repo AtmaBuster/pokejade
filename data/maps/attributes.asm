@@ -233,3 +233,4 @@ ENDC
 	map_attributes ShaleMart, SHALE_MART, $00, 0
 	map_attributes ShaleHouse1, SHALE_HOUSE_1, $00, 0
 	map_attributes ShaleHouse2, SHALE_HOUSE_2, $00, 0
+	map_attributes RouteN02DayCare, ROUTE_N02_DAYCARE, $00, 0

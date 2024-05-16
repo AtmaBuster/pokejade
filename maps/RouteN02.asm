@@ -1,9 +1,41 @@
 	object_const_def
+	const ROUTEN02_TRAINER_1
+	const ROUTEN02_TRAINER_2
+	const ROUTEN02_TRAINER_3
+	const ROUTEN02_YOUNGSTER
+	const ROUTEN02_LASS
+	const ROUTEN02_DAYCARE_MAN
+	const ROUTEN02_BERRY_1
+	const ROUTEN02_BERRY_2
+	const ROUTEN02_BERRY_3
+	const ROUTEN02_BERRY_4
+	const ROUTEN02_POKE_BALL_1
+	const ROUTEN02_POKE_BALL_2
+	const ROUTEN02_DAYCARE_MON_1
+	const ROUTEN02_DAYCARE_MON_2
 
 RouteN02_MapScripts:
 	def_scene_scripts
+	scene_script EmptyScript, SCENE_ROUTEN02_BEFORE_DAYCARE
+	scene_script EmptyScript, SCENE_ROUTEN02_NONE
 
 	def_callbacks
+
+RouteN02CO_ExplainDaycare:
+	turnobject ROUTEN02_DAYCARE_MAN, LEFT
+	applymovement ROUTEN02_DAYCARE_MAN, .Move_Left
+	turnobject PLAYER, RIGHT
+	scall RouteN02_ExplainDayCare
+	applymovement ROUTEN02_DAYCARE_MAN, .Move_Right
+	end
+
+.Move_Left:
+	step LEFT
+	step_end
+
+.Move_Right:
+	step RIGHT
+	step_end
 
 RouteN02BG_HIXAttack:
 	hiddenitem X_ATTACK, EVENT_ROUTEN02_HIDDEN_XATTACK
@@ -63,8 +95,68 @@ RouteN02OB_Youngster:
 	para "I just have to"
 	line "keep searching."
 
-	para "Determination is"
+	para "Persistence is"
 	line "key!"
+	done
+
+RouteN02OB_Lass:
+	jumptextfaceplayer .Text
+.Text:
+	text "The gate up ahead"
+	line "leads into MOSSY"
+	cont "WOODS."
+
+	para "If your #MON"
+	line "can use CUT, you"
+	cont "can bypass the"
+	cont "maze."
+	done
+
+RouteN02OB_DayCareMan:
+	faceplayer
+	checkscene
+	ifequal SCENE_ROUTEN02_BEFORE_DAYCARE, .Explain
+	opentext
+	writetext .Text
+	waitbutton
+	closetext
+	end
+.Text:
+	text "Hi"
+	done
+
+.Explain:
+	scall RouteN02_ExplainDayCare
+	end
+
+RouteN02_ExplainDayCare:
+	textbox .Text
+	setscene SCENE_ROUTEN02_NONE
+	return
+.Text:
+	text "Hello there,"
+	line "youngster!"
+
+	para "I can just tell by"
+	line "looking at you."
+	cont "You're a #MON"
+	cont "TRAINER!"
+
+	para "My wife and I run"
+	line "this here #MON"
+	cont "DAYCARE."
+
+	para "We'll look after"
+	line "your #MON for"
+	cont "you. Sometimes, we"
+	cont "even find #MON"
+	cont "EGGS!"
+
+	para "Feel free to talk"
+	line "to my wife inside"
+	cont "if you want us to"
+	cont "look after your"
+	cont "#MON."
 	done
 
 RouteN02OB_Item1:
@@ -77,10 +169,11 @@ RouteN02_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event 25,  5, OBSIDIAN_TOWN, 1
+	warp_event 25,  5, ROUTE_N02_DAYCARE, 2
 	warp_event 33,  3, OBSIDIAN_TOWN, 1
 
 	def_coord_events
+	coord_event 25,  6, SCENE_ROUTEN02_BEFORE_DAYCARE, 0, RouteN02CO_ExplainDaycare
 
 	def_bg_events
 	bg_event 15,  7, BGEVENT_READ, BGEvent
@@ -93,8 +186,8 @@ RouteN02_MapEvents:
 	object_event 14, 10, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
 	object_event 31, 10, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
 	object_event 11, 12, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RouteN02OB_Youngster, EVENT_ROUTEN02_YOUNGSTER
-	object_event 24,  9, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
-	object_event 27,  6, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+	object_event 23, 10, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RouteN02OB_Lass, -1
+	object_event 27,  6, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RouteN02OB_DayCareMan, -1
 	object_event  4,  0, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_BERRY_PLOT_ROUTEN02_1
 	object_event  5,  0, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_BERRY_PLOT_ROUTEN02_2
 	object_event  6,  0, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_BERRY_PLOT_ROUTEN02_3
