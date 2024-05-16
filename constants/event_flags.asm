@@ -43,7 +43,16 @@
 	const EVENT_GOT_POKEDEX
 	const EVENT_SHALE_CITY_HELP_KID
 	const EVENT_ASKED_SHALE_GUARD_FOR_HELP
-; Unused: next 562 events
+	const EVENT_GOT_TM_FROM_ROUTEN02_YOUNGSTER
+; Unused: next 462 events
+
+	const_next 500
+; Berries
+	const EVENT_BERRY_PLOT_ROUTEN02_1
+	const EVENT_BERRY_PLOT_ROUTEN02_2
+	const EVENT_BERRY_PLOT_ROUTEN02_3
+	const EVENT_BERRY_PLOT_ROUTEN02_4
+; Unused: next 96 events
 
 	const_next 600
 ; Decorations
@@ -99,7 +108,8 @@
 ; Hidden items
 	const EVENT_ROUTEN01_HIDDEN_REPEL
 	const EVENT_SHALE_CITY_HIDDEN_LURE
-; Unused: next 948 events
+	const EVENT_ROUTEN02_HIDDEN_XATTACK
+; Unused: next 947 events
 
 	const_next 1600
 ; Sprite visibility flags
@@ -119,12 +129,17 @@
 	const EVENT_OBSIDIAN_MEADOW_STARTERS
 	const EVENT_OBSIDIAN_MEADOW_RIVAL
 	const EVENT_SHALE_CITY_YOUNGSTER
+	const EVENT_DAY_CARE_MON_1
+	const EVENT_DAY_CARE_MON_2
+	const EVENT_ROUTEN02_YOUNGSTER
 ; Item balls
 	const EVENT_OBSIDIAN_TOWN_RARE_CANDY
 	const EVENT_OBSIDIAN_MEADOW_ITEMBALL
 	const EVENT_ROUTEN01_POTION
 	const EVENT_SHALE_CITY_ANTIDOTE
-; Unused: next 431 events
+	const EVENT_ROUTEN02_ITEM1
+	const EVENT_ROUTEN02_POKEBALL
+; Unused: next 426 events
 
 	const_next 2048
 DEF NUM_EVENTS EQU const_value ; 800

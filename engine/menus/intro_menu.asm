@@ -64,24 +64,20 @@ IF DEF(_DEBUG)
 	call ResetWRAM
 	farcall ClearSavedObjPals
 	call NewGame_ClearTilemapEtc
-	ld hl, .defaultname
-	ld de, wPlayerName
-	ld bc, 5
-	rst CopyBytes
+
+	farcall Debug_NewGame
+
 	call InitializeWorld
 
-	ld a, LANDMARK_OBSIDIAN_TOWN
+	ld a, LANDMARK_SHALE_CITY
 	ld [wPrevLandmark], a
 
-	ld a, SPAWN_HOME
+	ld a, SPAWN_SHALE
 	ld [wDefaultSpawnpoint], a
 
 	ld a, MAPSETUP_WARP
 	ldh [hMapEntryMethod], a
 	jmp FinishContinueFunction
-
-.defaultname
-	db "JADE@"
 
 .normal
 ENDC
@@ -812,18 +808,11 @@ NamePlayer:
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld hl, wPlayerName
-	ld de, .Chris
-	ld a, [wPlayerGender]
-	bit PLAYERGENDER_FEMALE_F, a
-	jr z, .Male
-	ld de, .Kris
-.Male:
+	ld de, .DefaultName
 	jmp InitName
 
-.Chris:
-	db "CHRIS@@@@@@"
-.Kris:
-	db "KRIS@@@@@@@"
+.DefaultName:
+	db "JADE@@@@@@@"
 
 IntroNameRival:
 	farcall MovePlayerPicRight

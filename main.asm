@@ -564,6 +564,7 @@ SECTION "Debug", ROMX
 
 IF DEF(_DEBUG)
 INCLUDE "engine/debug/debug_menu.asm"
+INCLUDE "engine/debug/new_game.asm"
 ENDC
 
 
