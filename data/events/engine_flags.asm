@@ -16,9 +16,9 @@ EngineFlags:
 	engine_flag wPokegearFlags, POKEGEAR_OBTAINED_F
 
 	; day-care
-	engine_flag wDayCareMan, DAYCAREMAN_HAS_EGG_F
-	engine_flag wDayCareMan, DAYCAREMAN_HAS_MON_F
-	engine_flag wDayCareLady, DAYCARELADY_HAS_MON_F
+	engine_flag wDayCare, DAYCARE_HAS_EGG_F
+	engine_flag wDayCare, DAYCARE_HAS_MON1_F
+	engine_flag wDayCare, DAYCARE_HAS_MON2_F
 
 	engine_flag wMomSavingMoney, MOM_SAVING_SOME_MONEY_F
 	engine_flag wMomSavingMoney, MOM_ACTIVE_F

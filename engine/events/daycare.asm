@@ -1,207 +1,271 @@
 ; PrintDayCareText.TextTable indexes
+
 	const_def
-	const DAYCARETEXT_MAN_INTRO
-	const DAYCARETEXT_MAN_INTRO_EGG
-	const DAYCARETEXT_LADY_INTRO
-	const DAYCARETEXT_LADY_INTRO_EGG
+	const DAYCARETEXT_INTRO
+	const DAYCARETEXT_ASK_DEPOSIT
+	const DAYCARETEXT_ASK_DEPOSIT_2
+	const DAYCARETEXT_ONLY_ONE_MON
 	const DAYCARETEXT_WHICH_ONE
-	const DAYCARETEXT_DEPOSIT
-	const DAYCARETEXT_CANT_BREED_EGG
-	const DAYCARETEXT_LAST_MON
-	const DAYCARETEXT_LAST_ALIVE_MON
-	const DAYCARETEXT_COME_BACK_LATER
-	const DAYCARETEXT_REMOVE_MAIL
-	const DAYCARETEXT_GENIUSES
-	const DAYCARETEXT_ASK_WITHDRAW
-	const DAYCARETEXT_WITHDRAW
-	const DAYCARETEXT_GOT_BACK
-	const DAYCARETEXT_TOO_SOON
-	const DAYCARETEXT_PARTY_FULL
-	const DAYCARETEXT_NOT_ENOUGH_MONEY
-	const DAYCARETEXT_OH_FINE
+	const DAYCARETEXT_DOING_GREAT
+	const DAYCARETEXT_GROWN_BY
+	const DAYCARETEXT_ASK_SEE
 	const DAYCARETEXT_COME_AGAIN
+	const DAYCARETEXT_CANT_RAISE_EGG
+	const DAYCARETEXT_ONE_LIVING_MON
+	const DAYCARETEXT_TOO_SOON
+	const DAYCARETEXT_COST
+	const DAYCARETEXT_NOT_ENOUGH_MONEY
+	const DAYCARETEXT_PARTY_FULL
+	const DAYCARETEXT_GOT_BACK
+	const DAYCARETEXT_TAKE_OTHER
 
-DayCareMan:
-	ld hl, wDayCareMan
-	bit DAYCAREMAN_HAS_MON_F, [hl]
-	jr nz, .AskWithdrawMon
-	ld hl, wDayCareMan
-	ld a, DAYCARETEXT_MAN_INTRO
-	call DayCareManIntroText
-	jr c, .cancel
-	call DayCareAskDepositPokemon
-	jr c, .print_text
-	farcall DepositMonWithDayCareMan
-	ld hl, wDayCareMan
-	set DAYCAREMAN_HAS_MON_F, [hl]
-	call DayCare_DepositPokemonText
-	jmp DayCare_InitBreeding
-
-.AskWithdrawMon:
-	farcall GetBreedMon1LevelGrowth
-	ld hl, wBreedMon1Nickname
-	call GetPriceToRetrieveBreedmon
-	call DayCare_AskWithdrawBreedMon
-	jr c, .print_text
-	farcall RetrieveMonFromDayCareMan
-	call DayCare_GetBackMonForMoney
-	ld hl, wDayCareMan
-	res DAYCAREMAN_HAS_MON_F, [hl]
-	res DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
-	jr .cancel
-
-.print_text
+DayCareWoman:
+	ld a, [wScriptVar]
+	and a
+	jr z, .normal_start
+	dec a
+	jp z, .mon1_retrieve_start
+	dec a
+	jp z, .mon2_retrieve_start
+.normal_start
+	ld a, DAYCARETEXT_INTRO
 	call PrintDayCareText
-
-.cancel
-	ld a, DAYCARETEXT_COME_AGAIN
-	jmp PrintDayCareText
-
-DayCareLady:
-	ld hl, wDayCareLady
-	bit DAYCARELADY_HAS_MON_F, [hl]
-	jr nz, .AskWithdrawMon
-	ld hl, wDayCareLady
-	ld a, DAYCARETEXT_LADY_INTRO
-	call DayCareLadyIntroText
-	jr c, .cancel
-	call DayCareAskDepositPokemon
-	jr c, .print_text
-	farcall DepositMonWithDayCareLady
-	ld hl, wDayCareLady
-	set DAYCARELADY_HAS_MON_F, [hl]
-	call DayCare_DepositPokemonText
-	jmp DayCare_InitBreeding
-
-.AskWithdrawMon:
-	farcall GetBreedMon2LevelGrowth
-	ld hl, wBreedMon2Nickname
-	call GetPriceToRetrieveBreedmon
-	call DayCare_AskWithdrawBreedMon
-	jr c, .print_text
-	farcall RetrieveMonFromDayCareLady
-	call DayCare_GetBackMonForMoney
-	ld hl, wDayCareLady
-	res DAYCARELADY_HAS_MON_F, [hl]
-	ld hl, wDayCareMan
-	res DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
-	jr .cancel
-
-.print_text
+	call PromptButton
+	ld hl, wDayCare
+	bit DAYCARE_HAS_MON1_F, [hl]
+	jr z, .AskDepositMons
+	bit DAYCARE_HAS_MON2_F, [hl]
+	jr nz, .ShowMons
+.AskDepositMons:
+	ld a, DAYCARETEXT_ASK_DEPOSIT
 	call PrintDayCareText
+	call YesNoBox
+	jp nc, .TryDepositMon
+	ld hl, wDayCare
+	bit DAYCARE_HAS_MON1_F, [hl]
+	jr nz, .ShowMons
+	bit DAYCARE_HAS_MON2_F, [hl]
+	jr nz, .ShowMons
+	jp .ComeAgain
 
-.cancel
-	ld a, DAYCARETEXT_COME_AGAIN
-	jmp PrintDayCareText
+.TryDepositMon:
+	call DayCareDepositPokemon
+	jmp c, PrintDayCareText
 
-DayCareLadyIntroText:
-	bit DAYCARELADY_ACTIVE_F, [hl]
-	jr nz, .okay
-	set DAYCARELADY_ACTIVE_F, [hl]
+	farcall DepositDayCareMon
+	call DayCare_InitBreeding
+
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON2_F, a
+	jp nz, .ComeAgain
+
+	ld a, DAYCARETEXT_ASK_DEPOSIT_2
+	call PrintDayCareText
+	call YesNoBox
+	jp c, .ComeAgain
+	jr .TryDepositMon
+
+.ShowMons:
+	ld a, DAYCARETEXT_DOING_GREAT
+	call PrintDayCareText
+	call PromptButton
+	ld a, DAYCARETEXT_ASK_SEE
+	call PrintDayCareText
+	call YesNoBox
+	jp c, .ComeAgain
+
+	call .CheckMon1Growth
+	call .CheckMon2Growth
+
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON2_F, a
+	ld a, 0 ; no-optimize a = 0
+	jr z, .got_menu
 	inc a
-.okay
-	call PrintDayCareText
-	jmp YesNoBox
-
-DayCareManIntroText:
-	set DAYCAREMAN_ACTIVE_F, [hl]
-	call PrintDayCareText
-	jmp YesNoBox
-
-DayCareAskDepositPokemon:
-	ld a, [wPartyCount]
-	cp 2
-	jr c, .OnlyOneMon
-	ld a, DAYCARETEXT_WHICH_ONE
-	call PrintDayCareText
-	ld b, PARTYMENUACTION_GIVE_MON
-	farcall SelectTradeOrDayCareMon
-	jr c, .Declined
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .Egg
-	farcall CheckCurPartyMonFainted
-	jr c, .OutOfUsableMons
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [wCurPartyMon]
-	rst AddNTimes
-	ld d, [hl]
-	farcall ItemIsMail
-	jr c, .HoldingMail
-	ld hl, wPartyMonNicknames
-	ld a, [wCurPartyMon]
-	call GetNickname
+.got_menu
+	ld [wWhichIndexSet], a
+	ld hl, SeeMonMenuHeader
+	call LoadMenuHeader
+	call DoNthMenu
+	call CloseWindow
+	jp c, .ComeAgain
+	ld a, [wMenuSelection]
 	and a
-	ret
+	jp z, .ComeAgain
 
-.Declined:
-	ld a, DAYCARETEXT_OH_FINE
-	scf
+	dec a
+	ld a, 0
+	jr nz, .ChooseMon2
+.ChooseMon1
+	ld hl, wBreedMon1Nickname
+	ld de, wStringBuffer2
+	call .PrintMonGrowth
+	jp c, PrintDayCareText
+	ld a, 1
+	ld [wScriptVar], a
 	ret
-
-.Egg:
-	ld a, DAYCARETEXT_CANT_BREED_EGG
-	scf
-	ret
-
-.OnlyOneMon:
-	ld a, DAYCARETEXT_LAST_MON
-	scf
-	ret
-
-.OutOfUsableMons:
-	ld a, DAYCARETEXT_LAST_ALIVE_MON
-	scf
-	ret
-
-.HoldingMail:
-	ld a, DAYCARETEXT_REMOVE_MAIL
-	scf
-	ret
-
-DayCare_DepositPokemonText:
-	ld a, DAYCARETEXT_DEPOSIT
-	call PrintDayCareText
-	ld a, [wCurPartySpecies]
+.mon1_retrieve_start:
+	xor a
+	ld [wScriptVar], a
+	ld a, [wBreedMon1Species]
 	call PlayMonCry
-	ld a, DAYCARETEXT_COME_BACK_LATER
+	call WaitSFX
+	ld bc, wStringBuffer3
+	ld de, wMoney
+	farcall TakeMoney
+	ld a, DAYCARETEXT_GOT_BACK
+	call PrintDayCareText
+	farcall RetrieveBreedmon1
+	ld hl, wDayCare
+	res DAYCARE_MONS_COMPATIBLE_F, [hl]
+	res DAYCARE_HAS_MON1_F, [hl]
+	bit DAYCARE_HAS_MON2_F, [hl]
+	jr z, .TakeOther
+	res DAYCARE_HAS_MON2_F, [hl]
+	set DAYCARE_HAS_MON1_F, [hl]
+	farcall TransferBreedmon2ToBreedmon1
+	ld hl, wDayCare
+	jr .TakeOther
+
+.ChooseMon2:
+	ld hl, wBreedMon2Nickname
+	ld de, wStringBuffer2 + 4
+	call .PrintMonGrowth
+	jp c, PrintDayCareText
+	ld a, 2
+	ld [wScriptVar], a
+	ret
+.mon2_retrieve_start:
+	xor a
+	ld [wScriptVar], a
+	ld a, [wBreedMon2Species]
+	call PlayMonCry
+	call WaitSFX
+	ld bc, wStringBuffer3
+	ld de, wMoney
+	farcall TakeMoney
+	ld a, DAYCARETEXT_GOT_BACK
+	call PrintDayCareText
+	farcall RetrieveBreedmon2
+	ld hl, wDayCare
+	res DAYCARE_HAS_MON2_F, [hl]
+	res DAYCARE_MONS_COMPATIBLE_F, [hl]
+.TakeOther
+	bit DAYCARE_HAS_MON1_F, [hl]
+	jr z, .ComeAgain
+	ld a, DAYCARETEXT_TAKE_OTHER
+	call PrintDayCareText
+	call YesNoBox
+	jp nc, .ChooseMon1
+.ComeAgain:
+	ld a, DAYCARETEXT_COME_AGAIN
 	jmp PrintDayCareText
 
-DayCare_AskWithdrawBreedMon:
-	ld a, [wStringBuffer2 + 1]
+.CheckMon1Growth:
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON1_F, a
+	ret z
+	farcall GetBreedMon1LevelGrowth
+	ld [wStringBuffer2], a
+	ld a, b
+	ld [wStringBuffer2 + 1], a
+	ld a, e
+	ld [wStringBuffer2 + 2], a
+	ld a, [wBreedMon1Species]
+	ld [wCurPartySpecies], a
+	ld a, [wBreedMon1Personality]
+	ld [wTempMonPersonality], a
+	ld a, TEMPMON
+	ld [wMonType], a
+	predef GetGender
+	ld b, -1
+	jr c, .got_gender_1
+	ld b, 1
+	jr z, .got_gender_1
+	dec b
+.got_gender_1
+	ld a, b
+	ld [wStringBuffer2 + 3], a
+	ret
+
+.CheckMon2Growth:
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON2_F, a
+	ret z
+	farcall GetBreedMon2LevelGrowth
+	ld [wStringBuffer2 + 4], a
+	ld a, b
+	ld [wStringBuffer2 + 5], a
+	ld a, e
+	ld [wStringBuffer2 + 6], a
+	ld a, [wBreedMon2Species]
+	ld [wCurPartySpecies], a
+	ld a, [wBreedMon2Personality]
+	ld [wTempMonPersonality], a
+	ld a, TEMPMON
+	ld [wMonType], a
+	predef GetGender
+	ld b, -1
+	jr c, .got_gender_2
+	ld b, 1
+	jr z, .got_gender_2
+	dec b
+.got_gender_2
+	ld a, b
+	ld [wStringBuffer2 + 7], a
+	ret
+
+.PrintMonGrowth:
+	ld b, a
+	push bc
+	push de
+	ld de, wStringBuffer1
+	ld bc, NAME_LENGTH
+	rst CopyBytes
+	pop de
+	ld a, [de]
 	and a
-	jr nz, .grew_at_least_one_level
+	jr z, .no_growth
+	ld [wStringBuffer2 + 8], a
+	ld hl, 100
+	ld bc, 100
+	rst AddNTimes
+	xor a
+	ld [wStringBuffer3], a
+	ld a, h
+	ld [wStringBuffer3 + 1], a
+	ld a, l
+	ld [wStringBuffer3 + 2], a
+	ld a, DAYCARETEXT_GROWN_BY
+	jr .join_print_growth
+
+.no_growth
+	xor a
+	ld [wStringBuffer3], a
+	ld [wStringBuffer3 + 1], a
+	ld a, 100
+	ld [wStringBuffer3 + 2], a
 	ld a, DAYCARETEXT_TOO_SOON
+.join_print_growth
+	pop bc
+	dec b
+	jr z, .skip_level_text
+	call PrintDayCareText
+	call PromptButton
+.skip_level_text
+	ld a, DAYCARETEXT_COST
 	call PrintDayCareText
 	call YesNoBox
-	jr c, .refused
-	jr .check_money
-
-.grew_at_least_one_level
-	ld a, DAYCARETEXT_GENIUSES
-	call PrintDayCareText
-	call YesNoBox
-	jr c, .refused
-	ld a, DAYCARETEXT_ASK_WITHDRAW
-	call PrintDayCareText
-	call YesNoBox
-	jr c, .refused
-
-.check_money
+	ld a, DAYCARETEXT_COME_AGAIN
+	ret c
 	ld de, wMoney
-	ld bc, wStringBuffer2 + 2
-	call CompareMoney
+	ld bc, wStringBuffer3
+	farcall CompareMoney
 	jr c, .not_enough_money
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr nc, .party_full
 	and a
-	ret
-
-.refused
-	ld a, DAYCARETEXT_OH_FINE
-	scf
 	ret
 
 .not_enough_money
@@ -214,37 +278,125 @@ DayCare_AskWithdrawBreedMon:
 	scf
 	ret
 
-DayCare_GetBackMonForMoney:
-	ld bc, wStringBuffer2 + 2
-	ld de, wMoney
-	call TakeMoney
-	ld a, DAYCARETEXT_WITHDRAW
-	call PrintDayCareText
-	ld a, [wCurPartySpecies]
-	call PlayMonCry
-	ld a, DAYCARETEXT_GOT_BACK
-	jr PrintDayCareText
+SeeMonMenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 0, 19, 7
+	dw .MenuData
+	db 1 ; default option
 
-GetPriceToRetrieveBreedmon:
-	ld a, b
-	ld [wStringBuffer2], a
-	ld a, d
-	ld [wStringBuffer2 + 1], a
-	ld de, wStringBuffer1
-	ld bc, NAME_LENGTH
-	rst CopyBytes
-	ld hl, 0
-	ld bc, 100
-	ld a, [wStringBuffer2 + 1]
-	rst AddNTimes
-	ld de, 100
+.MenuData:
+	db STATICMENU_CURSOR ; flags
+	db 0 ; items
+	dw .Items
+	dw .Display
+	dw 0
+
+.Items:
+	db 2, 1, 0, -1
+	db 3, 1, 2, 0, -1
+
+.Display:
+	ld h, d
+	ld l, e
+	ld a, [wMenuSelection]
+	and a
+	jr z, .cancel
+	dec a
+	ld de, wStringBuffer2 + 3
+	push de
+	ld de, wBreedMon1Nickname
+	jr z, .got_nickname
+	pop de
+	ld de, wStringBuffer2 + 7
+	push de
+	ld de, wBreedMon2Nickname
+.got_nickname
+	push hl
+	rst PlaceString
+	pop hl
+	ld de, 12
 	add hl, de
-	xor a
-	ld [wStringBuffer2 + 2], a
-	ld a, h
-	ld [wStringBuffer2 + 3], a
-	ld a, l
-	ld [wStringBuffer2 + 4], a
+	pop de
+	ld a, [de]
+	cp -1
+	ld b, " "
+	jr z, .got_gender_symbol
+	and a
+	ld b, "♂"
+	jr z, .got_gender_symbol
+	ld b, "♀"
+.got_gender_symbol
+	ld a, b
+	ld [hli], a
+	inc hl
+	dec de
+	ld a, [de]
+	cp 100
+	jr c, .under_100
+	lb bc, 1, 3
+	call PrintNum
+	ret
+
+.under_100
+	ld a, "L"
+	ld [hli], a
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	call PrintNum
+	ret
+
+.cancel
+	ld de, .cancel_string
+	jp PlaceString
+
+.cancel_string
+	db "CANCEL@"
+
+DayCareLadyIntroText:
+	call PrintDayCareText
+	jmp YesNoBox
+
+DayCareManIntroText:
+	call PrintDayCareText
+	jmp YesNoBox
+
+DayCareDepositPokemon:
+	ld a, [wPartyCount]
+	cp 2
+	jr c, .OnlyOneMon
+	ld a, DAYCARETEXT_WHICH_ONE
+	call PrintDayCareText
+	ld b, PARTYMENUACTION_GIVE_MON
+	farcall SelectTradeOrDayCareMon
+	jr c, .Declined
+	ld a, [wCurPartySpecies]
+	cp EGG
+	jr z, .Egg
+	farcall CheckCurPartyMonFainted
+	jr c, .NoOtherMons
+	ld hl, wPartyMonNicknames
+	ld a, [wCurPartyMon]
+	call GetNickname
+	and a
+	ret
+
+.OnlyOneMon:
+	ld a, DAYCARETEXT_ONLY_ONE_MON
+	scf
+	ret
+
+.Declined:
+	ld a, DAYCARETEXT_COME_AGAIN
+	scf
+	ret
+
+.Egg:
+	ld a, DAYCARETEXT_CANT_RAISE_EGG
+	scf
+	ret
+
+.NoOtherMons:
+	ld a, DAYCARETEXT_ONE_LIVING_MON
+	scf
 	ret
 
 PrintDayCareText:
@@ -259,111 +411,79 @@ PrintDayCareText:
 	jmp PrintText
 
 .TextTable:
-; entries correspond to DAYCARETEXT_* constants
-	dw .DayCareManIntroText ; 00
-	dw .DayCareManIntroEggText ; 01
-	dw .DayCareLadyIntroText ; 02
-	dw .DayCareLadyIntroEggText ; 03
-	dw .WhatShouldIRaiseText ; 04
-	dw .IllRaiseYourMonText ; 05
-	dw .CantAcceptEggText ; 06
-	dw .OnlyOneMonText ; 07
-	dw .LastHealthyMonText ; 08
-	dw .ComeBackLaterText ; 09
-	dw .RemoveMailText ; 0a
-	dw .AreWeGeniusesText ; 0b
-	dw .YourMonHasGrownText ; 0c
-	dw .PerfectHeresYourMonText ; 0d
-	dw .GotBackMonText ; 0e
-	dw .BackAlreadyText ; 0f
-	dw .HaveNoRoomText ; 10
-	dw .NotEnoughMoneyText ; 11
-	dw .OhFineThenText ; 12
-	dw .ComeAgainText ; 13
+	dw .Intro          ; DAYCARETEXT_INTRO
+	dw .AskDeposit     ; DAYCARETEXT_ASK_DEPOSIT
+	dw .AskDeposit2    ; DAYCARETEXT_ASK_DEPOSIT_2
+	dw .OnlyOneMon     ; DAYCARETEXT_ONLY_ONE_MON
+	dw .WhichOne       ; DAYCARETEXT_WHICH_ONE
+	dw .DoingGreat     ; DAYCARETEXT_DOING_GREAT
+	dw .GrownBy        ; DAYCARETEXT_GROWN_BY
+	dw .AskSee         ; DAYCARETEXT_ASK_SEE
+	dw .ComeAgain      ; DAYCARETEXT_COME_AGAIN
+	dw .CantRaiseEgg   ; DAYCARETEXT_CANT_RAISE_EGG
+	dw .OneLivingMon   ; DAYCARETEXT_ONE_LIVING_MON
+	dw .TooSoon        ; DAYCARETEXT_TOO_SOON
+	dw .Cost           ; DAYCARETEXT_COST
+	dw .NotEnoughMoney ; DAYCARETEXT_NOT_ENOUGH_MONEY
+	dw .PartyFull      ; DAYCARETEXT_PARTY_FULL
+	dw .GotBack        ; DAYCARETEXT_GOT_BACK
+	dw .TakeOther      ; DAYCARETEXT_TAKE_OTHER
 
-.DayCareManIntroText:
-	text_far _DayCareManIntroText
+.Intro:
+	text_far _DayCareIntroText
 	text_end
-
-.DayCareManIntroEggText:
-	text_far _DayCareManIntroEggText
+.AskDeposit:
+	text_far _DayCareAskDepositText
 	text_end
-
-.DayCareLadyIntroText:
-	text_far _DayCareLadyIntroText
+.AskDeposit2:
+	text_far _DayCareAskDeposit2Text
 	text_end
-
-.DayCareLadyIntroEggText:
-	text_far _DayCareLadyIntroEggText
+.OnlyOneMon:
+	text_far _DayCareOnlyOneMonText
 	text_end
-
-.WhatShouldIRaiseText:
-	text_far _WhatShouldIRaiseText
+.WhichOne:
+	text_far _DayCareWhichOneText
 	text_end
-
-.OnlyOneMonText:
-	text_far _OnlyOneMonText
+.DoingGreat:
+	text_far _DayCareDoingGreatText
 	text_end
-
-.CantAcceptEggText:
-	text_far _CantAcceptEggText
+.GrownBy:
+	text_far _DayCareGrownByText
 	text_end
-
-.RemoveMailText:
-	text_far _RemoveMailText
+.AskSee:
+	text_far _DayCareAskSeeText
 	text_end
-
-.LastHealthyMonText:
-	text_far _LastHealthyMonText
+.ComeAgain:
+	text_far _DayCareComeAgainText
 	text_end
-
-.IllRaiseYourMonText:
-	text_far _IllRaiseYourMonText
+.CantRaiseEgg:
+	text_far _DayCareCantRaiseEggText
 	text_end
-
-.ComeBackLaterText:
-	text_far _ComeBackLaterText
+.OneLivingMon:
+	text_far _DayCareOneLivingMonText
 	text_end
-
-.AreWeGeniusesText:
-	text_far _AreWeGeniusesText
+.TooSoon:
+	text_far _DayCareTooSoonText
 	text_end
-
-.YourMonHasGrownText:
-	text_far _YourMonHasGrownText
+.Cost:
+	text_far _DayCareCostText
 	text_end
-
-.PerfectHeresYourMonText:
-	text_far _PerfectHeresYourMonText
+.NotEnoughMoney:
+	text_far _DayCareNotEnoughMoneyText
 	text_end
-
-.GotBackMonText:
-	text_far _GotBackMonText
+.PartyFull:
+	text_far _DayCarePartyFullText
 	text_end
-
-.BackAlreadyText:
-	text_far _BackAlreadyText
+.GotBack:
+	text_far _DayCareGotBackText
 	text_end
-
-.HaveNoRoomText:
-	text_far _HaveNoRoomText
-	text_end
-
-.NotEnoughMoneyText:
-	text_far _NotEnoughMoneyText
-	text_end
-
-.OhFineThenText:
-	text_far _OhFineThenText
-	text_end
-
-.ComeAgainText:
-	text_far _ComeAgainText
+.TakeOther:
+	text_far _DayCareTakeOtherText
 	text_end
 
 DayCareManOutside:
-	ld hl, wDayCareMan
-	bit DAYCAREMAN_HAS_EGG_F, [hl]
+	ld hl, wDayCare
+	bit DAYCARE_HAS_EGG_F, [hl]
 	jr nz, .AskGiveEgg
 	ld hl, .NotYetText
 	jmp PrintText
@@ -381,8 +501,8 @@ DayCareManOutside:
 	cp PARTY_LENGTH
 	jr nc, .PartyFull
 	call DayCare_GiveEgg
-	ld hl, wDayCareMan
-	res DAYCAREMAN_HAS_EGG_F, [hl]
+	ld hl, wDayCare
+	res DAYCARE_HAS_EGG_F, [hl]
 	call DayCare_InitBreeding
 	ld hl, .ReceivedEggText
 	call PrintText
@@ -509,20 +629,19 @@ DayCare_GetCurrentPartyMember:
 	ret
 
 DayCare_InitBreeding:
-	ld a, [wDayCareLady]
-	bit DAYCARELADY_HAS_MON_F, a
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON2_F, a
 	ret z
-	ld a, [wDayCareMan]
-	bit DAYCAREMAN_HAS_MON_F, a
+	bit DAYCARE_HAS_MON1_F, a
 	ret z
-	call CheckBreedmonCompatibility
+	farcall CheckBreedmonCompatibility
 	ld a, [wBreedingCompatibility]
 	and a
 	ret z
 	inc a
 	ret z
-	ld hl, wDayCareMan
-	set DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
+	ld hl, wDayCare
+	set DAYCARE_MONS_COMPATIBLE_F, [hl]
 .loop
 	call Random
 	cp 150
@@ -595,7 +714,7 @@ DayCare_InitBreeding:
 	xor a ; FALSE
 	ld [wSkipMovesBeforeLevelUp], a
 	predef FillMoves
-	call InitEggMoves
+	farcall InitEggMoves
 	ld hl, wEggMonID
 	ld a, [wPlayerID]
 	ld [hli], a

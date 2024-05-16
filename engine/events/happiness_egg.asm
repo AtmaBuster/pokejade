@@ -142,8 +142,8 @@ StepHappiness::
 DayCareStep::
 ; Raise the experience of Day-Care Pokémon every step cycle.
 
-	ld a, [wDayCareMan]
-	bit DAYCAREMAN_HAS_MON_F, a
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON1_F, a
 	jr z, .day_care_lady
 
 	ld a, [wBreedMon1Level] ; level
@@ -163,8 +163,8 @@ DayCareStep::
 	ld [hl], HIGH(MAX_DAY_CARE_EXP >> 8)
 
 .day_care_lady
-	ld a, [wDayCareLady]
-	bit DAYCARELADY_HAS_MON_F, a
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON2_F, a
 	jr z, .check_egg
 
 	ld a, [wBreedMon2Level] ; level
@@ -184,8 +184,8 @@ DayCareStep::
 	ld [hl], HIGH(MAX_DAY_CARE_EXP >> 8)
 
 .check_egg
-	ld hl, wDayCareMan
-	bit DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
+	ld hl, wDayCare
+	bit DAYCARE_MONS_COMPATIBLE_F, [hl]
 	ret z
 	ld hl, wStepsToEgg
 	dec [hl]
@@ -212,7 +212,7 @@ DayCareStep::
 	call Random
 	cp b
 	ret nc
-	ld hl, wDayCareMan
-	res DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
-	set DAYCAREMAN_HAS_EGG_F, [hl]
+	ld hl, wDayCare
+	res DAYCARE_MONS_COMPATIBLE_F, [hl]
+	set DAYCARE_HAS_EGG_F, [hl]
 	ret

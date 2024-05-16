@@ -542,7 +542,14 @@ AddTempmonToParty:
 	and a
 	ret
 
-RetrieveMonFromDayCareMan:
+TransferBreedmon2ToBreedmon1:
+	ld hl, wBreedMon2Nickname
+	ld de, wBreedMon1Nickname
+	ld bc, wBreedMon1End - wBreedMon1Nickname
+	rst CopyBytes
+	ret
+
+RetrieveBreedmon1:
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
 	ld de, SFX_TRANSACTION
@@ -557,7 +564,7 @@ RetrieveMonFromDayCareMan:
 	ld [wPokemonWithdrawDepositParameter], a
 	jr RetrieveBreedmon
 
-RetrieveMonFromDayCareLady:
+RetrieveBreedmon2:
 	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
 	ld de, SFX_TRANSACTION
@@ -689,19 +696,33 @@ GetLastPartyMon:
 	ld e, l
 	ret
 
-DepositMonWithDayCareMan:
+DepositDayCareMon:
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON1_F, a
+	jr z, DepositDayCareMon1
+	bit DAYCARE_HAS_MON2_F, a
+	jr z, DepositDayCareMon2
+	ret
+
+DepositDayCareMon1:
 	ld de, wBreedMon1Nickname
 	call DepositBreedmon
 	xor a ; REMOVE_PARTY
 	ld [wPokemonWithdrawDepositParameter], a
-	jmp RemoveMonFromParty
+	call RemoveMonFromParty
+	ld hl, wDayCare
+	set DAYCARE_HAS_MON1_F, [hl]
+	ret
 
-DepositMonWithDayCareLady:
+DepositDayCareMon2:
 	ld de, wBreedMon2Nickname
 	call DepositBreedmon
 	xor a ; REMOVE_PARTY
 	ld [wPokemonWithdrawDepositParameter], a
-	jmp RemoveMonFromParty
+	call RemoveMonFromParty
+	ld hl, wDayCare
+	set DAYCARE_HAS_MON2_F, [hl]
+	ret
 
 DepositBreedmon:
 	ld a, [wCurPartyMon]

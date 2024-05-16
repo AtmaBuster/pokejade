@@ -3079,21 +3079,19 @@ NEXTU
 wUnlockedDexFlags:: db
 ENDU
 
-wDayCareMan::
-; bit 7: active
-; bit 6: egg ready
-; bit 5: monsters are compatible
+wDayCare::
 ; bit 0: monster 1 in day-care
+; bit 1: monster 2 in day-care
+; bit 2: monsters are compatible
+; bit 3: egg ready
 	db
 
 wBreedMon1Nickname:: ds MON_NAME_LENGTH
 wBreedMon1OT:: ds NAME_LENGTH
 wBreedMon1:: box_struct wBreedMon1
+wBreedMon1End::
 
-wDayCareLady::
-; bit 7: active
-; bit 0: monster 2 in day-care
-	db
+	ds 1
 
 wStepsToEgg::
 	db

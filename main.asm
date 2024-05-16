@@ -83,10 +83,14 @@ INCLUDE "engine/items/mart.asm"
 INCLUDE "engine/events/money.asm"
 INCLUDE "data/items/marts.asm"
 INCLUDE "engine/events/mom.asm"
-INCLUDE "engine/events/daycare.asm"
 INCLUDE "engine/events/print_unown.asm"
 INCLUDE "engine/events/print_photo.asm"
 INCLUDE "engine/pokemon/breeding.asm"
+
+
+SECTION "Day Care", ROMX
+
+INCLUDE "engine/events/daycare.asm"
 
 
 SECTION "Roofs", ROMX

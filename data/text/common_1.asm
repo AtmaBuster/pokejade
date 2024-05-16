@@ -1331,6 +1331,91 @@ _MomJustDoWhatYouCanText::
 	line "you can."
 	done
 
+_DayCareIntroText::
+	text "INTRO"
+	done
+
+_DayCareAskDepositText::
+	text "ASK DEPOSIT"
+	done
+
+_DayCareAskDeposit2Text::
+	text "ASK DEPOSIT 2"
+	done
+
+_DayCareOnlyOneMonText::
+	text "ONLY ONE MON"
+	done
+
+_DayCareWhichOneText::
+	text "WHICH ONE"
+	prompt
+
+_DayCareDoingGreatText::
+	text "DOING GREAT"
+	done
+
+_DayCareGrownByText::
+	text "Your @"
+	text_ram wStringBuffer1
+	text ""
+	line "has grown a lot."
+
+	para "By level, it's"
+	line "grown by @"
+	text_decimal wStringBuffer2 + 8, 1, 3
+	text "."
+	done
+
+_DayCareAskSeeText::
+	text "SEE MONS?"
+	done
+
+_DayCareComeAgainText::
+	text "COME AGAIN"
+	done
+
+_DayCareCantRaiseEggText::
+	text "NO EGGS"
+	done
+
+_DayCareOneLivingMonText::
+	text "ONE ALIVE MON"
+	done
+
+_DayCareTooSoonText::
+	text "TOO SOON"
+	done
+
+_DayCareCostText::
+	text "If you want your"
+	line "@"
+	text_ram wStringBuffer1
+	text " back,"
+	cont "it'll cost ¥@"
+	text_decimal wStringBuffer3, 3, 5
+	text "."
+	done
+
+_DayCareNotEnoughMoneyText::
+	text "NOT ENOUGH MONEY"
+	done
+
+_DayCarePartyFullText::
+	text "PARTY FULL"
+	done
+
+_DayCareGotBackText::
+	text "<PLAYER> got back"
+	line "@"
+	text_ram wStringBuffer1
+	text "."
+	prompt
+
+_DayCareTakeOtherText::
+	text "TAKE OTHER"
+	done
+
 _DayCareManIntroText::
 	text "I'm the DAY-CARE"
 	line "MAN. Want me to"

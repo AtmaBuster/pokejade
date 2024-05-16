@@ -4,10 +4,8 @@ CheckBreedmonCompatibility:
 	jmp nc, .done
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
-	ld a, [wBreedMon1DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon1DVs + 1]
-	ld [wTempMonDVs + 1], a
+	ld a, [wBreedMon1Personality]
+	ld [wTempMonPersonality], a
 	ld a, TEMPMON
 	ld [wMonType], a
 	predef GetGender
@@ -20,10 +18,8 @@ CheckBreedmonCompatibility:
 	push bc
 	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
-	ld a, [wBreedMon2DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon2DVs + 1]
-	ld [wTempMonDVs + 1], a
+	ld a, [wBreedMon2Personality]
+	ld [wTempMonPersonality], a
 	ld a, TEMPMON
 	ld [wMonType], a
 	predef GetGender
@@ -56,9 +52,6 @@ CheckBreedmonCompatibility:
 	jr z, .done
 
 .compute
-	call .CheckDVs
-	ld c, 255
-	jr z, .done
 	ld a, [wBreedMon2Species]
 	ld b, a
 	ld a, [wBreedMon1Species]
@@ -85,24 +78,6 @@ CheckBreedmonCompatibility:
 .done
 	ld a, c
 	ld [wBreedingCompatibility], a
-	ret
-
-.CheckDVs:
-; If Defense DVs match and the lower 3 bits of the Special DVs match,
-; avoid breeding
-	ld a, [wBreedMon1DVs]
-	and %1111
-	ld b, a
-	ld a, [wBreedMon2DVs]
-	and %1111
-	cp b
-	ret nz
-	ld a, [wBreedMon1DVs + 1]
-	and %111
-	ld b, a
-	ld a, [wBreedMon2DVs + 1]
-	and %111
-	cp b
 	ret
 
 .CheckBreedingGroupCompatibility:
@@ -873,8 +848,8 @@ DayCareMon1:
 	call PrintText
 	ld a, [wBreedMon1Species]
 	call PlayMonCry
-	ld a, [wDayCareLady]
-	bit DAYCARELADY_HAS_MON_F, a
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON2_F, a
 	jr z, DayCareMonCursor
 	call PromptButton
 	ld hl, wBreedMon2Nickname
@@ -886,8 +861,8 @@ DayCareMon2:
 	call PrintText
 	ld a, [wBreedMon2Species]
 	call PlayMonCry
-	ld a, [wDayCareMan]
-	bit DAYCAREMAN_HAS_MON_F, a
+	ld a, [wDayCare]
+	bit DAYCARE_HAS_MON1_F, a
 	jr z, DayCareMonCursor
 	call PromptButton
 	ld hl, wBreedMon1Nickname
