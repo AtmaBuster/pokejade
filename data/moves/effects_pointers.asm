@@ -159,4 +159,9 @@ MoveEffectsPointers:
 	dw Fly
 	dw DefenseCurl
 	dw Libra
+	dw HammerArm
+	dw Superpower
+	dw Overheat
+	dw BulkUp
+	dw Tickle
 	assert_table_length NUM_MOVE_EFFECTS

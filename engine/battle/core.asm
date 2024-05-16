@@ -3607,6 +3607,11 @@ TryToRunAwayFromBattle:
 	dec a
 	jmp nz, .cant_run_from_trainer
 
+	xor a
+	farcall GetPlayerAbility
+	cp RUN_AWAY
+	jmp z, .escape_via_run_away
+
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jmp nz, .cant_escape
@@ -3715,6 +3720,8 @@ TryToRunAwayFromBattle:
 	and a
 	ret
 
+.escape_via_run_away
+	farcall AnimatePlayerAbility
 .can_escape
 	ld a, [wLinkMode]
 	and a

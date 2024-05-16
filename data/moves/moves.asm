@@ -306,7 +306,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_SUPERPOWER,        120, FIGHTING,      PHYSICAL, 100,  5,   0      ;SUPERPOWER
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
@@ -340,12 +340,12 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_OVERHEAT,          140, FIRE,          SPECIAL,   90,  5,   0      ;OVERHEAT
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_TICKLE,              0, NORMAL,        STATUS,   100, 20,   0      ;TICKLE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
@@ -362,7 +362,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_BULK_UP,             0, FIGHTING,      STATUS,   100, 20,   0      ;BULK_UP
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPEED_DOWN_HIT,     55, GROUND,        SPECIAL,   95, 15, 100      ;MUD_SHOT
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
@@ -375,11 +375,11 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_OVERHEAT,          140, PSYCHIC_TYPE,  SPECIAL,   90,  5,   0      ;PSYCHO_BOOST
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_HAMMER_ARM,        100, FIGHTING,      PHYSICAL,  90, 10,   0      ;HAMMER_ARM
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
@@ -448,11 +448,11 @@ MovesGroup4:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_OVERHEAT,          140, DRAGON,        SPECIAL,   90,  5,   0      ;DRACO_METEOR
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_OVERHEAT,          140, GRASS,         SPECIAL,   90,  5,   0      ;LEAF_STORM
+	move EFFECT_NORMAL_HIT,        120, GRASS,         PHYSICAL,  85, 10,   0      ;POWER_WHIP
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;

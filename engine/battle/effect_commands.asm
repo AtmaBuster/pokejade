@@ -1061,7 +1061,14 @@ BattleCommand_doturn:
 	and PP_MASK
 	jr z, .out_of_pp
 	dec [hl]
+	farcall GetOpponentAbility
 	ld b, 0
+	cp PRESSURE
+	ret nz
+	ld a, [hl]
+	and a
+	ret z
+	dec [hl]
 	ret
 
 .wild
@@ -1990,7 +1997,7 @@ BattleCommand_lowersub:
 BattleCommand_moveanim:
 	call BattleCommand_lowersub
 	call BattleCommand_moveanimnosub
-	jmp BattleCommand_raisesub
+	jr BattleCommand_raisesub
 
 BattleCommand_moveanimnosub:
 	ld a, [wAttackMissed]

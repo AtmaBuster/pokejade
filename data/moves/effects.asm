@@ -1920,3 +1920,84 @@ Libra:
 	doturn
 	libra
 	endmove
+
+HammerArm:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	lowerstat SPEED
+	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove
+
+Superpower:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	lowerstat ATTACK
+	lowerstat DEFENSE
+	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove
+
+Overheat:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	lowerstat $10 | SP_ATTACK
+	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove
+
+BulkUp:
+	checkobedience
+	usedmovetext
+	doturn
+	forceraisestat ATTACK
+	forceraisestat DEFENSE
+	endmove
+
+Tickle:
+	checkobedience
+	usedmovetext
+	doturn
+	checkhit
+	loweroppstat ATTACK
+	loweroppstat DEFENSE
+	endmove

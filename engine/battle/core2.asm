@@ -49,3 +49,76 @@ GutsToxicBoostCheck:
 	pop bc
 	ret
 
+GetPlayerAbility:
+; if a is zero, ignore ability-cancelling effects
+	and a
+	ld a, [wBattleMonAbility]
+	ret z
+; ...
+	ret
+
+GetEnemyAbility:
+; if a is zero, ignore ability-cancelling effects
+	and a
+	ld a, [wEnemyMonAbility]
+	ret z
+; ...
+	ret
+
+GetUserAbility: ; TO-DO : check for Gastro Acid
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wBattleMonAbility]
+	jr z, .got_it
+	ld a, [wEnemyMonAbility]
+.got_it
+	ret
+
+GetOpponentAbility:
+	call GetUserAbility
+	sub MOLD_BREAKER
+	ret z
+	call SwitchTurn
+	call GetUserAbility
+	push af
+	call SwitchTurn
+	pop af
+	ret
+
+AnimateUserAbility:
+	ldh a, [hBattleTurn]
+	and a
+	jr z, AnimatePlayerAbility
+	jr AnimateEnemyAbility
+
+AnimateOppAbility:
+	ldh a, [hBattleTurn]
+	and a
+	jr z, AnimateEnemyAbility
+AnimatePlayerAbility:
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .Animate
+	call SwitchTurn
+	call .Animate
+	jmp SwitchTurn
+.Animate
+	xor a
+	call GetPlayerAbility
+	call GetAbilityName
+	ld hl, TempPlayerAbilityText
+	farjp StdBattleTextbox
+
+AnimateEnemyAbility:
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .Animate
+	call SwitchTurn
+	call .Animate
+	jmp SwitchTurn
+.Animate
+	xor a
+	call GetEnemyAbility
+	call GetAbilityName
+	ld hl, TempPlayerAbilityText
+	farjp StdBattleTextbox

@@ -1,4 +1,11 @@
 BattleCommand_selfdestruct:
+	farcall GetUserAbility
+	cp DAMP
+	jr z, .fail_user
+	farcall GetOpponentAbility
+	cp DAMP
+	jr z, .fail_opp
+
 	farcall PlayerStats_Selfdestruct
 	ld a, BATTLEANIM_PLAYER_DAMAGE
 	ld [wNumHits], a
@@ -27,3 +34,14 @@ BattleCommand_selfdestruct:
 	farcall DrawEnemyHUD
 	call WaitBGMap
 	jmp RefreshBattleHuds
+
+.fail_user
+	farcall AnimateUserAbility
+	jr .fail
+
+.fail_opp
+	farcall AnimateOppAbility
+.fail
+	call AnimateFailedMove
+	call PrintButItFailed
+	jmp EndMoveEffect

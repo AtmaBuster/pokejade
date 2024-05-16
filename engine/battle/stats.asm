@@ -45,8 +45,13 @@ FarChangeStat:
 .no_secondary
 	bit STAT_TARGET_F, b
 	jr nz, .is_target
-	; TO-DO : Contrary
-	;GetUserAbility
+	farcall GetUserAbility
+	cp SIMPLE
+	jr nz, .skip_simple_user
+	call DoubleStatChange
+	jmp .ability_done
+
+.skip_simple_user
 	cp CONTRARY
 	jmp nz, .ability_done
 	ld a, b
@@ -57,6 +62,12 @@ FarChangeStat:
 .is_target
 	; TO-DO ; Contrary / Mold Breaker
 	;call GetOpponentAbility
+	cp SIMPLE
+	jr nz, .skip_simple_target
+	call DoubleStatChange
+	jmp .ability_done
+
+.skip_simple_target
 	cp CONTRARY
 	jr nz, .no_target_contrary
 	ld a, b
@@ -218,6 +229,27 @@ DoPrintStatChange:
 .printmsg
 	jmp StdBattleTextbox
 
+DoubleStatChange:
+	push bc
+	ld a, [wChangedStat]
+	and $f0
+	swap a
+	inc a
+	add a
+	dec a
+	cp $10
+	jr c, .ok_change
+	ld a, $0f
+.ok_change
+	swap a
+	ld b, a
+	ld a, [wChangedStat]
+	and $0f
+	or b
+	ld [wChangedStat], a
+	pop bc
+	ret
+
 GetStatRaiseMessage:
 	ld a, [wChangedStat]
 	and $f0
@@ -323,6 +355,7 @@ DoChangeStat:
 	ret
 
 PlayStatChangeAnim:
+	ret ; TO-DO
 	farcall CheckBattleScene
 	ret c
 	bit STAT_LOWER_F, b

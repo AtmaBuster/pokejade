@@ -158,4 +158,9 @@
 	const EFFECT_FLY
 	const EFFECT_DEFENSE_CURL ; 9C
 	const EFFECT_LIBRA        ; 9D
+	const EFFECT_HAMMER_ARM   ; 9E
+	const EFFECT_SUPERPOWER   ; 9F
+	const EFFECT_OVERHEAT     ; A0
+	const EFFECT_BULK_UP      ; A1
+	const EFFECT_TICKLE       ; A2
 DEF NUM_MOVE_EFFECTS EQU const_value

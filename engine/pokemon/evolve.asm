@@ -917,6 +917,20 @@ EvoTest_LevelMove:
 	push hl
 	ld h, a
 	ld l, b
+; SPECIAL: check for ANCIENTPOWER & TANGELA
+; If true, check for POWER_WHIP in list before ANCIENTPOWER
+; If that exists, fail (prioritize list order)
+	cphl16 ANCIENTPOWER
+	jr nz, .skip_ancientpower_check
+	ld a, [wEvolutionOldSpecies]
+	call GetPokemonIndexFromID
+	cphl16 TANGELA
+	ld hl, ANCIENTPOWER
+	jr nz, .skip_ancientpower_check
+	call .PowerWhipCheck
+	jr c, .fail
+	ld hl, ANCIENTPOWER
+.skip_ancientpower_check
 	call GetMoveIDFromIndex
 	ld b, a
 	pop hl
@@ -939,6 +953,33 @@ EvoTest_LevelMove:
 
 .success
 	pop hl
+	scf
+	ret
+
+.PowerWhipCheck:
+	ld hl, ANCIENTPOWER
+	call GetMoveIDFromIndex
+	ld b, a
+	ld hl, POWER_WHIP
+	call GetMoveIDFromIndex
+	ld c, a
+	ld e, 4
+	ld hl, wTempMonMoves
+.power_whip_loop
+	ld a, [hli]
+	and a
+	jr z, .no_power_whip
+	cp b
+	jr z, .no_power_whip
+	cp c
+	jr z, .yes_power_whip
+	dec e
+	jr nz, .power_whip_loop
+.no_power_whip
+	and a
+	ret
+
+.yes_power_whip
 	scf
 	ret
 
