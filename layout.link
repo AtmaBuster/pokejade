@@ -285,6 +285,8 @@ ROMX $6b
 ROMX $6c
 	"Map Scripts 25"
 ROMX $6d
+	"Battle Core 2"
+	"Battle Ability"
 ROMX $6e
 	"Pokedex Entries 065-128"
 ROMX $6f

@@ -333,7 +333,11 @@ SECTION UNION "Miscellaneous", WRAM0
 
 ; battle data
 wBattle::
+UNION
+wTempMoveStruct:: move_struct wTempMoveStruct
+NEXTU
 wEnemyMoveStruct::  move_struct wEnemyMoveStruct
+ENDU
 wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 
 wEnemyMonNickname::  ds MON_NAME_LENGTH

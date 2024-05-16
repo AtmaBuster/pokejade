@@ -4909,7 +4909,9 @@ BattleCommand_forceswitch:
 	call StdBattleTextbox
 
 	ld hl, SpikesDamage
-	jmp CallBattleCore
+	call CallBattleCore
+
+	farjp ActivateSwitchInAbilities
 
 .switch_fail
 	jmp .fail
@@ -5003,7 +5005,9 @@ BattleCommand_forceswitch:
 	call StdBattleTextbox
 
 	ld hl, SpikesDamage
-	jmp CallBattleCore
+	call CallBattleCore
+
+	farjp ActivateSwitchInAbilities
 
 .fail
 	call BattleCommand_lowersub

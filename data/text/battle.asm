@@ -1155,3 +1155,25 @@ TempEnemyAbilityText:
 	text_ram wStringBuffer1
 	text "!"
 	prompt
+
+TraceText:
+	text "<USER>'s"
+	line "TRACE copied"
+	cont "<TARGET>'s"
+	cont "@"
+	text_ram wStringBuffer1
+	text "!"
+	prompt
+
+ProtectedFromIntimidateText:
+	text "<TARGET>'s"
+	line "@"
+	text_ram wStringBuffer1
+	text ""
+	cont "protected it!"
+	prompt
+
+AnticipationText:
+	text "<USER>"
+	line "shuddered!"
+	prompt

@@ -602,3 +602,8 @@ INCLUDE "engine/events/trainer_stars.asm"
 SECTION "Battle Stat Changes", ROMX
 
 INCLUDE "engine/battle/stats.asm"
+
+
+SECTION "Battle Ability", ROMX
+
+INCLUDE "engine/battle/ability.asm"

@@ -65,6 +65,8 @@ BattleCommand_batonpass:
 	ld hl, SpikesDamage
 	call CallBattleCore
 
+	farcall ActivateSwitchInAbilities
+
 	jr ResetBatonPassStatus
 
 BatonPass_LinkPlayerSwitch:

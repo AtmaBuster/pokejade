@@ -54,9 +54,9 @@ DoBattle:
 	call SafeLoadTempTilemapToTilemap
 	ld a, [wBattleType]
 	cp BATTLETYPE_DEBUG
-	jr z, .tutorial_debug
+	jp z, .tutorial_debug
 	cp BATTLETYPE_TUTORIAL
-	jr z, .tutorial_debug
+	jp z, .tutorial_debug
 	xor a
 	ld [wCurPartyMon], a
 .loop2
@@ -94,12 +94,13 @@ DoBattle:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
+	farcall ActivateSwitchInAbilities
 	ld a, [wLinkMode]
 	and a
-	jr z, BattleTurn
+	jr z, DoEnemyInitSendOut
 	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
-	jr nz, BattleTurn
+	jr nz, DoEnemyInitSendOut
 	xor a
 	ld [wEnemySwitchMonIndex], a
 	call NewEnemyMonStatus
@@ -108,6 +109,7 @@ DoBattle:
 	call EnemySwitch
 	call SetEnemyTurn
 	call SpikesDamage
+	farcall ActivateSwitchInAbilities
 	jr BattleTurn
 
 .tutorial_debug
@@ -141,6 +143,10 @@ WildFled_EnemyFled_LinkBattleCanceled:
 	ld [wBattleEnded], a
 	ret
 
+DoEnemyInitSendOut:
+	call SetEnemyTurn
+	call SpikesDamage
+	farcall ActivateSwitchInAbilities
 BattleTurn:
 .loop
 	call CheckContestBattleOver
@@ -458,6 +464,7 @@ DetermineMoveOrder:
 	farcall AI_Switch
 	call SetEnemyTurn
 	call SpikesDamage
+	farcall ActivateSwitchInAbilities
 	jmp .enemy_first
 
 .use_move
@@ -2321,6 +2328,7 @@ EnemyPartyMonEntrance:
 	call ResetBattleParticipants
 	call SetEnemyTurn
 	call SpikesDamage
+	farcall ActivateSwitchInAbilities
 	xor a
 	ld [wEnemyMoveStruct + MOVE_ANIM], a
 	ld [wBattlePlayerAction], a
@@ -2736,6 +2744,7 @@ ForcePlayerMonChoice:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
+	farcall ActivateSwitchInAbilities
 	ld a, $1
 	and a
 	ld c, a
@@ -2756,7 +2765,8 @@ PlayerPartyMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	jmp SpikesDamage
+	call SpikesDamage
+	farjp ActivateSwitchInAbilities
 
 SetUpBattlePartyMenu:
 	call ClearBGPalettes
@@ -5123,7 +5133,8 @@ PlayerSwitch:
 EnemyMonEntrance:
 	farcall AI_Switch
 	call SetEnemyTurn
-	jmp SpikesDamage
+	call SpikesDamage
+	farjp ActivateSwitchInAbilities
 
 BattleMonEntrance:
 	call WithdrawMonText
@@ -5155,6 +5166,7 @@ BattleMonEntrance:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
+	farcall ActivateSwitchInAbilities
 	ld a, $2
 	ld [wMenuCursorY], a
 	ret
@@ -5178,7 +5190,8 @@ PassedBattleMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	jmp SpikesDamage
+	call SpikesDamage
+	farjp ActivateSwitchInAbilities
 
 BattleMenu_Run:
 	call SafeLoadTempTilemapToTilemap
