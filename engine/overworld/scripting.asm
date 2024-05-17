@@ -1175,10 +1175,7 @@ Script_reloadmapafterbattle:
 
 .notblackedout
 	bit 0, d
-	jr z, .was_wild
-	farcall MomTriesToBuySomething
-	jr .done
-
+	jr nz, .done
 .was_wild
 	ld a, [wBattleResult]
 	bit BATTLERESULT_BOX_FULL, a

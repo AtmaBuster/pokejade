@@ -859,27 +859,6 @@ _ContestJudging_ThirdPlaceScoreText::
 	text " points!"
 	prompt
 
-_MagikarpGuruMeasureText::
-	text "Let me measure"
-	line "that MAGIKARP."
-
-	para "…Hm, it measures"
-	line "@"
-	text_ram wStringBuffer1
-	text "."
-	prompt
-
-_KarpGuruRecordText::
-	text "CURRENT RECORD"
-
-	para "@"
-	text_ram wStringBuffer1
-	text " caught by"
-	line "@"
-	text_ram wMagikarpRecordHoldersName
-	text_promptbutton
-	text_end
-
 _LuckyNumberMatchPartyText::
 	text "Congratulations!"
 

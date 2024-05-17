@@ -2922,7 +2922,8 @@ wFakeLinkTradeEvo:: db
 
 wCurMapSceneScriptPointer:: dw
 
-wCurCaller:: dw
+	ds 2
+
 wCurMapWarpEventCount:: db
 wCurMapWarpEventsPointer:: dw
 wCurMapCoordEventCount:: db
@@ -3124,11 +3125,18 @@ wRoamMons_CurMapGroup:: db
 wRoamMons_LastMapNumber:: db
 wRoamMons_LastMapGroup:: db
 
-wBestMagikarpLengthFeet::
-wBestMagikarpLengthInches::
-wMagikarpRecordHoldersName:: db
+	ds 1
 
 wPokemonDataEnd::
+
+SECTION "Berry Objects", WRAMX
+
+wBerryObjects::
+FOR n,1, 16
+wBerryObject{d:n}:: berry_object_struct wBerryObject{d:n}
+ENDR
+wTempBerryObject:: map_object wTempBerry
+
 wGameDataEnd::
 
 

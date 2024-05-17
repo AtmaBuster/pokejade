@@ -463,3 +463,10 @@ MACRO battle_bg_effect
 \1BattleTurn::     db
 \1Param::          db
 ENDM
+
+MACRO berry_object_struct
+\1StructID:: db
+\1YCoord:: db
+\1XCoord:: db
+\1SoilID:: db
+ENDM

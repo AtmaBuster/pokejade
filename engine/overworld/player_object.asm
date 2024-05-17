@@ -282,6 +282,10 @@ InitializeVisibleSprites:
 	ret
 
 CheckObjectEnteringVisibleRange::
+	call .CheckObject
+	jmp CheckBerryEnteringVisibleRange
+
+.CheckObject:
 	ld a, [wPlayerStepDirection]
 	cp STANDING
 	ret z
@@ -405,6 +409,102 @@ CheckObjectEnteringVisibleRange::
 	cp NUM_OBJECTS
 	jr nz, .loop_h
 	ret
+
+CheckBerryEnteringVisibleRange:
+	ld a, [wPlayerStepDirection]
+	cp STANDING
+	ret z
+	ld hl, .dw
+	jmp JumpTable
+
+.dw
+	dw .Down
+	dw .Up
+	dw .Left
+	dw .Right
+
+.Up:
+	ld a, [wYCoord]
+	dec a
+	jr .Vertical
+
+.Down:
+	ld a, [wYCoord]
+	add 9
+.Vertical:
+	ld d, a
+	ld a, [wXCoord]
+	ld e, a
+	ld bc, wBerryObjects
+	ld a, 1
+.loop_v
+	or $80
+	ldh [hMapObjectIndex], a
+	ld hl, BERRYOBJECT_SOIL_ID
+	add hl, bc
+	ld a, [hl]
+	cp -1
+	jr z, .next_v
+	ld hl, BERRYOBJECT_Y_COORD
+	add hl, bc
+	ld a, d
+	cp [hl]
+	jr nz, .next_v
+	ld hl, BERRYOBJECT_STRUCT_ID
+	add hl, bc
+	ld a, [hl]
+	cp -1
+	jr nz, .next_v
+	ld hl, BERRYOBJECT_X_COORD
+	add hl, bc
+	ld a, [hl]
+	inc a
+	sub e
+	jr c, .next_v
+	cp MAPOBJECT_SCREEN_HEIGHT
+	jr nc, .next_v
+	push de
+	push bc
+	call .MakeTempMapObjectStruct
+	ld bc, wTempBerryObject
+	call CopyObjectStruct
+	pop bc
+	pop de
+.next_v
+	ld hl, BERRYOBJECT_LENGTH
+	add hl, bc
+	ld b, h
+	ld c, l
+	ldh a, [hMapObjectIndex]
+	and $7f
+	inc a
+	cp 16 ; num berry objects
+	jr nz, .loop_v
+	ret
+
+.Left:
+.Right:
+	ret
+
+.MakeTempMapObjectStruct:
+	push bc
+	ld hl, .BerryObjectTemplate
+	ld de, wTempBerryObject
+	ld bc, .BerryObjectTemplateEnd - .BerryObjectTemplate
+	rst CopyBytes
+	pop bc
+	ld hl, BERRYOBJECT_Y_COORD
+	add hl, bc
+	ld a, [hli]
+	ld d, [hl]
+	ld hl, wTempBerryObjectYCoord
+	ld [hli], a
+	ld [hl], d
+	ret
+
+.BerryObjectTemplate:
+	object_event 0, 0, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+.BerryObjectTemplateEnd
 
 CopyTempObjectToObjectStruct:
 	ld a, [wTempObjectCopyMapObjectIndex]

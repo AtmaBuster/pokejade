@@ -68,11 +68,10 @@ DEF STRING_BUFFER_LENGTH EQU 19
 	const VAR_SPECIALPHONECALL ; 14
 	const VAR_BT_WIN_STREAK    ; 15
 	const VAR_KURT_APRICORNS   ; 16
-	const VAR_CALLERID         ; 17
-	const VAR_BLUECARDBALANCE  ; 18
-	const VAR_BUENASPASSWORD   ; 19
-	const VAR_KENJI_BREAK      ; 1a
-	const VAR_DEXUNCAUGHT      ; 1b
+	const VAR_BLUECARDBALANCE  ; 17
+	const VAR_BUENASPASSWORD   ; 18
+	const VAR_KENJI_BREAK      ; 19
+	const VAR_DEXUNCAUGHT      ; 1a
 DEF NUM_VARS EQU const_value
 
 ; variable action types

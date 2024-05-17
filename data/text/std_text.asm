@@ -377,17 +377,3 @@ HappinessText1:
 	para "If you aren't"
 	line "nice, it'll pout."
 	done
-
-RegisteredNumber1Text:
-	text "<PLAYER> registered"
-	line "@"
-	text_ram wStringBuffer3
-	text "'s number."
-	done
-
-RegisteredNumber2Text:
-	text "<PLAYER> registered"
-	line "@"
-	text_ram wStringBuffer3
-	text "'s number."
-	done

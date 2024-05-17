@@ -211,7 +211,6 @@ _ResetWRAM:
 	call CloseSRAM
 
 	call LoadOrRegenerateLuckyIDNumber
-	call InitializeMagikarpHouse
 
 	xor a
 	ld [wMonType], a
@@ -258,18 +257,6 @@ endc
 	dec a
 	ld [hl], a
 	ret
-
-InitializeMagikarpHouse:
-	ld hl, wBestMagikarpLengthFeet
-	ld a, $3
-	ld [hli], a
-	ld a, $6
-	ld [hli], a
-	ld de, .Ralph
-	jmp CopyName2
-
-.Ralph:
-	db "RALPH@"
 
 InitializeNPCNames:
 	ld hl, .Rival

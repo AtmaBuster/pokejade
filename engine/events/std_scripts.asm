@@ -29,26 +29,6 @@ StdScripts::
 	add_stdscript BugContestResultsWarpScript
 	add_stdscript BugContestResultsScript
 	add_stdscript InitializeEventsScript
-	add_stdscript AskNumber1MScript
-	add_stdscript AskNumber2MScript
-	add_stdscript RegisteredNumberMScript
-	add_stdscript NumberAcceptedMScript
-	add_stdscript NumberDeclinedMScript
-	add_stdscript PhoneFullMScript
-	add_stdscript RematchMScript
-	add_stdscript GiftMScript
-	add_stdscript PackFullMScript
-	add_stdscript RematchGiftMScript
-	add_stdscript AskNumber1FScript
-	add_stdscript AskNumber2FScript
-	add_stdscript RegisteredNumberFScript
-	add_stdscript NumberAcceptedFScript
-	add_stdscript NumberDeclinedFScript
-	add_stdscript PhoneFullFScript
-	add_stdscript RematchFScript
-	add_stdscript GiftFScript
-	add_stdscript PackFullFScript
-	add_stdscript RematchGiftFScript
 	add_stdscript GymStatue1Script
 	add_stdscript GymStatue2Script
 	add_stdscript ReceiveItemScript
@@ -478,77 +458,6 @@ InitializeEventsScript:
 	jr .loop
 
 INCLUDE "data/events/default_flags.asm"
-
-AskNumber1MScript:
-	special RandomPhoneMon
-	readvar VAR_CALLERID
-
-AskNumber2MScript:
-	special RandomPhoneMon
-	readvar VAR_CALLERID
-
-RegisteredNumberMScript:
-	farwritetext RegisteredNumber1Text
-	playsound SFX_REGISTER_PHONE_NUMBER
-	waitsfx
-	promptbutton
-	end
-
-NumberAcceptedMScript:
-	readvar VAR_CALLERID
-
-NumberDeclinedMScript:
-	readvar VAR_CALLERID
-
-PhoneFullMScript:
-	readvar VAR_CALLERID
-
-RematchMScript:
-	readvar VAR_CALLERID
-
-GiftMScript:
-	readvar VAR_CALLERID
-
-PackFullMScript:
-	readvar VAR_CALLERID
-
-RematchGiftMScript:
-	opentext
-	readvar VAR_CALLERID
-
-AskNumber1FScript:
-	readvar VAR_CALLERID
-
-AskNumber2FScript:
-	readvar VAR_CALLERID
-
-RegisteredNumberFScript:
-	farwritetext RegisteredNumber2Text
-	playsound SFX_REGISTER_PHONE_NUMBER
-	waitsfx
-	promptbutton
-	end
-
-NumberAcceptedFScript:
-	readvar VAR_CALLERID
-
-NumberDeclinedFScript:
-	readvar VAR_CALLERID
-
-PhoneFullFScript:
-	readvar VAR_CALLERID
-
-RematchFScript:
-	readvar VAR_CALLERID
-
-GiftFScript:
-	readvar VAR_CALLERID
-
-PackFullFScript:
-	readvar VAR_CALLERID
-
-RematchGiftFScript:
-	readvar VAR_CALLERID
 
 GymStatue1Script:
 	getcurlandmarkname STRING_BUFFER_3

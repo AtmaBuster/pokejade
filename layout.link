@@ -45,6 +45,7 @@ ROMX $05
 	"bank5"
 	"Load Map Part"
 ROMX $06
+	"Day Care"
 	"Tileset Data 1"
 	"Prism tilemap copy functions"
 	"Pics 20"
@@ -345,6 +346,7 @@ WRAMX 1
 	"More WRAM 1"
 	"Enemy Party"
 	"Party"
+	"Berry Objects"
 	"Used Storage"
 	"Debug WRAM"
 WRAMX 2

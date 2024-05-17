@@ -416,12 +416,10 @@ SECTION "bank3F", ROMX
 
 INCLUDE "engine/link/time_capsule.asm"
 INCLUDE "engine/link/time_capsule_2.asm"
-INCLUDE "engine/events/magikarp.asm"
 INCLUDE "engine/battle/hidden_power.asm"
 INCLUDE "engine/battle/misc.asm"
 INCLUDE "engine/tilesets/tileset_anims.asm"
 INCLUDE "engine/events/npc_trade.asm"
-INCLUDE "engine/events/mom_phone.asm"
 
 
 SECTION "bank41", ROMX
