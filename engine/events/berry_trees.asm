@@ -451,9 +451,10 @@ InitBerryPlots:
 	ld a, [de]
 	inc de
 	ld [hli], a
-; last growth time ; TO-DO
-	xor a
+; last growth time
+	ld a, [wCurDay]
 	ld [hli], a
+	ldh a, [hHours]
 	ld [hli], a
 ; mulch, water
 	xor a
