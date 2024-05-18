@@ -76,10 +76,11 @@ sBackupCheckValue1:: db ; loaded with SAVE_CHECK_VALUE_1, used to check save cor
 sBackupSaveData::
 
 sBackupGameData::
-sBackupPlayerData::  ds wPlayerDataEnd - wPlayerData
-sBackupCurMapData::  ds wCurMapDataEnd - wCurMapData
-sBackupPokemonData:: ds wPokemonDataEnd - wPokemonData
-sBackupTMHMData::    ds wTMsHMsEnd - wTMsHMs
+sBackupPlayerData::   ds wPlayerDataEnd - wPlayerData
+sBackupCurMapData::   ds wCurMapDataEnd - wCurMapData
+sBackupPokemonData::  ds wPokemonDataEnd - wPokemonData
+sBackupTMHMData::     ds wTMsHMsEnd - wTMsHMs
+sBackupBerryObjects:: ds wBerryObjectsEnd - wBerryObjects
 sBackupGameDataEnd::
 
 sBackupPokemonIndexTable:: ds wPokemonIndexTableEnd - wPokemonIndexTable
@@ -108,10 +109,11 @@ sCheckValue1:: db ; loaded with SAVE_CHECK_VALUE_1, used to check save corruptio
 sSaveData::
 
 sGameData::
-sPlayerData::  ds wPlayerDataEnd - wPlayerData
-sCurMapData::  ds wCurMapDataEnd - wCurMapData
-sPokemonData:: ds wPokemonDataEnd - wPokemonData
-sTMHMData::    ds wTMsHMsEnd - wTMsHMs
+sPlayerData::   ds wPlayerDataEnd - wPlayerData
+sCurMapData::   ds wCurMapDataEnd - wCurMapData
+sPokemonData::  ds wPokemonDataEnd - wPokemonData
+sTMHMData::     ds wTMsHMsEnd - wTMsHMs
+sBerryObjects:: ds wBerryObjectsEnd - wBerryObjects
 sGameDataEnd::
 
 sPokemonIndexTable:: ds wPokemonIndexTableEnd - wPokemonIndexTable

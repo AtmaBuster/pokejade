@@ -456,6 +456,7 @@ CheckTimeEvents:
 	ret
 
 .do_daily
+	farcall CheckBerryGrowthTick
 	farcall CheckDailyResetTimer
 	farcall CheckPokerusTick
 	ret c

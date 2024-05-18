@@ -366,6 +366,10 @@ SavePlayerData:
 	ld de, sCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	rst CopyBytes
+	ld hl, wBerryObjects
+	ld de, sBerryObjects
+	ld bc, wBerryObjectsEnd - wBerryObjects
+	rst CopyBytes
 	jmp CloseSRAM
 
 SavePlayerStats:
@@ -498,6 +502,10 @@ SaveBackupPlayerData:
 	ld hl, wCurMapData
 	ld de, sBackupCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
+	rst CopyBytes
+	ld hl, wBerryObjects
+	ld de, sBackupBerryObjects
+	ld bc, wBerryObjectsEnd - wBerryObjects
 	rst CopyBytes
 	jmp CloseSRAM
 
@@ -766,6 +774,10 @@ LoadPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	rst CopyBytes
+	ld hl, sBerryObjects
+	ld de, wBerryObjects
+	ld bc, wBerryObjectsEnd - wBerryObjects
+	rst CopyBytes
 	call CloseSRAM
 	ld a, BANK(sBattleTowerChallengeState)
 	call OpenSRAM
@@ -900,6 +912,10 @@ LoadBackupPlayerData:
 	ld hl, sBackupCurMapData
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
+	rst CopyBytes
+	ld hl, sBackupBerryObjects
+	ld de, wBerryObjects
+	ld bc, wBerryObjectsEnd - wBerryObjects
 	rst CopyBytes
 	jmp CloseSRAM
 

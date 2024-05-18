@@ -57,17 +57,17 @@ ItemNames::
 	li "ELIXER"       ; 0037
 	li "MOOMOO MILK"  ; 0038
 	li "QUICK CLAW"   ; 0039
-	li "PSNCUREBERRY" ; 003A
+	li "PECHA BERRY"  ; 003A
 	li "GOLD LEAF"    ; 003B
 	li "SOFT SAND"    ; 003C
 	li "SHARP BEAK"   ; 003D
-	li "PRZCUREBERRY" ; 003E
-	li "BURNT BERRY"  ; 003F
-	li "ICE BERRY"    ; 0040
+	li "CHERI BERRY"  ; 003E
+	li "ASPEAR BERRY" ; 003F
+	li "RAWST BERRY"  ; 0040
 	li "POISON BARB"  ; 0041
 	li "KING'S ROCK"  ; 0042
-	li "BITTER BERRY" ; 0043
-	li "MINT BERRY"   ; 0044
+	li "PERSIM BERRY" ; 0043
+	li "CHESTO BERRY" ; 0044
 	li "RED APRICORN" ; 0045
 	li "TINYMUSHROOM" ; 0046
 	li "BIG MUSHROOM" ; 0047
@@ -92,7 +92,7 @@ ItemNames::
 	li "SMOKE BALL"   ; 005A
 	li "NEVERMELTICE" ; 005B
 	li "MAGNET"       ; 005C
-	li "MIRACLEBERRY" ; 005D
+	li "LUM BERRY"    ; 005D
 	li "PEARL"        ; 005E
 	li "BIG PEARL"    ; 005F
 	li "EVERSTONE"    ; 0060
@@ -125,7 +125,7 @@ ItemNames::
 	li "TERU-SAMA"    ; 007D
 	li "TERU-SAMA"    ; 007B
 	li "TERU-SAMA"    ; 007C
-	li "MYSTERYBERRY" ; 007E
+	li "LEPPA BERRY"  ; 007E
 	li "DRAGON SCALE" ; 007F
 	li "BERSERK GENE" ; 0080
 	li "TERU-SAMA"    ; 0083
@@ -141,8 +141,8 @@ ItemNames::
 	li "POLKADOT BOW" ; 008B
 	li "TERU-SAMA"    ; 008C
 	li "UP-GRADE"     ; 008D
-	li "BERRY"        ; 008E
-	li "GOLD BERRY"   ; 008F
+	li "ORAN BERRY"   ; 008E
+	li "SITRUS BERRY" ; 008F
 	li "TERU-SAMA"    ; 0091
 	li "TERU-SAMA"    ; 0090
 	li "BRICK PIECE"  ; 0092

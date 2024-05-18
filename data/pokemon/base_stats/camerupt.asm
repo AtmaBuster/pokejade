@@ -11,7 +11,7 @@
 	db GENDER_F50 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/camerupt/front.dimensions"
-	db MAGMA_ARMOR, SOLID_ROCK, ANGER_POINT ; abilities
+	db MAGMA_ARMOR, DROUGHT, ANGER_POINT ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_FAST ; growth rate
 	db 70 ; base happiness

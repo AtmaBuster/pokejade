@@ -44,15 +44,7 @@
 	const EVENT_SHALE_CITY_HELP_KID
 	const EVENT_ASKED_SHALE_GUARD_FOR_HELP
 	const EVENT_GOT_TM_FROM_ROUTEN02_YOUNGSTER
-; Unused: next 462 events
-
-	const_next 500
-; Berries
-	const EVENT_BERRY_PLOT_ROUTEN02_1
-	const EVENT_BERRY_PLOT_ROUTEN02_2
-	const EVENT_BERRY_PLOT_ROUTEN02_3
-	const EVENT_BERRY_PLOT_ROUTEN02_4
-; Unused: next 96 events
+; Unused: next 562 events
 
 	const_next 600
 ; Decorations

@@ -465,6 +465,10 @@ CheckBerryEnteringVisibleRange:
 	jr nc, .next_v
 	push de
 	push bc
+	ld hl, BERRYOBJECT_SOIL_ID
+	add hl, bc
+	ld a, [hl]
+	farcall SetBerryPlotVisited
 	call MakeTempBerryMapObjectStruct
 	ld bc, wTempBerryObject
 	call CopyObjectStruct
@@ -526,6 +530,10 @@ CheckBerryEnteringVisibleRange:
 	jr nc, .next_h
 	push de
 	push bc
+	ld hl, BERRYOBJECT_SOIL_ID
+	add hl, bc
+	ld a, [hl]
+	farcall SetBerryPlotVisited
 	call MakeTempBerryMapObjectStruct
 	ld bc, wTempBerryObject
 	call CopyObjectStruct

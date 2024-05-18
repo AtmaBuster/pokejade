@@ -66,17 +66,17 @@ ItemDescriptions1:
 	dw ElixerDesc       ; 0037
 	dw MoomooMilkDesc   ; 0038
 	dw QuickClawDesc    ; 0039
-	dw PsnCureBerryDesc ; 003A
+	dw PechaBerryDesc   ; 003A
 	dw GoldLeafDesc     ; 003B
 	dw SoftSandDesc     ; 003C
 	dw SharpBeakDesc    ; 003D
-	dw PrzCureBerryDesc ; 003E
-	dw BurntBerryDesc   ; 003F
-	dw IceBerryDesc     ; 0040
+	dw CheriBerryDesc   ; 003E
+	dw AspearBerryDesc  ; 003F
+	dw RawstBerryDesc   ; 0040
 	dw PoisonBarbDesc   ; 0041
 	dw KingsRockDesc    ; 0042
-	dw BitterBerryDesc  ; 0043
-	dw MintBerryDesc    ; 0044
+	dw PersimBerryDesc  ; 0043
+	dw ChestoBerryDesc  ; 0044
 	dw RedApricornDesc  ; 0045
 	dw TinyMushroomDesc ; 0046
 	dw BigMushroomDesc  ; 0047
@@ -101,7 +101,7 @@ ItemDescriptions1:
 	dw SmokeBallDesc    ; 005A
 	dw NeverMeltIceDesc ; 005B
 	dw MagnetDesc       ; 005C
-	dw MiracleBerryDesc ; 005D
+	dw LumBerryDesc     ; 005D
 	dw PearlDesc        ; 005E
 	dw BigPearlDesc     ; 005F
 	dw EverStoneDesc    ; 0060
@@ -134,7 +134,7 @@ ItemDescriptions1:
 	dw QuestionMarkDesc ; 007B
 	dw QuestionMarkDesc ; 007C
 	dw QuestionMarkDesc ; 007D
-	dw MysteryBerryDesc ; 007E
+	dw LeppaBerryDesc   ; 007E
 	dw DragonScaleDesc  ; 007F
 	dw BerserkGeneDesc  ; 0080
 	dw QuestionMarkDesc ; 0081
@@ -150,8 +150,8 @@ ItemDescriptions1:
 	dw PolkadotBowDesc  ; 008B
 	dw QuestionMarkDesc ; 008C
 	dw UpGradeDesc      ; 008D
-	dw BerryDesc        ; 008E
-	dw GoldBerryDesc    ; 008F
+	dw OranBerryDesc    ; 008E
+	dw SitrusBerryDesc    ; 008F
 	dw QuestionMarkDesc ; 0090
 	dw QuestionMarkDesc ; 0091
 	dw BrickPieceDesc   ; 0092
@@ -495,7 +495,7 @@ QuickClawDesc:
 	db   "Raises 1st strike"
 	next "ratio. (HOLD)@"
 
-PsnCureBerryDesc:
+PechaBerryDesc:
 	db   "A self-cure for"
 	next "poison. (HOLD)@"
 
@@ -511,15 +511,15 @@ SharpBeakDesc:
 	db   "Powers up flying-"
 	next "type moves. (HOLD)@"
 
-PrzCureBerryDesc:
+CheriBerryDesc:
 	db   "A self-cure for"
 	next "paralysis. (HOLD)@"
 
-BurntBerryDesc:
+AspearBerryDesc:
 	db   "A self-cure for"
 	next "freezing. (HOLD)@"
 
-IceBerryDesc:
+RawstBerryDesc:
 	db   "A self-heal for a"
 	next "burn. (HOLD)@"
 
@@ -531,11 +531,11 @@ KingsRockDesc:
 	db   "May make the foe"
 	next "flinch. (HOLD)@"
 
-BitterBerryDesc:
+PersimBerryDesc:
 	db   "A self-cure for"
 	next "confusion. (HOLD)@"
 
-MintBerryDesc:
+ChestoBerryDesc:
 	db   "A self-awakening"
 	next "for sleep. (HOLD)@"
 
@@ -622,7 +622,7 @@ MagnetDesc:
 	db   "Boosts electric-"
 	next "type moves. (HOLD)@"
 
-MiracleBerryDesc:
+LumBerryDesc:
 	db   "Cures all status"
 	next "problems. (HOLD)@"
 
@@ -750,7 +750,7 @@ LeftoversDesc:
 	db   "Restores HP during"
 	next "battle. (HOLD)@"
 
-MysteryBerryDesc:
+LeppaBerryDesc:
 	db   "A self-restore"
 	next "for PP. (HOLD)@"
 
@@ -818,11 +818,11 @@ UpGradeDesc:
 	db   "A mysterious box"
 	next "made by SILPH CO.@"
 
-BerryDesc:
+OranBerryDesc:
 	db   "A self-restore"
 	next "item. (10HP, HOLD)@"
 
-GoldBerryDesc:
+SitrusBerryDesc:
 	db   "A self-restore"
 	next "item. (30HP, HOLD)@"
 

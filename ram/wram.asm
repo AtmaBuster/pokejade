@@ -1733,6 +1733,16 @@ wMartItem10BCD:: ds 3
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
 
+; berry choose list
+wBerryList::
+wBerryListCount:: db
+wBerryListItems:: ds 3 * NUM_BERRY_ITEMS
+wBerryListEnd::
+wBerryListMenuItems:: ds NUM_BERRY_ITEMS + 2
+
+
+SECTION UNION "Miscellaneous WRAM 1", WRAMX
+
 ; town map data
 wTownMapPlayerIconLandmark:: db
 UNION
@@ -2909,7 +2919,8 @@ wTiffanyFightCount:: db
 wVanceFightCount::   db
 wWiltonFightCount::  db
 wParryFightCount::   db
-wErinFightCount::    db
+
+wLastBerryCheckHour:: db
 
 wEventFlags:: flag_array NUM_EVENTS
 
@@ -3143,6 +3154,7 @@ FOR n, 1, 17
 wBerryObject{d:n}:: berry_object_struct wBerryObject{d:n}
 ENDR
 wTempBerryObject:: map_object wTempBerry
+wBerryObjectsEnd::
 
 wGameDataEnd::
 

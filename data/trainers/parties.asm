@@ -3569,107 +3569,107 @@ PokefanMGroup:
 	next_list_item ; POKEFANM (1)
 	db "WILLIAM@", TRAINERTYPE_ITEM
 	trainer_mon  RAICHU, 14, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (2)
 	db "DEREK@", TRAINERTYPE_ITEM
 	trainer_mon  PIKACHU, 17, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (3)
 	db "ROBERT@", TRAINERTYPE_ITEM
 	trainer_mon  QUAGSIRE, 33, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (4)
 	db "JOSHUA@", TRAINERTYPE_ITEM
 	trainer_mon  PIKACHU, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  PIKACHU, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  PIKACHU, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  PIKACHU, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  PIKACHU, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  PIKACHU, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (5)
 	db "CARTER@", TRAINERTYPE_ITEM
 	trainer_mon  BULBASAUR, 29, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  CHARMANDER, 29, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  SQUIRTLE, 29, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (6)
 	db "TREVOR@", TRAINERTYPE_ITEM
 	trainer_mon  PSYDUCK, 33, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (7)
 	db "BRANDON@", TRAINERTYPE_ITEM
 	trainer_mon  SNUBBULL, 13, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (8)
 	db "JEREMY@", TRAINERTYPE_ITEM
 	trainer_mon  MEOWTH, 28, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  MEOWTH, 28, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  MEOWTH, 28, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (9)
 	db "COLIN@", TRAINERTYPE_ITEM
 	trainer_mon  DELIBIRD, 32, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (10)
 	db "DEREK@", TRAINERTYPE_ITEM
 	trainer_mon  PIKACHU, 19, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (11)
 	db "DEREK@", TRAINERTYPE_ITEM
 	trainer_mon  PIKACHU, 36, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (12)
 	db "ALEX@", TRAINERTYPE_ITEM
 	trainer_mon  NIDOKING, 29, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  SLOWKING, 29, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  SEAKING, 29, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (13)
 	db "REX@", TRAINERTYPE_ITEM
 	trainer_mon  PHANPY, 35, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANM (14)
 	db "ALLAN@", TRAINERTYPE_ITEM
 	trainer_mon  TEDDIURSA, 35, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	end_list_items
@@ -3784,45 +3784,45 @@ PokefanFGroup:
 	next_list_item ; POKEFANF (1)
 	db "BEVERLY@", TRAINERTYPE_ITEM
 	trainer_mon  SNUBBULL, 14, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANF (2)
 	db "RUTH@", TRAINERTYPE_ITEM
 	trainer_mon  PIKACHU, 17, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANF (3)
 	db "BEVERLY@", TRAINERTYPE_ITEM
 	trainer_mon  SNUBBULL, 18, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANF (4)
 	db "BEVERLY@", TRAINERTYPE_ITEM
 	trainer_mon  GRANBULL, 30, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANF (5)
 	db "GEORGIA@", TRAINERTYPE_ITEM
 	trainer_mon  SENTRET, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  SENTRET, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  SENTRET, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  FURRET, 28, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	trainer_mon  SENTRET, 23, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	next_list_item ; POKEFANF (6)
 	db "JAIME@", TRAINERTYPE_ITEM
 	trainer_mon  MEOWTH, 16, NO_ABILITY, MALE
-	    mon_item BERRY
+	    mon_item ORAN_BERRY
 	db -1 ; end
 
 	end_list_items

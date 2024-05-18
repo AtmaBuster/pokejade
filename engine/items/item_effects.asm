@@ -2647,10 +2647,6 @@ RestorePP:
 	cphl16 MAX_ETHER
 	jr z, .restore_all
 
-	ld c, 5
-	cphl16 MYSTERYBERRY
-	jr z, .restore_some
-
 	ld c, 10
 
 .restore_some

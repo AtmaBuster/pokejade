@@ -63,17 +63,17 @@
 	const ELIXER       ; 0037
 	const MOOMOO_MILK  ; 0038
 	const QUICK_CLAW   ; 0039
-	const PSNCUREBERRY ; 003A
+	const PECHA_BERRY  ; 003A
 	const GOLD_LEAF    ; 003B
 	const SOFT_SAND    ; 003C
 	const SHARP_BEAK   ; 003D
-	const PRZCUREBERRY ; 003E
-	const BURNT_BERRY  ; 003F
-	const ICE_BERRY    ; 0040
+	const CHERI_BERRY  ; 003E
+	const ASPEAR_BERRY ; 003F
+	const RAWST_BERRY  ; 0040
 	const POISON_BARB  ; 0041
 	const KINGS_ROCK   ; 0042
-	const BITTER_BERRY ; 0043
-	const MINT_BERRY   ; 0044
+	const PERSIM_BERRY ; 0043
+	const CHESTO_BERRY ; 0044
 	const RED_APRICORN ; 0045
 	const TINYMUSHROOM ; 0046
 	const BIG_MUSHROOM ; 0047
@@ -98,7 +98,7 @@
 	const SMOKE_BALL   ; 005A
 	const NEVERMELTICE ; 005B
 	const MAGNET       ; 005C
-	const MIRACLEBERRY ; 005D
+	const LUM_BERRY    ; 005D
 	const PEARL        ; 005E
 	const BIG_PEARL    ; 005F
 	const EVERSTONE    ; 0060
@@ -131,7 +131,7 @@
 	const ITEM_93      ; 007B
 	const ITEM_94      ; 007C
 	const ITEM_95      ; 007D
-	const MYSTERYBERRY ; 007E
+	const LEPPA_BERRY  ; 007E
 	const DRAGON_SCALE ; 007F
 	const BERSERK_GENE ; 0080
 	const ITEM_99      ; 0081
@@ -147,8 +147,8 @@
 	const POLKADOT_BOW ; 008B
 	const ITEM_AB      ; 008C
 	const UP_GRADE     ; 008D
-	const BERRY        ; 008E
-	const GOLD_BERRY   ; 008F
+	const ORAN_BERRY   ; 008E
+	const SITRUS_BERRY ; 008F
 	const ITEM_B0      ; 0090
 	const ITEM_B3      ; 0091
 	const BRICK_PIECE  ; 0092
