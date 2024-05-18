@@ -469,6 +469,8 @@ CheckBerryEnteringVisibleRange:
 	add hl, bc
 	ld a, [hl]
 	farcall SetBerryPlotVisited
+	ldh a, [hMapObjectIndex]
+	and $3f
 	call MakeTempBerryMapObjectStruct
 	ld bc, wTempBerryObject
 	call CopyObjectStruct
@@ -534,6 +536,8 @@ CheckBerryEnteringVisibleRange:
 	add hl, bc
 	ld a, [hl]
 	farcall SetBerryPlotVisited
+	ldh a, [hMapObjectIndex]
+	and $3f
 	call MakeTempBerryMapObjectStruct
 	ld bc, wTempBerryObject
 	call CopyObjectStruct
@@ -554,6 +558,7 @@ CheckBerryEnteringVisibleRange:
 	ret
 
 MakeNthBerryMapObjectStruct:
+	push af
 	dec a
 	and $3f
 	ld hl, wBerryObjects
@@ -561,7 +566,9 @@ MakeNthBerryMapObjectStruct:
 	rst AddNTimes
 	ld b, h
 	ld c, l
+	pop af
 MakeTempBerryMapObjectStruct:
+	push af
 	push bc
 	ld hl, .BerryObjectTemplate
 	ld de, wTempBerryObject
@@ -579,11 +586,17 @@ MakeTempBerryMapObjectStruct:
 	add hl, bc
 	ld a, [hl]
 	ld [wTempBerryObjectScript], a
+	ld hl, wTempBerryObjectSprite
+	ld d, [hl]
+	pop af
+	dec a
+	add d
+	ld [hl], a
 	ret
 
 .BerryObjectTemplate:
 	db $ff
-	object_event 0, 0, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_BERRY, 0, 0, -1
+	object_event 0, 0, SPRITE_BERRY_TREE_1, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_BERRY, 0, 0, -1
 .BerryObjectTemplateEnd
 
 CopyTempObjectToObjectStruct:

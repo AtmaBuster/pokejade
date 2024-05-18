@@ -685,3 +685,53 @@ ENDC
 	ldh a, [hHours]
 	ld [hl], a
 	ret
+
+GetBerrySpriteGFXPointer:
+	ld hl, wBerryObject1SoilID
+	ld bc, 4 ; TO-DO
+	rst AddNTimes
+	ld e, [hl]
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBerryTrees)
+	ldh [rSVBK], a
+	ld hl, wBerryTrees
+	ld bc, BERRYTREE_STRUCT_LEN
+	ld a, e
+	rst AddNTimes
+	ld b, h
+	ld c, l
+	ld hl, BERRYTREE_GROWTH_STAGE
+	add hl, bc
+	ld a, [hl]
+	and BERRYTREE_GROWTH_STAGE_MASK
+	cp BERRYGROWTH_STAGE1
+	jr c, .generic
+
+	ld hl, BERRYTREE_PLANTED_BERRY
+	add hl, bc
+	push af
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	call GetBerryData
+	inc hl
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld bc, $40
+	pop af
+	sub 3
+	rst AddNTimes
+	jr .got_it
+
+.generic
+	ld hl, GenericBerryGFX
+	ld bc, $40
+	rst AddNTimes
+.got_it
+	ld b, BANK(GenericBerryGFX) ; all in the same bank
+	pop af
+	ldh [rSVBK], a
+	ret

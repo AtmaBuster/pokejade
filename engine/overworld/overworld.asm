@@ -141,6 +141,8 @@ SafeGetSprite:
 	ret
 
 GetSprite::
+	call GetBerrySprite
+	ret c
 	call GetMonSprite
 	ret c
 
@@ -228,6 +230,25 @@ GetMonSprite:
 .NoBreedmon:
 	ld a, WALKING_SPRITE
 	lb hl, 0, WALKING_SPRITE
+	and a
+	ret
+
+GetBerrySprite:
+	cp SPRITE_BERRY_TREE_1
+	jr c, .no
+	cp SPRITE_BERRY_TREE_16 + 1
+	jr nc, .no
+	sub SPRITE_BERRY_TREE_1
+	farcall GetBerrySpriteGFXPointer
+	ld d, h
+	ld e, l
+	ld h, b
+	ld l, STILL_SPRITE
+	ld c, 4
+	scf
+	ret
+
+.no
 	and a
 	ret
 

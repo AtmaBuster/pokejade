@@ -149,6 +149,24 @@ DEF SPRITE_POKEMON EQU const_value
 	const SPRITE_MUDKIP ; a5
 DEF NUM_POKEMON_SPRITES EQU const_value - SPRITE_POKEMON
 
+	const_next $d0
+	const SPRITE_BERRY_TREE_1
+	const SPRITE_BERRY_TREE_2
+	const SPRITE_BERRY_TREE_3
+	const SPRITE_BERRY_TREE_4
+	const SPRITE_BERRY_TREE_5
+	const SPRITE_BERRY_TREE_6
+	const SPRITE_BERRY_TREE_7
+	const SPRITE_BERRY_TREE_8
+	const SPRITE_BERRY_TREE_9
+	const SPRITE_BERRY_TREE_10
+	const SPRITE_BERRY_TREE_11
+	const SPRITE_BERRY_TREE_12
+	const SPRITE_BERRY_TREE_13
+	const SPRITE_BERRY_TREE_14
+	const SPRITE_BERRY_TREE_15
+	const SPRITE_BERRY_TREE_16
+
 ; special GetMonSprite values (see engine/overworld/overworld.asm)
 	const_next $e0
 	const SPRITE_DAY_CARE_MON_1 ; e0
