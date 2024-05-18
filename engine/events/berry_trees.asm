@@ -705,7 +705,7 @@ GetBerrySpriteGFXPointer:
 	add hl, bc
 	ld a, [hl]
 	and BERRYTREE_GROWTH_STAGE_MASK
-	cp BERRYGROWTH_STAGE1
+	cp BERRYGROWTH_STAGE2
 	jr c, .generic
 
 	ld hl, BERRYTREE_PLANTED_BERRY
