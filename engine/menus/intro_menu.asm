@@ -131,6 +131,8 @@ _ResetWRAM:
 	xor a
 	rst ByteFill
 
+	farcall InitBerryPlots
+
 	ld a, 1
 	ldh [rSVBK], a
 

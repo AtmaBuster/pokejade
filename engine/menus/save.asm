@@ -150,6 +150,7 @@ SaveGameData:
 	call SaveOptions
 	call SavePlayerData
 	call SavePlayerStats
+	call SaveBerryTrees
 	call SaveTMHMData
 	call SavePokemonData
 	call SaveIndexTables
@@ -191,6 +192,7 @@ WriteBackupSave:
 	call SaveBackupOptions
 	call SaveBackupPlayerData
 	call SaveBackupPlayerStats
+	call SaveBackupBerryTrees
 	call SaveBackupTMHMData
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
@@ -381,6 +383,21 @@ SavePlayerStats:
 	ldh [rSVBK], a
 	jmp CloseSRAM
 
+SaveBerryTrees:
+	ld a, BANK(sBerryTrees)
+	call OpenSRAM
+	ld hl, wBerryTrees
+	ld de, sBerryTrees
+	ld bc, wBerryTreesEnd - wBerryTrees
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBerryTrees)
+	ldh [rSVBK], a
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
 SavePokemonData:
 	ld a, BANK(sPokemonData)
 	call OpenSRAM
@@ -499,6 +516,21 @@ SaveBackupPlayerStats:
 	ldh [rSVBK], a
 	jmp CloseSRAM
 
+SaveBackupBerryTrees:
+	ld a, BANK(sBackupBerryTrees)
+	call OpenSRAM
+	ld hl, wBerryTrees
+	ld de, sBackupBerryTrees
+	ld bc, wBerryTreesEnd - wBerryTrees
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBerryTrees)
+	ldh [rSVBK], a
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
 SaveBackupPokemonData:
 	ld a, BANK(sBackupPokemonData)
 	call OpenSRAM
@@ -591,6 +623,7 @@ TryLoadSaveFile:
 	jr nz, .backup
 	call LoadPlayerData
 	call LoadPlayerStats
+	call LoadBerryTrees
 	call LoadTMHMData
 	call LoadPokemonData
 	call LoadIndexTables
@@ -759,6 +792,21 @@ LoadPlayerStats:
 	ldh [rSVBK], a
 	jmp CloseSRAM
 
+LoadBerryTrees:
+	ld a, BANK(sBerryTrees)
+	call OpenSRAM
+	ld hl, sBerryTrees
+	ld de, wBerryTrees
+	ld bc, wBerryTreesEnd - wBerryTrees
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBerryTrees)
+	ldh [rSVBK], a
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
 LoadPokemonData:
 	ld a, BANK(sPokemonData)
 	call OpenSRAM
@@ -864,6 +912,21 @@ LoadBackupPlayerStats:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wPlayerStatistics)
+	ldh [rSVBK], a
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	jmp CloseSRAM
+
+LoadBackupBerryTrees:
+	ld a, BANK(sBackupBerryTrees)
+	call OpenSRAM
+	ld hl, sBackupBerryTrees
+	ld de, wBerryTrees
+	ld bc, wBerryTreesEnd - wBerryTrees
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBerryTrees)
 	ldh [rSVBK], a
 	rst CopyBytes
 	pop af

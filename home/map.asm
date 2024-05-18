@@ -1008,11 +1008,17 @@ CoordinatesEventText::
 
 CheckObjectMask::
 	ldh a, [hMapObjectIndex]
+	bit 6, a
+	jr nz, .not_masked
 	ld e, a
 	ld d, 0
 	ld hl, wObjectMasks
 	add hl, de
 	ld a, [hl]
+	ret
+
+.not_masked
+	xor a
 	ret
 
 MaskObject::

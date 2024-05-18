@@ -470,3 +470,15 @@ MACRO berry_object_struct
 \1XCoord:: db
 \1SoilID:: db
 ENDM
+
+MACRO berry_tree_struct
+\1PlantedBerry:: dw
+\1LastGrowthDay:: db
+\1LastGrowthHour:: db
+\1Mulch::
+\1Water:: db
+\1Visited::
+\1BerriesProduced::
+\1GrowthStage:: db
+\1TimeTilNextStage:: db
+ENDM

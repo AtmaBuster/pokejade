@@ -154,3 +154,5 @@ SpecialsPointers::
 	add_special CheckStarterForceShiny
 	add_special GetStarterName
 	add_special CountTrainerStars
+
+	add_special BerryTree

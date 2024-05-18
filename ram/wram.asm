@@ -109,6 +109,11 @@ wMapMusic:: db
 wDontPlayMapMusicOnReload:: db
 
 
+SECTION "Berry Tree WRAM0", WRAM0
+
+wTempBerryTree:: berry_tree_struct wTempBerryTree
+
+
 SECTION "WRAM", WRAM0
 
 	ds 4
@@ -3421,5 +3426,15 @@ wPlayerStat_EggsHatched:: dw
 wPlayerStat_MonsEvolved:: dw
 wPlayerStat_FlyUsed:: dw
 wPlayerStatisticsEnd::
+
+ENDSECTION
+
+SECTION "Berry Tree RAM", WRAMX
+
+wBerryTrees::
+for n, 1, NUM_BERRY_PLOTS + 1
+wBerryTree{d:n}:: berry_tree_struct wBerryTree{d:n}
+endr
+wBerryTreesEnd::
 
 ENDSECTION

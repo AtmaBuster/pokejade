@@ -603,11 +603,6 @@ Movement_ContestResults_WalkAfterWarp:
 
 BerryTreeInteractScript:
 	opentext
-	writetext .Text
-	waitbutton
+	special BerryTree
 	closetext
 	end
-
-.Text:
-	text "BERRY"
-	done

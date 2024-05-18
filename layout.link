@@ -370,6 +370,7 @@ WRAMX 5
 	"Pokedex Listings"
 	org $d900
 	"Player Stats RAM"
+	"Berry Tree RAM"
 WRAMX 6
 	"Scratch RAM"
 WRAMX 7

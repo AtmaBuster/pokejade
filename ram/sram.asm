@@ -271,6 +271,9 @@ sBackupPlayerStatistics:: ds wPlayerStatisticsEnd - wPlayerStatistics
 
 ENDU
 
+sBerryTrees:: ds wBerryTreesEnd - wBerryTrees
+sBackupBerryTrees:: ds wBerryTreesEnd - wBerryTrees
+
 SECTION "SRAM Bank 5", SRAM
 
 s5_a89c:: ds 22
