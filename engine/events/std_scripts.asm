@@ -600,3 +600,14 @@ Movement_ContestResults_WalkAfterWarp:
 	step DOWN
 	turn_head UP
 	step_end
+
+BerryTreeInteractScript:
+	opentext
+	writetext .Text
+	waitbutton
+	closetext
+	end
+
+.Text:
+	text "BERRY"
+	done

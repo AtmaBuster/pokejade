@@ -31,3 +31,5 @@ ShaleMart_MapEvents:
 
 	def_object_events
 	object_event  1,  3, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ShaleMartOB_Clerk, -1
+
+	def_berry_events

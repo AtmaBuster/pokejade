@@ -278,7 +278,8 @@ ReadMapEvents::
 	and a ; skip object events?
 	ret nz
 
-	jmp ReadObjectEvents
+	call ReadObjectEvents
+	jmp ReadBerryEvents
 
 ReadMapScripts::
 	ld hl, wMapScriptsPointer
@@ -481,6 +482,57 @@ CopyMapObjectEvents::
 	ld bc, MAPOBJECT_LENGTH
 	add hl, bc
 	pop bc
+	dec c
+	jr nz, .loop
+	ret
+
+ReadBerryEvents:
+	push hl
+	call ClearBerryStructs
+	pop de
+	ld hl, wBerryObjects
+	ld a, [de]
+	inc de
+	ld [wCurMapBerryEventCount], a
+	ld a, e
+	ld [wCurMapBerryEventsPointer], a
+	ld a, d
+	ld [wCurMapBerryEventsPointer + 1], a
+	ld a, [wCurMapBerryEventCount]
+CopyBerryEvents:
+	and a
+	ret z
+
+	ld c, a
+.loop
+	push bc
+	ld a, $ff
+	ld [hli], a
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, [de]
+	inc de
+	ld [hli], a
+	pop bc
+	dec c
+	jr nz, .loop
+	ret
+
+ClearBerryStructs:
+	ld hl, wBerryObjects
+	ld c, 16 ; num berry objects
+	ld a, -1
+.loop
+	ld [hli], a
+	inc a
+	ld [hli], a
+	ld [hli], a
+	dec a
+	ld [hli], a
 	dec c
 	jr nz, .loop
 	ret

@@ -132,6 +132,21 @@ MACRO object_event
 	endc
 ENDM
 
+MACRO def_berry_events
+	REDEF _NUM_BERRY_EVENTS EQUS "_NUM_BERRY_EVENTS_\@"
+	db {_NUM_BERRY_EVENTS}
+	DEF {_NUM_BERRY_EVENTS} = 0
+ENDM
+
+MACRO berry_event
+;\1: x
+;\2: y
+;\3: soil id
+	db \2 + 4, \1 + 4
+	db \3
+	DEF {_NUM_BERRY_EVENTS} += 1
+ENDM
+
 MACRO trainer
 ;\1: trainer group
 ;\2: trainer id

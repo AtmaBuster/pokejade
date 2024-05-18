@@ -75,3 +75,5 @@ RivalsHouse_MapEvents:
 
 	def_object_events
 	object_event  7,  3, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RivalsHouseOB_Mom, -1
+
+	def_berry_events

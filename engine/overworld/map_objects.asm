@@ -18,8 +18,23 @@ DeleteMapObject::
 	jr z, .ok
 	bit 7, a
 	jr nz, .ok
+	bit 6, a
+	jr nz, .berry
 	call GetMapObject
 	ld hl, OBJECT_SPRITE
+	add hl, bc
+	ld [hl], -1
+	jr .ok
+
+.berry
+	dec a
+	and $3f
+	ld hl, wBerryObjects
+	ld bc, BERRYOBJECT_LENGTH
+	rst AddNTimes
+	ld b, h
+	ld c, l
+	ld hl, BERRYOBJECT_STRUCT_ID
 	add hl, bc
 	ld [hl], -1
 .ok
@@ -440,6 +455,8 @@ RestoreDefaultMovement:
 	ld a, [hl]
 	cp -1
 	jr z, .ok
+	bit 6, a
+	jr nz, .ok
 	push bc
 	call GetMapObject
 	ld hl, MAPOBJECT_MOVEMENT

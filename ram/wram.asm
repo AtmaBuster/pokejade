@@ -130,7 +130,9 @@ wMapTimeOfDay:: db
 
 wPalFlags:: db
 
-	ds 2
+	ds 1
+
+wBerryTreeInteractID:: db
 
 wPrinterConnectionOpen:: db
 wPrinterOpcode:: db
@@ -2922,8 +2924,6 @@ wFakeLinkTradeEvo:: db
 
 wCurMapSceneScriptPointer:: dw
 
-	ds 2
-
 wCurMapWarpEventCount:: db
 wCurMapWarpEventsPointer:: dw
 wCurMapCoordEventCount:: db
@@ -2932,6 +2932,8 @@ wCurMapBGEventCount:: db
 wCurMapBGEventsPointer:: dw
 wCurMapObjectEventCount:: db
 wCurMapObjectEventsPointer:: dw
+wCurMapBerryEventCount:: db
+wCurMapBerryEventsPointer:: dw
 wCurMapSceneScriptCount:: db
 wCurMapSceneScriptsPointer:: dw
 wCurMapCallbackCount:: db
@@ -2970,7 +2972,7 @@ wUnusedTwoDayTimer:: db
 wUnusedTwoDayTimerStartDate:: db
 
 wMobileOrCable_LastSelection:: db
-	ds 3
+	ds 2
 wStarterTreeckoPersonality:: db
 wStarterTorchicPersonality:: db
 wStarterMudkipPersonality:: db
@@ -3132,7 +3134,7 @@ wPokemonDataEnd::
 SECTION "Berry Objects", WRAMX
 
 wBerryObjects::
-FOR n,1, 16
+FOR n, 1, 17
 wBerryObject{d:n}:: berry_object_struct wBerryObject{d:n}
 ENDR
 wTempBerryObject:: map_object wTempBerry

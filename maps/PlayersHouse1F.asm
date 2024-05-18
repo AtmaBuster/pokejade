@@ -163,3 +163,5 @@ PlayersHouse1F_MapEvents:
 
 	def_object_events
 	object_event  7,  3, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, PlayersHouse1FOB_Mom, -1
+
+	def_berry_events

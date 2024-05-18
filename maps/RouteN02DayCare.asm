@@ -66,3 +66,5 @@ RouteN02DayCare_MapEvents:
 
 	def_object_events
 	object_event  6,  2, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, DayCareWomanScript, EVENT_ROUTEN02_DAYCARE_GRANNY
+
+	def_berry_events

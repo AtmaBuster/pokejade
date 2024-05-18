@@ -386,3 +386,5 @@ ParksLab_MapEvents:
 	def_object_events
 	object_event  4,  3, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ParksLabOB_Prof, EVENT_PARKS_LAB_PROF
 	object_event  2,  8, SPRITE_RIVAL, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ParksLabOB_Rival, EVENT_PARKS_LAB_RIVAL
+
+	def_berry_events

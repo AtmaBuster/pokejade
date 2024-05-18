@@ -532,7 +532,15 @@ TryObjectEvent:
 	add hl, bc
 	ld a, [hl]
 	ldh [hLastTalked], a
+	bit 6, a
+	jr nz, .berry
 	call GetMapObject
+	jr .got_object
+
+.berry
+	farcall MakeNthBerryMapObjectStruct
+	ld bc, wTempBerryObject
+.got_object
 	ld hl, MAPOBJECT_TYPE
 	add hl, bc
 	ld a, [hl]
@@ -559,8 +567,8 @@ ObjectEventTypeArray:
 	dbw OBJECTTYPE_SCRIPT, .script
 	dbw OBJECTTYPE_ITEMBALL, .itemball
 	dbw OBJECTTYPE_TRAINER, .trainer
-	; the remaining four are dummy events
-	dbw OBJECTTYPE_3, .three
+	dbw OBJECTTYPE_BERRY, .berry
+	; the remaining are dummy events
 	dbw OBJECTTYPE_4, .four
 	dbw OBJECTTYPE_5, .five
 	dbw OBJECTTYPE_6, .six
@@ -616,8 +624,13 @@ ObjectEventTypeArray:
 	scf
 	ret
 
-.three
-	xor a
+.berry
+	ld hl, MAPOBJECT_SCRIPT_POINTER
+	add hl, bc
+	ld a, [hl]
+	ld [wBerryTreeInteractID], a
+	ld a, PLAYEREVENT_BERRYTREE
+	scf
 	ret
 
 .four
@@ -1043,6 +1056,7 @@ PlayerEventScriptPointers:
 	dba SeenByTrainerScript     ; PLAYEREVENT_SEENBYTRAINER
 	dba TalkToTrainerScript     ; PLAYEREVENT_TALKTOTRAINER
 	dba FindItemInBallScript    ; PLAYEREVENT_ITEMBALL
+	dba BerryTreeInteractScript ; PLAYEREVENT_BERRYTREE
 	dba EdgeWarpScript          ; PLAYEREVENT_CONNECTION
 	dba WarpToNewMapScript      ; PLAYEREVENT_WARP
 	dba FallIntoMapScript       ; PLAYEREVENT_FALL

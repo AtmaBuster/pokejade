@@ -66,3 +66,5 @@ DebugRoom_MapEvents:
 	bg_event  9,  5, BGEVENT_READ, DebugRoomBG_TestGenMon
 
 	def_object_events
+
+	def_berry_events

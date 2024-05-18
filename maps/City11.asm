@@ -15,3 +15,5 @@ City11_MapEvents:
 	def_bg_events
 
 	def_object_events
+
+	def_berry_events

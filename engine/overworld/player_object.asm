@@ -438,7 +438,7 @@ CheckBerryEnteringVisibleRange:
 	ld bc, wBerryObjects
 	ld a, 1
 .loop_v
-	or $80
+	or $40
 	ldh [hMapObjectIndex], a
 	ld hl, BERRYOBJECT_SOIL_ID
 	add hl, bc
@@ -465,10 +465,12 @@ CheckBerryEnteringVisibleRange:
 	jr nc, .next_v
 	push de
 	push bc
-	call .MakeTempMapObjectStruct
+	call MakeTempBerryMapObjectStruct
 	ld bc, wTempBerryObject
 	call CopyObjectStruct
 	pop bc
+	ld a, [wTempBerryObjectStructID]
+	ld [bc], a
 	pop de
 .next_v
 	ld hl, BERRYOBJECT_LENGTH
@@ -476,17 +478,82 @@ CheckBerryEnteringVisibleRange:
 	ld b, h
 	ld c, l
 	ldh a, [hMapObjectIndex]
-	and $7f
+	and $3f
 	inc a
 	cp 16 ; num berry objects
 	jr nz, .loop_v
 	ret
 
 .Left:
+	ld a, [wXCoord]
+	dec a
+	jr .Horizontal
+
 .Right:
+	ld a, [wXCoord]
+	add 10
+.Horizontal:
+	ld e, a
+	ld a, [wYCoord]
+	ld d, a
+	ld bc, wBerryObjects
+	ld a, 1
+.loop_h
+	or $40
+	ldh [hMapObjectIndex], a
+	ld hl, BERRYOBJECT_SOIL_ID
+	add hl, bc
+	ld a, [hl]
+	cp -1
+	jr z, .next_h
+	ld hl, BERRYOBJECT_X_COORD
+	add hl, bc
+	ld a, e
+	cp [hl]
+	jr nz, .next_h
+	ld hl, BERRYOBJECT_STRUCT_ID
+	add hl, bc
+	ld a, [hl]
+	cp -1
+	jr nz, .next_h
+	ld hl, BERRYOBJECT_Y_COORD
+	add hl, bc
+	ld a, [hl]
+	inc a
+	sub d
+	jr c, .next_h
+	cp MAPOBJECT_SCREEN_HEIGHT
+	jr nc, .next_h
+	push de
+	push bc
+	call MakeTempBerryMapObjectStruct
+	ld bc, wTempBerryObject
+	call CopyObjectStruct
+	pop bc
+	ld a, [wTempBerryObjectStructID]
+	ld [bc], a
+	pop de
+.next_h
+	ld hl, BERRYOBJECT_LENGTH
+	add hl, bc
+	ld b, h
+	ld c, l
+	ldh a, [hMapObjectIndex]
+	and $3f
+	inc a
+	cp 16 ; num berry objects
+	jr nz, .loop_h
 	ret
 
-.MakeTempMapObjectStruct:
+MakeNthBerryMapObjectStruct:
+	dec a
+	and $3f
+	ld hl, wBerryObjects
+	ld bc, BERRYOBJECT_LENGTH
+	rst AddNTimes
+	ld b, h
+	ld c, l
+MakeTempBerryMapObjectStruct:
 	push bc
 	ld hl, .BerryObjectTemplate
 	ld de, wTempBerryObject
@@ -500,10 +567,15 @@ CheckBerryEnteringVisibleRange:
 	ld hl, wTempBerryObjectYCoord
 	ld [hli], a
 	ld [hl], d
+	ld hl, BERRYOBJECT_SOIL_ID
+	add hl, bc
+	ld a, [hl]
+	ld [wTempBerryObjectScript], a
 	ret
 
 .BerryObjectTemplate:
-	object_event 0, 0, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+	db $ff
+	object_event 0, 0, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_BERRY, 0, 0, -1
 .BerryObjectTemplateEnd
 
 CopyTempObjectToObjectStruct:
