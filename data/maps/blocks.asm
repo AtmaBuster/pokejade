@@ -12,7 +12,7 @@ ObsidianMeadow_Blocks:  INCBIN "maps/ObsidianMeadow.ablk"
 RivalsHouse_Blocks:     INCBIN "maps/RivalsHouse.ablk"
 ShaleCity_Blocks:       INCBIN "maps/ShaleCity.ablk"
 RouteN02_Blocks:        INCBIN "maps/RouteN02.ablk"
-City03_Blocks:          INCBIN "maps/City03.ablk"
+ChertCity_Blocks:       INCBIN "maps/ChertCity.ablk"
 RouteN03_Blocks:        INCBIN "maps/RouteN03.ablk"
 RouteN09_Blocks:        INCBIN "maps/RouteN09.ablk"
 RouteN08_Blocks:        INCBIN "maps/RouteN08.ablk"
@@ -38,6 +38,7 @@ Town12_Blocks:          INCBIN "maps/Town12.ablk"
 RouteN15_Blocks:        INCBIN "maps/RouteN14.ablk"
 City13_Blocks:          INCBIN "maps/City13.ablk"
 RouteN02DayCare_Blocks: INCBIN "maps/RouteN02DayCare.ablk"
+MossyWoods_Blocks:      INCBIN "maps/MossyWoods.ablk"
 
 
 SECTION "Map Blocks 2", ROMX
@@ -56,8 +57,12 @@ _Mart_Blocks:           INCBIN "maps/Mart.ablk"
 ShalePokecenter1F_Blocks:
 _Pokecenter1F_Blocks:   INCBIN "maps/Pokecenter1F.ablk"
 
+RouteN02MossyWoodsGate_Blocks:
 _NorthSouthGate_Blocks: INCBIN "maps/NorthSouthGate.ablk"
+
+ChertCityMossyWoodsGate_Blocks:
 _EastWestGate_Blocks:   INCBIN "maps/EastWestGate.ablk"
+
 IF DEF(_DEBUG)
 DebugRoom_Blocks:       INCBIN "maps/DebugRoom.ablk"
 ENDC

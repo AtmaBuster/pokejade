@@ -114,15 +114,15 @@ ENDM
 
 	map_attributes RouteN02, ROUTE_N02, $05, WEST | EAST
 	connection west, ShaleCity, SHALE_CITY, 0
-	connection east, City03, CITY_03, 0
+	connection east, ChertCity, CHERT_CITY, 0
 
-	map_attributes City03, CITY_03, $05, SOUTH | WEST | EAST
+	map_attributes ChertCity, CHERT_CITY, $05, SOUTH | WEST | EAST
 	connection south, RouteN09, ROUTE_N09, 0
 	connection west, RouteN02, ROUTE_N02, 0
 	connection east, RouteN03, ROUTE_N03, 0
 
 	map_attributes RouteN03, ROUTE_N03, $05, WEST | EAST
-	connection west, City03, CITY_03, 0
+	connection west, ChertCity, CHERT_CITY, 0
 	connection east, City04, CITY_04, 0
 
 	map_attributes RouteN08, ROUTE_N08, $05, SOUTH | WEST
@@ -130,7 +130,7 @@ ENDM
 	connection west, RouteN09, ROUTE_N09, -10
 
 	map_attributes RouteN09, ROUTE_N09, $05, NORTH | EAST
-	connection north, City03, CITY_03, 0
+	connection north, ChertCity, CHERT_CITY, 0
 	connection east, RouteN08, ROUTE_N08, 10
 
 	map_attributes City04, CITY_04, $05, WEST | EAST
@@ -225,6 +225,7 @@ IF DEF(_DEBUG)
 	map_attributes DebugRoom, DEBUG_ROOM, $0f, 0
 ENDC
 	map_attributes VictoryRoad, VICTORY_ROAD, $1d, 0
+	map_attributes MossyWoods, MOSSY_WOODS, $05, 0
 	map_attributes PlayersHouse1F, PLAYERS_HOUSE_1F, $00, 0
 	map_attributes PlayersHouse2F, PLAYERS_HOUSE_2F, $00, 0
 	map_attributes ParksLab, PARKS_LAB, $00, 0
@@ -234,3 +235,5 @@ ENDC
 	map_attributes ShaleHouse1, SHALE_HOUSE_1, $00, 0
 	map_attributes ShaleHouse2, SHALE_HOUSE_2, $00, 0
 	map_attributes RouteN02DayCare, ROUTE_N02_DAYCARE, $00, 0
+	map_attributes RouteN02MossyWoodsGate, ROUTE_N02_MOSSY_WOODS_GATE, $00, 0
+	map_attributes ChertCityMossyWoodsGate, CHERT_CITY_MOSSY_WOODS_GATE, $00, 0

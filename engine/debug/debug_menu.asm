@@ -1083,6 +1083,15 @@ Debug_WarpAny:
 	lb bc, 3, SCREEN_WIDTH - 2
 	call Textbox
 	call WaitBGMap2
+	hlcoord 7, 1
+	ld de, .WarpString
+	call PlaceString
+	hlcoord 7, 2
+	ld de, .GroupString
+	call PlaceString
+	hlcoord 7, 3
+	ld de, .MapString
+	call PlaceString
 	ld a, 2
 	ld [wDebugMenuCursorPos], a
 	call .update_display
@@ -1167,13 +1176,26 @@ Debug_WarpAny:
 
 .getdat
 	ld a, [wDebugMenuCursorPos]
-	add LOW(wDebugMenuDataBuffer)
+	push bc
 	ld c, a
-	ldh a, [c]
+	ld b, 0
+	ld hl, wDebugMenuDataBuffer
+	add hl, bc
+	pop bc
+	ld a, [hl]
 	ret
 
 .putdat
-	ldh [c], a
+	push af
+	ld a, [wDebugMenuCursorPos]
+	push bc
+	ld c, a
+	ld b, 0
+	ld hl, wDebugMenuDataBuffer
+	add hl, bc
+	pop bc
+	pop af
+	ld [hl], a
 	ret
 
 .warp
@@ -1213,6 +1235,13 @@ Debug_WarpAny:
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
 	ret
+
+.WarpString:
+	db "Warp@"
+.GroupString:
+	db "Group@"
+.MapString:
+	db "Map@"
 
 Debug_PC:
 	farcall PokemonCenterPC

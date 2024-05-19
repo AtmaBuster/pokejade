@@ -7,33 +7,33 @@
 	const LANDMARK_ROUTE_N01         ; 03
 	const LANDMARK_SHALE_CITY        ; 04
 	const LANDMARK_ROUTE_N02         ; 05
-	const LANDMARK_CITY_03           ; 06
-	const LANDMARK_ROUTE_N03         ; 07
-	const LANDMARK_CITY_04           ; 08
-	const LANDMARK_ROUTE_N04         ; 09
-	const LANDMARK_CITY_05_WEST      ; 0a
-	const LANDMARK_CITY_05_EAST      ; 0b
-	const LANDMARK_ROUTE_N05         ; 0c
-	const LANDMARK_TOWN_06           ; 0d
-	const LANDMARK_ROUTE_N06         ; 0e
-	const LANDMARK_COQUINA_TOWN      ; 0f
-	const LANDMARK_ROUTE_N07         ; 10
-	const LANDMARK_ROUTE_N08         ; 11
-	const LANDMARK_ROUTE_N09         ; 12
-	const LANDMARK_ROUTE_N10         ; 13
-	const LANDMARK_TOWN_08           ; 14
-	const LANDMARK_ROUTE_N11         ; 15
-	const LANDMARK_TOWN_09           ; 16
-	const LANDMARK_ROUTE_N12         ; 17
-	const LANDMARK_ROUTE_N13         ; 18
-	const LANDMARK_CITY_10           ; 19
-	const LANDMARK_ROUTE_N14         ; 1a
-	const LANDMARK_CITY_11           ; 1b
-	const LANDMARK_ROUTE_N15         ; 1c
-	const LANDMARK_TOWN_12           ; 1d
-	const LANDMARK_CITY_13           ; 1e
+	const LANDMARK_MOSSY_WOODS       ; 06
+	const LANDMARK_CHERT_CITY        ; 07
+	const LANDMARK_ROUTE_N03         ; 08
+	const LANDMARK_CITY_04           ; 09
+	const LANDMARK_ROUTE_N04         ; 0a
+	const LANDMARK_CITY_05_WEST      ; 0b
+	const LANDMARK_CITY_05_EAST      ; 0c
+	const LANDMARK_ROUTE_N05         ; 0d
+	const LANDMARK_TOWN_06           ; 0e
+	const LANDMARK_ROUTE_N06         ; 0f
+	const LANDMARK_COQUINA_TOWN      ; 10
+	const LANDMARK_ROUTE_N07         ; 11
+	const LANDMARK_ROUTE_N08         ; 12
+	const LANDMARK_ROUTE_N09         ; 13
+	const LANDMARK_ROUTE_N10         ; 14
+	const LANDMARK_TOWN_08           ; 15
+	const LANDMARK_ROUTE_N11         ; 16
+	const LANDMARK_TOWN_09           ; 17
+	const LANDMARK_ROUTE_N12         ; 18
+	const LANDMARK_ROUTE_N13         ; 19
+	const LANDMARK_CITY_10           ; 1a
+	const LANDMARK_ROUTE_N14         ; 1b
+	const LANDMARK_CITY_11           ; 1c
+	const LANDMARK_ROUTE_N15         ; 1d
+	const LANDMARK_TOWN_12           ; 1e
+	const LANDMARK_CITY_13           ; 1f
 DEF LANDMARK_UP_TO_DATE_NAZOH EQU const_value - 1
-	const LANDMARK_WHIRL_ISLANDS     ; 1f
 	const LANDMARK_ROUTE_41          ; 20
 	const LANDMARK_CIANWOOD_CITY     ; 21
 	const LANDMARK_ROUTE_42          ; 22

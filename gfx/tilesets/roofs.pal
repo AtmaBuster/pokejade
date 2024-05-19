@@ -23,7 +23,7 @@
 	RGB 09,13,19, 07,07,16 ; nite
 	RGB 12,13,23, 06,08,11 ; eve
 
-; group 5 (City03)
+; group 5 (Chert)
 	RGB 14,17,31, 07,11,15 ; morn/day
 	RGB 09,13,19, 07,07,16 ; nite
 	RGB 12,13,23, 06,08,11 ; eve

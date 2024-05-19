@@ -18,7 +18,7 @@ INCLUDE "maps/ShaleMart.asm"
 INCLUDE "maps/ShaleHouse1.asm"
 INCLUDE "maps/ShaleHouse2.asm"
 INCLUDE "maps/RouteN02.asm"
-INCLUDE "maps/City03.asm"
+INCLUDE "maps/ChertCity.asm"
 INCLUDE "maps/RouteN03.asm"
 INCLUDE "maps/RouteN09.asm"
 INCLUDE "maps/RouteN08.asm"
@@ -44,6 +44,9 @@ INCLUDE "maps/Town12.asm"
 INCLUDE "maps/RouteN15.asm"
 INCLUDE "maps/City13.asm"
 INCLUDE "maps/RouteN02DayCare.asm"
+INCLUDE "maps/MossyWoods.asm"
+INCLUDE "maps/RouteN02MossyWoodsGate.asm"
+INCLUDE "maps/ChertCityMossyWoodsGate.asm"
 
 
 SECTION "Map Scripts 2", ROMX

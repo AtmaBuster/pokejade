@@ -13,7 +13,8 @@ Landmarks:
 	landmark  52,  96, RouteN01Name
 	landmark  56,  84, ShaleCityName
 	landmark  72,  84, RouteN02Name
-	landmark  84,  88, City03Name
+	landmark  76,  84, MossyWoodsName
+	landmark  84,  88, ChertCityName
 	landmark  96,  84, RouteN03Name
 	landmark 112,  88, City04Name
 	landmark 124,  88, RouteN04Name
@@ -39,7 +40,6 @@ Landmarks:
 	landmark  36,  92, Town12Name
 	landmark  92,  28, City13Name
 
-	landmark  28,  92, WhirlIslandsName
 	landmark  28, 100, Route41Name
 	landmark  20, 100, CianwoodCityName
 	landmark  92,  44, Route42Name
@@ -110,7 +110,7 @@ Landmarks:
 ObsidianTownName:    db "OBSIDIAN<BSP>TOWN@"
 ObsidianMeadowName:  db "OBSIDIAN<BSP>MEADOW@"
 ShaleCityName:       db "SHALE CITY@"
-City03Name:          db "CITY 03@"
+ChertCityName:       db "CHERT CITY@"
 City04Name:          db "CITY 04@"
 City05WestName:      db "CITY 05<BSP>WEST@"
 City05EastName:      db "CITY 05<BSP>EAST@"
@@ -122,6 +122,7 @@ City10Name:          db "CITY 10@"
 City11Name:          db "CITY 11@"
 Town12Name:          db "TOWN 12@"
 City13Name:          db "CITY 13@"
+
 RouteN01Name:        db "ROUTE N01@"
 RouteN02Name:        db "ROUTE N02@"
 RouteN03Name:        db "ROUTE N03@"
@@ -138,13 +139,14 @@ RouteN13Name:        db "ROUTE N13@"
 RouteN14Name:        db "ROUTE N14@"
 RouteN15Name:        db "ROUTE N15@"
 
+MossyWoodsName:      db "MOSSY WOODS@"
+
 CianwoodCityName:    db "CIANWOOD<BSP>CITY@"
 MahoganyTownName:    db "MAHOGANY<BSP>TOWN@"
 BlackthornCityName:  db "BLACKTHORN<BSP>CITY@"
 LakeOfRageName:      db "LAKE OF<BSP>RAGE@"
 SilverCaveName:      db "SILVER CAVE@"
 PowerPlantName:      db "POWER PLANT@"
-WhirlIslandsName:    db "WHIRL<BSP>ISLANDS@"
 MtMortarName:        db "MT.MORTAR@"
 DragonsDenName:      db "DRAGON'S<BSP>DEN@"
 IcePathName:         db "ICE PATH@"

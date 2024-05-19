@@ -46,7 +46,8 @@ ENDC
 	endgroup
 
 	newgroup DUNGEONS                                             ;  2
-	map_const VICTORY_ROAD,                                10, 36 ;  1
+	map_const MOSSY_WOODS,                                 20, 20 ;  1
+	map_const VICTORY_ROAD,                                10, 36 ;  2
 	endgroup
 
 	newgroup OBSIDIAN                                             ;  3
@@ -67,13 +68,15 @@ ENDC
 	map_const SHALE_HOUSE_1,                                4,  4 ;  5
 	map_const SHALE_HOUSE_2,                                4,  4 ;  6
 	map_const ROUTE_N02_DAYCARE,                            4,  3 ;  7
+	map_const ROUTE_N02_MOSSY_WOODS_GATE,                   5,  4 ;  8
 	endgroup
 
-	newgroup CITY03                                               ;  5
-	map_const CITY_03,                                     10, 20 ;  1
+	newgroup CHERT                                                ;  5
+	map_const CHERT_CITY,                                  10, 20 ;  1
 	map_const ROUTE_N03,                                   20, 10 ;  2
 	map_const ROUTE_N08,                                   20, 10 ;  3
 	map_const ROUTE_N09,                                   10, 20 ;  4
+	map_const CHERT_CITY_MOSSY_WOODS_GATE,                  5,  4 ;  5
 	endgroup
 
 	newgroup CITY04                                               ;  6

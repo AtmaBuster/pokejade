@@ -196,7 +196,7 @@ RouteN02_MapEvents:
 
 	def_warp_events
 	warp_event 25,  5, ROUTE_N02_DAYCARE, 2
-	warp_event 33,  3, OBSIDIAN_TOWN, 1
+	warp_event 33,  3, ROUTE_N02_MOSSY_WOODS_GATE, 3
 
 	def_coord_events
 	coord_event 25,  6, SCENE_ROUTEN02_BEFORE_DAYCARE, 0, RouteN02CO_ExplainDaycare

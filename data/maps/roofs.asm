@@ -16,7 +16,7 @@ MapGroupRoofs:
 	db -1             ;  2
 	db ROOF_OBSIDIAN  ;  3 (Obsidian)
 	db ROOF_OBSIDIAN  ;  4 (Shale)
-	db ROOF_OBSIDIAN  ;  5 (City03)
+	db ROOF_OBSIDIAN  ;  5 (Chert)
 	db ROOF_OBSIDIAN  ;  6 (City04)
 	db ROOF_OBSIDIAN  ;  7 (Town07)
 	db ROOF_OBSIDIAN  ;  8 (Town06)
