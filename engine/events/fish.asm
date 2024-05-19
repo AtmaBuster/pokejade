@@ -123,3 +123,42 @@ GetFishGroupIndex:
 	jr .done
 
 INCLUDE "data/wild/fish.asm"
+
+IsMonInFishGroup:
+; checks if mon de is in fishgroup c
+	push hl
+	push de
+	push bc
+
+	ld hl, FishGroups + 1
+	ld a, c
+	dec a
+	ld bc, FISHGROUP_DATA_LENGTH
+	rst AddNTimes
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	inc hl
+	inc hl
+	ld c, 9 ; 2 old rod, 3 great rod, 4 super rod
+.loop
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	inc hl
+	inc hl
+
+	cp d
+	jr nz, .next
+	ld a, b
+	cp e
+	jr z, .ok
+.next
+	dec c
+	jr nz, .loop
+	and a
+	jmp PopBCDEHL
+
+.ok
+	scf
+	jmp PopBCDEHL

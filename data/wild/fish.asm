@@ -10,6 +10,7 @@ FishGroups:
 ; entries correspond to FISHGROUP_* constants
 	table_width FISHGROUP_DATA_LENGTH, FishGroups
 	fishgroup 50 percent + 1, .Shore_Old,            .Shore_Good,            .Shore_Super
+
 	fishgroup 50 percent + 1, .Ocean_Old,            .Ocean_Good,            .Ocean_Super
 	fishgroup 50 percent + 1, .Lake_Old,             .Lake_Good,             .Lake_Super
 	fishgroup 50 percent + 1, .Pond_Old,             .Pond_Good,             .Pond_Super
@@ -24,20 +25,30 @@ FishGroups:
 	fishgroup 50 percent + 1, .Qwilfish_NoSwarm_Old, .Qwilfish_NoSwarm_Good, .Qwilfish_NoSwarm_Super
 	assert_table_length NUM_FISHGROUPS
 
-.Shore_Old:
-	dbbw  70 percent + 1, 10, MAGIKARP
-	dbbw  85 percent + 1, 10, MAGIKARP
-	dbbw 100 percent,     10, KRABBY
-.Shore_Good:
-	dbbw  35 percent,     20, MAGIKARP
-	dbbw  70 percent,     20, KRABBY
-	dbbw  90 percent + 1, 20, KRABBY
-	dbbw 100 percent,     0, TIME_GROUP
-.Shore_Super:
-	dbbw  40 percent,     40, KRABBY
-	dbbw  70 percent,     1, TIME_GROUP
-	dbbw  90 percent + 1, 40, KRABBY
-	dbbw 100 percent,     40, KINGLER
+MACRO fishtable_old
+.\1_Old:
+	dbbw  70 percent, 10, \2
+	dbbw 100 percent, 10, \3
+ENDM
+
+MACRO fishtable_good
+.\1_Good:
+	dbbw  50 percent, 20, \2
+	dbbw  85 percent, 20, \3
+	dbbw 100 percent, 20, \4
+ENDM
+
+MACRO fishtable_super
+.\1_Super:
+	dbbw  45 percent, 30, \2
+	dbbw  75 percent, 30, \3
+	dbbw  95 percent, 30, \4
+	dbbw 100 percent, 30, \5
+ENDM
+
+	fishtable_old   Shore, MAGIKARP, POLIWAG
+	fishtable_good  Shore, MAGIKARP, POLIWAG, TYMPOLE
+	fishtable_super Shore, POLIWAG, TYMPOLE, POLIWHIRL, POLIWHIRL
 
 .Ocean_Old:
 	dbbw  70 percent + 1, 10, MAGIKARP

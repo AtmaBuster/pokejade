@@ -2366,6 +2366,9 @@ Pokedex_GetArea:
 	ld e, a
 	farcall FindNest ; load nest landmarks into wTilemap[0,0]
 	decoord 0, 0
+	ld a, [de]
+	and a
+	jr z, .no_nest
 	ld hl, wShadowOAMSprite00
 .nestloop
 	ld a, [de]
@@ -2397,6 +2400,14 @@ Pokedex_GetArea:
 	decoord 0, 0
 	ld bc, wShadowOAMEnd - wShadowOAM
 	jmp CopyBytes
+
+.no_nest
+	hlbgcoord 0, 15
+	ld a, [wTownMapCursorLandmark]
+	and a
+	jmp z, PlaceUnknownLocationBox
+	hlbgcoord 0, 15, vBGMap1
+	jmp PlaceUnknownLocationBox
 
 .HideNestsShowPlayer:
 	call .CheckPlayerLocation
@@ -2490,6 +2501,56 @@ Pokedex_GetArea:
 	ld de, FastShipGFX
 	ld b, BANK(FastShipGFX)
 	ret
+
+PlaceUnknownLocationBox:
+	di
+.spin_to_vblank
+	ldh a, [rLY]
+	cp 144
+	jr nz, .spin_to_vblank
+
+	ld de, .String
+	push hl
+	call .Place
+	pop hl
+	ldh a, [rVBK]
+	push af
+	ld a, 1
+	ldh [rVBK], a
+	ld de, .Attr
+	call .Place
+	pop af
+	ldh [rVBK], a
+	ei
+	ret
+
+.Place:
+	lb bc, 9, 3
+.loop_y
+	push bc
+	push hl
+.loop_x
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec b
+	jr nz, .loop_x
+	pop hl
+	ld bc, $20
+	add hl, bc
+	pop bc
+	dec c
+	jr nz, .loop_y
+	ret
+
+.String:
+	db $06, $07, $07, $07, $07, $07, $07, $07, $17
+	db $16, "UNKNOWN", $16
+	db $26, $07, $07, $07, $07, $07, $07, $07, $27
+.Attr:
+	db 0, 0, 0, 0, 0, 0, 0, 0, 0
+	db 0, 0, 0, 0, 0, 0, 0, 0, 0
+	db 0, 0, 0, 0, 0, 0, 0, 0, 0
 
 TownMapBGUpdate:
 ; Update BG Map tiles and attributes

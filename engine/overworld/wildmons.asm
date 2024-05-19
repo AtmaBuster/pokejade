@@ -61,9 +61,7 @@ FindNest:
 	ld a, [hli]
 	ldh [hMathBuffer + 1], a
 	inc hl
-	inc hl
-	inc hl
-	ld a, NUM_GRASSMON * 3
+	ld a, NUM_GRASSMON
 	call .SearchMapForMon
 	jr nc, .next_grass
 	ld [de], a
@@ -90,6 +88,13 @@ FindNest:
 	inc hl
 	ld a, NUM_WATERMON
 	call .SearchMapForMon
+	jr nc, .no_water
+	ld [de], a
+	inc de
+	jr .next_water
+
+.no_water
+	call .SearchMapForFishMon
 	jr nc, .next_water
 	ld [de], a
 	inc de
@@ -100,6 +105,34 @@ FindNest:
 	add hl, bc
 	pop bc
 	jr .FindWater
+
+.SearchMapForFishMon:
+	call GetFishingGroup
+	push de
+	ld d, b
+	ld e, c
+	ld c, a
+	farcall IsMonInFishGroup
+	pop de
+	jr c, .AppendCurrentNest
+	and a
+	ret
+
+.GetFishgroup:
+	push de
+	push hl
+	push bc
+	ldh a, [hMathBuffer]
+	ld b, a
+	ldh a, [hMathBuffer + 1]
+	ld c, a
+	ld de, MAP_FISHGROUP
+	call GetAnyMapField
+	ld a, c
+	pop bc
+	pop hl
+	pop de
+	ret
 
 .SearchMapForMon:
 	inc hl
@@ -121,6 +154,7 @@ FindNest:
 
 .found
 	pop af
+.AppendCurrentNest
 	ldh a, [hMathBuffer]
 	ld b, a
 	ldh a, [hMathBuffer + 1]
