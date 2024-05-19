@@ -55,7 +55,26 @@ RouteN01OB_Youngster:
 	end
 
 .Jumped:
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
+	iftrue .Join
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
+	checkevent EVENT_ROUTE_N01_YOUNGSTER_TOGGLE
+	iftrue .ClearEvent
+	setevent EVENT_ROUTE_N01_YOUNGSTER_TOGGLE
+	sjump .Join
+
+.ClearEvent:
+	clearevent EVENT_ROUTE_N01_YOUNGSTER_TOGGLE
+.Join:
+	checkevent EVENT_ROUTE_N01_YOUNGSTER_TOGGLE
+	iffalse .DidItAgain
 	writetext .Text_OneWay
+	waitbutton
+	closetext
+	end
+
+.DidItAgain:
+	writetext .Text_DidItAgain
 	waitbutton
 	closetext
 	end
@@ -77,6 +96,10 @@ RouteN01OB_Youngster:
 	line "jumping over a"
 	cont "ledge is a one-way"
 	cont "trip…"
+	done
+
+.Text_DidItAgain:
+	text "I did it again…"
 	done
 
 .Move_PlayerOutOfTheWay:

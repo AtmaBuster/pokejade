@@ -44,7 +44,8 @@
 	const EVENT_SHALE_CITY_HELP_KID
 	const EVENT_ASKED_SHALE_GUARD_FOR_HELP
 	const EVENT_GOT_TM_FROM_ROUTEN02_YOUNGSTER
-; Unused: next 562 events
+	const EVENT_ROUTE_N01_YOUNGSTER_TOGGLE
+; Unused: next 561 events
 
 	const_next 600
 ; Decorations
