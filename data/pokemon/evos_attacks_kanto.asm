@@ -1016,7 +1016,21 @@ MagmarEvosAttacks:
 LitleoEvosAttacks:
 	dbbw EVOLVE_LEVEL, 35, PYROAR
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, TACKLE
+	dbw 1, LEER
+	dbw 5, EMBER
+	dbw 8, WORK_UP
+	dbw 11, HEADBUTT
+	dbw 15, NOBLE_ROAR
+	dbw 20, BITE
+	dbw 23, TAKE_DOWN
+	dbw 28, FIRE_FANG
+	dbw 33, ENDEAVOR
+	dbw 36, FLAMETHROWER
+	dbw 39, CRUNCH
+	dbw 43, HYPER_VOICE
+	dbw 46, INCINERATE
+	dbw 50, OVERHEAT
 	db 0 ; no more level-up moves
 
 TaurosEvosAttacks:
@@ -1037,7 +1051,22 @@ GyaradosEvosAttacks:
 
 PyroarEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, HYPER_BEAM
+	dbw 1, TACKLE
+	dbw 1, LEER
+	dbw 5, EMBER
+	dbw 8, WORK_UP
+	dbw 11, HEADBUTT
+	dbw 15, NOBLE_ROAR
+	dbw 20, BITE
+	dbw 23, TAKE_DOWN
+	dbw 28, FIRE_FANG
+	dbw 33, ENDEAVOR
+	dbw 38, FLAMETHROWER
+	dbw 43, CRUNCH
+	dbw 49, HYPER_VOICE
+	dbw 54, INCINERATE
+	dbw 60, OVERHEAT
 	db 0 ; no more level-up moves
 
 DittoEvosAttacks:

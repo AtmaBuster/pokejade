@@ -486,6 +486,7 @@ MoveDescriptionsGroups4:
 	dw InvalidMoveDescription
 	dw InvalidMoveDescription
 	dw LibraDescription
+	dw InvalidMoveDescription
 .IndirectEnd::
 
 InvalidMoveDescription:

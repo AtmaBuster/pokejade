@@ -469,4 +469,5 @@ MoveNames::
 	li "NO RETREAT"
 	li "BARRIER BASH"
 	li "LIBRA"
+	li "INCINERATE"
 	assert_list_length NUM_ATTACKS
