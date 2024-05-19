@@ -1,353 +1,353 @@
 NationalPokedexOrder:
-	dw BULBASAUR
-	dw IVYSAUR
-	dw VENUSAUR
-	dw CHARMANDER
-	dw CHARMELEON
-	dw CHARIZARD
-	dw SQUIRTLE
-	dw WARTORTLE
-	dw BLASTOISE
-	dw WEEDLE
-	dw KAKUNA
-	dw BEEDRILL
-	dw PIDGEY
-	dw PIDGEOTTO
-	dw PIDGEOT
-	dw EKANS
-	dw ARBOK
-	dw PIKACHU
-	dw RAICHU
-	dw NIDORAN_F
-	dw NIDORINA
-	dw NIDOQUEEN
-	dw NIDORAN_M
-	dw NIDORINO
-	dw NIDOKING
-	dw ZUBAT
-	dw GOLBAT
-	dw ODDISH
-	dw GLOOM
-	dw VILEPLUME
-	dw PARAS
-	dw PARASECT
-	dw MEOWTH
-	dw PERSIAN
-	dw PSYDUCK
-	dw GOLDUCK
-	dw MANKEY
-	dw PRIMEAPE
-	dw POLIWAG
-	dw POLIWHIRL
-	dw POLIWRATH
-	dw GEODUDE
-	dw GRAVELER
-	dw GOLEM
-	dw MAGNEMITE
-	dw MAGNETON
-	dw DODUO
-	dw DODRIO
-	dw KRABBY
-	dw KINGLER
-	dw VOLTORB
-	dw ELECTRODE
-	dw EXEGGCUTE
-	dw EXEGGUTOR
-	dw CUBONE
-	dw MAROWAK
-	dw CHANSEY
-	dw TANGELA
-	dw HORSEA
-	dw SEADRA
-	dw STARYU
-	dw STARMIE
-	dw SCYTHER
-	dw ELECTABUZZ
-	dw MAGMAR
-	dw TAUROS
-	dw MAGIKARP
-	dw GYARADOS
-	dw DITTO
-	dw EEVEE
-	dw VAPOREON
-	dw JOLTEON
-	dw FLAREON
-	dw PORYGON
-	dw OMANYTE
-	dw OMASTAR
-	dw KABUTO
-	dw KABUTOPS
-	dw AERODACTYL
-	dw SNORLAX
-	dw ARTICUNO
-	dw ZAPDOS
-	dw MOLTRES
-	dw DRATINI
-	dw DRAGONAIR
-	dw DRAGONITE
-	dw MEWTWO
-	dw MEW
-	dw CHIKORITA
-	dw BAYLEEF
-	dw MEGANIUM
-	dw CYNDAQUIL
-	dw QUILAVA
-	dw TYPHLOSION
-	dw TOTODILE
-	dw CROCONAW
-	dw FERALIGATR
-	dw CROBAT
-	dw CHINCHOU
-	dw LANTURN
-	dw PICHU
-	dw NATU
-	dw XATU
-	dw BELLOSSOM
-	dw MARILL
-	dw AZUMARILL
-	dw POLITOED
-	dw WOOPER
-	dw QUAGSIRE
-	dw ESPEON
-	dw UMBREON
-	dw MURKROW
-	dw MISDREAVUS
-	dw UNOWN
-	dw GIRAFARIG
-	dw DUNSPARCE
-	dw SCIZOR
-	dw SHUCKLE
-	dw SNEASEL
-	dw TEDDIURSA
-	dw URSARING
-	dw REMORAID
-	dw OCTILLERY
-	dw SKARMORY
-	dw HOUNDOUR
-	dw HOUNDOOM
-	dw KINGDRA
-	dw PORYGON2
-	dw STANTLER
-	dw ELEKID
-	dw MAGBY
-	dw MILTANK
-	dw BLISSEY
-	dw RAIKOU
-	dw ENTEI
-	dw SUICUNE
-	dw LARVITAR
-	dw PUPITAR
-	dw TYRANITAR
-	dw LUGIA
-	dw HO_OH
-	dw CELEBI
-	dw TREECKO
-	dw GROVYLE
-	dw SCEPTILE
-	dw TORCHIC
-	dw COMBUSKEN
-	dw BLAZIKEN
-	dw MUDKIP
-	dw MARSHTOMP
-	dw SWAMPERT
-	dw POOCHYENA
-	dw MIGHTYENA
-	dw ZIGZAGOON
-	dw LINOONE
-	dw WURMPLE
-	dw SILCOON
-	dw BEAUTIFLY
-	dw CASCOON
-	dw DUSTOX
-	dw LOTAD
-	dw LOMBRE
-	dw LUDICOLO
-	dw SEEDOT
-	dw NUZLEAF
-	dw SHIFTRY
-	dw WINGULL
-	dw PELIPPER
-	dw RALTS
-	dw KIRLIA
-	dw GARDEVOIR
-	dw SHROOMISH
-	dw BRELOOM
-	dw SLAKOTH
-	dw VIGOROTH
-	dw SLAKING
-	dw AZURILL
-	dw SKITTY
-	dw DELCATTY
-	dw SABLEYE
-	dw MAWILE
-	dw ARON
-	dw LAIRON
-	dw AGGRON
-	dw ROSELIA
-	dw GULPIN
-	dw SWALOT
-	dw WAILMER
-	dw WAILORD
-	dw NUMEL
-	dw CAMERUPT
-	dw TRAPINCH
-	dw VIBRAVA
-	dw FLYGON
-	dw CACNEA
-	dw CACTURNE
-	dw SWABLU
-	dw ALTARIA
-	dw ZANGOOSE
-	dw SEVIPER
-	dw BARBOACH
-	dw WHISCASH
-	dw LILEEP
-	dw CRADILY
-	dw ANORITH
-	dw ARMALDO
-	dw FEEBAS
-	dw MILOTIC
-	dw CASTFORM
-	dw KECLEON
-	dw DUSKULL
-	dw DUSCLOPS
-	dw CHIMECHO
-	dw ABSOL
-	dw SNORUNT
-	dw GLALIE
-	dw SPHEAL
-	dw SEALEO
-	dw WALREIN
-	dw CLAMPERL
-	dw HUNTAIL
-	dw GOREBYSS
-	dw BAGON
-	dw SHELGON
-	dw SALAMENCE
-	dw BELDUM
-	dw METANG
-	dw METAGROSS
-	dw REGIROCK
-	dw REGICE
-	dw REGISTEEL
-	dw LATIAS
-	dw LATIOS
-	dw KYOGRE
-	dw GROUDON
-	dw RAYQUAZA
-	dw DEOXYS
-	dw BIDOOF
-	dw BIBAREL
-	dw KRICKETOT
-	dw KRICKETUNE
-	dw BUDEW
-	dw ROSERADE
-	dw COMBEE
-	dw VESPIQUEN
-	dw PACHIRISU
-	dw BUIZEL
-	dw FLOATZEL
-	dw MISMAGIUS
-	dw HONCHKROW
-	dw CHINGLING
-	dw HAPPINY
-	dw GIBLE
-	dw GABITE
-	dw GARCHOMP
-	dw MUNCHLAX
-	dw CROAGUNK
-	dw TOXICROAK
-	dw CARNIVINE
-	dw WEAVILE
-	dw MAGNEZONE
-	dw TANGROWTH
-	dw ELECTIVIRE
-	dw MAGMORTAR
-	dw LEAFEON
-	dw GLACEON
-	dw PORYGON_Z
-	dw GALLADE
-	dw DUSKNOIR
-	dw FROSLASS
-	dw LILLIPUP
-	dw HERDIER
-	dw STOUTLAND
-	dw TYMPOLE
-	dw PALPITOAD
-	dw SEISMITOAD
-	dw THROH
-	dw SAWK
-	dw COTTONEE
-	dw WHIMSICOTT
-	dw PETILIL
-	dw LILLIGANT
-	dw SANDILE
-	dw KROKOROK
-	dw KROOKODILE
-	dw FRILLISH
-	dw JELLICENT
-	dw JOLTIK
-	dw GALVANTULA
-	dw LITWICK
-	dw LAMPENT
-	dw CHANDELURE
-	dw BOUFFALANT
-	dw RUFFLET
-	dw BRAVIARY
-	dw VULLABY
-	dw MANDIBUZZ
-	dw HEATMOR
-	dw DURANT
-	dw LARVESTA
-	dw VOLCARONA
-	dw LITLEO
-	dw PYROAR
-	dw PANCHAM
-	dw PANGORO
-	dw SKRELP
-	dw DRAGALGE
-	dw CLAUNCHER
-	dw CLAWITZER
-	dw SYLVEON
-	dw HAWLUCHA
-	dw GRUBBIN
-	dw CHARJABUG
-	dw VIKAVOLT
-	dw ROCKRUFF
-	dw LYCANROC
-	dw DEWPIDER
-	dw ARAQUANID
-	dw MIMIKYU
-	dw DHELMISE
-	dw ROOKIDEE
-	dw CORVSQUIRE
-	dw CORVINIGHT
-	dw CHEWTLE
-	dw DREDNAW
-	dw FALINKS
-	dw WYRDEER
-	dw KLEAVOR
-	dw URSALUNA
-	dw TINKATINK
-	dw TINKATUFF
-	dw TINKATON
-	dw ORTHWORM
-	dw ANNIHILAPE
-	dw FARIGIRAF
-	dw DUDUNSPARC
-	dw GIMMIGHOUL
-	dw GHOLDENGO
-	dw JAGG
-	dw CROCKY
-	dw KOTORA
-	dw RAITORA
-	dw GELANLA
-	dw GELANIA
-	dw BOMASHIKA
-	dw RINRIN
-	dw BELLERUN
-	dw _SPACEBOAT
-	dw WULFMAN
-	dw WARWULF
-	dw KOKOPELLI
+	dw BULBASAUR      ;    1
+	dw IVYSAUR        ;    2
+	dw VENUSAUR       ;    3
+	dw CHARMANDER     ;    4
+	dw CHARMELEON     ;    5
+	dw CHARIZARD      ;    6
+	dw SQUIRTLE       ;    7
+	dw WARTORTLE      ;    8
+	dw BLASTOISE      ;    9
+	dw WEEDLE         ;   13
+	dw KAKUNA         ;   14
+	dw BEEDRILL       ;   15
+	dw PIDGEY         ;   16
+	dw PIDGEOTTO      ;   17
+	dw PIDGEOT        ;   18
+	dw EKANS          ;   23
+	dw ARBOK          ;   24
+	dw PIKACHU        ;   25
+	dw RAICHU         ;   26
+	dw NIDORAN_F      ;   29
+	dw NIDORINA       ;   30
+	dw NIDOQUEEN      ;   31
+	dw NIDORAN_M      ;   32
+	dw NIDORINO       ;   33
+	dw NIDOKING       ;   34
+	dw ZUBAT          ;   41
+	dw GOLBAT         ;   42
+	dw ODDISH         ;   43
+	dw GLOOM          ;   44
+	dw VILEPLUME      ;   45
+	dw PARAS          ;   46
+	dw PARASECT       ;   47
+	dw MEOWTH         ;   52
+	dw PERSIAN        ;   53
+	dw PSYDUCK        ;   54
+	dw GOLDUCK        ;   55
+	dw MANKEY         ;   56
+	dw PRIMEAPE       ;   57
+	dw POLIWAG        ;   60
+	dw POLIWHIRL      ;   61
+	dw POLIWRATH      ;   62
+	dw GEODUDE        ;   74
+	dw GRAVELER       ;   75
+	dw GOLEM          ;   76
+	dw MAGNEMITE      ;   81
+	dw MAGNETON       ;   82
+	dw DODUO          ;   84
+	dw DODRIO         ;   85
+	dw KRABBY         ;   98
+	dw KINGLER        ;   99
+	dw VOLTORB        ;  100
+	dw ELECTRODE      ;  101
+	dw EXEGGCUTE      ;  102
+	dw EXEGGUTOR      ;  103
+	dw CUBONE         ;  104
+	dw MAROWAK        ;  105
+	dw CHANSEY        ;  113
+	dw TANGELA        ;  114
+	dw HORSEA         ;  116
+	dw SEADRA         ;  117
+	dw STARYU         ;  120
+	dw STARMIE        ;  121
+	dw SCYTHER        ;  123
+	dw ELECTABUZZ     ;  125
+	dw MAGMAR         ;  126
+	dw TAUROS         ;  128
+	dw MAGIKARP       ;  129
+	dw GYARADOS       ;  130
+	dw DITTO          ;  132
+	dw EEVEE          ;  133
+	dw VAPOREON       ;  134
+	dw JOLTEON        ;  135
+	dw FLAREON        ;  136
+	dw PORYGON        ;  137
+	dw OMANYTE        ;  138
+	dw OMASTAR        ;  139
+	dw KABUTO         ;  140
+	dw KABUTOPS       ;  141
+	dw AERODACTYL     ;  142
+	dw SNORLAX        ;  143
+	dw ARTICUNO       ;  144
+	dw ZAPDOS         ;  145
+	dw MOLTRES        ;  146
+	dw DRATINI        ;  147
+	dw DRAGONAIR      ;  148
+	dw DRAGONITE      ;  149
+	dw MEWTWO         ;  150
+	dw MEW            ;  151
+	dw CHIKORITA      ;  152
+	dw BAYLEEF        ;  153
+	dw MEGANIUM       ;  154
+	dw CYNDAQUIL      ;  155
+	dw QUILAVA        ;  156
+	dw TYPHLOSION     ;  157
+	dw TOTODILE       ;  158
+	dw CROCONAW       ;  159
+	dw FERALIGATR     ;  160
+	dw CROBAT         ;  169
+	dw CHINCHOU       ;  170
+	dw LANTURN        ;  171
+	dw PICHU          ;  172
+	dw NATU           ;  177
+	dw XATU           ;  178
+	dw BELLOSSOM      ;  182
+	dw MARILL         ;  183
+	dw AZUMARILL      ;  184
+	dw POLITOED       ;  186
+	dw WOOPER         ;  194
+	dw QUAGSIRE       ;  195
+	dw ESPEON         ;  196
+	dw UMBREON        ;  197
+	dw MURKROW        ;  198
+	dw MISDREAVUS     ;  200
+	dw UNOWN          ;  201
+	dw GIRAFARIG      ;  203
+	dw DUNSPARCE      ;  206
+	dw SCIZOR         ;  212
+	dw SHUCKLE        ;  213
+	dw SNEASEL        ;  215
+	dw TEDDIURSA      ;  216
+	dw URSARING       ;  217
+	dw REMORAID       ;  223
+	dw OCTILLERY      ;  224
+	dw SKARMORY       ;  227
+	dw HOUNDOUR       ;  228
+	dw HOUNDOOM       ;  229
+	dw KINGDRA        ;  230
+	dw PORYGON2       ;  233
+	dw STANTLER       ;  234
+	dw ELEKID         ;  239
+	dw MAGBY          ;  240
+	dw MILTANK        ;  241
+	dw BLISSEY        ;  242
+	dw RAIKOU         ;  243
+	dw ENTEI          ;  244
+	dw SUICUNE        ;  245
+	dw LARVITAR       ;  246
+	dw PUPITAR        ;  247
+	dw TYRANITAR      ;  248
+	dw LUGIA          ;  249
+	dw HO_OH          ;  250
+	dw CELEBI         ;  251
+	dw TREECKO        ;  252
+	dw GROVYLE        ;  253
+	dw SCEPTILE       ;  254
+	dw TORCHIC        ;  255
+	dw COMBUSKEN      ;  256
+	dw BLAZIKEN       ;  257
+	dw MUDKIP         ;  258
+	dw MARSHTOMP      ;  259
+	dw SWAMPERT       ;  260
+	dw POOCHYENA      ;  261
+	dw MIGHTYENA      ;  262
+	dw ZIGZAGOON      ;  263
+	dw LINOONE        ;  264
+	dw WURMPLE        ;  265
+	dw SILCOON        ;  266
+	dw BEAUTIFLY      ;  267
+	dw CASCOON        ;  268
+	dw DUSTOX         ;  269
+	dw LOTAD          ;  270
+	dw LOMBRE         ;  271
+	dw LUDICOLO       ;  272
+	dw SEEDOT         ;  273
+	dw NUZLEAF        ;  274
+	dw SHIFTRY        ;  275
+	dw WINGULL        ;  278
+	dw PELIPPER       ;  279
+	dw RALTS          ;  280
+	dw KIRLIA         ;  281
+	dw GARDEVOIR      ;  282
+	dw SHROOMISH      ;  285
+	dw BRELOOM        ;  286
+	dw SLAKOTH        ;  287
+	dw VIGOROTH       ;  288
+	dw SLAKING        ;  289
+	dw AZURILL        ;  298
+	dw SKITTY         ;  300
+	dw DELCATTY       ;  301
+	dw SABLEYE        ;  302
+	dw MAWILE         ;  303
+	dw ARON           ;  304
+	dw LAIRON         ;  305
+	dw AGGRON         ;  306
+	dw ROSELIA        ;  315
+	dw GULPIN         ;  316
+	dw SWALOT         ;  317
+	dw WAILMER        ;  320
+	dw WAILORD        ;  321
+	dw NUMEL          ;  322
+	dw CAMERUPT       ;  323
+	dw TRAPINCH       ;  328
+	dw VIBRAVA        ;  329
+	dw FLYGON         ;  330
+	dw CACNEA         ;  331
+	dw CACTURNE       ;  332
+	dw SWABLU         ;  333
+	dw ALTARIA        ;  334
+	dw ZANGOOSE       ;  335
+	dw SEVIPER        ;  336
+	dw BARBOACH       ;  339
+	dw WHISCASH       ;  340
+	dw LILEEP         ;  345
+	dw CRADILY        ;  346
+	dw ANORITH        ;  347
+	dw ARMALDO        ;  348
+	dw FEEBAS         ;  349
+	dw MILOTIC        ;  350
+	dw CASTFORM       ;  351
+	dw KECLEON        ;  352
+	dw DUSKULL        ;  355
+	dw DUSCLOPS       ;  356
+	dw CHIMECHO       ;  358
+	dw ABSOL          ;  359
+	dw SNORUNT        ;  361
+	dw GLALIE         ;  362
+	dw SPHEAL         ;  363
+	dw SEALEO         ;  364
+	dw WALREIN        ;  365
+	dw CLAMPERL       ;  366
+	dw HUNTAIL        ;  367
+	dw GOREBYSS       ;  368
+	dw BAGON          ;  371
+	dw SHELGON        ;  372
+	dw SALAMENCE      ;  373
+	dw BELDUM         ;  374
+	dw METANG         ;  375
+	dw METAGROSS      ;  376
+	dw REGIROCK       ;  377
+	dw REGICE         ;  378
+	dw REGISTEEL      ;  379
+	dw LATIAS         ;  380
+	dw LATIOS         ;  381
+	dw KYOGRE         ;  382
+	dw GROUDON        ;  383
+	dw RAYQUAZA       ;  384
+	dw DEOXYS         ;  386
+	dw BIDOOF         ;  399
+	dw BIBAREL        ;  400
+	dw KRICKETOT      ;  401
+	dw KRICKETUNE     ;  402
+	dw BUDEW          ;  406
+	dw ROSERADE       ;  407
+	dw COMBEE         ;  415
+	dw VESPIQUEN      ;  416
+	dw PACHIRISU      ;  417
+	dw BUIZEL         ;  418
+	dw FLOATZEL       ;  419
+	dw MISMAGIUS      ;  429
+	dw HONCHKROW      ;  430
+	dw CHINGLING      ;  433
+	dw HAPPINY        ;  440
+	dw GIBLE          ;  443
+	dw GABITE         ;  444
+	dw GARCHOMP       ;  445
+	dw MUNCHLAX       ;  446
+	dw CROAGUNK       ;  453
+	dw TOXICROAK      ;  454
+	dw CARNIVINE      ;  455
+	dw WEAVILE        ;  461
+	dw MAGNEZONE      ;  462
+	dw TANGROWTH      ;  465
+	dw ELECTIVIRE     ;  466
+	dw MAGMORTAR      ;  467
+	dw LEAFEON        ;  470
+	dw GLACEON        ;  471
+	dw PORYGON_Z      ;  474
+	dw GALLADE        ;  475
+	dw DUSKNOIR       ;  477
+	dw FROSLASS       ;  478
+	dw LILLIPUP       ;  506
+	dw HERDIER        ;  507
+	dw STOUTLAND      ;  508
+	dw TYMPOLE        ;  535
+	dw PALPITOAD      ;  536
+	dw SEISMITOAD     ;  537
+	dw THROH          ;  538
+	dw SAWK           ;  539
+	dw COTTONEE       ;  546
+	dw WHIMSICOTT     ;  547
+	dw PETILIL        ;  548
+	dw LILLIGANT      ;  549
+	dw SANDILE        ;  551
+	dw KROKOROK       ;  552
+	dw KROOKODILE     ;  553
+	dw FRILLISH       ;  592
+	dw JELLICENT      ;  593
+	dw JOLTIK         ;  595
+	dw GALVANTULA     ;  596
+	dw LITWICK        ;  607
+	dw LAMPENT        ;  608
+	dw CHANDELURE     ;  609
+	dw BOUFFALANT     ;  626
+	dw RUFFLET        ;  627
+	dw BRAVIARY       ;  628
+	dw VULLABY        ;  629
+	dw MANDIBUZZ      ;  630
+	dw HEATMOR        ;  631
+	dw DURANT         ;  632
+	dw LARVESTA       ;  636
+	dw VOLCARONA      ;  637
+	dw LITLEO         ;  667
+	dw PYROAR         ;  668
+	dw PANCHAM        ;  674
+	dw PANGORO        ;  675
+	dw SKRELP         ;  690
+	dw DRAGALGE       ;  691
+	dw CLAUNCHER      ;  692
+	dw CLAWITZER      ;  693
+	dw SYLVEON        ;  700
+	dw HAWLUCHA       ;  701
+	dw GRUBBIN        ;  736
+	dw CHARJABUG      ;  737
+	dw VIKAVOLT       ;  738
+	dw ROCKRUFF       ;  744
+	dw LYCANROC       ;  745
+	dw DEWPIDER       ;  751
+	dw ARAQUANID      ;  752
+	dw MIMIKYU        ;  778
+	dw DHELMISE       ;  781
+	dw ROOKIDEE       ;  821
+	dw CORVSQUIRE     ;  822
+	dw CORVINIGHT     ;  823
+	dw CHEWTLE        ;  833
+	dw DREDNAW        ;  834
+	dw FALINKS        ;  870
+	dw WYRDEER        ;  899
+	dw KLEAVOR        ;  900
+	dw URSALUNA       ;  901
+	dw TINKATINK      ;  957
+	dw TINKATUFF      ;  958
+	dw TINKATON       ;  959
+	dw ORTHWORM       ;  968
+	dw ANNIHILAPE     ;  979
+	dw FARIGIRAF      ;  981
+	dw DUDUNSPARC     ;  982
+	dw GIMMIGHOUL     ;  999
+	dw GHOLDENGO      ; 1000
+	dw JAGG           ; 1026
+	dw CROCKY         ; 1027
+	dw KOTORA         ; 1028
+	dw RAITORA        ; 1029
+	dw GELANLA        ; 1030
+	dw GELANIA        ; 1031
+	dw BOMASHIKA      ; 1032
+	dw RINRIN         ; 1033
+	dw BELLERUN       ; 1034
+	dw _SPACEBOAT     ; 1035
+	dw WULFMAN        ; 1036
+	dw WARWULF        ; 1037
+	dw KOKOPELLI      ; 1038
 .End

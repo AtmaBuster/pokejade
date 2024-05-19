@@ -1,410 +1,410 @@
 DexListHolon:
 	table_width 2, DexListHolon
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw 199
-	dw 200
-	dw   1
-	dw   2
-	dw   3
-	dw   4
-	dw   5
-	dw   6
-	dw   7
-	dw   8
-	dw   9
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw 190
-	dw 191
-	dw 192
-	dw 196
-	dw 197
-	dw 193
-	dw 194
-	dw 195
-	dw 198
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
-	dw   0
+	dw    0 ; BULBASAUR
+	dw    0 ; IVYSAUR
+	dw    0 ; VENUSAUR
+	dw    0 ; CHARMANDER
+	dw    0 ; CHARMELEON
+	dw    0 ; CHARIZARD
+	dw    0 ; SQUIRTLE
+	dw    0 ; WARTORTLE
+	dw    0 ; BLASTOISE
+	dw    0 ; BIDOOF
+	dw    0 ; BIBAREL
+	dw    0 ; KRICKETOT
+	dw    0 ; WEEDLE
+	dw    0 ; KAKUNA
+	dw    0 ; BEEDRILL
+	dw    0 ; PIDGEY
+	dw    0 ; PIDGEOTTO
+	dw    0 ; PIDGEOT
+	dw    0 ; KRICKETUNE
+	dw    0 ; COMBEE
+	dw    0 ; VESPIQUEN
+	dw    0 ; PACHIRISU
+	dw    0 ; EKANS
+	dw    0 ; ARBOK
+	dw    0 ; PIKACHU
+	dw    0 ; RAICHU
+	dw    0 ; BUIZEL
+	dw    0 ; FLOATZEL
+	dw    0 ; NIDORAN_F
+	dw    0 ; NIDORINA
+	dw    0 ; NIDOQUEEN
+	dw    0 ; NIDORAN_M
+	dw    0 ; NIDORINO
+	dw    0 ; NIDOKING
+	dw    0 ; MISMAGIUS
+	dw    0 ; HONCHKROW
+	dw    0 ; HAPPINY
+	dw    0 ; GIBLE
+	dw    0 ; GABITE
+	dw    0 ; GARCHOMP
+	dw    0 ; ZUBAT
+	dw    0 ; GOLBAT
+	dw    0 ; ODDISH
+	dw    0 ; GLOOM
+	dw    0 ; VILEPLUME
+	dw    0 ; PARAS
+	dw    0 ; PARASECT
+	dw    0 ; MUNCHLAX
+	dw    0 ; CROAGUNK
+	dw    0 ; TOXICROAK
+	dw    0 ; CARNIVINE
+	dw    0 ; MEOWTH
+	dw    0 ; PERSIAN
+	dw    0 ; PSYDUCK
+	dw    0 ; GOLDUCK
+	dw    0 ; MANKEY
+	dw    0 ; PRIMEAPE
+	dw    0 ; WEAVILE
+	dw    0 ; MAGNEZONE
+	dw    0 ; POLIWAG
+	dw    0 ; POLIWHIRL
+	dw    0 ; POLIWRATH
+	dw    0 ; GELANLA
+	dw    0 ; TANGROWTH
+	dw    0 ; GELANIA
+	dw    0 ; ELECTIVIRE
+	dw    0 ; MAGMORTAR
+	dw    0 ; LEAFEON
+	dw    0 ; GLACEON
+	dw    0 ; SYLVEON
+	dw    0 ; PORYGON_Z
+	dw    0 ; LILLIPUP
+	dw    0 ; HERDIER
+	dw    0 ; GEODUDE
+	dw    0 ; GRAVELER
+	dw    0 ; GOLEM
+	dw    0 ; STOUTLAND
+	dw    0 ; TYMPOLE
+	dw    0 ; PALPITOAD
+	dw    0 ; SEISMITOAD
+	dw    0 ; MAGNEMITE
+	dw    0 ; MAGNETON
+	dw    0 ; THROH
+	dw    0 ; DODUO
+	dw    0 ; DODRIO
+	dw    0 ; SAWK
+	dw    0 ; COTTONEE
+	dw    0 ; WHIMSICOTT
+	dw    0 ; PETILIL
+	dw    0 ; LILLIGANT
+	dw    0 ; SANDILE
+	dw    0 ; KROKOROK
+	dw    0 ; KROOKODILE
+	dw    0 ; FRILLISH
+	dw    0 ; JELLICENT
+	dw    0 ; JOLTIK
+	dw    0 ; GALVANTULA
+	dw    0 ; KRABBY
+	dw    0 ; KINGLER
+	dw    0 ; VOLTORB
+	dw    0 ; ELECTRODE
+	dw    0 ; EXEGGCUTE
+	dw    0 ; EXEGGUTOR
+	dw    0 ; CUBONE
+	dw    0 ; MAROWAK
+	dw    0 ; LITWICK
+	dw    0 ; LAMPENT
+	dw    0 ; CHANDELURE
+	dw    0 ; BOUFFALANT
+	dw    0 ; RUFFLET
+	dw    0 ; BRAVIARY
+	dw    0 ; VULLABY
+	dw    0 ; CHANSEY
+	dw    0 ; TANGELA
+	dw    0 ; MANDIBUZZ
+	dw    0 ; HORSEA
+	dw    0 ; SEADRA
+	dw    0 ; HEATMOR
+	dw    0 ; DURANT
+	dw    0 ; STARYU
+	dw    0 ; STARMIE
+	dw    0 ; LARVESTA
+	dw    0 ; SCYTHER
+	dw    0 ; VOLCARONA
+	dw    0 ; ELECTABUZZ
+	dw    0 ; MAGMAR
+	dw    0 ; LITLEO
+	dw    0 ; TAUROS
+	dw    0 ; MAGIKARP
+	dw    0 ; GYARADOS
+	dw    0 ; PYROAR
+	dw    0 ; DITTO
+	dw    0 ; EEVEE
+	dw    0 ; VAPOREON
+	dw    0 ; JOLTEON
+	dw    0 ; FLAREON
+	dw    0 ; PORYGON
+	dw    0 ; OMANYTE
+	dw    0 ; OMASTAR
+	dw    0 ; KABUTO
+	dw    0 ; KABUTOPS
+	dw    0 ; AERODACTYL
+	dw    0 ; SNORLAX
+	dw    0 ; ARTICUNO
+	dw    0 ; ZAPDOS
+	dw    0 ; MOLTRES
+	dw    0 ; DRATINI
+	dw    0 ; DRAGONAIR
+	dw    0 ; DRAGONITE
+	dw  199 ; MEWTWO
+	dw  200 ; MEW
+	dw    1 ; CHIKORITA
+	dw    2 ; BAYLEEF
+	dw    3 ; MEGANIUM
+	dw    4 ; CYNDAQUIL
+	dw    5 ; QUILAVA
+	dw    6 ; TYPHLOSION
+	dw    7 ; TOTODILE
+	dw    8 ; CROCONAW
+	dw    9 ; FERALIGATR
+	dw    0 ; PANCHAM
+	dw    0 ; PANGORO
+	dw    0 ; SKRELP
+	dw    0 ; DRAGALGE
+	dw    0 ; CLAUNCHER
+	dw    0 ; CLAWITZER
+	dw    0 ; HAWLUCHA
+	dw    0 ; GRUBBIN
+	dw    0 ; CROBAT
+	dw    0 ; CHINCHOU
+	dw    0 ; LANTURN
+	dw    0 ; PICHU
+	dw    0 ; CHARJABUG
+	dw    0 ; VIKAVOLT
+	dw    0 ; ROCKRUFF
+	dw    0 ; LYCANROC
+	dw    0 ; NATU
+	dw    0 ; XATU
+	dw    0 ; DEWPIDER
+	dw    0 ; ARAQUANID
+	dw    0 ; MIMIKYU
+	dw    0 ; BELLOSSOM
+	dw    0 ; MARILL
+	dw    0 ; AZUMARILL
+	dw    0 ; DHELMISE
+	dw    0 ; POLITOED
+	dw    0 ; ROOKIDEE
+	dw    0 ; CORVSQUIRE
+	dw    0 ; CORVINIGHT
+	dw    0 ; CHEWTLE
+	dw    0 ; DREDNAW
+	dw    0 ; FALINKS
+	dw    0 ; MON_0C1
+	dw    0 ; WOOPER
+	dw    0 ; QUAGSIRE
+	dw    0 ; ESPEON
+	dw    0 ; UMBREON
+	dw    0 ; MURKROW
+	dw    0 ; WYRDEER
+	dw    0 ; MISDREAVUS
+	dw    0 ; UNOWN
+	dw    0 ; KLEAVOR
+	dw    0 ; GIRAFARIG
+	dw    0 ; URSALUNA
+	dw    0 ; TINKATINK
+	dw    0 ; DUNSPARCE
+	dw    0 ; TINKATUFF
+	dw    0 ; TINKATON
+	dw    0 ; ORTHWORM
+	dw    0 ; ANNIHILAPE
+	dw    0 ; DUDUNSPARC
+	dw    0 ; SCIZOR
+	dw    0 ; SHUCKLE
+	dw    0 ; GIMMIGHOUL
+	dw    0 ; SNEASEL
+	dw    0 ; TEDDIURSA
+	dw    0 ; URSARING
+	dw    0 ; GHOLDENGO
+	dw    0 ; JAGG
+	dw    0 ; CROCKY
+	dw    0 ; WULFMAN
+	dw    0 ; WARWULF
+	dw    0 ; REMORAID
+	dw    0 ; OCTILLERY
+	dw    0 ; RINRIN
+	dw    0 ; BELLERUN
+	dw    0 ; SKARMORY
+	dw    0 ; HOUNDOUR
+	dw    0 ; HOUNDOOM
+	dw    0 ; KINGDRA
+	dw    0 ; KOTORA
+	dw    0 ; RAITORA
+	dw    0 ; PORYGON2
+	dw    0 ; STANTLER
+	dw    0 ; BOMASHIKA
+	dw    0 ; _SPACEBOAT
+	dw    0 ; KOKOPELLI
+	dw    0 ; FARIGIRAF
+	dw    0 ; ELEKID
+	dw    0 ; MAGBY
+	dw    0 ; MILTANK
+	dw    0 ; BLISSEY
+	dw    0 ; RAIKOU
+	dw    0 ; ENTEI
+	dw    0 ; SUICUNE
+	dw    0 ; LARVITAR
+	dw    0 ; PUPITAR
+	dw    0 ; TYRANITAR
+	dw    0 ; LUGIA
+	dw    0 ; HO_OH
+	dw    0 ; CELEBI
+	dw    0 ; TREECKO
+	dw    0 ; GROVYLE
+	dw    0 ; SCEPTILE
+	dw    0 ; TORCHIC
+	dw    0 ; COMBUSKEN
+	dw    0 ; BLAZIKEN
+	dw    0 ; MUDKIP
+	dw    0 ; MARSHTOMP
+	dw    0 ; SWAMPERT
+	dw    0 ; POOCHYENA
+	dw    0 ; MIGHTYENA
+	dw    0 ; ZIGZAGOON
+	dw    0 ; LINOONE
+	dw    0 ; WURMPLE
+	dw    0 ; SILCOON
+	dw    0 ; BEAUTIFLY
+	dw    0 ; CASCOON
+	dw    0 ; DUSTOX
+	dw    0 ; LOTAD
+	dw    0 ; LOMBRE
+	dw    0 ; LUDICOLO
+	dw    0 ; SEEDOT
+	dw    0 ; NUZLEAF
+	dw    0 ; SHIFTRY
+	dw    0 ; WINGULL
+	dw    0 ; PELIPPER
+	dw    0 ; RALTS
+	dw    0 ; KIRLIA
+	dw    0 ; GARDEVOIR
+	dw    0 ; GALLADE
+	dw    0 ; SHROOMISH
+	dw    0 ; BRELOOM
+	dw    0 ; SLAKOTH
+	dw    0 ; VIGOROTH
+	dw    0 ; SLAKING
+	dw    0 ; AZURILL
+	dw    0 ; SKITTY
+	dw    0 ; DELCATTY
+	dw    0 ; SABLEYE
+	dw    0 ; MAWILE
+	dw    0 ; ARON
+	dw    0 ; LAIRON
+	dw    0 ; AGGRON
+	dw    0 ; BUDEW
+	dw    0 ; ROSELIA
+	dw    0 ; ROSERADE
+	dw    0 ; GULPIN
+	dw    0 ; SWALOT
+	dw    0 ; WAILMER
+	dw    0 ; WAILORD
+	dw    0 ; NUMEL
+	dw    0 ; CAMERUPT
+	dw    0 ; TRAPINCH
+	dw    0 ; VIBRAVA
+	dw    0 ; FLYGON
+	dw    0 ; CACNEA
+	dw    0 ; CACTURNE
+	dw    0 ; SWABLU
+	dw    0 ; ALTARIA
+	dw    0 ; ZANGOOSE
+	dw    0 ; SEVIPER
+	dw    0 ; BARBOACH
+	dw    0 ; WHISCASH
+	dw    0 ; LILEEP
+	dw    0 ; CRADILY
+	dw    0 ; ANORITH
+	dw    0 ; ARMALDO
+	dw    0 ; FEEBAS
+	dw    0 ; MILOTIC
+	dw    0 ; CASTFORM
+	dw    0 ; KECLEON
+	dw    0 ; DUSKULL
+	dw    0 ; DUSCLOPS
+	dw    0 ; DUSKNOIR
+	dw    0 ; CHINGLING
+	dw    0 ; CHIMECHO
+	dw    0 ; ABSOL
+	dw    0 ; SNORUNT
+	dw    0 ; GLALIE
+	dw    0 ; FROSLASS
+	dw    0 ; SPHEAL
+	dw    0 ; SEALEO
+	dw    0 ; WALREIN
+	dw    0 ; CLAMPERL
+	dw    0 ; HUNTAIL
+	dw    0 ; GOREBYSS
+	dw    0 ; BAGON
+	dw    0 ; SHELGON
+	dw    0 ; SALAMENCE
+	dw    0 ; BELDUM
+	dw    0 ; METANG
+	dw    0 ; METAGROSS
+	dw  190 ; REGIROCK
+	dw  191 ; REGICE
+	dw  192 ; REGISTEEL
+	dw  196 ; LATIAS
+	dw  197 ; LATIOS
+	dw  193 ; KYOGRE
+	dw  194 ; GROUDON
+	dw  195 ; RAYQUAZA
+	dw  198 ; DEOXYS
+	dw    0 ; MON_161
+	dw    0 ; MON_162
+	dw    0 ; MON_163
+	dw    0 ; MON_164
+	dw    0 ; MON_165
+	dw    0 ; MON_166
+	dw    0 ; MON_167
+	dw    0 ; MON_168
+	dw    0 ; MON_169
+	dw    0 ; MON_16A
+	dw    0 ; MON_16B
+	dw    0 ; MON_16C
+	dw    0 ; MON_16D
+	dw    0 ; MON_16E
+	dw    0 ; MON_16F
+	dw    0 ; MON_170
+	dw    0 ; MON_171
+	dw    0 ; MON_172
+	dw    0 ; MON_173
+	dw    0 ; MON_174
+	dw    0 ; MON_175
+	dw    0 ; MON_176
+	dw    0 ; MON_177
+	dw    0 ; MON_178
+	dw    0 ; MON_179
+	dw    0 ; MON_17A
+	dw    0 ; MON_17B
+	dw    0 ; MON_17C
+	dw    0 ; MON_17D
+	dw    0 ; MON_17E
+	dw    0 ; MON_17F
+	dw    0 ; MON_180
+	dw    0 ; MON_181
+	dw    0 ; MON_182
+	dw    0 ; MON_183
+	dw    0 ; MON_184
+	dw    0 ; MON_185
+	dw    0 ; MON_186
+	dw    0 ; MON_187
+	dw    0 ; MON_188
+	dw    0 ; MON_189
+	dw    0 ; MON_18A
+	dw    0 ; MON_18B
+	dw    0 ; MON_18C
+	dw    0 ; MON_18D
+	dw    0 ; MON_18E
+	dw    0 ; MON_18F
+	dw    0 ; MON_190
+	dw    0 ; MON_191
+	dw    0 ; DEOXYS_ATTACK
+	dw    0 ; DEOXYS_DEFENSE
+	dw    0 ; DEOXYS_SPEED
+	dw    0 ; LYCANROC_NITE
+	dw    0 ; LYCANROC_DUSK
+	dw    0 ; URSALUNA_BLOOD
 	assert_table_length NUM_POKEMON
