@@ -45,9 +45,9 @@ DEF KRIS EQU __trainer_class__
 	trainerclass CLAIR ; 8
 
 	trainerclass RIVAL1 ; 9
-	const RIVAL1_1_CHIKORITA
-	const RIVAL1_1_CYNDAQUIL
-	const RIVAL1_1_TOTODILE
+	const RIVAL1_1_TREECKO
+	const RIVAL1_1_TORCHIC
+	const RIVAL1_1_MUDKIP
 DEF RIVAL1_1 EQU const_value - 3
 
 	trainerclass POKEMON_PROF ; a
@@ -78,12 +78,15 @@ DEF RIVAL1_1 EQU const_value - 3
 	trainerclass ERIKA ; 15
 
 	trainerclass YOUNGSTER ; 16
+	const YOUNGSTER_DANNY
+	const YOUNGSTER_2
 
 	trainerclass SCHOOLBOY ; 17
 
 	trainerclass BIRD_KEEPER ; 18
 
 	trainerclass LASS ; 19
+	const LASS_1
 
 	trainerclass JANINE ; 1a
 
@@ -106,6 +109,10 @@ DEF RIVAL1_1 EQU const_value - 3
 	trainerclass SABRINA ; 23
 
 	trainerclass BUG_CATCHER ; 24
+	const BUG_CATCHER_1
+	const BUG_CATCHER_2
+	const BUG_CATCHER_3
+	const BUG_CATCHER_4
 
 	trainerclass FISHER ; 25
 
@@ -140,6 +147,7 @@ DEF RIVAL1_1 EQU const_value - 3
 	trainerclass PSYCHIC_T ; 34
 
 	trainerclass PICNICKER ; 35
+	const PICNICKER_1
 
 	trainerclass CAMPER ; 36
 

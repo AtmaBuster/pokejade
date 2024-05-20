@@ -12,9 +12,9 @@ DexListNazoh:
 	dw   10 ; BIDOOF
 	dw   11 ; BIBAREL
 	dw    0 ; KRICKETOT
-	dw    0 ; WEEDLE
-	dw    0 ; KAKUNA
-	dw    0 ; BEEDRILL
+	dw   25 ; WEEDLE
+	dw   26 ; KAKUNA
+	dw   27 ; BEEDRILL
 	dw   12 ; PIDGEY
 	dw   13 ; PIDGEOTTO
 	dw   14 ; PIDGEOT

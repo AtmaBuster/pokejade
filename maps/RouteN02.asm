@@ -39,6 +39,63 @@ RouteN02CB_EggCheck:
 .SkipMon2:
 	endcallback
 
+Trainer_YoungsterDanny:
+	trainer YOUNGSTER, YOUNGSTER_DANNY, EVENT_TRAINER_YOUNGSTER_DANNY, .SeenText, .BeatenText, 0, .Script
+.Script:
+	endifjustbattled
+	opentext
+	writetext .AfterText
+	waitbutton
+	closetext
+	end
+.SeenText:
+	text "SEEN"
+	done
+.BeatenText:
+	text "BEAT"
+	done
+.AfterText:
+	text "OVER"
+	done
+
+Trainer_Lass1:
+	trainer LASS, LASS_1, EVENT_TRAINER_LASS_1, .SeenText, .BeatenText, 0, .Script
+.Script:
+	endifjustbattled
+	opentext
+	writetext .AfterText
+	waitbutton
+	closetext
+	end
+.SeenText:
+	text "SEEN"
+	done
+.BeatenText:
+	text "BEAT"
+	done
+.AfterText:
+	text "OVER"
+	done
+
+Trainer_Youngster2:
+	trainer YOUNGSTER, YOUNGSTER_2, EVENT_TRAINER_YOUNGSTER_2, .SeenText, .BeatenText, 0, .Script
+.Script:
+	endifjustbattled
+	opentext
+	writetext .AfterText
+	waitbutton
+	closetext
+	end
+.SeenText:
+	text "SEEN"
+	done
+.BeatenText:
+	text "BEAT"
+	done
+.AfterText:
+	text "OVER"
+	done
+
 RouteN02CO_ExplainDaycare:
 	turnobject ROUTEN02_DAYCARE_MAN, LEFT
 	applymovement ROUTEN02_DAYCARE_MAN, .Move_Left
@@ -208,9 +265,9 @@ RouteN02_MapEvents:
 	bg_event 30,  6, BGEVENT_ITEM, RouteN02BG_HIXAttack
 
 	def_object_events
-	object_event 10, 19, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
-	object_event 14, 10, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
-	object_event 31, 10, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, -1
+	object_event 10, 19, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, Trainer_YoungsterDanny, -1
+	object_event 14, 10, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, Trainer_Lass1, -1
+	object_event 31, 10, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, Trainer_Youngster2, -1
 	object_event 11, 12, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RouteN02OB_Youngster, EVENT_ROUTEN02_YOUNGSTER
 	object_event 23, 10, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 2, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RouteN02OB_Lass, -1
 	object_event 27,  6, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RouteN02OB_DayCareMan, -1

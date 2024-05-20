@@ -23,9 +23,9 @@ NazohPokedexOrder:
 	dw TANGELA        ;  22
 	dw TANGROWTH      ;  23
 	dw GELANIA        ;  24
-	dw 0
-	dw 0
-	dw 0
+	dw WEEDLE         ;  25
+	dw KAKUNA         ;  26
+	dw BEEDRILL       ;  27
 	dw 0
 	dw 0
 	dw 0

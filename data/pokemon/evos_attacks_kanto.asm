@@ -243,24 +243,40 @@ BibarelEvosAttacks:
 KricketotEvosAttacks:
 	dbbw EVOLVE_LEVEL, 10, BIBAREL
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, GROWL
+	dbw 1, BIDE
+	dbw 16, BUG_BITE
 	db 0 ; no more level-up moves
 
 WeedleEvosAttacks:
 	dbbw EVOLVE_LEVEL, 7, KAKUNA
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, POISON_STING
+	dbw 1, STRING_SHOT
+	dbw 15, BUG_BITE
 	db 0 ; no more level-up moves
 
 KakunaEvosAttacks:
 	dbbw EVOLVE_LEVEL, 10, BEEDRILL
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, HARDEN
+	dbw 7, HARDEN
 	db 0 ; no more level-up moves
 
 BeedrillEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, FURY_ATTACK
+	dbw 10, FURY_ATTACK
+	dbw 13, FOCUS_ENERGY
+	dbw 16, TWINEEDLE
+	dbw 19, RAGE
+	dbw 22, PURSUIT
+	dbw 25, TOXIC_SPIKES
+	dbw 28, PIN_MISSILE
+	dbw 31, AGILITY
+	dbw 34, ASSURANCE
+	dbw 37, POISON_JAB
+	dbw 40, ENDEAVOR
 	db 0 ; no more level-up moves
 
 PidgeyEvosAttacks:
@@ -323,7 +339,19 @@ PidgeotEvosAttacks:
 
 KricketuneEvosAttacks:
 	db 0 ; no more evolutions
-	dbw 1, POUND
+	dbw 1, GROWL
+	dbw 1, BIDE
+	dbw 10, FURY_CUTTER
+	dbw 14, LEECH_LIFE
+	dbw 18, SING
+	dbw 22, FOCUS_ENERGY
+	dbw 26, SLASH
+	dbw 30, X_SCISSOR
+	dbw 34, SCREECH
+	dbw 38, TAUNT
+	dbw 42, NIGHT_SLASH
+	dbw 46, BUG_BUZZ
+	dbw 50, PERISH_SONG
 	db 0 ; no more level-up moves
 
 CombeeEvosAttacks:

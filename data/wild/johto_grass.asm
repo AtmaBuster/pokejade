@@ -22,6 +22,26 @@ JohtoGrassWildMons:
 	dbw  2, LITLEO
 	dbw  3, LITLEO
 
+	map_id ROUTE_N02
+	db 10 percent
+	dbw  3, PIDGEY
+	dbw  4, BIDOOF
+	dbw  4, PIDGEY
+	dbw  3, BIDOOF
+	dbw  3, WEEDLE
+	dbw  4, WEEDLE
+	dbw  4, GELANLA
+
+	map_id MOSSY_WOODS
+	db 4 percent
+	dbw  4, WEEDLE
+	dbw  3, KRICKETOT
+	dbw  3, WEEDLE
+	dbw  4, KAKUNA
+	dbw  5, WEEDLE
+	dbw  4, GELANLA
+	dbw  5, GELANLA
+
 IF DEF(_DEBUG)
 	map_id DEBUG_ROOM
 	db 10 percent

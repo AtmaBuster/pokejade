@@ -9,7 +9,7 @@ TalkToTrainerScript::
 SeenByTrainerScript::
 	loadtemptrainer
 	encountermusic
-	showemote EMOTE_SHOCK, LAST_TALKED, 30
+	showemote EMOTE_SHOCK, LAST_TALKED, 15
 	callasm TrainerWalkToPlayer
 	applymovementlasttalked wMovementBuffer
 	writeobjectxy LAST_TALKED
