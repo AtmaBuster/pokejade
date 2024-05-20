@@ -1,7 +1,7 @@
 roms := \
-	pokecrystal.gbc\
-	pokecrystal_debug.gbc
-patches := pokecrystal.patch
+	pokejade.gbc\
+	pokejade_debug.gbc\
+	pokejade_demo.gbc
 
 rom_obj := \
 	audio.o \
@@ -22,9 +22,9 @@ rom_obj := \
 	gfx/tilesets.o \
 	lib/mobile/main.o
 
-pokecrystal_obj       := $(rom_obj:.o=.o)
-pokecrystal_debug_obj := $(rom_obj:.o=_debug.o)
-pokecrystal_vc_obj    := $(rom_obj:.o=_vc.o)
+pokejade_obj       := $(rom_obj:.o=.o)
+pokejade_debug_obj := $(rom_obj:.o=_debug.o)
+pokejade_demo_obj  := $(rom_obj:.o=_demo.o)
 
 
 ### Build tools
@@ -45,15 +45,15 @@ RGBLINK ?= $(RGBDS)rgblink
 ### Build targets
 
 .SUFFIXES:
-.PHONY: all crystal clean tidy tools
+.PHONY: all jade clean tidy tools
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
 
-all: crystal crystal_debug
-crystal:       pokecrystal.gbc
-crystal_debug: pokecrystal_debug.gbc
-crystal_vc:    pokecrystal.patch
+all: jade jade_debug jade_demo
+jade:       pokejade.gbc
+jade_debug: pokejade_debug.gbc
+jade_demo:  pokejade_demo.gbc
 
 clean: tidy
 	find gfx \
@@ -75,14 +75,9 @@ tidy:
 	$(RM) $(roms) \
 	      $(roms:.gbc=.sym) \
 	      $(roms:.gbc=.map) \
-	      $(patches) \
-	      $(patches:.patch=_vc.gbc) \
-	      $(patches:.patch=_vc.sym) \
-	      $(patches:.patch=_vc.map) \
-	      $(patches:%.patch=vc/%.constants.sym) \
-	      $(pokecrystal_obj) \
-	      $(pokecrystal_debug_obj) \
-	      $(pokecrystal_vc_obj) \
+	      $(pokejade_obj) \
+	      $(pokejade_debug_obj) \
+	      $(pokejade_demo_obj) \
 	      rgbdscheck.o
 	$(MAKE) clean -C tools/
 
@@ -92,12 +87,9 @@ tools:
 
 RGBASMFLAGS = -E -Q8 -P includes.asm -Weverything -Wnumeric-string=2 -Wtruncation=1
 
-$(pokecrystal_obj):       RGBASMFLAGS +=
-$(pokecrystal_debug_obj): RGBASMFLAGS += -D _DEBUG
-$(pokecrystal_vc_obj):    RGBASMFLAGS += -D _CRYSTAL_VC
-
-%.patch: vc/%.constants.sym %_vc.gbc %.gbc vc/%.patch.template
-	tools/make_patch $*_vc.sym $^ $@
+$(pokejade_obj):       RGBASMFLAGS +=
+$(pokejade_debug_obj): RGBASMFLAGS += -D _DEBUG
+$(pokejade_demo_obj):  RGBASMFLAGS += -D _DEMO
 
 rgbdscheck.o: rgbdscheck.asm
 	$(RGBASM) -o $@ $<
@@ -118,9 +110,9 @@ $1: $2 $$(shell tools/scan_includes $2) $(preinclude_deps) | rgbdscheck.o
 endef
 
 # Dependencies for shared objects objects
-$(foreach obj, $(pokecrystal_obj), $(eval $(call DEP,$(obj),$(obj:.o=.asm))))
-$(foreach obj, $(pokecrystal_debug_obj), $(eval $(call DEP,$(obj),$(obj:_debug.o=.asm))))
-$(foreach obj, $(pokecrystal_vc_obj), $(eval $(call DEP,$(obj),$(obj:_vc.o=.asm))))
+$(foreach obj, $(pokejade_obj), $(eval $(call DEP,$(obj),$(obj:.o=.asm))))
+$(foreach obj, $(pokejade_debug_obj), $(eval $(call DEP,$(obj),$(obj:_debug.o=.asm))))
+$(foreach obj, $(pokejade_demo_obj), $(eval $(call DEP,$(obj),$(obj:_demo.o=.asm))))
 
 # Dependencies for VC files that need to run scan_includes
 %.constants.sym: %.constants.asm $(shell tools/scan_includes %.constants.asm) $(preinclude_deps) | rgbdscheck.o
@@ -129,9 +121,9 @@ $(foreach obj, $(pokecrystal_vc_obj), $(eval $(call DEP,$(obj),$(obj:_vc.o=.asm)
 endif
 
 
-pokecrystal_opt         = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokecrystal_debug_opt   = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokecrystal_vc_opt      = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokejade_opt         = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokejade_debug_opt   = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokejade_demo_opt    = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 
 .gbc: tools/bankends
 %.gbc: $$(%_obj) layout.link
