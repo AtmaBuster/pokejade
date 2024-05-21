@@ -163,4 +163,6 @@
 	const EFFECT_OVERHEAT     ; A0
 	const EFFECT_BULK_UP      ; A1
 	const EFFECT_TICKLE       ; A2
+	const EFFECT_WORK_UP      ; A3
+	const EFFECT_NOBLE_ROAR   ; A4
 DEF NUM_MOVE_EFFECTS EQU const_value

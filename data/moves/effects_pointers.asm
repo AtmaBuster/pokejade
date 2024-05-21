@@ -164,4 +164,6 @@ MoveEffectsPointers:
 	dw Overheat
 	dw BulkUp
 	dw Tickle
+	dw WorkUp
+	dw NobleRoar
 	assert_table_length NUM_MOVE_EFFECTS

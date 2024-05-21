@@ -2001,3 +2001,20 @@ Tickle:
 	loweroppstat ATTACK
 	loweroppstat DEFENSE
 	endmove
+
+WorkUp:
+	checkobedience
+	usedmovetext
+	doturn
+	forceraisestat ATTACK
+	forceraisestat SP_ATTACK
+	endmove
+
+NobleRoar:
+	checkobedience
+	usedmovetext
+	doturn
+	checkhit
+	loweroppstat ATTACK
+	loweroppstat SP_ATTACK
+	endmove
