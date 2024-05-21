@@ -4,6 +4,11 @@ DeepMossyWoods_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_NEWMAP, .SetVisited
+
+.SetVisited:
+	setevent EVENT_VISITED_DEEP_MOSSY_WOODS
+	endcallback
 
 DeepMossyWoods_MapEvents:
 	db 0, 0 ; filler
