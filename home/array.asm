@@ -7,18 +7,29 @@ IsInArray::
 .loop
 	ld a, [hl]
 	cp -1
-	jr z, .NotInArray
+	ret z
 	cp c
 	jr z, .InArray
 	inc b
 	add hl, de
 	jr .loop
 
-.NotInArray:
-	and a
+.InArray:
+	scf
 	ret
 
-.InArray:
+IsInByteArray:
+; Finds a in byte array hl terminated with $ff.
+; Return index in b and carry if found.
+	ld b, -1
+	ld c, a
+.loop
+	inc b
+	ld a, [hli]
+	cp -1
+	ret z
+	cp c
+	jr nz, .loop
 	scf
 	ret
 

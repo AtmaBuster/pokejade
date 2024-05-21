@@ -1030,8 +1030,7 @@ EvoTest_LevelLandmark:
 	ld h, [hl]
 	ld l, a
 	ld a, [wCurLandmark]
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	pop hl
 	ret
 
