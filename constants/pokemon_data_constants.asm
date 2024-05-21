@@ -252,11 +252,11 @@ DEF NUM_HOF_TEAMS EQU 30
 	const TR_MORNDAY
 	const TR_EVENITE
 
-; EVOLVE_STAT triggers
+; EVOLVE_LANDMARK triggers
 	const_def 1
-	const ATK_GT_DEF
-	const ATK_LT_DEF
-	const ATK_EQ_DEF
+	const LANDMARKGROUP_FOREST
+	const LANDMARKGROUP_ICE
+	const LANDMARKGROUP_ELECTRIC
 
 ; wild data
 

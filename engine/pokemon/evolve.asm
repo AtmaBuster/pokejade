@@ -1019,16 +1019,23 @@ EvoTest_LevelAbility:
 
 EvoTest_LevelLandmark:
 	call GetNextEvoAttackByte
-	ld b, a
+	dec a
+	add a
+	ld c, a
+	ld b, 0
+	push hl
+	ld hl, LandmarkEvoGroups
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 	ld a, [wCurLandmark]
-	cp b
-	jr nz, .fail
-	scf
+	ld de, 1
+	call IsInArray
+	pop hl
 	ret
 
-.fail
-	and a
-	ret
+INCLUDE "data/pokemon/landmark_evos.asm"
 
 EvoTest_ItemNite:
 	call EvoTest_Item
