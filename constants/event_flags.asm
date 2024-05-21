@@ -98,6 +98,11 @@
 ; Unused: next 4 events
 
 	const_next 650
+; Hideable Landmarks
+	const EVENT_VISITED_DEEP_MOSSY_WOODS
+;Unused: next 19 events
+
+	const_next 670
 ; Hidden items
 	const EVENT_ROUTEN01_HIDDEN_REPEL
 	const EVENT_SHALE_CITY_HIDDEN_LURE

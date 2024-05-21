@@ -1775,6 +1775,8 @@ _TownMap:
 
 .okay
 	inc [hl]
+	call CheckHiddenLandmark
+	jr c, .okay
 	jr .next
 
 .pressed_down
@@ -1788,6 +1790,8 @@ _TownMap:
 
 .okay2
 	dec [hl]
+	call CheckHiddenLandmark
+	jr c, .okay2
 
 .next
 	push de
@@ -1831,6 +1835,40 @@ _TownMap:
 	ld a, [wTownMapCursorLandmark]
 	call PokegearMap_UpdateLandmarkName
 	jmp TownMapPals
+
+CheckHiddenLandmark:
+	ld b, [hl]
+	push hl
+	ld hl, HideableLandmarks
+.loop
+	ld a, [hli]
+	cp -1
+	jr z, .not_hidden
+	cp b
+	jr nz, .next
+	push de
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	pop de
+	jr nz, .not_hidden
+	pop hl
+	scf
+	ret
+
+.next
+	inc hl
+	inc hl
+	jr .loop
+
+.not_hidden
+	pop hl
+	and a
+	ret
+
+INCLUDE "data/maps/hideable_landmarks.asm"
 
 PlayRadio:
 	ld hl, wOptions
