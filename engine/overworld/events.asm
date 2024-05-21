@@ -981,6 +981,11 @@ DoRepelStep:
 	and a
 	ret z
 
+IF DEF(_DEBUG)
+	cp -1
+	ret z
+	and a
+ENDC
 	dec a
 	ld [wRepelEffect], a
 	ret nz

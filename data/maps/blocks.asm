@@ -39,6 +39,7 @@ RouteN15_Blocks:        INCBIN "maps/RouteN14.ablk"
 City13_Blocks:          INCBIN "maps/City13.ablk"
 RouteN02DayCare_Blocks: INCBIN "maps/RouteN02DayCare.ablk"
 MossyWoods_Blocks:      INCBIN "maps/MossyWoods.ablk"
+DeepMossyWoods_Blocks:  INCBIN "maps/DeepMossyWoods.ablk"
 
 
 SECTION "Map Blocks 2", ROMX

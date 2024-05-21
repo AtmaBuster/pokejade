@@ -86,7 +86,7 @@ DEF RIVAL1_1 EQU const_value - 3
 	trainerclass BIRD_KEEPER ; 18
 
 	trainerclass LASS ; 19
-	const LASS_1
+	const LASS_ABBY
 
 	trainerclass JANINE ; 1a
 

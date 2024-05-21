@@ -45,6 +45,7 @@ INCLUDE "maps/RouteN15.asm"
 INCLUDE "maps/City13.asm"
 INCLUDE "maps/RouteN02DayCare.asm"
 INCLUDE "maps/MossyWoods.asm"
+INCLUDE "maps/DeepMossyWoods.asm"
 INCLUDE "maps/RouteN02MossyWoodsGate.asm"
 INCLUDE "maps/ChertCityMossyWoodsGate.asm"
 

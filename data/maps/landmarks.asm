@@ -13,7 +13,8 @@ Landmarks:
 	landmark  52,  96, RouteN01Name
 	landmark  56,  84, ShaleCityName
 	landmark  72,  84, RouteN02Name
-	landmark  76,  84, MossyWoodsName
+	landmark  76,  76, MossyWoodsName
+	landmark  80,  76, DeepMossyWoodsName
 	landmark  84,  88, ChertCityName
 	landmark  96,  84, RouteN03Name
 	landmark 112,  88, City04Name
@@ -40,7 +41,6 @@ Landmarks:
 	landmark  36,  92, Town12Name
 	landmark  92,  28, City13Name
 
-	landmark  28, 100, Route41Name
 	landmark  20, 100, CianwoodCityName
 	landmark  92,  44, Route42Name
 	landmark  84,  44, MtMortarName
@@ -140,6 +140,7 @@ RouteN14Name:        db "ROUTE N14@"
 RouteN15Name:        db "ROUTE N15@"
 
 MossyWoodsName:      db "MOSSY WOODS@"
+DeepMossyWoodsName:  db "DEEP MOSSY<BSP>WOODS@"
 
 CianwoodCityName:    db "CIANWOOD<BSP>CITY@"
 MahoganyTownName:    db "MAHOGANY<BSP>TOWN@"

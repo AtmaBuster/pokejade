@@ -30,6 +30,8 @@ Debug_NewGame:
 	call .GetItem
 	ld hl, PARKS_NOTE
 	call .GetItem
+	ld hl, TOWN_MAP
+	call .GetItem
 
 	ld hl, wStatusFlags
 	set STATUSFLAGS_POKEDEX_F, [hl]
@@ -92,6 +94,7 @@ Debug_SetStartingEvents:
 	dbw SET_FLAG, EVENT_OBSIDIAN_MEADOW_PROF
 	dbw SET_FLAG, EVENT_OBSIDIAN_MEADOW_STARTERS
 	dbw SET_FLAG, EVENT_OBSIDIAN_MEADOW_RIVAL
+	dbw SET_FLAG, EVENT_GOT_TOWN_MAP
 	dbw RESET_FLAG, EVENT_PARKS_LAB_PROF
 	dbw RESET_FLAG, EVENT_PARKS_LAB_RIVAL
 	db -1

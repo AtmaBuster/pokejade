@@ -217,6 +217,12 @@ ENDM
 	map_attributes City13, CITY_13, $05, SOUTH
 	connection south, RouteN12, ROUTE_N12, 0
 
+	map_attributes MossyWoods, MOSSY_WOODS, $05, EAST
+	connection east, DeepMossyWoods, DEEP_MOSSY_WOODS, 0
+
+	map_attributes DeepMossyWoods, DEEP_MOSSY_WOODS, $05, WEST
+	connection west, MossyWoods, MOSSY_WOODS, 0
+
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0
 	map_attributes TradeCenter, TRADE_CENTER, $00, 0
 	map_attributes Colosseum, COLOSSEUM, $00, 0
@@ -225,7 +231,6 @@ IF DEF(_DEBUG)
 	map_attributes DebugRoom, DEBUG_ROOM, $0f, 0
 ENDC
 	map_attributes VictoryRoad, VICTORY_ROAD, $1d, 0
-	map_attributes MossyWoods, MOSSY_WOODS, $05, 0
 	map_attributes PlayersHouse1F, PLAYERS_HOUSE_1F, $00, 0
 	map_attributes PlayersHouse2F, PLAYERS_HOUSE_2F, $00, 0
 	map_attributes ParksLab, PARKS_LAB, $00, 0

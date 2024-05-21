@@ -47,7 +47,8 @@ ENDC
 
 	newgroup DUNGEONS                                             ;  2
 	map_const MOSSY_WOODS,                                 20, 20 ;  1
-	map_const VICTORY_ROAD,                                10, 36 ;  2
+	map_const DEEP_MOSSY_WOODS,                            20, 20 ;  2
+	map_const VICTORY_ROAD,                                10, 36 ;  3
 	endgroup
 
 	newgroup OBSIDIAN                                             ;  3

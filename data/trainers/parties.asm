@@ -167,7 +167,7 @@ BirdKeeperGroup:
 
 LassGroup:
 	next_list_item ; LASS (1)
-	db "-@", TRAINERTYPE_NORMAL
+	db "ABBY@", TRAINERTYPE_NORMAL
 	trainer_mon  BULBASAUR, 5, OVERGROW, MALE
 	db -1 ; end
 
