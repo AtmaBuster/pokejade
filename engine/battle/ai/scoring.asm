@@ -42,8 +42,7 @@ AI_Basic:
 	push de
 	push bc
 	ld hl, StatusOnlyEffects
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 
 	pop bc
 	pop de
@@ -2034,16 +2033,14 @@ AI_Smart_Sandstorm:
 	ld a, [wBattleMonType1]
 	push hl
 	ld hl, .SandstormImmuneTypes
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	pop hl
 	jr c, .greatly_discourage
 
 	ld a, [wBattleMonType2]
 	push hl
 	ld hl, .SandstormImmuneTypes
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	pop hl
 	jr c, .greatly_discourage
 
@@ -3020,8 +3017,7 @@ AI_Aggressive:
 	push bc
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	ld hl, RecklessMoves
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	pop bc
 	pop de
 	pop hl
@@ -3037,9 +3033,8 @@ AIDamageCalc:
 	ld a, 1
 	ldh [hBattleTurn], a
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	ld de, 1
 	ld hl, ConstantDamageEffects
-	call IsInArray
+	call IsInByteArray
 	jr nc, .notconstant
 	farjp BattleCommand_constantdamage
 
@@ -3181,9 +3176,8 @@ AI_Risky:
 
 ; Don't use risky moves at max hp.
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	ld de, 1
 	ld hl, RiskyEffects
-	call IsInArray
+	call IsInByteArray
 	jr nc, .checkko
 
 	call AICheckEnemyMaxHP

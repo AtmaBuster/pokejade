@@ -1851,8 +1851,7 @@ Script_checkpoke:
 	ld [wScriptVar], a
 	call LoadScriptPokemonID
 	ld hl, wPartySpecies
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	ret nc
 	ld a, TRUE
 	ld [wScriptVar], a

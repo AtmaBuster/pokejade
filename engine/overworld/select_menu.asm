@@ -48,8 +48,7 @@ CheckRegisteredItem:
 	call GetItemIndexFromID
 	ld a, l
 	ld hl, wKeyItems
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 	jr nc, .NoRegisteredItem
 	ld a, [wRegisteredItem]
 	ld [wCurItem], a

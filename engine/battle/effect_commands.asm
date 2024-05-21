@@ -1098,8 +1098,7 @@ BattleCommand_doturn:
 	call GetBattleVar
 ; continuous?
 	ld hl, .continuousmoves
-	ld de, 1
-	call IsInArray
+	call IsInByteArray
 
 ; 'has no pp left for [move]'
 	ld hl, HasNoPPLeftText
