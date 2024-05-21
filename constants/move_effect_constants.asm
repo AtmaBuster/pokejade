@@ -156,13 +156,19 @@
 	const EFFECT_TELEPORT
 	const EFFECT_BEAT_UP
 	const EFFECT_FLY
-	const EFFECT_DEFENSE_CURL ; 9C
-	const EFFECT_LIBRA        ; 9D
-	const EFFECT_HAMMER_ARM   ; 9E
-	const EFFECT_SUPERPOWER   ; 9F
-	const EFFECT_OVERHEAT     ; A0
-	const EFFECT_BULK_UP      ; A1
-	const EFFECT_TICKLE       ; A2
-	const EFFECT_WORK_UP      ; A3
-	const EFFECT_NOBLE_ROAR   ; A4
+	const EFFECT_DEFENSE_CURL    ; 9C
+	const EFFECT_LIBRA           ; 9D
+	const EFFECT_HAMMER_ARM      ; 9E
+	const EFFECT_SUPERPOWER      ; 9F
+	const EFFECT_OVERHEAT        ; A0
+	const EFFECT_BULK_UP         ; A1
+	const EFFECT_TICKLE          ; A2
+	const EFFECT_WORK_UP         ; A3
+	const EFFECT_NOBLE_ROAR      ; A4
+	const EFFECT_FLINCH_BURN     ; A5
+	const EFFECT_FLINCH_PARALYZE ; A6
+	const EFFECT_FLINCH_FREEZE   ; A7
+	const EFFECT_WRING_OUT       ; A8
+	const EFFECT_HP_SCALE_HIT    ; A9
+	const EFFECT_WEATHER_BALL    ; AA
 DEF NUM_MOVE_EFFECTS EQU const_value

@@ -2018,3 +2018,114 @@ NobleRoar:
 	loweroppstat ATTACK
 	loweroppstat SP_ATTACK
 	endmove
+
+FlinchBurn:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	effectchance
+	flinchtarget
+	effectchance
+	burntarget
+	endmove
+
+FlinchParalyze:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	effectchance
+	flinchtarget
+	effectchance
+	paralyzetarget
+	endmove
+
+FlinchFreeze:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	effectchance
+	flinchtarget
+	effectchance
+	freezetarget
+	endmove
+
+WringOut:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	wringout
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove
+
+HPScaleHit:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	wringout
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove

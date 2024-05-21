@@ -166,4 +166,10 @@ MoveEffectsPointers:
 	dw Tickle
 	dw WorkUp
 	dw NobleRoar
+	dw FlinchBurn
+	dw FlinchParalyze
+	dw FlinchFreeze
+	dw WringOut
+	dw HPScaleHit
+	dw NormalHit
 	assert_table_length NUM_MOVE_EFFECTS

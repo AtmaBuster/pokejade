@@ -1,3 +1,64 @@
+INCLUDE "engine/battle/move_effects/triple_kick.asm"
+INCLUDE "engine/battle/move_effects/beat_up.asm"
+INCLUDE "engine/battle/move_effects/counter.asm"
+INCLUDE "engine/battle/move_effects/encore.asm"
+INCLUDE "engine/battle/move_effects/pain_split.asm"
+INCLUDE "engine/battle/move_effects/snore.asm"
+INCLUDE "engine/battle/move_effects/conversion2.asm"
+INCLUDE "engine/battle/move_effects/lock_on.asm"
+INCLUDE "engine/battle/move_effects/sketch.asm"
+INCLUDE "engine/battle/move_effects/sleep_talk.asm"
+INCLUDE "engine/battle/move_effects/destiny_bond.asm"
+INCLUDE "engine/battle/move_effects/spite.asm"
+INCLUDE "engine/battle/move_effects/false_swipe.asm"
+INCLUDE "engine/battle/move_effects/heal_bell.asm"
+INCLUDE "engine/battle/move_effects/bide.asm"
+INCLUDE "engine/battle/move_effects/teleport.asm"
+INCLUDE "engine/battle/move_effects/mist.asm"
+INCLUDE "engine/battle/move_effects/focus_energy.asm"
+INCLUDE "engine/battle/move_effects/substitute.asm"
+INCLUDE "engine/battle/move_effects/rage.asm"
+INCLUDE "engine/battle/move_effects/mimic.asm"
+INCLUDE "engine/battle/move_effects/leech_seed.asm"
+INCLUDE "engine/battle/move_effects/splash.asm"
+INCLUDE "engine/battle/move_effects/disable.asm"
+INCLUDE "engine/battle/move_effects/pay_day.asm"
+INCLUDE "engine/battle/move_effects/conversion.asm"
+INCLUDE "engine/battle/move_effects/libra.asm"
+INCLUDE "engine/battle/move_effects/transform.asm"
+INCLUDE "engine/battle/move_effects/selfdestruct.asm"
+INCLUDE "engine/battle/move_effects/mirror_move.asm"
+INCLUDE "engine/battle/move_effects/metronome.asm"
+INCLUDE "engine/battle/move_effects/thief.asm"
+INCLUDE "engine/battle/move_effects/nightmare.asm"
+INCLUDE "engine/battle/move_effects/curse.asm"
+INCLUDE "engine/battle/move_effects/protect.asm"
+INCLUDE "engine/battle/move_effects/endure.asm"
+INCLUDE "engine/battle/move_effects/spikes.asm"
+INCLUDE "engine/battle/move_effects/foresight.asm"
+INCLUDE "engine/battle/move_effects/perish_song.asm"
+INCLUDE "engine/battle/move_effects/sandstorm.asm"
+INCLUDE "engine/battle/move_effects/rollout.asm"
+INCLUDE "engine/battle/move_effects/fury_cutter.asm"
+INCLUDE "engine/battle/move_effects/attract.asm"
+INCLUDE "engine/battle/move_effects/return.asm"
+INCLUDE "engine/battle/move_effects/present.asm"
+INCLUDE "engine/battle/move_effects/frustration.asm"
+INCLUDE "engine/battle/move_effects/safeguard.asm"
+INCLUDE "engine/battle/move_effects/magnitude.asm"
+INCLUDE "engine/battle/move_effects/baton_pass.asm"
+INCLUDE "engine/battle/move_effects/pursuit.asm"
+INCLUDE "engine/battle/move_effects/rapid_spin.asm"
+INCLUDE "engine/battle/move_effects/hidden_power.asm"
+INCLUDE "engine/battle/move_effects/rain_dance.asm"
+INCLUDE "engine/battle/move_effects/sunny_day.asm"
+INCLUDE "engine/battle/move_effects/belly_drum.asm"
+INCLUDE "engine/battle/move_effects/psych_up.asm"
+INCLUDE "engine/battle/move_effects/mirror_coat.asm"
+INCLUDE "engine/battle/move_effects/future_sight.asm"
+INCLUDE "engine/battle/move_effects/thunder.asm"
+INCLUDE "engine/battle/move_effects/life_power.asm"
+
 DoPlayerTurn:
 	call SetPlayerTurn
 
@@ -1279,8 +1340,6 @@ INCLUDE "data/moves/critical_hit_moves.asm"
 
 INCLUDE "data/battle/critical_hit_chances.asm"
 
-INCLUDE "engine/battle/move_effects/triple_kick.asm"
-
 BattleCommand_stab:
 ; STAB = Same Type Attack Bonus
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -1312,9 +1371,7 @@ BattleCommand_stab:
 	ld e, [hl]
 
 .go
-	ld a, BATTLE_VARS_MOVE_TYPE
-	call GetBattleVarAddr
-	and TYPE_MASK
+	call GetCurrentMoveType
 	ld [wCurType], a
 
 	push hl
@@ -1358,9 +1415,7 @@ BattleCommand_stab:
 	set 7, [hl]
 
 .SkipStab:
-	ld a, BATTLE_VARS_MOVE_TYPE
-	call GetBattleVar
-	and TYPE_MASK
+	call GetCurrentMoveType
 	ld b, a
 	ld hl, TypeMatchups
 
@@ -1465,6 +1520,42 @@ BattleCommand_stab:
 	ld [wTypeModifier], a
 	ret
 
+GetCurrentMoveType:
+	push hl
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_WEATHER_BALL
+	jr z, .weather_ball
+
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVarAddr
+	and TYPE_MASK
+	pop hl
+	ret
+
+.weather_ball
+	push bc
+	ld a, [wBattleWeather]
+	cp WEATHER_NONE
+	ld b, NORMAL
+	jr z, .got_weather_type
+	cp WEATHER_SUN
+	ld b, FIRE
+	jr z, .got_weather_type
+	cp WEATHER_RAIN
+	ld b, WATER
+	jr z, .got_weather_type
+	cp WEATHER_SANDSTORM
+	ld b, ROCK
+	jr z, .got_weather_type
+; hail
+	ld b, ICE
+.got_weather_type
+	ld a, b
+	pop bc
+	pop hl
+	ret
+
 BattleCheckTypeMatchup:
 	ld hl, wEnemyMonType1
 	ldh a, [hBattleTurn]
@@ -1472,14 +1563,15 @@ BattleCheckTypeMatchup:
 	jr z, .get_type
 	ld hl, wBattleMonType1
 .get_type
-	ld a, BATTLE_VARS_MOVE_TYPE
-	call GetBattleVar ; preserves hl, de, and bc
-	and TYPE_MASK
-	; fallthrough
+;	ld a, BATTLE_VARS_MOVE_TYPE
+;	call GetBattleVar ; preserves hl, de, and bc
+;	and TYPE_MASK
+;	; fallthrough
 CheckTypeMatchup:
 	push hl
 	push de
 	push bc
+	call GetCurrentMoveType
 	ld d, a
 	ld a, [hli]
 	ld b, a
@@ -3076,8 +3168,6 @@ EnemyAttackDamage:
 	and a
 	ret
 
-INCLUDE "engine/battle/move_effects/beat_up.asm"
-
 BattleCommand_clearmissdamage:
 	ld a, [wAttackMissed]
 	and a
@@ -3237,9 +3327,7 @@ ConfusionDamageCalc:
 
 ; Type
 	ld b, a
-	ld a, BATTLE_VARS_MOVE_TYPE
-	call GetBattleVar
-	and TYPE_MASK
+	call GetCurrentMoveType
 	cp b
 	jr nz, .DoneItem
 
@@ -3523,20 +3611,6 @@ BattleCommand_constantdamage:
 
 INCLUDE "data/moves/flail_reversal_power.asm"
 
-INCLUDE "engine/battle/move_effects/counter.asm"
-
-INCLUDE "engine/battle/move_effects/encore.asm"
-
-INCLUDE "engine/battle/move_effects/pain_split.asm"
-
-INCLUDE "engine/battle/move_effects/snore.asm"
-
-INCLUDE "engine/battle/move_effects/conversion2.asm"
-
-INCLUDE "engine/battle/move_effects/lock_on.asm"
-
-INCLUDE "engine/battle/move_effects/sketch.asm"
-
 BattleCommand_defrostopponent:
 ; Thaw the opponent if frozen, and
 ; raise the user's Attack one stage.
@@ -3560,16 +3634,6 @@ BattleCommand_defrostopponent:
 	pop hl
 	ld [hl], a
 	ret
-
-INCLUDE "engine/battle/move_effects/sleep_talk.asm"
-
-INCLUDE "engine/battle/move_effects/destiny_bond.asm"
-
-INCLUDE "engine/battle/move_effects/spite.asm"
-
-INCLUDE "engine/battle/move_effects/false_swipe.asm"
-
-INCLUDE "engine/battle/move_effects/heal_bell.asm"
 
 FarPlayBattleAnimation:
 ; play animation de
@@ -4742,8 +4806,6 @@ CalcBattleStats:
 
 	ret
 
-INCLUDE "engine/battle/move_effects/bide.asm"
-
 BattleCommand_checkrampage:
 	ld de, wPlayerRolloutCount
 	ldh a, [hBattleTurn]
@@ -4803,8 +4865,6 @@ BattleCommand_rampage:
 	ld a, 1
 	ld [wSomeoneIsRampaging], a
 	ret
-
-INCLUDE "engine/battle/move_effects/teleport.asm"
 
 SetBattleDraw:
 	ld a, [wBattleResult]
@@ -5526,10 +5586,6 @@ BattleCommand_traptarget:
 	dw CLAMP,     ClampedByText     ; 'was CLAMPED by'
 	dw WHIRLPOOL, WhirlpoolTrapText ; 'was trapped!'
 
-INCLUDE "engine/battle/move_effects/mist.asm"
-
-INCLUDE "engine/battle/move_effects/focus_energy.asm"
-
 BattleCommand_recoil:
 	ld hl, wBattleMonMaxHP
 	ldh a, [hBattleTurn]
@@ -5782,9 +5838,7 @@ CheckMoveTypeMatchesTarget:
 	ld hl, wBattleMonType1
 .ok
 
-	ld a, BATTLE_VARS_MOVE_TYPE
-	call GetBattleVar
-	and TYPE_MASK
+	call GetCurrentMoveType
 	cp NORMAL
 	jr z, .normal
 
@@ -5804,8 +5858,6 @@ CheckMoveTypeMatchesTarget:
 	pop hl
 	ret
 
-INCLUDE "engine/battle/move_effects/substitute.asm"
-
 BattleCommand_rechargenextturn:
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
@@ -5819,8 +5871,6 @@ EndRechargeOpp:
 	res SUBSTATUS_RECHARGE, [hl]
 	pop hl
 	ret
-
-INCLUDE "engine/battle/move_effects/rage.asm"
 
 BattleCommand_doubleflyingdamage:
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
@@ -5848,14 +5898,6 @@ DoubleDamage:
 	ld [hli], a
 	ld [hl], a
 	ret
-
-INCLUDE "engine/battle/move_effects/mimic.asm"
-INCLUDE "engine/battle/move_effects/leech_seed.asm"
-INCLUDE "engine/battle/move_effects/splash.asm"
-INCLUDE "engine/battle/move_effects/disable.asm"
-INCLUDE "engine/battle/move_effects/pay_day.asm"
-INCLUDE "engine/battle/move_effects/conversion.asm"
-INCLUDE "engine/battle/move_effects/libra.asm"
 
 BattleCommand_resetstats:
 	ld a, BASE_STAT_LEVEL
@@ -5968,8 +6010,6 @@ BattleCommand_heal:
 	call AnimateFailedMove
 	ld hl, HPIsFullText
 	jmp StdBattleTextbox
-
-INCLUDE "engine/battle/move_effects/transform.asm"
 
 BattleEffect_ButItFailed:
 	call AnimateFailedMove
@@ -6095,12 +6135,6 @@ CheckSubstituteOpp:
 	bit SUBSTATUS_SUBSTITUTE, a
 	ret
 
-INCLUDE "engine/battle/move_effects/selfdestruct.asm"
-
-INCLUDE "engine/battle/move_effects/mirror_move.asm"
-
-INCLUDE "engine/battle/move_effects/metronome.asm"
-
 CheckUserMove:
 ; Return z if the user has move a.
 	ld b, a
@@ -6139,8 +6173,6 @@ ResetTurn:
 	call DoMove
 	jmp EndMoveEffect
 
-INCLUDE "engine/battle/move_effects/thief.asm"
-
 BattleCommand_arenatrap:
 ; Doesn't work on an absent opponent.
 
@@ -6164,8 +6196,6 @@ BattleCommand_arenatrap:
 .failed
 	call AnimateFailedMove
 	jmp PrintButItFailed
-
-INCLUDE "engine/battle/move_effects/nightmare.asm"
 
 BattleCommand_defrost:
 ; Thaw the user.
@@ -6196,34 +6226,6 @@ BattleCommand_defrost:
 	ld hl, WasDefrostedText
 	jmp StdBattleTextbox
 
-INCLUDE "engine/battle/move_effects/curse.asm"
-
-INCLUDE "engine/battle/move_effects/protect.asm"
-
-INCLUDE "engine/battle/move_effects/endure.asm"
-
-INCLUDE "engine/battle/move_effects/spikes.asm"
-
-INCLUDE "engine/battle/move_effects/foresight.asm"
-
-INCLUDE "engine/battle/move_effects/perish_song.asm"
-
-INCLUDE "engine/battle/move_effects/sandstorm.asm"
-
-INCLUDE "engine/battle/move_effects/rollout.asm"
-
-INCLUDE "engine/battle/move_effects/fury_cutter.asm"
-
-INCLUDE "engine/battle/move_effects/attract.asm"
-
-INCLUDE "engine/battle/move_effects/return.asm"
-
-INCLUDE "engine/battle/move_effects/present.asm"
-
-INCLUDE "engine/battle/move_effects/frustration.asm"
-
-INCLUDE "engine/battle/move_effects/safeguard.asm"
-
 SafeCheckSafeguard:
 	push hl
 	ld hl, wEnemyScreens
@@ -6252,14 +6254,6 @@ BattleCommand_checksafeguard:
 	ld hl, SafeguardProtectText
 	call StdBattleTextbox
 	jmp EndMoveEffect
-
-INCLUDE "engine/battle/move_effects/magnitude.asm"
-
-INCLUDE "engine/battle/move_effects/baton_pass.asm"
-
-INCLUDE "engine/battle/move_effects/pursuit.asm"
-
-INCLUDE "engine/battle/move_effects/rapid_spin.asm"
 
 BattleCommand_healmorn:
 	ld b, MORN_F
@@ -6355,18 +6349,6 @@ BattleCommand_timebasedhealcontinue:
 	dw GetHalfMaxHP
 	dw GetMaxHP
 
-INCLUDE "engine/battle/move_effects/hidden_power.asm"
-
-INCLUDE "engine/battle/move_effects/rain_dance.asm"
-
-INCLUDE "engine/battle/move_effects/sunny_day.asm"
-
-INCLUDE "engine/battle/move_effects/belly_drum.asm"
-
-INCLUDE "engine/battle/move_effects/psych_up.asm"
-
-INCLUDE "engine/battle/move_effects/mirror_coat.asm"
-
 BattleCommand_doubleminimizedamage:
 	ld hl, wEnemyMinimized
 	ldh a, [hBattleTurn]
@@ -6394,10 +6376,6 @@ BattleCommand_skipsuncharge:
 	ret nz
 	ld b, charge_command
 	jmp SkipToBattleCommand
-
-INCLUDE "engine/battle/move_effects/future_sight.asm"
-
-INCLUDE "engine/battle/move_effects/thunder.asm"
 
 CheckHiddenOpponent:
 	ld a, BATTLE_VARS_SUBSTATUS5_OPP

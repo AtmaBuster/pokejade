@@ -29,7 +29,7 @@ BattleCommandPointers:
 	command critical
 	command damagestats
 	command stab
-	command damagevariation
+	command damagevariation ; 08
 	command checkhit
 	command lowersub
 	command moveanimnosub
@@ -37,7 +37,7 @@ BattleCommandPointers:
 	command failuretext
 	command applydamage
 	command criticaltext
-	command supereffectivetext
+	command supereffectivetext ; 10
 	command checkfaint
 	command buildopponentrage
 	command poisontarget
@@ -45,7 +45,7 @@ BattleCommandPointers:
 	command draintarget
 	command eatdream
 	command burntarget
-	command freezetarget
+	command freezetarget ; 18
 	command paralyzetarget
 	command selfdestruct
 	command mirrormove
@@ -53,7 +53,7 @@ BattleCommandPointers:
 	command conversion
 	command resetstats
 	command storeenergy
-	command unleashenergy
+	command unleashenergy ; 20
 	command forceswitch
 	command endloop
 	command flinchtarget
@@ -61,7 +61,7 @@ BattleCommandPointers:
 	command recoil
 	command mist
 	command focusenergy
-	command confuse
+	command confuse ; 28
 	command confusetarget
 	command heal
 	command transform
@@ -69,7 +69,7 @@ BattleCommandPointers:
 	command poison
 	command paralyze
 	command substitute
-	command rechargenextturn
+	command rechargenextturn ; 30
 	command mimic
 	command metronome
 	command leechseed
@@ -77,7 +77,7 @@ BattleCommandPointers:
 	command disable
 	command cleartext
 	command charge
-	command checkcharge
+	command checkcharge ; 38
 	command traptarget
 	command donothing
 	command rampage
@@ -85,7 +85,7 @@ BattleCommandPointers:
 	command constantdamage
 	command counter
 	command encore
-	command painsplit
+	command painsplit ; 40
 	command snore
 	command conversion2
 	command lockon
@@ -93,7 +93,7 @@ BattleCommandPointers:
 	command defrostopponent
 	command sleeptalk
 	command destinybond
-	command spite
+	command spite ; 48
 	command falseswipe
 	command healbell
 	command heldflinch
@@ -101,7 +101,7 @@ BattleCommandPointers:
 	command kickcounter
 	command thief
 	command arenatrap
-	command nightmare
+	command nightmare ; 50
 	command defrost
 	command curse
 	command protect
@@ -109,7 +109,7 @@ BattleCommandPointers:
 	command foresight
 	command perishsong
 	command startsandstorm
-	command endure
+	command endure ; 58
 	command checkcurl
 	command rolloutpower
 	command donothing2
@@ -117,7 +117,7 @@ BattleCommandPointers:
 	command attract
 	command happinesspower
 	command present
-	command damagecalc
+	command damagecalc ; 60
 	command frustrationpower
 	command safeguard
 	command checksafeguard
@@ -125,7 +125,7 @@ BattleCommandPointers:
 	command batonpass
 	command pursuit
 	command clearhazards
-	command healmorn
+	command healmorn ; 68
 	command healday
 	command healnite
 	command hiddenpower
@@ -133,7 +133,7 @@ BattleCommandPointers:
 	command startsun
 	command effectchance
 	command switchturn
-	command fakeout
+	command fakeout ; 70
 	command bellydrum
 	command psychup
 	command rage
@@ -141,7 +141,7 @@ BattleCommandPointers:
 	command doubleundergrounddamage
 	command mirrorcoat
 	command checkfuturesight
-	command futuresight
+	command futuresight ; 78
 	command doubleminimizedamage
 	command skipsuncharge
 	command thunderaccuracy
@@ -149,7 +149,7 @@ BattleCommandPointers:
 	command beatup
 	command ragedamage
 	command resettypematchup
-	command bidefailtext
+	command bidefailtext ; 80
 	command raisesubnoanim
 	command lowersubnoanim
 	command beatupfailtext
@@ -157,10 +157,12 @@ BattleCommandPointers:
 	command movedelay
 	command moveanim
 	command tristatuschance
-	command supereffectivelooptext
+	command supereffectivelooptext ; 88
 	command startloop
 	command curl
 	command libra
+	command lifepower
+	command wringout
 
 	commandx raisestat
 	commandx lowerstat

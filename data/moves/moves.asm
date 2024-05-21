@@ -314,7 +314,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_HP_SCALE_HIT,      150, FIRE,          SPECIAL,  100,  5,   0      ;ERUPTION
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
@@ -324,7 +324,7 @@ MovesGroup3:
 	move EFFECT_SP_DEF_DOWN_HIT,    95, PSYCHIC_TYPE,  SPECIAL,  100,  5,  50      ;LUSTER_PURGE
 	move EFFECT_SP_ATK_DOWN_HIT,    95, PSYCHIC_TYPE,  SPECIAL,  100,  5,  50      ;MIST_BALL
 	move EFFECT_ATTACK_DOWN_2,       0, FLYING,        STATUS,   100, 15,   0      ;FEATHERDANCE
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_CONFUSE,             0, NORMAL,        STATUS,   100, 20,   0      ;TEETER_DANCE
 	move EFFECT_BURN_HIT,           85, FIRE,          PHYSICAL,  90, 10,  10      ;BLAZE_KICK
 	move EFFECT_ROLLOUT,            30, ICE,           PHYSICAL,  90, 20,   0      ;ICE_BALL
 	move EFFECT_FLINCH_HIT,         60, GRASS,         PHYSICAL, 100, 15,  30      ;NEEDLE_ARM
@@ -336,7 +336,7 @@ MovesGroup3:
 	move EFFECT_HYPER_BEAM,        150, WATER,         SPECIAL,   90,  5,   0      ;HYDRO_CANNON
 	move EFFECT_ATTACK_UP_HIT,      90, STEEL,         PHYSICAL,  90, 10,  20      ;METEOR_MASH
 	move EFFECT_FLINCH_HIT,         30, GHOST,         PHYSICAL, 100, 15,  30      ;ASTONISH
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_WEATHER_BALL,       50, NORMAL,        SPECIAL,  100, 10,   0      ;WEATHER_BALL
 	move EFFECT_HEAL_BELL,           0, GRASS,         STATUS,   100,  5,   0      ;AROMATHERAPY
 	move EFFECT_SP_DEF_DOWN_2,       0, DARK,          STATUS,   100, 20,   0      ;FAKE_TEARS
 	move EFFECT_NORMAL_HIT,         60, FLYING,        SPECIAL,   95, 25,   0      ;AIR_CUTTER
@@ -347,7 +347,7 @@ MovesGroup3:
 	move EFFECT_SLEEP,               0, GRASS,         STATUS,    55, 15,   0      ;GRASSWHISTLE
 	move EFFECT_TICKLE,              0, NORMAL,        STATUS,   100, 20,   0      ;TICKLE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_HP_SCALE_HIT,      150, WATER,         SPECIAL,  100,  5,   0      ;WATER_SPOUT
 	move EFFECT_CONFUSE_HIT,        75, BUG,           SPECIAL,  100, 15,  10      ;SIGNAL_BEAM
 	move EFFECT_ALWAYS_HIT,         60, GHOST,         PHYSICAL, 100, 20,   0      ;SHADOW_PUNCH
 	move EFFECT_FLINCH_HIT,         80, PSYCHIC_TYPE,  SPECIAL,  100, 20,  10      ;EXTRASENSORY
@@ -397,7 +397,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_WRING_OUT,           0, NORMAL,        SPECIAL,  100,  5,   0      ;WRING_OUT
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
@@ -438,9 +438,9 @@ MovesGroup4:
 	move EFFECT_PRIORITY_HIT,       40, STEEL,         PHYSICAL, 100, 30,   0      ;BULLET_PUNCH
 	move EFFECT_PRIORITY_HIT,       40, ICE,           PHYSICAL, 100, 30,   0      ;ICE_SHARD
 	move EFFECT_NORMAL_HIT,         70, GHOST,         PHYSICAL, 100, 15,   0      ;SHADOW_CLAW
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_FLINCH_PARALYZE,    65, ELECTRIC,      PHYSICAL,  95, 15,  10      ;THUNDER_FANG
+	move EFFECT_FLINCH_FREEZE,      65, ICE,           PHYSICAL,  95, 15,  10      ;ICE_FANG
+	move EFFECT_FLINCH_BURN,        65, FIRE,          PHYSICAL,  95, 15,  10      ;FIRE_FANG
 	move EFFECT_PRIORITY_HIT,       40, GHOST,         PHYSICAL, 100, 30,   0      ;SHADOW_SNEAK
 	move EFFECT_ACCURACY_DOWN_HIT,  65, GROUND,        SPECIAL,   85, 10,  30      ;MUD_BOMB
 	move EFFECT_NORMAL_HIT,         70, PSYCHIC_TYPE,  PHYSICAL, 100, 20,   0      ;PSYCHO_CUT
