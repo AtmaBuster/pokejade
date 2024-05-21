@@ -459,7 +459,7 @@ MovesGroup4:
 	move EFFECT_ALWAYS_HIT,         60, STEEL,         PHYSICAL, 100, 20,   0      ;MAGNET_BOMB
 	move EFFECT_NORMAL_HIT,        100, ROCK,          PHYSICAL,  80,  5,   0      ;STONE_EDGE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_STEALTH_ROCK,        0, ROCK,          STATUS,   100, 20,   0      ;STEALTH_ROCK
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;

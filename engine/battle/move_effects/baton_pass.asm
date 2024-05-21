@@ -62,7 +62,7 @@ BattleCommand_batonpass:
 	ld hl, ApplyStatLevelMultiplierOnAllStats
 	call CallBattleCore
 
-	ld hl, SpikesDamage
+	ld hl, DoEntryHazards
 	call CallBattleCore
 
 	farcall ActivateSwitchInAbilities

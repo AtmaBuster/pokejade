@@ -66,6 +66,15 @@ ENDM
 SECTION "Enemy Trainer Parties 1", ROMX
 
 FalknerGroup:
+; testing
+	next_list_item
+	db "DICKS@", TRAINERTYPE_NORMAL
+	trainer_mon  CHARMANDER, 10, NO_ABILITY, MALE
+	trainer_mon  SQUIRTLE, 10, NO_ABILITY, MALE
+	trainer_mon  CHARIZARD, 10, NO_ABILITY, MALE
+	trainer_mon  ORTHWORM, 10, NO_ABILITY, MALE
+	db -1 ; end
+	end_list_items
 
 WhitneyGroup:
 

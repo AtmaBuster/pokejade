@@ -93,7 +93,7 @@ DoBattle:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farcall ActivateSwitchInAbilities
 	ld a, [wLinkMode]
 	and a
@@ -108,7 +108,7 @@ DoBattle:
 	call BreakAttraction
 	call EnemySwitch
 	call SetEnemyTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farcall ActivateSwitchInAbilities
 	jr BattleTurn
 
@@ -145,7 +145,7 @@ WildFled_EnemyFled_LinkBattleCanceled:
 
 DoEnemyInitSendOut:
 	call SetEnemyTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farcall ActivateSwitchInAbilities
 BattleTurn:
 .loop
@@ -463,7 +463,7 @@ DetermineMoveOrder:
 .switch
 	farcall AI_Switch
 	call SetEnemyTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farcall ActivateSwitchInAbilities
 	jmp .enemy_first
 
@@ -1865,6 +1865,29 @@ GetEighthMaxHP:
 	inc c
 	ret
 
+GetSixthMaxHP:
+; output: bc
+	call GetMaxHP
+
+	xor a
+	ldh [hDividend + 0], a
+	ldh [hDividend + 1], a
+	ld a, b
+	ldh [hDividend + 2], a
+	ld a, c
+	ldh [hDividend + 3], a
+	ld a, 6
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+	ld b, 0
+	ldh a, [hDividend + 3]
+	ld c, a
+	and a
+	ret nz
+	inc c
+	ret
+
 GetQuarterMaxHP:
 ; output: bc
 	call GetMaxHP
@@ -2327,7 +2350,7 @@ EnemyPartyMonEntrance:
 .done_switch
 	call ResetBattleParticipants
 	call SetEnemyTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farcall ActivateSwitchInAbilities
 	xor a
 	ld [wEnemyMoveStruct + MOVE_ANIM], a
@@ -2743,7 +2766,7 @@ ForcePlayerMonChoice:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farcall ActivateSwitchInAbilities
 	ld a, $1
 	and a
@@ -2765,7 +2788,7 @@ PlayerPartyMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farjp ActivateSwitchInAbilities
 
 SetUpBattlePartyMenu:
@@ -4025,6 +4048,11 @@ BreakAttraction:
 	res SUBSTATUS_IN_LOVE, [hl]
 	ret
 
+DoEntryHazards:
+	call SpikesDamage
+	call StealthRockDamage
+	ret
+
 SpikesDamage:
 	ld hl, wPlayerScreens
 	ld de, wBattleMonType
@@ -4037,10 +4065,12 @@ SpikesDamage:
 	ld bc, UpdateEnemyHUD
 .ok
 
-	bit SCREENS_SPIKES, [hl]
+	ld a, [hl]
+	and SCREENS_SPIKES_MASK
 	ret z
 
 	; Flying-types aren't affected by Spikes.
+	; TO-DO : Levitate, Magnet Rise
 	ld a, [de]
 	cp FLYING
 	ret z
@@ -4050,20 +4080,88 @@ SpikesDamage:
 	ret z
 
 	push bc
+	push hl
 
 	ld hl, BattleText_UserHurtBySpikes ; "hurt by SPIKES!"
 	call StdBattleTextbox
 
-	call GetEighthMaxHP
+	pop hl
+	ld a, [hl]
+	and SCREENS_SPIKES_MASK
+	dec a
+	ld hl, .Jumptable
+	call JumpTable
+
 	call SubtractHPFromTarget
 
 	pop hl
-	call .hl
+	call _hl_
 
 	jmp WaitBGMap
 
-.hl
-	jp hl
+.Jumptable:
+	dw GetEighthMaxHP
+	dw GetSixthMaxHP
+	dw GetQuarterMaxHP
+
+StealthRockDamage:
+	ld hl, wPlayerScreens
+	ld de, wBattleMonType
+	ld bc, UpdatePlayerHUD
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld hl, wEnemyScreens
+	ld de, wEnemyMonType
+	ld bc, UpdateEnemyHUD
+.ok
+
+	bit SCREENS_STEALTH_ROCK, [hl]
+	ret z
+
+	ld h, d
+	ld l, e
+	ld a, ROCK
+	farcall CheckAnyTypeMatchup
+	ld a, [wTypeMatchup]
+	and a
+	ret z
+
+	push bc
+	push af
+
+	ld hl, BattleText_UserHurtBySpikes ; "hurt by SPIKES!" ; TO-DO : Stealth Rock Text
+	call StdBattleTextbox
+
+	call GetHalfMaxHP
+
+	pop af
+	cp 40 ; 4x
+	call c, .HalfHP
+	cp 20 ; 2x
+	call c, .HalfHP
+	cp 10 ; 1x
+	call c, .HalfHP
+	cp 5 ; 0.5x
+	call c, .HalfHP
+
+	ld a, b
+	or c
+	jr nz, .hp_ok
+	inc c
+.hp_ok
+
+	call SubtractHPFromTarget
+
+	pop hl
+	call _hl_
+
+	jmp WaitBGMap
+
+.HalfHP
+	srl b
+	rr c
+	ret
 
 PursuitSwitch:
 	ld a, BATTLE_VARS_MOVE
@@ -5133,7 +5231,7 @@ PlayerSwitch:
 EnemyMonEntrance:
 	farcall AI_Switch
 	call SetEnemyTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farjp ActivateSwitchInAbilities
 
 BattleMonEntrance:
@@ -5165,7 +5263,7 @@ BattleMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farcall ActivateSwitchInAbilities
 	ld a, $2
 	ld [wMenuCursorY], a
@@ -5190,7 +5288,7 @@ PassedBattleMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
-	call SpikesDamage
+	call DoEntryHazards
 	farjp ActivateSwitchInAbilities
 
 BattleMenu_Run:

@@ -16,15 +16,40 @@ BattleCommand_clearhazards:
 	ld hl, wEnemyScreens
 	ld de, wEnemyWrapCount
 .got_screens_wrap
-	bit SCREENS_SPIKES, [hl]
+	ld a, [hl]
+	and SCREENS_SPIKES_MASK
 	jr z, .no_spikes
-	res SCREENS_SPIKES, [hl]
+	ld a, [hl]
+	and ~SCREENS_SPIKES_MASK
+	ld [hl], a
+	push de
+	push hl
 	ld hl, BlewSpikesText
+	call StdBattleTextbox
+	pop hl
+	pop de
+.no_spikes
+	bit SCREENS_STEALTH_ROCK, [hl]
+	jr z, .no_stealth_rock
+	res SCREENS_STEALTH_ROCK, [hl]
+	push de
+	push hl
+;	ld hl, BlewRockText
+	call StdBattleTextbox
+	pop hl
+	pop de
+.no_stealth_rock
+	ld a, [hl]
+	and SCREENS_TOXIC_SPIKES_MASK
+	jr z, .no_toxic_spikes
+	ld a, [hl]
+	and ~SCREENS_TOXIC_SPIKES_MASK
+	ld [hl], a
+;	ld hl, BlewToxicSpikesText
 	push de
 	call StdBattleTextbox
 	pop de
-.no_spikes
-
+.no_toxic_spikes
 	ld a, [de]
 	and a
 	ret z

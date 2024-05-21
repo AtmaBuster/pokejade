@@ -172,4 +172,5 @@ MoveEffectsPointers:
 	dw WringOut
 	dw HPScaleHit
 	dw NormalHit
+	dw StealthRock
 	assert_table_length NUM_MOVE_EFFECTS

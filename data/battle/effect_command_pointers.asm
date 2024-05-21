@@ -163,6 +163,7 @@ BattleCommandPointers:
 	command libra
 	command lifepower
 	command wringout
+	command stealthrock
 
 	commandx raisestat
 	commandx lowerstat

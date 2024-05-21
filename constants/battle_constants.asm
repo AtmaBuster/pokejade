@@ -230,10 +230,26 @@ DEF ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP_MASK
 ; wPlayerScreens or wEnemyScreens bit flags
 	const_def
 	const SCREENS_SPIKES
-	const_skip
+	const_skip ; spikes 2
 	const SCREENS_SAFEGUARD
 	const SCREENS_LIGHT_SCREEN
 	const SCREENS_REFLECT
+	const SCREENS_STEALTH_ROCK
+	const SCREENS_TOXIC_SPIKES
+	const_skip ; toxic spikes 2
+
+	const_def
+	const SCREENS_SPIKES_0
+	const SCREENS_SPIKES_1
+	const SCREENS_SPIKES_2
+	const SCREENS_SPIKES_3
+
+	const_def 0, $40
+	const SCREENS_TOXIC_SPIKES_0
+	const SCREENS_TOXIC_SPIKES_1
+	const SCREENS_TOXIC_SPIKES_2
+DEF SCREENS_SPIKES_MASK       EQU %00_0000_11
+DEF SCREENS_TOXIC_SPIKES_MASK EQU %11_0000_00
 
 ; values in wBattleWeather
 	const_def

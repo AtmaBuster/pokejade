@@ -1357,6 +1357,13 @@ Spikes:
 	spikes
 	endmove
 
+StealthRock:
+	checkobedience
+	usedmovetext
+	doturn
+	stealthrock
+	endmove
+
 Foresight:
 	checkobedience
 	usedmovetext

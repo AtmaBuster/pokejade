@@ -171,4 +171,5 @@
 	const EFFECT_WRING_OUT       ; A8
 	const EFFECT_HP_SCALE_HIT    ; A9
 	const EFFECT_WEATHER_BALL    ; AA
+	const EFFECT_STEALTH_ROCK    ; AB
 DEF NUM_MOVE_EFFECTS EQU const_value

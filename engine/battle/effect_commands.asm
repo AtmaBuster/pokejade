@@ -1556,6 +1556,14 @@ GetCurrentMoveType:
 	pop hl
 	ret
 
+CheckAnyTypeMatchup:
+; hl = *defending_type
+; a  = attacking_type
+	push hl
+	push de
+	push bc
+	jr CheckTypeMatchup_Join
+
 BattleCheckTypeMatchup:
 	ld hl, wEnemyMonType1
 	ldh a, [hBattleTurn]
@@ -1572,6 +1580,7 @@ CheckTypeMatchup:
 	push de
 	push bc
 	call GetCurrentMoveType
+CheckTypeMatchup_Join:
 	ld d, a
 	ld a, [hli]
 	ld b, a
@@ -4967,7 +4976,7 @@ BattleCommand_forceswitch:
 	ld hl, DraggedOutText
 	call StdBattleTextbox
 
-	ld hl, SpikesDamage
+	ld hl, DoEntryHazards
 	call CallBattleCore
 
 	farjp ActivateSwitchInAbilities
@@ -5063,7 +5072,7 @@ BattleCommand_forceswitch:
 	ld hl, DraggedOutText
 	call StdBattleTextbox
 
-	ld hl, SpikesDamage
+	ld hl, DoEntryHazards
 	call CallBattleCore
 
 	farjp ActivateSwitchInAbilities
