@@ -1837,21 +1837,24 @@ _TownMap:
 	jmp TownMapPals
 
 CheckHiddenLandmark:
-	ld b, [hl]
+	ld c, [hl]
+CheckAnyHiddenLandmark:
 	push hl
 	ld hl, HideableLandmarks
 .loop
 	ld a, [hli]
 	cp -1
 	jr z, .not_hidden
-	cp b
+	cp c
 	jr nz, .next
 	push de
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
 	ld b, CHECK_FLAG
+	push bc
 	call EventFlagAction
+	pop bc
 	pop de
 	jr nz, .not_hidden
 	pop hl

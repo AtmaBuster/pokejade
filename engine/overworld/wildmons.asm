@@ -164,16 +164,21 @@ FindNest:
 	push de
 	call GetWorldMapLocation
 	ld c, a
+	farcall CheckAnyHiddenLandmark
+	jr c, .found_nest
 	hlcoord 0, 0
 	ld de, SCREEN_WIDTH * SCREEN_HEIGHT
 .AppendNestLoop:
 	ld a, [hli]
 	cp c
 	jr z, .found_nest
+	and a
+	jr z, .end_of_list
 	dec de
 	ld a, e
 	or d
 	jr nz, .AppendNestLoop
+.end_of_list
 	ld a, c
 	pop de
 	scf
