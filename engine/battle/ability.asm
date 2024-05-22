@@ -54,7 +54,12 @@ GetPlayerAbility:
 	and a
 	ld a, [wBattleMonAbility]
 	ret z
-; ...
+	ld b, a
+	ld a, [wPlayerSubStatus2]
+	and 1 << SUBSTATUS_GASTRO_ACID
+	ld a, 0 ; no-optimize a = 0
+	ret nz
+	ld a, b
 	ret
 
 GetEnemyAbility:
@@ -62,7 +67,12 @@ GetEnemyAbility:
 	and a
 	ld a, [wEnemyMonAbility]
 	ret z
-; ...
+	ld b, a
+	ld a, [wEnemySubStatus2]
+	and 1 << SUBSTATUS_GASTRO_ACID
+	ld a, 0 ; no-optimize a = 0
+	ret nz
+	ld a, b
 	ret
 
 SetUserAbility:
@@ -108,11 +118,9 @@ GetTrueOppnentAbility:
 GetUserAbility: ; TO-DO : check for Gastro Acid
 	ldh a, [hBattleTurn]
 	and a
-	ld a, [wBattleMonAbility]
-	jr z, .got_it
-	ld a, [wEnemyMonAbility]
-.got_it
-	ret
+	ld a, 1
+	jmp z, GetPlayerAbility
+	jmp GetEnemyAbility
 
 GetOpponentAbility:
 	call GetUserAbility

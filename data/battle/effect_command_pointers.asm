@@ -165,6 +165,8 @@ BattleCommandPointers:
 	command wringout
 	command stealthrock
 	command toxicspikes
+	command gastroacid ; 90
+	command incinerate
 
 	commandx raisestat
 	commandx lowerstat

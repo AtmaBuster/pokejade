@@ -562,6 +562,20 @@ AttackMissed2Text:
 	line "attack missed!"
 	prompt
 
+GastroAcidText:
+	text "<TARGET>'s"
+	line "ability was"
+	cont "suppressed!"
+	prompt
+
+ItemBurntUpText:
+	text "<TARGET>'s"
+	line "@"
+	text_ram wStringBuffer1
+	text " was"
+	cont "burnt up!"
+	prompt
+
 CrashedText:
 	text "<USER>"
 	line "kept going and"

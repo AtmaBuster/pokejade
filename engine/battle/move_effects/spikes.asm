@@ -10,16 +10,13 @@ BattleCommand_spikes:
 	ld a, [hl]
 	and SCREENS_SPIKES_MASK
 	cp SCREENS_SPIKES_3
-	jr z, .failed
+	jmp z, FailMove
 
 ; Otherwise, increment spikes counter
 	inc [hl]
 	call AnimateCurrentMove
 	ld hl, SpikesText
 	jmp StdBattleTextbox
-
-.failed
-	jmp FailMove
 
 BattleCommand_stealthrock:
 	ld hl, wEnemyScreens
@@ -31,16 +28,13 @@ BattleCommand_stealthrock:
 
 ; Fails if rocks are already out
 	bit SCREENS_STEALTH_ROCK, [hl]
-	jr nz, .failed
+	jmp nz, FailMove
 
 ; Otherwise, set
 	set SCREENS_STEALTH_ROCK, [hl]
 	call AnimateCurrentMove
 	ld hl, StealthRockText
 	jmp StdBattleTextbox
-
-.failed
-	jmp FailMove
 
 BattleCommand_toxicspikes:
 	ld hl, wEnemyScreens
@@ -54,7 +48,7 @@ BattleCommand_toxicspikes:
 	ld a, [hl]
 	and SCREENS_TOXIC_SPIKES_MASK
 	cp SCREENS_TOXIC_SPIKES_2
-	jr z, .failed
+	jmp z, FailMove
 
 ; Otherwise, set
 	ld a, [hl]
@@ -63,6 +57,3 @@ BattleCommand_toxicspikes:
 	call AnimateCurrentMove
 	ld hl, ToxicSpikesText
 	jmp StdBattleTextbox
-
-.failed
-	jmp FailMove

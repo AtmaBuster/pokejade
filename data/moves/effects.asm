@@ -2143,3 +2143,32 @@ HPScaleHit:
 	buildopponentrage
 	heldflinch
 	endmove
+
+GastroAcid:
+	checkobedience
+	usedmovetext
+	doturn
+	checkhit
+	gastroacid
+	endmove
+
+Incinerate:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	incinerate
+	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove

@@ -398,7 +398,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_WRING_OUT,           0, NORMAL,        SPECIAL,  100,  5,   0      ;WRING_OUT
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_GASTRO_ACID,         0, POISON,        STATUS,   100, 10,   0      ;GASTRO_ACID
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
@@ -510,7 +510,7 @@ MovesGroup4:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_DEFENSE_UP_HIT,     70, PSYCHIC_TYPE,  PHYSICAL,  90, 10, 100      ;BARRIER_BASH
 	move EFFECT_LIBRA,               0, NORMAL,        STATUS,   100, 40,   0      ;LIBRA
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_INCINERATE,         60, FIRE,          SPECIAL,  100, 15,   0      ;INCINERATE
 .IndirectEnd::
 
 POPS

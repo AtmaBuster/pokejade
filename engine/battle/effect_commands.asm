@@ -58,6 +58,8 @@ INCLUDE "engine/battle/move_effects/mirror_coat.asm"
 INCLUDE "engine/battle/move_effects/future_sight.asm"
 INCLUDE "engine/battle/move_effects/thunder.asm"
 INCLUDE "engine/battle/move_effects/life_power.asm"
+INCLUDE "engine/battle/move_effects/gastro_acid.asm"
+INCLUDE "engine/battle/move_effects/incinerate.asm"
 
 DoPlayerTurn:
 	call SetPlayerTurn
@@ -5726,7 +5728,7 @@ BattleCommand_finishconfusingtarget:
 	jr z, .got_effect
 	cp EFFECT_SWAGGER
 	call nz, AnimateCurrentMove
-; fallthough
+; fallthrough
 .got_effect
 	ld de, ANIM_CONFUSED
 	call PlayOpponentBattleAnim

@@ -174,4 +174,6 @@ MoveEffectsPointers:
 	dw NormalHit
 	dw StealthRock
 	dw ToxicSpikes
+	dw GastroAcid
+	dw Incinerate
 	assert_table_length NUM_MOVE_EFFECTS
