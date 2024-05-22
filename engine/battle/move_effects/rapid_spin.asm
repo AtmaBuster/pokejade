@@ -34,7 +34,7 @@ BattleCommand_clearhazards:
 	res SCREENS_STEALTH_ROCK, [hl]
 	push de
 	push hl
-;	ld hl, BlewRockText
+	ld hl, BlewRockText
 	call StdBattleTextbox
 	pop hl
 	pop de
@@ -45,7 +45,7 @@ BattleCommand_clearhazards:
 	ld a, [hl]
 	and ~SCREENS_TOXIC_SPIKES_MASK
 	ld [hl], a
-;	ld hl, BlewToxicSpikesText
+	ld hl, BlewToxicSpikesText
 	push de
 	call StdBattleTextbox
 	pop de

@@ -36,7 +36,7 @@ BattleCommand_stealthrock:
 ; Otherwise, set
 	set SCREENS_STEALTH_ROCK, [hl]
 	call AnimateCurrentMove
-	ld hl, SpikesText ; TO-DO
+	ld hl, StealthRockText
 	jmp StdBattleTextbox
 
 .failed

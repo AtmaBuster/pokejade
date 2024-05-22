@@ -963,6 +963,13 @@ SpikesText:
 	cont "<TARGET>!"
 	prompt
 
+StealthRockText:
+	text "Pointed stones"
+	line "float in the air"
+	cont "around"
+	cont "<TARGET>!"
+	prompt
+
 IdentifiedText:
 	text "<USER>"
 	line "identified"
@@ -1020,6 +1027,18 @@ ShedLeechSeedText:
 BlewSpikesText:
 	text "<USER>"
 	line "blew away SPIKES!"
+	prompt
+
+BlewRockText:
+	text "<USER>"
+	line "blew away the"
+	cont "STEALTH ROCK!"
+	prompt
+
+BlewToxicSpikesText:
+	text "<USER>"
+	line "blew away the"
+	cont "TOXIC SPIKES!"
 	prompt
 
 DownpourText:
