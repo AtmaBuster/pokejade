@@ -6363,6 +6363,7 @@ LoadEnemyMon:
 	ld [hli], a
 	ld a, c
 	ld [hli], a
+	ld [wWildMonAbility], a
 	ld a, e
 	ld [hli], a
 	pop bc

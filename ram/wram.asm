@@ -539,8 +539,6 @@ wEnemyLightScreenCount:: db
 wEnemyReflectCount:: db
 	ds 1
 
-	ds 1
-
 wBattleWeather::
 ; 00 normal
 ; 01 rain
@@ -603,6 +601,7 @@ wBattleEnded:: db
 
 wWildMonMoves:: ds NUM_MOVES
 wWildMonPP:: ds NUM_MOVES
+wWildMonAbility:: db
 
 wAmuletCoin:: db
 

@@ -503,7 +503,8 @@ PokeBallEffect:
 	ld hl, wEnemyBackupPersonality
 	ld a, [wEnemyMonPersonality]
 	ld [hli], a
-	ld a, [wEnemyMonPersonality + 1]
+	ld a, [wWildMonAbility]
+;	ld a, [wEnemyMonPersonality + 1]
 	ld [hli], a
 	ld a, [wEnemyMonCaughtBall]
 	ld [hli], a
