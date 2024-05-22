@@ -1364,6 +1364,13 @@ StealthRock:
 	stealthrock
 	endmove
 
+ToxicSpikes:
+	checkobedience
+	usedmovetext
+	doturn
+	toxicspikes
+	endmove
+
 Foresight:
 	checkobedience
 	usedmovetext

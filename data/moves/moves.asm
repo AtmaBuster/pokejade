@@ -405,7 +405,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
+	move EFFECT_TOXIC_SPIKES,        0, POISON,        STATUS,   100, 20,   0      ;TOXIC_SPIKES
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0      ;
 .IndirectEnd::

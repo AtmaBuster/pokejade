@@ -41,3 +41,28 @@ BattleCommand_stealthrock:
 
 .failed
 	jmp FailMove
+
+BattleCommand_toxicspikes:
+	ld hl, wEnemyScreens
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_screens
+	ld hl, wPlayerScreens
+.got_screens
+
+; Fails if two layers already set
+	ld a, [hl]
+	and SCREENS_TOXIC_SPIKES_MASK
+	cp SCREENS_TOXIC_SPIKES_2
+	jr z, .failed
+
+; Otherwise, set
+	ld a, [hl]
+	add SCREENS_TOXIC_SPIKES_1
+	ld [hl], a
+	call AnimateCurrentMove
+	ld hl, ToxicSpikesText
+	jmp StdBattleTextbox
+
+.failed
+	jmp FailMove

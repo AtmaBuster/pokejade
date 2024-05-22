@@ -4051,7 +4051,100 @@ BreakAttraction:
 DoEntryHazards:
 	call SpikesDamage
 	call StealthRockDamage
-	ret
+; fallthrough
+ToxicSpikesEffect:
+	ld hl, wPlayerScreens
+	ld de, wBattleMonType
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld hl, wEnemyScreens
+	ld de, wEnemyMonType
+.ok
+
+	ld a, [hl]
+	and SCREENS_TOXIC_SPIKES_MASK
+	ret z
+
+	; Flying-types aren't affected
+	ld a, [de]
+	cp FLYING
+	ret z
+	inc de
+	ld a, [de]
+	cp FLYING
+	ret z
+	; Mons with Levitate are protected
+	; TO-DO : Levitate
+	; Poison-types clear Toxic Spikes
+	ld a, [de]
+	cp POISON
+	jr z, .clear_toxic_spikes
+	dec de
+	ld a, [de]
+	cp POISON
+	jr z, .clear_toxic_spikes
+	; Steel-type are immune
+	cp STEEL
+	ret z
+	inc de
+	ld a, [de]
+	cp STEEL
+	ret z
+	; Mons with Immunity, Leaf Guard (during sunlight) are protected
+	; TO-DO : Immunity, Leaf Guard
+	; Don't apply if already poisoned
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
+	and 1 << PSN
+	ret nz
+
+	ld a, [hl]
+	and SCREENS_TOXIC_SPIKES_MASK
+	push af ; remember, to check for toxic
+	; Set poison
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	set PSN, [hl]
+	call UpdateUserInParty
+
+	; Check for toxic
+	pop af
+	cp SCREENS_TOXIC_SPIKES_2
+	jr z, .toxic
+
+	; Message
+	call SwitchTurn
+	ld hl, WasPoisonedText
+	jr .finished
+
+.toxic
+	; Set toxic substatus
+	ld a, BATTLE_VARS_SUBSTATUS5
+	call GetBattleVarAddr
+	ldh a, [hBattleTurn]
+	and a
+	ld de, wPlayerToxicCount
+	jr z, .got_toxic_count
+	ld de, wEnemyToxicCount
+.got_toxic_count
+	set SUBSTATUS_TOXIC, [hl]
+	xor a
+	ld [de], a
+	; Message
+	call SwitchTurn
+	ld hl, BadlyPoisonedText
+.finished
+	call StdBattleTextbox
+	call UseHeldStatusHealingItem
+	jmp SwitchTurn
+
+.clear_toxic_spikes
+	ld a, [hl]
+	and ~SCREENS_TOXIC_SPIKES_MASK
+	ld [hl], a
+	ld hl, AbsorbedToxicSpikesText
+	jmp StdBattleTextbox
 
 SpikesDamage:
 	ld hl, wPlayerScreens

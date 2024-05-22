@@ -164,6 +164,7 @@ BattleCommandPointers:
 	command lifepower
 	command wringout
 	command stealthrock
+	command toxicspikes
 
 	commandx raisestat
 	commandx lowerstat

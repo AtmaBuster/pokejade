@@ -676,6 +676,12 @@ AlreadyPoisonedText:
 	line "already poisoned!"
 	prompt
 
+AbsorbedToxicSpikesText:
+	text "The poison spikes"
+	line "disappeared around"
+	cont "<USER>!"
+	prompt
+
 SuckedHealthText:
 	text "Sucked health from"
 	line "<TARGET>!"
@@ -969,6 +975,12 @@ StealthRockText:
 	cont "around"
 	cont "<TARGET>!"
 	prompt
+
+ToxicSpikesText:
+	text "Poison spikes were"
+	line "scattered around"
+	cont "<TARGET>!"
+	done
 
 IdentifiedText:
 	text "<USER>"

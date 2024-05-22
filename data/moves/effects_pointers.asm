@@ -173,4 +173,5 @@ MoveEffectsPointers:
 	dw HPScaleHit
 	dw NormalHit
 	dw StealthRock
+	dw ToxicSpikes
 	assert_table_length NUM_MOVE_EFFECTS
