@@ -2279,12 +2279,12 @@ BattleCommand_applydamage:
 	pop bc
 	ld a, b
 	and a
-	ret z
+	jr z, .try_contact
 
 	dec a
 	jr nz, .focus_band_text
 	ld hl, EnduredText
-	jmp StdBattleTextbox
+	jr .do_endure_text
 
 .focus_band_text
 	call GetOpponentItem
@@ -2292,7 +2292,15 @@ BattleCommand_applydamage:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld hl, HungOnText
-	jmp StdBattleTextbox
+.do_endure_text
+	call StdBattleTextbox
+
+	ld a, BATTLE_VARS_MOVE_FLAGS
+	call GetBattleVar
+	bit MOVE_CONTACT_F, a
+	ret z
+.try_contact
+	farjp DoContactAbilities
 
 .update_damage_taken
 	ld a, BATTLE_VARS_SUBSTATUS4_OPP

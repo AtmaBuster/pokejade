@@ -69,6 +69,7 @@ BattleVarPairs:
 	dw .LastCounterOpp
 	dw .LastMove
 	dw .LastMoveOpp
+	dw .MoveFlags
 	assert_table_length NUM_BATTLE_VARS
 
 ;                   player                 enemy
@@ -93,6 +94,7 @@ BattleVarPairs:
 .LastCounterOpp: db ENEMY_COUNTER_MOVE,    PLAYER_COUNTER_MOVE
 .LastMove:       db PLAYER_LAST_MOVE,      ENEMY_LAST_MOVE
 .LastMoveOpp:    db ENEMY_LAST_MOVE,       PLAYER_LAST_MOVE
+.MoveFlags:      db PLAYER_MOVE_FLAGS,     ENEMY_MOVE_FLAGS
 
 BattleVarLocations:
 ; entries correspond to PLAYER_* and ENEMY_* constants
@@ -110,4 +112,5 @@ BattleVarLocations:
 	dw wCurPlayerMove,             wCurEnemyMove
 	dw wLastPlayerCounterMove,     wLastEnemyCounterMove
 	dw wLastPlayerMove,            wLastEnemyMove
+	dw wPlayerMoveStructFlags,     wEnemyMoveStructFlags
 	assert_table_length NUM_BATTLE_VAR_LOCATION_PAIRS

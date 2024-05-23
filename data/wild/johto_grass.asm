@@ -45,12 +45,12 @@ JohtoGrassWildMons:
 IF DEF(_DEBUG)
 	map_id DEBUG_ROOM
 	db 10 percent
-	dbw 10, ZUBAT
-	dbw 10, ZUBAT
-	dbw 10, ZUBAT
-	dbw 10, ZUBAT
-	dbw 10, ZUBAT
-	dbw 10, ZUBAT
-	dbw 10, ZUBAT
+	dbw 10, PIKACHU
+	dbw 10, NIDORAN_M
+	dbw 10, SHROOMISH
+	dbw 10, SHROOMISH
+	dbw 10, MAGBY
+	dbw 10, MAGBY
+	dbw 10, MAGBY
 ENDC
 	db -1 ; end

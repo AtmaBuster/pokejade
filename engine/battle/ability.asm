@@ -405,3 +405,297 @@ SwitchIn_Anticipation:
 	call AnimateUserAbility
 	ld hl, AnticipationText
 	jp StdBattleTextbox
+
+DoContactAbilities:
+	call GetOpponentAbility
+	ld hl, .JumpList
+	ld b, a
+.loop
+	ld a, [hli]
+	cp -1
+	ret z
+	cp b
+	jr z, .jump
+	inc hl
+	inc hl
+	jr .loop
+
+.jump
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp hl
+
+.JumpList:
+	dbw STATIC, Contact_Static
+	dbw POISON_POINT, Contact_PoisonPoint
+	dbw EFFECT_SPORE, Contact_EffectSpore
+	dbw FLAME_BODY, Contact_FlameBody
+	db -1
+
+Contact_Static:
+	ld b, 1
+TryParalyzeOnContact:
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wBattleMonType
+	ld a, [wPlayerScreens]
+	jr z, .got_type
+	ld hl, wEnemyMonType
+	ld a, [wEnemyScreens]
+.got_type
+; don't affect if protected by safeguard
+	bit SCREENS_SAFEGUARD, a
+	ret nz
+; don't affect ground-types
+	ld a, [hli]
+	cp GROUND
+	ret z
+	ld a, [hl]
+	cp GROUND
+	ret z
+; don't paralyze if already have status
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
+	and a
+	ret nz
+; don't affect mons w/ Limber
+	push bc
+	call GetUserAbility
+	pop bc
+	cp LIMBER
+	ret z
+; don't affect mons w/ Leaf Guard in sunlight
+	cp LEAF_GUARD
+	jr nz, .skip_leaf_guard
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	ret z
+.skip_leaf_guard
+; if b != 1, skip random check (called from elsewhere)
+	dec b
+	jr nz, .do_para
+; 30% chance
+	call BattleRandom
+	cp 30 percent
+	ret nc
+.do_para
+; paralyze user
+	call AnimateOppAbility
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	set PAR, [hl]
+	call UpdateUserInParty
+	call SwitchTurn
+	farcall ApplyPrzEffectOnSpeed
+	call UpdateBattleHuds
+	farcall PrintParalyze
+	farcall UseHeldStatusHealingItem
+	jmp SwitchTurn
+
+Contact_PoisonPoint:
+	ld b, 1
+TryPoisonOnContact:
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wBattleMonType
+	ld a, [wPlayerScreens]
+	jr z, .got_type
+	ld hl, wEnemyMonType
+	ld a, [wEnemyScreens]
+.got_type
+; don't affect if protected by safeguard
+	bit SCREENS_SAFEGUARD, a
+	ret nz
+; don't affect poison- or steel-types
+	ld a, [hli]
+	cp POISON
+	ret z
+	cp STEEL
+	ret z
+	ld a, [hl]
+	cp POISON
+	ret z
+	cp STEEL
+	ret z
+; don't poison if already have status
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
+	and a
+	ret nz
+; don't affect mons w/ Immunity
+	push bc
+	call GetUserAbility
+	pop bc
+	cp IMMUNITY
+	ret z
+; don't affect mons w/ Leaf Guard in sunlight
+	cp LEAF_GUARD
+	jr nz, .skip_leaf_guard
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	ret z
+.skip_leaf_guard
+; if b != 1, skip random check (called from elsewhere)
+	dec b
+	jr nz, .do_poison
+; 30% chance
+	call BattleRandom
+	cp 30 percent
+	ret nc
+.do_poison
+; poison user
+	call AnimateOppAbility
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	set PSN, [hl]
+	call UpdateUserInParty
+	call SwitchTurn
+	call UpdateBattleHuds
+	ld hl, WasPoisonedText
+	call StdBattleTextbox
+	farcall UseHeldStatusHealingItem
+	jmp SwitchTurn
+
+Contact_EffectSpore:
+	ld b, 0
+	call BattleRandom
+	cp 10 percent
+	jp c, TryParalyzeOnContact
+	cp 20 percent
+	jr c, TryPoisonOnContact
+	cp 30 percent
+	ret nc
+TrySleepOnContact:
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerScreens]
+	jr z, .got_type
+	ld a, [wEnemyScreens]
+.got_type
+; don't affect if protected by safeguard
+	bit SCREENS_SAFEGUARD, a
+	ret nz
+; don't sleep if already have status
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
+	and a
+	ret nz
+; don't affect mons w/ Insomnia or Vital Spirit
+	push bc
+	call GetUserAbility
+	pop bc
+	cp INSOMNIA
+	ret z
+	cp VITAL_SPIRIT
+	ret z
+; don't affect mons w/ Leaf Guard in sunlight
+	cp LEAF_GUARD
+	jr nz, .skip_leaf_guard
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	ret z
+.skip_leaf_guard
+; if b != 1, skip random check (called from elsewhere)
+	dec b
+	jr nz, .do_sleep
+; 30% chance
+	call BattleRandom
+	cp 30 percent
+	ret nc
+.do_sleep
+; sleep user
+	call AnimateOppAbility
+	call GetUserAbility
+	push af
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	ld b, SLP_MASK
+	ld a, [wInBattleTowerBattle]
+	and a
+	jr z, .random_loop
+	ld b, %011
+.random_loop
+	call BattleRandom
+	and b
+	jr z, .random_loop
+	cp SLP_MASK
+	jr z, .random_loop
+	inc a
+	ld b, a
+	pop af
+	cp EARLY_BIRD
+	jr nz, .got_sleep_timer
+	srl b
+.got_sleep_timer
+	ld [hl], b
+	call UpdateUserInParty
+	call SwitchTurn
+	call UpdateBattleHuds
+	ld hl, FellAsleepText
+	call StdBattleTextbox
+	farcall UseHeldStatusHealingItem
+	jmp SwitchTurn
+
+Contact_FlameBody:
+	ld b, 1
+TryBurnOnContact:
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wBattleMonType
+	ld a, [wPlayerScreens]
+	jr z, .got_type
+	ld hl, wEnemyMonType
+	ld a, [wEnemyScreens]
+.got_type
+; don't affect if protected by safeguard
+	bit SCREENS_SAFEGUARD, a
+	ret nz
+; don't affect fire-types
+	ld a, [hli]
+	cp FIRE
+	ret z
+	ld a, [hl]
+	cp FIRE
+	ret z
+; don't burn if already have status
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
+	and a
+	ret nz
+; don't affect mons w/ Water Veil or Water Bubble
+	push bc
+	call GetUserAbility
+	pop bc
+	cp WATER_VEIL
+	ret z
+	cp WATER_BUBBLE
+	ret z
+; don't affect mons w/ Leaf Guard in sunlight
+	cp LEAF_GUARD
+	jr nz, .skip_leaf_guard
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	ret z
+.skip_leaf_guard
+; if b != 1, skip random check (called from elsewhere)
+	dec b
+	jr nz, .do_burn
+; 30% chance
+	call BattleRandom
+	cp 30 percent
+	ret nc
+.do_burn
+; burn user
+	call AnimateOppAbility
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	set BRN, [hl]
+	call UpdateUserInParty
+	call SwitchTurn
+	farcall ApplyBrnEffectOnAttack
+	call UpdateBattleHuds
+	ld hl, WasBurnedText
+	call StdBattleTextbox
+	farcall UseHeldStatusHealingItem
+	jmp SwitchTurn
