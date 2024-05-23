@@ -352,8 +352,6 @@ wBattleMonNickname:: ds MON_NAME_LENGTH
 
 wBattleMon:: battle_struct wBattleMon
 
-	ds 2
-
 wWildMon:: db
 	ds 1
 

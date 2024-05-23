@@ -49,7 +49,19 @@ DEF MOVE_TYPE   rb ; 3
 DEF MOVE_ACC    rb ; 4
 DEF MOVE_PP     rb ; 5
 DEF MOVE_CHANCE rb ; 6
+DEF MOVE_FLAGS  rb ; 7
 DEF MOVE_LENGTH EQU _RS
+
+; move flags
+	const_def
+	fconst MOVE_CONTACT
+	fconst MOVE_SOUND
+	fconst MOVE_PUNCH
+	fconst MOVE_AURA
+	fconst MOVE_BITING
+	fconst MOVE_SLICING
+	fconst MOVE_BOMB
+	fconst MOVE_WIND
 
 ; stat constants
 ; indexes for:

@@ -23,6 +23,12 @@ MACRO shift_const
 	DEF const_value += const_inc
 ENDM
 
+MACRO fconst
+	DEF \1 EQU 1 << const_value
+	DEF \1_F EQU const_value
+	DEF const_value += const_inc
+ENDM
+
 MACRO const_skip
 	if _NARG >= 1
 		DEF const_value += const_inc * (\1)

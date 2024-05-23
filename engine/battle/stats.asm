@@ -65,7 +65,7 @@ FarChangeStat:
 	cp SIMPLE
 	jr nz, .skip_simple_target
 	call DoubleStatChange
-	jmp .ability_done
+	jr .ability_done
 
 .skip_simple_target
 	cp CONTRARY

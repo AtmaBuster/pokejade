@@ -6206,7 +6206,7 @@ BattleCommand_arenatrap:
 
 .failed
 	call AnimateFailedMove
-	jmp PrintButItFailed
+	jr PrintButItFailed
 
 BattleCommand_defrost:
 ; Thaw the user.

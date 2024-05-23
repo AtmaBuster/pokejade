@@ -119,8 +119,8 @@ GetUserAbility: ; TO-DO : check for Gastro Acid
 	ldh a, [hBattleTurn]
 	and a
 	ld a, 1
-	jmp z, GetPlayerAbility
-	jmp GetEnemyAbility
+	jr z, GetPlayerAbility
+	jr GetEnemyAbility
 
 GetOpponentAbility:
 	call GetUserAbility
