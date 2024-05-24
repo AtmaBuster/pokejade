@@ -409,4 +409,7 @@ AlphabeticalPokedexOrder:
 	dw -1
 	dw -1
 	dw -1
+	dw -1
+	dw -1
+	dw -1
 	assert_table_length NUM_POKEMON

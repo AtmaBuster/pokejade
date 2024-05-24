@@ -407,4 +407,7 @@ AnimationIdlePointers:
 	dw PlaceholderAnimationIdle
 	dw PlaceholderAnimationIdle
 	dw PlaceholderAnimationIdle
+	dw PlaceholderAnimationIdle
+	dw PlaceholderAnimationIdle
+	dw PlaceholderAnimationIdle
 	assert_table_length NUM_POKEMON

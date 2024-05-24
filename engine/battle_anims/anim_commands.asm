@@ -48,21 +48,23 @@ _PlayBattleAnim:
 BattleAnimRunScript:
 	ld a, [wFXAnimID + 1]
 	add a
-	jr c, .play_anyway
+	jr nc, .check_scene
+	ld a, [wFXAnimID]
+	cp LOW(ANIM_REFRESH_SPRITE)
+	jr z, .do_full_anim
+	jr .play_anyway
 
+.check_scene
 	farcall CheckBattleScene
 	jr c, .disabled
 
-; This vc_hook reduces the move animation flashing in the Virtual Console for
-; Fissure, Self-Destruct, Thunder, Flash, Explosion, Horn Drill, and Hyper Beam.
-	vc_hook Reduce_move_anim_flashing
+.do_full_anim
 	call BattleAnimClearHud
 	call RunBattleAnimScript
 
 	call BattleAnimAssignPals
 	call BattleAnimRequestPals
 
-	vc_hook Stop_reducing_move_anim_flashing
 	xor a
 	ldh [hSCX], a
 	ldh [hSCY], a
@@ -322,8 +324,8 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Minimize          ; e9
 	dw BattleAnimCmd_SetBgPal          ; ea
 	dw BattleAnimCmd_SetObjPal         ; eb
-	dw DoNothing ; BattleAnimCmd_EC    ; ec
-	dw DoNothing ; BattleAnimCmd_ED    ; ed
+	dw BattleAnimCmd_ReloadSprite      ; ec
+	dw BattleAnimCmd_ReloadPal         ; ed
 	dw BattleAnimCmd_IfParamAnd        ; ee
 	dw BattleAnimCmd_JumpUntil         ; ef
 	dw BattleAnimCmd_BGEffect          ; f0
@@ -852,6 +854,68 @@ BattleAnimCmd_CheckPokeball:
 	ld [wBattleAnimVar], a
 	ret
 
+BattleAnimCmd_ReloadSprite:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wCurPartySpecies)
+	ldh [rSVBK], a
+
+	ld a, [wCurPartySpecies]
+	push af
+
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy
+
+	ld hl, wBattleMonDVs
+	predef GetUnownLetter
+	ld de, vTiles0 tile $00
+	predef GetMonBackpic
+	jr .done
+
+.enemy
+	ld hl, wEnemyMonDVs
+	predef GetUnownLetter
+	ld de, vTiles0 tile $00
+	predef GetMonFrontpic
+
+.done
+	pop af
+	ld [wCurPartySpecies], a
+	pop af
+	ldh [rSVBK], a
+	ret
+
+BattleAnimCmd_ReloadPal:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wCurPartySpecies)
+	ldh [rSVBK], a
+	ld a, [wCurPartySpecies]
+	push af
+
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy
+
+	farcall GetBattlemonBackpicPalettePointer
+	ld de, wBGPals1
+	farcall LoadPalette_White_Col1_Col2_Black
+	call BattleAnimAssignPals
+	jr .done
+
+.enemy
+	farcall GetEnemyFrontpicPalettePointer
+	ld de, wBGPals2
+	farcall LoadPalette_White_Col1_Col2_Black
+	call BattleAnimAssignPals
+.done
+	pop af
+	ld [wCurPartySpecies], a
+	pop af
+	ldh [rSVBK], a
+	ret
+
 BattleAnimCmd_Transform:
 	ldh a, [rSVBK]
 	push af
@@ -1050,7 +1114,7 @@ BattleAnimCmd_Minimize:
 	ldh [rSVBK], a
 	ret
 
-	BattleAnimCmd_SetBgPal:
+BattleAnimCmd_SetBgPal:
 	xor a
 	jr SetBattleAnimPal
 BattleAnimCmd_SetObjPal:

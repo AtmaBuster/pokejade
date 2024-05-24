@@ -607,7 +607,10 @@ wSomeoneIsRampaging:: db
 
 wPlayerJustGotFrozen:: db
 wEnemyJustGotFrozen:: db
+
 wBattleEnd::
+
+	ds 182
 
 
 SECTION UNION "Miscellaneous", WRAM0

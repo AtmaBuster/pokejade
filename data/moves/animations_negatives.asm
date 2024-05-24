@@ -1,4 +1,6 @@
 BattleAnimationsNegatives::
+	dw BattleAnim_RefreshSprite
+	dw BattleAnim_TightenFocus
 	dw BattleAnim_ThrowPokeBall
 	dw BattleAnim_SendOutMon
 	dw BattleAnim_ReturnMon
@@ -22,6 +24,23 @@ BattleAnimationsNegatives::
 	dw BattleAnim_Shake
 	dw BattleAnim_HitConfusion
 .IndirectEnd::
+
+BattleAnim_RefreshSprite:
+	anim_1gfx BATTLE_ANIM_GFX_HIT
+	anim_call BattleAnim_TargetObj_2Row
+	anim_reloadsprite
+	anim_sound 0, 0, SFX_PSYBEAM
+	anim_bgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON, $0, BG_EFFECT_USER, $0
+	anim_wait 48
+	anim_updateactorpic
+	anim_reloadpal
+	anim_incbgeffect BATTLE_BG_EFFECT_WAVE_DEFORM_MON
+	anim_wait 48
+	anim_call BattleAnim_ShowMon_0
+	anim_ret
+
+BattleAnim_TightenFocus:
+	anim_ret
 
 BattleAnim_ThrowPokeBall:
 	anim_if_param_item_equal NO_ITEM, .TheTrainerBlockedTheBall

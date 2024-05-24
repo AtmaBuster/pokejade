@@ -84,7 +84,7 @@ MovesGen1:
 	move EFFECT_NORMAL_HIT,        110, WATER,         SPECIAL,   80,  5,   0, %00000000 ;HYDRO_PUMP
 	move EFFECT_NORMAL_HIT,         90, WATER,         SPECIAL,  100, 15,   0, %00000000 ;SURF
 	move EFFECT_FREEZE_HIT,         90, ICE,           SPECIAL,  100, 10,  10, %00000000 ;ICE_BEAM
-	move EFFECT_FREEZE_HIT,        110, ICE,           SPECIAL,   70,  5,  10, %10000000 ;BLIZZARD
+	move EFFECT_BLIZZARD,          110, ICE,           SPECIAL,   70,  5,  10, %10000000 ;BLIZZARD
 	move EFFECT_CONFUSE_HIT,        65, PSYCHIC_TYPE,  SPECIAL,  100, 20,  10, %00000000 ;PSYBEAM
 	move EFFECT_SPEED_DOWN_HIT,     65, WATER,         SPECIAL,  100, 20,  10, %00000000 ;BUBBLEBEAM
 	move EFFECT_ATTACK_DOWN_HIT,    65, ICE,           SPECIAL,  100, 20,  10, %00000000 ;AURORA_BEAM
@@ -294,7 +294,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_BURN_HIT,           95, FIRE,          SPECIAL,   90, 10,  10, %10000000 ;HEAT_WAVE
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_HAIL,                0, ICE,           STATUS,   100, 10,   0, %00000000 ;HAIL
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;

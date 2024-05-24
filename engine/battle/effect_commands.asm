@@ -37,7 +37,6 @@ INCLUDE "engine/battle/move_effects/endure.asm"
 INCLUDE "engine/battle/move_effects/spikes.asm"
 INCLUDE "engine/battle/move_effects/foresight.asm"
 INCLUDE "engine/battle/move_effects/perish_song.asm"
-INCLUDE "engine/battle/move_effects/sandstorm.asm"
 INCLUDE "engine/battle/move_effects/rollout.asm"
 INCLUDE "engine/battle/move_effects/fury_cutter.asm"
 INCLUDE "engine/battle/move_effects/attract.asm"
@@ -50,8 +49,6 @@ INCLUDE "engine/battle/move_effects/baton_pass.asm"
 INCLUDE "engine/battle/move_effects/pursuit.asm"
 INCLUDE "engine/battle/move_effects/rapid_spin.asm"
 INCLUDE "engine/battle/move_effects/hidden_power.asm"
-INCLUDE "engine/battle/move_effects/rain_dance.asm"
-INCLUDE "engine/battle/move_effects/sunny_day.asm"
 INCLUDE "engine/battle/move_effects/belly_drum.asm"
 INCLUDE "engine/battle/move_effects/psych_up.asm"
 INCLUDE "engine/battle/move_effects/mirror_coat.asm"
@@ -60,6 +57,7 @@ INCLUDE "engine/battle/move_effects/thunder.asm"
 INCLUDE "engine/battle/move_effects/life_power.asm"
 INCLUDE "engine/battle/move_effects/gastro_acid.asm"
 INCLUDE "engine/battle/move_effects/incinerate.asm"
+INCLUDE "engine/battle/move_effects/weather.asm"
 
 DoPlayerTurn:
 	call SetPlayerTurn
@@ -1733,6 +1731,9 @@ BattleCommand_checkhit:
 	call .ThunderRain
 	ret z
 
+	call .BlizzardHail
+	ret z
+
 	call .XAccuracy
 	ret nz
 
@@ -1901,6 +1902,17 @@ BattleCommand_checkhit:
 
 	ld a, [wBattleWeather]
 	cp WEATHER_RAIN
+	ret
+
+.BlizzardHail:
+; Return z if the current move always hits in hail, and it is hailing.
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_BLIZZARD
+	ret nz
+
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
 	ret
 
 .XAccuracy:
@@ -2758,6 +2770,8 @@ PlayerAttackDamage:
 	push hl
 	call ClamperlDeepSeaScale
 	pop hl
+	ld a, [wBattleMonAbility]
+	call SolarPowerBoost
 	jr .done
 
 .thickclub
@@ -2942,6 +2956,21 @@ ThickClubBoost:
 	inc bc ; MAROWAK == CUBONE + 1
 	call DoubleStatIfSpeciesHoldingItem
 	pop de
+	pop bc
+	ret
+
+SolarPowerBoost:
+	cp SOLAR_POWER
+	ret nz
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	ret nz
+	push bc
+	ld b, h
+	ld c, l
+	srl b
+	rr c
+	add hl, bc
 	pop bc
 	ret
 
@@ -3166,6 +3195,8 @@ EnemyAttackDamage:
 	push hl
 	call ClamperlDeepSeaScale
 	pop hl
+	ld a, [wEnemyMonAbility]
+	call SolarPowerBoost
 	jr .done
 
 .thickclub
@@ -6324,7 +6355,7 @@ BattleCommand_timebasedhealcontinue:
 	jr z, .Heal
 
 ; x2 in sun
-; /2 in rain/sandstorm
+; /2 in rain/sandstorm/hail
 	inc c
 	cp WEATHER_SUN
 	jr z, .Heal

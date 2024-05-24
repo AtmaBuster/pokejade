@@ -411,4 +411,7 @@ PokemonNames::
 	db "LYCANROC@@"
 	db "LYCANROC@@"
 	db "URSALUNA@@"
+	db "CASTFORM@@"
+	db "CASTFORM@@"
+	db "CASTFORM@@"
 	assert_table_length NUM_POKEMON

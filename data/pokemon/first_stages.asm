@@ -408,4 +408,7 @@ FirstEvoStages::
 	dw BULBASAUR
 	dw BULBASAUR
 	dw BULBASAUR
+	dw BULBASAUR
+	dw BULBASAUR
+	dw BULBASAUR
 	assert_table_length NUM_POKEMON

@@ -407,4 +407,7 @@ DexListNational:
 	dw    0 ; LYCANROC_NITE
 	dw    0 ; LYCANROC_DUSK
 	dw    0 ; URSALUNA_BLOOD
+	dw    0 ; CASTFORM_SUNNY
+	dw    0 ; CASTFORM_RAINY
+	dw    0 ; CASTFORM_SNOWY
 	assert_table_length NUM_POKEMON

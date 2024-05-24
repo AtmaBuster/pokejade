@@ -167,6 +167,7 @@ BattleCommandPointers:
 	command toxicspikes
 	command gastroacid ; 90
 	command incinerate
+	command starthail
 
 	commandx raisestat
 	commandx lowerstat

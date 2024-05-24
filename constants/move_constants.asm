@@ -481,14 +481,14 @@ DEF MOVES_GP3 EQU const_value - 1
 	const INCINERATE   ; 1d6
 DEF MOVES_GP4 EQU const_value - 1
 DEF NUM_ATTACKS EQU const_value - 1
-	const TRAILBLAZE   ; 1d6
+	const TRAILBLAZE   ; 1d7
 
 	if NUM_ATTACKS > $3fff
 		fail "Too many moves defined!"
 	endc
 
 ; Battle animations use the same constants as the moves
-DEF ANIM_SWEET_SCENT_2 EQU $FC
+	const ANIM_SWEET_SCENT_2  ; 1d8
 ; Animations with negative IDs will play even when animations are disabled
 	const_def -1, -1
 	const ANIM_HIT_CONFUSION     ;  -1 (ffff)
@@ -514,6 +514,8 @@ DEF ANIM_SWEET_SCENT_2 EQU $FC
 	const ANIM_RETURN_MON        ; -14 (ffec)
 	const ANIM_SEND_OUT_MON      ; -15 (ffeb)
 	const ANIM_THROW_POKE_BALL   ; -16 (ffea)
+	const ANIM_TIGHTEN_FOCUS     ; -17 (ffe9)
+	const ANIM_REFRESH_SPRITE    ; -18 (ffe8)
 DEF NUM_BATTLE_ANIMS EQU -const_value - 1
 
 ; wNumHits uses offsets from ANIM_MISS

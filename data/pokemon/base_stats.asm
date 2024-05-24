@@ -442,4 +442,7 @@ INCLUDE "data/pokemon/base_stats/deoxys-speed.asm"
 INCLUDE "data/pokemon/base_stats/lycanroc-nite.asm"
 INCLUDE "data/pokemon/base_stats/lycanroc-dusk.asm"
 INCLUDE "data/pokemon/base_stats/ursaluna-blood.asm"
+INCLUDE "data/pokemon/base_stats/castform-sunny.asm"
+INCLUDE "data/pokemon/base_stats/castform-rainy.asm"
+INCLUDE "data/pokemon/base_stats/castform-snowy.asm"
 .IndirectEnd::

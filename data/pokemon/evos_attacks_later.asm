@@ -157,6 +157,9 @@ EvosAttacksPointers3::
 	dw PlaceholderEvosAttacks
 	dw PlaceholderEvosAttacks
 	dw PlaceholderEvosAttacks
+	dw PlaceholderEvosAttacks
+	dw PlaceholderEvosAttacks
+	dw PlaceholderEvosAttacks
 .IndirectEnd::
 
 TreeckoEvosAttacks:

@@ -1705,14 +1705,23 @@ HandleWeather:
 
 	ld hl, wWeatherCount
 	dec [hl]
-	jr z, .ended
+	jr nz, .continuing
+; ended
+	ld hl, .WeatherEndedMessages
+	call .PrintWeatherMessage
+	xor a
+	ld [wBattleWeather], a
+	farjp UpdateCastform
 
+.continuing
 	ld hl, .WeatherMessages
 	call .PrintWeatherMessage
 
+	call CheckWeatherHealingAbilities
+
 	ld a, [wBattleWeather]
 	cp WEATHER_SANDSTORM
-	ret nz
+	jr nz, .check_hail
 
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
@@ -1735,12 +1744,21 @@ HandleWeather:
 	bit SUBSTATUS_UNDERGROUND, a
 	ret nz
 
-	ld hl, wBattleMonType1
 	ldh a, [hBattleTurn]
 	and a
+	ld hl, wBattleMonType
+	ld a, [wBattleMonAbility]
 	jr z, .ok
-	ld hl, wEnemyMonType1
+	ld hl, wEnemyMonType
+	ld a, [wEnemyMonAbility]
 .ok
+	cp SAND_RUSH
+	ret z
+	cp SAND_VEIL
+	ret z
+	cp OVERCOAT
+	ret z
+
 	ld a, [hli]
 	cp ROCK
 	ret z
@@ -1763,18 +1781,110 @@ HandleWeather:
 	ld de, ANIM_IN_SANDSTORM
 	call Call_PlayBattleAnim
 	call SwitchTurn
-	call GetEighthMaxHP
+	call GetSixteenthMaxHP
 	call SubtractHPFromUser
 
 	ld hl, SandstormHitsText
 	jmp StdBattleTextbox
 
-.ended
-	ld hl, .WeatherEndedMessages
-	call .PrintWeatherMessage
-	xor a
-	ld [wBattleWeather], a
-	ret
+.check_hail
+	cp WEATHER_HAIL
+	jr nz, .check_sun
+
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_hail_first
+
+; player first
+	call SetPlayerTurn
+	call .HailDamage
+	call SetEnemyTurn
+	jr .HailDamage
+
+.enemy_hail_first
+	call SetEnemyTurn
+	call .HailDamage
+	call SetPlayerTurn
+.HailDamage:
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVar
+	bit SUBSTATUS_UNDERGROUND, a
+	ret nz
+
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wBattleMonAbility]
+	ld hl, wBattleMonType1
+	jr z, .got_hail_type
+	ld hl, wEnemyMonType
+	ld a, [wEnemyMonAbility]
+.got_hail_type
+	cp ICE_BODY
+	ret z
+	cp SNOW_CLOAK
+	ret z
+	cp OVERCOAT
+	ret z
+
+	ld a, [hli]
+	cp ICE
+	ret z
+
+	ld a, [hl]
+	cp ICE
+	ret z
+
+;	call SwitchTurn
+;	xor a
+;	ld [wNumHits], a
+;	ld de, ANIM_IN_HAIL
+;	call Call_PlayBattleAnim
+;	call SwitchTurn
+	call GetSixteenthMaxHP
+	call SubtractHPFromUser
+
+	ld hl, PeltedByHailText
+	jmp StdBattleTextbox
+
+.check_sun
+	cp WEATHER_SUN
+	ret nz
+
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_sun_first
+
+; player first
+	call SetPlayerTurn
+	call .SunDamage
+	call SetEnemyTurn
+	jr .SunDamage
+
+.enemy_sun_first
+	call SetEnemyTurn
+	call .SunDamage
+	call SetPlayerTurn
+.SunDamage:
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVar
+	bit SUBSTATUS_UNDERGROUND, a
+	ret nz
+
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wBattleMonAbility]
+	jr z, .got_sun_ability
+	ld a, [wEnemyMonAbility]
+.got_sun_ability
+	cp SOLAR_POWER
+	jr z, .ok_ability
+	cp DRY_SKIN
+	ret nz
+.ok_ability
+
+	farcall AnimateUserAbility
+	call GetEighthMaxHP
+	jmp SubtractHPFromUser
 
 .PrintWeatherMessage:
 	ld a, [wBattleWeather]
@@ -1793,12 +1903,89 @@ HandleWeather:
 	dw BattleText_RainContinuesToFall
 	dw BattleText_TheSunlightIsStrong
 	dw BattleText_TheSandstormRages
+	dw BattleText_HailContinuesToFall
 
 .WeatherEndedMessages:
 ; entries correspond to WEATHER_* constants
 	dw BattleText_TheRainStopped
 	dw BattleText_TheSunlightFaded
 	dw BattleText_TheSandstormSubsided
+	dw BattleText_TheHailStopped
+
+CheckWeatherHealingAbilities:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_first
+
+; player first
+	call SetPlayerTurn
+	ld a, [wBattleMonAbility]
+	call .Check
+	call SetEnemyTurn
+	ld a, [wEnemyMonAbility]
+	jr .Check
+
+.enemy_first
+	call SetEnemyTurn
+	ld a, [wEnemyMonAbility]
+	call .Check
+	call SetPlayerTurn
+	ld a, [wBattleMonAbility]
+.Check:
+	cp DRY_SKIN
+	jr z, .dry_skin
+	cp RAIN_DISH
+	jr z, .rain_dish
+	cp ICE_BODY
+	ret nz
+; ice_body
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	ret nz
+	ld hl, GetSixteenthMaxHP
+	jr .do_recovery
+
+.rain_dish
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	ret nz
+	ld hl, GetSixteenthMaxHP
+	jr .do_recovery
+
+.dry_skin
+	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	ret nz
+	ld hl, GetEighthMaxHP
+.do_recovery
+	push hl
+	call .CheckHPFull
+	pop hl
+	ret z
+	push hl
+	farcall AnimateUserAbility
+	pop hl
+	call _hl_
+	call SwitchTurn
+	jmp RestoreHP
+
+.CheckHPFull
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_hp
+	ld hl, wEnemyMonHP
+.got_hp
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	ret nz
+	ld a, [hl]
+	cp c
+	ret
 
 SubtractHPFromTarget:
 	call SubtractHP
@@ -4008,6 +4195,7 @@ SendOutPlayerMon:
 	call PlayStereoCry
 
 .statused
+	farcall UpdateCastform
 	call UpdatePlayerHUD
 	ld a, $1
 	ldh [hBGMapMode], a

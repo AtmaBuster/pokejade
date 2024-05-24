@@ -412,4 +412,7 @@ IconPointers:
 	dba PlaceholderIcon
 	dba PlaceholderIcon
 	dba PlaceholderIcon
+	dba PlaceholderIcon
+	dba PlaceholderIcon
+	dba PlaceholderIcon
 	assert_table_length NUM_POKEMON + 1

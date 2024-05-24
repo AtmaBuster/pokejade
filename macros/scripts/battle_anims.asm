@@ -187,9 +187,15 @@ MACRO anim_setobjpal
 	db \2 ; battle pal
 ENDM
 
-	const_skip ; $ec
+	const anim_reloadsprite_command ; ec
+MACRO anim_reloadsprite
+	db anim_reloadsprite_command
+ENDM
 
-	const_skip ; $ed
+	const anim_reloadpal_command ; ec
+MACRO anim_reloadpal
+	db anim_reloadpal_command
+ENDM
 
 	const anim_if_param_and_command ; $ee
 MACRO anim_if_param_and
