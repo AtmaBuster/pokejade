@@ -19,8 +19,6 @@ GymLeaders:
 	db KOGA
 	db CHAMPION
 	db RED
-; fallthrough
-KantoGymLeaders:
 	db BROCK
 	db MISTY
 	db LT_SURGE

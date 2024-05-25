@@ -4281,8 +4281,7 @@ BattleCommand_burntarget:
 	call GetBattleVarAddr
 	set BRN, [hl]
 	call UpdateOpponentInParty
-	ld hl, ApplyBrnEffectOnAttack
-	call CallBattleCore
+	farcall ApplyBrnEffectOnAttack
 	ld de, ANIM_BRN
 	call PlayOpponentBattleAnim
 	call RefreshBattleHuds
@@ -4393,8 +4392,7 @@ BattleCommand_paralyzetarget:
 	call GetBattleVarAddr
 	set PAR, [hl]
 	call UpdateOpponentInParty
-	ld hl, ApplyPrzEffectOnSpeed
-	call CallBattleCore
+	farcall ApplySpeedModifiers
 	ld de, ANIM_PAR
 	call PlayOpponentBattleAnim
 	call RefreshBattleHuds
@@ -4499,207 +4497,7 @@ ChangeStat:
 ; b contains stat to alter, or zero if it should be read from the move script
 	farjp FarChangeStat
 
-MinimizeDropSub:
-; Lower the substitute if we're minimizing
-
-	ld de, wPlayerMinimized
-	ld hl, DropPlayerSub
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .do_player
-	ld de, wEnemyMinimized
-	ld hl, DropEnemySub
-.do_player
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	ld bc, MINIMIZE
-	call CompareMove
-	ret nz
-
-	ld a, $1
-	ld [de], a
-	call _CheckBattleScene
-	ret nc
-
-	xor a
-	ldh [hBGMapMode], a
-	call CallBattleCore
-	call WaitBGMap
-	jmp BattleCommand_movedelay
-
-CheckMist:
-	ld a, BATTLE_VARS_MOVE_EFFECT
-	call GetBattleVar
-	cp EFFECT_ATTACK_DOWN
-	jr c, .dont_check_mist
-	cp EFFECT_EVASION_DOWN + 1
-	jr c, .check_mist
-	cp EFFECT_ATTACK_DOWN_2
-	jr c, .dont_check_mist
-	cp EFFECT_EVASION_DOWN_2 + 1
-	jr c, .check_mist
-	cp EFFECT_ATTACK_DOWN_HIT
-	jr c, .dont_check_mist
-	cp EFFECT_EVASION_DOWN_HIT + 1
-	jr c, .check_mist
-.dont_check_mist
-	xor a
-	ret
-
-.check_mist
-	ld a, BATTLE_VARS_SUBSTATUS4_OPP
-	call GetBattleVar
-	bit SUBSTATUS_MIST, a
-	ret
-
-BattleCommand_statupmessage:
-	ret
-
-.BattleStatWentWayUpText:
-	text_far _BattleStatWentWayUpText
-	text_end
-
-.BattleStatWentUpText:
-	text_far _BattleStatWentUpText
-	text_end
-
-BattleCommand_statdownmessage:
-	ret
-
-.BattleStatSharplyFellText:
-	text_far _BattleStatSharplyFellText
-	text_end
-
-.BattleStatFellText:
-	text_far _BattleStatFellText
-	text_end
-
-TryLowerStat:
-; Lower stat c from stat struct hl (buffer de).
-
-	push bc
-	sla c
-	ld b, 0
-	add hl, bc
-	; add de, c
-	ld a, c
-	add e
-	ld e, a
-	adc d
-	sub e
-	ld d, a
-	pop bc
-
-; The lowest possible stat is 1.
-	ld a, [hld]
-	dec a
-	jr nz, .not_min
-	ld a, [hl]
-	and a
-	ret z
-
-.not_min
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .Player
-
-	call BattleCommand_switchturn
-	call CalcPlayerStats
-	call BattleCommand_switchturn
-	jr .end
-
-.Player:
-	call BattleCommand_switchturn
-	call CalcEnemyStats
-	call BattleCommand_switchturn
-.end
-	ld a, 1
-	and a
-	ret
-
-BattleCommand_statupfailtext:
-	ret
-
-BattleCommand_statdownfailtext:
-	ret
-
 INCLUDE "data/battle/stat_multipliers.asm"
-
-BattleCommand_allstatsup:
-	ret
-
-ResetMiss:
-	xor a
-	ld [wAttackMissed], a
-	ret
-
-;LowerStat:
-
-	ld hl, wPlayerStatLevels
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_target
-	ld hl, wEnemyStatLevels
-
-.got_target
-	and $f
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld b, [hl]
-	dec b
-	jr z, .cant_lower_anymore
-
-	and $f0
-	jr z, .got_num_stages
-	dec b
-	jr nz, .got_num_stages
-	inc b
-
-.got_num_stages
-	ld [hl], b
-	ld a, c
-	cp ACCURACY
-	jr nc, .accuracy_evasion
-
-	push hl
-	ld hl, wBattleMonStats + 1
-	ld de, wPlayerStats
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_target_2
-	ld hl, wEnemyMonStats + 1
-	ld de, wEnemyStats
-
-.got_target_2
-	call TryLowerStat
-	pop hl
-	jr z, .failed
-
-.accuracy_evasion
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .player
-
-	call CalcEnemyStats
-
-	jr .finish
-
-.player
-	call CalcPlayerStats
-
-.finish
-	xor a
-	ld [wFailedMessage], a
-	ret
-
-.failed
-	inc [hl]
-
-.cant_lower_anymore
-	ld a, 2
-	ld [wFailedMessage], a
-	ret
 
 BattleCommand_tristatuschance:
 	call BattleCommand_effectchance
@@ -4761,11 +4559,8 @@ CalcPlayerStats:
 
 	call BattleCommand_switchturn
 
-	ld hl, ApplyPrzEffectOnSpeed
-	call CallBattleCore
-
-	ld hl, ApplyBrnEffectOnAttack
-	call CallBattleCore
+	farcall ApplySpeedModifiers
+	farcall ApplyBrnEffectOnAttack
 
 	jmp BattleCommand_switchturn
 
@@ -4779,11 +4574,8 @@ CalcEnemyStats:
 
 	call BattleCommand_switchturn
 
-	ld hl, ApplyPrzEffectOnSpeed
-	call CallBattleCore
-
-	ld hl, ApplyBrnEffectOnAttack
-	call CallBattleCore
+	farcall ApplySpeedModifiers
+	farcall ApplyBrnEffectOnAttack
 
 	jmp BattleCommand_switchturn
 
@@ -5855,8 +5647,7 @@ BattleCommand_paralyze:
 	call GetBattleVarAddr
 	set PAR, [hl]
 	call UpdateOpponentInParty
-	ld hl, ApplyPrzEffectOnSpeed
-	call CallBattleCore
+	farcall ApplySpeedModifiers
 	call UpdateBattleHuds
 	call PrintParalyze
 	ld hl, UseHeldStatusHealingItem

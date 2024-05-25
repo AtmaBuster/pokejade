@@ -30,7 +30,7 @@ class Label:
 	line_no = None
 
 labels = {}
-with open('pokecrystal.sym', 'r', encoding='utf8') as sym_file:
+with open('pokejade.sym', 'r', encoding='utf8') as sym_file:
 	for line in sym_file:
 		if (line := line.split(';', 1)[0].rstrip()):
 			address, label = line.split(maxsplit=1)

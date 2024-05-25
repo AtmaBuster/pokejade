@@ -287,7 +287,6 @@ ROMX $6c
 	"Map Scripts 25"
 ROMX $6d
 	"Battle Core 2"
-	"Battle Ability"
 ROMX $6e
 	"Pokedex Entries 065-128"
 ROMX $6f
@@ -304,6 +303,7 @@ ROMX $74
 	"Pokedex Entries 193-251"
 ROMX $75
 	"16-bit ID stuff"
+	"Battle Ability"
 ROMX $77
 	"Unown Font"
 	"Print Party"

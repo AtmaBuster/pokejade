@@ -371,7 +371,7 @@ SwitchIn_Drizzle:
 	farcall PlayFXAnimID
 	ld hl, DownpourText
 	call StdBattleTextbox
-	jp UpdateCastform
+	farjp UpdateCastform
 
 SwitchIn_Drought:
 	ld a, [wBattleWeather]
@@ -386,7 +386,7 @@ SwitchIn_Drought:
 	farcall PlayFXAnimID
 	ld hl, SunGotBrightText
 	call StdBattleTextbox
-	jp UpdateCastform
+	farjp UpdateCastform
 
 SwitchIn_SandStream:
 	ld a, [wBattleWeather]
@@ -401,7 +401,7 @@ SwitchIn_SandStream:
 	farcall PlayFXAnimID
 	ld hl, SandstormBrewedText
 	call StdBattleTextbox
-	jp UpdateCastform
+	farjp UpdateCastform
 
 SwitchIn_SnowWarning:
 	ld a, [wBattleWeather]
@@ -416,7 +416,7 @@ SwitchIn_SnowWarning:
 	farcall PlayFXAnimID
 	ld hl, ItStartedToHailText
 	call StdBattleTextbox
-	jp UpdateCastform
+	farjp UpdateCastform
 
 SwitchIn_Imposter: ; TO-DO
 	ret
@@ -642,7 +642,7 @@ TryParalyzeOnContact:
 	set PAR, [hl]
 	call UpdateUserInParty
 	call SwitchTurn
-	farcall ApplyPrzEffectOnSpeed
+	farcall ApplySpeedModifiers
 	call UpdateBattleHuds
 	farcall PrintParalyze
 	farcall UseHeldStatusHealingItem

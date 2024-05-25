@@ -249,7 +249,6 @@ HandleBetweenTurnEffects:
 	call HandleDefrost
 	call HandleSafeguard
 	call HandleScreens
-	call HandleStatBoostingHeldItems
 	call HandleHealingItems
 	call UpdateBattleMonInParty
 	call LoadTilemapToTempTilemap
@@ -402,7 +401,7 @@ HandleBerserkGene:
 	call GetItemName
 	ld hl, BattleText_UsersStringBuffer1Activated
 	call StdBattleTextbox
-	farcall BattleCommand_statupmessage
+;	farcall BattleCommand_statupmessage ; TO-DO
 	pop af
 	bit SUBSTATUS_CONFUSED, a
 	ret nz
@@ -2771,13 +2770,8 @@ PlayVictoryMusic:
 	pop de
 	ret
 
-IsKantoGymLeader:
-	ld hl, KantoGymLeaders
-	jr IsGymLeaderCommon
-
 IsGymLeader:
 	ld hl, GymLeaders
-IsGymLeaderCommon:
 	push de
 	ld a, [wOtherTrainerClass]
 	ld de, 1
@@ -4239,8 +4233,7 @@ BreakAttraction:
 DoEntryHazards:
 	call SpikesDamage
 	call StealthRockDamage
-; fallthrough
-ToxicSpikesEffect:
+;ToxicSpikesEffect
 	ld hl, wPlayerScreens
 	ld de, wBattleMonType
 	ldh a, [hBattleTurn]
@@ -4765,74 +4758,6 @@ UseConfusionHealingItem:
 	ld [bc], a
 	ld [hl], a
 	ret
-
-HandleStatBoostingHeldItems:
-; The effects handled here are not used in-game.
-	ldh a, [hSerialConnectionStatus]
-	cp USING_EXTERNAL_CLOCK
-	jr z, .player_1
-	call .DoPlayer
-	jr .DoEnemy
-
-.player_1
-	call .DoEnemy
-; fallthrough
-.DoPlayer:
-	call GetPartymonItem
-	xor a
-	jr .HandleItem
-
-.DoEnemy:
-	call GetOTPartymonItem
-	ld a, $1
-.HandleItem:
-	ldh [hBattleTurn], a
-	ld d, h
-	ld e, l
-	push de
-	push bc
-	ld a, [bc]
-	ld b, a
-	farcall GetItemHeldEffect
-	ld hl, HeldStatUpItems
-.loop
-	ld a, [hli]
-	cp -1
-	jr z, .finish
-	inc hl
-	inc hl
-	cp b
-	jr nz, .loop
-	pop bc
-	ld a, [bc]
-	ld [wNamedObjectIndex], a
-	push bc
-	dec hl
-	dec hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-;	ld a, BANK(BattleCommand_attackup)
-	call FarCall_hl
-	pop bc
-	pop de
-	ld a, [wFailedMessage]
-	and a
-	ret nz
-	xor a
-	ld [bc], a
-	ld [de], a
-	call GetItemName
-	ld hl, BattleText_UsersStringBuffer1Activated
-	call StdBattleTextbox
-	farjp BattleCommand_statupmessage
-
-.finish
-	pop bc
-	pop de
-	ret
-
-INCLUDE "data/battle/held_stat_up.asm"
 
 GetPartymonItem:
 	ld hl, wPartyMon1Item
@@ -6829,53 +6754,6 @@ CheckSleepingTreeMon:
 
 INCLUDE "data/wild/treemons_asleep.asm"
 
-CheckUnownLetter:
-; Return carry if the Unown letter hasn't been unlocked yet
-
-	ld a, [wUnlockedUnowns]
-	ld c, a
-	ld de, 0
-
-.loop
-
-; Don't check this set unless it's been unlocked
-	srl c
-	jr nc, .next
-
-; Is our letter in the set?
-	ld hl, UnlockedUnownLetterSets
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
-	push de
-	ld a, [wUnownLetter]
-	ld de, 1
-	push bc
-	call IsInArray
-	pop bc
-	pop de
-
-	jr c, .match
-
-.next
-; Make sure we haven't gone past the end of the table
-	inc e
-	inc e
-	ld a, e
-	cp NUM_UNLOCKED_UNOWN_SETS * 2
-	jr c, .loop
-
-; Hasn't been unlocked, or the letter is invalid
-	scf
-	ret
-
-.match
-; Valid letter
-	and a
-	ret
-
 INCLUDE "data/wild/unlocked_unowns.asm"
 
 BattleWinSlideInEnemyTrainerFrontpic:
@@ -6944,100 +6822,8 @@ ApplyStatusEffectOnEnemyStats:
 
 ApplyStatusEffectOnStats:
 	ldh [hBattleTurn], a
-	call ApplyPrzEffectOnSpeed
-	jr ApplyBrnEffectOnAttack
-
-ApplyPrzEffectOnSpeed:
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .enemy
-	ld a, [wBattleMonStatus]
-	and 1 << PAR
-	ret z
-	ld hl, wBattleMonSpeed + 1
-	ld a, [hld]
-	ld b, a
-	ld a, [hl]
-	srl a
-	rr b
-	srl a
-	rr b
-	ld [hli], a
-	or b
-	jr nz, .player_ok
-	ld b, $1 ; min speed
-
-.player_ok
-	ld [hl], b
-	ret
-
-.enemy
-	ld a, [wEnemyMonStatus]
-	and 1 << PAR
-	ret z
-	ld hl, wEnemyMonSpeed + 1
-	ld a, [hld]
-	ld b, a
-	ld a, [hl]
-	srl a
-	rr b
-	srl a
-	rr b
-	ld [hli], a
-	or b
-	jr nz, .enemy_ok
-	ld b, $1 ; min speed
-
-.enemy_ok
-	ld [hl], b
-	ret
-
-ApplyBrnEffectOnAttack:
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .enemy
-	ld a, [wBattleMonAbility]
-	cp GUTS
-	ret z
-	ld a, [wBattleMonStatus]
-	and 1 << BRN
-	ret z
-	ld hl, wBattleMonAttack + 1
-	ld a, [hld]
-	ld b, a
-	ld a, [hl]
-	srl a
-	rr b
-	ld [hli], a
-	or b
-	jr nz, .player_ok
-	ld b, $1 ; min attack
-
-.player_ok
-	ld [hl], b
-	ret
-
-.enemy
-	ld a, [wEnemyMonAbility]
-	cp GUTS
-	ret z
-	ld a, [wEnemyMonStatus]
-	and 1 << BRN
-	ret z
-	ld hl, wEnemyMonAttack + 1
-	ld a, [hld]
-	ld b, a
-	ld a, [hl]
-	srl a
-	rr b
-	ld [hli], a
-	or b
-	jr nz, .enemy_ok
-	ld b, $1 ; min attack
-
-.enemy_ok
-	ld [hl], b
-	ret
+	farcall ApplySpeedModifiers
+	farjp ApplyBrnEffectOnAttack
 
 ApplyStatLevelMultiplierOnAllStats:
 ; Apply StatLevelMultipliers on all 5 Stats
