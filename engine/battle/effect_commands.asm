@@ -2021,6 +2021,23 @@ BattleCommand_effectchance:
 	call CheckSubstituteOpp
 	jr nz, .failed
 
+; if opponent has Shield Dust, fail, unless it's an effect on self
+	farcall GetOpponentAbility
+	cp SHIELD_DUST
+	jr nz, .check_effect_chance
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	jr z, .got_move_effect
+	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
+.got_move_effect
+	cp EFFECT_DEFENSE_UP_HIT
+	jr z, .check_effect_chance
+	cp EFFECT_ATTACK_UP_HIT
+	jr z, .check_effect_chance
+	cp EFFECT_ALL_UP_HIT
+	jr nz, .failed
+.check_effect_chance
 	push hl
 	ld hl, wPlayerMoveStruct + MOVE_CHANCE
 	ldh a, [hBattleTurn]

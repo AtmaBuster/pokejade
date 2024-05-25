@@ -76,6 +76,43 @@ CompareBattleMonSpeeds:
 	db SAND_RUSH,   WEATHER_SANDSTORM
 	db -1
 
+HandleShedSkin:
+; Player
+	call SetPlayerTurn
+	ld de, wBattleMonStatus
+	call .Apply
+; Enemy
+	call SetEnemyTurn
+	ld de, wEnemyMonStatus
+.Apply:
+	call GetUserAbility
+	cp SHED_SKIN
+	ret nz
+	ld a, [de]
+	and a
+	ret z
+	call BattleRandom
+	cp 33 percent
+	ret c
+
+	push de
+	call AnimateUserAbility
+	ld hl, Text_ShedSkinRecovered
+	call StdBattleTextbox
+	pop de
+
+	xor a
+	ld [de], a
+	ld a, BATTLE_VARS_SUBSTATUS5
+	call GetBattleVarAddr
+	res SUBSTATUS_TOXIC, [hl]
+	ld a, BATTLE_VARS_SUBSTATUS1
+	call GetBattleVarAddr
+	res SUBSTATUS_NIGHTMARE, [hl]
+
+	call UpdateBattleMonInParty
+	jp UpdateEnemyMonInParty
+
 MarvelScaleCheck:
 ; check ablility
 	push bc
@@ -132,12 +169,15 @@ GetPlayerAbility:
 	and a
 	ld a, [wBattleMonAbility]
 	ret z
+	push bc
 	ld b, a
 	ld a, [wPlayerSubStatus2]
 	and 1 << SUBSTATUS_GASTRO_ACID
 	ld a, 0 ; no-optimize a = 0
-	ret nz
+	jr nz, .done
 	ld a, b
+.done
+	pop bc
 	ret
 
 GetEnemyAbility:
@@ -145,12 +185,15 @@ GetEnemyAbility:
 	and a
 	ld a, [wEnemyMonAbility]
 	ret z
+	push bc
 	ld b, a
 	ld a, [wEnemySubStatus2]
 	and 1 << SUBSTATUS_GASTRO_ACID
 	ld a, 0 ; no-optimize a = 0
-	ret nz
+	jr nz, .done
 	ld a, b
+.done
+	pop bc
 	ret
 
 SetUserAbility:
@@ -193,7 +236,7 @@ GetTrueOppnentAbility:
 	pop af
 	ret
 
-GetUserAbility: ; TO-DO : check for Gastro Acid
+GetUserAbility:
 	ldh a, [hBattleTurn]
 	and a
 	ld a, 1

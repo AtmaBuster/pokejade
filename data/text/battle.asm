@@ -1244,3 +1244,8 @@ TrickRoomReturnedText:
 	line "returned to"
 	cont "normal."
 	prompt
+
+Text_ShedSkinRecovered:
+	text "<USER>"
+	line "shed its skin!"
+	prompt

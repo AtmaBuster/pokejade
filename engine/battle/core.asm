@@ -245,6 +245,7 @@ HandleBetweenTurnEffects:
 
 .NoMoreFaintingConditions:
 	farcall HandleTrickRoom
+	farcall HandleShedSkin
 	call HandleLeftovers
 	call HandleMysteryberry
 	call HandleDefrost

@@ -199,7 +199,7 @@ SECTION "Moves Gen 2", ROMX
 MovesGen2:
 	move EFFECT_SKETCH,              0, NORMAL,        STATUS,   100,  1,   0, %00000000 ;SKETCH
 	move EFFECT_TRIPLE_KICK,        10, FIGHTING,      PHYSICAL,  90, 10,   0, %00000001 ;TRIPLE_KICK
-	move EFFECT_THIEF,              60, DARK,          PHYSICAL, 100, 25, 100, %00000001 ;THIEF
+	move EFFECT_THIEF,              60, DARK,          PHYSICAL, 100, 25,   0, %00000001 ;THIEF
 	move EFFECT_MEAN_LOOK,           0, BUG,           STATUS,   100, 10,   0, %00000000 ;SPIDER_WEB
 	move EFFECT_LOCK_ON,             0, NORMAL,        STATUS,   100,  5,   0, %00000000 ;MIND_READER
 	move EFFECT_NIGHTMARE,           0, GHOST,         STATUS,   100, 15,   0, %00000000 ;NIGHTMARE
@@ -238,7 +238,7 @@ MovesGen2:
 	move EFFECT_ATTACK_DOWN_2,       0, FAIRY,         STATUS,   100, 20,   0, %00000000 ;CHARM
 	move EFFECT_ROLLOUT,            30, ROCK,          PHYSICAL,  90, 20,   0, %00000001 ;ROLLOUT
 	move EFFECT_FALSE_SWIPE,        40, NORMAL,        PHYSICAL, 100, 40,   0, %00000001 ;FALSE_SWIPE
-	move EFFECT_SWAGGER,             0, NORMAL,        STATUS,    85, 15, 100, %00000000 ;SWAGGER
+	move EFFECT_SWAGGER,             0, NORMAL,        STATUS,    85, 15,   0, %00000000 ;SWAGGER
 	move EFFECT_HEAL,                0, NORMAL,        STATUS,   100, 10,   0, %00000000 ;MILK_DRINK
 	move EFFECT_PARALYZE_HIT,       65, ELECTRIC,      PHYSICAL, 100, 20,  30, %00000001 ;SPARK
 	move EFFECT_FURY_CUTTER,        40, BUG,           PHYSICAL,  95, 20,   0, %00100001 ;FURY_CUTTER
@@ -367,7 +367,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPEED_DOWN_HIT,     55, GROUND,        SPECIAL,   95, 15, 100, %00000000 ;MUD_SHOT
 	move EFFECT_POISON_HIT,         50, POISON,        PHYSICAL, 100, 25,  10, %00000001 ;POISON_TAIL
-	move EFFECT_THIEF,              60, NORMAL,        PHYSICAL, 100, 25, 100, %00000001 ;COVET
+	move EFFECT_THIEF,              60, NORMAL,        PHYSICAL, 100, 25,   0, %00000001 ;COVET
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_ALWAYS_HIT,         60, GRASS,         SPECIAL,  100, 20,   0, %00000000 ;MAGICAL_LEAF
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
