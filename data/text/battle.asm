@@ -1232,3 +1232,15 @@ ChangedFormText:
 	text "<USER>"
 	line "changed form!"
 	prompt
+
+TrickRoomUsedText:
+	text "<USER>"
+	line "twisted the"
+	cont "dimensions!"
+	prompt
+
+TrickRoomReturnedText:
+	text "The dimensions"
+	line "returned to"
+	cont "normal."
+	prompt

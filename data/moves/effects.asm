@@ -2179,3 +2179,10 @@ Incinerate:
 	buildopponentrage
 	heldflinch
 	endmove
+
+TrickRoom:
+	checkobedience
+	usedmovetext
+	doturn
+	trickroom
+	endmove

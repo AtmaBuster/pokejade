@@ -176,4 +176,5 @@ MoveEffectsPointers:
 	dw ToxicSpikes
 	dw GastroAcid
 	dw Incinerate
+	dw TrickRoom
 	assert_table_length NUM_MOVE_EFFECTS

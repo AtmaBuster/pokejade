@@ -1,3 +1,81 @@
+CompareBattleMonSpeeds:
+	call .CompareSpeeds
+; check for trick room
+	push af
+	ld a, [wTrickRoomTimer]
+	and a
+	jr z, .no_trick_room
+	pop af
+	ccf
+	ret
+
+.no_trick_room
+	pop af
+	ret
+
+.CompareSpeeds:
+; get player speed
+	ld de, wBattleMonSpeed
+	ld hl, GetPlayerAbility
+	call .GetSpeedValue
+	push de
+; get enemy speed
+	ld de, wEnemyMonSpeed
+	ld hl, GetEnemyAbility
+	call .GetSpeedValue
+	ld b, d
+	ld c, e
+	pop de
+; compare values
+	ld a, d
+	cp b
+	ret nz
+	ld a, e
+	cp c
+	ret
+
+.GetSpeedValue:
+; return effective speed in de
+; get ability
+	ld a, 1
+	call _hl_
+	ld b, a
+; get default speed
+	ld a, [de]
+	ld c, a
+	inc de
+	ld a, [de]
+	ld e, a
+	ld d, c
+; get weather
+	ld a, [wBattleWeather]
+	ld c, a
+; check table
+	ld hl, .WeatherSpeedUpAbilities
+.weather_table_loop
+	ld a, [hli]
+	cp -1
+	ret z
+	cp b
+	jr nz, .next
+	ld a, [hl]
+	cp c
+	jr z, .double_speed
+.next
+	inc hl
+	jr .weather_table_loop
+
+.double_speed
+	sla e
+	rl d
+	ret
+
+.WeatherSpeedUpAbilities:
+	db SWIFT_SWIM,  WEATHER_RAIN
+	db CHLOROPHYLL, WEATHER_SUN
+	db SAND_RUSH,   WEATHER_SANDSTORM
+	db -1
+
 MarvelScaleCheck:
 ; check ablility
 	push bc

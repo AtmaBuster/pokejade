@@ -244,6 +244,7 @@ HandleBetweenTurnEffects:
 	ret c
 
 .NoMoreFaintingConditions:
+	farcall HandleTrickRoom
 	call HandleLeftovers
 	call HandleMysteryberry
 	call HandleDefrost
@@ -464,7 +465,7 @@ DetermineMoveOrder:
 	call SetEnemyTurn
 	call DoEntryHazards
 	farcall ActivateSwitchInAbilities
-	jmp .enemy_first
+	jr .enemy_first
 
 .use_move
 	ld a, [wBattlePlayerAction]
@@ -521,10 +522,7 @@ DetermineMoveOrder:
 	cp c
 	jr c, .enemy_first
 .speed_check
-	ld de, wBattleMonSpeed
-	ld hl, wEnemyMonSpeed
-	ld c, 2
-	call CompareBytes
+	farcall CompareBattleMonSpeeds
 	jr z, .speed_tie
 	jr nc, .player_first
 	jr .enemy_first

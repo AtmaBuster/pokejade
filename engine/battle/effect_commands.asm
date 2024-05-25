@@ -58,6 +58,7 @@ INCLUDE "engine/battle/move_effects/life_power.asm"
 INCLUDE "engine/battle/move_effects/gastro_acid.asm"
 INCLUDE "engine/battle/move_effects/incinerate.asm"
 INCLUDE "engine/battle/move_effects/weather.asm"
+INCLUDE "engine/battle/move_effects/trick_room.asm"
 
 DoPlayerTurn:
 	call SetPlayerTurn

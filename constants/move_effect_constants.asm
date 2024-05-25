@@ -175,4 +175,5 @@
 	const EFFECT_TOXIC_SPIKES    ; AC
 	const EFFECT_GASTRO_ACID     ; AD
 	const EFFECT_INCINERATE      ; AE
+	const EFFECT_TRICK_ROOM      ; AF
 DEF NUM_MOVE_EFFECTS EQU const_value

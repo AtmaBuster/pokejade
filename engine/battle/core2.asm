@@ -210,3 +210,15 @@ ApplyBrnEffectOnAttack:
 .enemy_ok
 	ld [hl], b
 	ret
+
+HandleTrickRoom:
+	ld hl, wTrickRoomTimer
+	ld a, [hl]
+	and a
+	ret z
+
+	dec [hl]
+	ret nz
+
+	ld hl, TrickRoomReturnedText
+	jp StdBattleTextbox

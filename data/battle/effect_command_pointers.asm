@@ -168,6 +168,7 @@ BattleCommandPointers:
 	command gastroacid ; 90
 	command incinerate
 	command starthail
+	command trickroom
 
 	commandx raisestat
 	commandx lowerstat

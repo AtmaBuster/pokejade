@@ -610,9 +610,11 @@ wEnemyJustGotFrozen:: db
 
 wStringBufferBattle:: ds STRING_BUFFER_LENGTH
 
+wTrickRoomTimer:: db
+
 wBattleEnd::
 
-	ds 163
+	ds 162
 
 
 SECTION UNION "Miscellaneous", WRAM0
