@@ -370,7 +370,8 @@ SwitchIn_Drizzle:
 	ld de, RAIN_DANCE
 	farcall PlayFXAnimID
 	ld hl, DownpourText
-	jp StdBattleTextbox
+	call StdBattleTextbox
+	jp UpdateCastform
 
 SwitchIn_Drought:
 	ld a, [wBattleWeather]
@@ -384,7 +385,8 @@ SwitchIn_Drought:
 	ld de, SUNNY_DAY
 	farcall PlayFXAnimID
 	ld hl, SunGotBrightText
-	jp StdBattleTextbox
+	call StdBattleTextbox
+	jp UpdateCastform
 
 SwitchIn_SandStream:
 	ld a, [wBattleWeather]
@@ -398,7 +400,23 @@ SwitchIn_SandStream:
 	ld de, SANDSTORM
 	farcall PlayFXAnimID
 	ld hl, SandstormBrewedText
-	jp StdBattleTextbox
+	call StdBattleTextbox
+	jp UpdateCastform
+
+SwitchIn_SnowWarning:
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	ret z
+	call AnimateUserAbility
+	ld a, WEATHER_HAIL
+	ld [wBattleWeather], a
+	ld a, 5
+	ld [wWeatherCount], a
+	ld de, HAIL
+	farcall PlayFXAnimID
+	ld hl, ItStartedToHailText
+	call StdBattleTextbox
+	jp UpdateCastform
 
 SwitchIn_Imposter: ; TO-DO
 	ret
