@@ -154,8 +154,8 @@ AnimatePlayerAbility:
 	xor a
 	call GetPlayerAbility
 	call GetAbilityName
-	ld hl, TempPlayerAbilityText
-	jp StdBattleTextbox
+	ld d, 55
+	jr AnimateAbility
 
 AnimateEnemyAbility:
 	ldh a, [hBattleTurn]
@@ -168,8 +168,145 @@ AnimateEnemyAbility:
 	xor a
 	call GetEnemyAbility
 	call GetAbilityName
-	ld hl, TempPlayerAbilityText
-	jp StdBattleTextbox
+	ld d, 19
+; fallthrough
+AnimateAbility:
+	push de
+	ld hl, wStringBuffer1
+	ld de, wStringBufferBattle
+	ld bc, STRING_BUFFER_LENGTH
+	rst CopyBytes
+	pop de
+	ld a, d
+	add 40
+	ld e, a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wLYOverrides)
+	ldh [rSVBK], a
+	call .SetupBox
+
+	call .SetupWindow
+	ld hl, rIE
+	set LCD_STAT, [hl]
+
+	ld a, LOW(rWX)
+	ldh [hLCDCPointer], a
+	xor a
+	ldh [hWY], a
+	ld a, $A7
+	ldh [hWX], a
+
+	call .SlideIn
+	ld c, 60
+	call DelayFrames
+	call .SlideOut
+
+	ld hl, rIE
+	res LCD_STAT, [hl]
+	ld a, 7
+	ldh [hWX], a
+	ld a, 144
+	ldh [hWY], a
+	xor a
+	ldh [hLCDCPointer], a
+	ld hl, wTilemap5RowBackup
+	ld de, wTilemap
+	ld bc, SCREEN_WIDTH * 5
+	rst CopyBytes
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.SetupBox:
+	push de
+; backup top 5 rows of wTilemap
+	ld hl, wTilemap
+	ld de, wTilemap5RowBackup
+	ld bc, SCREEN_WIDTH * 5
+	rst CopyBytes
+; place box
+	hlcoord 0, 0
+	lb bc, 3, 12
+	call Textbox
+; copy mon name
+	ldh a, [hBattleTurn]
+	and a
+	ld de, wBattleMonNickname
+	jr z, .got_name
+	ld de, wEnemyMonNickname
+.got_name
+	hlcoord 1, 1
+	call PlaceString
+	ld a, "'s"
+	ld [bc], a
+; copy ability name
+	ld de, wStringBufferBattle
+	hlcoord 1, 3
+	call PlaceString
+
+	ld a, 3
+	ldh [hBGMapMode], a
+	call UpdateBGMap
+
+	pop de
+	ret
+
+.SetupWindow:
+	ld hl, wLYOverrides
+	ld a, $A7
+	ld bc, SCREEN_HEIGHT_PX
+	jmp ByteFill
+
+.SlideIn:
+	call DelayFrame
+	ld c, 14
+.SlideIn_Loop:
+	ldh a, [rLY]
+	cp $60
+	jr nz, .SlideIn_Loop
+
+	ld l, d ; LOW(wLYOverrides) = 0
+	ld h, HIGH(wLYOverrides)
+	ld a, e
+	sub d
+	ld b, a
+.SlideIn_Loop2:
+	ld a, [hl]
+	sub 8
+	ld [hli], a
+	dec b
+	jr nz, .SlideIn_Loop2
+
+	call DelayFrame
+	dec c
+	jr nz, .SlideIn_Loop
+	ret
+
+.SlideOut:
+	call DelayFrame
+	ld c, 14
+.SlideOut_Loop:
+	ldh a, [rLY]
+	cp $60
+	jr nz, .SlideOut_Loop
+
+	ld l, d ; LOW(wLYOverrides) = 0
+	ld h, HIGH(wLYOverrides)
+	ld a, e
+	sub d
+	ld b, a
+.SlideOut_Loop2:
+	ld a, [hl]
+	add 8
+	ld [hli], a
+	dec b
+	jr nz, .SlideOut_Loop2
+
+	call DelayFrame
+	dec c
+	jr nz, .SlideOut_Loop
+	ret
 
 ActivateSwitchInAbilities:
 	call GetUserAbility

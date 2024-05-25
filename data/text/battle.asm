@@ -1196,20 +1196,6 @@ StatFellSeverelyText:
 	cont "severely!"
 	prompt
 
-TempPlayerAbilityText:
-	text "<USER>'s"
-	line "@"
-	text_ram wStringBuffer1
-	text "!"
-	prompt
-
-TempEnemyAbilityText:
-	text "<TARGET>'s"
-	line "@"
-	text_ram wStringBuffer1
-	text "!"
-	prompt
-
 TraceText:
 	text "<USER>'s"
 	line "TRACE copied"

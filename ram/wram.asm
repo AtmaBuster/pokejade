@@ -608,9 +608,11 @@ wSomeoneIsRampaging:: db
 wPlayerJustGotFrozen:: db
 wEnemyJustGotFrozen:: db
 
+wStringBufferBattle:: ds STRING_BUFFER_LENGTH
+
 wBattleEnd::
 
-	ds 182
+	ds 163
 
 
 SECTION UNION "Miscellaneous", WRAM0
@@ -3270,7 +3272,9 @@ wMagnetTrainPlayerSpriteInitX:: db
 wPalFadeDelayFrames:: db
 wPalFadeDelay:: db
 
-	ds 104
+wTilemap5RowBackup:: ds SCREEN_WIDTH * 5
+
+	ds 4
 
 	align 8
 wLYOverridesBackup:: ds SCREEN_HEIGHT_PX

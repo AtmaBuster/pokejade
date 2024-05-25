@@ -88,21 +88,14 @@ UpdateCastform:
 	ld [wCurPartySpecies], a
 	ld [de], a
 	ld [bc], a
+; show ability
+	farcall AnimateUserAbility
 ; play animation
-	farcall _CheckBattleScene
-	jr c, .mimic_anims
 	xor a
 	ld [wNumHits], a
 	ld hl, ANIM_REFRESH_SPRITE
 	call GetMoveIDFromIndex
 	farcall LoadAnim
-	jr .after_anim
-
-.mimic_anims
-	farcall BattleCommand_movedelay
-	farcall BattleCommand_raisesubnoanim
-	farcall BattleAnimCmd_SetObjPal
-.after_anim
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVar
 	bit SUBSTATUS_SUBSTITUTE, a
