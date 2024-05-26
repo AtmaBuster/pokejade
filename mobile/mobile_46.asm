@@ -115,7 +115,6 @@ BattleTowerRoomMenu_InitRAM:
 	ldh [hMobileReceive], a
 ;	ldh [hMobile], a
 	ei
-	farcall Function106464
 	farcall Function115d99
 	farcall Function11615a
 	jmp CloseSRAM

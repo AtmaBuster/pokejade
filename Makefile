@@ -19,8 +19,7 @@ rom_obj := \
 	gfx/misc.o \
 	gfx/pics.o \
 	gfx/sprites.o \
-	gfx/tilesets.o \
-	lib/mobile/main.o
+	gfx/tilesets.o
 
 pokejade_obj       := $(rom_obj:.o=.o)
 pokejade_debug_obj := $(rom_obj:.o=_debug.o)

@@ -44,6 +44,26 @@ PlayerStats_HallOfFame:
 	pop de
 	ret
 
+PlayerStats_Splash:
+	ldh a, [hBattleTurn]
+	and a
+	ret nz
+	push de
+	ld de, wPlayerStat_Splash
+	call PlayerStats_Inc16
+	pop de
+	ret
+
+PlayerStats_Selfdestruct:
+	ldh a, [hBattleTurn]
+	and a
+	ret nz
+	push de
+	ld de, wPlayerStat_Selfdestruct
+	call PlayerStats_Inc16
+	pop de
+	ret
+
 	playerstat16 Healing
 	playerstat16 Battles
 	playerstat16 TrainerBattles
@@ -53,8 +73,6 @@ PlayerStats_HallOfFame:
 	playerstat16 ColosseumWins
 	playerstat16 ColosseumLosses
 	playerstat16 FishingBattles
-	playerstat16 Selfdestruct
-	playerstat16 Splash
 	playerstat16 BerriesPicked
 	playerstat16 SurfUsed
 	playerstat16 WaterfallUsed

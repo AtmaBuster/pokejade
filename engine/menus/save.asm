@@ -183,7 +183,7 @@ WriteBackupSave:
 ; on game load if we have a valid main save but not a backup save.
 	; Save storage, mail, mobile event and mystery gift to backup
 	farcall BackupPartyMonMail
-	farcall BackupGSBallFlag
+	call BackupGSBallFlag
 	farcall BackupMysteryGift
 	call SaveStorageSystem
 
@@ -640,7 +640,7 @@ TryLoadSaveFile:
 	call WasMidSaveAborted
 	call z, WriteBackupSave
 	farcall RestorePartyMonMail
-	farcall RestoreGSBallFlag
+	call RestoreGSBallFlag
 	farcall RestoreMysteryGift
 	call LoadStorageSystem
 
@@ -658,7 +658,7 @@ TryLoadSaveFile:
 	call LoadBackupPokemonData
 	call LoadBackupIndexTables
 	farcall RestorePartyMonMail
-	farcall RestoreGSBallFlag
+	call RestoreGSBallFlag
 	farcall RestoreMysteryGift
 	call LoadStorageSystem
 	call SaveGameData
@@ -1085,3 +1085,33 @@ AnotherSaveFileText:
 SaveFileCorruptedText:
 	text_far _SaveFileCorruptedText
 	text_end
+
+BackupGSBallFlag:
+	ld a, BANK(sGSBallFlag)
+	call OpenSRAM
+	ld a, [sGSBallFlag]
+	push af
+	ld a, BANK(sGSBallFlagBackup)
+	call OpenSRAM
+	pop af
+	ld [sGSBallFlagBackup], a
+	jmp CloseSRAM
+
+RestoreGSBallFlag:
+	ld a, BANK(sGSBallFlagBackup)
+	call OpenSRAM
+	ld a, [sGSBallFlagBackup]
+	push af
+	ld a, BANK(sGSBallFlag)
+	call OpenSRAM
+	pop af
+	ld [sGSBallFlag], a
+	jmp CloseSRAM
+
+ClearGSBallFlag:
+	ld a, BANK(sGSBallFlag)
+	call OpenSRAM
+	xor a
+	ld [sGSBallFlag], a
+	jmp CloseSRAM
+

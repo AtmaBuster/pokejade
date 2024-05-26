@@ -98,7 +98,6 @@ ROMX $13
 	"bank13_2"
 ROMX $14
 	"bank14"
-	"Unused Egg Pic"
 ROMX $15
 	"Map Scripts 1"
 ROMX $16
@@ -202,7 +201,6 @@ ROMX $42
 ROMX $43
 	"Title"
 ROMX $44
-	"Mobile Adapter SDK"
 	"Mon Icons 2"
 ROMX $45
 	"mobile45"

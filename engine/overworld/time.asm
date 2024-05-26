@@ -11,40 +11,6 @@ ClearDailyTimers:
 InitCallReceiveDelay::
 	xor a
 	ld [wTimeCyclesSinceLastCall], a
-
-NextCallReceiveDelay:
-	ld a, [wTimeCyclesSinceLastCall]
-	cp 3
-	jr c, .okay
-	ld a, 3
-
-.okay
-	ld e, a
-	ld d, 0
-	ld hl, .ReceiveCallDelays
-	add hl, de
-	ld a, [hl]
-if DEF(_DEBUG)
-	ld h, a
-	ld a, BANK(sDebugTimeCyclesSinceLastCall)
-	call OpenSRAM
-	ld a, [sDebugTimeCyclesSinceLastCall]
-	call CloseSRAM
-	dec a
-	cp 2
-	jr nc, .debug_ok
-	xor 1
-	ld h, a
-.debug_ok
-	ld a, h
-endc
-	jr RestartReceiveCallDelay
-
-.ReceiveCallDelays:
-	db 20, 10, 5, 3
-
-CheckReceiveCallTimer:
-	and a
 	ret
 
 InitOneDayCountdown:
@@ -73,13 +39,6 @@ RestartReceiveCallDelay:
 	call UpdateTime
 	ld hl, wReceiveCallDelay_StartTime
 	jmp CopyDayHourMinToHL
-
-CheckReceiveCallDelay:
-	ld hl, wReceiveCallDelay_StartTime
-	call CalcMinsHoursDaysSince
-	call GetMinutesSinceIfLessThan60
-	ld hl, wReceiveCallDelay_MinsRemaining
-	jmp UpdateTimeRemaining
 
 RestartDailyResetTimer:
 	ld hl, wDailyResetTimer
