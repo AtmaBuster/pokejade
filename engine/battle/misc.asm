@@ -51,7 +51,7 @@ GetPlayerBackpicCoords:
 
 DoWeatherModifiers:
 	ld de, WeatherTypeModifiers
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	ld b, a
 	ld a, [wCurType]
 	ld c, a

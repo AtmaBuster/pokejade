@@ -37,7 +37,7 @@ UpdateCastform:
 	ld b, NORMAL
 	jr nz, .set_form
 ; otherwise, set form according to the weather
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	and a
 	jr z, .set_form
 	cp WEATHER_SANDSTORM
@@ -123,6 +123,9 @@ ApplySpeedModifiers:
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .enemy
+	ld a, [wBattleMonAbility]
+	cp QUICK_FEET
+	ret z
 	ld a, [wBattleMonStatus]
 	and 1 << PAR
 	ret z
@@ -144,6 +147,9 @@ ApplySpeedModifiers:
 	ret
 
 .enemy
+	ld a, [wEnemyMonAbility]
+	cp QUICK_FEET
+	ret z
 	ld a, [wEnemyMonStatus]
 	and 1 << PAR
 	ret z

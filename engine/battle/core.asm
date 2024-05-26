@@ -1717,7 +1717,7 @@ HandleWeather:
 
 	call CheckWeatherHealingAbilities
 
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_SANDSTORM
 	jr nz, .check_hail
 
@@ -1937,21 +1937,21 @@ CheckWeatherHealingAbilities:
 	cp ICE_BODY
 	ret nz
 ; ice_body
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_HAIL
 	ret nz
 	ld hl, GetSixteenthMaxHP
 	jr .do_recovery
 
 .rain_dish
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_RAIN
 	ret nz
 	ld hl, GetSixteenthMaxHP
 	jr .do_recovery
 
 .dry_skin
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_RAIN
 	ret nz
 	ld hl, GetEighthMaxHP

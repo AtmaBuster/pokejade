@@ -317,12 +317,14 @@ ReadTrainerPartyPieces:
 ; get starter personality data
 	sub $fd
 	push hl
-	ld hl, wStarterTreeckoPersonality
-	add l
+
+	; ld hl, wStarterTreeckoPersonality + a
+	add LOW(wStarterTreeckoPersonality)
 	ld l, a
-	adc h
+	adc HIGH(wStarterTreeckoPersonality)
 	sub l
 	ld h, a
+
 	ld a, [hl]
 	pop hl
 	and MON_SHINY

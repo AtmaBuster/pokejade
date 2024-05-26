@@ -169,6 +169,7 @@ BattleCommandPointers:
 	command incinerate
 	command starthail
 	command trickroom
+	command checkleafguard
 
 	commandx raisestat
 	commandx lowerstat

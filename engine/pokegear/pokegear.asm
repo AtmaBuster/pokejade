@@ -2562,8 +2562,7 @@ PlaceUnknownLocationBox:
 	call .Place
 	pop af
 	ldh [rVBK], a
-	ei
-	ret
+	reti
 
 .Place:
 	lb bc, 9, 3

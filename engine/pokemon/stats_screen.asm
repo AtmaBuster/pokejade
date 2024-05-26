@@ -1028,8 +1028,14 @@ LoadOrangePage:
 	hlcoord 2, 13
 	call .PlaceAbilityName
 	hlcoord 1, 15
-	call .PlaceAbilityDescription
-	ret
+	push hl
+	ld a, [wTempMonAbility]
+	call GetAbilityDescriptionPointer
+	ld a, BANK(AbilityDescriptions)
+	ld d, h
+	ld e, l
+	pop hl
+	jmp FarPlaceString
 
 .PlaceNatureString
 	ld a, [wTempMonPersonality]
@@ -1097,16 +1103,6 @@ LoadOrangePage:
 	pop hl
 	ld de, wStringBuffer1
 	jmp PlaceString
-
-.PlaceAbilityDescription:
-	push hl
-	ld a, [wTempMonAbility]
-	call GetAbilityDescriptionPointer
-	ld a, BANK(AbilityDescriptions)
-	ld d, h
-	ld e, l
-	pop hl
-	jmp FarPlaceString
 
 StatsScreen_PlaceFrontpic:
 	ld hl, wTempMonDVs

@@ -28,6 +28,7 @@ DoSleep:
 	doturn
 	checkhit
 	checksafeguard
+	checkleafguard
 	sleeptarget
 	endmove
 
@@ -895,6 +896,7 @@ DoPoison:
 	checkhit
 	stab
 	checksafeguard
+	checkleafguard
 	poison
 	endmove
 
@@ -905,6 +907,7 @@ DoParalyze:
 	stab
 	checkhit
 	checksafeguard
+	checkleafguard
 	paralyze
 	endmove
 

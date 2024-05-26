@@ -1249,3 +1249,21 @@ Text_ShedSkinRecovered:
 	text "<USER>"
 	line "shed its skin!"
 	prompt
+
+TextPressure:
+	text "<USER>"
+	line "is exerting its"
+	cont "pressure!"
+	prompt
+
+TextWeatherEffectsDisappeared:
+	text "The effects of"
+	line "weather went away."
+	prompt
+
+LeafGuardProtectText:
+	text "<TARGET>"
+	line "is protected by"
+	cont "LEAF GUARD!"
+	prompt
+

@@ -850,8 +850,8 @@ DayCareManCompatibilty:
 	ld hl, .DoingGreatText
 	call PrintText
 	ld a, [wDayCare]
-	and %11
-	cp %11
+	and ~3
+	inc a
 	ret nz
 	call PromptButton
 	call DayCareMonCompatibilityText

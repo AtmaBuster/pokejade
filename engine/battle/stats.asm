@@ -182,8 +182,7 @@ FarChangeStat:
 	ret nz
 	bit STAT_SILENT_F, b
 	push bc
-	jr nz, .anim_done
-	call StatUpDownAnim
+	call z, StatUpDownAnim
 .anim_done
 	;farcall ShowAbilityActivation
 	pop bc
@@ -347,7 +346,9 @@ DoChangeStat:
 	and $f
 	or b
 	ld [wChangedStat], a
-	ret
+
+	farcall CalcPlayerStats
+	farjp CalcEnemyStats
 
 .stat_change_failed
 	ld a, 1

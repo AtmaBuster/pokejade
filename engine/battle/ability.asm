@@ -1,3 +1,74 @@
+GetBattleWeather:
+	call GetPlayerAbility
+	sub AIR_LOCK
+	ret z
+	sub CLOUD_NINE - AIR_LOCK
+	ret z
+	call GetEnemyAbility
+	sub AIR_LOCK
+	ret z
+	sub CLOUD_NINE - AIR_LOCK
+	ret z
+	ld a, [wBattleWeather]
+	ret
+
+CheckUnawareAccEva:
+; b = User Acc
+; c = Target Eva
+	call SwitchTurn
+	call GetOpponentAbility
+	cp UNAWARE
+	jr nz, .no_opp_unaware
+	ld c, BASE_STAT_LEVEL
+.no_opp_unaware
+	call SwitchTurn
+	call GetOpponentAbility
+	cp UNAWARE
+	ret nz
+	ld b, BASE_STAT_LEVEL
+	ret
+
+UnawareBackupStatLevels:
+	ld hl, wPlayerStatLevels
+	ld de, wBackupPlayerStatLevels
+	ld bc, 8 * 2
+	rst CopyBytes
+
+	ld a, 1
+	call GetEnemyAbility
+	cp UNAWARE
+	jr nz, .skip_player_stat_levels
+
+	ld hl, wPlayerStatLevels
+	ld bc, 8
+	ld a, BASE_STAT_LEVEL
+	rst ByteFill
+	farcall CalcPlayerStats
+
+.skip_player_stat_levels
+	ld a, 1
+	call GetPlayerAbility
+	cp UNAWARE
+	ret nz
+
+	ld hl, wEnemyStatLevels
+	ld bc, 8
+	ld a, BASE_STAT_LEVEL
+	rst ByteFill
+	farjp CalcEnemyStats
+
+UnawareRestoreStatLevels:
+	push hl
+	push de
+	push bc
+	ld hl, wBackupPlayerStatLevels
+	ld de, wPlayerStatLevels
+	ld bc, 8 * 2
+	rst CopyBytes
+	farcall CalcPlayerStats
+	farcall CalcEnemyStats
+	jmp PopBCDEHL
+
 CompareBattleMonSpeeds:
 	call .CompareSpeeds
 ; check for trick room
@@ -40,15 +111,32 @@ CompareBattleMonSpeeds:
 	ld a, 1
 	call _hl_
 	ld b, a
+; Quick Feet check
+	ld c, 0
+	ld a, b
+	cp QUICK_FEET
+	jr nz, .skip_quick_feet
+	ld hl, -10
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .skip_quick_feet
+	inc c
+.skip_quick_feet
 ; get default speed
+	push bc
 	ld a, [de]
 	ld c, a
 	inc de
 	ld a, [de]
 	ld e, a
 	ld d, c
+	pop bc
+; apply quick feet
+	dec c
+	call z, .Increase50Pcnt
 ; get weather
-	ld a, [wBattleWeather]
+	call GetBattleWeather
 	ld c, a
 ; check table
 	ld hl, .WeatherSpeedUpAbilities
@@ -64,6 +152,16 @@ CompareBattleMonSpeeds:
 .next
 	inc hl
 	jr .weather_table_loop
+
+.Increase50Pcnt:
+	ld h, d
+	ld l, e
+	srl h
+	rr l
+	add hl, de
+	ld d, h
+	ld e, l
+	ret
 
 .double_speed
 	sla e
@@ -291,6 +389,11 @@ AnimateEnemyAbility:
 	call GetAbilityName
 	ld d, 19
 ; fallthrough
+
+DEF ABILANIM_SLIDE_IN_TIME  EQU 14
+DEF ABILANIM_PAUSE_TIME     EQU 80
+DEF ABILANIM_SLIDE_OUT_TIME EQU 7
+
 AnimateAbility:
 	push de
 	ld hl, wStringBuffer1
@@ -319,7 +422,7 @@ AnimateAbility:
 	ldh [hWX], a
 
 	call .SlideIn
-	ld c, 60
+	ld c, ABILANIM_PAUSE_TIME
 	call DelayFrames
 	call .SlideOut
 
@@ -381,7 +484,7 @@ AnimateAbility:
 
 .SlideIn:
 	call DelayFrame
-	ld c, 14
+	ld c, ABILANIM_SLIDE_IN_TIME
 .SlideIn_Loop:
 	ldh a, [rLY]
 	cp $60
@@ -394,7 +497,7 @@ AnimateAbility:
 	ld b, a
 .SlideIn_Loop2:
 	ld a, [hl]
-	sub 8
+	sub 112 / ABILANIM_SLIDE_IN_TIME
 	ld [hli], a
 	dec b
 	jr nz, .SlideIn_Loop2
@@ -406,7 +509,7 @@ AnimateAbility:
 
 .SlideOut:
 	call DelayFrame
-	ld c, 14
+	ld c, ABILANIM_SLIDE_OUT_TIME
 .SlideOut_Loop:
 	ldh a, [rLY]
 	cp $60
@@ -419,7 +522,7 @@ AnimateAbility:
 	ld b, a
 .SlideOut_Loop2:
 	ld a, [hl]
-	add 8
+	add 112 / ABILANIM_SLIDE_OUT_TIME
 	ld [hli], a
 	dec b
 	jr nz, .SlideOut_Loop2
@@ -458,6 +561,9 @@ ActivateSwitchInAbilities:
 	dbw INTIMIDATE, SwitchIn_Intimidate
 	dbw DOWNLOAD, SwitchIn_Download
 	dbw ANTICIPATION, SwitchIn_Anticipation
+	dbw PRESSURE, SwitchIn_Pressure
+	dbw AIR_LOCK, SwitchIn_AirLockCloudNine
+	dbw CLOUD_NINE, SwitchIn_AirLockCloudNine
 	db -1
 
 SwitchIn_Trace:
@@ -652,8 +758,8 @@ SwitchIn_Anticipation:
 	cp EFFECT_OHKO
 	jr z, .success
 	ld a, [wTempMoveStructType]
-	and STATUS
-	cp STATUS
+	or ~STATUS
+	inc a
 	jr z, .skip_type_matchup
 	ld a, [wTempMoveStructType]
 	and TYPE_MASK
@@ -744,7 +850,7 @@ TryParalyzeOnContact:
 ; don't affect mons w/ Leaf Guard in sunlight
 	cp LEAF_GUARD
 	jr nz, .skip_leaf_guard
-	ld a, [wBattleWeather]
+	call GetBattleWeather
 	cp WEATHER_SUN
 	ret z
 .skip_leaf_guard
@@ -808,7 +914,7 @@ TryPoisonOnContact:
 ; don't affect mons w/ Leaf Guard in sunlight
 	cp LEAF_GUARD
 	jr nz, .skip_leaf_guard
-	ld a, [wBattleWeather]
+	call GetBattleWeather
 	cp WEATHER_SUN
 	ret z
 .skip_leaf_guard
@@ -868,7 +974,7 @@ TrySleepOnContact:
 ; don't affect mons w/ Leaf Guard in sunlight
 	cp LEAF_GUARD
 	jr nz, .skip_leaf_guard
-	ld a, [wBattleWeather]
+	call GetBattleWeather
 	cp WEATHER_SUN
 	ret z
 .skip_leaf_guard
@@ -950,7 +1056,7 @@ TryBurnOnContact:
 ; don't affect mons w/ Leaf Guard in sunlight
 	cp LEAF_GUARD
 	jr nz, .skip_leaf_guard
-	ld a, [wBattleWeather]
+	call GetBattleWeather
 	cp WEATHER_SUN
 	ret z
 .skip_leaf_guard
@@ -975,3 +1081,14 @@ TryBurnOnContact:
 	call StdBattleTextbox
 	farcall UseHeldStatusHealingItem
 	jmp SwitchTurn
+
+SwitchIn_Pressure:
+	call AnimateUserAbility
+	ld hl, TextPressure
+	jp StdBattleTextbox
+
+SwitchIn_AirLockCloudNine:
+	call AnimateUserAbility
+	ld hl, TextWeatherEffectsDisappeared
+	call StdBattleTextbox
+	farjp UpdateCastform

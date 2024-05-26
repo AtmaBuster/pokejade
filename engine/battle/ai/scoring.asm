@@ -2677,7 +2677,7 @@ AI_Smart_Solarbeam:
 ; 80% chance to encourage this move when it's sunny.
 ; 90% chance to discourage this move when it's raining.
 
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_SUN
 	jr z, .encourage
 
@@ -2703,7 +2703,7 @@ AI_Smart_Solarbeam:
 AI_Smart_Thunder:
 ; 90% chance to discourage this move when it's sunny.
 
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_SUN
 	ret nz
 

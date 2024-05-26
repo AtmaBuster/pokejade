@@ -94,7 +94,7 @@ DayCareWoman:
 	jp z, .ComeAgain
 
 	dec a
-	ld a, 0
+	ld a, 0 ; no-optimize a = 0
 	jr nz, .ChooseMon2
 .ChooseMon1
 	ld hl, wBreedMon1Nickname
@@ -334,15 +334,13 @@ SeeMonMenuHeader:
 	cp 100
 	jr c, .under_100
 	lb bc, 1, 3
-	call PrintNum
-	ret
+	jmp PrintNum
 
 .under_100
 	ld a, "L"
 	ld [hli], a
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ret
+	jmp PrintNum
 
 .cancel
 	ld de, .cancel_string

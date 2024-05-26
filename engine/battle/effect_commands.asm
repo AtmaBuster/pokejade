@@ -1536,7 +1536,7 @@ GetCurrentMoveType:
 
 .weather_ball
 	push bc
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_NONE
 	ld b, NORMAL
 	jr z, .got_weather_type
@@ -1901,7 +1901,7 @@ BattleCommand_checkhit:
 	cp EFFECT_THUNDER
 	ret nz
 
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_RAIN
 	ret
 
@@ -1912,7 +1912,7 @@ BattleCommand_checkhit:
 	cp EFFECT_BLIZZARD
 	ret nz
 
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_HAIL
 	ret
 
@@ -1942,6 +1942,8 @@ BattleCommand_checkhit:
 	ld c, a
 
 .got_acc_eva
+	farcall CheckUnawareAccEva
+	ld a, c
 	cp b
 	jr c, .skip_foresight_check
 
@@ -1953,6 +1955,21 @@ BattleCommand_checkhit:
 	ret nz
 
 .skip_foresight_check
+	; if opponent has Tangled Feet and is confused, raise evasion by 3 stages
+	farcall GetOpponentAbility
+	cp TANGLED_FEET
+	jr nz, .no_tangled_feet
+	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call GetBattleVar
+	bit SUBSTATUS_CONFUSED, a
+	jr z, .no_tangled_feet
+	ld a, c
+	add 3
+	ld c, a
+	cp MAX_STAT_LEVEL + 1
+	jr c, .no_tangled_feet
+	ld c, MAX_STAT_LEVEL
+.no_tangled_feet
 	; subtract evasion from 14
 	ld a, MAX_STAT_LEVEL + 1
 	sub c
@@ -2265,7 +2282,66 @@ BattleCommand_failuretext:
 	dw DIG
 	dw -1
 
+ApplyTypeAbsorbingAbilities:
+	farcall GetOpponentAbility
+	push bc
+	ld b, a
+	ld hl, .AbilityTypes
+.loop
+	ld a, [hli]
+	cp -1
+	jr z, .exit
+	cp b
+	jr z, .check_type
+	inc hl
+	jr .loop
+
+.check_type
+	call GetCurrentMoveType
+	cp [hl]
+	pop bc
+	jr nz, .diff_type
+
+	farcall AnimateOppAbility
+	ldh a, [hBattleTurn]
+	and a
+	ld de, wEnemyMonHP
+	ld hl, wEnemyMonMaxHP
+	jr z, .got_hp
+	ld de, wBattleMonHP
+	ld hl, wBattleMonMaxHP
+.got_hp
+	ld c, 2
+	call CompareBytes
+	jr z, .done ; hp full
+
+	call SwitchTurn
+	farcall GetQuarterMaxHP
+	call SwitchTurn
+	farcall RestoreHP
+	call UpdateOpponentInParty
+	call RefreshBattleHuds
+	call EndMoveEffect
+.done
+	scf
+	ret
+
+.exit
+	pop bc
+.diff_type
+	and a
+	ret
+
+.AbilityTypes:
+	db WATER_ABSORB, WATER
+	db DRY_SKIN, WATER
+	db VOLT_ABSORB, ELECTRIC
+	db EARTH_EATER, GROUND
+	db -1
+
 BattleCommand_applydamage:
+	call ApplyTypeAbsorbingAbilities
+	ret c
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVar
 	bit SUBSTATUS_ENDURE, a
@@ -2708,6 +2784,11 @@ DittoMetalPowder:
 	ret
 
 BattleCommand_damagestats:
+	farcall UnawareBackupStatLevels
+	call .DamageStats
+	farjp UnawareRestoreStatLevels
+
+.DamageStats:
 	ldh a, [hBattleTurn]
 	and a
 	jmp nz, EnemyAttackDamage
@@ -2980,7 +3061,7 @@ ThickClubBoost:
 SolarPowerBoost:
 	cp SOLAR_POWER
 	ret nz
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_SUN
 	ret nz
 	push bc
@@ -4033,6 +4114,8 @@ BattleCommand_poisontarget:
 	ret nz
 	call SafeCheckSafeguard
 	ret nz
+	call SafeCheckLeafGuard
+	ret nz
 
 	call PoisonOpponent
 	ld de, ANIM_PSN
@@ -4295,6 +4378,8 @@ BattleCommand_burntarget:
 	ret nz
 	call SafeCheckSafeguard
 	ret nz
+	call SafeCheckLeafGuard
+	ret nz
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	set BRN, [hl]
@@ -4346,7 +4431,7 @@ BattleCommand_freezetarget:
 	ld a, [wTypeModifier]
 	and $7f
 	ret z
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_SUN
 	ret z
 	call CheckMoveTypeMatchesTarget ; Don't freeze an Ice-type
@@ -4359,6 +4444,8 @@ BattleCommand_freezetarget:
 	and a
 	ret nz
 	call SafeCheckSafeguard
+	ret nz
+	call SafeCheckLeafGuard
 	ret nz
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
@@ -4405,6 +4492,8 @@ BattleCommand_paralyzetarget:
 	and a
 	ret nz
 	call SafeCheckSafeguard
+	ret nz
+	call SafeCheckLeafGuard
 	ret nz
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
@@ -6098,6 +6187,25 @@ SafeCheckSafeguard:
 	pop hl
 	ret
 
+SafeCheckLeafGuard:
+	push hl
+	farcall GetOpponentAbility
+	cp LEAF_GUARD
+	jr nz, .done
+	farcall GetBattleWeather
+	cp WEATHER_SUN
+.done
+	pop hl
+	ret
+
+BattleCommand_checkleafguard:
+	call SafeCheckSafeguard
+	ret nz
+	farcall AnimateOppAbility
+	ld hl, LeafGuardProtectText
+	call StdBattleTextbox
+	jmp EndMoveEffect
+
 BattleCommand_checksafeguard:
 	ld hl, wEnemyScreens
 	ldh a, [hBattleTurn]
@@ -6159,7 +6267,7 @@ BattleCommand_timebasedhealcontinue:
 	dec c ; double
 
 .Weather:
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	and a
 	jr z, .Heal
 
@@ -6230,7 +6338,7 @@ BattleCommand_doubleminimizedamage:
 
 BattleCommand_skipsuncharge:
 ; mimicsuncharge
-	ld a, [wBattleWeather]
+	farcall GetBattleWeather
 	cp WEATHER_SUN
 	ret nz
 	ld b, charge_command
@@ -6250,6 +6358,8 @@ CheckHiddenOpponent:
 
 GetUserItem:
 ; Return the effect of the user's item in bc, and its id at hl.
+	farcall GetOpponentAbility
+	ld c, a
 	ld hl, wBattleMonItem
 	ldh a, [hBattleTurn]
 	and a
@@ -6261,6 +6371,8 @@ GetUserItem:
 
 GetOpponentItem:
 ; Return the effect of the opponent's item in bc, and its id at hl.
+	farcall GetUserAbility
+	ld c, a
 	ld hl, wEnemyMonItem
 	ldh a, [hBattleTurn]
 	and a
@@ -6276,6 +6388,20 @@ GetItemHeldEffect:
 	ret z
 
 	push hl
+	ld a, c
+	cp UNNERVE
+	ld a, b
+	jr nz, .no_unnerve
+	call GetItemIndexFromID
+	ld d, h
+	ld e, l
+	farcall CheckIsBerryItem
+	jr nc, .no_unnerve
+	pop hl
+	ld bc, 0
+	ret
+
+.no_unnerve
 	call GetItemIndexFromID
 	ld b, h
 	ld c, l

@@ -612,9 +612,12 @@ wStringBufferBattle:: ds STRING_BUFFER_LENGTH
 
 wTrickRoomTimer:: db
 
+wBackupPlayerStatLevels:: ds 8
+wBackupEnemyStatLevels:: ds 8
+
 wBattleEnd::
 
-	ds 162
+	ds 146
 
 
 SECTION UNION "Miscellaneous", WRAM0

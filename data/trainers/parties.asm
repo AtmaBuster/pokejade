@@ -69,7 +69,7 @@ FalknerGroup:
 ; testing
 	next_list_item
 	db "DICKS@", TRAINERTYPE_ITEM
-	trainer_mon  CHARMANDER, 10, NO_ABILITY, MALE
+	trainer_mon  CHARMANDER, 10, VOLT_ABSORB, MALE
 	    mon_item ORAN_BERRY
 	trainer_mon  BULBASAUR, 10, NO_ABILITY, MALE
 	    mon_item MIRACLE_SEED
