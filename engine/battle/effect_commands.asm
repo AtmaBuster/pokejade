@@ -6219,12 +6219,19 @@ SafeCheckLeafGuard:
 	push hl
 	farcall GetOpponentAbility
 	cp LEAF_GUARD
-	jr nz, .done
+	jr nz, .no
 	farcall GetBattleWeather
 	cp WEATHER_SUN
+	jr nz, .no
 .done
 	pop hl
+	and a
 	ret
+
+.no
+	pop hl
+	xor a
+	ret 
 
 BattleCommand_checkleafguard:
 	call SafeCheckSafeguard
