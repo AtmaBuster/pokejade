@@ -208,6 +208,11 @@ BattleTurn:
 	jr .loop
 
 HandleBetweenTurnEffects:
+; non-fainting effects
+	farcall HandleTrickRoom
+	farcall HandleShedSkin
+	farcall HandleTailwind
+
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .CheckEnemyFirst
@@ -244,8 +249,6 @@ HandleBetweenTurnEffects:
 	ret c
 
 .NoMoreFaintingConditions:
-	farcall HandleTrickRoom
-	farcall HandleShedSkin
 	call HandleLeftovers
 	call HandleMysteryberry
 	call HandleDefrost

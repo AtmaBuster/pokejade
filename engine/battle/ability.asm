@@ -86,13 +86,11 @@ CompareBattleMonSpeeds:
 
 .CompareSpeeds:
 ; get player speed
-	ld de, wBattleMonSpeed
-	ld hl, GetPlayerAbility
+	call SetPlayerTurn
 	call .GetSpeedValue
 	push de
 ; get enemy speed
-	ld de, wEnemyMonSpeed
-	ld hl, GetEnemyAbility
+	call SetEnemyTurn
 	call .GetSpeedValue
 	ld b, d
 	ld c, e
@@ -108,33 +106,24 @@ CompareBattleMonSpeeds:
 .GetSpeedValue:
 ; return effective speed in de
 ; get ability
-	ld a, 1
-	call _hl_
+	call .GetAbility
 	ld b, a
+; get default speed
+	call .GetActualSpeedValue
 ; Quick Feet check
-	ld c, 0
 	ld a, b
 	cp QUICK_FEET
 	jr nz, .skip_quick_feet
-	ld hl, -10
-	add hl, de
-	ld a, [hl]
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
 	and a
 	jr z, .skip_quick_feet
-	inc c
+	call .Increase50Pcnt
 .skip_quick_feet
-; get default speed
-	push bc
-	ld a, [de]
-	ld c, a
-	inc de
-	ld a, [de]
-	ld e, a
-	ld d, c
-	pop bc
-; apply quick feet
-	dec c
-	call z, .Increase50Pcnt
+; Tailwind check
+	call .GetTailwindTimer
+	and a
+	call nz, .DoubleSpeed
 ; get weather
 	call GetBattleWeather
 	ld c, a
@@ -148,7 +137,7 @@ CompareBattleMonSpeeds:
 	jr nz, .next
 	ld a, [hl]
 	cp c
-	jr z, .double_speed
+	jr z, .DoubleSpeed
 .next
 	inc hl
 	jr .weather_table_loop
@@ -163,7 +152,7 @@ CompareBattleMonSpeeds:
 	ld e, l
 	ret
 
-.double_speed
+.DoubleSpeed:
 	sla e
 	rl d
 	ret
@@ -173,6 +162,37 @@ CompareBattleMonSpeeds:
 	db CHLOROPHYLL, WEATHER_SUN
 	db SAND_RUSH,   WEATHER_SANDSTORM
 	db -1
+
+.GetAbility:
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, GetPlayerAbility
+	jr z, .got_ability_fun
+	ld hl, GetEnemyAbility
+.got_ability_fun
+	ld a, a
+	call _hl_
+	ret
+
+.GetActualSpeedValue:
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wBattleMonSpeed
+	jr z, .get_speed_value
+	ld hl, wEnemyMonSpeed
+.get_speed_value
+	ld a, [hli]
+	ld e, [hl]
+	ld d, a
+	ret
+
+.GetTailwindTimer:
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wPlayerTailwindTimer]
+	ret z
+	ld a, [wEnemyTailwindTimer]
+	ret
 
 HandleShedSkin:
 ; Player

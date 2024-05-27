@@ -170,6 +170,8 @@ BattleCommandPointers:
 	command starthail
 	command trickroom
 	command checkleafguard
+	command knockoff
+	command tailwind
 
 	commandx raisestat
 	commandx lowerstat

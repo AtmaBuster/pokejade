@@ -79,7 +79,7 @@ MoveEffectsPointers:
 	dw SkyAttack
 	dw ConfuseHit
 	dw PoisonMultiHit
-	dw NormalHit
+	dw Tailwind
 	dw Substitute
 	dw HyperBeam
 	dw Rage
@@ -177,4 +177,5 @@ MoveEffectsPointers:
 	dw GastroAcid
 	dw Incinerate
 	dw TrickRoom
+	dw KnockOff
 	assert_table_length NUM_MOVE_EFFECTS

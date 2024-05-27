@@ -2188,3 +2188,31 @@ TrickRoom:
 	doturn
 	trickroom
 	endmove
+
+KnockOff:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	knockoff
+	buildopponentrage
+	heldflinch
+	endmove
+
+Tailwind:
+	checkobedience
+	usedmovetext
+	doturn
+	tailwind
+	endmove

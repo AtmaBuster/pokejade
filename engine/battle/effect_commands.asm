@@ -59,6 +59,8 @@ INCLUDE "engine/battle/move_effects/gastro_acid.asm"
 INCLUDE "engine/battle/move_effects/incinerate.asm"
 INCLUDE "engine/battle/move_effects/weather.asm"
 INCLUDE "engine/battle/move_effects/trick_room.asm"
+INCLUDE "engine/battle/move_effects/knock_off.asm"
+INCLUDE "engine/battle/move_effects/tailwind.asm"
 
 DoPlayerTurn:
 	call SetPlayerTurn
@@ -6357,6 +6359,8 @@ CheckHiddenOpponent:
 	ret
 
 GetUserItem:
+	farcall CheckUserKnockOff
+	ret nz
 ; Return the effect of the user's item in bc, and its id at hl.
 	farcall GetOpponentAbility
 	ld c, a
@@ -6370,6 +6374,8 @@ GetUserItem:
 	jr GetItemHeldEffect
 
 GetOpponentItem:
+	farcall CheckOpponentKnockOff
+	ret nz
 ; Return the effect of the opponent's item in bc, and its id at hl.
 	farcall GetUserAbility
 	ld c, a

@@ -1267,3 +1267,21 @@ LeafGuardProtectText:
 	cont "LEAF GUARD!"
 	prompt
 
+KnockOffText:
+	text "<TARGET>'s"
+	line "@"
+	text_ram wStringBuffer1
+	text " was"
+	cont "knocked off!"
+	prompt
+
+TailwindBlewText:
+	text "The tailwind blew"
+	line "from behind"
+	cont "<USER>!"
+	prompt
+
+TailwindPeteredOutText:
+	text "The tailwind"
+	line "petered out."
+	prompt

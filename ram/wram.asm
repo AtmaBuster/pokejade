@@ -615,9 +615,15 @@ wTrickRoomTimer:: db
 wBackupPlayerStatLevels:: ds 8
 wBackupEnemyStatLevels:: ds 8
 
+wPlayerKnockOffFlag:: db
+wEnemyKnockOffFlag:: db
+
+wPlayerTailwindTimer:: db
+wEnemyTailwindTimer:: db
+
 wBattleEnd::
 
-	ds 146
+	ds 142
 
 
 SECTION UNION "Miscellaneous", WRAM0

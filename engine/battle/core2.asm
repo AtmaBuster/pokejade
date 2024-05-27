@@ -228,3 +228,72 @@ HandleTrickRoom:
 
 	ld hl, TrickRoomReturnedText
 	jp StdBattleTextbox
+
+CheckUserKnockOff:
+	ldh a, [hBattleTurn]
+	and a
+	jr z, CheckPlayerKnockOff
+CheckEnemyKnockOff:
+	ld a, [wCurOTMon]
+	ld hl, wEnemyKnockOffFlag
+	call GetKnockOffFlag
+	ret z
+	ld bc, 0
+	ld hl, wEnemyMonItem
+	ret
+
+CheckOpponentKnockOff:
+	ldh a, [hBattleTurn]
+	and a
+	jr z, CheckEnemyKnockOff
+CheckPlayerKnockOff:
+	ld a, [wCurBattleMon]
+	ld hl, wPlayerKnockOffFlag
+	call GetKnockOffFlag
+	ret z
+	ld bc, 0
+	ld hl, wBattleMonItem
+	ret
+
+GetKnockOffFlag:
+; gets bit a of *hl
+	ld b, a
+	inc b
+	xor a
+	inc a
+.loop
+	dec b
+	jr z, .done
+	rla
+	jr .loop
+.done
+	and [hl]
+	ret
+
+SetKnockOffFlag:
+	ld b, a
+	inc b
+	xor a
+	inc a
+.loop
+	dec b
+	jr z, .done
+	rla
+	jr .loop
+.done
+	or [hl]
+	ld [hl], a
+	ret
+
+HandleTailwind:
+	ld hl, wPlayerTailwindTimer
+	call .CheckTimer
+	ld hl, wEnemyTailwindTimer
+.CheckTimer:
+	ld a, [hl]
+	and a
+	ret z
+	dec [hl]
+	ret nz
+	ld hl, TailwindPeteredOutText
+	jmp StdBattleTextbox

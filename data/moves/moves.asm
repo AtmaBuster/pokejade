@@ -313,7 +313,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_KNOCK_OFF,          65, DARK,          PHYSICAL, 100, 20,   0, %00000001 ;KNOCK_OFF
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_HP_SCALE_HIT,      150, FIRE,          SPECIAL,  100,  5,   0, %00000000 ;ERUPTION
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
@@ -387,7 +387,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_TAILWIND,            0, FLYING,        STATUS,   100, 15,   0, %00000000 ;TAILWIND
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;

@@ -3000,5 +3000,86 @@ Debug_PokeEdit_GetItemSection:
 	ret
 
 Debug_ATMA:
-	farcall Script_halloffame
+	di
+
+	ld de, .testfun1
+	ld a, $C4
+	call .RunTestFun
+	ld de, .testfun2
+	ld a, $C6
+	call .RunTestFun
+	lb bc, $C4, $C6
+	ld a, $C8
+	call .CompareFun
+
+	jr @
+
+.RunTestFun:
+	ld [$C3FE], a
+	xor a
+	ld hl, $C3FF
+	ld [hl], a
+.run_loop
+	ld a, [hl]
+	call .runfun
+	push af
+	ld a, [hld]
+	add a
+	push af
+	ld a, [hl]
+	adc 0
+	ld h, a
+	pop af
+	ld l, a
+	pop bc
+	ld a, b
+	ld [hli], a
+	ld a, c
+	and %1001_0000 ; znhc....
+	ld [hl], a
+	ld hl, $C3FF
+	inc [hl]
+	ret z
+	jr .run_loop
+
+.runfun:
+	push hl
+	push de
+	pop hl
+	call _hl_
+	pop hl
+	ret
+
+.CompareFun:
+	ld de, $200
+	push af
+.cmp_loop
+	dec de
+	ld h, b
+	ld l, 0
+	add hl, de
+	ld a, [hl]
+	ld h, c
+	ld l, 0
+	add hl, de
+	xor [hl]
+	ld hl, sp+1
+	ld h, [hl]
+	ld l, 0
+	add hl, de
+	ld [hl], a
+	ld a, d
+	or e
+	jr nz, .cmp_loop
+	pop af
+	ret
+
+.testfun1:
+	and a
+	adc a
+	ret
+
+.testfun2:
+	and a
+	rla
 	ret
