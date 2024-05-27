@@ -1,13 +1,13 @@
 MACRO command
 	const \1_command
 DEF \1 EQUS "db \1_command"
-	dw BattleCommand_\1
+	dba BattleCommand_\1
 ENDM
 
 MACRO commandx
 	const \1_command
 DEF \1 EQUS "db \1_command,"
-	dw BattleCommand_\1
+	dba BattleCommand_\1
 ENDM
 
 MACRO commandonly
@@ -172,6 +172,8 @@ BattleCommandPointers:
 	command checkleafguard
 	command knockoff
 	command tailwind
+	command ingrain
+	command roost ; 98
 
 	commandx raisestat
 	commandx lowerstat

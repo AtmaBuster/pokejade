@@ -30,7 +30,7 @@ FarChangeStat:
 	; attack missed
 	bit STAT_SILENT_F, b
 	ret nz
-	farcall CheckAlreadyExecuted
+	call CheckAlreadyExecuted
 	ret nz
 	farcall AnimateFailedMove
 	farjp GetFailureResultText
@@ -82,7 +82,7 @@ FarChangeStat:
 	bit STAT_SILENT_F, b
 	ret nz
 	;farcall ShowAbilityActivation
-	farcall CheckAlreadyExecuted
+	call CheckAlreadyExecuted
 	ret nz
 	farcall AnimateFailedMove
 	farjp PrintButItFailed
@@ -100,7 +100,7 @@ FarChangeStat:
 	jr z, .check_ability
 	bit STAT_SILENT_F, b
 	ret nz
-	farcall CheckAlreadyExecuted
+	call CheckAlreadyExecuted
 	ret nz
 	;farcall ShowAbilityActivation
 	farcall AnimateFailedMove
@@ -132,7 +132,7 @@ FarChangeStat:
 .ability_immune
 	bit STAT_SILENT_F, b
 	ret nz
-	farcall CheckAlreadyExecuted
+	call CheckAlreadyExecuted
 	ret nz
 	;farcall ShowAbilityActivation
 	;farcall DisableAnimations
@@ -377,7 +377,7 @@ StatUpDownAnim:
 	farcall CheckBattleScene
 	ret c
 
-	farcall CheckAlreadyExecuted
+	call CheckAlreadyExecuted
 	ret nz
 
 	xor a
@@ -386,3 +386,12 @@ StatUpDownAnim:
 	call GetBattleVar
 	farcall SetMoveAnimationID
 	farjp PlaySelectedFXAnim
+
+CheckAlreadyExecuted:
+	ld a, [wAlreadyExecuted]
+	and a
+	ret nz
+	inc a
+	ld [wAlreadyExecuted], a
+	dec a
+	ret

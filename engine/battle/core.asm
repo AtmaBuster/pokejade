@@ -209,9 +209,11 @@ BattleTurn:
 
 HandleBetweenTurnEffects:
 ; non-fainting effects
+	farcall HandleRoost
 	farcall HandleTrickRoom
 	farcall HandleShedSkin
 	farcall HandleTailwind
+	farcall HandleIngrain
 
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK

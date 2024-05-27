@@ -1282,6 +1282,18 @@ TailwindBlewText:
 	prompt
 
 TailwindPeteredOutText:
-	text "The tailwind"
-	line "petered out."
+	text "<USER>'s"
+	line "tailwind petered"
+	cont "out."
+	prompt
+
+PlantedRootsText:
+	text "<USER>"
+	line "planted its roots!"
+	prompt
+
+AbsorbedNutrientsText:
+	text "<TARGET>"
+	line "absorbed nutrients"
+	cont "with its roots!"
 	prompt

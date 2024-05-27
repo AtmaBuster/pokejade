@@ -6,5 +6,6 @@ BattleCommand_tailwind:
 	ld hl, wEnemyTailwindTimer
 .got_timer
 	ld [hl], 4
+	call AnimateCurrentMove
 	ld hl, TailwindBlewText
 	jmp StdBattleTextbox

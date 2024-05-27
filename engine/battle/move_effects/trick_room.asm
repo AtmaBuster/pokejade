@@ -1,4 +1,5 @@
 BattleCommand_trickroom:
+	call AnimateCurrentMove
 	ld a, [wTrickRoomTimer]
 	and a
 	jr nz, .return_to_normal

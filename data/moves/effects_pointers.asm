@@ -111,7 +111,7 @@ MoveEffectsPointers:
 	dw Nightmare
 	dw FlameWheel
 	dw Curse
-	dw NormalHit
+	dw Ingrain
 	dw Protect
 	dw Spikes
 	dw Foresight
@@ -131,8 +131,8 @@ MoveEffectsPointers:
 	dw BatonPass
 	dw Pursuit
 	dw RapidSpin
-	dw NormalHit
-	dw NormalHit
+	dw Roost
+	dw Bounce
 	dw MorningSun
 	dw Synthesis
 	dw Moonlight

@@ -73,7 +73,7 @@ ROMX $0c
 ROMX $0d
 	"Effect Commands"
 ROMX $0e
-	"Enemy Trainers"
+	"Effect Commands 2"
 ROMX $0f
 	"Battle Core"
 	"Effect Command Pointers"
@@ -89,6 +89,7 @@ ROMX $12
 	"Crystal Features 1"
 	"Egg Moves 2"
 	"Evolutions and Attacks 2"
+	"Enemy Trainers"
 ROMX $13
 	"bank13"
 	"Shrink Pics"

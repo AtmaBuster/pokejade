@@ -853,6 +853,14 @@ Heal:
 	heal
 	endmove
 
+Roost:
+	checkobedience
+	usedmovetext
+	doturn
+	heal
+	roost
+	endmove
+
 Transform:
 	checkobedience
 	usedmovetext
@@ -1064,6 +1072,31 @@ Fly:
 	supereffectivetext
 	checkfaint
 	buildopponentrage
+	heldflinch
+	endmove
+
+Bounce:
+	checkcharge
+	checkobedience
+	doturn
+	charge
+	usedmovetext
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanimnosub
+	raisesub
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	paralyzetarget
 	heldflinch
 	endmove
 
@@ -2215,4 +2248,11 @@ Tailwind:
 	usedmovetext
 	doturn
 	tailwind
+	endmove
+
+Ingrain:
+	checkobedience
+	usedmovetext
+	doturn
+	ingrain
 	endmove

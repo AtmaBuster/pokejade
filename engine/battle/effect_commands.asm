@@ -62,6 +62,14 @@ INCLUDE "engine/battle/move_effects/trick_room.asm"
 INCLUDE "engine/battle/move_effects/knock_off.asm"
 INCLUDE "engine/battle/move_effects/tailwind.asm"
 
+PUSHS
+
+SECTION "Effect Commands 2", ROMX
+INCLUDE "engine/battle/move_effects/roost.asm"
+INCLUDE "engine/battle/move_effects/ingrain.asm"
+
+POPS
+
 DoPlayerTurn:
 	call SetPlayerTurn
 
@@ -146,16 +154,19 @@ DoMove:
 	ld hl, BattleCommandPointers
 	add hl, bc
 	add hl, bc
+	add hl, bc
 	pop bc
 
 	ld a, BANK(BattleCommandPointers)
-	call GetFarWord
+	call GetFarBankAddress
 
 	call .DoMoveEffectCommand
 
 	jr .ReadMoveEffectCommand
 
 .DoMoveEffectCommand:
+	cp BANK(@)
+	jp nz, FarCall_hl
 	jp hl
 
 ReadMoveEffectCommand:
@@ -1888,6 +1899,7 @@ BattleCommand_checkhit:
 	dw WHIRLWIND
 	dw THUNDER
 	dw TWISTER
+	dw SKY_UPPERCUT
 	dw -1
 
 .DigMoves:
@@ -4834,6 +4846,10 @@ BattleCommand_forceswitch:
 	jmp z, .fail
 	cp BATTLETYPE_SUICUNE
 	jmp z, .fail
+	ld a, BATTLE_VARS_SUBSTATUS2_OPP
+	call GetBattleVar
+	bit SUBSTATUS_INGRAIN, a
+	jmp nz, .fail
 	ldh a, [hBattleTurn]
 	and a
 	jmp nz, .force_player_switch
@@ -5375,11 +5391,12 @@ BattleCommand_charge:
 	call CompareMove
 	ld a, 1 << SUBSTATUS_FLYING
 	jr z, .got_move_type
-	if HIGH(FLY) != HIGH(DIG)
-		ld bc, DIG
-	else
-		ld c, LOW(DIG)
-	endc
+	ld a, h
+	ld bc, BOUNCE
+	call CompareMove
+	ld a, 1 << SUBSTATUS_FLYING
+	jr z, .got_move_type
+	ld bc, DIG
 	ld a, h
 	call CompareMove
 	ld a, 1 << SUBSTATUS_UNDERGROUND
@@ -5451,6 +5468,7 @@ BattleCommand_charge:
 	dw SKY_ATTACK, .BattleGlowingText
 	dw FLY,        .BattleFlewText
 	dw DIG,        .BattleDugText
+	dw BOUNCE,     .BattleSprangUpText
 	dw -1
 
 .BattleMadeWhirlwindText:
@@ -5475,6 +5493,10 @@ BattleCommand_charge:
 
 .BattleDugText:
 	text_far _BattleDugText
+	text_end
+
+.BattleSprangUpText:
+	text_far _BattleSprangUpText
 	text_end
 
 BattleCommand_traptarget:
@@ -5881,6 +5903,8 @@ BattleCommand_resetstats:
 	ret
 
 BattleCommand_heal:
+	xor a
+	ld [wAttackMissed], a
 	ld de, wBattleMonHP
 	ld hl, wBattleMonMaxHP
 	ldh a, [hBattleTurn]
@@ -5957,6 +5981,8 @@ BattleCommand_heal:
 	jmp StdBattleTextbox
 
 .hp_full
+	ld a, 1
+	ld [wAttackMissed], a
 	call AnimateFailedMove
 	ld hl, HPIsFullText
 	jmp StdBattleTextbox
@@ -6607,13 +6633,4 @@ CheckMoveInList:
 	call IsInWordArray
 	pop de
 	pop bc
-	ret
-
-CheckAlreadyExecuted:
-	ld a, [wAlreadyExecuted]
-	and a
-	ret nz
-	inc a
-	ld [wAlreadyExecuted], a
-	dec a
 	ret

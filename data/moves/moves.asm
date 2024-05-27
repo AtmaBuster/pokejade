@@ -306,7 +306,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_INGRAIN,             0, GRASS,         STATUS,   100, 20,   0, %00000000 ;INGRAIN
 	move EFFECT_SUPERPOWER,        120, FIGHTING,      PHYSICAL, 100,  5,   0, %00000001 ;SUPERPOWER
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
@@ -352,7 +352,7 @@ MovesGroup3:
 	move EFFECT_CONFUSE_HIT,        75, BUG,           SPECIAL,  100, 15,  10, %00000000 ;SIGNAL_BEAM
 	move EFFECT_ALWAYS_HIT,         60, GHOST,         PHYSICAL, 100, 20,   0, %00000101 ;SHADOW_PUNCH
 	move EFFECT_FLINCH_HIT,         80, PSYCHIC_TYPE,  SPECIAL,  100, 20,  10, %00000000 ;EXTRASENSORY
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_NORMAL_HIT,         85, FIGHTING,      PHYSICAL,  90, 15,   0, %00000101 ;SKY_UPPERCUT
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_OHKO,                0, ICE,           SPECIAL,   30,  5,   0, %00000000 ;SHEER_COLD
 	move EFFECT_ACCURACY_DOWN_HIT,  90, WATER,         SPECIAL,   85, 10,  30, %00000000 ;MUDDY_WATER
@@ -364,7 +364,7 @@ MovesGroup3:
 	move EFFECT_NORMAL_HIT,         80, DRAGON,        PHYSICAL, 100, 15,   0, %00000001 ;DRAGON_CLAW
 	move EFFECT_HYPER_BEAM,        150, GRASS,         SPECIAL,   90,  5,   0, %00000000 ;FRENZY_PLANT
 	move EFFECT_BULK_UP,             0, FIGHTING,      STATUS,   100, 20,   0, %00000000 ;BULK_UP
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_BOUNCE,             85, FLYING,        PHYSICAL,  85,  5,  30, %00000001 ;BOUNCE
 	move EFFECT_SPEED_DOWN_HIT,     55, GROUND,        SPECIAL,   95, 15, 100, %00000000 ;MUD_SHOT
 	move EFFECT_POISON_HIT,         50, POISON,        PHYSICAL, 100, 25,  10, %00000001 ;POISON_TAIL
 	move EFFECT_THIEF,              60, NORMAL,        PHYSICAL, 100, 25,   0, %00000001 ;COVET
@@ -377,7 +377,7 @@ MovesGroup3:
 	move EFFECT_ALWAYS_HIT,         60, ELECTRIC,      SPECIAL,  100, 20,   0, %00000000 ;SHOCK_WAVE
 	move EFFECT_CONFUSE_HIT,        60, WATER,         SPECIAL,  100, 20,  20, %00001000 ;WATER_PULSE
 	move EFFECT_OVERHEAT,          140, PSYCHIC_TYPE,  SPECIAL,   90,  5,   0, %00000000 ;PSYCHO_BOOST
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_ROOST,               0, FLYING,        STATUS,   100,  5,   0, %00000000 ;ROOST
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_HAMMER_ARM,        100, FIGHTING,      PHYSICAL,  90, 10,   0, %00000101 ;HAMMER_ARM

@@ -286,8 +286,10 @@ SetKnockOffFlag:
 	ret
 
 HandleTailwind:
+	call SetPlayerTurn
 	ld hl, wPlayerTailwindTimer
 	call .CheckTimer
+	call SetEnemyTurn
 	ld hl, wEnemyTailwindTimer
 .CheckTimer:
 	ld a, [hl]
@@ -297,3 +299,64 @@ HandleTailwind:
 	ret nz
 	ld hl, TailwindPeteredOutText
 	jmp StdBattleTextbox
+
+HandleIngrain:
+	call SetPlayerTurn
+	call .Check
+	call SetEnemyTurn
+.Check:
+	ld a, BATTLE_VARS_SUBSTATUS2
+	call GetBattleVar
+	bit SUBSTATUS_INGRAIN, a
+	ret z
+
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_hp
+	ld hl, wEnemyMonHP
+
+.got_hp
+; Don't restore if we're already at max HP
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	jr nz, .restore
+	ld a, [hl]
+	cp c
+	ret z
+
+.restore
+	farcall GetSixteenthMaxHP
+	call SwitchTurn
+	farcall RestoreHP
+	ld hl, AbsorbedNutrientsText
+	jmp StdBattleTextbox
+
+HandleRoost:
+	call SetPlayerTurn
+	call .Check
+	call SetEnemyTurn
+.Check:
+	ld a, BATTLE_VARS_SUBSTATUS2
+	call GetBattleVarAddr
+	bit SUBSTATUS_ROOST, [hl]
+	ret z
+	res SUBSTATUS_ROOST, [hl]
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wBattleMonTypeBackup
+	ld de, wBattleMonType
+	jr z, .got_type
+	ld hl, wEnemyMonTypeBackup
+	ld de, wEnemyMonType
+.got_type
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret

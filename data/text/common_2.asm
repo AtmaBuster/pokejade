@@ -665,6 +665,11 @@ _BattleDugText::
 	line "dug a hole!"
 	prompt
 
+_BattleSprangUpText::
+	text_start
+	line "sprang up!"
+	prompt
+
 _ActorNameText::
 	text "<USER>@"
 	text_end

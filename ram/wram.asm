@@ -621,9 +621,12 @@ wEnemyKnockOffFlag:: db
 wPlayerTailwindTimer:: db
 wEnemyTailwindTimer:: db
 
+wBattleMonTypeBackup:: dw
+wEnemyMonTypeBackup:: dw
+
 wBattleEnd::
 
-	ds 142
+	ds 138
 
 
 SECTION UNION "Miscellaneous", WRAM0

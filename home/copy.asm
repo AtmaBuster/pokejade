@@ -128,6 +128,29 @@ GetFarWord::
 	rst Bankswitch
 	ret
 
+
+
+GetFarBankAddress:
+; gets a bank and address from a:hl and returns it in a:hl
+	ldh [hTempBank], a
+	ldh a, [hROMBank]
+	push af
+	ldh a, [hTempBank]
+	rst Bankswitch
+
+	ld a, [hli]
+	ldh [hFarByte], a
+
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	pop af
+	rst Bankswitch
+
+	ldh a, [hFarByte]
+	ret
+
 FarCopyColorWRAM::
 	ld a, BANK("GBC Video")
 	; fallthrough
