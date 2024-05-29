@@ -2852,12 +2852,12 @@ BGEffect_CheckFlyDigStatus:
 	xor [hl]
 	jr nz, .player
 	ld a, [wEnemySubStatus3] ; EnemySubStatus3
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	ret
 
 .player
 	ld a, [wPlayerSubStatus3] ; PlayerSubStatus3
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	ret
 
 BattleBGEffects_CheckSGB:

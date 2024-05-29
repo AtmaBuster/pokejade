@@ -1100,6 +1100,28 @@ Bounce:
 	heldflinch
 	endmove
 
+Whirlpool:
+	checkobedience
+	usedmovetext
+	doturn
+	checkhit
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	doubledivingdamage
+	clearmissdamage
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	traptarget
+	endmove
+
 TrapTarget:
 	checkobedience
 	usedmovetext
@@ -1572,28 +1594,6 @@ Safeguard:
 	safeguard
 	endmove
 
-SacredFire:
-	checkobedience
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	effectchance
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	defrost
-	checkfaint
-	buildopponentrage
-	burntarget
-	endmove
-
 Magnitude:
 	checkobedience
 	usedmovetext
@@ -1837,6 +1837,26 @@ FutureSight:
 	moveanimnosub
 	failuretext
 	applydamage
+	checkfaint
+	buildopponentrage
+	endmove
+
+Surf:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	doubledivingdamage
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
 	checkfaint
 	buildopponentrage
 	endmove
@@ -2144,48 +2164,6 @@ FlinchFreeze:
 	freezetarget
 	endmove
 
-WringOut:
-	checkobedience
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	wringout
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	buildopponentrage
-	heldflinch
-	endmove
-
-HPScaleHit:
-	checkobedience
-	usedmovetext
-	doturn
-	critical
-	damagestats
-	wringout
-	damagecalc
-	stab
-	damagevariation
-	checkhit
-	moveanim
-	failuretext
-	applydamage
-	criticaltext
-	supereffectivetext
-	checkfaint
-	buildopponentrage
-	heldflinch
-	endmove
-
 GastroAcid:
 	checkobedience
 	usedmovetext
@@ -2255,4 +2233,25 @@ Ingrain:
 	usedmovetext
 	doturn
 	ingrain
+	endmove
+
+CommonModMove:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	commondamagemod
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	heldflinch
 	endmove

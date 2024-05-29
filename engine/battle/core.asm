@@ -577,9 +577,9 @@ CheckPlayerLockedIn:
 	and 1 << SUBSTATUS_RECHARGE
 	jr nz, .quit
 
-	ld hl, wEnemySubStatus3
+	ld hl, wEnemySubStatus2
 	res SUBSTATUS_FLINCHED, [hl]
-	ld hl, wPlayerSubStatus3
+	ld hl, wPlayerSubStatus2
 	res SUBSTATUS_FLINCHED, [hl]
 
 	ld a, [hl]
@@ -1078,7 +1078,7 @@ ResidualDamage:
 	ld de, ANIM_SAP
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVar
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	call z, Call_PlayBattleAnim_OnlyIfVisible
 	call SwitchTurn
 
@@ -1260,7 +1260,7 @@ HandleWrap:
 
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	jr nz, .skip_anim
 
 	call SwitchTurn
@@ -7098,7 +7098,7 @@ _BattleRandom::
 Call_PlayBattleAnim_OnlyIfVisible:
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	ret nz
 
 Call_PlayBattleAnim:

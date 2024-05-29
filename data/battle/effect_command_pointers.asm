@@ -161,19 +161,19 @@ BattleCommandPointers:
 	command startloop
 	command curl
 	command libra
-	command lifepower
-	command wringout
 	command stealthrock
 	command toxicspikes
-	command gastroacid ; 90
+	command gastroacid
 	command incinerate
-	command starthail
+	command starthail ; 90
 	command trickroom
 	command checkleafguard
 	command knockoff
 	command tailwind
 	command ingrain
-	command roost ; 98
+	command roost
+	command doubledivingdamage
+	command commondamagemod ; 98
 
 	commandx raisestat
 	commandx lowerstat

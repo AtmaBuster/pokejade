@@ -126,7 +126,7 @@ MoveEffectsPointers:
 	dw Present
 	dw Frustration
 	dw Safeguard
-	dw SacredFire
+	dw NULL
 	dw Magnitude
 	dw BatonPass
 	dw Pursuit
@@ -169,8 +169,8 @@ MoveEffectsPointers:
 	dw FlinchBurn
 	dw FlinchParalyze
 	dw FlinchFreeze
-	dw WringOut
-	dw HPScaleHit
+	dw NULL
+	dw NULL
 	dw NormalHit
 	dw StealthRock
 	dw ToxicSpikes
@@ -178,4 +178,8 @@ MoveEffectsPointers:
 	dw Incinerate
 	dw TrickRoom
 	dw KnockOff
+	dw Surf
+	dw Whirlpool
+	dw CommonModMove
+	dw NULL
 	assert_table_length NUM_MOVE_EFFECTS

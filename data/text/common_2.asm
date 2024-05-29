@@ -670,6 +670,11 @@ _BattleSprangUpText::
 	line "sprang up!"
 	prompt
 
+_BattleHidUnderwaterText::
+	text_start
+	line "hid underwater!"
+	prompt
+
 _ActorNameText::
 	text "<USER>@"
 	text_end

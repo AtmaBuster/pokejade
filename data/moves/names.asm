@@ -470,4 +470,5 @@ MoveNames::
 	li "BARRIER BASH"
 	li "LIBRA"
 	li "INCINERATE"
+	li "TRAILBLAZE"
 	assert_list_length NUM_ATTACKS

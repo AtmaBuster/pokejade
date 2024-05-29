@@ -624,9 +624,12 @@ wEnemyTailwindTimer:: db
 wBattleMonTypeBackup:: dw
 wEnemyMonTypeBackup:: dw
 
+wPlayerRageFistCounter:: ds PARTY_LENGTH
+wEnemyRageFistCounter:: ds PARTY_LENGTH
+
 wBattleEnd::
 
-	ds 138
+	ds 126
 
 
 SECTION UNION "Miscellaneous", WRAM0

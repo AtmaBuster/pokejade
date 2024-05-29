@@ -360,3 +360,22 @@ HandleRoost:
 	ld a, [hl]
 	ld [de], a
 	ret
+
+HandleRageFist:
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wCurOTMon]
+	ld hl, wEnemyRageFistCounter
+	jr z, .got_it
+	ld a, [wCurBattleMon]
+	ld hl, wPlayerRageFistCounter
+.got_it
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	inc [hl]
+	ret nz
+	dec [hl]
+	ret

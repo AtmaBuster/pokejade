@@ -54,19 +54,21 @@ INCLUDE "engine/battle/move_effects/psych_up.asm"
 INCLUDE "engine/battle/move_effects/mirror_coat.asm"
 INCLUDE "engine/battle/move_effects/future_sight.asm"
 INCLUDE "engine/battle/move_effects/thunder.asm"
-INCLUDE "engine/battle/move_effects/life_power.asm"
 INCLUDE "engine/battle/move_effects/gastro_acid.asm"
 INCLUDE "engine/battle/move_effects/incinerate.asm"
 INCLUDE "engine/battle/move_effects/weather.asm"
 INCLUDE "engine/battle/move_effects/trick_room.asm"
-INCLUDE "engine/battle/move_effects/knock_off.asm"
-INCLUDE "engine/battle/move_effects/tailwind.asm"
 
 PUSHS
 
 SECTION "Effect Commands 2", ROMX
+INCLUDE "engine/battle/move_effects/damagemod.asm"
+INCLUDE "engine/battle/move_effects/knock_off.asm"
+INCLUDE "engine/battle/move_effects/tailwind.asm"
 INCLUDE "engine/battle/move_effects/roost.asm"
 INCLUDE "engine/battle/move_effects/ingrain.asm"
+INCLUDE "engine/battle/move_effects/life_power.asm"
+INCLUDE "engine/battle/move_effects/recoil.asm"
 
 POPS
 
@@ -300,7 +302,7 @@ BattleCommand_checkturn:
 
 .not_frozen
 
-	ld hl, wPlayerSubStatus3
+	ld hl, wPlayerSubStatus2
 	bit SUBSTATUS_FLINCHED, [hl]
 	jr z, .not_flinched
 
@@ -444,11 +446,13 @@ CantMove:
 
 	res SUBSTATUS_UNDERGROUND, [hl]
 	res SUBSTATUS_FLYING, [hl]
+	res SUBSTATUS_DIVING, [hl]
 	jmp AppearUserRaiseSub
 
 .fly_dig_moves
 	dw FLY
 	dw DIG
+	dw DIVE
 	dw -1
 
 OpponentCantMove:
@@ -538,7 +542,7 @@ CheckEnemyTurn:
 
 .not_frozen
 
-	ld hl, wEnemySubStatus3
+	ld hl, wEnemySubStatus2
 	bit SUBSTATUS_FLINCHED, [hl]
 	jr z, .not_flinched
 
@@ -617,7 +621,7 @@ CheckEnemyTurn:
 	ld de, ANIM_HIT_CONFUSION
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVar
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	call z, PlayFXAnimID
 
 	ld c, TRUE
@@ -720,7 +724,7 @@ HitConfusion:
 	ld de, ANIM_HIT_CONFUSION
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVar
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	call z, PlayFXAnimID
 
 	ld hl, UpdatePlayerHUD
@@ -1884,7 +1888,10 @@ BattleCommand_checkhit:
 	bit SUBSTATUS_FLYING, a
 	ld hl, .FlyMoves
 	jr z, .check_move_in_list
+	bit SUBSTATUS_UNDERGROUND, a
 	ld hl, .DigMoves
+	jr z, .check_move_in_list
+	ld hl, .DiveMoves
 .check_move_in_list
 	; returns z (and a = 0) if the current move is in a given list, or nz (and a = 1) if not
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -1906,6 +1913,11 @@ BattleCommand_checkhit:
 	dw EARTHQUAKE
 	dw FISSURE
 	dw MAGNITUDE
+	dw -1
+
+.DiveMoves:
+	dw SURF
+	dw WHIRLPOOL
 	dw -1
 
 .ThunderRain:
@@ -2288,6 +2300,7 @@ BattleCommand_failuretext:
 	call GetBattleVarAddr
 	res SUBSTATUS_UNDERGROUND, [hl]
 	res SUBSTATUS_FLYING, [hl]
+	res SUBSTATUS_DIVING, [hl]
 	call AppearUserRaiseSub
 	jmp EndMoveEffect
 
@@ -2681,6 +2694,8 @@ BattleCommand_buildopponentrage:
 	ld a, [wAttackMissed]
 	and a
 	ret nz
+
+	farcall HandleRageFist
 
 	ld a, BATTLE_VARS_SUBSTATUS4_OPP
 	call GetBattleVar
@@ -3803,7 +3818,7 @@ FarPlayBattleAnimation:
 
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	ret nz
 
 	; fallthrough
@@ -3972,7 +3987,7 @@ DoSubstituteDamage:
 	call BattleCommand_lowersubnoanim
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	call z, AppearUserLowerSub
 	call BattleCommand_switchturn
 
@@ -5257,7 +5272,7 @@ BattleCommand_flinchtarget:
 	; fallthrough
 
 FlinchTarget:
-	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	ld a, BATTLE_VARS_SUBSTATUS2_OPP
 	call GetBattleVarAddr
 	set SUBSTATUS_FLINCHED, [hl]
 	jmp EndRechargeOpp
@@ -5296,7 +5311,7 @@ BattleCommand_heldflinch:
 	cp c
 	ret nc
 	call EndRechargeOpp
-	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	ld a, BATTLE_VARS_SUBSTATUS2_OPP
 	call GetBattleVarAddr
 	set SUBSTATUS_FLINCHED, [hl]
 	ret
@@ -5353,6 +5368,7 @@ BattleCommand_checkcharge:
 	res SUBSTATUS_CHARGED, [hl]
 	res SUBSTATUS_UNDERGROUND, [hl]
 	res SUBSTATUS_FLYING, [hl]
+	res SUBSTATUS_DIVING, [hl]
 	ld b, charge_command
 	jmp SkipToBattleCommand
 
@@ -5396,8 +5412,13 @@ BattleCommand_charge:
 	call CompareMove
 	ld a, 1 << SUBSTATUS_FLYING
 	jr z, .got_move_type
-	ld bc, DIG
 	ld a, h
+	ld bc, DIVE
+	call CompareMove
+	ld a, 1 << SUBSTATUS_DIVING
+	jr z, .got_move_type
+	ld a, h
+	ld bc, DIG
 	call CompareMove
 	ld a, 1 << SUBSTATUS_UNDERGROUND
 	jr z, .got_move_type
@@ -5469,6 +5490,7 @@ BattleCommand_charge:
 	dw FLY,        .BattleFlewText
 	dw DIG,        .BattleDugText
 	dw BOUNCE,     .BattleSprangUpText
+	dw DIVE,       .BattleHidUnderwaterText
 	dw -1
 
 .BattleMadeWhirlwindText:
@@ -5497,6 +5519,10 @@ BattleCommand_charge:
 
 .BattleSprangUpText:
 	text_far _BattleSprangUpText
+	text_end
+
+.BattleHidUnderwaterText:
+	text_far _BattleHidUnderwaterText
 	text_end
 
 BattleCommand_traptarget:
@@ -5558,68 +5584,6 @@ BattleCommand_traptarget:
 	dw FIRE_SPIN, FireSpinTrapText  ; 'was trapped!'
 	dw CLAMP,     ClampedByText     ; 'was CLAMPED by'
 	dw WHIRLPOOL, WhirlpoolTrapText ; 'was trapped!'
-
-BattleCommand_recoil:
-	ld hl, wBattleMonMaxHP
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_hp
-	ld hl, wEnemyMonMaxHP
-.got_hp
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	ld d, a
-; get 1/4 damage or 1 HP, whichever is higher
-	ld a, [wCurDamage]
-	ld b, a
-	ld a, [wCurDamage + 1]
-	ld c, a
-	srl b
-	rr c
-	srl b
-	rr c
-	ld a, b
-	or c
-	jr nz, .min_damage
-	inc c
-.min_damage
-	ld a, [hli]
-	ld [wHPBuffer1 + 1], a
-	ld a, [hl]
-	ld [wHPBuffer1], a
-	dec hl
-	dec hl
-	ld a, [hl]
-	ld [wHPBuffer2], a
-	sub c
-	ld [hld], a
-	ld [wHPBuffer3], a
-	ld a, [hl]
-	ld [wHPBuffer2 + 1], a
-	sbc b
-	ld [hl], a
-	ld [wHPBuffer3 + 1], a
-	jr nc, .dont_ko
-	xor a
-	ld [hli], a
-	ld [hl], a
-	ld hl, wHPBuffer3
-	ld [hli], a
-	ld [hl], a
-.dont_ko
-	hlcoord 10, 9
-	ldh a, [hBattleTurn]
-	and a
-	ld a, 1
-	jr z, .animate_hp_bar
-	hlcoord 2, 2
-	xor a
-.animate_hp_bar
-	ld [wWhichHPBar], a
-	predef AnimateHPBar
-	call RefreshBattleHuds
-	ld hl, RecoilText
-	jmp StdBattleTextbox
 
 BattleCommand_confusetarget:
 	call GetOpponentItem
@@ -5843,6 +5807,13 @@ EndRechargeOpp:
 	res SUBSTATUS_RECHARGE, [hl]
 	pop hl
 	ret
+
+BattleCommand_doubledivingdamage:
+	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call GetBattleVar
+	bit SUBSTATUS_DIVING, a
+	ret z
+	jr DoubleDamage
 
 BattleCommand_doubleflyingdamage:
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
@@ -6388,7 +6359,7 @@ CheckHiddenOpponent:
 
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVar
-	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
+	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND | 1 << SUBSTATUS_DIVING
 	ret
 
 GetUserItem:

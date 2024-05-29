@@ -252,7 +252,7 @@ MovesGen2:
 	move EFFECT_FRUSTRATION,         1, NORMAL,        PHYSICAL, 100, 20,   0, %00000001 ;FRUSTRATION
 	move EFFECT_SAFEGUARD,           0, NORMAL,        STATUS,   100, 25,   0, %00000000 ;SAFEGUARD
 	move EFFECT_PAIN_SPLIT,          0, NORMAL,        STATUS,   100, 20,   0, %00000000 ;PAIN_SPLIT
-	move EFFECT_SACRED_FIRE,       100, FIRE,          PHYSICAL,  95,  5,  50, %00000000 ;SACRED_FIRE
+	move EFFECT_FLAME_WHEEL,       100, FIRE,          PHYSICAL,  95,  5,  50, %00000000 ;SACRED_FIRE
 	move EFFECT_MAGNITUDE,           1, GROUND,        PHYSICAL, 100, 30,   0, %00000000 ;MAGNITUDE
 	move EFFECT_CONFUSE_HIT,       100, FIGHTING,      PHYSICAL,  50,  5, 100, %00000101 ;DYNAMICPUNCH
 	move EFFECT_NORMAL_HIT,        120, BUG,           PHYSICAL,  85, 10,   0, %00000001 ;MEGAHORN
@@ -299,7 +299,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_COMMON_MOVE,        70, NORMAL,        PHYSICAL, 100, 20,   0, %00000001 ;FACADE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
@@ -315,12 +315,12 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_KNOCK_OFF,          65, DARK,          PHYSICAL, 100, 20,   0, %00000001 ;KNOCK_OFF
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_HP_SCALE_HIT,      150, FIRE,          SPECIAL,  100,  5,   0, %00000000 ;ERUPTION
+	move EFFECT_COMMON_MOVE,       150, FIRE,          SPECIAL,  100,  5,   0, %00000000 ;ERUPTION
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_FLY,                80, WATER,         SPECIAL,  100, 10,   0, %00000001 ;DIVE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SP_DEF_DOWN_HIT,    95, PSYCHIC_TYPE,  SPECIAL,  100,  5,  50, %00000000 ;LUSTER_PURGE
 	move EFFECT_SP_ATK_DOWN_HIT,    95, PSYCHIC_TYPE,  SPECIAL,  100,  5,  50, %01000000 ;MIST_BALL
@@ -348,7 +348,7 @@ MovesGroup3:
 	move EFFECT_SLEEP,               0, GRASS,         STATUS,    55, 15,   0, %00000010 ;GRASSWHISTLE
 	move EFFECT_TICKLE,              0, NORMAL,        STATUS,   100, 20,   0, %00000000 ;TICKLE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_HP_SCALE_HIT,      150, WATER,         SPECIAL,  100,  5,   0, %00000000 ;WATER_SPOUT
+	move EFFECT_COMMON_MOVE,       150, WATER,         SPECIAL,  100,  5,   0, %00000000 ;WATER_SPOUT
 	move EFFECT_CONFUSE_HIT,        75, BUG,           SPECIAL,  100, 15,  10, %00000000 ;SIGNAL_BEAM
 	move EFFECT_ALWAYS_HIT,         60, GHOST,         PHYSICAL, 100, 20,   0, %00000101 ;SHADOW_PUNCH
 	move EFFECT_FLINCH_HIT,         80, PSYCHIC_TYPE,  SPECIAL,  100, 20,  10, %00000000 ;EXTRASENSORY
@@ -398,7 +398,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_WRING_OUT,           0, NORMAL,        SPECIAL,  100,  5,   0, %00000001 ;WRING_OUT
+	move EFFECT_COMMON_MOVE,         0, NORMAL,        SPECIAL,  100,  5,   0, %00000001 ;WRING_OUT
 	move EFFECT_GASTRO_ACID,         0, POISON,        STATUS,   100, 10,   0, %00000000 ;GASTRO_ACID
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
@@ -415,7 +415,7 @@ SECTION "Moves Group 4", ROMX
 
 MovesGroup4:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_PARALYZE_HIT,       60, FIGHTING,      PHYSICAL, 100, 10,  30, %00000001 ;FORCE_PALM
 	move EFFECT_SPEED_UP_2,          0, ROCK,          STATUS,   100, 20,   0, %00000000 ;ROCK_POLISH
 	move EFFECT_POISON_HIT,         80, POISON,        PHYSICAL, 100, 20,  30, %00000001 ;POISON_JAB
 	move EFFECT_FLINCH_HIT,         80, DARK,          SPECIAL,  100, 15,  20, %00001000 ;DARK_PULSE
@@ -426,7 +426,7 @@ MovesGroup4:
 	move EFFECT_NORMAL_HIT,         80, BUG,           PHYSICAL, 100, 15,   0, %00100001 ;X_SCISSOR
 	move EFFECT_SP_DEF_DOWN_HIT,    90, BUG,           SPECIAL,  100, 10,  10, %00000010 ;BUG_BUZZ
 	move EFFECT_NORMAL_HIT,         85, DRAGON,        SPECIAL,  100, 10,   0, %00001000 ;DRAGON_PULSE
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_STOMP,             100, DRAGON,        PHYSICAL,  75, 10,  20, %00000001 ;DRAGON_RUSH
 	move EFFECT_NORMAL_HIT,         80, ROCK,          SPECIAL,  100, 20,   0, %00000000 ;POWER_GEM
 	move EFFECT_LEECH_HIT,          75, FIGHTING,      PHYSICAL, 100, 10,   0, %00000101 ;DRAIN_PUNCH
 	move EFFECT_PRIORITY_HIT,       40, FIGHTING,      SPECIAL,  100, 30,   0, %00000000 ;VACUUM_WAVE
@@ -481,10 +481,10 @@ MovesGroup4:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_COMMON_MOVE,        55, FLYING,        PHYSICAL, 100, 15,   0, %00000001 ;ACROBATICS
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_WORK_UP,             0, NORMAL,        STATUS,   100, 30,   0, %00000000 ;WORK_UP
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_SPEED_DOWN_HIT,     55, ELECTRIC,      SPECIAL,   95, 15, 100, %00000000 ;ELECTROWEB
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
@@ -505,13 +505,14 @@ MovesGroup4:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_DOUBLE_HIT,         40, PSYCHIC_TYPE,  SPECIAL,  100, 10,   0, %00000000 ;TWIN_BEAM
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_COMMON_MOVE,        50, GHOST,         PHYSICAL, 100, 10,   0, %00000101 ;RAGE_FIST
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_DEFENSE_UP_HIT,     70, PSYCHIC_TYPE,  PHYSICAL,  90, 10, 100, %00000001 ;BARRIER_BASH
 	move EFFECT_LIBRA,               0, NORMAL,        STATUS,   100, 40,   0, %00000000 ;LIBRA
 	move EFFECT_INCINERATE,         60, FIRE,          SPECIAL,  100, 15,   0, %00000000 ;INCINERATE
+	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 .IndirectEnd::
 
 POPS

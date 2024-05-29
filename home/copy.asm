@@ -128,8 +128,6 @@ GetFarWord::
 	rst Bankswitch
 	ret
 
-
-
 GetFarBankAddress:
 ; gets a bank and address from a:hl and returns it in a:hl
 	ldh [hTempBank], a
