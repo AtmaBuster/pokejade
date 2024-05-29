@@ -2255,3 +2255,70 @@ CommonModMove:
 	buildopponentrage
 	heldflinch
 	endmove
+
+FlareBlitz:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	recoil
+	checkfaint
+	buildopponentrage
+	heldflinch
+	burntarget
+	endmove
+
+VoltTackle:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	effectchance
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	recoil
+	checkfaint
+	buildopponentrage
+	heldflinch
+	paralyzetarget
+	endmove
+
+Pluck:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	pluck
+	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove

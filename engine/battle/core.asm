@@ -2070,10 +2070,11 @@ GetSixthMaxHP:
 	ldh [hDivisor], a
 	ld b, 4
 	call Divide
-	ld b, 0
+	ldh a, [hDividend + 2]
+	ld b, a
 	ldh a, [hDividend + 3]
 	ld c, a
-	and a
+	or b
 	ret nz
 	inc c
 	ret

@@ -126,7 +126,7 @@ MoveEffectsPointers:
 	dw Present
 	dw Frustration
 	dw Safeguard
-	dw NULL
+	dw Pluck
 	dw Magnitude
 	dw BatonPass
 	dw Pursuit
@@ -169,8 +169,8 @@ MoveEffectsPointers:
 	dw FlinchBurn
 	dw FlinchParalyze
 	dw FlinchFreeze
-	dw NULL
-	dw NULL
+	dw FlareBlitz
+	dw VoltTackle
 	dw NormalHit
 	dw StealthRock
 	dw ToxicSpikes

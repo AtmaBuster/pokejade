@@ -174,6 +174,7 @@ BattleCommandPointers:
 	command roost
 	command doubledivingdamage
 	command commondamagemod ; 98
+	command pluck
 
 	commandx raisestat
 	commandx lowerstat

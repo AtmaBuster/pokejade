@@ -125,7 +125,7 @@
 	const EFFECT_PRESENT           ; 7A
 	const EFFECT_FRUSTRATION       ; 7B
 	const EFFECT_SAFEGUARD         ; 7C
-	const EFFECT_UNUSED_7D         ; 7D
+	const EFFECT_PLUCK             ; 7D
 	const EFFECT_MAGNITUDE         ; 7E
 	const EFFECT_BATON_PASS        ; 7F
 	const EFFECT_PURSUIT           ; 80
@@ -168,8 +168,8 @@
 	const EFFECT_FLINCH_BURN       ; A5
 	const EFFECT_FLINCH_PARALYZE   ; A6
 	const EFFECT_FLINCH_FREEZE     ; A7
-	const EFFECT_UNUSED_A8         ; A8
-	const EFFECT_UNUSED_A9         ; A9
+	const EFFECT_FLARE_BLITZ       ; A8
+	const EFFECT_VOLT_TACKLE       ; A9
 	const EFFECT_WEATHER_BALL      ; AA
 	const EFFECT_STEALTH_ROCK      ; AB
 	const EFFECT_TOXIC_SPIKES      ; AC

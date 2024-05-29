@@ -69,6 +69,8 @@ INCLUDE "engine/battle/move_effects/roost.asm"
 INCLUDE "engine/battle/move_effects/ingrain.asm"
 INCLUDE "engine/battle/move_effects/life_power.asm"
 INCLUDE "engine/battle/move_effects/recoil.asm"
+INCLUDE "engine/battle/move_effects/pluck.asm"
+INCLUDE "engine/battle/move_effects/recycle.asm"
 
 POPS
 
