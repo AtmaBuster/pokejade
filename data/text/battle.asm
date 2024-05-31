@@ -1297,3 +1297,15 @@ AbsorbedNutrientsText:
 	line "absorbed nutrients"
 	cont "with its roots!"
 	prompt
+
+RecycleText:
+	text "<USER>"
+	line "found one"
+	cont "<BUFFER1>!"
+	prompt
+
+PluckText:
+	text "<USER>"
+	line "stole and at the"
+	cont "<BUFFER1>!"
+	prompt

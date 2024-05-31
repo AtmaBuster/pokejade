@@ -175,6 +175,7 @@ BattleCommandPointers:
 	command doubledivingdamage
 	command commondamagemod ; 98
 	command pluck
+	command recycle
 
 	commandx raisestat
 	commandx lowerstat

@@ -309,7 +309,7 @@ MovesGroup3:
 	move EFFECT_INGRAIN,             0, GRASS,         STATUS,   100, 20,   0, %00000000 ;INGRAIN
 	move EFFECT_SUPERPOWER,        120, FIGHTING,      PHYSICAL, 100,  5,   0, %00000001 ;SUPERPOWER
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_RECYCLE,             0, NORMAL,        STATUS,   100, 10,   0, %00000000 ;RECYCLE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
@@ -386,7 +386,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_PLUCK,              60, FLYING,        PHYSICAL, 100, 20,   0, %00000001 ;PLUCK
 	move EFFECT_TAILWIND,            0, FLYING,        STATUS,   100, 15,   0, %00000000 ;TAILWIND
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
@@ -461,7 +461,7 @@ MovesGroup4:
 	move EFFECT_NORMAL_HIT,        100, ROCK,          PHYSICAL,  80,  5,   0, %00000000 ;STONE_EDGE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_STEALTH_ROCK,        0, ROCK,          STATUS,   100, 20,   0, %00000000 ;STEALTH_ROCK
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_PLUCK,              60, BUG,           PHYSICAL, 100, 20,   0, %00000001 ;BUG_BITE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_RECOIL_HIT,        120, GRASS,         PHYSICAL, 100, 15,   0, %00000001 ;WOOD_HAMMER
 	move EFFECT_PRIORITY_HIT,       40, WATER,         PHYSICAL, 100, 20,   0, %00000001 ;AQUA_JET

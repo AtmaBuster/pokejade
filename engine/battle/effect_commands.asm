@@ -6207,8 +6207,8 @@ SafeCheckLeafGuard:
 	ret 
 
 BattleCommand_checkleafguard:
-	call SafeCheckSafeguard
-	ret nz
+	call SafeCheckLeafGuard
+	ret z
 	farcall AnimateOppAbility
 	ld hl, LeafGuardProtectText
 	call StdBattleTextbox

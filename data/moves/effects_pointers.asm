@@ -181,5 +181,5 @@ MoveEffectsPointers:
 	dw Surf
 	dw Whirlpool
 	dw CommonModMove
-	dw NULL
+	dw Recycle
 	assert_table_length NUM_MOVE_EFFECTS

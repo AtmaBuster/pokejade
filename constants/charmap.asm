@@ -10,6 +10,11 @@
 	charmap "<LF>",      $22
 	charmap "<POKE>",    $24 ; "<PO><KE>"
 	charmap "<WBR>",     $25 ; word-break opportunity (usually skipped, or "<LF>" on the Town Map)
+	charmap "<BUFFER1>", $30
+	charmap "<BUFFER2>", $31
+	charmap "<BUFFER3>", $32
+	charmap "<BUFFER4>", $33
+	charmap "<BUFFER5>", $34
 	charmap "<RED>",     $38 ; wRedsName
 	charmap "<GREEN>",   $39 ; wGreensName
 	charmap "<ENEMY>",   $3f

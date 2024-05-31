@@ -255,20 +255,11 @@ ENDM
 	dict "<MOM>",     PrintMomsName
 	dict "<PLAYER>",  PrintPlayerName
 	dict "<RIVAL>",   PrintRivalName
-	dict "<ROUTE>",   PlaceJPRoute
-	dict "<WATASHI>", PlaceWatashi
-	dict "<KOKO_WA>", PlaceKokoWa
 	dict "<RED>",     PrintRedsName
 	dict "<GREEN>",   PrintGreensName
 	dict "#",         PlacePOKe
-	dict "<PC>",      PCChar
-	dict "<ROCKET>",  RocketChar
-	dict "<TM>",      TMChar
-	dict "<TRAINER>", TrainerChar
-	dict "<KOUGEKI>", PlaceKougeki
 	dict "<LF>",      LineFeedChar
 	dict "<CONT>",    ContText
-	dict "<……>",      SixDotsChar
 	dict "<DONE>",    DoneText
 	dict "<PROMPT>",  PromptText
 	dict "<PKMN>",    PlacePKMN
@@ -279,7 +270,11 @@ ENDM
 	dict "<TARGET>",  PlaceMoveTargetsName
 	dict "<USER>",    PlaceMoveUsersName
 	dict "<ENEMY>",   PlaceEnemysName
-	dict "<PLAY_G>",  PlaceGenderedPlayerName
+	dict "<BUFFER1>", PrintBuffer1
+	dict "<BUFFER2>", PrintBuffer2
+	dict "<BUFFER3>", PrintBuffer3
+	dict "<BUFFER4>", PrintBuffer4
+	dict "<BUFFER5>", PrintBuffer5
 
 	ld [hli], a
 	call PrintLetterDelay
@@ -297,18 +292,15 @@ PrintRivalName:  print_name wRivalName
 PrintRedsName:   print_name wRedsName
 PrintGreensName: print_name wGreensName
 
-TrainerChar:  print_name TrainerCharText
-TMChar:       print_name TMCharText
-PCChar:       print_name PCCharText
-RocketChar:   print_name RocketCharText
+PrintBuffer1: print_name wStringBuffer1
+PrintBuffer2: print_name wStringBuffer2
+PrintBuffer3: print_name wStringBuffer3
+PrintBuffer4: print_name wStringBuffer4
+PrintBuffer5: print_name wStringBuffer5
+
 PlacePOKe:    print_name PlacePOKeText
-PlaceKougeki: print_name KougekiText
-SixDotsChar:  print_name SixDotsCharText
 PlacePKMN:    print_name PlacePKMNText
 PlacePOKE:    print_name PlacePOKEText
-PlaceJPRoute: print_name PlaceJPRouteText
-PlaceWatashi: print_name PlaceWatashiText
-PlaceKokoWa:  print_name PlaceKokoWaText
 
 PlaceMoveTargetsName::
 	ldh a, [hBattleTurn]
@@ -366,19 +358,6 @@ PlaceEnemysName::
 
 .linkbattle
 	ld de, wOTClassName
-	jr PlaceCommandCharacter
-
-PlaceGenderedPlayerName::
-	push de
-	ld de, wPlayerName
-	rst PlaceString
-	ld h, b
-	ld l, c
-	ld a, [wPlayerGender]
-	bit PLAYERGENDER_FEMALE_F, a
-	ld de, KunSuffixText
-	jr z, PlaceCommandCharacter
-	ld de, ChanSuffixText
 ; fallthrough
 
 PlaceCommandCharacter::
@@ -388,23 +367,11 @@ PlaceCommandCharacter::
 	pop de
 	jmp NextChar
 
-TMCharText::      db "TM@"
-TrainerCharText:: db "TRAINER@"
-PCCharText::      db "PC@"
-RocketCharText::  db "ROCKET@"
 PlacePOKeText::   db "POKé@"
-KougekiText::     db "こうげき@"
-SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"
 PlacePKMNText::   db "<PK><MN>@"
 PlacePOKEText::   db "<PO><KE>@"
 String_Space::    db " @"
-; These strings have been dummied out.
-PlaceJPRouteText::
-PlaceWatashiText::
-PlaceKokoWaText:: db "@"
-KunSuffixText::   db "@"
-ChanSuffixText::  db "@"
 
 NextLineChar::
 	pop hl

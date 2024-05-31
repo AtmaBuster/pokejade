@@ -69,14 +69,16 @@ FalknerGroup:
 ; testing
 	next_list_item
 	db "DICKS@", TRAINERTYPE_ITEM
-	trainer_mon  CHARMANDER, 10, VOLT_ABSORB, MALE
+	trainer_mon  MAGIKARP, 5, NO_ABILITY, MALE
 	    mon_item ORAN_BERRY
-	trainer_mon  BULBASAUR, 10, NO_ABILITY, MALE
-	    mon_item MIRACLE_SEED
-	trainer_mon  PIKACHU, 10, NO_ABILITY, MALE
-	    mon_item LIGHT_BALL
-	trainer_mon  SQUIRTLE, 10, NO_ABILITY, MALE
-	    mon_item NO_ITEM
+	trainer_mon  MAGIKARP, 5, NO_ABILITY, MALE
+	    mon_item LEPPA_BERRY
+	trainer_mon  MAGIKARP, 5, NO_ABILITY, MALE
+	    mon_item LUM_BERRY
+	trainer_mon  MAGIKARP, 5, NO_ABILITY, MALE
+	    mon_item PERSIM_BERRY
+	trainer_mon  MAGIKARP, 5, NO_ABILITY, MALE
+	    mon_item PECHA_BERRY
 	db -1 ; end
 	end_list_items
 

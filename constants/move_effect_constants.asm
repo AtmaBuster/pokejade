@@ -180,5 +180,5 @@
 	const EFFECT_SURF              ; B1
 	const EFFECT_WHIRLPOOL         ; B2
 	const EFFECT_COMMON_MOVE       ; B3
-	const EFFECT_UNUSED_B4         ; B4
+	const EFFECT_RECYCLE           ; B4
 DEF NUM_MOVE_EFFECTS EQU const_value

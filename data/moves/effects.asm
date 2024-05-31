@@ -2235,6 +2235,13 @@ Ingrain:
 	ingrain
 	endmove
 
+Recycle:
+	checkobedience
+	usedmovetext
+	doturn
+	recycle
+	endmove
+
 CommonModMove:
 	checkobedience
 	usedmovetext

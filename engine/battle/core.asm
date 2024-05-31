@@ -252,7 +252,7 @@ HandleBetweenTurnEffects:
 
 .NoMoreFaintingConditions:
 	call HandleLeftovers
-	call HandleMysteryberry
+	call HandleLeppaBerry
 	call HandleDefrost
 	call HandleSafeguard
 	call HandleScreens
@@ -1332,7 +1332,7 @@ HandleLeftovers:
 	ld hl, BattleText_TargetRecoveredWithItem
 	jmp StdBattleTextbox
 
-HandleMysteryberry:
+HandleLeppaBerry:
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .DoEnemyFirst
@@ -1351,6 +1351,7 @@ HandleMysteryberry:
 	ld a, b
 	cp HELD_RESTORE_PP
 	ret nz
+	push bc
 	ld hl, wPartyMon1PP
 	ld a, [wCurBattleMon]
 	call GetPartyLocation
@@ -1381,6 +1382,7 @@ HandleMysteryberry:
 .loop
 	ld a, [hl]
 	and a
+	jr z, .done
 	ret z
 	ld a, [de]
 	and PP_MASK
@@ -1391,27 +1393,15 @@ HandleMysteryberry:
 	ld a, c
 	cp NUM_MOVES
 	jr nz, .loop
+.done
+	pop bc
 	ret
 
 .restore
-	; lousy hack
-	ld a, [hl]
-	push hl
-	call GetMoveIndexFromID
-	ld a, h
-	if HIGH(SKETCH)
-		cp HIGH(SKETCH)
-	else
-		and a
-	endc
-	ld a, l
-	pop hl
-	ld b, 5
-	jr nz, .not_sketch
-	cp LOW(SKETCH)
-	jr nz, .not_sketch
-	ld b, 1
-.not_sketch
+	ld a, c
+	pop bc
+	ld b, c
+	ld c, a
 	ld a, [de]
 	add b
 	ld [de], a
@@ -4669,6 +4659,14 @@ ItemRecoveryAnim:
 
 UseHeldStatusHealingItem:
 	farcall GetOpponentItem
+	call UseStatusHealingItemEffect
+	ret z
+	push af
+	call UseOpponentItem
+	pop af
+	ret
+
+UseStatusHealingItemEffect:
 	ld hl, HeldStatusHealingEffects
 .loop
 	ld a, [hli]
@@ -4678,11 +4676,27 @@ UseHeldStatusHealingItem:
 	cp b
 	jr nz, .loop
 	dec hl
+	ld a, b
+	cp HELD_HEAL_STATUS
+	jr z, .all_status_check
 	ld b, [hl]
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	and b
+	jr nz, .found_status
+	ret
+
+.all_status_check
+	ld b, [hl]
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVarAddr
+	and a
+	jr nz, .found_status
+	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call GetBattleVar
+	bit SUBSTATUS_CONFUSED, a
 	ret z
+.found_status
 	xor a
 	ld [hl], a
 	push bc
@@ -4716,12 +4730,28 @@ UseHeldStatusHealingItem:
 	call FarCall_hl
 	call SwitchTurn
 	call ItemRecoveryAnim
-	call UseOpponentItem
 	ld a, $1
 	and a
 	ret
 
 INCLUDE "data/battle/held_heal_status.asm"
+
+UseConfusionHealingItemAlt:
+	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call GetBattleVar
+	bit SUBSTATUS_CONFUSED, a
+	ret z
+	ld a, b
+	cp HELD_HEAL_CONFUSION
+	jr z, .heal_status
+	cp HELD_HEAL_STATUS
+	ret nz
+
+.heal_status
+	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call GetBattleVarAddr
+	res SUBSTATUS_CONFUSED, [hl]
+	jmp ItemRecoveryAnim
 
 UseConfusionHealingItem:
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP

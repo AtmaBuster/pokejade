@@ -6,15 +6,25 @@ ConsumeHeldItem:
 	and a
 	ld hl, wOTPartyMon1Item
 	ld de, wEnemyMonItem
+	ld bc, wEnemyRecycleMemory
 	ld a, [wCurOTMon]
 	jr z, .theirturn
 	ld hl, wPartyMon1Item
 	ld de, wBattleMonItem
+	ld bc, wPlayerRecycleMemory
 	ld a, [wCurBattleMon]
 
 .theirturn
+	push af
+	add c
+	ld c, a
+	adc b
+	sub c
+	ld b, a
+	pop af
 	push hl
 	push af
+	push bc
 	ld a, [de]
 	ld b, a
 	farcall GetItemHeldEffect
@@ -25,11 +35,15 @@ ConsumeHeldItem:
 	jr z, .ok
 	inc a
 	jr nz, .loop
+	pop bc
 	pop af
 	pop hl
 	jmp PopBCDEHL
 
 .ok
+	pop bc
+	ld a, [de]
+	ld [bc], a
 	xor a
 	ld [de], a
 	pop af

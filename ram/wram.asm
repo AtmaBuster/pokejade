@@ -627,9 +627,12 @@ wEnemyMonTypeBackup:: dw
 wPlayerRageFistCounter:: ds PARTY_LENGTH
 wEnemyRageFistCounter:: ds PARTY_LENGTH
 
+wPlayerRecycleMemory:: ds PARTY_LENGTH
+wEnemyRecycleMemory:: ds PARTY_LENGTH
+
 wBattleEnd::
 
-	ds 126
+	ds 114
 
 
 SECTION UNION "Miscellaneous", WRAM0
