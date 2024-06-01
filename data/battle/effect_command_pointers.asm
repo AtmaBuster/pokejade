@@ -176,6 +176,9 @@ BattleCommandPointers:
 	command commondamagemod ; 98
 	command pluck
 	command recycle
+	command endeavor
+	command simplestatus
+	command wakeupslap
 
 	commandx raisestat
 	commandx lowerstat

@@ -181,4 +181,7 @@
 	const EFFECT_WHIRLPOOL         ; B2
 	const EFFECT_COMMON_MOVE       ; B3
 	const EFFECT_RECYCLE           ; B4
+	const EFFECT_ENDEAVOR          ; B5
+	const EFFECT_COMMON_STATUS     ; B6
+	const EFFECT_WAKE_UP_SLAP      ; B7
 DEF NUM_MOVE_EFFECTS EQU const_value

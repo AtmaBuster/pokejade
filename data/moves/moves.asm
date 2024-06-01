@@ -314,7 +314,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_KNOCK_OFF,          65, DARK,          PHYSICAL, 100, 20,   0, %00000001 ;KNOCK_OFF
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_ENDEAVOR,            0, NORMAL,        PHYSICAL, 100,  5,   0, %00000001 ;ENDEAVOR
 	move EFFECT_COMMON_MOVE,       150, FIRE,          SPECIAL,  100,  5,   0, %00000000 ;ERUPTION
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
@@ -379,7 +379,7 @@ MovesGroup3:
 	move EFFECT_OVERHEAT,          140, PSYCHIC_TYPE,  SPECIAL,   90,  5,   0, %00000000 ;PSYCHO_BOOST
 	move EFFECT_ROOST,               0, FLYING,        STATUS,   100,  5,   0, %00000000 ;ROOST
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_WAKE_UP_SLAP,       70, FIGHTING,      PHYSICAL, 100, 10,   0, %00000001 ;WAKE_UP_SLAP
 	move EFFECT_HAMMER_ARM,        100, FIGHTING,      PHYSICAL,  90, 10,   0, %00000101 ;HAMMER_ARM
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
@@ -393,7 +393,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_COMMON_MOVE,        60, DARK,          PHYSICAL, 100, 10,   0, %00000001 ;ASSURANCE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;

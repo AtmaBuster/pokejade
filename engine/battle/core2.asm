@@ -379,3 +379,15 @@ HandleRageFist:
 	ret nz
 	dec [hl]
 	ret
+
+SetDamageFlag:
+	ld a, BATTLE_VARS_SUBSTATUS4_OPP
+	call GetBattleVar
+	bit SUBSTATUS_SUBSTITUTE, a
+	ret nz
+	ld a, BATTLE_VARS_SUBSTATUS2_OPP
+	call GetBattleVarAddr
+	set SUBSTATUS_TOOK_DAMAGE, [hl]
+	ld a, BATTLE_VARS_SUBSTATUS4_OPP
+	res SUBSTATUS_FOCUS_PUNCH, [hl]
+	ret

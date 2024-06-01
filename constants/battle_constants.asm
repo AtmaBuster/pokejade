@@ -212,6 +212,7 @@ DEF ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP_MASK
 	const SUBSTATUS_INGRAIN
 	const SUBSTATUS_ROOST
 	const SUBSTATUS_FLINCHED
+	const SUBSTATUS_TOOK_DAMAGE
 
 ; wPlayerSubStatus3 or wEnemySubStatus3 bit flags
 	const_def
@@ -229,7 +230,7 @@ DEF ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP_MASK
 	const SUBSTATUS_X_ACCURACY
 	const SUBSTATUS_MIST
 	const SUBSTATUS_FOCUS_ENERGY
-	const_skip
+	const SUBSTATUS_FOCUS_PUNCH
 	const SUBSTATUS_SUBSTITUTE
 	const SUBSTATUS_RECHARGE
 	const SUBSTATUS_RAGE

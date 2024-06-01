@@ -71,6 +71,8 @@ INCLUDE "engine/battle/move_effects/life_power.asm"
 INCLUDE "engine/battle/move_effects/recoil.asm"
 INCLUDE "engine/battle/move_effects/pluck.asm"
 INCLUDE "engine/battle/move_effects/recycle.asm"
+INCLUDE "engine/battle/move_effects/endeavor.asm"
+INCLUDE "engine/battle/move_effects/wake_up_slap.asm"
 
 POPS
 
@@ -2371,6 +2373,9 @@ ApplyTypeAbsorbingAbilities:
 BattleCommand_applydamage:
 	call ApplyTypeAbsorbingAbilities
 	ret c
+
+	farcall SetDamageFlag
+
 	ld a, BATTLE_VARS_SUBSTATUS1_OPP
 	call GetBattleVar
 	bit SUBSTATUS_ENDURE, a
@@ -6614,3 +6619,43 @@ CheckMoveInList:
 	pop de
 	pop bc
 	ret
+
+BattleCommand_simplestatus:
+	ld hl, .CommandTable
+	ld a, BATTLE_VARS_MOVE
+	call GetBattleVar
+	ld e, a
+.loop
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	and c
+	inc a
+	ret z
+	ld a, e
+	call CompareMove
+	jr z, .go_to_command
+	inc hl
+	inc hl
+	inc hl
+	jr .loop
+
+.go_to_command
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, b
+	cp BANK(@)
+	jp nz, FarCall_hl
+	jp hl
+
+MACRO statuscommand
+	dw \1
+	dba \2
+ENDM
+.CommandTable
+	statuscommand MIRROR_MOVE, BattleCommand_mirrormove
+	dw -1

@@ -182,4 +182,7 @@ MoveEffectsPointers:
 	dw Whirlpool
 	dw CommonModMove
 	dw Recycle
+	dw Endeavor
+	dw CommonStatus
+	dw WakeUpSlap
 	assert_table_length NUM_MOVE_EFFECTS

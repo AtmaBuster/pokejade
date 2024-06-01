@@ -1160,6 +1160,21 @@ StaticDamage:
 	heldflinch
 	endmove
 
+Endeavor:
+	checkobedience
+	usedmovetext
+	doturn
+	endeavor
+	checkhit
+	resettypematchup
+	moveanim
+	failuretext
+	applydamage
+	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove
+
 Reversal:
 	checkobedience
 	usedmovetext
@@ -2326,6 +2341,35 @@ Pluck:
 	supereffectivetext
 	pluck
 	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove
+
+CommonStatus:
+	checkobedience
+	usedmovetext
+	doturn
+	simplestatus
+	endmove
+
+WakeUpSlap:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	commondamagemod
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	wakeupslap
 	buildopponentrage
 	heldflinch
 	endmove

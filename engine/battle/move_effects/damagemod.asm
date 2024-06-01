@@ -34,12 +34,14 @@ BattleCommand_commondamagemod:
 	ret
 
 .CommandTable:
-	dw RAGE_FIST,   BattleCommand_ragefist
-	dw FACADE,      BattleCommand_facade
-	dw WRING_OUT,   BattleCommand_wringout
-	dw ERUPTION,    BattleCommand_lifepower
-	dw WATER_SPOUT, BattleCommand_lifepower
-	dw ACROBATICS,  BattleCommand_acrobatics
+	dw RAGE_FIST,    BattleCommand_ragefist
+	dw FACADE,       BattleCommand_facade
+	dw WRING_OUT,    BattleCommand_wringout
+	dw ERUPTION,     BattleCommand_lifepower
+	dw WATER_SPOUT,  BattleCommand_lifepower
+	dw ACROBATICS,   BattleCommand_acrobatics
+	dw ASSURANCE,    BattleCommand_assurance
+	dw WAKE_UP_SLAP, BattleCommand_checksleep
 	dw -1
 
 BattleCommand_ragefist:
@@ -98,27 +100,19 @@ BattleCommand_facade:
 	ret z
 	bit BRN, a
 	call nz, .UndoBurnAttackDrop
-	sla d
-	ret
+	jr CommonDoublePower
 
 .UndoBurnAttackDrop:
 	farcall GetUserAbility
 	cp GUTS
 	ret z
-	bit 7, b
-	jr nz, .halve_opp_defense
-	sla b
-	ret
-
-.halve_opp_defense
-	srl c
-	ret
+	jr CommonDoublePower
 
 BattleCommand_acrobatics:
 	push bc
 	farcall CheckUserKnockOff
 	pop bc
-	jr nz, .double
+	jr nz, CommonDoublePower
 	ldh a, [hBattleTurn]
 	ld a, [wBattleMonItem]
 	jr z, .got_item
@@ -126,6 +120,36 @@ BattleCommand_acrobatics:
 .got_item
 	and a
 	ret nz
-.double
+	jr CommonDoublePower
+
+BattleCommand_assurance:
+	ld a, BATTLE_VARS_SUBSTATUS2
+	call GetBattleVar
+	bit SUBSTATUS_TOOK_DAMAGE, a
+	ret z
+CommonDoublePower:
+; double power
 	sla d
+	ret nc
+; if overflow, double attack instead
+	rr d
+	sla b
+	ret nc
+; if overflow, halve defense instead
+	rr b
+	srl c
+	ret nz
+; if 0, set to 1
+	inc c
 	ret
+
+BattleCommand_checksleep:
+	ld a, BATTLE_VARS_SUBSTATUS4_OPP
+	call GetBattleVar
+	bit SUBSTATUS_SUBSTITUTE, a
+	ret nz
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVar
+	and SLP_MASK
+	ret z
+	jr CommonDoublePower
