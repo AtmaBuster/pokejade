@@ -410,3 +410,52 @@ HandleTaunt:
 	ret nz
 	ld hl, TauntWoreOffText
 	jmp StdBattleTextbox
+
+HandleYawn:
+	call SetPlayerTurn
+	call .Check
+	call SetEnemyTurn
+.Check:
+	ld a, BATTLE_VARS_SUBSTATUS6
+	call GetBattleVarAddr
+	ld a, [hl]
+	and %11 ; flags
+	ret z
+	dec [hl]
+	ld a, [hl]
+	and %11
+	ret nz
+; TO-DO : Uproar
+; fail if has status
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVarAddr
+	ld a, [hl]
+	and a
+	ret nz
+; put to sleep
+	ld b, 7
+	ld a, [wInBattleTowerBattle]
+	and a
+	jr z, .random_loop
+	ld b, 3
+.random_loop
+	call BattleRandom
+	and b
+	jr z, .random_loop
+	cp 7
+	jr z, .random_loop
+	inc a
+	ld [hl], a
+	call UpdateUserInParty
+	call RefreshBattleHuds
+
+	ld hl, FellAsleepText
+	call SwitchTurn
+	call StdBattleTextbox
+
+	farcall UseHeldStatusHealingItem
+	push af
+	call SwitchTurn
+	pop af
+	ret nz
+	farjp CantMove

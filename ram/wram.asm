@@ -393,12 +393,14 @@ wPlayerSubStatus2:: db
 wPlayerSubStatus3:: db
 wPlayerSubStatus4:: db
 wPlayerSubStatus5:: db
+wPlayerSubStatus6:: db
 
 wEnemySubStatus1:: db
 wEnemySubStatus2:: db
 wEnemySubStatus3:: db
 wEnemySubStatus4:: db
 wEnemySubStatus5:: db
+wEnemySubStatus6:: db
 
 wPlayerRolloutCount:: db
 wPlayerConfuseCount:: db
@@ -635,7 +637,7 @@ wEnemyTauntTimer:: db
 
 wBattleEnd::
 
-	ds 112
+	ds 110
 
 
 SECTION UNION "Miscellaneous", WRAM0

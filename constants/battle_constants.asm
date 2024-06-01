@@ -132,11 +132,13 @@ DEF SPDSPCDV_SHINY EQU $AA
 	const BATTLE_VARS_SUBSTATUS3
 	const BATTLE_VARS_SUBSTATUS4
 	const BATTLE_VARS_SUBSTATUS5
+	const BATTLE_VARS_SUBSTATUS6
 	const BATTLE_VARS_SUBSTATUS1_OPP
 	const BATTLE_VARS_SUBSTATUS2_OPP
 	const BATTLE_VARS_SUBSTATUS3_OPP
 	const BATTLE_VARS_SUBSTATUS4_OPP
 	const BATTLE_VARS_SUBSTATUS5_OPP
+	const BATTLE_VARS_SUBSTATUS6_OPP
 	const BATTLE_VARS_STATUS
 	const BATTLE_VARS_STATUS_OPP
 	const BATTLE_VARS_MOVE_ANIM
@@ -163,6 +165,8 @@ DEF NUM_BATTLE_VARS EQU const_value
 	const ENEMY_SUBSTATUS_4
 	const PLAYER_SUBSTATUS_5
 	const ENEMY_SUBSTATUS_5
+	const PLAYER_SUBSTATUS_6
+	const ENEMY_SUBSTATUS_6
 	const PLAYER_STATUS
 	const ENEMY_STATUS
 	const PLAYER_MOVE_ANIMATION
@@ -246,6 +250,17 @@ DEF ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP_MASK
 	const SUBSTATUS_LOCK_ON
 	const SUBSTATUS_DESTINY_BOND
 	const SUBSTATUS_CANT_RUN
+
+; wPlayerSubStatus6 or wEnemySubStatus6 bit flags
+	const_def
+	const SUBSTATUS_YAWNED
+	const_skip ; reserved for yawn
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
 
 ; wPlayerScreens or wEnemyScreens bit flags
 	const_def

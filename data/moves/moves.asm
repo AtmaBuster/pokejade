@@ -312,7 +312,7 @@ MovesGroup3:
 	move EFFECT_RECYCLE,             0, NORMAL,        STATUS,   100, 10,   0, %00000000 ;RECYCLE
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_COMMON_STATUS,       0, NORMAL,        STATUS,   100, 10,   0, %00000000 ;YAWN
 	move EFFECT_KNOCK_OFF,          65, DARK,          PHYSICAL, 100, 20,   0, %00000001 ;KNOCK_OFF
 	move EFFECT_ENDEAVOR,            0, NORMAL,        PHYSICAL, 100,  5,   0, %00000001 ;ENDEAVOR
 	move EFFECT_COMMON_MOVE,       150, FIRE,          SPECIAL,  100,  5,   0, %00000000 ;ERUPTION
@@ -384,7 +384,7 @@ MovesGroup3:
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
-	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
+	move EFFECT_NATURAL_GIFT,        1, NORMAL,        PHYSICAL, 100, 15,   0, %00000000 ;NATURAL_GIFT
 	move EFFECT_SPLASH,              0, NORMAL,        PHYSICAL, 100,  0,   0, %00000000 ;
 	move EFFECT_PLUCK,              60, FLYING,        PHYSICAL, 100, 20,   0, %00000001 ;PLUCK
 	move EFFECT_TAILWIND,            0, FLYING,        STATUS,   100, 15,   0, %00000000 ;TAILWIND

@@ -1325,3 +1325,8 @@ TauntWoreOffText:
 	text "<USER>'s"
 	line "taunt wore off!"
 	prompt
+
+YawnText:
+	text "<TARGET>"
+	line "grew drowsy!"
+	prompt

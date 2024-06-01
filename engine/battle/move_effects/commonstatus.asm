@@ -36,6 +36,7 @@ MACRO statuscommand
 ENDM
 .CommandTable
 	statuscommand TAUNT, BattleCommand_taunt
+	statuscommand YAWN,  BattleCommand_yawn
 	dw -1
 
 BattleCommand_taunt:
@@ -50,6 +51,40 @@ BattleCommand_taunt:
 	jr nz, .fail
 	ld [hl], 3
 	ld hl, TauntText
+	jmp StdBattleTextbox
+
+.fail
+	farjp FailMove
+
+BattleCommand_yawn:
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVar
+	and a
+	jr nz, .fail
+	ld a, BATTLE_VARS_SUBSTATUS4_OPP
+	call GetBattleVar
+	bit SUBSTATUS_SUBSTITUTE, a
+	jr nz, .fail
+	ld a, BATTLE_VARS_SUBSTATUS6_OPP
+	call GetBattleVarAddr
+	ld a, [hl]
+	and %11 ; yawn flags
+	jr nz, .fail
+	ldh a, [hBattleTurn]
+	and a
+	ld de, wEnemyScreens
+	jr z, .go
+	ld de, wPlayerScreens
+.go
+	ld a, [de]
+	bit SCREENS_SAFEGUARD, a
+	jr nz, .fail
+
+	ld a, 2
+	or [hl]
+	ld [hl], a
+	farcall AnimateCurrentMove
+	ld hl, YawnText
 	jmp StdBattleTextbox
 
 .fail

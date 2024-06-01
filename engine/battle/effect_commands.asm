@@ -74,6 +74,7 @@ INCLUDE "engine/battle/move_effects/pluck.asm"
 INCLUDE "engine/battle/move_effects/recycle.asm"
 INCLUDE "engine/battle/move_effects/endeavor.asm"
 INCLUDE "engine/battle/move_effects/wake_up_slap.asm"
+INCLUDE "engine/battle/move_effects/natural_gift.asm"
 
 POPS
 

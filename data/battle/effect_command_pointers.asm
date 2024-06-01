@@ -179,6 +179,8 @@ BattleCommandPointers:
 	command endeavor
 	command simplestatus
 	command wakeupslap
+	command naturalgift
+	command forceconsumeholditem
 
 	commandx raisestat
 	commandx lowerstat

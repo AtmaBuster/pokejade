@@ -215,6 +215,7 @@ HandleBetweenTurnEffects:
 	farcall HandleTailwind
 	farcall HandleIngrain
 	farcall HandleTaunt
+	farcall HandleYawn
 
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK

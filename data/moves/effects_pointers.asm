@@ -185,4 +185,5 @@ MoveEffectsPointers:
 	dw Endeavor
 	dw CommonStatus
 	dw WakeUpSlap
+	dw NaturalGift
 	assert_table_length NUM_MOVE_EFFECTS

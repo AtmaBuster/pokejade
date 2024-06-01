@@ -2373,3 +2373,25 @@ WakeUpSlap:
 	buildopponentrage
 	heldflinch
 	endmove
+
+NaturalGift:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	naturalgift
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	forceconsumeholditem
+	checkfaint
+	buildopponentrage
+	heldflinch
+	endmove

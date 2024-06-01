@@ -184,4 +184,5 @@
 	const EFFECT_ENDEAVOR          ; B5
 	const EFFECT_COMMON_STATUS     ; B6
 	const EFFECT_WAKE_UP_SLAP      ; B7
+	const EFFECT_NATURAL_GIFT      ; B8
 DEF NUM_MOVE_EFFECTS EQU const_value
