@@ -34,3 +34,16 @@ GetMoveData::
 	call GetMoveAddress
 	ld bc, MOVE_LENGTH - 1
 	jmp FarCopyBytes
+
+IsStatusMove::
+	ldh [hFarCallSavedA], a
+	push hl
+	ld l, a
+	ld a, MOVE_TYPE
+	call GetMoveAttribute
+	pop hl
+	and ~TYPE_MASK
+	cp STATUS
+	ldh a, [hFarCallSavedA]
+	ccf
+	ret

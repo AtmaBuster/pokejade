@@ -391,3 +391,22 @@ SetDamageFlag:
 	ld a, BATTLE_VARS_SUBSTATUS4_OPP
 	res SUBSTATUS_FOCUS_PUNCH, [hl]
 	ret
+
+HandleTaunt:
+	call SetPlayerTurn
+	call .Check
+	call SetEnemyTurn
+.Check:
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wPlayerTauntTimer
+	jr z, .got_timer
+	ld hl, wEnemyTauntTimer
+.got_timer
+	ld a, [hl]
+	and a
+	ret z
+	dec [hl]
+	ret nz
+	ld hl, TauntWoreOffText
+	jmp StdBattleTextbox

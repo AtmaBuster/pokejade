@@ -630,9 +630,12 @@ wEnemyRageFistCounter:: ds PARTY_LENGTH
 wPlayerRecycleMemory:: ds PARTY_LENGTH
 wEnemyRecycleMemory:: ds PARTY_LENGTH
 
+wPlayerTauntTimer:: db
+wEnemyTauntTimer:: db
+
 wBattleEnd::
 
-	ds 114
+	ds 112
 
 
 SECTION UNION "Miscellaneous", WRAM0

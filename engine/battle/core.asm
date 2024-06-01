@@ -214,6 +214,7 @@ HandleBetweenTurnEffects:
 	farcall HandleShedSkin
 	farcall HandleTailwind
 	farcall HandleIngrain
+	farcall HandleTaunt
 
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
@@ -3731,6 +3732,7 @@ endr
 	ld [wPlayerWrapCount], a
 	ld [wEnemyWrapCount], a
 	ld [wEnemyTurnsTaken], a
+	ld [wEnemyTauntTimer], a
 	ld hl, wPlayerSubStatus5
 	res SUBSTATUS_CANT_RUN, [hl]
 	ret
@@ -4214,6 +4216,7 @@ endr
 	ld [wEnemyWrapCount], a
 	ld [wPlayerWrapCount], a
 	ld [wPlayerTurnsTaken], a
+	ld [wPlayerTauntTimer], a
 	ld hl, wEnemySubStatus5
 	res SUBSTATUS_CANT_RUN, [hl]
 	ret
@@ -5678,11 +5681,11 @@ MoveSelectionScreen:
 	ldh [hBGMapMode], a
 	call ScrollingMenuJoypad
 	bit D_UP_F, a
-	jr nz, .pressed_up
+	jp nz, .pressed_up
 	bit D_DOWN_F, a
-	jr nz, .pressed_down
+	jp nz, .pressed_down
 	bit SELECT_F, a
-	jmp nz, .pressed_select
+	jp nz, .pressed_select
 	bit B_BUTTON_F, a
 	; A button
 	push af
@@ -5727,6 +5730,20 @@ MoveSelectionScreen:
 	dec a
 	cp c
 	jr z, .move_disabled
+	ld a, [wPlayerTauntTimer]
+	and a
+	jr z, .not_taunted
+	ld a, [wMenuCursorY]
+	add LOW(wBattleMonMoves)
+	ld l, a
+	adc HIGH(wBattleMonMoves)
+	sub l
+	ld h, a
+	ld a, [hl]
+	call IsStatusMove
+	jr c, .taunted
+
+.not_taunted
 	ld a, [wUnusedPlayerLockedMove]
 	and a
 	jr nz, .skip2
@@ -5741,6 +5758,10 @@ MoveSelectionScreen:
 	ld [wCurPlayerMove], a
 	xor a
 	ret
+
+.taunted
+	ld hl, BattleText_TheMoveCantBeSelected
+	jr .place_textbox_start_over
 
 .move_disabled
 	ld hl, BattleText_TheMoveIsDisabled
@@ -5959,6 +5980,68 @@ CheckPlayerHasUsableMoves:
 	ld hl, STRUGGLE
 	call GetMoveIDFromIndex
 	ld [wCurPlayerMove], a
+
+	ld bc, 0
+.loop
+	push bc
+	call .CheckMove
+	pop bc
+	jr c, .usable_move
+	inc c
+	ld a, c
+	cp NUM_MOVES
+	jr nz, .loop
+
+	ld hl, BattleText_MonHasNoMovesLeft
+	call StdBattleTextbox
+	ld c, 60
+	call DelayFrames
+	xor a
+	ret
+
+.usable_move
+	inc c
+	ret
+
+.CheckMove:
+	ld hl, wBattleMonMoves
+	add hl, bc
+	ld a, [hl]
+	and a
+	ret z
+
+	ld a, [wPlayerDisableCount]
+	and a
+	jr z, .skip_disable
+
+	swap a
+	and $f
+	cp c
+	jr z, .cant_use
+.skip_disable
+
+	ld a, [wPlayerTauntTimer]
+	and a
+	jr z, .skip_taunt
+	ld a, [hl]
+	call IsStatusMove
+	jr c, .cant_use
+.skip_taunt
+
+	ld hl, wBattleMonPP
+	add hl, bc
+	ld a, [hl]
+	and PP_MASK
+	ret z
+.can_use
+	scf
+	ret
+
+.cant_use
+	and a
+	ret
+
+IF 0
 	ld a, [wPlayerDisableCount]
 	and a
 	ld hl, wBattleMonPP
@@ -5995,12 +6078,7 @@ CheckPlayerHasUsableMoves:
 	ret nz
 
 .force_struggle
-	ld hl, BattleText_MonHasNoMovesLeft
-	call StdBattleTextbox
-	ld c, 60
-	call DelayFrames
-	xor a
-	ret
+ENDC
 
 ParseEnemyAction:
 	ld a, [wEnemyIsSwitching]
@@ -6029,7 +6107,7 @@ ParseEnemyAction:
 	jmp nz, .skip_load
 	ld a, [wEnemySubStatus3]
 	and 1 << SUBSTATUS_CHARGED | 1 << SUBSTATUS_RAMPAGE | 1 << SUBSTATUS_BIDE
-	jr nz, .skip_load
+	jp nz, .skip_load
 
 	ld hl, wEnemySubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
@@ -6064,14 +6142,22 @@ ParseEnemyAction:
 .loop
 	ld a, [hl]
 	and a
-	jr z, .struggle
+	jp z, .struggle
 	ld a, [wEnemyDisabledMove]
 	cp [hl]
 	jr z, .disabled
+	ld a, [hl]
+	call IsStatusMove
+	jr nc, .not_status
+	ld a, [wEnemyTauntTimer]
+	and a
+	jr nz, .taunt
+.not_status
 	ld a, [de]
 	and PP_MASK
 	jr nz, .enough_pp
 
+.taunt
 .disabled
 	inc hl
 	inc de

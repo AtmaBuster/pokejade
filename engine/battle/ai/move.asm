@@ -42,6 +42,38 @@ AIChooseMove:
 	add hl, bc
 	ld [hl], 80
 
+; Don't pick taunted moves
+.CheckTaunt:
+	ld a, [wEnemyTauntTimer]
+	and a
+	jr z, .CheckTorment
+
+	ld hl, wEnemyMonMoves
+	ld c, 0
+.CheckTauntMove:
+	ld a, c
+	cp 4
+	jr z, .CheckTorment
+	ld a, [hli]
+	and a
+	jr z, .CheckTorment
+	inc c
+	call IsStatusMove
+	jr nc, .CheckTauntMove
+
+	push hl
+	ld hl, wEnemyAIMoveScores
+	ld b, 0
+	dec c
+	add hl, bc
+	inc c
+	ld [hl], 80
+	pop hl
+	inc c
+	jr .CheckTauntMove
+
+.CheckTorment: ; TO-DO
+
 ; Don't pick moves with 0 PP.
 .CheckPP:
 	ld hl, wEnemyAIMoveScores - 1

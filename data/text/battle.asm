@@ -326,6 +326,11 @@ BattleText_TheMoveIsDisabled:
 	line "DISABLED!"
 	prompt
 
+BattleText_TheMoveCantBeSelected:
+	text "The move can't be"
+	line "selected!"
+	prompt
+
 BattleText_MonHasNoMovesLeft:
 	text_ram wBattleMonNickname
 	text_start
@@ -1308,4 +1313,15 @@ PluckText:
 	text "<USER>"
 	line "stole and at the"
 	cont "<BUFFER1>!"
+	prompt
+
+TauntText:
+	text "<TARGET>"
+	line "fell for the"
+	cont "taunt!"
+	prompt
+
+TauntWoreOffText:
+	text "<USER>'s"
+	line "taunt wore off!"
 	prompt
