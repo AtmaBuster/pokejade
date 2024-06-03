@@ -416,4 +416,13 @@ PokemonCries::
 	mon_cry CRY_NIDORAN_M,     0,    0 ;
 	mon_cry CRY_NIDORAN_M,     0,    0 ;
 	mon_cry CRY_NIDORAN_M,     0,    0 ;
+	mon_cry CRY_NIDORAN_M,     0,    0 ;
+	mon_cry CRY_NIDORAN_M,     0,    0 ;
+	mon_cry CRY_NIDORAN_M,     0,    0 ;
+	mon_cry CRY_NIDORAN_M,     0,    0 ;
+	mon_cry CRY_NIDORAN_M,     0,    0 ;
+	mon_cry CRY_NIDORAN_M,     0,    0 ;
+	mon_cry CRY_NIDORAN_M,     0,    0 ;
+	mon_cry CRY_NIDORAN_M,     0,    0 ;
+	mon_cry CRY_NIDORAN_M,     0,    0 ;
 	assert_table_length NUM_POKEMON

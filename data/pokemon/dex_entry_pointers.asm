@@ -402,4 +402,13 @@ PokedexDataPointerTable:
 	dba PlaceholderPokedexEntry
 	dba PlaceholderPokedexEntry
 	dba PlaceholderPokedexEntry
+	dba PlaceholderPokedexEntry
+	dba PlaceholderPokedexEntry
+	dba PlaceholderPokedexEntry
+	dba PlaceholderPokedexEntry
+	dba PlaceholderPokedexEntry
+	dba PlaceholderPokedexEntry
+	dba PlaceholderPokedexEntry
+	dba PlaceholderPokedexEntry
+	dba PlaceholderPokedexEntry
 	assert_table_length NUM_DEX_POKEMON

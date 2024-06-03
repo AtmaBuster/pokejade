@@ -26,8 +26,8 @@ NazohPokedexOrder:
 	dw WEEDLE         ;  25
 	dw KAKUNA         ;  26
 	dw BEEDRILL       ;  27
-	dw 0
-	dw 0
+	dw KRICKETOT      ;  28
+	dw KRICKETUNE     ;  29
 	dw 0
 	dw 0
 	dw 0

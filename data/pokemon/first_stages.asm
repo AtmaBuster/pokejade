@@ -401,7 +401,16 @@ FirstEvoStages::
 	dw -1
 	dw -1
 	dw -1
+	dw REGIGIGAS
+	dw JIRACHI
 	dw -1
+	dw -1
+	dw -1
+	dw -1
+	dw -1
+	dw -1
+	dw -1
+	dw FRIGO
 	dw DEOXYS
 	dw DEOXYS
 	dw DEOXYS

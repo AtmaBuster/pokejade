@@ -150,7 +150,16 @@ EvosAttacksPointers3::
 	dw PlaceholderEvosAttacks
 	dw PlaceholderEvosAttacks
 	dw PlaceholderEvosAttacks
+	dw RegigigasEvosAttacks
+	dw JirachiEvosAttacks
 	dw PlaceholderEvosAttacks
+	dw PlaceholderEvosAttacks
+	dw PlaceholderEvosAttacks
+	dw PlaceholderEvosAttacks
+	dw PlaceholderEvosAttacks
+	dw PlaceholderEvosAttacks
+	dw PlaceholderEvosAttacks
+	dw FrigoEvosAttacks
 	dw PlaceholderEvosAttacks
 	dw PlaceholderEvosAttacks
 	dw PlaceholderEvosAttacks
@@ -837,6 +846,21 @@ RayquazaEvosAttacks:
 	db 0 ; no more level-up moves
 
 DeoxysEvosAttacks:
+	db 0 ; no more evolutions
+	dbw 1, POUND
+	db 0 ; no more level-up moves
+
+RegigigasEvosAttacks:
+	db 0 ; no more evolutions
+	dbw 1, POUND
+	db 0 ; no more level-up moves
+
+JirachiEvosAttacks:
+	db 0 ; no more evolutions
+	dbw 1, POUND
+	db 0 ; no more level-up moves
+
+FrigoEvosAttacks:
 	db 0 ; no more evolutions
 	dbw 1, POUND
 	db 0 ; no more level-up moves

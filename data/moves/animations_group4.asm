@@ -98,6 +98,8 @@ BattleAnimationsGroup4::
 	dw BattleAnim_Group4None
 	dw BattleAnim_Group4None
 	dw BattleAnim_Group4None
+	dw BattleAnim_Group4None
+	dw BattleAnim_Group4None
 .IndirectEnd::
 
 BattleAnim_Group4None:

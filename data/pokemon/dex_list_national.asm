@@ -400,7 +400,16 @@ DexListNational:
 	dw    0 ; MON_18E
 	dw    0 ; MON_18F
 	dw    0 ; MON_190
-	dw    0 ; MON_191
+	dw  486 ; REGIGIGAS
+	dw  385 ; JIRACHI
+	dw    0 ; MON_193
+	dw    0 ; MON_194
+	dw    0 ; MON_195
+	dw    0 ; MON_196
+	dw    0 ; MON_197
+	dw    0 ; MON_198
+	dw    0 ; MON_199
+	dw 1039 ; FRIGO
 	dw    0 ; DEOXYS_ATTACK
 	dw    0 ; DEOXYS_DEFENSE
 	dw    0 ; DEOXYS_SPEED

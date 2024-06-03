@@ -235,6 +235,7 @@ NationalPokedexOrder:
 	dw KYOGRE         ;  382
 	dw GROUDON        ;  383
 	dw RAYQUAZA       ;  384
+	dw JIRACHI        ;  385
 	dw DEOXYS         ;  386
 	dw BIDOOF         ;  399
 	dw BIBAREL        ;  400
@@ -269,6 +270,7 @@ NationalPokedexOrder:
 	dw GALLADE        ;  475
 	dw DUSKNOIR       ;  477
 	dw FROSLASS       ;  478
+	dw REGIGIGAS      ;  486
 	dw LILLIPUP       ;  506
 	dw HERDIER        ;  507
 	dw STOUTLAND      ;  508
@@ -350,4 +352,5 @@ NationalPokedexOrder:
 	dw WULFMAN        ; 1036
 	dw WARWULF        ; 1037
 	dw KOKOPELLI      ; 1038
+	dw FRIGO          ; 1039
 .End

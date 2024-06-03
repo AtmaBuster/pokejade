@@ -410,4 +410,13 @@ BitmasksPointers:
 	dw PlaceholderBitmasks
 	dw PlaceholderBitmasks
 	dw PlaceholderBitmasks
+	dw PlaceholderBitmasks
+	dw PlaceholderBitmasks
+	dw PlaceholderBitmasks
+	dw PlaceholderBitmasks
+	dw PlaceholderBitmasks
+	dw PlaceholderBitmasks
+	dw PlaceholderBitmasks
+	dw PlaceholderBitmasks
+	dw PlaceholderBitmasks
 	assert_table_length NUM_POKEMON

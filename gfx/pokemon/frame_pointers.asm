@@ -410,4 +410,13 @@ FramesPointers:
 	dba PlaceholderFrames
 	dba PlaceholderFrames
 	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
+	dba PlaceholderFrames
 	assert_table_length NUM_POKEMON

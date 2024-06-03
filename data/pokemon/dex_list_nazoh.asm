@@ -11,14 +11,14 @@ DexListNazoh:
 	dw    0 ; BLASTOISE
 	dw   10 ; BIDOOF
 	dw   11 ; BIBAREL
-	dw    0 ; KRICKETOT
+	dw   28 ; KRICKETOT
 	dw   25 ; WEEDLE
 	dw   26 ; KAKUNA
 	dw   27 ; BEEDRILL
 	dw   12 ; PIDGEY
 	dw   13 ; PIDGEOTTO
 	dw   14 ; PIDGEOT
-	dw    0 ; KRICKETUNE
+	dw   29 ; KRICKETUNE
 	dw    0 ; COMBEE
 	dw    0 ; VESPIQUEN
 	dw    0 ; PACHIRISU
@@ -400,7 +400,16 @@ DexListNazoh:
 	dw    0 ; MON_18E
 	dw    0 ; MON_18F
 	dw    0 ; MON_190
-	dw    0 ; MON_191
+	dw    0 ; REGIGIGAS
+	dw    0 ; JIRACHI
+	dw    0 ; MON_193
+	dw    0 ; MON_194
+	dw    0 ; MON_195
+	dw    0 ; MON_196
+	dw    0 ; MON_197
+	dw    0 ; MON_198
+	dw    0 ; MON_199
+	dw    0 ; FRIGO
 	dw    0 ; DEOXYS_ATTACK
 	dw    0 ; DEOXYS_DEFENSE
 	dw    0 ; DEOXYS_SPEED

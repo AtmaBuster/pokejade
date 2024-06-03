@@ -853,5 +853,23 @@ INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/placeholder/shiny.pal"
 INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/placeholder/shiny.pal"
+INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/placeholder/shiny.pal"
+INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/placeholder/shiny.pal"
+INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/placeholder/shiny.pal"
+INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/placeholder/shiny.pal"
+INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/placeholder/shiny.pal"
+INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/placeholder/shiny.pal"
+INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/placeholder/shiny.pal"
+INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/placeholder/shiny.pal"
+INCBIN "gfx/pokemon/placeholder/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/placeholder/shiny.pal"
 
 	assert_table_length NUM_POKEMON + 1

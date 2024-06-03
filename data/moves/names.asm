@@ -471,4 +471,6 @@ MoveNames::
 	li "LIBRA"
 	li "INCINERATE"
 	li "TRAILBLAZE"
+	li "DOOM DESIRE"
+	li "CRUSH GRIP"
 	assert_list_length NUM_ATTACKS

@@ -420,4 +420,13 @@ MonMenuIconPals:
 	icon_pals RED,    RED
 	icon_pals RED,    RED
 	icon_pals RED,    RED
+	icon_pals RED,    RED
+	icon_pals RED,    RED
+	icon_pals RED,    RED
+	icon_pals RED,    RED
+	icon_pals RED,    RED
+	icon_pals RED,    RED
+	icon_pals RED,    RED
+	icon_pals RED,    RED
+	icon_pals RED,    RED
 	assert_table_length NUM_POKEMON

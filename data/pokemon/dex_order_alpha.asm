@@ -104,6 +104,7 @@ AlphabeticalPokedexOrder:
 	dw FLAREON
 	dw FLOATZEL
 	dw FLYGON
+	dw FRIGO
 	dw FRILLISH
 	dw FROSLASS
 	dw GABITE
@@ -144,6 +145,7 @@ AlphabeticalPokedexOrder:
 	dw IVYSAUR
 	dw JAGG
 	dw JELLICENT
+	dw JIRACHI
 	dw JOLTEON
 	dw JOLTIK
 	dw KABUTO
@@ -255,7 +257,13 @@ AlphabeticalPokedexOrder:
 	dw MON_18E
 	dw MON_18F
 	dw MON_190
-	dw MON_191
+	dw MON_193
+	dw MON_194
+	dw MON_195
+	dw MON_196
+	dw MON_197
+	dw MON_198
+	dw MON_199
 	dw MUDKIP
 	dw MUNCHLAX
 	dw MURKROW
@@ -307,6 +315,7 @@ AlphabeticalPokedexOrder:
 	dw RALTS
 	dw RAYQUAZA
 	dw REGICE
+	dw REGIGIGAS
 	dw REGIROCK
 	dw REGISTEEL
 	dw REMORAID

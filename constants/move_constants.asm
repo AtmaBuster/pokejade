@@ -480,6 +480,8 @@ DEF MOVES_GP3 EQU const_value - 1
 	const LIBRA        ; 1d5
 	const INCINERATE   ; 1d6
 	const TRAILBLAZE   ; 1d7
+	const DOOM_DESIRE  ; 1d8
+	const CRUSH_GRIP   ; 1d9
 DEF MOVES_GP4 EQU const_value - 1
 DEF NUM_ATTACKS EQU const_value - 1
 

@@ -157,3 +157,5 @@ AbilityNames:
 	li "CLEAR BODY"
 	li "DROUGHT"
 	li "AIR LOCK"
+	li "SLOW START"
+	li "HIVE MIND"

@@ -157,6 +157,8 @@ AbilityDescriptions:
 	dw ClearBodyDesc
 	dw DroughtDesc
 	dw AirLockDesc
+	dw SlowStartDesc ; TO-DO
+	dw HiveMindDesc ; TO-DO
 
 SniperDesc:
 TechnicianDesc:
@@ -255,6 +257,8 @@ CompetitiveDesc:
 ColorChangeDesc:
 ProteanDesc:
 RefrigerateDesc:
+SlowStartDesc:
+HiveMindDesc:
 	db   "???@"
 
 NoAbilityDesc:
