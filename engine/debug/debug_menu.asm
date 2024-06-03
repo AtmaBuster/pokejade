@@ -213,7 +213,8 @@ Debug_GiveParty:
 	ld [hld], a
 	ld a, c
 	ld [hl], a
-	ret
+
+	farjp HealParty
 
 .set_move
 	ld e, [hl]
