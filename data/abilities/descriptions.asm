@@ -8,7 +8,7 @@ AbilityDescriptions:
 	dw RainDishDesc
 	dw SimpleDesc
 	dw UnawareDesc
-	dw MoodyDesc ; TO-DO
+	dw MoodyDesc
 	dw ShedSkinDesc
 	dw RunAwayDesc
 	dw ShieldDustDesc
@@ -132,7 +132,7 @@ AbilityDescriptions:
 	dw CudChewDesc ; TO-DO
 	dw ArmorTailDesc ; TO-DO
 	dw SandStreamDesc
-	dw SpeedBoostDesc ; TO-DO
+	dw SpeedBoostDesc
 	dw WindRiderDesc ; TO-DO
 	dw TraceDesc
 	dw JustifiedDesc ; TO-DO
@@ -158,7 +158,6 @@ AbilityDescriptions:
 	dw DroughtDesc
 	dw AirLockDesc
 
-MoodyDesc:
 SniperDesc:
 TechnicianDesc:
 HustleDesc:
@@ -238,7 +237,6 @@ GoodAsGoldDesc:
 SuctionCupsDesc:
 CudChewDesc:
 ArmorTailDesc:
-SpeedBoostDesc:
 WindRiderDesc:
 JustifiedDesc:
 PoisonHealDesc:
@@ -294,6 +292,10 @@ SimpleDesc:
 UnawareDesc:
 	db   "Ignores the foes"
 	next "stat changes@"
+
+MoodyDesc:
+	db   "Raises and lowers"
+	next "random stats@"
 
 ShedSkinDesc:
 	db   "May heal status"
@@ -464,6 +466,10 @@ ContraryDesc:
 SandStreamDesc:
 	db   "Summons a"
 	next "sandstorm@"
+
+SpeedBoostDesc:
+	db   "Raises SPEED over"
+	next "time@"
 
 TraceDesc:
 	db   "Copies the foe's"

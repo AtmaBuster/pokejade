@@ -670,6 +670,8 @@ StatsScreen_CheckDexNumbers:
 	ld [wStatsScreenDexNumber], a
 
 	ld a, b
+	and a
+	jr z, .none
 	cp $10
 	jr z, .single
 	cp $20
@@ -679,6 +681,7 @@ StatsScreen_CheckDexNumbers:
 	scf
 	ret
 
+.none
 .single
 	and a
 	ret

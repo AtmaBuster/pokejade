@@ -491,7 +491,12 @@ AnimateAbility:
 
 	ld a, 3
 	ldh [hBGMapMode], a
-	call UpdateBGMap
+	ld c, 4
+	call DelayFrames
+	ld a, 4
+	ldh [hBGMapMode], a
+	ld c, 4
+	call DelayFrames
 
 	pop de
 	ret
@@ -1112,3 +1117,153 @@ SwitchIn_AirLockCloudNine:
 	ld hl, TextWeatherEffectsDisappeared
 	call StdBattleTextbox
 	farjp UpdateCastform
+
+ActivateBetweenTurnAbilitiesBothSides:
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_first
+	call SetPlayerTurn
+	call ActivateBetweenTurnAbilities
+	call SetEnemyTurn
+	jr ActivateBetweenTurnAbilities
+
+.enemy_first
+	call SetEnemyTurn
+	call ActivateBetweenTurnAbilities
+	call SetPlayerTurn
+; fallthrough
+
+ActivateBetweenTurnAbilities:
+	call GetUserAbility
+	ld hl, .JumpList
+	ld b, a
+.loop
+	ld a, [hli]
+	cp -1
+	ret z
+	cp b
+	jr z, .jump
+	inc hl
+	inc hl
+	jr .loop
+
+.jump
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp hl
+
+.JumpList:
+	dbw MOODY, Activate_Moody
+	dbw SPEED_BOOST, Activate_SpeedBoost
+	db -1
+
+DEF NUM_MOODY_STATS EQU 7
+Activate_Moody:
+; always activates, so animate it now
+	call AnimateUserAbility
+	ld a, 1
+	ld [wAlreadyExecuted], a
+
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wPlayerStatLevels
+	jr z, .got_levels
+	ld hl, wEnemyStatLevels
+.got_levels
+; check if all 1 or all 13 (min or max)
+	push hl
+	ld bc, 0
+	ld e, NUM_MOODY_STATS
+.check_loop
+	ld a, [hli]
+	cp MAX_STAT_LEVEL
+	jr nz, .not_max
+	inc c
+.not_max
+	dec a
+	jr nz, .not_min
+	inc b
+.not_min
+	dec e
+	jr nz, .check_loop
+	pop hl
+
+	ld a, NUM_MOODY_STATS
+; if all max, just lower a random stat
+	cp c
+	jr z, .lower_random_stat
+; if all min, just raise a random stat
+	cp b
+	jr z, .raise_random_stat
+; raise and lower stats
+	ld d, h
+	ld e, l
+.random_loop
+	call .get_random_stat
+	ld c, a
+	call .get_random_stat
+	cp c
+	jr z, .random_loop
+	ld b, a
+	ld l, c
+	ld h, 0
+	add hl, de
+	ld a, [hl]
+	cp MAX_STAT_LEVEL
+	jr z, .random_loop
+	ld l, b
+	ld h, 0
+	add hl, de
+	ld a, [hl]
+	dec a
+	jr z, .random_loop
+; raise stat c, lower stat b
+	push bc
+	ld b, c
+	set 4, b
+	xor a
+	farcall FarChangeStat
+	pop bc
+	ld a, STAT_LOWER
+	farjp FarChangeStat
+
+.raise_random_stat
+	call .get_random_stat
+	ld b, a
+	set 4, b
+	xor a
+	farjp FarChangeStat
+
+.lower_random_stat
+	call .get_random_stat
+	ld b, a
+	ld a, STAT_LOWER
+	farjp FarChangeStat
+
+.get_random_stat
+	call BattleRandom
+	maskbits NUM_MOODY_STATS
+	cp NUM_MOODY_STATS
+	jr nc, .get_random_stat
+	ret
+
+Activate_SpeedBoost:
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wPlayerSpdLevel
+	jr z, .got_levels
+	ld hl, wEnemySpdLevel
+.got_levels
+; if max, don't do anything
+	ld a, [hl]
+	cp MAX_STAT_LEVEL
+	ret z
+; activate
+	call AnimateUserAbility
+; raise by one stage
+	ld a, 1
+	ld [wAlreadyExecuted], a
+	ld b, SPEED
+	xor a
+	farjp FarChangeStat

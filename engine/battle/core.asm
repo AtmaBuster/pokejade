@@ -222,6 +222,9 @@ HandleBetweenTurnEffects:
 	jr z, .CheckEnemyFirst
 	call CheckFaint_PlayerThenEnemy
 	ret c
+	farcall ActivateBetweenTurnAbilitiesBothSides
+	call CheckFaint_PlayerThenEnemy
+	ret c
 	call HandleFutureSight
 	call CheckFaint_PlayerThenEnemy
 	ret c
@@ -237,6 +240,9 @@ HandleBetweenTurnEffects:
 	jr .NoMoreFaintingConditions
 
 .CheckEnemyFirst:
+	call CheckFaint_EnemyThenPlayer
+	ret c
+	farcall ActivateBetweenTurnAbilitiesBothSides
 	call CheckFaint_EnemyThenPlayer
 	ret c
 	call HandleFutureSight
@@ -4272,7 +4278,15 @@ DoEntryHazards:
 	cp STEEL
 	ret z
 	; Mons with Immunity, Leaf Guard (during sunlight) are protected
-	; TO-DO : Immunity, Leaf Guard
+	call GetUserAbility
+	cp IMMUNITY
+	ret z
+	cp LEAF_GUARD
+	jr nz, .no_leaf_guard
+	call GetBattleWeather
+	cp WEATHER_SUN
+	ret z
+.no_leaf_guard
 	; Don't apply if already poisoned
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVar
