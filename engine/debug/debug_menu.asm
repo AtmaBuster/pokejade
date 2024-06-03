@@ -153,6 +153,10 @@ Debug_GiveParty:
 	ld b, h
 	ld c, l
 	pop hl
+	inc hl
+	ld a, [hld]
+	or [hl]
+	jr z, .loop
 	call .set_move
 	call .set_move
 	call .set_move
@@ -478,7 +482,25 @@ Debug_SoundTest:
 	ld [hl], e
 	ret
 
-INCLUDE "engine/debug/music_names.asm"
+Debug_MusicNames::
+FOR __songnum, 0, NUM_MUSIC_SONGS
+
+def curnum equs strfmt("%u", __songnum)
+def songname equs strrpl(strsub("{MUSCONST_ID_{curnum}}", 7), "_", " ")
+
+def slen = strlen("{songname}")
+
+if slen < 18
+	db "{songname}"
+	ds 18 - slen, "@"
+else
+	db strsub("{songname}", 1, 17), "@"
+endc
+
+purge songname
+purge curnum
+
+ENDR
 
 Debug_SubgameMenu:
 	ld hl, COIN_CASE
