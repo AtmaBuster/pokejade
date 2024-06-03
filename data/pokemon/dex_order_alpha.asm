@@ -156,6 +156,7 @@ AlphabeticalPokedexOrder:
 	dw KINGLER
 	dw KIRLIA
 	dw KLEAVOR
+	dw KOKOPELLI
 	dw KOTORA
 	dw KRABBY
 	dw KRICKETOT
@@ -410,7 +411,6 @@ AlphabeticalPokedexOrder:
 	dw ZAPDOS
 	dw ZIGZAGOON
 	dw ZUBAT
-	dw KOKOPELLI
 	dw _SPACEBOAT
 	dw -1
 	dw -1
