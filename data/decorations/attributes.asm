@@ -69,21 +69,21 @@ DecorationAttributePokemonNames:
 	dw SQUIRTLE   ;  2
 	dw WEEDLE     ;  3
 	dw PIKACHU    ;  4
-	dw CLEFAIRY   ;  5
-	dw JIGGLYPUFF ;  6
+	dw -1         ;  5
+	dw -1         ;  6
 	dw ODDISH     ;  7
-	dw DIGLETT    ;  8
+	dw -1         ;  8
 	dw POLIWAG    ;  9
-	dw MACHOP     ; 10
-	dw TENTACOOL  ; 11
+	dw -1         ; 10
+	dw -1         ; 11
 	dw GEODUDE    ; 12
-	dw GRIMER     ; 13
-	dw SHELLDER   ; 14
-	dw GENGAR     ; 15
-	dw ONIX       ; 16
+	dw -1         ; 13
+	dw -1         ; 14
+	dw -1         ; 15
+	dw -1         ; 16
 	dw VOLTORB    ; 17
 	dw STARYU     ; 18
 	dw MAGIKARP   ; 19
-	dw LAPRAS     ; 20
+	dw -1         ; 20
 	dw SNORLAX    ; 21
 	dw UNOWN      ; 22

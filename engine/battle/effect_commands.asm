@@ -1287,6 +1287,7 @@ BattleCommand_critical:
 	jr .Tally
 
 .Farfetchd:
+IF 0
 	ld a, l
 	sub LOW(FARFETCH_D)
 	if HIGH(FARFETCH_D) == 0
@@ -1311,6 +1312,7 @@ BattleCommand_critical:
 ; +2 critical level
 	ld c, 2
 	jr .Tally
+ENDC
 
 .FocusEnergy:
 	ld a, BATTLE_VARS_SUBSTATUS4

@@ -37,18 +37,18 @@ OddEggSpecies:
 	table_width 2, OddEggSpecies
 	dw PICHU
 	dw PICHU
-	dw CLEFFA
-	dw CLEFFA
-	dw IGGLYBUFF
-	dw IGGLYBUFF
-	dw SMOOCHUM
-	dw SMOOCHUM
+	dw -1
+	dw -1
+	dw -1
+	dw -1
+	dw -1
+	dw -1
 	dw MAGBY
 	dw MAGBY
 	dw ELEKID
 	dw ELEKID
-	dw TYROGUE
-	dw TYROGUE
+	dw -1
+	dw -1
 	assert_table_length NUM_ODD_EGGS
 
 OddEggMoves:

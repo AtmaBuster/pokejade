@@ -3,34 +3,34 @@ SpriteMons:
 	table_width 2, SpriteMons
 	dw UNOWN
 	dw GEODUDE
-	dw GROWLITHE
+	dw -1
 	dw WEEDLE
-	dw SHELLDER
+	dw -1
 	dw ODDISH
-	dw GENGAR
+	dw -1
 	dw ZUBAT
 	dw MAGIKARP
 	dw SQUIRTLE
-	dw TOGEPI
-	dw BUTTERFREE
-	dw DIGLETT
+	dw -1
+	dw -1
+	dw -1
 	dw POLIWAG
 	dw PIKACHU
-	dw CLEFAIRY
+	dw -1
 	dw CHARMANDER
-	dw JYNX
+	dw -1
 	dw STARMIE
 	dw BULBASAUR
-	dw JIGGLYPUFF
-	dw GRIMER
+	dw -1
+	dw -1
 	dw EKANS
 	dw PARAS
-	dw TENTACOOL
+	dw -1
 	dw TAUROS
-	dw MACHOP
+	dw -1
 	dw VOLTORB
-	dw LAPRAS
-	dw RHYDON
+	dw -1
+	dw -1
 	dw MOLTRES
 	dw SNORLAX
 	dw GYARADOS

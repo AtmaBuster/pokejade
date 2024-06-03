@@ -3,18 +3,13 @@ FleeMons:
 
 SometimesFleeMons:
 	dw MAGNEMITE
-	dw GRIMER
 	dw TANGELA
-	dw MR__MIME
 	dw EEVEE
 	dw PORYGON
 	dw DRATINI
 	dw DRAGONAIR
-	dw TOGETIC
 	dw UMBREON
 	dw UNOWN
-	dw SNUBBULL
-	dw HERACROSS
 	dw -1
 
 OftenFleeMons:
@@ -23,8 +18,6 @@ OftenFleeMons:
 	dw ZAPDOS
 	dw MOLTRES
 	dw QUAGSIRE
-	dw DELIBIRD
-	dw PHANPY
 	dw TEDDIURSA
 	dw -1
 

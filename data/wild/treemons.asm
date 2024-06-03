@@ -18,114 +18,15 @@ TreeMons:
 
 TreeMonSet_City:
 TreeMonSet_Canyon:
-; common
-	dbbw 50, 10, SPEAROW
-	dbbw 15, 10, SPEAROW
-	dbbw 15, 10, SPEAROW
-	dbbw 10, 10, AIPOM
-	dbbw  5, 10, AIPOM
-	dbbw  5, 10, AIPOM
-	db -1
-; rare
-	dbbw 50, 10, SPEAROW
-	dbbw 15, 10, HERACROSS
-	dbbw 15, 10, HERACROSS
-	dbbw 10, 10, AIPOM
-	dbbw  5, 10, AIPOM
-	dbbw  5, 10, AIPOM
-	db -1
-
 TreeMonSet_Town:
-; common
-	dbbw 50, 10, SPEAROW
-	dbbw 15, 10, EKANS
-	dbbw 15, 10, SPEAROW
-	dbbw 10, 10, AIPOM
-	dbbw  5, 10, AIPOM
-	dbbw  5, 10, AIPOM
-	db -1
-; rare
-	dbbw 50, 10, SPEAROW
-	dbbw 15, 10, HERACROSS
-	dbbw 15, 10, HERACROSS
-	dbbw 10, 10, AIPOM
-	dbbw  5, 10, AIPOM
-	dbbw  5, 10, AIPOM
-	db -1
-
 TreeMonSet_Route:
-; common
-	dbbw 50, 10, HOOTHOOT
-	dbbw 15, 10, SPINARAK
-	dbbw 15, 10, LEDYBA
-	dbbw 10, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	db -1
-; rare
-	dbbw 50, 10, HOOTHOOT
-	dbbw 15, 10, PINECO
-	dbbw 15, 10, PINECO
-	dbbw 10, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	db -1
-
 TreeMonSet_Kanto:
-; common
-	dbbw 50, 10, HOOTHOOT
-	dbbw 15, 10, EKANS
-	dbbw 15, 10, HOOTHOOT
-	dbbw 10, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	db -1
-; rare
-	dbbw 50, 10, HOOTHOOT
-	dbbw 15, 10, PINECO
-	dbbw 15, 10, PINECO
-	dbbw 10, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	db -1
-
 TreeMonSet_Lake:
-; common
-	dbbw 50, 10, HOOTHOOT
-	dbbw 15, 10, VENONAT
-	dbbw 15, 10, HOOTHOOT
-	dbbw 10, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	db -1
-; rare
-	dbbw 50, 10, HOOTHOOT
-	dbbw 15, 10, PINECO
-	dbbw 15, 10, PINECO
-	dbbw 10, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	dbbw  5, 10, EXEGGCUTE
-	db -1
-
 TreeMonSet_Forest:
+TreeMonSet_Rock:
 ; common
-	dbbw 50, 10, HOOTHOOT
-	dbbw 15, 10, PINECO
-	dbbw 15, 10, PINECO
-	dbbw 10, 10, NOCTOWL
-	dbbw  5, 10, BUTTERFREE
-	dbbw  5, 10, BEEDRILL
+	dbbw 100, 10, MAGIKARP
 	db -1
 ; rare
-	dbbw 50, 10, HOOTHOOT
-	dbbw 15, 10, CATERPIE
-	dbbw 15, 10, WEEDLE
-	dbbw 10, 10, HOOTHOOT
-	dbbw  5, 10, METAPOD
-	dbbw  5, 10, KAKUNA
-	db -1
-
-TreeMonSet_Rock:
-	dbbw 90, 15, KRABBY
-	dbbw 10, 15, SHUCKLE
+	dbbw 100, 10, MAGIKARP
 	db -1
