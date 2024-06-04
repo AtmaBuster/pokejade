@@ -48,6 +48,12 @@ INCLUDE "maps/MossyWoods.asm"
 INCLUDE "maps/DeepMossyWoods.asm"
 INCLUDE "maps/RouteN02MossyWoodsGate.asm"
 INCLUDE "maps/ChertCityMossyWoodsGate.asm"
+INCLUDE "maps/ChertPokecenter1F.asm"
+INCLUDE "maps/ChertMart.asm"
+INCLUDE "maps/ChertGym.asm"
+INCLUDE "maps/ChertFlowerShop.asm"
+INCLUDE "maps/ChertHouse1.asm"
+INCLUDE "maps/ChertHouse2.asm"
 
 
 SECTION "Map Scripts 2", ROMX

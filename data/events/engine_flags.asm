@@ -77,6 +77,7 @@ EngineFlags:
 	engine_flag wVisitedSpawns, SPAWN_DEBUG
 	engine_flag wVisitedSpawns, SPAWN_OBSIDIAN
 	engine_flag wVisitedSpawns, SPAWN_SHALE
+	engine_flag wVisitedSpawns, SPAWN_CHERT
 	engine_flag wVisitedSpawns, NUM_SPAWNS ; unused
 
 	engine_flag wLuckyNumberShowFlag, LUCKYNUMBERSHOW_GAME_OVER_F

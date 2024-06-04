@@ -114,11 +114,11 @@ ENDM
 
 	map_attributes RouteN02, ROUTE_N02, $05, WEST | EAST
 	connection west, ShaleCity, SHALE_CITY, 0
-	connection east, ChertCity, CHERT_CITY, 0
+	connection east, ChertCity, CHERT_CITY, -2
 
 	map_attributes ChertCity, CHERT_CITY, $05, SOUTH | WEST | EAST
 	connection south, RouteN09, ROUTE_N09, 0
-	connection west, RouteN02, ROUTE_N02, 0
+	connection west, RouteN02, ROUTE_N02, 2
 	connection east, RouteN03, ROUTE_N03, 0
 
 	map_attributes RouteN03, ROUTE_N03, $05, WEST | EAST
@@ -242,3 +242,9 @@ ENDC
 	map_attributes RouteN02DayCare, ROUTE_N02_DAYCARE, $00, 0
 	map_attributes RouteN02MossyWoodsGate, ROUTE_N02_MOSSY_WOODS_GATE, $00, 0
 	map_attributes ChertCityMossyWoodsGate, CHERT_CITY_MOSSY_WOODS_GATE, $00, 0
+	map_attributes ChertPokecenter1F, CHERT_POKECENTER_1F, $00, 0
+	map_attributes ChertMart, CHERT_MART, $00, 0
+	map_attributes ChertGym, CHERT_GYM, $00, 0
+	map_attributes ChertFlowerShop, CHERT_FLOWER_SHOP, $00, 0
+	map_attributes ChertHouse1, CHERT_HOUSE_1, $00, 0
+	map_attributes ChertHouse2, CHERT_HOUSE_2, $00, 0

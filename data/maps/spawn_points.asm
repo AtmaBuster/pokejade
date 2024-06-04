@@ -17,6 +17,7 @@ ENDC
 
 	spawn OBSIDIAN_TOWN,               3, 10
 	spawn SHALE_CITY,                  1, 12
+	spawn CHERT_CITY,                  7,  4
 
 	spawn N_A,                        -1, -1
 

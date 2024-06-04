@@ -40,6 +40,8 @@ City13_Blocks:          INCBIN "maps/City13.ablk"
 RouteN02DayCare_Blocks: INCBIN "maps/RouteN02DayCare.ablk"
 MossyWoods_Blocks:      INCBIN "maps/MossyWoods.ablk"
 DeepMossyWoods_Blocks:  INCBIN "maps/DeepMossyWoods.ablk"
+ChertGym_Blocks:        INCBIN "maps/ChertGym.ablk"
+ChertFlowerShop_Blocks: INCBIN "maps/ChertFlowerShop.ablk"
 
 
 SECTION "Map Blocks 2", ROMX
@@ -50,12 +52,16 @@ TimeCapsule_Blocks:     INCBIN "maps/TradeCenter.ablk"
 
 ShaleHouse1_Blocks:
 ShaleHouse2_Blocks:
+ChertHouse1_Blocks:
+ChertHouse2_Blocks:
 _House_Blocks:          INCBIN "maps/House1.ablk"
 
 ShaleMart_Blocks:
+ChertMart_Blocks:
 _Mart_Blocks:           INCBIN "maps/Mart.ablk"
 
 ShalePokecenter1F_Blocks:
+ChertPokecenter1F_Blocks:
 _Pokecenter1F_Blocks:   INCBIN "maps/Pokecenter1F.ablk"
 
 RouteN02MossyWoodsGate_Blocks:

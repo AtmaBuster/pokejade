@@ -10,8 +10,8 @@
 	const_def
 	const MART_SHALE
 	const MART_SHALE_DEX
+	const MART_CHERT
 
-	const MART_VIOLET
 	const MART_AZALEA
 	const MART_CIANWOOD
 	const MART_GOLDENROD_2F_1

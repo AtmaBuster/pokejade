@@ -2851,8 +2851,8 @@ wObsidianMeadowSceneID::                          db
 wPlayersHouse1FSceneID::                          db
 wShaleCitySceneID::                               db
 wRouteN02SceneID::                                db
+wChertCitySceneID::                               db
 
-wTrainerHouseB1FSceneID::                         db
 wVictoryRoadGateSceneID::                         db
 wSaffronMagnetTrainStationSceneID::               db
 wRoute16GateSceneID::                             db

@@ -15,4 +15,5 @@ MapScenes::
 	scene_var PLAYERS_HOUSE_1F, wPlayersHouse1FSceneID
 	scene_var SHALE_CITY,       wShaleCitySceneID
 	scene_var ROUTE_N02,        wRouteN02SceneID
+	scene_var CHERT_CITY,       wChertCitySceneID
 	db -1 ; end

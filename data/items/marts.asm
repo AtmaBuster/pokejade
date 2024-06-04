@@ -3,7 +3,7 @@ Marts:
 	table_width 2, Marts
 	dw MartShale
 	dw MartShaleDex
-	dw MartViolet
+	dw MartChert
 	dw MartAzalea
 	dw MartCianwood
 	dw MartGoldenrod2F1
@@ -52,18 +52,16 @@ MartShaleDex:
 	dw PARLYZ_HEAL
 	dw AWAKENING
 
-MartViolet:
-	db 10 ; # items
+MartChert:
+	db 8 ; # items
 	dw POKE_BALL
 	dw POTION
 	dw ESCAPE_ROPE
 	dw ANTIDOTE
 	dw PARLYZ_HEAL
 	dw AWAKENING
-	dw X_DEFEND
-	dw X_ATTACK
-	dw X_SPEED
-	dw FLOWER_MAIL
+	dw REPEL
+	dw LURE
 
 MartAzalea:
 	db 9 ; # items

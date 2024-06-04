@@ -78,6 +78,12 @@ ENDC
 	map_const ROUTE_N08,                                   20, 10 ;  3
 	map_const ROUTE_N09,                                   10, 20 ;  4
 	map_const CHERT_CITY_MOSSY_WOODS_GATE,                  5,  4 ;  5
+	map_const CHERT_POKECENTER_1F,                          5,  4 ;  6
+	map_const CHERT_MART,                                   6,  4 ;  7
+	map_const CHERT_GYM,                                    1,  1 ;  8
+	map_const CHERT_FLOWER_SHOP,                            5,  4 ;  9
+	map_const CHERT_HOUSE_1,                                4,  4 ; 10
+	map_const CHERT_HOUSE_2,                                4,  4 ; 11
 	endgroup
 
 	newgroup CITY04                                               ;  6
