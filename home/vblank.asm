@@ -7,11 +7,6 @@
 ; This prevents the display and audio output from lagging.
 
 VBlank::
-	push af
-	push bc
-	push de
-	push hl
-
 	ldh a, [hROMBank]
 	ldh [hROMBankBackup], a
 

@@ -1,8 +1,8 @@
 _CopyBytes::
 ; copy bc bytes from hl to de
-	inc b ; we bail the moment b hits 0, so include the last run
+;	inc b ; we bail the moment b hits 0, so include the last run
 
-	srl c
+;	srl c
 	jr nc, .skip1
 	ld a, [hli]
 	ld [de], a
@@ -61,8 +61,8 @@ SwapBytes::
 
 _ByteFill::
 ; fill bc bytes with the value of a, starting at hl
-	inc b ; we bail the moment b hits 0, so include the last run
-	srl c
+;	inc b ; we bail the moment b hits 0, so include the last run
+;	srl c
 	jr nc, .skip1
 	ld [hli], a
 

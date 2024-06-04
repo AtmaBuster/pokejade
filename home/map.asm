@@ -955,10 +955,6 @@ GetMovementData::
 _GetScriptByte::
 ; Return byte at wScriptBank:wScriptPos in a.
 
-	push hl
-	push bc
-	ldh a, [hROMBank]
-	push af
 	ld a, [wScriptBank]
 	rst Bankswitch
 

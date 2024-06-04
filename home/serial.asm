@@ -1,11 +1,5 @@
 Serial::
 ; The serial interrupt.
-
-	push af
-	push bc
-	push de
-	push hl
-
 	ld a, [wPrinterConnectionOpen]
 	bit 0, a
 	jr nz, .printer

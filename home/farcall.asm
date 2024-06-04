@@ -56,9 +56,6 @@ StackCallInBankA:
 RstFarCall::
 ; Call the following dba pointer on the stack.
 ; Preserves a, bc, de, hl
-	ldh [hFarCallSavedA], a
-	ld a, h
-	ldh [hFarCallSavedH], a
 	ld a, l
 	ldh [hFarCallSavedL], a
 	pop hl

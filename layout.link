@@ -27,6 +27,8 @@ ROM0
 	"serial"
 	org $0060
 	"joypad"
+	org $0068
+	"Low ROM"
 	org $0100
 	"Header"
 	org $0150

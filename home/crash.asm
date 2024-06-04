@@ -1,9 +1,3 @@
-Crash_rst38::
-	di
-	ldh [hCrashStoreAF + 1], a
-	ld a, ERR_RST38
-	jr CrashHandler
-
 Crash_div0::
 	di
 	ldh [hCrashStoreAF + 1], a

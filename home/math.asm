@@ -44,8 +44,12 @@ Multiply::
 Divide::
 ; Divide hDividend length b (max 4 bytes) by hDivisor. Result in hQuotient.
 ; All values are big endian.
+; Check for divide-by-zero
+	ldh a, [hDivisor]
+	and a
+	jp z, Crash_div0
 	push hl
 	push de
 	push bc
-	homecall _Divide
+	farcall _Divide
 	jmp PopBCDEHL
