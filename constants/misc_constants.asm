@@ -51,3 +51,11 @@ DEF HOF_MASTER_COUNT EQU 200
 
 ; sm83 instructions
 DEF JP_INSTRUCTION EQU $c3
+
+; crash constants
+	const_def
+	const ERR_RST38
+	const ERR_DIV0
+	const ERR_DMAROM
+	const ERR_INTTIMER
+	const ERR_INTJOY

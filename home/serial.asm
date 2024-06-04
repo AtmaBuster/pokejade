@@ -156,7 +156,7 @@ Serial_ExchangeByte::
 
 .not_player_1_or_timed_out
 	ldh a, [rIE]
-	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
+	and (1 << SERIAL) | (1 << LCD_STAT) | (1 << VBLANK)
 	cp 1 << SERIAL
 	jr nz, .loop
 	ld a, [wLinkByteTimeout]
@@ -180,7 +180,7 @@ Serial_ExchangeByte::
 	xor a
 	ldh [hSerialReceivedNewData], a
 	ldh a, [rIE]
-	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
+	and (1 << SERIAL) | (1 << LCD_STAT) | (1 << VBLANK)
 	sub 1 << SERIAL
 	jr nz, .non_serial_interrupts_enabled
 
@@ -212,7 +212,7 @@ Serial_ExchangeByte::
 
 .timed_out
 	ldh a, [rIE]
-	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
+	and (1 << SERIAL) | (1 << LCD_STAT) | (1 << VBLANK)
 	cp 1 << SERIAL
 	ld a, SERIAL_NO_DATA_BYTE
 	ret z

@@ -1,8 +1,10 @@
 ; rst vectors (called through the rst instruction)
 
 SECTION "rst0", ROM0[$0000]
-	di
-	jmp Start
+Bankswitch::
+	ldh [hROMBank], a
+	ld [MBC3RomBank], a
+	ret
 
 SECTION "rst8", ROM0[$0008]
 FarCall::
@@ -18,10 +20,9 @@ DoNothing::
 	ret ; no-optimize Stub Function (global do nothing)
 
 SECTION "rst10", ROM0[$0010]
-Bankswitch::
-	ldh [hROMBank], a
-	ld [MBC3RomBank], a
-	ret
+
+GetScriptByte::
+	jmp _GetScriptByte
 
 SECTION "rst18", ROM0[$0018]
 
@@ -52,9 +53,8 @@ SwapHLDE::
 
 SECTION "rst38", ROM0[$0038]
 
-GetScriptByte::
-	jmp _GetScriptByte
-
+RST38::
+	jp Crash_rst38
 
 SECTION "vblank", ROM0[$0040]
 	jmp VBlank
@@ -63,13 +63,21 @@ SECTION "lcd", ROM0[$0048]
 	jr hLCDInterruptFunction
 
 SECTION "timer", ROM0[$0050]
-	reti
+Crash_inttimer:
+	di
+	ldh [hCrashStoreAF + 1], a
+	ld a, ERR_INTTIMER
+	jmp CrashHandler
 
 SECTION "serial", ROM0[$0058]
 	jmp Serial
 
 SECTION "joypad", ROM0[$0060]
-	jmp Joypad
+Crash_intjoy:
+	di
+	ldh [hCrashStoreAF + 1], a
+	ld a, ERR_INTJOY
+	jmp CrashHandler
 
 
 SECTION "Header", ROM0[$0100]

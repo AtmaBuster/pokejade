@@ -580,11 +580,10 @@ TryReceivingIRDataBlock:
 	cp MG_OKAY
 	ret
 
-InitializeIRCommunicationInterrupts:
+InitializeIRCommunicationInterrupts: ; TO-DO?
 	call StartFastIRTimer
-	ld a, 1 << TIMER
-	ldh [rIE], a
 	xor a
+	ldh [rIE], a
 	ldh [rIF], a
 	call BeginIRCommunication
 ; waits for ~$40400 cycles = ~0.25 seconds

@@ -15,6 +15,12 @@ SimpleMultiply::
 
 SimpleDivide::
 ; Divide a by c. Return quotient b and remainder a.
+; Check for divide-by-zero
+	ld b, a
+	ld a, c
+	and a
+	jp z, Crash_div0
+	ld a, b
 	ld b, 0
 .loop
 	inc b

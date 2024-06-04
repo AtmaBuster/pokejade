@@ -611,3 +611,8 @@ INCLUDE "engine/battle/stats.asm"
 SECTION "Battle Ability", ROMX
 
 INCLUDE "engine/battle/ability.asm"
+
+
+SECTION "Crash Handler", ROMX
+
+INCLUDE "engine/crash.asm"

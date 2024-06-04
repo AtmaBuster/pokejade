@@ -1,5 +1,18 @@
 SECTION "HRAM", HRAM
 
+UNION
+; Crash Handler
+hCrashType:: db
+hCrashStoreAF:: dw
+hCrashStoreBC:: dw
+hCrashStoreDE:: dw
+hCrashStoreHL:: dw
+hCrashStoreVRAM_Bank:: db
+hCrashStoreWRAM_Bank:: db
+hCrashStoreROM_Bank:: db
+hCrashStoreStackContents::
+NEXTU
+
 hROMBankBackup:: db
 hBuffer::
 hFarByte::
@@ -93,6 +106,7 @@ hMGChecksum:: dw
 hMGUnusedMsgLength:: db
 hMGRole:: db
 hMGStatusFlags:: db
+
 ENDU
 
 UNION
@@ -197,6 +211,7 @@ hRand16:: ds 2
 ENDU
 hRand32_Result:: ds 4
 
+ENDU
 
 	ds 1 ; MAKE SURE THIS IS HERE TO RESERVE $FFFF
 ENDSECTION
