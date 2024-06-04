@@ -1,3 +1,5 @@
+INCLUDE "version.asm"
+
 INCLUDE "constants/charmap.asm"
 
 INCLUDE "macros/asserts.asm"

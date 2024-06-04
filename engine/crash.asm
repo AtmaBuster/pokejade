@@ -72,6 +72,7 @@ ENDR
 	call Crash_PutStackData
 	call Crash_PutRegisters
 	call Crash_PutVars
+	call Crash_PutVersion
 
 	ldh a, [hCrashType]
 	ld c, a
@@ -170,6 +171,10 @@ Crash_PutVars:
 	ldh a, [hCrashStoreVRAM_Bank]
 	and %1
 	jp Crash_PutHex
+
+Crash_PutVersion:
+	hlcoord 0, 17
+	ld de, Crash_VersionString
 
 Crash_CopyString:
 	ld a, [de]
@@ -305,6 +310,9 @@ Crash_ErrorStrings:
 	db "TIMER INT.", 0
 .Err_intjoy
 	db "JOYPAD INT.", 0
+
+Crash_VersionString:
+	db "{VER_STRING}", 0
 popc
 
 CrashHandlerFont: INCBIN "gfx/font/ascii_font.1bpp"
