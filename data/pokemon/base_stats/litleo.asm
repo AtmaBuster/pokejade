@@ -11,7 +11,7 @@
 	db GENDER_F87_5 ; gender ratio
 	db 20 ; step cycles to hatch
 	INCBIN "gfx/pokemon/placeholder/front.dimensions"
-	db RIVALRY, UNAWARE, MOXIE ; abilities
+	db RIVALRY, UNNERVE, MOXIE ; abilities
 	db 0 ; unused
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	db 70 ; base happiness

@@ -310,9 +310,9 @@ endc
 	ret
 
 .walk
-	ld a, [wCurInput]
-	and B_BUTTON
-	jr nz, .run
+;	ld a, [wCurInput]
+;	and B_BUTTON
+;	jr nz, .run
 	ld a, STEP_WALK
 	call .DoStep
 	scf
