@@ -59,10 +59,7 @@ SwapHLDE::
 SECTION "rst38", ROM0[$0038]
 
 Crash_rst38::
-	di
-	ldh [hCrashStoreAF + 1], a
-	ld a, ERR_RST38
-	jr CrashHandler
+	crashvec ERR_RST38
 
 SECTION "vblank", ROM0[$0040]
 _VBlank::
@@ -88,10 +85,7 @@ DoNothing::
 
 SECTION "timer", ROM0[$0050]
 Crash_inttimer::
-	di
-	ldh [hCrashStoreAF + 1], a
-	ld a, ERR_INTTIMER
-	jr CrashHandler
+	crashvec ERR_INTTIMER
 
 SECTION "serial", ROM0[$0058]
 _Serial::
@@ -104,11 +98,7 @@ _Serial::
 
 SECTION "joypad", ROM0[$0060]
 Crash_intjoy::
-	di
-	ldh [hCrashStoreAF + 1], a
-	ld a, ERR_INTJOY
-	jr CrashHandler
-
+	crashvec ERR_INTJOY
 
 SECTION "Low ROM", ROM0[$0068]
 

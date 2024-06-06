@@ -138,7 +138,7 @@ ENDM
 	connection east, RouteN04, ROUTE_N04, 0
 
 	map_attributes RouteN04, ROUTE_N04, $05, NORTH | WEST
-	connection north, City05West, CITY_05_WEST, 0
+	connection north, MonolithCityWest, MONOLITH_CITY_WEST, 0
 	connection west, City04, CITY_04, 0
 
 	map_attributes CoquinaTown, COQUINA_TOWN, $05, WEST | EAST
@@ -158,32 +158,32 @@ ENDM
 	connection south, RouteN06, ROUTE_N06, -40
 
 	map_attributes RouteN05, ROUTE_N05, $05, NORTH | SOUTH
-	connection north, City05East, CITY_05_EAST, -10
+	connection north, MonolithCityEast, MONOLITH_CITY_EAST, -10
 	connection south, Town06, TOWN_06, 0
 
-	map_attributes City05West, CITY_05_WEST, $05, NORTH | SOUTH | EAST
+	map_attributes MonolithCityWest, MONOLITH_CITY_WEST, $05, NORTH | SOUTH | EAST
 	connection north, RouteN11, ROUTE_N11, -20
 	connection south, RouteN04, ROUTE_N04, 0
-	connection east, City05East, CITY_05_EAST, 0
+	connection east, MonolithCityEast, MONOLITH_CITY_EAST, 0
 
-	map_attributes City05East, CITY_05_EAST, $05, NORTH | SOUTH | WEST
+	map_attributes MonolithCityEast, MONOLITH_CITY_EAST, $05, NORTH | SOUTH | WEST
 	connection north, RouteN10, ROUTE_N10, 10
 	connection south, RouteN05, ROUTE_N05, 10
-	connection west, City05West, CITY_05_WEST, 0
+	connection west, MonolithCityWest, MONOLITH_CITY_WEST, 0
 
 	map_attributes Town08, TOWN_08, $05, SOUTH
 	connection south, RouteN10, ROUTE_N10, 0
 
 	map_attributes RouteN10, ROUTE_N10, $05, NORTH | SOUTH
 	connection north, Town08, TOWN_08, 0
-	connection south, City05East, CITY_05_EAST, -10
+	connection south, MonolithCityEast, MONOLITH_CITY_EAST, -10
 
 	map_attributes Town09, TOWN_09, $05, WEST | EAST
 	connection west, RouteN12, ROUTE_N12, -30
 	connection east, RouteN11, ROUTE_N11, 0
 
 	map_attributes RouteN11, ROUTE_N11, $05, SOUTH | WEST
-	connection south, City05West, CITY_05_WEST, 20
+	connection south, MonolithCityWest, MONOLITH_CITY_WEST, 20
 	connection west, Town09, TOWN_09, 0
 
 	map_attributes RouteN12, ROUTE_N12, $05, NORTH | WEST | EAST

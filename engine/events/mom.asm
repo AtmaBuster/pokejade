@@ -32,11 +32,11 @@ BankOfMom:
 	dw .AskDST
 
 .CheckIfBankInitialized:
-	ld a, [wMomSavingMoney]
-	bit MOM_ACTIVE_F, a
+;	ld a, [wMomSavingMoney]
+;	bit MOM_ACTIVE_F, a
 	jr nz, .savingmoneyalready
-	set MOM_ACTIVE_F, a
-	ld [wMomSavingMoney], a
+;	set MOM_ACTIVE_F, a
+;	ld [wMomSavingMoney], a
 	ld a, $1
 	jr .done_0
 
@@ -54,14 +54,14 @@ BankOfMom:
 	jr c, .DontSaveMoney
 	ld hl, MomLeavingText2
 	call PrintText
-	ld a, (1 << MOM_ACTIVE_F) | (1 << MOM_SAVING_SOME_MONEY_F)
+;	ld a, (1 << MOM_ACTIVE_F) | (1 << MOM_SAVING_SOME_MONEY_F)
 	jr .done_1
 
 .DontSaveMoney:
-	ld a, 1 << MOM_ACTIVE_F
+;	ld a, 1 << MOM_ACTIVE_F
 
 .done_1
-	ld [wMomSavingMoney], a
+;	ld [wMomSavingMoney], a
 	ld hl, MomLeavingText3
 	call PrintText
 	ld a, $8
@@ -150,7 +150,7 @@ BankOfMom:
 	ld de, wStringBuffer2 + 3
 	ld bc, 3
 	rst CopyBytes
-	ld bc, wMomsMoney
+;	ld bc, wMomsMoney
 	ld de, wStringBuffer2
 	call GiveMoney
 	jr c, .NotEnoughRoomInBank
@@ -158,7 +158,7 @@ BankOfMom:
 	ld de, wMoney
 	call TakeMoney
 	ld hl, wStringBuffer2
-	ld de, wMomsMoney
+;	ld de, wMomsMoney
 	ld bc, 3
 	rst CopyBytes
 	ld de, SFX_TRANSACTION
@@ -210,7 +210,7 @@ BankOfMom:
 	ld de, wStringBuffer2 + 3
 	ld bc, 3
 	rst CopyBytes
-	ld de, wMomsMoney
+;	ld de, wMomsMoney
 	ld bc, wStringBuffer2
 	call CompareMoney
 	jr c, .InsufficientFundsInBank
@@ -219,7 +219,7 @@ BankOfMom:
 	call GiveMoney
 	jr c, .NotEnoughRoomInWallet
 	ld bc, wStringBuffer2 + 3
-	ld de, wMomsMoney
+;	ld de, wMomsMoney
 	call TakeMoney
 	ld hl, wStringBuffer2
 	ld de, wMoney
@@ -253,8 +253,8 @@ BankOfMom:
 	call PrintText
 	call YesNoBox
 	jr c, .StopSavingMoney
-	ld a, (1 << MOM_ACTIVE_F) | (1 << MOM_SAVING_SOME_MONEY_F)
-	ld [wMomSavingMoney], a
+;	ld a, (1 << MOM_ACTIVE_F) | (1 << MOM_SAVING_SOME_MONEY_F)
+;	ld [wMomSavingMoney], a
 	ld hl, MomStartSavingMoneyText
 	call PrintText
 	ld a, $8
@@ -262,8 +262,8 @@ BankOfMom:
 	ret
 
 .StopSavingMoney:
-	ld a, 1 << MOM_ACTIVE_F
-	ld [wMomSavingMoney], a
+;	ld a, 1 << MOM_ACTIVE_F
+;	ld [wMomSavingMoney], a
 	ld a, $7
 	ld [wJumptableIndex], a
 	ret
@@ -412,7 +412,7 @@ Mom_ContinueMenuSetup:
 	ld de, Mom_SavedString
 	rst PlaceString
 	hlcoord 12, 2
-	ld de, wMomsMoney
+;	ld de, wMomsMoney
 	lb bc, PRINTNUM_MONEY | 3, 6
 	call PrintNum
 	hlcoord 1, 4

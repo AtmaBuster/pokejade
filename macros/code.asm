@@ -67,3 +67,10 @@ MACRO cphl16
 	smartcp LOW(\1)
 .done\@
 ENDM
+
+MACRO crashvec
+	di
+	ldh [hCrashStoreAF + 1], a
+	ld a, \1
+	jr CrashHandler
+ENDM

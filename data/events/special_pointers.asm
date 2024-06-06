@@ -156,3 +156,7 @@ SpecialsPointers::
 	add_special CountTrainerStars
 
 	add_special BerryTree
+	add_special ChooseBerryToBuy
+	add_special BufferBoughtBerryAndTradeItem
+	add_special TakeBoughtBerry
+	add_special GetBerryTradeItem

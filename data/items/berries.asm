@@ -26,3 +26,9 @@ BerryData:
 	berry_data PNK_APRICORN,  1,  3, OranBerryGFX
 	assert_table_length NUM_BERRY_ITEMS
 	dw -1
+
+BerryBuyerData:
+	dw ORAN_BERRY,  TINYMUSHROOM
+	dw PECHA_BERRY, SILVER_LEAF
+	dw CHERI_BERRY, SILVER_LEAF
+	dw -1

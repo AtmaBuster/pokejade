@@ -1,11 +1,11 @@
 	object_const_def
 
-City05West_MapScripts:
+MonolithCityWest_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-City05West_MapEvents:
+MonolithCityWest_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events

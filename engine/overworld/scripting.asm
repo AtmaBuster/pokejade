@@ -1793,11 +1793,8 @@ CompareMoneyAction:
 	ret
 
 GetMoneyAccount:
-	rst GetScriptByte
-	and a
+	rst GetScriptByte ; deprecated
 	ld de, wMoney ; YOUR_MONEY
-	ret z
-	ld de, wMomsMoney ; MOMS_MONEY
 	ret
 
 LoadMoneyAmountToMem:

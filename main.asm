@@ -330,6 +330,7 @@ SECTION "Standard Scripts", ROMX
 INCLUDE "engine/events/std_scripts.asm"
 INCLUDE "engine/events/trainer_scripts.asm"
 INCLUDE "engine/events/berry_trees.asm"
+INCLUDE "engine/events/berry_buyer.asm"
 
 
 SECTION "bank32", ROMX

@@ -1,3 +1,6 @@
+Crash_index::
+	crashvec ERR_INDEX
+
 Crash_div0::
 	di
 	ldh [hCrashStoreAF + 1], a

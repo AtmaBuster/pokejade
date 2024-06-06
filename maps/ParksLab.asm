@@ -94,7 +94,7 @@ ParksLabSC_AfterStarter:
 
 	para "I have a letter"
 	line "for a colleague in"
-	cont "-------- CITY."
+	cont "MONOLITH CITY."
 
 	para "Would you deliver"
 	line "it for me?"

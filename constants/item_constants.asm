@@ -206,7 +206,7 @@ DEF FIRST_KEY_ITEM EQU const_value
 	const LOST_ITEM    ; 0111 -
 	const BASEMENT_KEY ; 0112 -
 	const PASS         ; 0113 -
-	const SQUIRTBOTTLE ; 0114
+	const WAILMER_PAIL ; 0114
 	const RAINBOW_WING ; 0115
 	const SHINY_CHARM  ; 0116
 	const LETTER       ; 0117

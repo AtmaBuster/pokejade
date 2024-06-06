@@ -2786,16 +2786,11 @@ wStatusFlags2::
 	db
 
 wMoney:: ds 3
-wMomsMoney:: ds 3
-
-wMomSavingMoney::
-; bit 0: saving some money
-; bit 1: saving half money (unused)
-; bit 2: saving all money (unused)
-; bit 7: active
-	db
-
 wCoins:: dw
+
+wBerryBuyerCurrentBerry:: dw
+
+	ds 2
 
 wBadges::
 wJohtoBadges:: flag_array NUM_JOHTO_BADGES

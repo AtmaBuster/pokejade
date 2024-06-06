@@ -13,8 +13,8 @@
 	const LANDMARK_ROUTE_N03         ; 09
 	const LANDMARK_CITY_04           ; 0a
 	const LANDMARK_ROUTE_N04         ; 0b
-	const LANDMARK_CITY_05_WEST      ; 0c
-	const LANDMARK_CITY_05_EAST      ; 0d
+	const LANDMARK_MONOLITH_CITY_WEST; 0c
+	const LANDMARK_MONOLITH_CITY_EAST; 0d
 	const LANDMARK_ROUTE_N05         ; 0e
 	const LANDMARK_TOWN_06           ; 0f
 	const LANDMARK_ROUTE_N06         ; 10

@@ -19,8 +19,8 @@ Landmarks:
 	landmark  96,  84, RouteN03Name
 	landmark 112,  88, City04Name
 	landmark 124,  88, RouteN04Name
-	landmark 128,  72, City05WestName
-	landmark 144,  72, City05EastName
+	landmark 128,  72, MonolithCityWestName
+	landmark 144,  72, MonolithCityEastName
 	landmark 148,  96, RouteN05Name
 	landmark 148, 116, Town06Name
 	landmark 132, 124, RouteN06Name
@@ -112,8 +112,8 @@ ObsidianMeadowName:  db "OBSIDIAN<BSP>MEADOW@"
 ShaleCityName:       db "SHALE CITY@"
 ChertCityName:       db "CHERT CITY@"
 City04Name:          db "CITY 04@"
-City05WestName:      db "CITY 05<BSP>WEST@"
-City05EastName:      db "CITY 05<BSP>EAST@"
+MonolithCityWestName:db "MONOLITH<BSP>CITY W.@"
+MonolithCityEastName:db "MONOLITH<BSP>CITY E.@"
 Town06Name:          db "TOWN 06@"
 CoquinaTownName:     db "COQUINA<BSP>TOWN@"
 Town08Name:          db "TOWN 08@"

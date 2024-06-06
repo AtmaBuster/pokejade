@@ -102,9 +102,9 @@ ENDC
 	map_const ROUTE_N05,                                   10, 40 ;  2
 	endgroup
 
-	newgroup CITY05                                               ;  9
-	map_const CITY_05_WEST,                                20, 20 ;  1
-	map_const CITY_05_EAST,                                20, 20 ;  2
+	newgroup MONOLITH                                             ;  9
+	map_const MONOLITH_CITY_WEST,                          20, 20 ;  1
+	map_const MONOLITH_CITY_EAST,                          20, 20 ;  2
 	endgroup
 
 	newgroup TOWN08                                               ; 10

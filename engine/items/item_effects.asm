@@ -228,7 +228,7 @@ ItemEffectsKeyItems:
 	dw NoEffect           ; LOST_ITEM
 	dw BasementKeyEffect  ; BASEMENT_KEY
 	dw NoEffect           ; PASS
-	dw SquirtbottleEffect ; SQUIRTBOTTLE
+	dw WailmerPailEffect  ; WAILMER_PAIL
 	dw NoEffect           ; RAINBOW_WING
 	dw NoEffect           ; SHINY_CHARM
 	dw NoEffect           ; LETTER
@@ -2688,8 +2688,8 @@ PPRestoredText:
 	text_far _PPRestoredText
 	text_end
 
-SquirtbottleEffect:
-	farjp _Squirtbottle
+WailmerPailEffect:
+	farjp _WailmerPail
 
 CardKeyEffect:
 	farjp _CardKey

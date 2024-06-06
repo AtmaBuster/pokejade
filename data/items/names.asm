@@ -200,7 +200,7 @@ KeyItemNames::
 	li "LOST ITEM"    ; 0111
 	li "BASEMENT KEY" ; 0112
 	li "PASS"         ; 0113
-	li "SQUIRTBOTTLE" ; 0114
+	li "WAILMER PAIL" ; 0114
 	li "RAINBOW WING" ; 0115
 	li "SHINY CHARM"  ; 0116
 	li "LETTER"       ; 0117

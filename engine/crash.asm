@@ -294,11 +294,14 @@ Crash_BaseTilemap:
 .end
 
 Crash_ErrorStrings:
+	table_width 2, Crash_ErrorStrings
 	dw .Err_rst38
 	dw .Err_div0
 	dw .Err_dmarom
 	dw .Err_inttimer
 	dw .Err_intjoy
+	dw .Err_index
+	assert_table_length NUM_CRASH_TYPES
 
 .Err_rst38
 	db "0xFF EXEC", 0
@@ -310,6 +313,8 @@ Crash_ErrorStrings:
 	db "TIMER INT.", 0
 .Err_intjoy
 	db "JOYPAD INT.", 0
+.Err_index
+	db "INDEX OOB", 0
 
 Crash_VersionString:
 	db "{VER_STRING}", 0

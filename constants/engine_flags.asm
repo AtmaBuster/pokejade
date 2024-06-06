@@ -10,9 +10,6 @@
 	const ENGINE_DAY_CARE_HAS_EGG
 	const ENGINE_DAY_CARE_HAS_MON1
 	const ENGINE_DAY_CARE_HAS_MON2
-; wMomSavingMoney
-	const ENGINE_MOM_SAVING_MONEY
-	const ENGINE_MOM_ACTIVE
 ; wUnusedTwoDayTimerOn
 	const ENGINE_UNUSED_TWO_DAY_TIMER_ON
 ; wStatusFlags

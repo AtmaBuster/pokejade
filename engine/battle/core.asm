@@ -2605,66 +2605,20 @@ WinTrainerBattle:
 	ld a, [wAmuletCoin]
 	and a
 	call nz, .DoubleReward
-	call .CheckMaxedOutMomMoney
-	push af
-	ld a, FALSE ; no-optimize a = 0
-	jr nc, .okay
-	ld a, [wMomSavingMoney]
-	and MOM_SAVING_MONEY_MASK
-	cp (1 << MOM_SAVING_SOME_MONEY_F) | (1 << MOM_SAVING_HALF_MONEY_F)
-	jr nz, .okay
-	inc a ; TRUE
-
-.okay
-	ld b, a
 	ld c, 4
 .loop
-	ld a, b
-	and a
-	jr z, .loop2
-	call .AddMoneyToMom
-	dec c
-	dec b
-	jr .loop
-
-.loop2
 	ld a, c
 	and a
 	jr z, .done
 	call .AddMoneyToWallet
 	dec c
-	jr .loop2
+	jr .loop
 
 .done
 	call .DoubleReward
 	call .DoubleReward
-	pop af
-	jr nc, .KeepItAll
-	ld a, [wMomSavingMoney]
-	and MOM_SAVING_MONEY_MASK
-	jr z, .KeepItAll
-	ld hl, .SentToMomTexts
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jmp StdBattleTextbox
-
-.KeepItAll:
 	ld hl, GotMoneyForWinningText
 	jmp StdBattleTextbox
-
-.AddMoneyToMom:
-	push bc
-	ld hl, wBattleReward + 2
-	ld de, wMomsMoney + 2
-	call AddBattleMoneyToAccount
-	pop bc
-	ret
 
 .AddMoneyToWallet:
 	push bc
@@ -2686,22 +2640,6 @@ WinTrainerBattle:
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ret
-
-.SentToMomTexts:
-; entries correspond to MOM_SAVING_* constants
-	dw SentSomeToMomText
-	dw SentHalfToMomText
-	dw SentAllToMomText
-
-.CheckMaxedOutMomMoney:
-	ld hl, wMomsMoney + 2
-	ld a, [hld]
-	cp LOW(MAX_MONEY)
-	ld a, [hld]
-	sbc HIGH(MAX_MONEY) ; mid
-	ld a, [hl]
-	sbc HIGH(MAX_MONEY >> 8)
 	ret
 
 AddBattleMoneyToAccount:

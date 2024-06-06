@@ -37,7 +37,7 @@ BerryTree:
 	and BERRYTREE_WATER_MASK
 	cp d
 	jr nc, .skip_water
-	ld hl, SQUIRTBOTTLE
+	ld hl, WAILMER_PAIL
 	call GetItemIDFromIndex
 	ld [wCurItem], a
 	ld hl, wNumItems

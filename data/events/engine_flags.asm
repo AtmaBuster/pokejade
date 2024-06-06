@@ -20,9 +20,6 @@ EngineFlags:
 	engine_flag wDayCare, DAYCARE_HAS_MON1_F
 	engine_flag wDayCare, DAYCARE_HAS_MON2_F
 
-	engine_flag wMomSavingMoney, MOM_SAVING_SOME_MONEY_F
-	engine_flag wMomSavingMoney, MOM_ACTIVE_F
-
 	engine_flag wUnusedTwoDayTimerOn, 0 ; unused, possibly related to a 2-day timer
 
 	engine_flag wStatusFlags, STATUSFLAGS_POKEDEX_F
