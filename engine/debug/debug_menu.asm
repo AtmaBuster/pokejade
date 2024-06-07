@@ -76,6 +76,7 @@ DebugMenu::
 .Strings:
 	db "Party@"
 	db "Set Flags@"
+	db "Call ASM@"
 	db "ATMA@"
 	db "Sound Test@"
 	db "Subgame@"
@@ -94,13 +95,14 @@ DebugMenu::
 	db "# Edit@"
 
 .MenuItems
-	db 18
-	db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+	db 19
+	db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
 	db -1
 
 .Jumptable
 	dw Debug_GiveParty
 	dw Debug_SetFlags
+	dw Debug_CallASM
 	dw Debug_ATMA
 	dw Debug_SoundTest
 	dw Debug_SubgameMenu
@@ -316,6 +318,191 @@ Debug_SetFlags:
 
 .event_flags
 	dw -1
+
+Debug_CallASM:
+	xor a
+	ld [wDebugMenuDataBuffer], a
+	ld [wDebugMenuDataBuffer + 1], a
+	ld [wDebugMenuDataBuffer + 2], a
+	hlcoord 0, 0
+	lb bc, 6, SCREEN_WIDTH - 2
+	call Textbox
+	call WaitBGMap2
+	xor a
+	ld [wDebugMenuCursorPos], a
+	call .update_display
+.loop
+	call JoyTextDelay
+	ldh a, [hJoyLast]
+	cp B_BUTTON
+	ret z
+	cp START
+	jr z, .jmp
+	cp D_LEFT
+	jr z, .left
+	cp D_RIGHT
+	jr z, .right
+	cp D_UP
+	jr z, .down
+	cp D_DOWN
+	jr z, .up
+	jr .loop
+
+.jmp
+	ld hl, wDebugMenuDataBuffer
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, b
+	and a
+	jr z, .home
+	call FarCall_hl
+	ret
+
+.home
+	call _hl_
+	ret
+
+.left
+	ld hl, wDebugMenuCursorPos
+	ld a, [hl]
+	and a
+	jr z, :+
+	dec [hl]
+	jr .done_dpad
+:
+	ld a, 5
+	ld [hl], a
+	jr .done_dpad
+
+.right
+	ld hl, wDebugMenuCursorPos
+	inc [hl]
+	ld a, [hl]
+	cp 6
+	jr nz, .done_dpad
+	xor a
+	ld [hl], a
+	jr .done_dpad
+
+.up
+	ld a, [wDebugMenuCursorPos]
+	cp 2
+	ld hl, wDebugMenuDataBuffer
+	jr c, .up_1
+	sub 2
+	ld bc, $F000
+	jr z, .change_2
+	dec a
+	ld b, $FF
+	jr z, .change_2
+	dec a
+	ld c, $F0
+	jr z, .change_2
+	ld c, $FF
+	jr .change_2
+
+.up_1
+	and a
+	ld b, $F0
+	jr z, .change_1
+	ld b, $FF
+	jr .change_1
+
+.down
+	ld a, [wDebugMenuCursorPos]
+	cp 2
+	ld hl, wDebugMenuDataBuffer
+	jr c, .down_1
+	sub 2
+	ld bc, $1000
+	jr z, .change_2
+	dec a
+	ld b, $01
+	jr z, .change_2
+	dec a
+	ld bc, $0010
+	jr z, .change_2
+	ld c, $01
+	jr .change_2
+
+.down_1
+	and a
+	ld b, $10
+	jr z, .change_1
+	ld b, $01
+.change_1
+	ld a, b
+	add [hl]
+	ld [hl], a
+	jr .done_dpad
+
+.change_2
+	inc hl
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	add hl, bc
+
+	ld d, h
+	ld e, l
+
+	pop hl
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hl], a
+
+.done_dpad
+	call .update_display
+	jp .loop
+
+.update_display
+	hlcoord 1, 1
+	ld a, " "
+	ld bc, 7
+	rst ByteFill
+	hlcoord 1, 2
+	ld a, " "
+	ld bc, 4
+	rst ByteFill
+	ld a, [wDebugMenuCursorPos]
+	cp 2
+	jr c, .no_inc
+	inc a
+.no_inc
+	ld c, a
+	ld b, 0
+	hlcoord 1, 1
+	add hl, bc
+	ld a, "▼"
+	ld [hl], a
+
+	hlcoord 1, 2
+	ld a, [wDebugMenuDataBuffer]
+	call .draw_hex
+	ld a, ":"
+	ld [hli], a
+	ld a, [wDebugMenuDataBuffer + 2]
+	call .draw_hex
+	ld a, [wDebugMenuDataBuffer + 1]
+.draw_hex
+	push af
+	swap a
+	call .hex_digit
+	pop af
+.hex_digit
+	and $f
+	add "0"
+	jr nc, .draw_digit
+	add "A"
+.draw_digit
+	ld [hli], a
+	ret
 
 Debug_SoundTest:
 	ld de, MUSIC_NONE
