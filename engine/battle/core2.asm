@@ -53,8 +53,7 @@ UpdateCastform:
 	cp WEATHER_HAIL
 	ld hl, CASTFORM_SNOWY
 	ld b, ICE
-	jr z, .set_form
-	ret ; shouldn't get here
+	call nz, Crash_index
 .set_form
 	ldh a, [hBattleTurn]
 	and a

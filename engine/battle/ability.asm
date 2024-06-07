@@ -117,8 +117,7 @@ CompareBattleMonSpeeds:
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVar
 	and a
-	jr z, .skip_quick_feet
-	call .Increase50Pcnt
+	call nz, .Increase50Pcnt
 .skip_quick_feet
 ; Tailwind check
 	call .GetTailwindTimer
