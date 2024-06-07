@@ -431,7 +431,6 @@ INCLUDE "gfx/emotes.asm"
 INCLUDE "engine/overworld/warp_connection.asm"
 INCLUDE "engine/link/mystery_gift.asm"
 INCLUDE "engine/battle/used_move_text.asm"
-INCLUDE "mobile/mobile_41.asm"
 INCLUDE "engine/gfx/load_overworld_font.asm"
 INCLUDE "gfx/stats/ball_icons.asm"
 
@@ -449,7 +448,6 @@ INCLUDE "engine/movie/title.asm"
 SECTION "mobile45", ROMX
 
 INCLUDE "mobile/mobile_45_sprite_engine.asm"
-INCLUDE "mobile/mobile_45_stadium.asm"
 
 
 SECTION "mobile46", ROMX
