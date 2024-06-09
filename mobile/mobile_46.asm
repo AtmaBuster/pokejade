@@ -1,7 +1,4 @@
 _BattleTowerRoomMenu:
-	xor a
-	ld [wcd38], a
-; Function118125:
 	call BattleTowerRoomMenu_InitRAM
 	ld a, $3
 	ld [wcd33], a
@@ -36,52 +33,7 @@ _BattleTowerRoomMenu:
 	pop af
 	ldh [rSVBK], a
 	call BattleTowerRoomMenu_Cleanup
-	call Function118180
 	jmp ReturnToMapFromSubmenu
-
-Function118180:
-	ld a, [wScriptVar]
-	and a
-	ret nz
-	ld a, [wcd38]
-	and a
-	ret z
-	ld a, BANK(s5_a89c) ; aka BANK(s5_a8b2)
-	call OpenSRAM
-	ld hl, wcd69
-	ld de, s5_a89c
-	ld bc, 22
-	rst CopyBytes
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(w3_d202)
-	ldh [rSVBK], a
-
-	ld de, w3_d202
-	ld c, $96
-	farcall CheckStringForErrors_IgnoreTerminator
-	jr c, .return_d3
-
-	ld de, w3_d202
-	lb bc, 1, $96
-	farcall CheckStringContainsLessThanBNextCharacters
-	jr c, .return_d3
-
-	ld hl, w3_d202
-	ld de, s5_a8b2
-	ld bc, 150
-	rst CopyBytes
-.reset_banks
-	pop af
-	ldh [rSVBK], a
-	jmp CloseSRAM
-
-.return_d3
-	ld a, $d3
-	ld [wMobileErrorCodeBuffer], a
-	ld [wScriptVar], a
-	jr .reset_banks
 
 BattleTowerRoomMenu_InitRAM:
 	di
@@ -198,16 +150,7 @@ SetMobileErrorCode:
 	ret
 
 BattleTowerRoomMenu_PickLevelMessage:
-	ld a, [wcd38]
-	and a
-	jr nz, .asm_11892d
 	ld hl, Text_WhatLevelDoYouWantToChallenge
-	jr .asm_118930
-
-.asm_11892d
-	ld hl, Text_CheckBattleRoomListByMaxLevel
-
-.asm_118930
 	call BattleTowerRoomMenu_SetMessage
 	call BattleTowerRoomMenu_IncrementJumptable
 
@@ -346,15 +289,10 @@ BattleTowerRoomMenu_UpdatePickLevelMenu:
 	call CloseWindow
 	pop af
 	ldh [rSVBK], a
-	ld a, [wcd38]
-	and a
-	jr nz, .asm_118a30
 	call BattleTower_LevelCheck
 	ret c
 	call BattleTower_UbersCheck
 	ret c
-
-.asm_118a30
 	ld a, [wcd4f]
 	ld [wBTChoiceOfLvlGroup], a
 	jmp BattleTowerRoomMenu_IncrementJumptable
@@ -458,22 +396,7 @@ BattleTowerRoomMenu_DelayRestartMenu:
 	ret
 
 BattleTowerRoomMenu_QuitMessage:
-	ld a, [wcd38]
-	and a
-	jr z, .asm_119cd1
-	dec a
-	jr z, .asm_119cd6
-	ld hl, Text_QuitReadingNews
-	jr .asm_119cd9
-
-.asm_119cd1
 	ld hl, Text_CancelBattleRoomChallenge
-	jr .asm_119cd9
-
-.asm_119cd6
-	ld hl, Text_ExitGymLeaderHonorRoll
-
-.asm_119cd9
 	call BattleTowerRoomMenu_SetMessage
 	call BattleTowerRoomMenu_IncrementJumptable
 
@@ -1601,10 +1524,6 @@ Function11a9f0:
 	and a
 	ret
 
-Text_QuitReadingNews:
-	text "Quit reading NEWS?"
-	done
-
 Text_PartyMonTopsThisLevel:
 	text "A party #MON"
 	line "tops this level."
@@ -1624,119 +1543,7 @@ Text_CancelBattleRoomChallenge:
 	line "ROOM challenge?"
 	done
 
-Text_ExitGymLeaderHonorRoll:
-	text "Exit GYM LEADER"
-	line "HONOR ROLL?"
-	done
-
 Text_WhatLevelDoYouWantToChallenge:
 	text "What level do you"
 	line "want to challenge?"
 	done
-
-Text_CheckBattleRoomListByMaxLevel:
-	text "Check BATTLE ROOM"
-	line "list by max level?"
-	done
-
-AddMobileMonToParty:
-	ld hl, wPartyCount
-	ld a, [hl]
-	ld e, a
-	inc [hl]
-
-	ld hl, wMobileMonSpeciesPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	inc hl
-	ld bc, wPartySpecies
-	ld d, e
-.loop1
-	inc bc
-	dec d
-	jr nz, .loop1
-	ld a, e
-	ld [wCurPartyMon], a
-	ld a, [hl]
-	ld [bc], a
-	inc bc
-	ld a, -1
-	ld [bc], a
-
-	ld hl, wPartyMon1Species
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, e
-	ld [wMobileMonIndex], a
-.loop2
-	add hl, bc
-	dec a
-	and a
-	jr nz, .loop2
-	ld e, l
-	ld d, h
-	ld hl, wMobileMonStructPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst CopyBytes
-
-	ld hl, wPartyMonOTs
-	ld bc, NAME_LENGTH
-	ld a, [wMobileMonIndex]
-.loop3
-	add hl, bc
-	dec a
-	and a
-	jr nz, .loop3
-	ld e, l
-	ld d, h
-	ld hl, wMobileMonOTPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld bc, MON_NAME_LENGTH - 1
-	rst CopyBytes
-	ld a, "@"
-	ld [de], a
-
-	ld hl, wPartyMonNicknames
-	ld bc, MON_NAME_LENGTH
-	ld a, [wMobileMonIndex]
-.loop4
-	add hl, bc
-	dec a
-	and a
-	jr nz, .loop4
-	ld e, l
-	ld d, h
-	ld hl, wMobileMonNicknamePointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld bc, MON_NAME_LENGTH - 1
-	rst CopyBytes
-	ld a, "@"
-	ld [de], a
-
-	ld hl, sPartyMail
-	ld bc, MAIL_STRUCT_LENGTH
-	ld a, [wMobileMonIndex]
-.loop5
-	add hl, bc
-	dec a
-	and a
-	jr nz, .loop5
-	ld a, BANK(sPartyMail)
-	call OpenSRAM
-	ld e, l
-	ld d, h
-	ld hl, wMobileMonMailPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld bc, MAIL_STRUCT_LENGTH
-	rst CopyBytes
-
-	jmp CloseSRAM

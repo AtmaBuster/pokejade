@@ -39,6 +39,7 @@ INCLUDE "engine/events/bug_contest/display_stats.asm"
 INCLUDE "engine/items/item_effects.asm"
 INCLUDE "engine/battle_anims/pokeball_wobble.asm"
 INCLUDE "engine/pokemon/knows_move.asm"
+INCLUDE "engine/events/battle_tower/battle_tower.asm"
 
 SECTION "Load Map Part", ROMX
 
@@ -467,11 +468,6 @@ INCLUDE "engine/link/link.asm"
 INCLUDE "engine/battle/link_result.asm"
 
 
-SECTION "mobile5C", ROMX
-
-INCLUDE "mobile/mobile_5c.asm"
-
-
 SECTION "UpdateBattleHUDs", ROMX
 
 INCLUDE "engine/battle/update_battle_huds.asm"
@@ -527,7 +523,6 @@ INCLUDE "data/battle_tower/unknown.asm"
 SECTION "Crystal Events", ROMX
 
 INCLUDE "engine/events/battle_tower/load_trainer.asm"
-INCLUDE "engine/events/odd_egg.asm"
 
 
 SECTION "Newbox", ROMX

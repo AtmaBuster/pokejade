@@ -40,8 +40,8 @@ ROMX $02
 ROMX $03
 	"Battle Weather Images"
 	"bank3"
-	"VWF"
 ROMX $04
+	"VWF"
 	"bank4"
 ROMX $05
 	"bank5"
@@ -316,7 +316,6 @@ ROMX $78
 	"Tileset Data 8"
 ROMX $7b
 	"Battle Tower Text"
-	"mobile5C"
 ROMX $7c
 	"Battle Tower Trainer Data"
 ROMX $7d
@@ -404,7 +403,6 @@ SRAM $03
 	"PokeDB Bank 2"
 SRAM $04
 SRAM $05
-	"SRAM Bank 5"
 SRAM $06
 SRAM $07
 HRAM

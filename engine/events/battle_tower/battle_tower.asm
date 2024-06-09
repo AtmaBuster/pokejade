@@ -68,7 +68,6 @@ RunBattleTowerTrainer:
 	farcall PlayerStats_Healing
 	call HealParty
 	call ReadBTTrainerParty
-	call Clears5_a89a
 
 	predef StartBattle
 
@@ -217,8 +216,6 @@ ReadBTTrainerParty:
 
 BT_ChrisName:
 	db "CHRIS@"
-
-INCLUDE "data/battle_tower/unknown_levels.asm"
 
 CopyBTTrainer_FromBT_OT_TowBT_OTTemp:
 ; copy the BattleTower-Trainer data that lies at 'wBT_OTTrainer' to 'wBT_OTTemp'
@@ -533,17 +530,8 @@ BattleTowerAction_0F:
 	ret
 
 BattleTowerAction_11:
-	ld c, FALSE
-	jr Set_s5_aa8d
-
 BattleTowerAction_12:
-	ld c, TRUE
-Set_s5_aa8d:
-	ld a, BANK(s5_aa8d)
-	call OpenSRAM
-	ld a, c
-	ld [s5_aa8d], a
-	jmp CloseSRAM
+	ret
 
 BattleTowerAction_14:
 	call BattleTower_CheckSaveFileExistsAndIsYours
@@ -616,4 +604,48 @@ CheckForBattleTowerRules:
 
 .end
 	ld [wScriptVar], a
+	ret
+
+CheckBTMonMovesForErrors:
+	ld c, BATTLETOWER_PARTY_LENGTH
+	ld hl, wBT_OTTempMon1Moves
+.loop
+	push hl
+	ld a, [hl]
+	cp MOVE_TABLE_ENTRIES + 1
+	jr c, .okay
+	push hl
+	ld hl, POUND
+	call GetMoveIDFromIndex
+	pop hl
+	ld [hl], a
+
+.okay
+	inc hl
+	ld b, NUM_MOVES - 1
+.loop2
+	ld a, [hl]
+	and a
+	jr z, .loop3
+	cp MOVE_TABLE_ENTRIES + 1
+	jr c, .next
+
+.loop3
+	xor a
+	ld [hli], a
+	dec b
+	jr nz, .loop3
+	jr .done
+
+.next
+	inc hl
+	dec b
+	jr nz, .loop2
+
+.done
+	pop hl
+	ld de, NICKNAMED_MON_STRUCT_LENGTH
+	add hl, de
+	dec c
+	jr nz, .loop
 	ret
