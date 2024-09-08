@@ -33,6 +33,9 @@ SplashScreen:
 ; Stop here if not in GBC mode
 	farcall GBCOnlyScreen
 
+; Show info screen if MBC30 isn't implemented properly
+	farcall MBC30FailScreen
+
 ; Play GameFreak logo animation
 	call GameFreakPresentsInit
 .joy_loop
