@@ -203,16 +203,6 @@ GetMemSGBLayout::
 	ld b, SCGB_DEFAULT
 GetSGBLayout::
 ; load sgb packets unless dmg
-
-	ldh a, [hCGB]
-	and a
-	jr nz, .sgb
-
-	ldh a, [hSGB]
-	and a
-	ret z
-
-.sgb
 	predef_jump LoadSGBLayout
 
 SetHPPal::

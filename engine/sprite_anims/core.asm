@@ -507,13 +507,7 @@ INCLUDE "data/sprite_anims/framesets.asm"
 INCLUDE "data/sprite_anims/oam.asm"
 
 AnimateEndOfExpBar:
-	ldh a, [hSGB]
 	ld de, EndOfExpBarGFX
-	and a
-	jr z, .load
-	ld de, SGBEndOfExpBarGFX
-
-.load
 	ld hl, vTiles0 tile $00
 	lb bc, BANK(EndOfExpBarGFX), 1
 	call Request2bpp

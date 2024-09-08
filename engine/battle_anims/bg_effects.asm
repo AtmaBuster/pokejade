@@ -2861,6 +2861,5 @@ BGEffect_CheckFlyDigStatus:
 	ret
 
 BattleBGEffects_CheckSGB:
-	ldh a, [hSGB]
-	and a
+	xor a
 	ret

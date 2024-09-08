@@ -120,9 +120,9 @@ $(foreach obj, $(pokejade_demo_obj), $(eval $(call DEP,$(obj),$(obj:_demo.o=.asm
 endif
 
 
-pokejade_opt         = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokejade_debug_opt   = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokejade_demo_opt    = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokejade_opt         = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 4 -p 0
+pokejade_debug_opt   = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 4 -p 0
+pokejade_demo_opt    = -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 4 -p 0
 
 .gbc: tools/bankends
 %.gbc: $$(%_obj) layout.link

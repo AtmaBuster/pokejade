@@ -34,6 +34,7 @@ ROM0
 	org $0150
 	"Home"
 ROMX $01
+	"Hardware Test String 1"
 	"bank1"
 ROMX $02
 	"bank2"

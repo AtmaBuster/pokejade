@@ -2941,9 +2941,6 @@ INCBIN "gfx/pokedex/slowpoke.2bpp.lz"
 Pokedex_CheckSGB:
 	ldh a, [hCGB]
 	or a
-	ret nz
-	ldh a, [hSGB]
-	dec a
 	ret
 
 Pokedex_LoadUnownFont:

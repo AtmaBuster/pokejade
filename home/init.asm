@@ -32,6 +32,13 @@ _Start::
 	ld a, TRUE
 	ldh [hSystemBooted], a
 
+	ldh a, [hCGB]
+	and a
+	jr z, .not_cgb
+	ld a, b
+.not_cgb
+	ld [hHWType], a
+
 Init::
 	di
 
@@ -85,10 +92,14 @@ Init::
 	push af
 	ldh a, [hSystemBooted]
 	push af
+	ldh a, [hHWType]
+	push af
 	xor a
 	ld hl, STARTOF(HRAM)
 	ld bc, SIZEOF(HRAM)
 	rst ByteFill
+	pop af
+	ld [hHWType], a
 	pop af
 	ldh [hSystemBooted], a
 	pop af
@@ -132,6 +143,8 @@ Init::
 	ld a, 7
 	ldh [hWX], a
 	ldh [rWX], a
+
+	farcall HardwareTest
 
 	farcall InitCGBPals
 

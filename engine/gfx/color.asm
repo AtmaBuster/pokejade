@@ -649,36 +649,7 @@ _PushSGBPals:
 
 InitSGBBorder:
 	call CheckCGB
-	ret nz
-
-; SGB/DMG only
-	di
-	ld a, [wJoypadDisable]
-	push af
-	set JOYPAD_DISABLE_SGB_TRANSFER_F, a
-	ld [wJoypadDisable], a
-
-	xor a
-	ldh [rJOYP], a
-	ldh [hSGB], a
-	call PushSGBBorderPalsAndWait
-	jr nc, .skip
-	ld a, $1
-	ldh [hSGB], a
-	call _InitSGBBorderPals
-	call SGBBorder_PushBGPals
-	call SGBDelayCycles
-	call SGB_ClearVRAM
-	call PushSGBBorder
-	call SGBDelayCycles
-	call SGB_ClearVRAM
-	ld hl, MaskEnCancelPacket
-	call _PushSGBPals
-
-.skip
-	pop af
-	ld [wJoypadDisable], a
-	reti
+	ret
 
 InitCGBPals::
 	call CheckCGB

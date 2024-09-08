@@ -367,3 +367,14 @@ DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
 	const TRAINER_STAR_3_F
 	const TRAINER_STAR_4_F
 	const TRAINER_STAR_5_F
+
+; hHWType
+	const_def
+	const HW_AGB       ; 0
+	const HW_MBC30_ROM ; 1
+	const HW_MBC30_RAM ; 2
+	const_skip ; 3
+	const_skip ; 4
+	const_skip ; 5
+	const_skip ; 6
+	const_skip ; 7

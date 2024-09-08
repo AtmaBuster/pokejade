@@ -175,7 +175,7 @@ hBattleTurn::
 
 hCGBPalUpdate:: db
 hCGB::          db
-hSGB::          db
+hHWType::       db
 
 hDMATransfer:: db
 hSystemBooted:: db
