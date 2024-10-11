@@ -14,5 +14,10 @@ DefaultOptions:
 
 	db $00
 	db $00
+
+	db REGISTERED_FLY_TELEPORT
+	db REGISTERED_DIG
+	db REGISTERED_ITEM
+	db REGISTERED_SWEET_SCENT
 .End
 	assert DefaultOptions.End - DefaultOptions == wOptionsEnd - wOptions

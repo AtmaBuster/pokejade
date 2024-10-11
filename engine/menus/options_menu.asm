@@ -1,4 +1,5 @@
 ; GetOptionPointer.Pointers indexes
+; Page 1
 	const_def
 	const OPT_TEXT_SPEED    ; 0
 	const OPT_BATTLE_SCENE  ; 1
@@ -7,8 +8,16 @@
 	const OPT_PRINT         ; 4
 	const OPT_MENU_ACCOUNT  ; 5
 	const OPT_FRAME         ; 6
-	const OPT_CANCEL        ; 7
-DEF NUM_OPTIONS EQU const_value ; 8
+	const OPT_PAGE          ; 7
+; Page 2
+	const_def
+	const OPT_REGISTER_UP    ; 0
+	const OPT_REGISTER_DOWN  ; 0
+	const OPT_REGISTER_LEFT  ; 0
+	const OPT_REGISTER_RIGHT ; 0
+
+DEF NUM_OPTIONS EQU 8 ; 8
+DEF NUM_OPTIONS_PAGES EQU 2
 
 _Option:
 	call ClearJoypad
@@ -20,25 +29,10 @@ _Option:
 	hlcoord 0, 0
 	lb bc, SCREEN_HEIGHT - 2, SCREEN_WIDTH - 2
 	call Textbox
-	hlcoord 2, 2
-	ld de, StringOptions
-	rst PlaceString
-	xor a
-	ld [wJumptableIndex], a
+	ld a, 1
+	ld [wMenuCursorX], a ; Page Number
 
-; display the settings of each option when the menu is opened
-	ld c, NUM_OPTIONS - 2 ; omit frame type, the last option
-.print_text_loop
-	push bc
-	xor a
-	ldh [hJoyLast], a
-	call GetOptionPointer
-	pop bc
-	ld hl, wJumptableIndex
-	inc [hl]
-	dec c
-	jr nz, .print_text_loop
-	call UpdateFrame ; display the frame type
+	call UpdateOptionsDisplay
 
 	xor a
 	ld [wJumptableIndex], a
@@ -73,7 +67,48 @@ _Option:
 	ldh [hInMenu], a
 	ret
 
-StringOptions:
+UpdateOptionsDisplay:
+	hlcoord 2, 2
+	lb bc, 14, 16
+	call ClearBox
+	ld a, [wMenuCursorX]
+	dec a
+	ld l, a
+	ld h, 0
+	add hl, hl
+	ld de, PageStrings
+	add hl, de
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	hlcoord 2, 2
+	rst PlaceString
+; display the settings of each option when the menu is opened
+	xor a
+	ld [wJumptableIndex], a
+	ld c, NUM_OPTIONS - 2 ; omit frame type, the last option
+.print_text_loop
+	push bc
+	xor a
+	ldh [hJoyLast], a
+	call GetOptionPointer
+	pop bc
+	ld hl, wJumptableIndex
+	inc [hl]
+	dec c
+	jr nz, .print_text_loop
+	call UpdatePageNumber
+	ld a, [wMenuCursorX]
+	cp 1
+	ret nz
+	call UpdateFrame ; display the frame type
+	ret
+
+PageStrings:
+	dw StringOptions1
+	dw StringOptions2
+
+StringOptions1:
 	db "TEXT SPEED<LF>"
 	db "        :<LF>"
 	db "BATTLE SCENE<LF>"
@@ -88,12 +123,40 @@ StringOptions:
 	db "        :<LF>"
 	db "FRAME<LF>"
 	db "        :TYPE<LF>"
-	db "CANCEL@"
+	db "PAGE@"
+
+StringOptions2:
+	db "REGISTER UP<LF>"
+	db " :<LF>"
+	db "REGISTER DOWN<LF>"
+	db " :<LF>"
+	db "REGISTER LEFT<LF>"
+	db " :<LF>"
+	db "REGISTER RIGHT<LF>"
+	db " :<LF>"
+	db "-<LF>"
+	db "        :<LF>"
+	db "-<LF>"
+	db "        :<LF>"
+	db "-<LF>"
+	db "        :<LF>"
+	db "PAGE@"
 
 GetOptionPointer:
-	jumptable .Pointers, wJumptableIndex
+	jumptable .Pages, wMenuCursorX
 
-.Pointers:
+.Pages:
+	dw NULL
+	dw .Page1
+	dw .Page2
+
+.Page1:
+	jumptable .Pointers1, wJumptableIndex
+
+.Page2:
+	jumptable .Pointers2, wJumptableIndex
+
+.Pointers1:
 ; entries correspond to OPT_* constants
 	dw Options_TextSpeed
 	dw Options_BattleScene
@@ -102,7 +165,17 @@ GetOptionPointer:
 	dw Options_Print
 	dw Options_MenuAccount
 	dw Options_Frame
-	dw Options_Cancel
+	dw Options_Page
+
+.Pointers2:
+	dw Options_RegisterUp
+	dw Options_RegisterDown
+	dw Options_RegisterLeft
+	dw Options_RegisterRight
+	dw Options_Dummy
+	dw Options_Dummy
+	dw Options_Dummy
+	dw Options_Page
 
 	const_def
 	const OPT_TEXT_SPEED_FAST ; 0
@@ -482,16 +555,159 @@ UpdateFrame:
 	and a
 	ret
 
-Options_Cancel:
+Options_Page:
 	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr nz, .RightPressed
 	and A_BUTTON
-	jr nz, .Exit
+	jr nz, .NextPage
+	and a
+	ret
+
+.LeftPressed:
+	xor a
+	ldh [hJoyPressed], a
+	ld hl, wMenuCursorX
+	dec [hl]
+	jr nz, .done_change_page
+	ld a, 1
+	ld [hl], a
+	jr .no_change_page
+
+.RightPressed:
+	xor a
+	ldh [hJoyPressed], a
+	ld hl, wMenuCursorX
+	ld a, [hl]
+	cp NUM_OPTIONS_PAGES
+	jr z, .no_change_page
+	inc [hl]
+	jr .done_change_page
+
+.NextPage:
+	xor a
+	ldh [hJoyPressed], a
+	ld a, [wMenuCursorX]
+	cp NUM_OPTIONS_PAGES
+	jr z, .Exit
+	inc a
+	ld [wMenuCursorX], a
+.done_change_page
+	call UpdateOptionsDisplay
+.no_change_page
+	ld a, OPT_PAGE
+	ld [wJumptableIndex], a
 	and a
 	ret
 
 .Exit:
 	scf
 	ret
+
+UpdatePageNumber:
+	hlcoord 7, 16
+	ld a, [wMenuCursorX]
+	ld b, a
+	cp 1
+	ld a, "◀"
+	jr nz, .left_arrow
+	ld a, " "
+.left_arrow
+	ld [hli], a
+	inc hl
+	ld a, "0"
+	add b
+	ld [hli], a
+	inc hl
+	ld a, b
+	cp NUM_OPTIONS_PAGES
+	ld a, "▶"
+	jr nz, .right_arrow
+	ld a, " "
+.right_arrow
+	ld [hl], a
+	ret
+
+Options_Dummy:
+	ret
+
+Options_RegisterUp:
+	hlcoord 5, 3
+	ld de, wRegisterOptionUp
+	jr Options_RegisterChange
+
+Options_RegisterDown:
+	hlcoord 5, 5
+	ld de, wRegisterOptionDown
+	jr Options_RegisterChange
+
+Options_RegisterLeft:
+	hlcoord 5, 7
+	ld de, wRegisterOptionLeft
+	jr Options_RegisterChange
+
+Options_RegisterRight:
+	hlcoord 5, 9
+	ld de, wRegisterOptionRight
+Options_RegisterChange:
+	ld a, [de]
+	ld c, a
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	; right pressed
+	ld a, c
+	inc c
+	cp NUM_REGISTER_OPTIONS - 1
+	jr nz, .Save
+	ld c, 0
+	jr .Save
+
+.LeftPressed:
+	ld a, c
+	dec c
+	and a
+	jr nz, .Save
+	ld c, NUM_REGISTER_OPTIONS - 1
+.Save:
+	ld a, c
+	ld [de], a
+.NonePressed:
+	call GetRegisterString
+	rst PlaceString
+	and a
+	ret
+
+GetRegisterString:
+	push hl
+	ld b, 0
+	ld hl, .Strings
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	pop hl
+	ret
+
+.Strings:
+	dw .None
+	dw .Item
+	dw .FlyTeleport
+	dw .Cut
+	dw .SweetScent
+	dw .Dig
+
+.None:        db "NONE        @"
+.Item:        db "ITEM        @"
+.FlyTeleport: db "FLY/TELEPORT@"
+.Cut:         db "CUT         @"
+.SweetScent:  db "SWEET SCENT @"
+.Dig:         db "DIG         @"
 
 OptionsControl:
 	ld hl, wJumptableIndex
@@ -505,7 +721,7 @@ OptionsControl:
 
 .DownPressed:
 	ld a, [hl]
-	cp OPT_CANCEL ; maximum option index
+	cp OPT_PAGE ; maximum option index
 	jr nz, .CheckMenuAccount
 	ld [hl], OPT_TEXT_SPEED ; first option
 	scf
@@ -534,7 +750,7 @@ OptionsControl:
 .NotFrame:
 	and a ; OPT_TEXT_SPEED, minimum option index
 	jr nz, .Decrease
-	ld [hl], NUM_OPTIONS ; decrements to OPT_CANCEL, maximum option index
+	ld [hl], NUM_OPTIONS ; decrements to OPT_PAGE, maximum option index
 
 .Decrease:
 	dec [hl]

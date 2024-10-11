@@ -378,3 +378,13 @@ DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
 	const_skip ; 5
 	const_skip ; 6
 	const_skip ; 7
+
+; wRegisterOptions
+	const_def
+	const REGISTERED_NONE         ; 0
+	const REGISTERED_ITEM         ; 1
+	const REGISTERED_FLY_TELEPORT ; 2
+	const REGISTERED_CUT          ; 3
+	const REGISTERED_SWEET_SCENT  ; 4
+	const REGISTERED_DIG          ; 5
+DEF NUM_REGISTER_OPTIONS EQU const_value ; 6

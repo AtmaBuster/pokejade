@@ -1633,6 +1633,13 @@ wOptions2::
 ; bit 1: menu account off/on
 	db
 	ds 2
+
+wRegisterOptions::
+wRegisterOptionUp:: db
+wRegisterOptionDown:: db
+wRegisterOptionLeft:: db
+wRegisterOptionRight:: db
+
 wOptionsEnd::
 
 ; Time buffer, for counting the amount of time since
@@ -1642,7 +1649,7 @@ wMinutesSince:: db
 wHoursSince:: db
 wDaysSince:: db
 
-	ds 7
+	ds 3
 
 wTempLoopCounter:: db
 
