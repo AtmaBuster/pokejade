@@ -266,6 +266,16 @@ _CutNothingText::
 	line "CUT here."
 	prompt
 
+_CutNothingOWText::
+	text "There's nothing to"
+	line "CUT here."
+	done
+
+_NoMonWithMoveText::
+	text "Your #MON don't"
+	line "know that move."
+	done
+
 _BlindingFlashText::
 	text "A blinding FLASH"
 	line "lights the area!@"
@@ -1313,6 +1323,13 @@ _MayRegisterItemText::
 
 	para "registered for use"
 	line "on SELECT Button."
+	done
+
+_MayRegisterOptionsText::
+	text "The SELECT menu"
+	line "can be configured"
+	cont "from the OPTION"
+	cont "menu."
 	done
 
 _ParkText1::

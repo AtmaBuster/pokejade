@@ -77,6 +77,29 @@ LoadFonts_NoOAMUpdate::
 	call SafeUpdateSprites
 	jmp LoadStandardFont
 
+LoadRegisterMenuGraphics_NoOAMUpdate:
+	ldh a, [hOAMUpdate]
+	push af
+	ld a, $1
+	ldh [hOAMUpdate], a
+
+	call .LoadGFX
+
+	pop af
+	ldh [hOAMUpdate], a
+	ret
+
+.LoadGFX:
+	call LoadFontsExtra
+	ld a, $90
+	ldh [hWY], a
+	call SafeUpdateSprites
+
+	ld de, SelectMenuGFX
+	ld hl, vTiles1
+	lb bc, BANK(Font), 32
+	jmp Get1bppViaHDMA
+
 HDMATransfer_FillBGMap0WithBlack:
 	ldh a, [rSVBK]
 	push af

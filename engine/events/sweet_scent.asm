@@ -20,6 +20,7 @@ SweetScentFromMenu:
 
 .SweetScent:
 	refreshmap
+.SweetScent_NoRefresh:
 	special UpdateTimePals
 	callasm GetPartyNickname
 	writetext UseSweetScentText

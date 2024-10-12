@@ -217,14 +217,14 @@ DEF SPAWN_RED   EQU 2
 
 ; wJohtoBadges::
 	const_def
-	const ZEPHYRBADGE
-	const HIVEBADGE
-	const PLAINBADGE
-	const FOGBADGE
-	const MINERALBADGE
-	const STORMBADGE
-	const GLACIERBADGE
-	const RISINGBADGE
+	const BADGE1
+	const BADGE2
+	const BADGE3
+	const BADGE4
+	const BADGE5
+	const BADGE6
+	const BADGE7
+	const BADGE8
 DEF NUM_JOHTO_BADGES EQU const_value
 
 ; wKantoBadges::
@@ -388,3 +388,4 @@ DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
 	const REGISTERED_SWEET_SCENT  ; 4
 	const REGISTERED_DIG          ; 5
 DEF NUM_REGISTER_OPTIONS EQU const_value ; 6
+	const REGISTERED_TELEPORT_ICON ; 6

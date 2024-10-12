@@ -49,3 +49,6 @@ INCBIN "gfx/font/space.2bpp"
 
 MobilePhoneTilesGFX:
 INCBIN "gfx/mobile/phone_tiles.2bpp"
+
+SelectMenuGFX:
+INCBIN "gfx/font/selectmenu.1bpp"

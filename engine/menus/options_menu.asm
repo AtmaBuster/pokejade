@@ -15,6 +15,8 @@
 	const OPT_REGISTER_DOWN  ; 0
 	const OPT_REGISTER_LEFT  ; 0
 	const OPT_REGISTER_RIGHT ; 0
+; Page 3
+	const_def
 
 DEF NUM_OPTIONS EQU 8 ; 8
 DEF NUM_OPTIONS_PAGES EQU 2
@@ -107,6 +109,7 @@ UpdateOptionsDisplay:
 PageStrings:
 	dw StringOptions1
 	dw StringOptions2
+	dw StringOptions3
 
 StringOptions1:
 	db "TEXT SPEED<LF>"
@@ -142,6 +145,23 @@ StringOptions2:
 	db "        :<LF>"
 	db "PAGE@"
 
+StringOptions3:
+	db "<LF>"
+	db "        :<LF>"
+	db "<LF>"
+	db "        :<LF>"
+	db "<LF>"
+	db "        :<LF>"
+	db "<LF>"
+	db "        :<LF>"
+	db "<LF>"
+	db "        :<LF>"
+	db "<LF>"
+	db "        :<LF>"
+	db "<LF>"
+	db "        :TYPE<LF>"
+	db "PAGE@"
+
 GetOptionPointer:
 	jumptable .Pages, wMenuCursorX
 
@@ -149,12 +169,16 @@ GetOptionPointer:
 	dw NULL
 	dw .Page1
 	dw .Page2
+	dw .Page3
 
 .Page1:
 	jumptable .Pointers1, wJumptableIndex
 
 .Page2:
 	jumptable .Pointers2, wJumptableIndex
+
+.Page3:
+	jumptable .Pointers3, wJumptableIndex
 
 .Pointers1:
 ; entries correspond to OPT_* constants
@@ -172,6 +196,16 @@ GetOptionPointer:
 	dw Options_RegisterDown
 	dw Options_RegisterLeft
 	dw Options_RegisterRight
+	dw Options_Dummy
+	dw Options_Dummy
+	dw Options_Dummy
+	dw Options_Page
+
+.Pointers3:
+	dw Options_Dummy
+	dw Options_Dummy
+	dw Options_Dummy
+	dw Options_Dummy
 	dw Options_Dummy
 	dw Options_Dummy
 	dw Options_Dummy

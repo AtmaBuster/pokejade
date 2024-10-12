@@ -41,14 +41,14 @@ EngineFlags:
 	engine_flag wBikeFlags, BIKEFLAGS_ALWAYS_ON_BIKE_F
 	engine_flag wBikeFlags, BIKEFLAGS_DOWNHILL_F
 
-	engine_flag wJohtoBadges, ZEPHYRBADGE
-	engine_flag wJohtoBadges, HIVEBADGE
-	engine_flag wJohtoBadges, PLAINBADGE
-	engine_flag wJohtoBadges, FOGBADGE
-	engine_flag wJohtoBadges, MINERALBADGE
-	engine_flag wJohtoBadges, STORMBADGE
-	engine_flag wJohtoBadges, GLACIERBADGE
-	engine_flag wJohtoBadges, RISINGBADGE
+	engine_flag wJohtoBadges, BADGE1
+	engine_flag wJohtoBadges, BADGE2
+	engine_flag wJohtoBadges, BADGE3
+	engine_flag wJohtoBadges, BADGE4
+	engine_flag wJohtoBadges, BADGE5
+	engine_flag wJohtoBadges, BADGE6
+	engine_flag wJohtoBadges, BADGE7
+	engine_flag wJohtoBadges, BADGE8
 
 	engine_flag wKantoBadges, BOULDERBADGE
 	engine_flag wKantoBadges, CASCADEBADGE
